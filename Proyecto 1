@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-08-29T23:10:41.996Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36" etag="OK-5fyBXdzcpwNmKhbXs" version="13.6.5" type="github">
+<mxfile host="app.diagrams.net" modified="2020-08-29T23:11:51.917Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36" etag="acjXZtUAmO59wilJahBn" version="13.6.5" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="2897" dy="677" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -182,12 +182,6 @@
         <mxCell id="FTZK_QXaD_brdKL7z16E-15" value="+ características: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="FTZK_QXaD_brdKL7z16E-13" vertex="1">
           <mxGeometry y="52" width="140" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="FTZK_QXaD_brdKL7z16E-21" value="Carne" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-200" y="410" width="110" height="52" as="geometry" />
-        </mxCell>
-        <mxCell id="FTZK_QXaD_brdKL7z16E-22" value="+ tipoCarné: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="FTZK_QXaD_brdKL7z16E-21" vertex="1">
-          <mxGeometry y="26" width="110" height="26" as="geometry" />
-        </mxCell>
         <mxCell id="FTZK_QXaD_brdKL7z16E-49" value="*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="560" y="348" width="20" height="20" as="geometry" />
         </mxCell>
@@ -241,9 +235,9 @@
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="FTZK_QXaD_brdKL7z16E-60" value="" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.479;exitY=1.038;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="FTZK_QXaD_brdKL7z16E-55" target="FTZK_QXaD_brdKL7z16E-21">
+        <mxCell id="FTZK_QXaD_brdKL7z16E-60" value="" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" target="FTZK_QXaD_brdKL7z16E-21">
           <mxGeometry x="0.7646" y="13" relative="1" as="geometry">
-            <mxPoint x="-145" y="90" as="sourcePoint" />
+            <mxPoint x="-155" y="97" as="sourcePoint" />
             <mxPoint x="-60" y="63" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
@@ -285,6 +279,15 @@
         </mxCell>
         <mxCell id="sDolKrX7uJEKL7b6jObz-46" value="+ horarioCierre: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="sDolKrX7uJEKL7b6jObz-4" vertex="1">
           <mxGeometry y="104" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Mi_76yM4fD5CRByg0zk9-32" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Enumeration&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;TipoLector&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;span&gt;TEMPERATURA&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;VISITANTE&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;VEHÍCULO&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1310" y="206" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="FTZK_QXaD_brdKL7z16E-21" value="Carne" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="-210" y="410" width="110" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="FTZK_QXaD_brdKL7z16E-22" value="+ tipoCarné: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="FTZK_QXaD_brdKL7z16E-21" vertex="1">
+          <mxGeometry y="26" width="110" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
