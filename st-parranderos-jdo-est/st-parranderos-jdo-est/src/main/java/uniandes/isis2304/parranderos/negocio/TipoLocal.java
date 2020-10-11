@@ -1,28 +1,19 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
+ * Proyecto: Aforo-CCAndes
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 package uniandes.isis2304.parranderos.negocio;
 
+import java.sql.Timestamp;
+
 /**
- * Clase para modelar la relación GUSTAN del negocio de los Parranderos:
- * Cada objeto de esta clase representa el hecho que un bebedor gusta de una bebida y viceversa.
- * Se modela mediante los identificadores del bebedor y de la bebida respectivamente.
- * Debe existir un bebedor con el identificador dado
- * Debe existir una bebida con el identificador dado 
- * 
- * @author Germán Bravo
+ * Clase para modelar el concepto TIPOLOCAL del negocio de Aforo-CCAndes
+ *
  */
 public class TipoLocal implements VOTipoLocal
 {
@@ -30,15 +21,25 @@ public class TipoLocal implements VOTipoLocal
 	 * 			Atributos
 	 *****************************************************************/
 	/**
-	 * El identificador del bebedor que gusta de la bebida
+	 * El identificador del tipo de local
 	 */
-	private long idBebedor;
+	private long id;
 
 	/**
-	 * El identificador de la bebida que gusta al bebedor
+	 * El nombre del tipo de local
 	 */
-	private long idBebida;
+	private String tipo;
 
+	/**
+	 * Hora de apertura del tipo de local
+	 */
+	private Timestamp horaApertura;
+	
+	/**
+	 * Hora de cierre del tipo de local
+	 */
+	private Timestamp horaCierre;
+	
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
@@ -47,60 +48,109 @@ public class TipoLocal implements VOTipoLocal
 	 */
 	public TipoLocal() 
 	{
-		this.idBebedor = 0;
-		this.idBebida = 0;
+		this.id = 0;
+		this.tipo = "Default";
+		this.horaApertura = new Timestamp (0);
+		this.horaCierre = new Timestamp (0);
 	}
 
 	/**
 	 * Constructor con valores
-	 * @param idBebedor - El identificador del bebedor. Debe exixtir un bebedor con dicho identificador
-	 * @param idBebida - El identificador de la bebida. Debe existir una bebida con dicho identificador
+	 * @param id - El identificador del tipo de local
+	 * @param tipo - El nombre del tipo de local
 	 */
-	public TipoLocal(long idBebedor, long idBebida) 
+	public TipoLocal(long id, String tipo, Timestamp horaApertura, Timestamp horaCierre) 
 	{
-		this.idBebedor = idBebedor;
-		this.idBebida = idBebida;
+		this.id = id;
+		this.tipo = tipo;
+		this.horaApertura = horaApertura;
+		this.horaCierre = horaCierre;
+
 	}
 
 	/**
-	 * @return El idBebedor
+	 * @return El id del tipo de local
 	 */
-	public long getIdBebedor() 
+	public long getId() 
 	{
-		return idBebedor;
+		return id;
 	}
 
 	/**
-	 * @param idBebedor - El nuevo idBebedor. Debe existir un bebedor con dicho identificador
+	 * @param id - El nuevo id del tipo de local
 	 */
-	public void setIdBebedor(long idBebedor) 
+	public void setId(long id) 
 	{
-		this.idBebedor = idBebedor;
+		this.id = id;
 	}
 
 	/**
-	 * @return El idBebida
+	 * @return El nombre del tipo de local
 	 */
-	public long getIdBebida() 
+	public String getTipo() 
 	{
-		return idBebida;
+		return tipo;
 	}
 
 	/**
-	 * @param idBebida - El nuevo identificador de bebida. Debe existir una bebida con dicho identificador
+	 * @param tipo - El nuevo nombre del tipo de local
 	 */
-	public void setIdBebida(long idBebida) 
+	public void setTipo(String tipo) 
 	{
-		this.idBebida = idBebida;
+		this.tipo = tipo;
 	}
-	
-	/** 
-	 * @return Una cadena con la información básica
+
+
+	/**
+	 * @return La hora de apertura del tipo de local
+	 */
+	public Timestamp getHoraApertura() 
+	{
+		return horaApertura;
+	}
+
+	/**
+	 * @param horaApertura - La nueva hora de apertura del tipo de local
+	 */
+	public void setHoraApertura(Timestamp horaApertura) 
+	{
+		this.horaApertura = horaApertura;
+	}
+
+	/**
+	 * @return La hora de cierre del tipo de local
+	 */
+	public Timestamp getHoraCierre() 
+	{
+		return horaCierre;
+	}
+
+	/**
+	 * @param horaCierre - La nueva hora de cierre del tipo de local
+	 */
+	public void setHoraCierre(Timestamp horaCierre) 
+	{
+		this.horaCierre = horaCierre;
+	}
+
+	/**
+	 * @return Una cadena de caracteres con la información del tipo de local
 	 */
 	@Override
 	public String toString() 
 	{
-		return "Gustan [idBebedor=" + idBebedor + ", idBebida=" + idBebida + "]";
+		return "TipoLocal [id=" + id + ", nombre=" + tipo + ", horaApertura= " + horaApertura + ", horaCierre =" + horaCierre + "]";
 	}
-	
+
+	/**
+	 * Define la igualdad de dos tipos de local
+	 * @param tipoLocal - El TipoLocal a comparar
+	 * @return True si tienen el mismo nombre
+	 */
+	public boolean equals(Object tipoLocal) 
+	{
+		TipoLocal tl = (TipoLocal) tipoLocal;
+		return id == tl.id && tipo.equalsIgnoreCase (tl.tipo);
+	}
+
 }

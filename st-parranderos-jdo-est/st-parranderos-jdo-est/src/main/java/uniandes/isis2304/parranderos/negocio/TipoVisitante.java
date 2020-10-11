@@ -1,15 +1,9 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
+ * Proyecto: Aforo-CCAndes
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
@@ -18,14 +12,8 @@ package uniandes.isis2304.parranderos.negocio;
 import java.sql.Timestamp;
 
 /**
- * Clase para modelar la relación VISITAN del negocio de los Parranderos:
- * Cada objeto de esta clase representa el hecho que un bebedor visitó un bar y viceversa.
- * Se modela mediante los identificadores del bebedor y del bar respectivamente
- * Debe existir un bebedor con el identificador dado
- * Debe existir un bar con el identificador dado 
- * Adicionalmente contiene la fecha y el horario (DIURNO, NOCTURNO, TODOS) en el cual el bebedor visitó el bar
- * 
- * @author Germán Bravo
+ * Clase para modelar el concepto TIPOVISITANTE del negocio de Aforo-CCAndes
+ *
  */
 public class TipoVisitante implements VOTipoVisitante
 {
@@ -33,25 +21,21 @@ public class TipoVisitante implements VOTipoVisitante
 	 * 			Atributos
 	 *****************************************************************/
 	/**
-	 * El identificador del bebedor que realiza la visita
+	 * El identificador del tipo de visitante
 	 */
-	private long idBebedor;
-	
-	/**
-	 * El identificador del bar visitado
-	 */
-	private long idBar;
-	
-	/**
-	 * La fecha de la visita
-	 */
-	private Timestamp fechaVisita;
-	
-	/**
-	 * El horario en que se realizó la visita (DIURNO, NOCTURNO, TODOS)
-	 */
-	private String horario;
+	private long id;
 
+	/**
+	 * El nombre del tipo de visitante
+	 */
+	private String tipo;
+
+	/**
+	 * Hora de límite del tipo de visitante
+	 */
+	private Timestamp horaLimite;
+	
+	
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
@@ -60,98 +44,91 @@ public class TipoVisitante implements VOTipoVisitante
 	 */
 	public TipoVisitante() 
 	{
-		this.idBebedor = 0;
-		this.idBar = 0;
-		this.horario = "";
-		this.fechaVisita = new Timestamp (0);
+		this.id = 0;
+		this.tipo = "Default";
+		this.horaLimite = new Timestamp (0);
+
 	}
 
 	/**
 	 * Constructor con valores
-	 * @param idBebedor - El identificador del b ebedor. Debe existir un bebedor con dicho identificador
-	 * @param idBar - El identificador del bar. Debe exixtir un bar con dicho identificador
-	 * @param fechaVisita - La fecha en la cual se realiza la visita
-	 * @param horario - El horario en el que el bebedor vista el bar (DIURNO, NOCTURNO, TODOS)
+	 * @param id - El identificador del tipo de visitante
+	 * @param tipo - El nombre del tipo de visitante
 	 */
-	public TipoVisitante(long idBebedor, long idBar, Timestamp fechaVisita, String horario) 
+	public TipoVisitante(long id, String tipo, Timestamp horaApertura) 
 	{
-		this.idBebedor = idBebedor;
-		this.idBar = idBar;
-		this.fechaVisita = fechaVisita;
-		this.horario = horario;
+		this.id = id;
+		this.tipo = tipo;
+		this.horaLimite = horaApertura;
 	}
 
 	/**
-	 * @return El idBebedor
+	 * @return El id del tipo de visitante
 	 */
-	public long getIdBebedor() 
+	public long getId() 
 	{
-		return idBebedor;
+		return id;
 	}
 
 	/**
-	 * @param idBebedor - El nuevo idBebedor. Debe existir un bebedor con dicho identificador
+	 * @param id - El nuevo id del tipo de visitante
 	 */
-	public void setIdBebedor(long idBebedor) 
+	public void setId(long id) 
 	{
-		this.idBebedor = idBebedor;
+		this.id = id;
 	}
 
 	/**
-	 * @return El idBar
+	 * @return El nombre del tipo de visitante
 	 */
-	public long getIdBar() 
+	public String getTipo() 
 	{
-		return idBar;
+		return tipo;
 	}
 
 	/**
-	 * @param idBar - El nuevo idBar. Debe exixtir un bar con dicho identificador
+	 * @param tipo - El nuevo nombre del tipo de visitante
 	 */
-	public void setIdBar(long idBar) 
+	public void setTipo(String tipo) 
 	{
-		this.idBar = idBar;
+		this.tipo = tipo;
+	}
+
+
+	/**
+	 * @return La hora límite del tipo de visitante
+	 */
+	public Timestamp getHoraLimite() 
+	{
+		return horaLimite;
 	}
 
 	/**
-	 * @return La fechaVisita
+	 * @param horaApertura - La nueva hora límite del tipo de visitante
 	 */
-	public Timestamp getFechaVisita() 
+	public void setHoraLimite(Timestamp horaApertura) 
 	{
-		return fechaVisita;
+		this.horaLimite = horaApertura;
 	}
 
 	/**
-	 * @param fechaVisita - La nueva fecha de visita al bar por el bebedor
-	 */
-	public void setFechaVisita(Timestamp fechaVisita) 
-	{
-		this.fechaVisita = fechaVisita;
-	}
-
-	/**
-	 * @return El horario
-	 */
-	public String getHorario() 
-	{
-		return horario;
-	}
-
-	/**
-	 * @param horario - El nuevo horario en que se realizó la visita (DIURNO, NOCTURNO, TODOS)
-	 */
-	public void setHorario(String horario) 
-	{
-		this.horario = horario;
-	}
-
-	/** 
-	 * @return Una cadena con la información básica
+	 * @return Una cadena de caracteres con la información del tipo de visitante
 	 */
 	@Override
 	public String toString() 
 	{
-		return "Visitan [idBebedor=" + idBebedor + ", idBar=" + idBar + ", fechaVisita=" + fechaVisita + ", horario="
-				+ horario + "]";
+		return "TipoVisitante [id=" + id + ", nombre=" + tipo + ", horaLimite= " + horaLimite + "]";
 	}
+
+	/**
+	 * Define la igualdad de dos tipos de visitante
+	 * @param tipoVisitante - El TipoVisitante a comparar
+	 * @return True si tienen el mismo nombre
+	 */
+	public boolean equals(Object tipoVisitante) 
+	{
+		TipoVisitante tl = (TipoVisitante) tipoVisitante;
+		return id == tl.id && tipo.equalsIgnoreCase (tl.tipo);
+	}
+
 }

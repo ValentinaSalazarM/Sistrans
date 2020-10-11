@@ -70,10 +70,10 @@ public class Ascensor implements VOAscensor
 	 * Constructor con valores
 	 * @param identificador - El identificador del ascensor
 	 * @param cupoActual - El cupo actual del ascensor
-	 * @param area - El identificador del area
-	 * @param capacidadNormal - El identificador de la capacidad normal
+	 * @param area - El identificador del area. Debe existir un área con dicho identificador
+	 * @param capacidadNormal - El identificador de la capacidad normal. Debe existir una capacidad normal con dicho identificador
 	 * @param pesoMaximo - El peso máximo del ascensor (mayor a 0)
-	 * @param idCentroComercial - El identificador del centro comercial
+	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador.
 	 */
 	public Ascensor(String identificador, int cupoActual, long area, long capacidadNormal, int pesoMaximo, String idCentroComercial) 
 	{

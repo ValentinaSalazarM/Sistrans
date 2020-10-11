@@ -4,41 +4,52 @@
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
  * Proyecto: Aforo-CCAndes
-
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 package uniandes.isis2304.parranderos.negocio;
 
+import java.sql.Timestamp;
+
 /**
- * Interfaz para los métodos get de TIPOLECTOR.
+ * Interfaz para los métodos get de REGISTRANCARNET.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  */
-public interface VOVehiculo 
+public interface VORegistranCarnet 
 {
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
 	/**
-	 * @return La placa del vehículo
+	 * @return El lector que realiza el registro
 	 */
-	public String getPlaca();
+	public String getLector(); 
 
 	/**
-	 * @return Las caracteristicas del vehículo
+	 * @return El tipo del carnet registrado
 	 */
-	public String getCaracteristicas();
+	public long getTipoCarnet();
 
 	/**
-	 * @return El identificador del dueño del vehículo
+	 * @return El visitante asociado al carnet registrado
 	 */
-	public String getDueño();
+	public String getVisitante();
+
+	/**
+	 * @return La hora de entrada registrada
+	 */
+	public Timestamp getHoraEntrada();
 	
 	/**
-	 * @return Una cadena de caracteres con la información del tipo de lector
+	 * @return La horaSalida registrada
+	 */
+	public Timestamp getHoraSalida();
+	
+	/** 
+	 * @return Una cadena con la información básica
 	 */
 	@Override
-	public String toString(); 
+	public String toString();
 
 }

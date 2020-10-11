@@ -15,30 +15,32 @@ package uniandes.isis2304.parranderos.negocio;
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  */
-public interface VOVehiculo 
+public interface VOTipoLector 
 {
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
 	/**
-	 * @return La placa del vehículo
+	 * @return El id del tipo de lector
 	 */
-	public String getPlaca();
+	public long getId();
 
 	/**
-	 * @return Las caracteristicas del vehículo
+	 * @return El nombre del tipo de lector
 	 */
-	public String getCaracteristicas();
+	public String getTipo();
 
-	/**
-	 * @return El identificador del dueño del vehículo
-	 */
-	public String getDueño();
-	
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de lector
 	 */
 	@Override
 	public String toString(); 
 
+	/**
+	 * Define la igualdad dos tipos de lector
+	 * @param tipoLector - El tipo de lector a comparar
+	 * @return true si tienen el mismo identificador y el mismo nombre
+	 */
+	@Override
+	public boolean equals (Object tipoLector); 
 }

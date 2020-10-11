@@ -44,7 +44,7 @@ public class Baño implements VOBaño
 	private int sanitarios;
 	
 	/**
-	 * El identificador del centro comercial donde se localiza el ascensor. Debe existir en la tabla de CENTROCOMERCIAL
+	 * El identificador del centro comercial donde se localiza el baño. Debe existir en la tabla de CENTROCOMERCIAL
 	 */
 	private String idCentroComercial;
 	
@@ -69,10 +69,10 @@ public class Baño implements VOBaño
 	 * Constructor con valores
 	 * @param identificador - El identificador del baño
 	 * @param cupoActual - El cupo actual del baño
-	 * @param area - El identificador del area
-	 * @param capacidadNormal - El identificador de la capacidad normal
+	 * @param area - El identificador del area. Debe existir un área con dicho identificador
+	 * @param capacidadNormal - El identificador de la capacidad normal. Debe existir una capacidad normal con dicho identificador
 	 * @param sanitarios - El número de sanitarios del baño (mayor a 0)
-	 * @param idCentroComercial - El identificador del centro comercial
+	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
 	public Baño(String identificador, int cupoActual, long area, long capacidadNormal, int sanitarios, String idCentroComercial) 
 	{

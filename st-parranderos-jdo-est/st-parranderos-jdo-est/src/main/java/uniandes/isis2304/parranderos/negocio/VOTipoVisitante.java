@@ -1,15 +1,10 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
+ * Proyecto: Aforo-CCAndes
+
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
@@ -18,40 +13,41 @@ package uniandes.isis2304.parranderos.negocio;
 import java.sql.Timestamp;
 
 /**
- * Interfaz para los métodos get de VISITAN.
+ * Interfaz para los métodos get de TIPOVISITANTE.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
- * @author Germán Bravo
  */
-public interface VOTipoVisitante 
+public interface VOTipoVisitante
 {
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
 	/**
-	 * @return El idBebedor
+	 * @return El id del tipo de visitante
 	 */
-	public long getIdBebedor();
+	public long getId();
 
 	/**
-	 * @return El idBar
+	 * @return El nombre del tipo de visitante
 	 */
-	public long getIdBar();
+	public String getTipo();
 
 	/**
-	 * @return La fechaVisita
+	 * @return La hora límite del tipo de visitante
 	 */
-	public Timestamp getFechaVisita();
-
+	public Timestamp getHoraLimite(); 
+	
 	/**
-	 * @return El horario
-	 */
-	public String getHorario();
-
-	/** 
-	 * @return Una cadena con la información básica
+	 * @return Una cadena de caracteres con la información del tipo de visitante
 	 */
 	@Override
-	public String toString();
+	public String toString(); 
 
+	/**
+	 * Define la igualdad de dos tipos de visitante
+	 * @param tipoVisitante - El tipo de visitante a comparar
+	 * @return true si tienen el mismo identificador y el mismo nombre
+	 */
+	@Override
+	public boolean equals (Object tipoVisitante); 
 }

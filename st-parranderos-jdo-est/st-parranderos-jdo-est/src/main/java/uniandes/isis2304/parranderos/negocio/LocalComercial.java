@@ -24,7 +24,7 @@ public class LocalComercial implements VOLocalComercial
 	private String identificador;
 	
 	/**
-	 * El cupo actual del ascensor
+	 * El cupo actual del local comercial
 	 */
 	private int cupoActual;
 	
@@ -67,12 +67,12 @@ public class LocalComercial implements VOLocalComercial
 
 	/**
 	 * Constructor con valores
-	 * @param identificador - El identificador del ascensor
-	 * @param cupoActual - El cupo actual del ascensor
-	 * @param area - El identificador del area
-	 * @param capacidadNormal - El identificador de la capacidad normal
-	 * @param tipoLocal - El peso máximo del ascensor (mayor a 0)
-	 * @param idCentroComercial - El identificador del centro comercial
+	 * @param identificador - El identificador del local comercial
+	 * @param cupoActual - El cupo actual del  local comercial
+	 * @param area - El identificador del area. Debe existir un área con dicho identificador
+	 * @param capacidadNormal - El identificador de la capacidad normal. Debe existir una capacidad normal con dicho identificador
+	 * @param tipoLocal - El identificador del tipo de local. Debe existir un tipo de local con dicho identificador 
+	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
 	public LocalComercial (String identificador, int cupoActual, long area, long capacidadNormal, long tipoLocal, String idCentroComercial) 
 	{

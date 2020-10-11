@@ -1,45 +1,58 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
+ * Proyecto: Aforo-CCAndes
+
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 package uniandes.isis2304.parranderos.negocio;
 
+import java.sql.Timestamp;
+
 /**
- * Interfaz para los métodos get de GUSTAN.
+ * Interfaz para los métodos get de TIPOLOCAL.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
- * @author Germán Bravo
  */
-public interface VOTipoLocal 
+public interface VOTipoLocal
 {
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
 	/**
-	 * @return El idBebedor
+	 * @return El id del tipo de local
 	 */
-	public long getIdBebedor();
+	public long getId();
 
 	/**
-	 * @return El idBebida
+	 * @return El nombre del tipo de local
 	 */
-	public long getIdBebida();
+	public String getTipo();
+
+	/**
+	 * @return La hora de apertura del tipo de local
+	 */
+	public Timestamp getHoraApertura(); 
 	
-	/** 
-	 * @return Una cadena con la información básica
+	/**
+	 * @return La hora de cierre del tipo de local
+	 */
+	public Timestamp getHoraCierre(); 
+
+	/**
+	 * @return Una cadena de caracteres con la información del tipo de local
 	 */
 	@Override
-	public String toString();
-	
+	public String toString(); 
+
+	/**
+	 * Define la igualdad de dos tipos de local
+	 * @param tipoLocal - El tipo de local a comparar
+	 * @return true si tienen el mismo identificador y el mismo nombre
+	 */
+	@Override
+	public boolean equals (Object tipoLocal); 
 }

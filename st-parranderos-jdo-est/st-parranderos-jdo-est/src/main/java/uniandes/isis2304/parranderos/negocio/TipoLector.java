@@ -10,21 +10,21 @@
 package uniandes.isis2304.parranderos.negocio;
 
 /**
- * Clase para modelar el concepto TIPOCARNET del negocio de Aforo-CCAndes
+ * Clase para modelar el concepto TIPOLECTOR del negocio de Aforo-CCAndes
  *
  */
-public class TipoCarnet implements VOTipoCarnet
+public class TipoLector implements VOTipoLector
 {
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
 	/**
-	 * El identificador del tipo de carnet
+	 * El identificador del tipo de lector
 	 */
 	private long id;
 
 	/**
-	 * El nombre del tipo de carnet (QR, Físico)
+	 * El nombre del tipo de lector (Temperatura, Visitante, Vehículo)
 	 */
 	private String tipo;
 
@@ -34,7 +34,7 @@ public class TipoCarnet implements VOTipoCarnet
 	/**
 	 * Constructor por defecto
 	 */
-	public TipoCarnet() 
+	public TipoLector() 
 	{
 		this.id = 0;
 		this.tipo = "Default";
@@ -42,17 +42,17 @@ public class TipoCarnet implements VOTipoCarnet
 
 	/**
 	 * Constructor con valores
-	 * @param id - El identificador del tipo de carnet
-	 * @param tipo - El nombre del tipo de carnet
+	 * @param id - El identificador del tipo de lector
+	 * @param tipo - El nombre del tipo de lector
 	 */
-	public TipoCarnet(long id, String tipo) 
+	public TipoLector(long id, String tipo) 
 	{
 		this.id = id;
 		this.tipo = tipo;
 	}
 
 	/**
-	 * @return El id del tipo de carnet
+	 * @return El id del tipo de lector
 	 */
 	public long getId() 
 	{
@@ -60,7 +60,7 @@ public class TipoCarnet implements VOTipoCarnet
 	}
 
 	/**
-	 * @param id - El nuevo id del tipo de carnet
+	 * @param id - El nuevo id del tipo de lector
 	 */
 	public void setId(long id) 
 	{
@@ -68,7 +68,7 @@ public class TipoCarnet implements VOTipoCarnet
 	}
 
 	/**
-	 * @return El nombre del tipo de carnet
+	 * @return El nombre del tipo de lector
 	 */
 	public String getTipo() 
 	{
@@ -76,7 +76,7 @@ public class TipoCarnet implements VOTipoCarnet
 	}
 
 	/**
-	 * @param tipo - El nuevo nombre del tipo de carnet
+	 * @param tipo - El nuevo nombre del tipo de lector
 	 */
 	public void setTipo(String tipo) 
 	{
@@ -85,23 +85,23 @@ public class TipoCarnet implements VOTipoCarnet
 
 
 	/**
-	 * @return Una cadena de caracteres con la información del tipo de carnet
+	 * @return Una cadena de caracteres con la información del tipo de lector
 	 */
 	@Override
 	public String toString() 
 	{
-		return "TipoCarnet [id=" + id + ", tipo=" + tipo + "]";
+		return "TipoLector [id=" + id + ", tipo=" + tipo + "]";
 	}
 
 	/**
-	 * Define la igualdad dos tipos de carnet
-	 * @param tipoCarnet - El tipo de carnet a comparar
+	 * Define la igualdad dos tipos de lector
+	 * @param tipoLector - El tipo de lector a comparar
 	 * @return true si tienen el mismo identificador y el mismo nombre
 	 */
-	public boolean equals(Object tipoCarnet) 
+	public boolean equals(Object tipoLector) 
 	{
-		TipoCarnet tc = (TipoCarnet) tipoCarnet;
-		return id == tc.id && tipo.equalsIgnoreCase (tc.tipo);
+		TipoLector tl = (TipoLector) tipoLector;
+		return id == tl.id && tipo.equalsIgnoreCase (tl.tipo);
 	}
 
 }

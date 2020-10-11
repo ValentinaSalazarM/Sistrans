@@ -1,24 +1,17 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
+ * Proyecto: Aforo-CCAandes
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 package uniandes.isis2304.parranderos.negocio;
 
 /**
- * Clase para modelar el concepto BAR del negocio de los Parranderos
+ * Clase para modelar el concepto VISITANTE del negocio de Aforo-CCAndes
  *
- * @author Germán Bravo
  */
 public class Visitante implements VOVisitante
 {
@@ -26,29 +19,40 @@ public class Visitante implements VOVisitante
 	 * 			Atributos
 	 *****************************************************************/
 	/**
-	 * El identificador ÚNICO de los bares
+	 * El identificador ÚNICO de los visitantes
 	 */
-	private long id;
+	private String identificador;
 	
 	/**
-	 * El nombre del bar
+	 * El identificador del tipo de visitante. Debe existir en la tabla TIPOVISITANTE
+	 */
+	private long tipo;
+	
+	/**
+	 * El nombre del visitante
 	 */
 	private String nombre;
 
 	/**
-	 * La ciudad donde se encuentra el bar
+	 * El correo del visitante
 	 */
-	private String ciudad;
+	private String correo;
 	
 	/**
-	 * El presupuesto del bar (ALTO, MEDIO, BAJO)
+	 * El teléfono del visitante
 	 */
-	private String presupuesto;
+	private String telefonoPropio;
 	
 	/**
-	 * El número de sedes del bar en la ciudad
+	 * El nombre del contacto de emergencia del visitante
 	 */
-	private int cantSedes;
+	private String nombreEmergencia;
+	
+	/**
+	 * El teléfono de emergencia del contacto de emergencia del visitante
+	 */
+	private String telefonoEmergencia;
+	
 
 	/* ****************************************************************
 	 * 			Métodos 
@@ -58,118 +62,156 @@ public class Visitante implements VOVisitante
      */
 	public Visitante() 
     {
-    	this.id = 0;
+    	this.identificador = "";
+    	this.tipo = 0;
 		this.nombre = "";
-		this.ciudad = "";
-		this.presupuesto = "";
-		this.cantSedes = 0;
+		this.correo = "";
+		this.telefonoPropio = "";
+		this.nombreEmergencia = "";
+		this.telefonoEmergencia = "";
 	}
 
 	/**
 	 * Constructor con valores
-	 * @param id - El id del bart
-	 * @param nombre - El nombre del bar
-	 * @param ciudad - La ciudad del bar
-	 * @param presupuesto - El presupuesto del bar (ALTO, MEDIO, BAJO)
-	 * @param cantSedes - Las sedes del bar (Mayor que 0)
+	 * @param identificador - El id del visitante
+	 * @param tipo - El identificador del tipo de visitante 
+	 * @param nombre - El nombre del visitante
+	 * @param correo - El correo del visitante
+	 * @param telefonoPropio - El teléfono del visitante
+	 * @param nombreEmergencia - El nombre del contacto de emergencia del visitante
+	 * @param telefonoEmergencia - El teléfono del contacto de emergencia del visitante
 	 */
-    public Visitante(long id, String nombre, String ciudad, String presupuesto, int cantSedes) 
+    public Visitante(String identificador, String nombre, long tipo, String correo, String telefonoPropio, String nombreEmergencia, String telefonoEmergencia) 
     {
-    	this.id = id;
+    	this.identificador = identificador;
+    	this.tipo = tipo;
 		this.nombre = nombre;
-		this.ciudad = ciudad;
-		this.presupuesto = presupuesto;
-		this.cantSedes = cantSedes;
+		this.correo = correo;
+		this.telefonoPropio = telefonoPropio;
+		this.nombreEmergencia = nombreEmergencia;
+		this.telefonoEmergencia = telefonoEmergencia;
+	}
+    
+	/**
+	 * @return El identificador del visitante
+	 */
+	public String getIdentificador() 
+	{
+		return identificador;
 	}
 
-    /**
-	 * @return El id del bar
-	 */
-	public long getId() 
-	{
-		return id;
-	}
-	
 	/**
-	 * @param id - El nuevo id del bar
+	 * @param identificador - El nuevo identificador del visitante
 	 */
-	public void setId(long id) 
+	public void setIdentificador(String identificador) 
 	{
-		this.id = id;
+		this.identificador = identificador;
 	}
-	
+
 	/**
-	 * @return el nombre del bar
+	 * @return El identificador del tipo de visitante
+	 */
+	public long getTipo() 
+	{
+		return tipo;
+	}
+
+	/**
+	 * @param tipo - El nuevo tipo de visitante
+	 */
+	public void setTipo(long tipo) 
+	{
+		this.tipo = tipo;
+	}
+
+	/**
+	 * @return El nombre del visitante
 	 */
 	public String getNombre() 
 	{
 		return nombre;
 	}
-	
+
 	/**
-	 * @param nombre El nuevo nombre del bar
+	 * @param nombre - El nuevo nombre del visitante
 	 */
 	public void setNombre(String nombre) 
 	{
 		this.nombre = nombre;
 	}
-	
+
 	/**
-	 * @return la ciudad del bar
+	 * @return El correo del visitante
 	 */
-	public String getCiudad() 
+	public String getCorreo() 
 	{
-		return ciudad;
+		return correo;
 	}
-	
+
 	/**
-	 * @param ciudad - La nueva ciudad del bar
+	 * @param correo - El nuevo correo del visitante
 	 */
-	public void setCiudad(String ciudad) 
+	public void setCorreo(String correo) 
 	{
-		this.ciudad = ciudad;
+		this.correo = correo;
 	}
-	
+
 	/**
-	 * @return El presupuesto del bar
+	 * @return El telefono propio del visitante
 	 */
-	public String getPresupuesto() 
+	public String getTelefonoPropio() 
 	{
-		return presupuesto;
+		return telefonoPropio;
 	}
-	
+
 	/**
-	 * @param presupuesto - El nuevo presupuesto del bar (ALTO, MEDIO, BAJOO)
+	 * @param telefonoPropio - El nuevo telefono propio del visitante
 	 */
-	public void setPresupuesto(String presupuesto) 
+	public void setTelefonoPropio(String telefonoPropio) 
 	{
-		this.presupuesto = presupuesto;
+		this.telefonoPropio = telefonoPropio;
 	}
-	
+
 	/**
-	 * @return la cantSedes del bar
+	 * @return El nombre de emergencia del visitante
 	 */
-	public int getCantSedes() 
+	public String getNombreEmergencia() 
 	{
-		return cantSedes;
+		return nombreEmergencia;
 	}
-	
+
 	/**
-	 * @param cantSedes - la nueva cantidad de sedes del bar
+	 * @param nombreEmergencia - El nuevo nombre de emergencia del visitante
 	 */
-	public void setCantSedes(int cantSedes) 
+	public void setNombreEmergencia(String nombreEmergencia) 
 	{
-		this.cantSedes = cantSedes;
+		this.nombreEmergencia = nombreEmergencia;
 	}
-	
+
+	/**
+	 * @return El telefono de emergencia del visitante
+	 */
+	public String getTelefonoEmergencia() 
+	{
+		return telefonoEmergencia;
+	}
+
+	/**
+	 * @param telefonoEmergencia - El nuevo telefono de emergencia del visitante
+	 */
+	public void setTelefonoEmergencia(String telefonoEmergencia) 
+	{
+		this.telefonoEmergencia = telefonoEmergencia;
+	}
+
 	@Override
 	/**
-	 * @return Una cadena de caracteres con todos los atributos del bar
+	 * @return Una cadena de caracteres con todos los atributos del visitante
 	 */
 	public String toString() 
 	{
-		return "Bar [id=" + id + ", nombre=" + nombre + ", ciudad=" + ciudad + ", presupuesto=" + presupuesto
-				+ ", cantSedes=" + cantSedes + "]";
+		return "Visitante [identificador=" + identificador + ", tipo=" + tipo + ", nombre=" + nombre + ", correo=" + correo + ", telefonoPropio=" + telefonoPropio
+				+ ", nombreEmergencia=" + nombreEmergencia + ", telefonoEmergencia=" + telefonoEmergencia + "]";
 	}
 	
 
