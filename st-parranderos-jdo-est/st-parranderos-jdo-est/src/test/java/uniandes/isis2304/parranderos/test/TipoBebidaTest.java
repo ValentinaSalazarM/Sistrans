@@ -29,7 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.parranderos.negocio.Parranderos;
-import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
+import uniandes.isis2304.parranderos.negocio.VOLocalComercial;
 
 /**
  * Clase con los métdos de prueba de funcionalidad sobre TIPOBEBIDA
@@ -99,19 +99,19 @@ public class TipoBebidaTest
     	try
 		{
 			// Lectura de los tipos de bebida con la tabla vacía
-			List <VOTipoBebida> lista = parranderos.darVOTiposBebida();
+			List <VOLocalComercial> lista = parranderos.darVOTiposBebida();
 			assertEquals ("No debe haber tipos de bebida creados!!", 0, lista.size ());
 
 			// Lectura de los tipos de bebida con un tipo de bebida adicionado
 			String nombreTipoBebida1 = "Vino tinto";
-			VOTipoBebida tipoBebida1 = parranderos.adicionarTipoBebida (nombreTipoBebida1);
+			VOLocalComercial tipoBebida1 = parranderos.adicionarTipoBebida (nombreTipoBebida1);
 			lista = parranderos.darVOTiposBebida();
 			assertEquals ("Debe haber un tipo de bebida creado !!", 1, lista.size ());
 			assertEquals ("El objeto creado y el traido de la BD deben ser iguales !!", tipoBebida1, lista.get (0));
 
 			// Lectura de los tipos de bebida con dos tipos de bebida adicionados
 			String nombreTipoBebida2 = "Cerveza";
-			VOTipoBebida tipoBebida2 = parranderos.adicionarTipoBebida (nombreTipoBebida2);
+			VOLocalComercial tipoBebida2 = parranderos.adicionarTipoBebida (nombreTipoBebida2);
 			lista = parranderos.darVOTiposBebida();
 			assertEquals ("Debe haber dos tipos de bebida creados !!", 2, lista.size ());
 			assertTrue ("El primer tipo de bebida adicionado debe estar en la tabla", tipoBebida1.equals (lista.get (0)) || tipoBebida1.equals (lista.get (1)));
@@ -175,16 +175,16 @@ public class TipoBebidaTest
 		try
 		{
 			// Lectura de los tipos de bebida con la tabla vacía
-			List <VOTipoBebida> lista = parranderos.darVOTiposBebida();
+			List <VOLocalComercial> lista = parranderos.darVOTiposBebida();
 			assertEquals ("No debe haber tipos de bebida creados!!", 0, lista.size ());
 
 			// Lectura de los tipos de bebida con un tipo de bebida adicionado
 			String nombreTipoBebida1 = "Vino tinto";
-			VOTipoBebida tipoBebida1 = parranderos.adicionarTipoBebida (nombreTipoBebida1);
+			VOLocalComercial tipoBebida1 = parranderos.adicionarTipoBebida (nombreTipoBebida1);
 			lista = parranderos.darVOTiposBebida();
 			assertEquals ("Debe haber un tipo de bebida creado !!", 1, lista.size ());
 
-			VOTipoBebida tipoBebida2 = parranderos.adicionarTipoBebida (nombreTipoBebida1);
+			VOLocalComercial tipoBebida2 = parranderos.adicionarTipoBebida (nombreTipoBebida1);
 			assertNull ("No puede adicionar dos tipos de bebida con el mismo nombre !!", tipoBebida2);
 		}
 		catch (Exception e)

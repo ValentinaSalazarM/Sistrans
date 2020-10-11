@@ -20,7 +20,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Bar;
+import uniandes.isis2304.parranderos.negocio.Visitante;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto BAR de Parranderos
@@ -110,12 +110,12 @@ class SQLBar
 	 * @param idBar - El identificador del bar
 	 * @return El objeto BAR que tiene el identificador dado
 	 */
-	public Bar darBarPorId (PersistenceManager pm, long idBar) 
+	public Visitante darBarPorId (PersistenceManager pm, long idBar) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBar () + " WHERE id = ?");
-		q.setResultClass(Bar.class);
+		q.setResultClass(Visitante.class);
 		q.setParameters(idBar);
-		return (Bar) q.executeUnique();
+		return (Visitante) q.executeUnique();
 	}
 
 	/**
@@ -125,12 +125,12 @@ class SQLBar
 	 * @param nombreBar - El nombre de bar buscado
 	 * @return Una lista de objetos BAR que tienen el nombre dado
 	 */
-	public List<Bar> darBaresPorNombre (PersistenceManager pm, String nombreBar) 
+	public List<Visitante> darBaresPorNombre (PersistenceManager pm, String nombreBar) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBar () + " WHERE nombre = ?");
-		q.setResultClass(Bar.class);
+		q.setResultClass(Visitante.class);
 		q.setParameters(nombreBar);
-		return (List<Bar>) q.executeList();
+		return (List<Visitante>) q.executeList();
 	}
 
 	/**
@@ -139,11 +139,11 @@ class SQLBar
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos BAR
 	 */
-	public List<Bar> darBares (PersistenceManager pm)
+	public List<Visitante> darBares (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBar ());
-		q.setResultClass(Bar.class);
-		return (List<Bar>) q.executeList();
+		q.setResultClass(Visitante.class);
+		return (List<Visitante>) q.executeList();
 	}
 
 	/**

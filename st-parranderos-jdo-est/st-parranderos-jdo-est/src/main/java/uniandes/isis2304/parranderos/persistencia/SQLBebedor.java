@@ -21,7 +21,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Bebedor;
+import uniandes.isis2304.parranderos.negocio.CapacidadNormal;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto BEBEDOR de Parranderos
@@ -109,12 +109,12 @@ class SQLBebedor
 	 * @param idBebedor - El identificador del bebedor
 	 * @return El objeto BEBEDOR que tiene el identificador dado
 	 */
-	public Bebedor darBebedorPorId (PersistenceManager pm, long idBebedor) 
+	public CapacidadNormal darBebedorPorId (PersistenceManager pm, long idBebedor) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebedor () + " WHERE id = ?");
-		q.setResultClass(Bebedor.class);
+		q.setResultClass(CapacidadNormal.class);
 		q.setParameters(idBebedor);
-		return (Bebedor) q.executeUnique();
+		return (CapacidadNormal) q.executeUnique();
 	}
 
 	/**
@@ -124,12 +124,12 @@ class SQLBebedor
 	 * @param nombreBebedor - El nombre de bebedor buscado
 	 * @return Una lista de objetos BEBEDOR que tienen el nombre dado
 	 */
-	public List<Bebedor> darBebedoresPorNombre (PersistenceManager pm, String nombreBebedor) 
+	public List<CapacidadNormal> darBebedoresPorNombre (PersistenceManager pm, String nombreBebedor) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebedor () + " WHERE nombre = ?");
-		q.setResultClass(Bebedor.class);
+		q.setResultClass(CapacidadNormal.class);
 		q.setParameters(nombreBebedor);
-		return (List<Bebedor>) q.executeList();
+		return (List<CapacidadNormal>) q.executeList();
 	}
 
 	/**
@@ -138,11 +138,11 @@ class SQLBebedor
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos BEBEDOR
 	 */
-	public List<Bebedor> darBebedores (PersistenceManager pm)
+	public List<CapacidadNormal> darBebedores (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebedor ());
-		q.setResultClass(Bebedor.class);
-		return (List<Bebedor>) q.executeList();
+		q.setResultClass(CapacidadNormal.class);
+		return (List<CapacidadNormal>) q.executeList();
 	}
 
 	/**

@@ -20,7 +20,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Gustan;
+import uniandes.isis2304.parranderos.negocio.TipoLocal;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto GUSTAN de Parranderos
@@ -93,11 +93,11 @@ class SQLGustan
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos GUSTAN
 	 */
-	public List<Gustan> darGustan (PersistenceManager pm)
+	public List<TipoLocal> darGustan (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaGustan ());
-		q.setResultClass(Gustan.class);
-		List<Gustan> resp = (List<Gustan>) q.execute();
+		q.setResultClass(TipoLocal.class);
+		List<TipoLocal> resp = (List<TipoLocal>) q.execute();
 		return resp;
 	}
 

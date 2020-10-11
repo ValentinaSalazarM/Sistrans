@@ -20,7 +20,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Sirven;
+import uniandes.isis2304.parranderos.negocio.Area;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto SIRVEN de Parranderos
@@ -94,11 +94,11 @@ class SQLSirven
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos SIRVEN
 	 */
-	public List<Sirven> darSirven (PersistenceManager pm)
+	public List<Area> darSirven (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaSirven ());
-		q.setResultClass(Sirven.class);
-		return (List<Sirven>) q.execute();
+		q.setResultClass(Area.class);
+		return (List<Area>) q.execute();
 	}
  
 	/**

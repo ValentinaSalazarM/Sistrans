@@ -20,8 +20,8 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Bebida;
-import uniandes.isis2304.parranderos.negocio.TipoBebida;
+import uniandes.isis2304.parranderos.negocio.Ascensor;
+import uniandes.isis2304.parranderos.negocio.LocalComercial;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto BEBIDA de Parranderos
@@ -109,12 +109,12 @@ class SQLBebida
 	 * @param idBebida - El identificador de la bebida
 	 * @return El objeto BEBIDA que tiene el identificador dado
 	 */
-	public Bebida darTipoBebidaPorId (PersistenceManager pm, long idBebida) 
+	public Ascensor darTipoBebidaPorId (PersistenceManager pm, long idBebida) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebida () + " WHERE id = ?");
-		q.setResultClass(TipoBebida.class);
+		q.setResultClass(LocalComercial.class);
 		q.setParameters(idBebida);
-		return (Bebida) q.executeUnique();
+		return (Ascensor) q.executeUnique();
 	}
 
 	/**
@@ -124,12 +124,12 @@ class SQLBebida
 	 * @param nombreBebida - El nombre de la bebida
 	 * @return Una lista de objetos BEBIDA que tienen el nombre dado
 	 */
-	public List<Bebida> darBebidasPorNombre (PersistenceManager pm, String nombreBebida) 
+	public List<Ascensor> darBebidasPorNombre (PersistenceManager pm, String nombreBebida) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebida () + " WHERE nombre = ?");
-		q.setResultClass(Bebida.class);
+		q.setResultClass(Ascensor.class);
 		q.setParameters(nombreBebida);
-		return (List<Bebida>) q.executeList();
+		return (List<Ascensor>) q.executeList();
 	}
 
 	/**
@@ -138,11 +138,11 @@ class SQLBebida
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos BEBIDA
 	 */
-	public List<Bebida> darBebidas (PersistenceManager pm)
+	public List<Ascensor> darBebidas (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebida ());
-		q.setResultClass(Bebida.class);
-		return (List<Bebida>) q.executeList();
+		q.setResultClass(Ascensor.class);
+		return (List<Ascensor>) q.executeList();
 	}
 
 	/**
