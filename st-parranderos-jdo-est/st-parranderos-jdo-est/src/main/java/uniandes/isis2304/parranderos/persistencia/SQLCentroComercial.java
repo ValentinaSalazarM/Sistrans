@@ -9,7 +9,7 @@
 
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -57,17 +57,14 @@ class SQLCentroComercial
 	 * Crea y ejecuta la sentencia SQL para adicionar un CENTRO COMERCIAL a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
 	 * @param idCentroComercial - El identificador del centro comercial
-	 * @param cupoActual - El cupo actual del centro comercial
-	 * @param capacidadNormal - El identificador de la capacidad normal del centro comercial
-	 * @param area - El identificador del área del centro comercial
-	 * @param pesoMaximo - El peso máximo del centro comercial
-	 * @param idCentroComercial - El identificador del centro comercial del centro comercial
+	 * @param nombre - El nombre del centro comercial
+	 * @param horaApertura - La hora de apertura 
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarCentroComercial (PersistenceManager pm, String idCentroComercial, String nombre, Timestamp horaApertura) 
+	public long adicionarCentroComercial (PersistenceManager pm, String idCentroComercial, String nombre, Calendar horaApertura) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCentroComercial () + "(id, nombre, horaApertura) values (?, ?, ?)");
-        q.setParameters(idCentroComercial, nombre);
+        q.setParameters(idCentroComercial, nombre, horaApertura);
         return (long) q.executeUnique();
 	}
 
@@ -149,7 +146,7 @@ class SQLCentroComercial
 	 * @param horaApertura - La nueva horaApertura del centro comercial
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarHoraAperturaCentroComercial (PersistenceManager pm, long idCentroComercial, Timestamp horaApertura) 
+	public long cambiarHoraAperturaCentroComercial (PersistenceManager pm, long idCentroComercial, Calendar horaApertura) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCentroComercial () + " SET horaApertura = ? WHERE identificador = ?");
 	     q.setParameters(horaApertura, idCentroComercial);
