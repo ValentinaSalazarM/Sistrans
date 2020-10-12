@@ -1,33 +1,25 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Proyecto: Aforo-CCAndes
+ *  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.CapacidadNormal;
+import uniandes.isis2304.parranderos.negocio.Ascensor;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto BEBEDOR de Parranderos
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto ASCENSOR de AforoAndes
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
- * @author Germán Bravo
  */
 class SQLAscensor 
 {
@@ -61,270 +53,105 @@ class SQLAscensor
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar un BEBEDOR a la base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para adicionar un ASCENSOR a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @param nombre - El nombre del bebedor
-	 * @param ciudad - La ciudad del bebedor
-	 * @param presupuesto - El presupuesto del bebedor (ALTO, MEDIO, BAJO)
+	 * @param idAscensor - El identificador del ascensor
+	 * @param capacidadNormal - El identificador de la capacidad normal del ascensor
+	 * @param area - El identificador del área del ascensor
+	 * @param pesoMaximo - El peso máximo del ascensor
+	 * @param idCentroComercial - El identificador del centro comercial del ascensor
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarBebedor (PersistenceManager pm, long idBebedor, String nombre, String ciudad, String presupuesto) 
+	public long adicionarAscensor (PersistenceManager pm, long idAscensor, long capacidadNormal, long area, double pesoMaximo, long idCentroComercial) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCapacidadNormal () + "(id, nombre, ciudad, presupuesto) values (?, ?, ?, ?)");
-        q.setParameters(idBebedor, nombre, ciudad, presupuesto);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaAscensor () + "(identificador, capacidadNormal, area, pesoMaximo, idCentroComercial) values (?, ?, ?, ?, ?)");
+        q.setParameters(idAscensor, capacidadNormal, area, pesoMaximo, idCentroComercial);
         return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar BEBEDORES de la base de datos de Parranderos, por su nombre
+	 * Crea y ejecuta la sentencia SQL para eliminar un ASCENSOR de la base de datos de AforoAndes, por su peso máximo
 	 * @param pm - El manejador de persistencia
-	 * @param nombre - El nombre del bebedor
+	 * @param pesoMaximo - El peso máximo del ascensor
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarBebedorPorNombre (PersistenceManager pm, String nombre)
+	public long eliminarAscensorPorPeso (PersistenceManager pm, double pesoMaximo)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal () + " WHERE nombre = ?");
-        q.setParameters(nombre);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor () + " WHERE pesoMaximo = ?");
+        q.setParameters(pesoMaximo);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar UN BEBEDOR de la base de datos de Parranderos, por su identificador
+	 * Crea y ejecuta la sentencia SQL para eliminar UN ASCENSOR de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebeodor
+	 * @param idAscensor - El identificador del ascensor
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarBebedorPorId (PersistenceManager pm, long idBebedor)
+	public long eliminarAscensorPorId (PersistenceManager pm, long idAscensor)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal () + " WHERE id = ?");
-        q.setParameters(idBebedor);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor () + " WHERE identificador = ?");
+        q.setParameters(idAscensor);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN BEBEDOR de la 
-	 * base de datos de Parranderos, por su identificador
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN ASCENSOR de la 
+	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @return El objeto BEBEDOR que tiene el identificador dado
+	 * @param idAscensor - El identificador del ascensor
+	 * @return El objeto ASCENSOR que tiene el identificador dado
 	 */
-	public CapacidadNormal darBebedorPorId (PersistenceManager pm, long idBebedor) 
+	public Ascensor darAscensorPorId (PersistenceManager pm, long idAscensor) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal () + " WHERE id = ?");
-		q.setResultClass(CapacidadNormal.class);
-		q.setParameters(idBebedor);
-		return (CapacidadNormal) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaAscensor () + " WHERE identificador = ?");
+		q.setResultClass(Ascensor.class);
+		q.setParameters(idAscensor);
+		return (Ascensor) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BEBEDORES de la 
-	 * base de datos de Parranderos, por su nombre
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS ASCENSORES de la 
+	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
-	 * @param nombreBebedor - El nombre de bebedor buscado
-	 * @return Una lista de objetos BEBEDOR que tienen el nombre dado
+	 * @param pesoMaximo - El peso máximo de ascensor buscado
+	 * @return Una lista de objetos ASCENSOR que tienen el peso máximo dado
 	 */
-	public List<CapacidadNormal> darBebedoresPorNombre (PersistenceManager pm, String nombreBebedor) 
+	public List<Ascensor> darAscensoresPorPesoMaximo (PersistenceManager pm, double pesoMaximo) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal () + " WHERE nombre = ?");
-		q.setResultClass(CapacidadNormal.class);
-		q.setParameters(nombreBebedor);
-		return (List<CapacidadNormal>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaAscensor () + " WHERE pesoMaximo = ?");
+		q.setResultClass(Ascensor.class);
+		q.setParameters(pesoMaximo);
+		return (List<Ascensor>) q.executeList();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BEBEDORES de la 
-	 * base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS ASCENSORES de la 
+	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos BEBEDOR
+	 * @return Una lista de objetos ASCENSOR
 	 */
-	public List<CapacidadNormal> darBebedores (PersistenceManager pm)
+	public List<Ascensor> darAscensores (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal ());
-		q.setResultClass(CapacidadNormal.class);
-		return (List<CapacidadNormal>) q.executeList();
-	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BEBEDORES Y DE SUS VISITAS REALIZADAS de la 
-	 * base de datos de Parranderos
-	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @return Una lista de arreglos de objetos, de tamaño 7. Los elementos del arreglo corresponden a los datos de 
-	 * los bares visitados y los datos propios de la visita:
-	 * 		(id, nombre, ciudad, presupuesto, cantsedes) de los bares y (fechavisita, horario) de las visitas
-	 */
-	public List<Object []> darVisitasRealizadas (PersistenceManager pm, long idBebedor)
-	{
-        String sql = "SELECT bar.id, bar.nombre, bar.ciudad, bar.presupuesto, bar.cantsedes, vis.fechavisita, vis.horario";
-        sql += " FROM ";
-        sql += pp.darTablaCapacidadNormal () + " bdor, ";
-        sql += pp.darTablaBaño () + " vis, ";
-        sql += pp.darTablaCentroComercial () + " bar ";
-       	sql	+= " WHERE ";
-       	sql += "bdor.id = ?";
-       	sql += " AND bdor.id = vis.idbebedor";
-       	sql += " AND vis.idbar = bar.id";
-		Query q = pm.newQuery(SQL, sql);
-		q.setParameters(idBebedor);
-		return q.executeList();
-	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BEBEDORES Y DE LAS BEBIDAS QUE GUSTA de la 
-	 * base de datos de Parranderos
-	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @return Una lista de arreglos de objetos, de tamaño 5. Los elementos del arreglo corresponden a los datos de 
-	 * las bebidas (con el nombre del tipo de bebida) que le gustan al bebedor:
-	 * 		(id, nombre, idtipobebida, gradoalcohol) de la bebida y el (nombre) del tipo de bebida
-	 */
-	public List<Object []> darBebidasQueLeGustan (PersistenceManager pm, long idBebedor)
-	{
-        String sql = "SELECT beb.id, beb.nombre, beb.idtipobebida, beb.gradoalcohol, tb.nombre";
-        sql += " FROM ";
-        sql += pp.darTablaCapacidadNormal () + " bdor, ";
-        sql += pp.darTablaArea () + " g, ";
-        sql += pp.darTablaVisitante () + " beb, ";
-        sql += pp.darTablaTipoBebida () + " tb ";
-       	sql	+= " WHERE ";
-       	sql += "bdor.id = ?";
-       	sql += " AND bdor.id = g.idbebedor";
-       	sql += " AND g.idBebida = beb.id";
-       	sql += " AND beb.idtipobebida = tb.id";
-		Query q = pm.newQuery(SQL, sql);
-		q.setParameters(idBebedor);
-		return q.executeList();
-	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BEBEDORES Y DE CUÁNTAS VISITAS HA REALIZADO de la 
-	 * base de datos de Parranderos. Incluye, con 0, los bebedores que no han realizado visitas 
-	 * @param pm - El manejador de persistencia
-	 * @return Una lista de arreglos de objetos, de tamaño 5. Los elementos del arreglo corresponden a los datos del bebedor,
-	 * y del número de visitas realizadas:
-	 * 		(id, nombre, ciudad, presupuesto) del bebedor y numVisitas
-	 */
-	public List<Object> darBebedoresYNumVisitasRealizadas (PersistenceManager pm)
-	{
-	    String sql = "SELECT id, nombre, ciudad, presupuesto, count (idbebedor) as numVisitas";
-	    sql += " FROM " + pp.darTablaCapacidadNormal ();
-	    sql += " LEFT OUTER JOIN " + pp.darTablaBaño () + " ON id = idbebedor";
-	    sql	+= " GROUP BY id, nombre, ciudad, presupuesto";
-	    sql	+= " ORDER BY numVisitas";
-		
-	    Query q = pm.newQuery(SQL, sql);
-		return q.executeList();
-	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la cantidad de BEBEDORES de una ciudad que visitan bares de la 
-	 * base de datos de Parranderos
-	 * @param pm - El manejador de persistencia
-	 * @param ciudad - La ciudad de interés
-	 * @return El número de bebedores de la ciudad que son referenciados en VISITAN
-	 */
-	public long darCantidadBebedoresCiudadVisitanBares (PersistenceManager pm, String ciudad)
-	{
-        String sql1 = "SELECT UNIQUE ID";
-        sql1 += " FROM " + pp.darTablaCapacidadNormal ();
-        sql1 += " INNER JOIN " + pp.darTablaBaño () + " ON id = idbebedor";
-       	sql1	+= " WHERE ciudad = ?";
-       	
-       	String sql = "SELECT count (*) FROM (" + sql1 + ")";
-		Query q = pm.newQuery(SQL, sql);
-		q.setParameters(ciudad);
-		return ((BigDecimal) q.executeUnique()).longValue ();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaAscensor ());
+		q.setResultClass(Ascensor.class);
+		return (List<Ascensor>) q.executeList();
 	}
 
 	/**
 	 * 
-	 * Crea y ejecuta la sentencia SQL para cambiar la ciudad de un bebedor en la 
-	 * base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para cambiar el peso máximo de un ascensor en la 
+	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @param ciudad - La nueva ciudad del bebedor
+	 * @param idAscensor - El identificador del ascensor
+	 * @param pesoMaximo - El nuevo peso máximo del ascensor
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarCiudadBebedor (PersistenceManager pm, long idBebedor, String ciudad) 
+	public long cambiarPesoMaximoAscensor (PersistenceManager pm, long idAscensor, double pesoMaximo) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCapacidadNormal () + " SET ciudad = ? WHERE id = ?");
-	     q.setParameters(ciudad, idBebedor);
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaAscensor () + " SET pesoMaximo = ? WHERE identificador = ?");
+	     q.setParameters(pesoMaximo, idAscensor);
 	     return (long) q.executeUnique();            
-	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para:
-	 * Eliminar un bebedor y las visitas a bares que haya realizado v1: 
-	 * En caso que el bebedor esté referenciado por otra relación, NO SE BORRA NI EL BEBEDOR, NI SUS VISITAS
-	 * Adiciona entradas al log de la aplicación
-	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El bebedor que se quiere eliminar
-	 * @return Una pareja de números [número de bebedores eliminados, número de visitas eliminadas]
-	 */
-	public long [] eliminarBebedorYVisitas_v1 (PersistenceManager pm, long idBebedor) 
-	{
-      Query q1 = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE idBebedor = ?");
-      q1.setParameters(idBebedor);
-      Query q2 = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal () + " WHERE id = ?");
-      q2.setParameters(idBebedor);
-      
-      long visitasEliminadas = (long) q1.executeUnique ();
-      long bebedoresEliminads = (long) q2.executeUnique ();
-      return new long[] {bebedoresEliminads, visitasEliminadas};
-	}
-
-	/* ****************************************************************
-	 * 			Métodos de prueba para subtransacciones
-	 *****************************************************************/
-	//****************** QUITAR EN LA VERSIÓN A ENTREGAR
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BEBEDORES Y DE CUÁNTOS BARES VISITAN de la 
-	 * base de datos de Parranderos. Incluye, con 0, los bebedores que no han realizado visitas 
-	 * @param pm - El manejador de persistencia
-	 * @return Una lista de arreglos de objetos, de tamaño 5. Los elementos del arreglo corresponden a los datos del bebedor,
-	 * y del número de bares que visita:
-	 * 		(id, nombre, ciudad, presupuesto) del bebedor y numbares
-	 */
-	public List<Object> darBebedoresYCuantosBaresVisitan (PersistenceManager pm)
-	{
-		// Selecciona las parejas [idBebedor, idBar] únicas de la tabla VISITAN
-		String sql0 = "SELECT DISTINCT idbebedor, idBar";
-		sql0 += " FROM " + pp.darTablaBaño ();
-		
-		// Agrupa las parejas anteriores por idBebedor y cuenta cuántos bares visita cada bebedor
-		String sql1 = "SELECT idbebedor, count (*) as numbares";
-		sql1 += " FROM " + "(" + sql0 + ")";
-		sql1 += " GROUP BY idBebedor";
-		
-		// Hace join de BEBEDORES con el resultado anterior para asociar la información del bebedor
-        String sql = "SELECT id, nombre, ciudad, presupuesto, NVL (numbares, 0)";
-        sql += " FROM " + pp.darTablaCapacidadNormal () + " LEFT OUTER JOIN (" + sql1 + ")";
-        sql += " ON id = idBebedor";
-		Query q = pm.newQuery(SQL, sql);
-		return q.executeList();
-	}
-
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BEBEDORES Y DE CUÁNTAS VISITAS HA REALIZADO de la 
-	 * base de datos de Parranderos. Incluye, con 0, los bebedores que no han realizado visitas 
-	 * @param pm - El manejador de persistencia
-	 * @return Una lista de arreglos de objetos, de tamaño 5. Los elementos del arreglo corresponden a los datos del bebedor,
-	 * y del número de visitas realizadas:
-	 * 		(id, nombre, ciudad, presupuesto) del bebedor y numVisitas
-	 */
-	public List<Object> darBebedoresYNumVisitasRealizadas_v2 (PersistenceManager pm)
-	{		
-		String sql1 = "SELECT idbebedor, count (*) as numVisitas";
-		sql1 += " FROM " + pp.darTablaBaño ();
-		sql1 += " GROUP BY idBebedor";
-		
-        String sql = "SELECT id, nombre, ciudad, presupuesto, NVL (numVisitas, 0)";
-        sql += " FROM " + pp.darTablaCapacidadNormal () + " LEFT OUTER JOIN (" + sql1 + ")";
-        sql += " ON id = idBebedor";
-		Query q = pm.newQuery(SQL, sql);
-		return q.executeList();
 	}
 
 

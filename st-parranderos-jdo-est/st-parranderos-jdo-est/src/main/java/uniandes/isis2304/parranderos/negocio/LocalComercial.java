@@ -24,11 +24,6 @@ public class LocalComercial implements VOLocalComercial
 	private String identificador;
 	
 	/**
-	 * El cupo actual del local comercial
-	 */
-	private int cupoActual;
-	
-	/**
 	 * El identificador de la capacidad normal del local comercial. Debe existir en la tabla de CAPACIDADNORMAL
 	 */
 	private long capacidadNormal;
@@ -58,7 +53,6 @@ public class LocalComercial implements VOLocalComercial
 	public LocalComercial() 
 	{
 		this.identificador = "";
-		this.cupoActual = 0;
 		this.capacidadNormal = 0;
 		this.area = 0;
 		this.tipoLocal = 0;
@@ -68,16 +62,14 @@ public class LocalComercial implements VOLocalComercial
 	/**
 	 * Constructor con valores
 	 * @param identificador - El identificador del local comercial
-	 * @param cupoActual - El cupo actual del  local comercial
 	 * @param area - El identificador del area. Debe existir un área con dicho identificador
 	 * @param capacidadNormal - El identificador de la capacidad normal. Debe existir una capacidad normal con dicho identificador
 	 * @param tipoLocal - El identificador del tipo de local. Debe existir un tipo de local con dicho identificador 
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
-	public LocalComercial (String identificador, int cupoActual, long area, long capacidadNormal, long tipoLocal, String idCentroComercial) 
+	public LocalComercial (String identificador, long area, long capacidadNormal, long tipoLocal, String idCentroComercial) 
 	{
 		this.identificador = identificador;
-		this.cupoActual = cupoActual;
 		this.area = area;
 		this.capacidadNormal = capacidadNormal;
 		this.tipoLocal = tipoLocal;
@@ -99,22 +91,6 @@ public class LocalComercial implements VOLocalComercial
 	public void setIdentificador(String identificador) 
 	{
 		this.identificador = identificador;
-	}
-
-	/**
-	 * @return El cupo actual del local comercial
-	 */
-	public int getCupoActual() 
-	{
-		return cupoActual;
-	}
-
-	/**
-	 * @param cupoActual - El nuevo cupo actual del local comercial
-	 */
-	public void setCupoActual(int cupoActual) 
-	{
-		this.cupoActual = cupoActual;
 	}
 
 	/**
@@ -187,7 +163,7 @@ public class LocalComercial implements VOLocalComercial
 	@Override
 	public String toString() 
 	{
-		return "LocalComercial [identificador=" + identificador + ", cupoActual=" + cupoActual + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", tipoLocal=" + tipoLocal + ", idCentroComercial=" + idCentroComercial + "]";
+		return "LocalComercial [identificador=" + identificador + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", tipoLocal=" + tipoLocal + ", idCentroComercial=" + idCentroComercial + "]";
 	}
 
 	

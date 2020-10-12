@@ -1,15 +1,10 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
+ * Proyecto: AforoAndes Uniandes
+ *
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
@@ -20,6 +15,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.parranderos.negocio.Area;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Area de AFORO-CCANDES
@@ -59,103 +55,87 @@ class SQLArea
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar un BAR a la base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para adicionar un AREA a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idBar - El identificador del bar
-	 * @param nombre - El nombre del bar
-	 * @param ciudad - La ciudad del bar
-	 * @param presupuesto - El presupuesto del bar (ALTO, MEDIO, BAJO)
-	 * @param sedes - El número de sedes del bar
+	 * @param idArea - El identificador del area
+	 * @param valor - El valor del area
+	 * @param aforo - El aforo del area
 	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarBar (PersistenceManager pm, long idBar, String nombre, String ciudad, String presupuesto, int sedes) 
+	public long adicionarArea (PersistenceManager pm, long idArea, double valor, int aforo) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCentroComercial () + "(id, nombre, ciudad, presupuesto, cantsedes) values (?, ?, ?, ?, ?)");
-        q.setParameters(idBar, nombre, ciudad, presupuesto, sedes);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaArea () + "(id, valor, aforo) values (?, ?, ?)");
+        q.setParameters(idArea, valor, aforo);
         return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar BARES de la base de datos de Parranderos, por su nombre
+	 * Crea y ejecuta la sentencia SQL para eliminar AREAS de la base de datos de AforoAndes, por su valor
 	 * @param pm - El manejador de persistencia
-	 * @param nombreBar - El nombre del bar
+	 * @param valorArea - El valor del area
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarBaresPorNombre (PersistenceManager pm, String nombreBar)
+	public long eliminarAreasPorValor (PersistenceManager pm, double valorArea)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE nombre = ?");
-        q.setParameters(nombreBar);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaArea () + " WHERE valor = ?");
+        q.setParameters(valorArea);
         return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar UN BAR de la base de datos de Parranderos, por su identificador
+	 * Crea y ejecuta la sentencia SQL para eliminar UN AREA de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idBar - El identificador del bar
+	 * @param idArea - El identificador del area
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarBarPorId (PersistenceManager pm, long idBar)
+	public long eliminarAreaPorId (PersistenceManager pm, long idArea)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
-        q.setParameters(idBar);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaArea () + " WHERE id = ?");
+        q.setParameters(idArea);
         return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN BAR de la 
-	 * base de datos de Parranderos, por su identificador
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN AREA de la 
+	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idBar - El identificador del bar
-	 * @return El objeto BAR que tiene el identificador dado
+	 * @param idArea - El identificador del area
+	 * @return El objeto AREA que tiene el identificador dado
 	 */
-	public Visitante darBarPorId (PersistenceManager pm, long idBar) 
+	public Area darAreaPorId (PersistenceManager pm, long idArea) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
-		q.setResultClass(Visitante.class);
-		q.setParameters(idBar);
-		return (Visitante) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaArea () + " WHERE id = ?");
+		q.setResultClass(Area.class);
+		q.setParameters(idArea);
+		return (Area) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BARES de la 
-	 * base de datos de Parranderos, por su nombre
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS AREAS de la 
+	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
-	 * @param nombreBar - El nombre de bar buscado
-	 * @return Una lista de objetos BAR que tienen el nombre dado
+	 * @param valorArea - El valor de area buscado
+	 * @return Una lista de objetos AREA que tienen el nombre dado
 	 */
-	public List<Visitante> darBaresPorNombre (PersistenceManager pm, String nombreBar) 
+	public List<Area> darAreasPorValor (PersistenceManager pm, String valorArea) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial () + " WHERE nombre = ?");
-		q.setResultClass(Visitante.class);
-		q.setParameters(nombreBar);
-		return (List<Visitante>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaArea () + " WHERE valor = ?");
+		q.setResultClass(Area.class);
+		q.setParameters(valorArea);
+		return (List<Area>) q.executeList();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BARES de la 
-	 * base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS AREAS de la 
+	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos BAR
+	 * @return Una lista de objetos AREA
 	 */
-	public List<Visitante> darBares (PersistenceManager pm)
+	public List<Area> darAreas (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial ());
-		q.setResultClass(Visitante.class);
-		return (List<Visitante>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaArea ());
+		q.setResultClass(Area.class);
+		return (List<Area>) q.executeList();
 	}
 
-	/**
-	 * Crea y ejecuta la sentencia SQL para aumentar en uno el número de sedes de los bares de la 
-	 * base de datos de Parranderos
-	 * @param pm - El manejador de persistencia
-	 * @param ciudad - La ciudad a la cual se le quiere realizar el proceso
-	 * @return El número de tuplas modificadas
-	 */
-	public long aumentarSedesBaresCiudad (PersistenceManager pm, String ciudad)
-	{
-        Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCentroComercial () + " SET cantsedes = cantsedes + 1 WHERE ciudad = ?");
-        q.setParameters(ciudad);
-        return (long) q.executeUnique();
-	}
-	
 }

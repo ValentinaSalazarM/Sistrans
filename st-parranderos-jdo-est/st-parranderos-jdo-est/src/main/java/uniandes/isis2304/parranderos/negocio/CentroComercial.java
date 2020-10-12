@@ -9,7 +9,7 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Timestamp;
+import java.util.Calendar;
 
 /**
  * Clase para modelar el concepto CENTROCOMERCIAL del negocio de Aforo-CCAndes
@@ -33,17 +33,7 @@ public class CentroComercial implements VOCentroComercial
 	/**
 	 * Hora apertura del centro comercial 
 	 */
-	private Timestamp horaApertura;
-	
-	/**
-	 * El aforoTotal del centro comercial
-	 */
-	private int aforoTotal;
-	
-	/**
-	 * El cupo actual del centro comercial
-	 */
-	private int cupoActual;
+	private Calendar horaApertura;
 	
 
 	/* ****************************************************************
@@ -56,8 +46,7 @@ public class CentroComercial implements VOCentroComercial
 	{
 		this.identificador = "";
 		this.nombre = "";
-		this.aforoTotal = 0;
-		this.cupoActual = 0;
+		this.horaApertura = Calendar.getInstance();
 	}
 
 	/**
@@ -68,13 +57,11 @@ public class CentroComercial implements VOCentroComercial
 	 * @param cupoActual - El cupo actual del centro comercial
 	 * @param aforoTotal - El aforo total del centro comercial
 	 */
-	public CentroComercial (String identificador, String nombre, Timestamp horaApertura, int cupoActual, int aforoTotal) 
+	public CentroComercial (String identificador, String nombre, Calendar horaApertura, int cupoActual, int aforoTotal) 
 	{
 		this.identificador = identificador;
 		this.nombre = nombre;
 		this.horaApertura = horaApertura;
-		this.cupoActual = cupoActual;
-		this.aforoTotal = aforoTotal;
 	}
 	
 	/**
@@ -112,7 +99,7 @@ public class CentroComercial implements VOCentroComercial
 	/**
 	 * @return La hora de apertura del centro comercial
 	 */
-	public Timestamp getHoraApertura() 
+	public Calendar getHoraApertura() 
 	{
 		return horaApertura;
 	}
@@ -120,41 +107,9 @@ public class CentroComercial implements VOCentroComercial
 	/**
 	 * @param horaApertura - La nueva hora apertura del centro comercial
 	 */
-	public void setHoraApertura(Timestamp horaApertura) 
+	public void setHoraApertura(Calendar horaApertura) 
 	{
 		this.horaApertura = horaApertura;
-	}
-
-	/**
-	 * @return El aforo total del centro comercial
-	 */
-	public int getAforoTotal() 
-	{
-		return aforoTotal;
-	}
-
-	/**
-	 * @param aforoTotal - El nuevo aforo total del centro comercial
-	 */
-	public void setAforoTotal(int aforoTotal) 
-	{
-		this.aforoTotal = aforoTotal;
-	}
-
-	/**
-	 * @return El cupo actual del centro comercial
-	 */
-	public int getCupoActual() 
-	{
-		return cupoActual;
-	}
-
-	/**
-	 * @param cupoActual - El nuevo cupo actual del centro comercial
-	 */
-	public void setCupoActual(int cupoActual) 
-	{
-		this.cupoActual = cupoActual;
 	}
 
 	/**
@@ -163,7 +118,7 @@ public class CentroComercial implements VOCentroComercial
 	@Override
 	public String toString() 
 	{
-		return "CentroComercial [identificador=" + identificador + ", nombre=" + nombre + ", horaApertura=" + horaApertura + ", aforoTotal=" + aforoTotal + ", cupoActual=" + cupoActual + "]";
+		return "CentroComercial [identificador=" + identificador + ", nombre=" + nombre + ", horaApertura=" + horaApertura + "]";
 	}
 
 	

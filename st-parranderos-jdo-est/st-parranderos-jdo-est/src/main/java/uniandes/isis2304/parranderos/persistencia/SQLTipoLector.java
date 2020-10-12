@@ -13,11 +13,11 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.TipoVisitante;
+import uniandes.isis2304.parranderos.negocio.TipoLector;
 
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto TIPO DE VISITANTE de AforoAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto TIPO DE LECTOR de AforoAndes
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
  */
@@ -53,86 +53,86 @@ public class SQLTipoLector
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar un TipoVisitante a la base de datos de AforoAndes
+	 * Crea y ejecuta la sentencia SQL para adicionar un TipoLector a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idTipoVisitante - El identificador del tipo de visitante
-	 * @param tipo - El nombre del tipo de visitante
+	 * @param idTipoLector - El identificador del tipo de lector
+	 * @param tipo - El nombre del tipo de lector
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoVisitante (PersistenceManager pm, long idTipoVisitante, String tipo, String horaLimite) 
+	public long adicionarTipoLector (PersistenceManager pm, long idTipoLector, String tipo) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoVisitante() + "(id, tipo) values (?, ?)");
-        q.setParameters(idTipoVisitante, tipo);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoLector() + "(id, tipo) values (?, ?)");
+        q.setParameters(idTipoLector, tipo);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE VISITANTE de la base de datos de AforoAndes, por su nombre
+	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE LECTOR de la base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
-	 * @param nombreTipoVisitante - El nombre del tipo de visitante
+	 * @param nombreTipoLector - El nombre del tipo de lector
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarTipoVisitantePorNombre (PersistenceManager pm, String nombreTipoVisitante)
+	public long eliminarTipoLectorPorNombre (PersistenceManager pm, String nombreTipoLector)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoVisitante () + " WHERE tipo = ?");
-        q.setParameters(nombreTipoVisitante);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoLector () + " WHERE tipo = ?");
+        q.setParameters(nombreTipoLector);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE VISITANTE de la base de datos de AforoAndes, por su identificador
+	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE LECTOR de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idTipoVisitante - El identificador del tipo de visitante
+	 * @param idTipoLector - El identificador del tipo de lector
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarTipoVisitantePorId (PersistenceManager pm, long idTipoVisitante)
+	public long eliminarTipoLectorPorId (PersistenceManager pm, long idTipoLector)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoVisitante () + " WHERE id = ?");
-        q.setParameters(idTipoVisitante);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoLector () + " WHERE id = ?");
+        q.setParameters(idTipoLector);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE VISITANTE de la 
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE LECTOR de la 
 	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idTipoVisitante - El identificador del tipo de visitante
-	 * @return El objeto TipoVisitante que tiene el identificador dado
+	 * @param idTipoLector - El identificador del tipo de lector
+	 * @return El objeto TipoLector que tiene el identificador dado
 	 */
-	public TipoVisitante darTipoVisitantePorId (PersistenceManager pm, long idTipoVisitante) 
+	public TipoLector darTipoLectorPorId (PersistenceManager pm, long idTipoLector) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoVisitante  () + " WHERE id = ?");
-		q.setResultClass(TipoVisitante.class);
-		q.setParameters(idTipoVisitante);
-		return (TipoVisitante) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoLector  () + " WHERE id = ?");
+		q.setResultClass(TipoLector.class);
+		q.setParameters(idTipoLector);
+		return (TipoLector) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE visitante de la 
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE LECTOR de la 
 	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
-	 * @param nombreTipoVisitante - El nombre del tipo de visitante
-	 * @return El objeto TipoVisitante que tiene el tipo dado
+	 * @param nombreTipoLector - El nombre del tipo de lector
+	 * @return El objeto TipoLector que tiene el tipo dado
 	 */
-	public List<TipoVisitante> darTiposvisitantePorNombre (PersistenceManager pm, String nombreTipoVisitante) 
+	public List<TipoLector> darTiposLectorPorNombre (PersistenceManager pm, String nombreTipoLector) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoVisitante  () + " WHERE tipo = ?");
-		q.setResultClass(TipoVisitante.class);
-		q.setParameters(nombreTipoVisitante);
-		return (List<TipoVisitante>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoLector  () + " WHERE tipo = ?");
+		q.setResultClass(TipoLector.class);
+		q.setParameters(nombreTipoLector);
+		return (List<TipoLector>) q.executeList();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS TIPOS DE visitante de la 
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS TIPOS DE LECTOR de la 
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos TipoVisitante
+	 * @return Una lista de objetos TipoLector
 	 */
-	public List<TipoVisitante> darTiposvisitante (PersistenceManager pm)
+	public List<TipoLector> darTiposLector (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoVisitante  ());
-		q.setResultClass(TipoVisitante.class);
-		return (List<TipoVisitante>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoLector  ());
+		q.setResultClass(TipoLector.class);
+		return (List<TipoLector>) q.executeList();
 	}
 
 }

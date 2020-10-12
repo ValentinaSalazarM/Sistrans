@@ -23,11 +23,6 @@ public interface VOAscensor
 	public String getIdentificador();
 
 	/**
-	 * @return El cupo actual del ascensor
-	 */
-	public int getCupoActual();
-
-	/**
 	 * @return El id de la capacidad normal del ascensor
 	 */
 	public long getCapacidadNormal();
@@ -40,7 +35,7 @@ public interface VOAscensor
 	/**
 	 * @return El peso máximo del ascensor
 	 */
-	public int getPesoMaximo();
+	public double getPesoMaximo();
 
 	/**
 	 * @return El id del centro comercial del ascensor

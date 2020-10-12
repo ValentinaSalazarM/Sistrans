@@ -1,15 +1,10 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
+ * Proyecto: AforoAndes Uniandes
+ *
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
@@ -20,13 +15,12 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.TipoLocal;
+import uniandes.isis2304.parranderos.negocio.CapacidadNormal;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto GUSTAN de Parranderos
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto CapacidadNormal de AFORO-CCANDES
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
- * @author Germán Bravo
  */
 class SQLCapacidadNormal 
 {
@@ -50,6 +44,7 @@ class SQLCapacidadNormal
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
+
 	/**
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
@@ -60,45 +55,87 @@ class SQLCapacidadNormal
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar un GUSTAN a la base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para adicionar una CAPACIDADNORMAL a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @param idBebida - El identificador de la bebida
-	 * @return EL número de tuplas insertadas
+	 * @param idCapacidadNormal - El identificador de la capacidad normal
+	 * @param valor - El valor de la capacidad normal
+	 * @param aforo - El aforo de la capacidad normal
+	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarGustan(PersistenceManager pm, long idBebedor, long idBebida) 
+	public long adicionarCapacidadNormal (PersistenceManager pm, long idCapacidadNormal, double valor, int aforo) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaArea () + "(idbebedor, idbebida) values (?, ?)");
-        q.setParameters(idBebedor, idBebida);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCapacidadNormal () + "(id, valor, aforo) values (?, ?, ?)");
+        q.setParameters(idCapacidadNormal, valor, aforo);
         return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar UN GUSTAN de la base de datos de Parranderos, por sus identificador
+	 * Crea y ejecuta la sentencia SQL para eliminar CAPACIDADNORMALES de la base de datos de AforoAndes, por su valor
 	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @param idBebida - El identificador de la bebida
+	 * @param valorCapacidadNormal - El valor de la capacidad normal
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarGustan (PersistenceManager pm, long idBebedor, long idBebida)
+	public long eliminarCapacidadNormalesPorValor (PersistenceManager pm, double valorCapacidadNormal)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaArea () + " WHERE idbebedor = ? AND idbebida = ?");
-        q.setParameters(idBebedor, idBebida);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal () + " WHERE valor = ?");
+        q.setParameters(valorCapacidadNormal);
         return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de los GUSTAN de la 
-	 * base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para eliminar UNA CAPACIDAD NORMAL de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos GUSTAN
+	 * @param idCapacidadNormal - El identificador de la capacidad normal
+	 * @return EL número de tuplas eliminadas
 	 */
-	public List<TipoLocal> darGustan (PersistenceManager pm)
+	public long eliminarCapacidadNormalPorId (PersistenceManager pm, long idCapacidadNormal)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaArea ());
-		q.setResultClass(TipoLocal.class);
-		List<TipoLocal> resp = (List<TipoLocal>) q.execute();
-		return resp;
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal () + " WHERE id = ?");
+        q.setParameters(idCapacidadNormal);
+        return (long) q.executeUnique();
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UNA CAPACIDAD NORMAL de la 
+	 * base de datos de AforoAndes, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param idCapacidadNormal - El identificador de la capacidad normal
+	 * @return El objeto CAPACIDADNORMAL que tiene el identificador dado
+	 */
+	public CapacidadNormal darCapacidadNormalPorId (PersistenceManager pm, long idCapacidadNormal) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal () + " WHERE id = ?");
+		q.setResultClass(CapacidadNormal.class);
+		q.setParameters(idCapacidadNormal);
+		return (CapacidadNormal) q.executeUnique();
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS CAPACIDADNORMALES de la 
+	 * base de datos de AforoAndes, por su nombre
+	 * @param pm - El manejador de persistencia
+	 * @param valorCapacidadNormal - El valor de area buscado
+	 * @return Una lista de objetos CAPACIDADNORMAL que tienen el nombre dado
+	 */
+	public List<CapacidadNormal> darCapacidadesNormalesPorValor (PersistenceManager pm, String valorCapacidadNormal) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal () + " WHERE valor = ?");
+		q.setResultClass(CapacidadNormal.class);
+		q.setParameters(valorCapacidadNormal);
+		return (List<CapacidadNormal>) q.executeList();
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS CAPACIDADNORMALES de la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Una lista de objetos CAPACIDADNORMAL
+	 */
+	public List<CapacidadNormal> darCapacidadesNormales (PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal ());
+		q.setResultClass(CapacidadNormal.class);
+		return (List<CapacidadNormal>) q.executeList();
 	}
 
 }

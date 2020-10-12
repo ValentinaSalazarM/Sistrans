@@ -1,16 +1,10 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Proyecto: Aforo-CCAndes
+ *  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 package uniandes.isis2304.parranderos.persistencia;
@@ -20,14 +14,12 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Ascensor;
-import uniandes.isis2304.parranderos.negocio.LocalComercial;
+import uniandes.isis2304.parranderos.negocio.Baño;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto BEBIDA de Parranderos
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto BAÑO de AforoAndes
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
- * @author Germán Bravo
  */
 class SQLBaño 
 {
@@ -61,101 +53,107 @@ class SQLBaño
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar una BEBIDA a la base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para adicionar un BAÑO a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idBebida - El identificador de la bebida
-	 * @param nombre - El nombre de la bebida
-	 * @param idTipoBebida - El identificador del tipo de bebida de la bebida
-	 * @param gradoAlcohol - El grado de alcohol de la bebida (Mayor que 0)
+	 * @param idBaño - El identificador del baño
+	 * @param cupoActual - El cupo actual del baño
+	 * @param capacidadNormal - El identificador de la capacidad normal del baño
+	 * @param area - El identificador del área del baño
+	 * @param numeroSanitarios - El número de sanitarios del baño
+	 * @param idCentroComercial - El identificador del centro comercial del baño
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarBebida (PersistenceManager pm, long idBebida, String nombre, long idTipoBebida, int gradoAlcohol) 
+	public long adicionarBaño (PersistenceManager pm, long idBaño, int cupoActual, long capacidadNormal, long area, int numeroSanitarios, long idCentroComercial) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVisitante () + "(id, nombre, idTipoBebida, gradoalcohol) values (?, ?, ?, ?)");
-        q.setParameters(idBebida, nombre, idTipoBebida, gradoAlcohol);
-        return (long) q.executeUnique();            
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBaño () + "(identificador, cupoactual, capacidadNormal, area, sanitarios, idcentrocomercial) values (?, ?, ?, ?, ?, ?)");
+        q.setParameters(idBaño, cupoActual, capacidadNormal, area, numeroSanitarios, idCentroComercial);
+        return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar BEBIDAS de la base de datos de Parranderos, por su nombre
+	 * Crea y ejecuta la sentencia SQL para eliminar un BAÑO de la base de datos de AforoAndes, por su número de sanitarios
 	 * @param pm - El manejador de persistencia
-	 * @param nombreBebida - El nombre de la bebida
+	 * @param numeroSanitarios - El número de sanitarios del baño
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarBebidaPorNombre (PersistenceManager pm, String nombreBebida)
+	public long eliminarBañoPorSanitarios (PersistenceManager pm, int numeroSanitarios)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante () + " WHERE nombre = ?");
-        q.setParameters(nombreBebida);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE sanitarios = ?");
+        q.setParameters(numeroSanitarios);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar BEBIDAS de la base de datos de Parranderos, por su identificador
+	 * Crea y ejecuta la sentencia SQL para eliminar UN BAÑO de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idBebida - El identificador de la bebida
+	 * @param idBaño - El identificador del baño
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarBebidaPorId (PersistenceManager pm, long idBebida)
+	public long eliminarBañoPorId (PersistenceManager pm, long idBaño)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante () + " WHERE id = ?");
-        q.setParameters(idBebida);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE identificador = ?");
+        q.setParameters(idBaño);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UNA BEBIDA de la 
-	 * base de datos de Parranderos, por su identificador
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN BAÑO de la 
+	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idBebida - El identificador de la bebida
-	 * @return El objeto BEBIDA que tiene el identificador dado
+	 * @param idBaño - El identificador del baño
+	 * @return El objeto BAÑO que tiene el identificador dado
 	 */
-	public Ascensor darTipoBebidaPorId (PersistenceManager pm, long idBebida) 
+	public Baño darBañoPorId (PersistenceManager pm, long idBaño) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisitante () + " WHERE id = ?");
-		q.setResultClass(LocalComercial.class);
-		q.setParameters(idBebida);
-		return (Ascensor) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBaño () + " WHERE identificador = ?");
+		q.setResultClass(Baño.class);
+		q.setParameters(idBaño);
+		return (Baño) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de BEBIDAS de la 
-	 * base de datos de Parranderos, por su nombre
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BAÑOS de la 
+	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
-	 * @param nombreBebida - El nombre de la bebida
-	 * @return Una lista de objetos BEBIDA que tienen el nombre dado
+	 * @param numeroSanitarios - El número de sanitarios de baño buscado
+	 * @return Una lista de objetos BAÑO que tienen el número de sanitarios dado
 	 */
-	public List<Ascensor> darBebidasPorNombre (PersistenceManager pm, String nombreBebida) 
+	public List<Baño> darBañosPorSanitarios (PersistenceManager pm, int numeroSanitarios) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisitante () + " WHERE nombre = ?");
-		q.setResultClass(Ascensor.class);
-		q.setParameters(nombreBebida);
-		return (List<Ascensor>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBaño () + " WHERE sanitarios = ?");
+		q.setResultClass(Baño.class);
+		q.setParameters(numeroSanitarios);
+		return (List<Baño>) q.executeList();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS BEBIDAS de la 
-	 * base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BAÑOS de la 
+	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos BEBIDA
+	 * @return Una lista de objetos BAÑO
 	 */
-	public List<Ascensor> darBebidas (PersistenceManager pm)
+	public List<Baño> darBaños (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisitante ());
-		q.setResultClass(Ascensor.class);
-		return (List<Ascensor>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBaño ());
+		q.setResultClass(Baño.class);
+		return (List<Baño>) q.executeList();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar LAS BEBIDAS que no son servidas de la 
-	 * base de datos de Parranderos
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el número de sanitarios de un baño en la 
+	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @return El número de tuplas eliminadas
+	 * @param idBaño - El identificador del baño
+	 * @param numeroSanitarios - El nuevo número de sanitarios del baño
+	 * @return El número de tuplas modificadas
 	 */
-	public long eliminarBebidasNoServidas (PersistenceManager pm)
+	public long cambiarPesoMaximoBaño (PersistenceManager pm, long idBaño, int numeroSanitarios) 
 	{
-        String q2Str = "SELECT idBebida FROM " + pp.darTablaAscensor ();
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante () + " WHERE id NOT IN (" + q2Str + ")");
-        return (long) q.executeUnique();            
-    }
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaBaño () + " SET sanitarios = ? WHERE identificador = ?");
+	     q.setParameters(numeroSanitarios, idBaño);
+	     return (long) q.executeUnique();            
+	}
+
 
 }

@@ -26,7 +26,7 @@ public class Area implements VOArea
 	/**
 	 * El valor numérico del área
 	 */
-	private int valor;
+	private double valor;
 	
 	/**
 	 * El aforo correspondiente al área
@@ -52,7 +52,7 @@ public class Area implements VOArea
 	 * @param valor - El valor numérico del área
 	 * @param aforo - El aforo correspondiente al área
 	 */
-	public Area (long id, int valor, int aforo) 
+	public Area (long id, double valor, int aforo) 
 	{
 		this.id = id;
 		this.valor = valor;
@@ -78,7 +78,7 @@ public class Area implements VOArea
 	/**
 	 * @return El valor numérico del área
 	 */
-	public int getValor() 
+	public double getValor() 
 	{
 		return valor;
 	}
@@ -86,7 +86,7 @@ public class Area implements VOArea
 	/**
 	 * @param valor - El nuevo valor numérico del área
 	 */
-	public void setValor(int valor) 
+	public void setValor(double valor) 
 	{
 		this.valor = valor;
 	}

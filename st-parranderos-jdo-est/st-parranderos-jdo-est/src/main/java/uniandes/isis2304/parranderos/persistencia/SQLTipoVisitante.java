@@ -8,6 +8,7 @@
  */
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -59,10 +60,10 @@ public class SQLTipoVisitante
 	 * @param tipo - El nombre del tipo de visitante
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoVisitante (PersistenceManager pm, long idTipoVisitante, String tipo, String horaLimite) 
+	public long adicionarTipoVisitante (PersistenceManager pm, long idTipoVisitante, String tipo, Timestamp horaLimite) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoVisitante() + "(id, tipo) values (?, ?)");
-        q.setParameters(idTipoVisitante, tipo);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoVisitante() + "(id, tipo, horaLimite) values (?, ?, ?)");
+        q.setParameters(idTipoVisitante, tipo, horaLimite);
         return (long) q.executeUnique();            
 	}
 
@@ -108,13 +109,13 @@ public class SQLTipoVisitante
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE visitante de la 
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE VISITANTE de la 
 	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
 	 * @param nombreTipoVisitante - El nombre del tipo de visitante
 	 * @return El objeto TipoVisitante que tiene el tipo dado
 	 */
-	public List<TipoVisitante> darTiposvisitantePorNombre (PersistenceManager pm, String nombreTipoVisitante) 
+	public List<TipoVisitante> darTiposVisitantePorNombre (PersistenceManager pm, String nombreTipoVisitante) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoVisitante  () + " WHERE tipo = ?");
 		q.setResultClass(TipoVisitante.class);
@@ -123,12 +124,12 @@ public class SQLTipoVisitante
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS TIPOS DE visitante de la 
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS TIPOS DE VISITANTE de la 
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos TipoVisitante
 	 */
-	public List<TipoVisitante> darTiposvisitante (PersistenceManager pm)
+	public List<TipoVisitante> darTiposVisitante (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoVisitante  ());
 		q.setResultClass(TipoVisitante.class);

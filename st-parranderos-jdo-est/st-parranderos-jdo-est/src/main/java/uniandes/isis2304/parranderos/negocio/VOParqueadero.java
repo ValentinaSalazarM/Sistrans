@@ -21,11 +21,6 @@ public interface VOParqueadero
 	public String getIdentificador();
 
 	/**
-	 * @return El cupo actual del parqueadero
-	 */
-	public int getCupoActual();
-
-	/**
 	 * @return El id de la capacidad normal del parqueadero
 	 */
 	public long getCapacidadNormal();

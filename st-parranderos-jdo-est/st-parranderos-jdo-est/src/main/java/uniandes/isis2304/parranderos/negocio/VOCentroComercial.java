@@ -10,7 +10,7 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Timestamp;
+import java.util.Calendar;
 
 /**
  * Interfaz para los métodos get de CENTROCOMERCIAL.
@@ -32,18 +32,8 @@ public interface VOCentroComercial
 	/**
 	 * @return La hora de apertura del centro comercial
 	 */
-	public Timestamp getHoraApertura();
+	public Calendar getHoraApertura();
 	
-	/**
-	 * @return El aforo total del centro comercial
-	 */
-	public int getAforoTotal();
-
-	/**
-	 * @return El cupo actual del centro comercial
-	 */
-	public int getCupoActual();
-
 	/**
 	 * @return Una cadena con la información básica del centro comercial
 	 */

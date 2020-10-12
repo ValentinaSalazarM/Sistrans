@@ -1,15 +1,10 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
+ * Proyecto: AforoAndes Uniandes
+ *
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
@@ -20,13 +15,12 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Area;
+import uniandes.isis2304.parranderos.negocio.Carnet;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto SIRVEN de Parranderos
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Carnet de AFORO-CCANDES
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
- * @author Germán Bravo
  */
 class SQLCarnet 
 {
@@ -50,6 +44,7 @@ class SQLCarnet
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
+
 	/**
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
@@ -60,61 +55,87 @@ class SQLCarnet
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar un SIRVEN a la base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para adicionar una CARNET a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idBar - El identificador del bar
-	 * @param idBebida - El identificador de la bebida
-	 * @param horario - El horario en que el bar sirve la bebida (DIURNO, NOCTURNO, TDOOS)
-	 * @return EL número de tuplas insertadas
+	 * @param tipoCarnet - El identificador del tipo de carnet
+	 * @param idVisitante - El identificador del visitante del carnet
+	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarSirven (PersistenceManager pm, long idBar, long idBebida, String horario) 
+	public long adicionarCarnet (PersistenceManager pm, long tipoCarnet, String idVisitante) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaAscensor () + "(idbar, idbebida, horario) values (?, ?, ?)");
-        q.setParameters(idBar, idBebida, horario);
-        return (long)q.executeUnique();            
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCarnet () + "(tipoCarnet, idVisitante) values (?, ?)");
+        q.setParameters(tipoCarnet, idVisitante);
+        return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar UN SIRVEN de la base de datos de Parranderos, por sus identificador
+	 * Crea y ejecuta la sentencia SQL para eliminar CARNETS de la base de datos de AforoAndes, por su tipo
 	 * @param pm - El manejador de persistencia
-	 * @param idBar - El identificador del bar
-	 * @param idBebida - El identificador de la bebida
+	 * @param tipoCarnet - El identificador del tipo de carnet
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarSirven (PersistenceManager pm, long idBar, long idBebida) 
+	public long eliminarCarnetsPorTipo (PersistenceManager pm, long tipoCarnet)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor () + " WHERE idbar = ? AND idbebida = ?");
-        q.setParameters(idBar, idBebida);
-        return (long) q.executeUnique();            
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCarnet () + " WHERE tipoCarnet = ?");
+        q.setParameters(tipoCarnet);
+        return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de los SIRVEN de la 
-	 * base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para eliminar UN CARNET de la base de datos de AforoAndes, por su tipo e identificador
 	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos SIRVEN
+	 * @param tipoCarnet - El identificador del tipo de carnet
+	 * @param idVisitante - El identificador del visitante del carnet
+	 * @return EL número de tuplas eliminadas
 	 */
-	public List<Area> darSirven (PersistenceManager pm)
+	public long eliminarCarnetPorIdVisitante (PersistenceManager pm, long idVisitante)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaAscensor ());
-		q.setResultClass(Area.class);
-		return (List<Area>) q.execute();
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCarnet () + " WHERE idVisitante = ?");
+        q.setParameters(idVisitante);
+        return (long) q.executeUnique();
 	}
- 
+
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar el identificador y el número de bebidas que sirven los bares de la 
-	 * base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN CARNET de la 
+	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @return Una lista de parejas de objetos, el primer elemento de cada pareja representa el identificador de un bar,
-	 * 	el segundo elemento representa el número de bebidas que sirve (Una bebida que se sirve en dos horarios cuenta dos veces)
+	 * @param idVisitante - El identificador del carnet
+	 * @return El objeto CARNET que tiene el identificador dado
 	 */
-	public List<Object []> darBaresYCantidadBebidasSirven (PersistenceManager pm)
+	public Carnet darCarnetPorIdVisitante (PersistenceManager pm, long idVisitante) 
 	{
-        String sql = "SELECT idBar, count (*) as numBebidas";
-        sql += " FROM " + pp.darTablaAscensor ();
-       	sql	+= " GROUP BY idBar";
-		Query q = pm.newQuery(SQL, sql);
-		return q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarnet () + " WHERE idVisitante = ?");
+		q.setResultClass(Carnet.class);
+		q.setParameters(idVisitante);
+		return (Carnet) q.executeUnique();
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS CARNETS de la 
+	 * base de datos de AforoAndes, por su nombre
+	 * @param pm - El manejador de persistencia
+	 * @param tipoCarnet - El identificador del tipo de carnet
+	 * @return Una lista de objetos CARNET que tienen el nombre dado
+	 */
+	public List<Carnet> darCarnetsPorTipo (PersistenceManager pm, long tipoCarnet) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarnet () + " WHERE tipoCarnet = ?");
+		q.setResultClass(Carnet.class);
+		q.setParameters(tipoCarnet);
+		return (List<Carnet>) q.executeList();
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS CARNETS de la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Una lista de objetos CARNET
+	 */
+	public List<Carnet> darCarnets (PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarnet ());
+		q.setResultClass(Carnet.class);
+		return (List<Carnet>) q.executeList();
 	}
 
 }

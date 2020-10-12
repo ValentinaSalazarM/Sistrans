@@ -27,7 +27,7 @@ public interface VOArea
 	/**
 	 * @return El valor numérico del área
 	 */
-	public int getValor();
+	public double getValor();
 
 	/**
 	 * @return El aforo correspondiente al área

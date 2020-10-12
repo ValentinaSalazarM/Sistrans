@@ -1,32 +1,26 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Proyecto: Aforo-CCAndes
+ *  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.LocalComercial;
+import uniandes.isis2304.parranderos.negocio.CentroComercial;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto TIPO DE BEBIDA de Parranderos
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto CENTRO COMERCIAL de AforoAndes
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
- * @author Germán Bravo
  */
 class SQLCentroComercial 
 {
@@ -60,86 +54,107 @@ class SQLCentroComercial
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar un TIPOBEBIDA a la base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para adicionar un CENTRO COMERCIAL a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idTipoBebida - El identificador del tipo de bebida
-	 * @param nombre - El nombre del tipo de bebida
+	 * @param idCentroComercial - El identificador del centro comercial
+	 * @param cupoActual - El cupo actual del centro comercial
+	 * @param capacidadNormal - El identificador de la capacidad normal del centro comercial
+	 * @param area - El identificador del área del centro comercial
+	 * @param pesoMaximo - El peso máximo del centro comercial
+	 * @param idCentroComercial - El identificador del centro comercial del centro comercial
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoBebida (PersistenceManager pm, long idTipoBebida, String nombre) 
+	public long adicionarCentroComercial (PersistenceManager pm, String idCentroComercial, String nombre, Timestamp horaApertura) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoBebida  () + "(id, nombre) values (?, ?)");
-        q.setParameters(idTipoBebida, nombre);
-        return (long) q.executeUnique();            
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCentroComercial () + "(id, nombre, horaApertura) values (?, ?, ?)");
+        q.setParameters(idCentroComercial, nombre);
+        return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE BEBIDA de la base de datos de Parranderos, por su nombre
+	 * Crea y ejecuta la sentencia SQL para eliminar un CENTRO COMERCIAL de la base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
-	 * @param nombreTipoBebida - El nombre del tipo de bebida
+	 * @param nombre - El peso máximo del centro comercial
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarTipoBebidaPorNombre (PersistenceManager pm, String nombreTipoBebida)
+	public long eliminarCentroComercialPorNombre (PersistenceManager pm, String nombre)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoBebida  () + " WHERE nombre = ?");
-        q.setParameters(nombreTipoBebida);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE nombre = ?");
+        q.setParameters(nombre);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE BEBIDA de la base de datos de Parranderos, por su identificador
+	 * Crea y ejecuta la sentencia SQL para eliminar UN CENTRO COMERCIAL de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idTipoBebida - El identificador del tipo de bebida
+	 * @param idCentroComercial - El identificador del centro comercial
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarTipoBebidaPorId (PersistenceManager pm, long idTipoBebida)
+	public long eliminarCentroComercialPorId (PersistenceManager pm, long idCentroComercial)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoBebida  () + " WHERE id = ?");
-        q.setParameters(idTipoBebida);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
+        q.setParameters(idCentroComercial);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE BEBIDA de la 
-	 * base de datos de Parranderos, por su identificador
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN CENTRO COMERCIAL de la 
+	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idTipoBebida - El identificador del tipo de bebida
-	 * @return El objeto TIPOBEBIDA que tiene el identificador dado
+	 * @param idCentroComercial - El identificador del centro comercial
+	 * @return El objeto CENTRO COMERCIAL que tiene el identificador dado
 	 */
-	public LocalComercial darTipoBebidaPorId (PersistenceManager pm, long idTipoBebida) 
+	public CentroComercial darCentroComercialPorId (PersistenceManager pm, long idCentroComercial) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoBebida  () + " WHERE id = ?");
-		q.setResultClass(LocalComercial.class);
-		q.setParameters(idTipoBebida);
-		return (LocalComercial) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
+		q.setResultClass(CentroComercial.class);
+		q.setParameters(idCentroComercial);
+		return (CentroComercial) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE BEBIDA de la 
-	 * base de datos de Parranderos, por su nombre
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS CENTRO COMERCIALES de la 
+	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
-	 * @param nombreTipoBebida - El nombre del tipo de bebida
-	 * @return El objeto TIPOBEBIDA que tiene el nombre dado
+	 * @param nombre - El nombre del centro comercial buscado
+	 * @return Una lista de objetos CENTRO COMERCIAL que tienen el nombre dado
 	 */
-	public List<LocalComercial> darTiposBebidaPorNombre (PersistenceManager pm, String nombreTipoBebida) 
+	public List<CentroComercial> darCentrosComercialesPorNombre (PersistenceManager pm, String nombre) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoBebida  () + " WHERE nombre = ?");
-		q.setResultClass(LocalComercial.class);
-		q.setParameters(nombreTipoBebida);
-		return (List<LocalComercial>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial () + " WHERE nombre = ?");
+		q.setResultClass(CentroComercial.class);
+		q.setParameters(nombre);
+		return (List<CentroComercial>) q.executeList();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS TIPOS DE BEBIDA de la 
-	 * base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS CENTRO COMERCIALES de la 
+	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos TIPOBEBIDA
+	 * @return Una lista de objetos CENTRO COMERCIAL
 	 */
-	public List<LocalComercial> darTiposBebida (PersistenceManager pm)
+	public List<CentroComercial> darCentrosComerciales (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoBebida  ());
-		q.setResultClass(LocalComercial.class);
-		return (List<LocalComercial>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial ());
+		q.setResultClass(CentroComercial.class);
+		return (List<CentroComercial>) q.executeList();
 	}
+
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar la hora de apertura de un centro comercial en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idCentroComercial - El identificador del centro comercial
+	 * @param horaApertura - La nueva horaApertura del centro comercial
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarHoraAperturaCentroComercial (PersistenceManager pm, long idCentroComercial, Timestamp horaApertura) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCentroComercial () + " SET horaApertura = ? WHERE identificador = ?");
+	     q.setParameters(horaApertura, idCentroComercial);
+	     return (long) q.executeUnique();            
+	}
+
 
 }

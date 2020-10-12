@@ -21,11 +21,6 @@ public interface VOBaño
 	public String getIdentificador();
 
 	/**
-	 * @return El cupo actual del baño
-	 */
-	public int getCupoActual();
-
-	/**
 	 * @return El id de la capacidad normal del baño
 	 */
 	public long getCapacidadNormal();

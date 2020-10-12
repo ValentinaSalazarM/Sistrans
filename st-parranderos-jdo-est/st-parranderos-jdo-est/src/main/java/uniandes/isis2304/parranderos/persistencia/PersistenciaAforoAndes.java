@@ -983,7 +983,7 @@ public class PersistenciaAforoAndes
         try
         {
             tx.begin();
-            long resp = sqlAscensor.eliminarBebedorPorNombre (pm, nombre);
+            long resp = sqlAscensor.eliminarAscensorPorPeso (pm, nombre);
             tx.commit();
             return resp;
         }
@@ -1016,7 +1016,7 @@ public class PersistenciaAforoAndes
         try
         {
             tx.begin();
-            long resp = sqlAscensor.eliminarBebedorPorId (pm, idBebedor);
+            long resp = sqlAscensor.eliminarAscensorPorId (pm, idBebedor);
             tx.commit();
             return resp;
         }
@@ -1043,7 +1043,7 @@ public class PersistenciaAforoAndes
 	 */
 	public List<CapacidadNormal> darBebedoresPorNombre (String nombreBebedor) 
 	{
-		return sqlAscensor.darBebedoresPorNombre (pmf.getPersistenceManager(), nombreBebedor);
+		return sqlAscensor.darAscensoresPorPesoMaximo (pmf.getPersistenceManager(), nombreBebedor);
 	}
 
 	/**
@@ -1053,7 +1053,7 @@ public class PersistenciaAforoAndes
 	 */
 	public CapacidadNormal darBebedorPorId (long idBebedor) 
 	{
-		return (CapacidadNormal) sqlAscensor.darBebedorPorId (pmf.getPersistenceManager(), idBebedor);
+		return (CapacidadNormal) sqlAscensor.darAscensorPorId (pmf.getPersistenceManager(), idBebedor);
 	}
 
 	/**
@@ -1066,7 +1066,7 @@ public class PersistenciaAforoAndes
 	public CapacidadNormal darBebedorCompleto (long idBebedor) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-		CapacidadNormal bebedor = (CapacidadNormal) sqlAscensor.darBebedorPorId (pm, idBebedor);
+		CapacidadNormal bebedor = (CapacidadNormal) sqlAscensor.darAscensorPorId (pm, idBebedor);
 		bebedor.setVisitasRealizadas(armarVisitasBebedor (sqlAscensor.darVisitasRealizadas (pm, idBebedor)));
 		bebedor.setBebidasQueLeGustan(armarGustanBebedor (sqlAscensor.darBebidasQueLeGustan (pm, idBebedor)));
 		return bebedor;
@@ -1078,7 +1078,7 @@ public class PersistenciaAforoAndes
 	 */
 	public List<CapacidadNormal> darBebedores ()
 	{
-		return sqlAscensor.darBebedores (pmf.getPersistenceManager());
+		return sqlAscensor.darAscensores (pmf.getPersistenceManager());
 	}
  
 	/**
@@ -1133,7 +1133,7 @@ public class PersistenciaAforoAndes
         try
         {
             tx.begin();
-            long resp = sqlAscensor.cambiarCiudadBebedor (pm, idBebedor, ciudad);
+            long resp = sqlAscensor.cambiarPesoMaximoAscensor (pm, idBebedor, ciudad);
             tx.commit();
             return resp;
         }
@@ -1371,7 +1371,7 @@ public class PersistenciaAforoAndes
         try
         {
             tx.begin();
-            long resp = sqlArea.eliminarBarPorId (pm, idBar);
+            long resp = sqlArea.eliminarAreaPorId (pm, idBar);
             tx.commit();
 
             return resp;
@@ -1398,7 +1398,7 @@ public class PersistenciaAforoAndes
 	 */
 	public List<Visitante> darBares ()
 	{
-		return sqlArea.darBares (pmf.getPersistenceManager());
+		return sqlArea.darAreas (pmf.getPersistenceManager());
 	}
  
 	/**
@@ -1408,7 +1408,7 @@ public class PersistenciaAforoAndes
 	 */
 	public List<Visitante> darBaresPorNombre (String nombreBar)
 	{
-		return sqlArea.darBaresPorNombre (pmf.getPersistenceManager(), nombreBar);
+		return sqlArea.darAreasPorValor (pmf.getPersistenceManager(), nombreBar);
 	}
  
 	/**
@@ -1418,7 +1418,7 @@ public class PersistenciaAforoAndes
 	 */
 	public Visitante darBarPorId (long idBar)
 	{
-		return sqlArea.darBarPorId (pmf.getPersistenceManager(), idBar);
+		return sqlArea.darAreaPorId (pmf.getPersistenceManager(), idBar);
 	}
  
 	/**

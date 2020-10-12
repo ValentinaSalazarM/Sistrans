@@ -23,11 +23,6 @@ public interface VOLocalComercial
 	public String getIdentificador();
 
 	/**
-	 * @return El cupo actual del local comercial
-	 */
-	public int getCupoActual();
-
-	/**
 	 * @return El id de la capacidad normal del local comercial
 	 */
 	public long getCapacidadNormal();

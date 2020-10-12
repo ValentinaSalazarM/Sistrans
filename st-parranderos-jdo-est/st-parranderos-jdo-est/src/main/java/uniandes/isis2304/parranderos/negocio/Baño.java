@@ -24,11 +24,6 @@ public class Baño implements VOBaño
 	private String identificador;
 	
 	/**
-	 * El cupo actual del baño
-	 */
-	private int cupoActual;
-	
-	/**
 	 * El identificador de la capacidad normal del baño. Debe existir en la tabla de CAPACIDADNORMAL
 	 */
 	private long capacidadNormal;
@@ -58,7 +53,6 @@ public class Baño implements VOBaño
 	public Baño() 
 	{
 		this.identificador = "";
-		this.cupoActual = 0;
 		this.capacidadNormal = 0;
 		this.area = 0;
 		this.sanitarios = 0;
@@ -68,16 +62,14 @@ public class Baño implements VOBaño
 	/**
 	 * Constructor con valores
 	 * @param identificador - El identificador del baño
-	 * @param cupoActual - El cupo actual del baño
 	 * @param area - El identificador del area. Debe existir un área con dicho identificador
 	 * @param capacidadNormal - El identificador de la capacidad normal. Debe existir una capacidad normal con dicho identificador
 	 * @param sanitarios - El número de sanitarios del baño (mayor a 0)
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
-	public Baño(String identificador, int cupoActual, long area, long capacidadNormal, int sanitarios, String idCentroComercial) 
+	public Baño(String identificador, long area, long capacidadNormal, int sanitarios, String idCentroComercial) 
 	{
 		this.identificador = identificador;
-		this.cupoActual = cupoActual;
 		this.area = area;
 		this.capacidadNormal = capacidadNormal;
 		this.sanitarios = sanitarios;
@@ -99,22 +91,6 @@ public class Baño implements VOBaño
 	public void setIdentificador(String identificador) 
 	{
 		this.identificador = identificador;
-	}
-
-	/**
-	 * @return El cupo actual del baño
-	 */
-	public int getCupoActual() 
-	{
-		return cupoActual;
-	}
-
-	/**
-	 * @param cupoActual - El nuevo cupo actual del baño
-	 */
-	public void setCupoActual(int cupoActual) 
-	{
-		this.cupoActual = cupoActual;
 	}
 
 	/**
@@ -187,7 +163,7 @@ public class Baño implements VOBaño
 	@Override
 	public String toString() 
 	{
-		return "Baño [identificador=" + identificador + ", cupoActual=" + cupoActual + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", sanitarios=" + sanitarios + ", idCentroComercial=" + idCentroComercial + "]";
+		return "Baño [identificador=" + identificador + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", sanitarios=" + sanitarios + ", idCentroComercial=" + idCentroComercial + "]";
 	}
 
 	

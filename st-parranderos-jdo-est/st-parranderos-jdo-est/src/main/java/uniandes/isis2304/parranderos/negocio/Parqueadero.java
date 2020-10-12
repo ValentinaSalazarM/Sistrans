@@ -13,7 +13,7 @@ package uniandes.isis2304.parranderos.negocio;
  * Clase para modelar el concepto ASCENSOR del negocio de Aforo-CCAndes
  *
  */
-public class Parqueadero implements VOParqueadero
+public class Parqueadero implements VOParqueadero 
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -22,11 +22,6 @@ public class Parqueadero implements VOParqueadero
 	 * El identificador ÚNICO del parqueadero asignado por un individuo.
 	 */
 	private String identificador;
-	
-	/**
-	 * El cupo actual del parqueadero
-	 */
-	private int cupoActual;
 	
 	/**
 	 * El identificador de la capacidad normal del parqueadero. Debe existir en la tabla de CAPACIDADNORMAL
@@ -53,7 +48,6 @@ public class Parqueadero implements VOParqueadero
 	public Parqueadero() 
 	{
 		this.identificador = "";
-		this.cupoActual = 0;
 		this.capacidadNormal = 0;
 		this.area = 0;
 		this.idCentroComercial = "";
@@ -62,15 +56,13 @@ public class Parqueadero implements VOParqueadero
 	/**
 	 * Constructor con valores
 	 * @param identificador - El identificador del ascensor
-	 * @param cupoActual - El cupo actual del ascensor
 	 * @param area - El identificador del area. Debe existir un área con dicho identificador
 	 * @param capacidadNormal - El identificador de la capacidad normal. Debe existir una capacidad normal con dicho identificador
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
-	public Parqueadero(String identificador, int cupoActual, long area, long capacidadNormal, String idCentroComercial) 
+	public Parqueadero(String identificador, long area, long capacidadNormal, String idCentroComercial) 
 	{
 		this.identificador = identificador;
-		this.cupoActual = cupoActual;
 		this.area = area;
 		this.capacidadNormal = capacidadNormal;
 		this.idCentroComercial = idCentroComercial;
@@ -91,22 +83,6 @@ public class Parqueadero implements VOParqueadero
 	public void setIdentificador(String identificador) 
 	{
 		this.identificador = identificador;
-	}
-
-	/**
-	 * @return El cupo actual del parqueadero
-	 */
-	public int getCupoActual() 
-	{
-		return cupoActual;
-	}
-
-	/**
-	 * @param cupoActual - El nuevo cupo actual del parqueadero
-	 */
-	public void setCupoActual(int cupoActual) 
-	{
-		this.cupoActual = cupoActual;
 	}
 
 	/**
@@ -163,7 +139,7 @@ public class Parqueadero implements VOParqueadero
 	@Override
 	public String toString() 
 	{
-		return "Parqueadero [identificador=" + identificador + ", cupoActual=" + cupoActual + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", idCentroComercial=" + idCentroComercial + "]";
+		return "Parqueadero [identificador=" + identificador + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", idCentroComercial=" + idCentroComercial + "]";
 	}
 
 	
