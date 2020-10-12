@@ -20,15 +20,13 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Visitante;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto BAR de Parranderos
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Area de AFORO-CCANDES
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
- * @author Germán Bravo
  */
-class SQLBar 
+class SQLArea 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -37,7 +35,7 @@ class SQLBar
 	 * Cadena que representa el tipo de consulta que se va a realizar en las sentencias de acceso a la base de datos
 	 * Se renombra acá para facilitar la escritura de las sentencias
 	 */
-	private final static String SQL = PersistenciaParranderos.SQL;
+	private final static String SQL = PersistenciaAforoAndes.SQL;
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -45,7 +43,7 @@ class SQLBar
 	/**
 	 * El manejador de persistencia general de la aplicación
 	 */
-	private PersistenciaParranderos pp;
+	private PersistenciaAforoAndes pp;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -55,7 +53,7 @@ class SQLBar
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLBar (PersistenciaParranderos pp)
+	public SQLArea (PersistenciaAforoAndes pp)
 	{
 		this.pp = pp;
 	}
@@ -72,7 +70,7 @@ class SQLBar
 	 */
 	public long adicionarBar (PersistenceManager pm, long idBar, String nombre, String ciudad, String presupuesto, int sedes) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBar () + "(id, nombre, ciudad, presupuesto, cantsedes) values (?, ?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCentroComercial () + "(id, nombre, ciudad, presupuesto, cantsedes) values (?, ?, ?, ?, ?)");
         q.setParameters(idBar, nombre, ciudad, presupuesto, sedes);
         return (long) q.executeUnique();
 	}
@@ -85,7 +83,7 @@ class SQLBar
 	 */
 	public long eliminarBaresPorNombre (PersistenceManager pm, String nombreBar)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBar () + " WHERE nombre = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE nombre = ?");
         q.setParameters(nombreBar);
         return (long) q.executeUnique();
 	}
@@ -98,7 +96,7 @@ class SQLBar
 	 */
 	public long eliminarBarPorId (PersistenceManager pm, long idBar)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBar () + " WHERE id = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
         q.setParameters(idBar);
         return (long) q.executeUnique();
 	}
@@ -112,7 +110,7 @@ class SQLBar
 	 */
 	public Visitante darBarPorId (PersistenceManager pm, long idBar) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBar () + " WHERE id = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
 		q.setResultClass(Visitante.class);
 		q.setParameters(idBar);
 		return (Visitante) q.executeUnique();
@@ -127,7 +125,7 @@ class SQLBar
 	 */
 	public List<Visitante> darBaresPorNombre (PersistenceManager pm, String nombreBar) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBar () + " WHERE nombre = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial () + " WHERE nombre = ?");
 		q.setResultClass(Visitante.class);
 		q.setParameters(nombreBar);
 		return (List<Visitante>) q.executeList();
@@ -141,7 +139,7 @@ class SQLBar
 	 */
 	public List<Visitante> darBares (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBar ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial ());
 		q.setResultClass(Visitante.class);
 		return (List<Visitante>) q.executeList();
 	}
@@ -155,7 +153,7 @@ class SQLBar
 	 */
 	public long aumentarSedesBaresCiudad (PersistenceManager pm, String ciudad)
 	{
-        Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaBar () + " SET cantsedes = cantsedes + 1 WHERE ciudad = ?");
+        Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCentroComercial () + " SET cantsedes = cantsedes + 1 WHERE ciudad = ?");
         q.setParameters(ciudad);
         return (long) q.executeUnique();
 	}

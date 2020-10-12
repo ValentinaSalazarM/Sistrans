@@ -29,7 +29,7 @@ import uniandes.isis2304.parranderos.negocio.CapacidadNormal;
  * 
  * @author Germán Bravo
  */
-class SQLBebedor 
+class SQLAscensor 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -38,7 +38,7 @@ class SQLBebedor
 	 * Cadena que representa el tipo de consulta que se va a realizar en las sentencias de acceso a la base de datos
 	 * Se renombra acá para facilitar la escritura de las sentencias
 	 */
-	private final static String SQL = PersistenciaParranderos.SQL;
+	private final static String SQL = PersistenciaAforoAndes.SQL;
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -46,7 +46,7 @@ class SQLBebedor
 	/**
 	 * El manejador de persistencia general de la aplicación
 	 */
-	private PersistenciaParranderos pp;
+	private PersistenciaAforoAndes pp;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -55,7 +55,7 @@ class SQLBebedor
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLBebedor (PersistenciaParranderos pp)
+	public SQLAscensor (PersistenciaAforoAndes pp)
 	{
 		this.pp = pp;
 	}
@@ -71,7 +71,7 @@ class SQLBebedor
 	 */
 	public long adicionarBebedor (PersistenceManager pm, long idBebedor, String nombre, String ciudad, String presupuesto) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBebedor () + "(id, nombre, ciudad, presupuesto) values (?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCapacidadNormal () + "(id, nombre, ciudad, presupuesto) values (?, ?, ?, ?)");
         q.setParameters(idBebedor, nombre, ciudad, presupuesto);
         return (long) q.executeUnique();
 	}
@@ -84,7 +84,7 @@ class SQLBebedor
 	 */
 	public long eliminarBebedorPorNombre (PersistenceManager pm, String nombre)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBebedor () + " WHERE nombre = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal () + " WHERE nombre = ?");
         q.setParameters(nombre);
         return (long) q.executeUnique();            
 	}
@@ -97,7 +97,7 @@ class SQLBebedor
 	 */
 	public long eliminarBebedorPorId (PersistenceManager pm, long idBebedor)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBebedor () + " WHERE id = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal () + " WHERE id = ?");
         q.setParameters(idBebedor);
         return (long) q.executeUnique();            
 	}
@@ -111,7 +111,7 @@ class SQLBebedor
 	 */
 	public CapacidadNormal darBebedorPorId (PersistenceManager pm, long idBebedor) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebedor () + " WHERE id = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal () + " WHERE id = ?");
 		q.setResultClass(CapacidadNormal.class);
 		q.setParameters(idBebedor);
 		return (CapacidadNormal) q.executeUnique();
@@ -126,7 +126,7 @@ class SQLBebedor
 	 */
 	public List<CapacidadNormal> darBebedoresPorNombre (PersistenceManager pm, String nombreBebedor) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebedor () + " WHERE nombre = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal () + " WHERE nombre = ?");
 		q.setResultClass(CapacidadNormal.class);
 		q.setParameters(nombreBebedor);
 		return (List<CapacidadNormal>) q.executeList();
@@ -140,7 +140,7 @@ class SQLBebedor
 	 */
 	public List<CapacidadNormal> darBebedores (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebedor ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal ());
 		q.setResultClass(CapacidadNormal.class);
 		return (List<CapacidadNormal>) q.executeList();
 	}
@@ -158,9 +158,9 @@ class SQLBebedor
 	{
         String sql = "SELECT bar.id, bar.nombre, bar.ciudad, bar.presupuesto, bar.cantsedes, vis.fechavisita, vis.horario";
         sql += " FROM ";
-        sql += pp.darTablaBebedor () + " bdor, ";
-        sql += pp.darTablaVisitan () + " vis, ";
-        sql += pp.darTablaBar () + " bar ";
+        sql += pp.darTablaCapacidadNormal () + " bdor, ";
+        sql += pp.darTablaBaño () + " vis, ";
+        sql += pp.darTablaCentroComercial () + " bar ";
        	sql	+= " WHERE ";
        	sql += "bdor.id = ?";
        	sql += " AND bdor.id = vis.idbebedor";
@@ -183,9 +183,9 @@ class SQLBebedor
 	{
         String sql = "SELECT beb.id, beb.nombre, beb.idtipobebida, beb.gradoalcohol, tb.nombre";
         sql += " FROM ";
-        sql += pp.darTablaBebedor () + " bdor, ";
-        sql += pp.darTablaGustan () + " g, ";
-        sql += pp.darTablaBebida () + " beb, ";
+        sql += pp.darTablaCapacidadNormal () + " bdor, ";
+        sql += pp.darTablaArea () + " g, ";
+        sql += pp.darTablaVisitante () + " beb, ";
         sql += pp.darTablaTipoBebida () + " tb ";
        	sql	+= " WHERE ";
        	sql += "bdor.id = ?";
@@ -208,8 +208,8 @@ class SQLBebedor
 	public List<Object> darBebedoresYNumVisitasRealizadas (PersistenceManager pm)
 	{
 	    String sql = "SELECT id, nombre, ciudad, presupuesto, count (idbebedor) as numVisitas";
-	    sql += " FROM " + pp.darTablaBebedor ();
-	    sql += " LEFT OUTER JOIN " + pp.darTablaVisitan () + " ON id = idbebedor";
+	    sql += " FROM " + pp.darTablaCapacidadNormal ();
+	    sql += " LEFT OUTER JOIN " + pp.darTablaBaño () + " ON id = idbebedor";
 	    sql	+= " GROUP BY id, nombre, ciudad, presupuesto";
 	    sql	+= " ORDER BY numVisitas";
 		
@@ -227,8 +227,8 @@ class SQLBebedor
 	public long darCantidadBebedoresCiudadVisitanBares (PersistenceManager pm, String ciudad)
 	{
         String sql1 = "SELECT UNIQUE ID";
-        sql1 += " FROM " + pp.darTablaBebedor ();
-        sql1 += " INNER JOIN " + pp.darTablaVisitan () + " ON id = idbebedor";
+        sql1 += " FROM " + pp.darTablaCapacidadNormal ();
+        sql1 += " INNER JOIN " + pp.darTablaBaño () + " ON id = idbebedor";
        	sql1	+= " WHERE ciudad = ?";
        	
        	String sql = "SELECT count (*) FROM (" + sql1 + ")";
@@ -248,7 +248,7 @@ class SQLBebedor
 	 */
 	public long cambiarCiudadBebedor (PersistenceManager pm, long idBebedor, String ciudad) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaBebedor () + " SET ciudad = ? WHERE id = ?");
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCapacidadNormal () + " SET ciudad = ? WHERE id = ?");
 	     q.setParameters(ciudad, idBebedor);
 	     return (long) q.executeUnique();            
 	}
@@ -264,9 +264,9 @@ class SQLBebedor
 	 */
 	public long [] eliminarBebedorYVisitas_v1 (PersistenceManager pm, long idBebedor) 
 	{
-      Query q1 = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitan () + " WHERE idBebedor = ?");
+      Query q1 = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE idBebedor = ?");
       q1.setParameters(idBebedor);
-      Query q2 = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBebedor () + " WHERE id = ?");
+      Query q2 = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal () + " WHERE id = ?");
       q2.setParameters(idBebedor);
       
       long visitasEliminadas = (long) q1.executeUnique ();
@@ -290,7 +290,7 @@ class SQLBebedor
 	{
 		// Selecciona las parejas [idBebedor, idBar] únicas de la tabla VISITAN
 		String sql0 = "SELECT DISTINCT idbebedor, idBar";
-		sql0 += " FROM " + pp.darTablaVisitan ();
+		sql0 += " FROM " + pp.darTablaBaño ();
 		
 		// Agrupa las parejas anteriores por idBebedor y cuenta cuántos bares visita cada bebedor
 		String sql1 = "SELECT idbebedor, count (*) as numbares";
@@ -299,7 +299,7 @@ class SQLBebedor
 		
 		// Hace join de BEBEDORES con el resultado anterior para asociar la información del bebedor
         String sql = "SELECT id, nombre, ciudad, presupuesto, NVL (numbares, 0)";
-        sql += " FROM " + pp.darTablaBebedor () + " LEFT OUTER JOIN (" + sql1 + ")";
+        sql += " FROM " + pp.darTablaCapacidadNormal () + " LEFT OUTER JOIN (" + sql1 + ")";
         sql += " ON id = idBebedor";
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();
@@ -317,11 +317,11 @@ class SQLBebedor
 	public List<Object> darBebedoresYNumVisitasRealizadas_v2 (PersistenceManager pm)
 	{		
 		String sql1 = "SELECT idbebedor, count (*) as numVisitas";
-		sql1 += " FROM " + pp.darTablaVisitan ();
+		sql1 += " FROM " + pp.darTablaBaño ();
 		sql1 += " GROUP BY idBebedor";
 		
         String sql = "SELECT id, nombre, ciudad, presupuesto, NVL (numVisitas, 0)";
-        sql += " FROM " + pp.darTablaBebedor () + " LEFT OUTER JOIN (" + sql1 + ")";
+        sql += " FROM " + pp.darTablaCapacidadNormal () + " LEFT OUTER JOIN (" + sql1 + ")";
         sql += " ON id = idBebedor";
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();

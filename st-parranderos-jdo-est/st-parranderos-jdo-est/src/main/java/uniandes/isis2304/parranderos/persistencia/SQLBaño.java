@@ -29,7 +29,7 @@ import uniandes.isis2304.parranderos.negocio.LocalComercial;
  * 
  * @author Germán Bravo
  */
-class SQLBebida 
+class SQLBaño 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -38,7 +38,7 @@ class SQLBebida
 	 * Cadena que representa el tipo de consulta que se va a realizar en las sentencias de acceso a la base de datos
 	 * Se renombra acá para facilitar la escritura de las sentencias
 	 */
-	private final static String SQL = PersistenciaParranderos.SQL;
+	private final static String SQL = PersistenciaAforoAndes.SQL;
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -46,7 +46,7 @@ class SQLBebida
 	/**
 	 * El manejador de persistencia general de la aplicación
 	 */
-	private PersistenciaParranderos pp;
+	private PersistenciaAforoAndes pp;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -55,7 +55,7 @@ class SQLBebida
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLBebida (PersistenciaParranderos pp)
+	public SQLBaño (PersistenciaAforoAndes pp)
 	{
 		this.pp = pp;
 	}
@@ -71,7 +71,7 @@ class SQLBebida
 	 */
 	public long adicionarBebida (PersistenceManager pm, long idBebida, String nombre, long idTipoBebida, int gradoAlcohol) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBebida () + "(id, nombre, idTipoBebida, gradoalcohol) values (?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVisitante () + "(id, nombre, idTipoBebida, gradoalcohol) values (?, ?, ?, ?)");
         q.setParameters(idBebida, nombre, idTipoBebida, gradoAlcohol);
         return (long) q.executeUnique();            
 	}
@@ -84,7 +84,7 @@ class SQLBebida
 	 */
 	public long eliminarBebidaPorNombre (PersistenceManager pm, String nombreBebida)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBebida () + " WHERE nombre = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante () + " WHERE nombre = ?");
         q.setParameters(nombreBebida);
         return (long) q.executeUnique();            
 	}
@@ -97,7 +97,7 @@ class SQLBebida
 	 */
 	public long eliminarBebidaPorId (PersistenceManager pm, long idBebida)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBebida () + " WHERE id = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante () + " WHERE id = ?");
         q.setParameters(idBebida);
         return (long) q.executeUnique();            
 	}
@@ -111,7 +111,7 @@ class SQLBebida
 	 */
 	public Ascensor darTipoBebidaPorId (PersistenceManager pm, long idBebida) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebida () + " WHERE id = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisitante () + " WHERE id = ?");
 		q.setResultClass(LocalComercial.class);
 		q.setParameters(idBebida);
 		return (Ascensor) q.executeUnique();
@@ -126,7 +126,7 @@ class SQLBebida
 	 */
 	public List<Ascensor> darBebidasPorNombre (PersistenceManager pm, String nombreBebida) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebida () + " WHERE nombre = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisitante () + " WHERE nombre = ?");
 		q.setResultClass(Ascensor.class);
 		q.setParameters(nombreBebida);
 		return (List<Ascensor>) q.executeList();
@@ -140,7 +140,7 @@ class SQLBebida
 	 */
 	public List<Ascensor> darBebidas (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBebida ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisitante ());
 		q.setResultClass(Ascensor.class);
 		return (List<Ascensor>) q.executeList();
 	}
@@ -153,8 +153,8 @@ class SQLBebida
 	 */
 	public long eliminarBebidasNoServidas (PersistenceManager pm)
 	{
-        String q2Str = "SELECT idBebida FROM " + pp.darTablaSirven ();
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBebida () + " WHERE id NOT IN (" + q2Str + ")");
+        String q2Str = "SELECT idBebida FROM " + pp.darTablaAscensor ();
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante () + " WHERE id NOT IN (" + q2Str + ")");
         return (long) q.executeUnique();            
     }
 

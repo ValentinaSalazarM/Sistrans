@@ -31,7 +31,7 @@ import uniandes.isis2304.parranderos.negocio.TipoVisitante;
  * 
  * @author Germán Bravo
  */
-class SQLVisitan 
+class SQLDomiciliario 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -40,7 +40,7 @@ class SQLVisitan
 	 * Cadena que representa el tipo de consulta que se va a realizar en las sentencias de acceso a la base de datos
 	 * Se renombra acá para facilitar la escritura de las sentencias
 	 */
-	private final static String SQL = PersistenciaParranderos.SQL;
+	private final static String SQL = PersistenciaAforoAndes.SQL;
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -48,7 +48,7 @@ class SQLVisitan
 	/**
 	 * El manejador de persistencia general de la aplicación
 	 */
-	private PersistenciaParranderos pp;
+	private PersistenciaAforoAndes pp;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -57,7 +57,7 @@ class SQLVisitan
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLVisitan (PersistenciaParranderos pp)
+	public SQLDomiciliario (PersistenciaAforoAndes pp)
 	{
 		this.pp = pp;
 	}
@@ -73,7 +73,7 @@ class SQLVisitan
 	 */
 	public long adicionarVisitan (PersistenceManager pm, long idBebedor, long idBar, Timestamp fecha, String horario) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVisitan () + "(idbebedor, idbar, fechavisita, horario) values (?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBaño () + "(idbebedor, idbar, fechavisita, horario) values (?, ?, ?, ?)");
         q.setParameters(idBebedor, idBar, fecha, horario);
         return (long) q.executeUnique();
 	}
@@ -85,7 +85,7 @@ class SQLVisitan
 	 */
 	public long eliminarVisitan (PersistenceManager pm) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitan ());
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño ());
         return (long) q.executeUnique();
 	}
 
@@ -98,7 +98,7 @@ class SQLVisitan
 	 */
 	public long eliminarVisitan (PersistenceManager pm, long idBebedor, long idBar) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitan () + " WHERE idbebedor = ? AND idbar = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE idbebedor = ? AND idbar = ?");
         q.setParameters(idBebedor, idBar);
         return (long) q.executeUnique();
 	}
@@ -111,7 +111,7 @@ class SQLVisitan
 	 */
 	public long eliminarVisitanPorIdBebedor (PersistenceManager pm, long idBebedor) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitan () + " WHERE idbebedor = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE idbebedor = ?");
         q.setParameters(idBebedor);
         return (long) q.executeUnique();
 	}
@@ -124,7 +124,7 @@ class SQLVisitan
 	 */
 	public long eliminarVisitanPorIdBar (PersistenceManager pm, long idBar) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitan () + " WHERE idBar = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE idBar = ?");
         q.setParameters(idBar);
         return (long) q.executeUnique();
 	}
@@ -137,7 +137,7 @@ class SQLVisitan
 	 */
 	public List<TipoVisitante> darVisitan (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisitan ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBaño ());
 		q.setResultClass(TipoVisitante.class);
 		return (List<TipoVisitante>) q.execute();
 	}
@@ -154,7 +154,7 @@ class SQLVisitan
 	 */
 	private List<TipoVisitante> darVisitan_V2 (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT idBebedor, idBar, fechaVisita, horario FROM " + pp.darTablaVisitan ());
+		Query q = pm.newQuery(SQL, "SELECT idBebedor, idBar, fechaVisita, horario FROM " + pp.darTablaBaño ());
 		List<TipoVisitante> resp = new LinkedList<>();
 		List results = q.executeList();
 		for (Object obj : results)

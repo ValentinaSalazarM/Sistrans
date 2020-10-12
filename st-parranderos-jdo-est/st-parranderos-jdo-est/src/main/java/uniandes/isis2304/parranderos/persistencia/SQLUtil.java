@@ -33,7 +33,7 @@ class SQLUtil
 	 * Cadena que representa el tipo de consulta que se va a realizar en las sentencias de acceso a la base de datos
 	 * Se renombra acá para facilitar la escritura de las sentencias
 	 */
-	private final static String SQL = PersistenciaParranderos.SQL;
+	private final static String SQL = PersistenciaAforoAndes.SQL;
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -41,7 +41,7 @@ class SQLUtil
 	/**
 	 * El manejador de persistencia general de la aplicación
 	 */
-	private PersistenciaParranderos pp;
+	private PersistenciaAforoAndes pp;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -51,7 +51,7 @@ class SQLUtil
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLUtil (PersistenciaParranderos pp)
+	public SQLUtil (PersistenciaAforoAndes pp)
 	{
 		this.pp = pp;
 	}
@@ -77,13 +77,13 @@ class SQLUtil
 	 */
 	public long [] limpiarParranderos (PersistenceManager pm)
 	{
-        Query qGustan = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaGustan ());          
-        Query qSirven = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaSirven ());
-        Query qVisitan = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitan ());
-        Query qBebida = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBebida ());
+        Query qGustan = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaArea ());          
+        Query qSirven = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor ());
+        Query qVisitan = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño ());
+        Query qBebida = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante ());
         Query qTipoBebida = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoBebida ());
-        Query qBebedor = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBebedor ());
-        Query qBar = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBar ());
+        Query qBebedor = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal ());
+        Query qBar = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial ());
 
         long gustanEliminados = (long) qGustan.executeUnique ();
         long sirvenEliminados = (long) qSirven.executeUnique ();

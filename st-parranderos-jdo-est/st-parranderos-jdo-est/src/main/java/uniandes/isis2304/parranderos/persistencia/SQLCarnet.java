@@ -28,7 +28,7 @@ import uniandes.isis2304.parranderos.negocio.Area;
  * 
  * @author Germán Bravo
  */
-class SQLSirven 
+class SQLCarnet 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -37,7 +37,7 @@ class SQLSirven
 	 * Cadena que representa el tipo de consulta que se va a realizar en las sentencias de acceso a la base de datos
 	 * Se renombra acá para facilitar la escritura de las sentencias
 	 */
-	private final static String SQL = PersistenciaParranderos.SQL;
+	private final static String SQL = PersistenciaAforoAndes.SQL;
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -45,7 +45,7 @@ class SQLSirven
 	/**
 	 * El manejador de persistencia general de la aplicación
 	 */
-	private PersistenciaParranderos pp;
+	private PersistenciaAforoAndes pp;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -54,7 +54,7 @@ class SQLSirven
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLSirven (PersistenciaParranderos pp)
+	public SQLCarnet (PersistenciaAforoAndes pp)
 	{
 		this.pp = pp;
 	}
@@ -69,7 +69,7 @@ class SQLSirven
 	 */
 	public long adicionarSirven (PersistenceManager pm, long idBar, long idBebida, String horario) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaSirven () + "(idbar, idbebida, horario) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaAscensor () + "(idbar, idbebida, horario) values (?, ?, ?)");
         q.setParameters(idBar, idBebida, horario);
         return (long)q.executeUnique();            
 	}
@@ -83,7 +83,7 @@ class SQLSirven
 	 */
 	public long eliminarSirven (PersistenceManager pm, long idBar, long idBebida) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaSirven () + " WHERE idbar = ? AND idbebida = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor () + " WHERE idbar = ? AND idbebida = ?");
         q.setParameters(idBar, idBebida);
         return (long) q.executeUnique();            
 	}
@@ -96,7 +96,7 @@ class SQLSirven
 	 */
 	public List<Area> darSirven (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaSirven ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaAscensor ());
 		q.setResultClass(Area.class);
 		return (List<Area>) q.execute();
 	}
@@ -111,7 +111,7 @@ class SQLSirven
 	public List<Object []> darBaresYCantidadBebidasSirven (PersistenceManager pm)
 	{
         String sql = "SELECT idBar, count (*) as numBebidas";
-        sql += " FROM " + pp.darTablaSirven ();
+        sql += " FROM " + pp.darTablaAscensor ();
        	sql	+= " GROUP BY idBar";
 		Query q = pm.newQuery(SQL, sql);
 		return q.executeList();

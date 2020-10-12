@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
-import uniandes.isis2304.parranderos.persistencia.PersistenciaParranderos;
+import uniandes.isis2304.parranderos.persistencia.PersistenciaAforoAndes;
 
 /**
  * Clase principal del negocio
@@ -45,7 +45,7 @@ public class Parranderos
 	/**
 	 * El manejador de persistencia
 	 */
-	private PersistenciaParranderos pp;
+	private PersistenciaAforoAndes pp;
 	
 	/* ****************************************************************
 	 * 			Métodos
@@ -55,7 +55,7 @@ public class Parranderos
 	 */
 	public Parranderos ()
 	{
-		pp = PersistenciaParranderos.getInstance ();
+		pp = PersistenciaAforoAndes.getInstance ();
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class Parranderos
 	 */
 	public Parranderos (JsonObject tableConfig)
 	{
-		pp = PersistenciaParranderos.getInstance (tableConfig);
+		pp = PersistenciaAforoAndes.getInstance (tableConfig);
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class Parranderos
 	public LocalComercial adicionarTipoBebida (String nombre)
 	{
         log.info ("Adicionando Tipo de bebida: " + nombre);
-        LocalComercial tipoBebida = pp.adicionarTipoBebida (nombre);		
+        LocalComercial tipoBebida = pp.adicionarTipoCarnet (nombre);		
         log.info ("Adicionando Tipo de bebida: " + tipoBebida);
         return tipoBebida;
 	}
@@ -101,7 +101,7 @@ public class Parranderos
 	public long eliminarTipoBebidaPorNombre (String nombre)
 	{
 		log.info ("Eliminando Tipo de bebida por nombre: " + nombre);
-        long resp = pp.eliminarTipoBebidaPorNombre (nombre);		
+        long resp = pp.eliminarTipoCarnetPorNombre (nombre);		
         log.info ("Eliminando Tipo de bebida por nombre: " + resp + " tuplas eliminadas");
         return resp;
 	}
@@ -115,7 +115,7 @@ public class Parranderos
 	public long eliminarTipoBebidaPorId (long idTipoBebida)
 	{
 		log.info ("Eliminando Tipo de bebida por id: " + idTipoBebida);
-        long resp = pp.eliminarTipoBebidaPorId (idTipoBebida);		
+        long resp = pp.eliminarTipoCarnetPorId (idTipoBebida);		
         log.info ("Eliminando Tipo de bebida por id: " + resp + " tuplas eliminadas");
         return resp;
 	}
@@ -128,7 +128,7 @@ public class Parranderos
 	public List<LocalComercial> darTiposBebida ()
 	{
 		log.info ("Consultando Tipos de bebida");
-        List<LocalComercial> tiposBebida = pp.darTiposBebida ();	
+        List<LocalComercial> tiposBebida = pp.darTiposCarnet ();	
         log.info ("Consultando Tipos de bebida: " + tiposBebida.size() + " existentes");
         return tiposBebida;
 	}
@@ -142,7 +142,7 @@ public class Parranderos
 	{
 		log.info ("Generando los VO de Tipos de bebida");        
         List<VOLocalComercial> voTipos = new LinkedList<VOLocalComercial> ();
-        for (LocalComercial tb : pp.darTiposBebida ())
+        for (LocalComercial tb : pp.darTiposCarnet ())
         {
         	voTipos.add (tb);
         }
@@ -160,7 +160,7 @@ public class Parranderos
 	public LocalComercial darTipoBebidaPorNombre (String nombre)
 	{
 		log.info ("Buscando Tipo de bebida por nombre: " + nombre);
-		List<LocalComercial> tb = pp.darTipoBebidaPorNombre (nombre);
+		List<LocalComercial> tb = pp.darTiposCarnetPorNombre (nombre);
 		return !tb.isEmpty () ? tb.get (0) : null;
 	}
 

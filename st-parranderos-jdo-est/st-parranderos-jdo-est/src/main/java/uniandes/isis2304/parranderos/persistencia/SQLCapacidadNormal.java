@@ -28,7 +28,7 @@ import uniandes.isis2304.parranderos.negocio.TipoLocal;
  * 
  * @author Germán Bravo
  */
-class SQLGustan 
+class SQLCapacidadNormal 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -37,7 +37,7 @@ class SQLGustan
 	 * Cadena que representa el tipo de consulta que se va a realizar en las sentencias de acceso a la base de datos
 	 * Se renombra acá para facilitar la escritura de las sentencias
 	 */
-	private final static String SQL = PersistenciaParranderos.SQL;
+	private final static String SQL = PersistenciaAforoAndes.SQL;
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -45,7 +45,7 @@ class SQLGustan
 	/**
 	 * El manejador de persistencia general de la aplicación
 	 */
-	private PersistenciaParranderos pp;
+	private PersistenciaAforoAndes pp;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -54,7 +54,7 @@ class SQLGustan
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLGustan (PersistenciaParranderos pp)
+	public SQLCapacidadNormal (PersistenciaAforoAndes pp)
 	{
 		this.pp = pp;
 	}
@@ -68,7 +68,7 @@ class SQLGustan
 	 */
 	public long adicionarGustan(PersistenceManager pm, long idBebedor, long idBebida) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaGustan () + "(idbebedor, idbebida) values (?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaArea () + "(idbebedor, idbebida) values (?, ?)");
         q.setParameters(idBebedor, idBebida);
         return (long) q.executeUnique();
 	}
@@ -82,7 +82,7 @@ class SQLGustan
 	 */
 	public long eliminarGustan (PersistenceManager pm, long idBebedor, long idBebida)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaGustan () + " WHERE idbebedor = ? AND idbebida = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaArea () + " WHERE idbebedor = ? AND idbebida = ?");
         q.setParameters(idBebedor, idBebida);
         return (long) q.executeUnique();
 	}
@@ -95,7 +95,7 @@ class SQLGustan
 	 */
 	public List<TipoLocal> darGustan (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaGustan ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaArea ());
 		q.setResultClass(TipoLocal.class);
 		List<TipoLocal> resp = (List<TipoLocal>) q.execute();
 		return resp;

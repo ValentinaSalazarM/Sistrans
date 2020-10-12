@@ -269,7 +269,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 				errorTipoBebida = true;
 			}
 			List <VOLocalComercial> lista = parranderos.darVOTiposBebida();
-			long tbEliminados = parranderos.eliminarTipoBebidaPorId (tipoBebida.getId ());
+			long tbEliminados = parranderos.eliminarTipoCarnetPorId (tipoBebida.getId ());
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de TipoBebida\n\n";
@@ -329,7 +329,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			List <VOLocalComercial> listaTiposBebida = parranderos.darVOTiposBebida();
 			List <VOAscensor> listaBebidas = parranderos.darVOBebidas();
 			long bebEliminadas = parranderos.eliminarBebidaPorNombre(nombreBebida);
-			long tbEliminados = parranderos.eliminarTipoBebidaPorId (tipoBebida.getId ());
+			long tbEliminados = parranderos.eliminarTipoCarnetPorId (tipoBebida.getId ());
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Bebidas\n\n";

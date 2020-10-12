@@ -118,7 +118,7 @@ public class TipoBebidaTest
 			assertTrue ("El segundo tipo de bebida adicionado debe estar en la tabla", tipoBebida2.equals (lista.get (0)) || tipoBebida2.equals (lista.get (1)));
 
 			// Prueba de eliminación de un tipo de bebida, dado su identificador
-			long tbEliminados = parranderos.eliminarTipoBebidaPorId (tipoBebida1.getId ());
+			long tbEliminados = parranderos.eliminarTipoCarnetPorId (tipoBebida1.getId ());
 			assertEquals ("Debe haberse eliminado un tipo de bebida !!", 1, tbEliminados);
 			lista = parranderos.darVOTiposBebida();
 			assertEquals ("Debe haber un solo tipo de bebida !!", 1, lista.size ());

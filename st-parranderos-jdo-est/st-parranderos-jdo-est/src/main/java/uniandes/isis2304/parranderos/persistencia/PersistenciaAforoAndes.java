@@ -37,19 +37,21 @@ import uniandes.isis2304.parranderos.negocio.Ascensor;
 import uniandes.isis2304.parranderos.negocio.TipoLocal;
 import uniandes.isis2304.parranderos.negocio.Area;
 import uniandes.isis2304.parranderos.negocio.LocalComercial;
+import uniandes.isis2304.parranderos.negocio.TipoCarnet;
 import uniandes.isis2304.parranderos.negocio.TipoVisitante;
 
 /**
- * Clase para el manejador de persistencia del proyecto Parranderos
+ * Clase para el manejador de persistencia del proyecto Aforo-CCAndes
  * Traduce la información entre objetos Java y tuplas de la base de datos, en ambos sentidos
  * Sigue un patrón SINGLETON (Sólo puede haber UN objeto de esta clase) para comunicarse de manera correcta
  * con la base de datos
- * Se apoya en las clases SQLBar, SQLBebedor, SQLBebida, SQLGustan, SQLSirven, SQLTipoBebida y SQLVisitan, que son 
- * las que realizan el acceso a la base de datos
+ * Se apoya en las clases SQLArea, SQLAscensor, SQLBaño, SQLCapacidadNormal, SQLCarnet, SQLCentroComercial, SQLDomiciliario,
+ * SQLEmpleado, SQLLector, SQLLocalComercial, SQLParqueadero, SQLRegistranCarnet, SQLRegistranVehiculo, SQLTipoCarnet, SQLTipoLector,
+ * SQLTipoLocal, SQLTipoVisitante, SQLVehiculo, SQLVisitanAscensor, SQLVisitanBaño, SQLVisitanCentroComercial, SQLVisitanParqueadero,
+ * SQLVisitante y SQLZonaCirculacion que son las que realizan el acceso a la base de datos
  * 
- * @author Germán Bravo
  */
-public class PersistenciaParranderos 
+public class PersistenciaAforoAndes 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -57,7 +59,7 @@ public class PersistenciaParranderos
 	/**
 	 * Logger para escribir la traza de la ejecución
 	 */
-	private static Logger log = Logger.getLogger(PersistenciaParranderos.class.getName());
+	private static Logger log = Logger.getLogger(PersistenciaAforoAndes.class.getName());
 	
 	/**
 	 * Cadena para indicar el tipo de sentencias que se va a utilizar en una consulta
@@ -70,7 +72,7 @@ public class PersistenciaParranderos
 	/**
 	 * Atributo privado que es el único objeto de la clase - Patrón SINGLETON
 	 */
-	private static PersistenciaParranderos instance;
+	private static PersistenciaAforoAndes instance;
 	
 	/**
 	 * Fábrica de Manejadores de persistencia, para el manejo correcto de las transacciones
@@ -78,51 +80,140 @@ public class PersistenciaParranderos
 	private PersistenceManagerFactory pmf;
 	
 	/**
-	 * Arreglo de cadenas con los nombres de las tablas de la base de datos, en su orden:
-	 * Secuenciador, tipoBebida, bebida, bar, bebedor, gustan, sirven y visitan
+	 * Arreglo de cadenas con los nombres de las tablas de la base de datos, en orden alfabético:
 	 */
 	private List <String> tablas;
 	
 	/**
-	 * Atributo para el acceso a las sentencias SQL propias a PersistenciaParranderos
+	 * Atributo para el acceso a las sentencias SQL propias a PersistenciaAforoAndes
 	 */
 	private SQLUtil sqlUtil;
 	
 	/**
-	 * Atributo para el acceso a la tabla TIPOBEBIDA de la base de datos
+	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
-	private SQLTipoBebida sqlTipoBebida;
+	private SQLTipoVisitante sqlTipoVisitante;
 	
 	/**
-	 * Atributo para el acceso a la tabla BEBIDA de la base de datos
+	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
-	private SQLBebida sqlBebida;
+	private SQLVisitante sqlVisitante;
 	
 	/**
-	 * Atributo para el acceso a la tabla BAR de la base de datos
+	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
-	private SQLBar sqlBar;
+	private SQLCentroComercial sqlCentroComercial;
 	
 	/**
-	 * Atributo para el acceso a la tabla BEBIDA de la base de datos
+	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
-	private SQLBebedor sqlBebedor;
+	private SQLCapacidadNormal sqlCapacidadNormal;
 	
 	/**
-	 * Atributo para el acceso a la tabla GUSTAN de la base de datos
+	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
-	private SQLGustan sqlGustan;
+	private SQLArea sqlArea;
 	
 	/**
-	 * Atributo para el acceso a la tabla SIRVEN de la base de datos
+	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
-	private SQLSirven sqlSirven;
+	private SQLAscensor sqlAscensor;
 	
 	/**
-	 * Atributo para el acceso a la tabla VISITAN de la base de datos
+	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
-	private SQLVisitan sqlVisitan;
+	private SQLBaño sqlBaño;
 	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLParqueadero sqlParqueadero;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLTipoLocal sqlTipoLocal;
+
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLLocalComercial sqlLocalComercial;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLZonaCirculacion sqlZonaCirculacion;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLTipoLector sqlTipoLector;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLLector sqlLector;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLTipoCarnet sqlTipoCarnet;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLCarnet sqlCarnet;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLDomiciliario sqlDomiciliario;
+
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLEmpleado sqlEmpleado;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLVehiculo sqlVehiculo;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLVisitanCentroComercial sqlVisitanCentroComercial;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLVisitanAscensor sqlVisitanAscensor;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLVisitanBaño sqlVisitanBaño;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLVisitanLocalComercial sqlVisitanLocalComercial;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLVisitanParqueadero sqlVisitanParqueadero;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLRegistranCarnet sqlRegistranCarnet;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLRegistranVehiculo sqlRegistranVehiculo;
+		
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
 	 *****************************************************************/
@@ -130,28 +221,52 @@ public class PersistenciaParranderos
 	/**
 	 * Constructor privado con valores por defecto - Patrón SINGLETON
 	 */
-	private PersistenciaParranderos ()
+	private PersistenciaAforoAndes ()
 	{
-		pmf = JDOHelper.getPersistenceManagerFactory("Parranderos");		
+		pmf = JDOHelper.getPersistenceManagerFactory("AforoAndes");		
 		crearClasesSQL ();
 		
 		// Define los nombres por defecto de las tablas de la base de datos
 		tablas = new LinkedList<String> ();
-		tablas.add ("Parranderos_sequence");
-		tablas.add ("TIPOBEBIDA");
-		tablas.add ("BEBIDA");
-		tablas.add ("BAR");
-		tablas.add ("BEBEDOR");
-		tablas.add ("GUSTAN");
-		tablas.add ("SIRVEN");
-		tablas.add ("VISITAN");
+		tablas.add ("TIPOVISITANTE");
+		tablas.add ("VISITANTE");
+		tablas.add ("CENTROCOMERCIAL");
+		tablas.add ("CAPACIDADNORMAL");
+		tablas.add ("AREA");
+		tablas.add ("ASCENSOR");
+		tablas.add ("BAÑO");
+		tablas.add ("PARQUEADERO");
+		tablas.add ("TIPOLOCAL");
+		tablas.add ("LOCALCOMERCIAL");
+		tablas.add ("ZONACIRCULACION");
+		tablas.add ("TIPOLECTOR");
+		tablas.add ("LECTOR");
+		tablas.add ("TIPOCARNET");
+		tablas.add ("CARNET");
+		tablas.add ("DOMICILIARIO");
+		tablas.add ("EMPLEADO");
+		tablas.add ("VEHICULO");
+		tablas.add ("VISITANCENTROCOMERCIAL");
+		tablas.add ("VISITANASCENSOR");
+		tablas.add ("VISITANBAÑO");
+		tablas.add ("VISITANLOCALCOMERCIAL");
+		tablas.add ("VISITANPARQUEADERO");
+		tablas.add ("REGISTRANCARNET");
+		tablas.add ("REGISTRANVEHICULO");
+		tablas.add ("capacidadNormal_sequence");
+		tablas.add ("area_sequence");
+		tablas.add ("tipoLocal_sequence");
+		tablas.add ("tipoCarnet_sequence");
+		tablas.add ("tipoLector_sequence");
+		tablas.add ("tipoVisitante_sequence");
+
 }
 
 	/**
 	 * Constructor privado, que recibe los nombres de las tablas en un objeto Json - Patrón SINGLETON
 	 * @param tableConfig - Objeto Json que contiene los nombres de las tablas y de la unidad de persistencia a manejar
 	 */
-	private PersistenciaParranderos (JsonObject tableConfig)
+	private PersistenciaAforoAndes (JsonObject tableConfig)
 	{
 		crearClasesSQL ();
 		tablas = leerNombresTablas (tableConfig);
@@ -162,13 +277,13 @@ public class PersistenciaParranderos
 	}
 
 	/**
-	 * @return Retorna el único objeto PersistenciaParranderos existente - Patrón SINGLETON
+	 * @return Retorna el único objeto PersistenciaAforoAndes existente - Patrón SINGLETON
 	 */
-	public static PersistenciaParranderos getInstance ()
+	public static PersistenciaAforoAndes getInstance ()
 	{
 		if (instance == null)
 		{
-			instance = new PersistenciaParranderos ();
+			instance = new PersistenciaAforoAndes ();
 		}
 		return instance;
 	}
@@ -176,13 +291,13 @@ public class PersistenciaParranderos
 	/**
 	 * Constructor que toma los nombres de las tablas de la base de datos del objeto tableConfig
 	 * @param tableConfig - El objeto JSON con los nombres de las tablas
-	 * @return Retorna el único objeto PersistenciaParranderos existente - Patrón SINGLETON
+	 * @return Retorna el único objeto PersistenciaAforoAndes existente - Patrón SINGLETON
 	 */
-	public static PersistenciaParranderos getInstance (JsonObject tableConfig)
+	public static PersistenciaAforoAndes getInstance (JsonObject tableConfig)
 	{
 		if (instance == null)
 		{
-			instance = new PersistenciaParranderos (tableConfig);
+			instance = new PersistenciaAforoAndes (tableConfig);
 		}
 		return instance;
 	}
@@ -219,89 +334,283 @@ public class PersistenciaParranderos
 	 */
 	private void crearClasesSQL ()
 	{
-		sqlTipoBebida = new SQLTipoBebida(this);
-		sqlBebida = new SQLBebida(this);
-		sqlBar = new SQLBar(this);
-		sqlBebedor = new SQLBebedor(this);
-		sqlGustan = new SQLGustan(this);
-		sqlSirven = new SQLSirven (this);
-		sqlVisitan = new SQLVisitan(this);		
+		sqlTipoVisitante = new SQLTipoVisitante(this);
+		sqlVisitante = new SQLVisitante(this);
+		sqlCentroComercial = new SQLCentroComercial(this);
+		sqlCapacidadNormal = new SQLCapacidadNormal(this);
+		sqlArea = new SQLArea(this);
+		sqlAscensor = new SQLAscensor(this);
+		sqlBaño = new SQLBaño(this);
+		sqlParqueadero = new SQLParqueadero(this);
+		sqlTipoLocal = new SQLTipoLocal(this);
+		sqlLocalComercial = new SQLLocalComercial(this);
+		sqlZonaCirculacion = new SQLZonaCirculacion(this);
+		sqlTipoLector = new SQLTipoLector(this);
+		sqlLector = new SQLLector(this);
+		sqlTipoCarnet = new SQLTipoCarnet(this);
+		sqlCarnet = new SQLCarnet (this);
+		sqlDomiciliario = new SQLDomiciliario(this);
+		sqlEmpleado = new SQLEmpleado(this);
+		sqlVehiculo = new SQLVehiculo(this);
+		sqlVisitanCentroComercial = new SQLVisitanCentroComercial(this);
+		sqlVisitanAscensor = new SQLVisitanAscensor(this);
+		sqlVisitanBaño = new SQLVisitanBaño(this);
+		sqlVisitanLocalComercial = new SQLVisitanLocalComercial(this);
+		sqlVisitanParqueadero = new SQLVisitanParqueadero(this);
+		sqlRegistranCarnet = new SQLRegistranCarnet(this);
+		sqlRegistranVehiculo = new SQLRegistranVehiculo(this);
 		sqlUtil = new SQLUtil(this);
 	}
 
 	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de parranderos
+	 * @return La cadena de caracteres con el nombre de la tabla de TipoVisitante de AforoAndes
 	 */
-	public String darSeqParranderos ()
+	public String darTablaTipoVisitante ()
 	{
 		return tablas.get (0);
 	}
 
 	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de TipoBebida de parranderos
+	 * @return La cadena de caracteres con el nombre de la tabla de Visitante de AforoAndes
 	 */
-	public String darTablaTipoBebida ()
+	public String darTablaVisitante ()
 	{
 		return tablas.get (1);
 	}
 
 	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de Bebida de parranderos
+	 * @return La cadena de caracteres con el nombre de la tabla de CentroComercial de AforoAndes
 	 */
-	public String darTablaBebida ()
+	public String darTablaCentroComercial ()
 	{
 		return tablas.get (2);
 	}
 
 	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de Bar de parranderos
+	 * @return La cadena de caracteres con el nombre de la tabla de CapacidadNormal de AforoAndes
 	 */
-	public String darTablaBar ()
+	public String darTablaCapacidadNormal ()
 	{
 		return tablas.get (3);
 	}
 
 	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de Bebedor de parranderos
+	 * @return La cadena de caracteres con el nombre de la tabla de Area de AforoAndes
 	 */
-	public String darTablaBebedor ()
+	public String darTablaArea ()
 	{
 		return tablas.get (4);
 	}
 
 	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de Gustan de parranderos
+	 * @return La cadena de caracteres con el nombre de la tabla de Ascensor de AforoAndes
 	 */
-	public String darTablaGustan ()
+	public String darTablaAscensor ()
 	{
 		return tablas.get (5);
 	}
 
 	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de Sirven de parranderos
+	 * @return La cadena de caracteres con el nombre de la tabla de Baño de AforoAndes
 	 */
-	public String darTablaSirven ()
+	public String darTablaBaño ()
 	{
 		return tablas.get (6);
 	}
-
+	
 	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de Visitan de parranderos
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
 	 */
-	public String darTablaVisitan ()
+	public String darTablaParqueadero ()
 	{
 		return tablas.get (7);
 	}
 	
 	/**
-	 * Transacción para el generador de secuencia de Parranderos
-	 * Adiciona entradas al log de la aplicación
-	 * @return El siguiente número del secuenciador de Parranderos
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
 	 */
-	private long nextval ()
+	public String darTablaTipoLocal ()
+	{
+		return tablas.get (8);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaLocalComercial ()
+	{
+		return tablas.get (9);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaZonaCirculacion ()
+	{
+		return tablas.get (10);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaTipoLector ()
+	{
+		return tablas.get (11);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaLector ()
+	{
+		return tablas.get (12);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaTipoCarnet ()
+	{
+		return tablas.get (13);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaCarnet ()
+	{
+		return tablas.get (14);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaDomiciliario ()
+	{
+		return tablas.get (15);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaEmpleado ()
+	{
+		return tablas.get (16);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaVehiculo ()
+	{
+		return tablas.get (17);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaVisitanCentroComercial ()
+	{
+		return tablas.get (18);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaVisitanAscensor ()
+	{
+		return tablas.get (19);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaVisitanBaño ()
+	{
+		return tablas.get (20);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaVisitanLocalComercial ()
+	{
+		return tablas.get (21);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaVisitanParqueadero ()
+	{
+		return tablas.get (22);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaRegistranCarnet ()
+	{
+		return tablas.get (23);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de de AforoAndes
+	 */
+	public String darTablaRegistranVehiculo ()
+	{
+		return tablas.get (24);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador
+	 */
+	public String darSeqCapacidadNormal ()
+	{
+		return tablas.get (25);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador
+	 */
+	public String darSeqArea ()
+	{
+		return tablas.get (26);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador
+	 */
+	public String darSeqTipoLocal ()
+	{
+		return tablas.get (27);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador
+	 */
+	public String darSeqTipoCarnet ()
+	{
+		return tablas.get (28);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador
+	 */
+	public String darSeqTipoLector ()
+	{
+		return tablas.get (29);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador
+	 */
+	public String darSeqTipoVisitante ()
+	{
+		return tablas.get (30);
+	}
+
+
+	/**
+	 * Transacción para el generador de secuencia de 
+	 * Adiciona entradas al log de la aplicación
+	 * @return El siguiente número del secuenciador de TipoCarnet
+	 */
+	private long nextvalTipoCarnet ()
 	{
         long resp = sqlUtil.nextval (pmf.getPersistenceManager());
-        log.trace ("Generando secuencia: " + resp);
+        log.trace ("Generando secuencia para TipoCarnet: " + resp);
         return resp;
     }
 	
@@ -322,33 +631,32 @@ public class PersistenciaParranderos
 	}
 
 	/* ****************************************************************
-	 * 			Métodos para manejar los TIPOS DE BEBIDA
+	 * 			Métodos para manejar los TIPOS DE CARNET
 	 *****************************************************************/
 
 	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoBebida
+	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoCarnet
 	 * Adiciona entradas al log de la aplicación
-	 * @param nombre - El nombre del tipo de bebida
-	 * @return El objeto TipoBebida adicionado. null si ocurre alguna Excepción
+	 * @param tipo - El nombre del tipo de carnet
+	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
 	 */
-	public LocalComercial adicionarTipoBebida(String nombre)
+	public TipoCarnet adicionarTipoCarnet(String tipo)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long idTipoBebida = nextval ();
-            long tuplasInsertadas = sqlTipoBebida.adicionarTipoBebida(pm, idTipoBebida, nombre);
+            long idTipoCarnet = nextvalTipoCarnet ();
+            long tuplasInsertadas = sqlTipoCarnet.adicionarTipoCarnet(pm, idTipoCarnet, tipo);
             tx.commit();
             
-            log.trace ("Inserción de tipo de bebida: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            log.trace ("Inserción de tipo de carnet: " + tipo + ": " + tuplasInsertadas + " tuplas insertadas");
             
-            return new LocalComercial (idTipoBebida, nombre);
+            return new TipoCarnet(idTipoCarnet, tipo);
         }
         catch (Exception e)
         {
-//        	e.printStackTrace();
         	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
@@ -363,19 +671,19 @@ public class PersistenciaParranderos
 	}
 
 	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoBebida, dado el nombre del tipo de bebida
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoCarnet, dado el nombre del tipo de carnet
 	 * Adiciona entradas al log de la aplicación
-	 * @param nombre - El nombre del tipo de bebida
+	 * @param tipo - El nombre del tipo de carnet
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarTipoBebidaPorNombre (String nombre) 
+	public long eliminarTipoCarnetPorNombre (String tipo) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long resp = sqlTipoBebida.eliminarTipoBebidaPorNombre(pm, nombre);
+            long resp = sqlTipoCarnet.eliminarTipoCarnetPorNombre(pm, tipo);
             tx.commit();
             return resp;
         }
@@ -396,19 +704,19 @@ public class PersistenciaParranderos
 	}
 
 	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoBebida, dado el identificador del tipo de bebida
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoCarnet, dado el identificador del tipo de carnet
 	 * Adiciona entradas al log de la aplicación
-	 * @param idTipoBebida - El identificador del tipo de bebida
+	 * @param idTipoCarnet - El identificador del tipo de carnet
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarTipoBebidaPorId (long idTipoBebida) 
+	public long eliminarTipoCarnetPorId (long idTipoCarnet) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long resp = sqlTipoBebida.eliminarTipoBebidaPorId(pm, idTipoBebida);
+            long resp = sqlTipoCarnet.eliminarTipoCarnetPorId(pm, idTipoCarnet);
             tx.commit();
             return resp;
         }
@@ -429,34 +737,36 @@ public class PersistenciaParranderos
 	}
 
 	/**
-	 * Método que consulta todas las tuplas en la tabla TipoBebida
-	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 * Método que consulta todas las tuplas en la tabla TipoCarnet
+	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
 	 */
-	public List<LocalComercial> darTiposBebida ()
+	public List<TipoCarnet> darTiposCarnet ()
 	{
-		return sqlTipoBebida.darTiposBebida (pmf.getPersistenceManager());
+		return sqlTipoCarnet.darTiposCarnet (pmf.getPersistenceManager());
 	}
  
 	/**
-	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
-	 * @param nombre - El nombre del tipo de bebida
-	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 * Método que consulta todas las tuplas en la tabla TipoCarnet que tienen el nombre dado
+	 * @param tipo - El nombre del tipo de carnet
+	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
 	 */
-	public List<LocalComercial> darTipoBebidaPorNombre (String nombre)
+	public List<TipoCarnet> darTiposCarnetPorNombre (String tipo)
 	{
-		return sqlTipoBebida.darTiposBebidaPorNombre (pmf.getPersistenceManager(), nombre);
+		return sqlTipoCarnet.darTiposCarnetPorNombre (pmf.getPersistenceManager(), tipo);
 	}
  
 	/**
-	 * Método que consulta todas las tuplas en la tabla TipoBebida con un identificador dado
-	 * @param idTipoBebida - El identificador del tipo de bebida
-	 * @return El objeto TipoBebida, construido con base en las tuplas de la tabla TIPOBEBIDA con el identificador dado
+	 * Método que consulta todas las tuplas en la tabla TipoCarnet con un identificador dado
+	 * @param idTipoCarnet - El identificador del tipo de carnet
+	 * @return El objeto TipoCarnet, construido con base en las tuplas de la tabla TipoCarnet con el identificador dado
 	 */
-	public LocalComercial darTipoBebidaPorId (long idTipoBebida)
+	public TipoCarnet darTipoCarnetPorId (long idTipoCarnet)
 	{
-		return sqlTipoBebida.darTipoBebidaPorId (pmf.getPersistenceManager(), idTipoBebida);
+		return sqlTipoCarnet.darTipoCarnetPorId (pmf.getPersistenceManager(), idTipoCarnet);
 	}
  
+	
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar las BEBIDAS
 	 *****************************************************************/
@@ -477,7 +787,7 @@ public class PersistenciaParranderos
         {
             tx.begin();            
             long idBebida = nextval ();
-            long tuplasInsertadas = sqlBebida.adicionarBebida(pm, idBebida, nombre, idTipoBebida, gradoAlcohol);
+            long tuplasInsertadas = sqlBaño.adicionarBebida(pm, idBebida, nombre, idTipoBebida, gradoAlcohol);
             tx.commit();
             
             log.trace ("Inserción bebida: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
@@ -512,7 +822,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlBebida.eliminarBebidaPorNombre(pm, nombreBebida);
+            long resp = sqlBaño.eliminarBebidaPorNombre(pm, nombreBebida);
             tx.commit();
 
             return resp;
@@ -546,7 +856,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlBebida.eliminarBebidaPorId (pm, idBebida);
+            long resp = sqlBaño.eliminarBebidaPorId (pm, idBebida);
             tx.commit();
 
             return resp;
@@ -574,7 +884,7 @@ public class PersistenciaParranderos
 	 */
 	public List<Ascensor> darBebidasPorNombre (String nombreBebida)
 	{
-		return sqlBebida.darBebidasPorNombre (pmf.getPersistenceManager(), nombreBebida);
+		return sqlBaño.darBebidasPorNombre (pmf.getPersistenceManager(), nombreBebida);
 	}
  
 	/**
@@ -583,7 +893,7 @@ public class PersistenciaParranderos
 	 */
 	public List<Ascensor> darBebidas ()
 	{
-		return sqlBebida.darBebidas (pmf.getPersistenceManager());
+		return sqlBaño.darBebidas (pmf.getPersistenceManager());
 	}
  
 	/**
@@ -597,7 +907,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlBebida.eliminarBebidasNoServidas(pm);
+            long resp = sqlBaño.eliminarBebidasNoServidas(pm);
             tx.commit();
             return resp;
         }
@@ -637,7 +947,7 @@ public class PersistenciaParranderos
         {
             tx.begin();
             long idBebedor = nextval ();
-            long tuplasInsertadas = sqlBebedor.adicionarBebedor(pmf.getPersistenceManager(), idBebedor, nombre, ciudad, presupuesto);
+            long tuplasInsertadas = sqlAscensor.adicionarBebedor(pmf.getPersistenceManager(), idBebedor, nombre, ciudad, presupuesto);
             tx.commit();
 
             log.trace ("Inserción de bebedor: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
@@ -673,7 +983,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlBebedor.eliminarBebedorPorNombre (pm, nombre);
+            long resp = sqlAscensor.eliminarBebedorPorNombre (pm, nombre);
             tx.commit();
             return resp;
         }
@@ -706,7 +1016,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlBebedor.eliminarBebedorPorId (pm, idBebedor);
+            long resp = sqlAscensor.eliminarBebedorPorId (pm, idBebedor);
             tx.commit();
             return resp;
         }
@@ -733,7 +1043,7 @@ public class PersistenciaParranderos
 	 */
 	public List<CapacidadNormal> darBebedoresPorNombre (String nombreBebedor) 
 	{
-		return sqlBebedor.darBebedoresPorNombre (pmf.getPersistenceManager(), nombreBebedor);
+		return sqlAscensor.darBebedoresPorNombre (pmf.getPersistenceManager(), nombreBebedor);
 	}
 
 	/**
@@ -743,7 +1053,7 @@ public class PersistenciaParranderos
 	 */
 	public CapacidadNormal darBebedorPorId (long idBebedor) 
 	{
-		return (CapacidadNormal) sqlBebedor.darBebedorPorId (pmf.getPersistenceManager(), idBebedor);
+		return (CapacidadNormal) sqlAscensor.darBebedorPorId (pmf.getPersistenceManager(), idBebedor);
 	}
 
 	/**
@@ -756,9 +1066,9 @@ public class PersistenciaParranderos
 	public CapacidadNormal darBebedorCompleto (long idBebedor) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-		CapacidadNormal bebedor = (CapacidadNormal) sqlBebedor.darBebedorPorId (pm, idBebedor);
-		bebedor.setVisitasRealizadas(armarVisitasBebedor (sqlBebedor.darVisitasRealizadas (pm, idBebedor)));
-		bebedor.setBebidasQueLeGustan(armarGustanBebedor (sqlBebedor.darBebidasQueLeGustan (pm, idBebedor)));
+		CapacidadNormal bebedor = (CapacidadNormal) sqlAscensor.darBebedorPorId (pm, idBebedor);
+		bebedor.setVisitasRealizadas(armarVisitasBebedor (sqlAscensor.darVisitasRealizadas (pm, idBebedor)));
+		bebedor.setBebidasQueLeGustan(armarGustanBebedor (sqlAscensor.darBebidasQueLeGustan (pm, idBebedor)));
 		return bebedor;
 	}
 
@@ -768,7 +1078,7 @@ public class PersistenciaParranderos
 	 */
 	public List<CapacidadNormal> darBebedores ()
 	{
-		return sqlBebedor.darBebedores (pmf.getPersistenceManager());
+		return sqlAscensor.darBebedores (pmf.getPersistenceManager());
 	}
  
 	/**
@@ -780,7 +1090,7 @@ public class PersistenciaParranderos
 	public List<Object []> darBebedoresYNumVisitasRealizadas ()
 	{
 		List<Object []> respuesta = new LinkedList <Object []> ();
-		List<Object> tuplas = sqlBebedor.darBebedoresYNumVisitasRealizadas (pmf.getPersistenceManager());
+		List<Object> tuplas = sqlAscensor.darBebedoresYNumVisitasRealizadas (pmf.getPersistenceManager());
         for ( Object tupla : tuplas)
         {
 			Object [] datos = (Object []) tupla;
@@ -807,7 +1117,7 @@ public class PersistenciaParranderos
 	 */
 	public long darCantidadBebedoresCiudadVisitanBares (String ciudad)
 	{
-		return sqlBebedor.darCantidadBebedoresCiudadVisitanBares (pmf.getPersistenceManager(), ciudad);
+		return sqlAscensor.darCantidadBebedoresCiudadVisitanBares (pmf.getPersistenceManager(), ciudad);
 	}
 	
 	/**
@@ -823,7 +1133,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlBebedor.cambiarCiudadBebedor (pm, idBebedor, ciudad);
+            long resp = sqlAscensor.cambiarCiudadBebedor (pm, idBebedor, ciudad);
             tx.commit();
             return resp;
         }
@@ -857,7 +1167,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long [] resp = sqlBebedor.eliminarBebedorYVisitas_v1 (pm, idBebedor);
+            long [] resp = sqlAscensor.eliminarBebedorYVisitas_v1 (pm, idBebedor);
             tx.commit();
             return resp;
         }
@@ -991,7 +1301,7 @@ public class PersistenciaParranderos
         {
             tx.begin();
             long idBar = nextval ();
-            long tuplasInsertadas = sqlBar.adicionarBar(pm, idBar, nombre, ciudad, presupuesto, sedes);
+            long tuplasInsertadas = sqlArea.adicionarBar(pm, idBar, nombre, ciudad, presupuesto, sedes);
             tx.commit();
 
             log.trace ("Inserción de Bar: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
@@ -1027,7 +1337,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlBar.eliminarBaresPorNombre(pm, nombreBar);
+            long resp = sqlArea.eliminarBaresPorNombre(pm, nombreBar);
             tx.commit();
 
             return resp;
@@ -1061,7 +1371,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlBar.eliminarBarPorId (pm, idBar);
+            long resp = sqlArea.eliminarBarPorId (pm, idBar);
             tx.commit();
 
             return resp;
@@ -1088,7 +1398,7 @@ public class PersistenciaParranderos
 	 */
 	public List<Visitante> darBares ()
 	{
-		return sqlBar.darBares (pmf.getPersistenceManager());
+		return sqlArea.darBares (pmf.getPersistenceManager());
 	}
  
 	/**
@@ -1098,7 +1408,7 @@ public class PersistenciaParranderos
 	 */
 	public List<Visitante> darBaresPorNombre (String nombreBar)
 	{
-		return sqlBar.darBaresPorNombre (pmf.getPersistenceManager(), nombreBar);
+		return sqlArea.darBaresPorNombre (pmf.getPersistenceManager(), nombreBar);
 	}
  
 	/**
@@ -1108,7 +1418,7 @@ public class PersistenciaParranderos
 	 */
 	public Visitante darBarPorId (long idBar)
 	{
-		return sqlBar.darBarPorId (pmf.getPersistenceManager(), idBar);
+		return sqlArea.darBarPorId (pmf.getPersistenceManager(), idBar);
 	}
  
 	/**
@@ -1123,7 +1433,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlBar.aumentarSedesBaresCiudad(pm, ciudad);
+            long resp = sqlArea.aumentarSedesBaresCiudad(pm, ciudad);
             tx.commit();
 
             return resp;
@@ -1162,7 +1472,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long tuplasInsertadas = sqlGustan.adicionarGustan (pm, idBebedor, idBebida);
+            long tuplasInsertadas = sqlCapacidadNormal.adicionarGustan (pm, idBebedor, idBebida);
             tx.commit();
 
             log.trace ("Inserción de gustan: [" + idBebedor + ", " + idBebida + "]. " + tuplasInsertadas + " tuplas insertadas");
@@ -1198,7 +1508,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlGustan.eliminarGustan(pm, idBebedor, idBebida);           
+            long resp = sqlCapacidadNormal.eliminarGustan(pm, idBebedor, idBebida);           
             tx.commit();
 
             return resp;
@@ -1225,7 +1535,7 @@ public class PersistenciaParranderos
 	 */
 	public List<TipoLocal> darGustan ()
 	{
-		return sqlGustan.darGustan (pmf.getPersistenceManager());
+		return sqlCapacidadNormal.darGustan (pmf.getPersistenceManager());
 	}
  
  
@@ -1248,7 +1558,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long tuplasInsertadas = sqlSirven.adicionarSirven (pmf.getPersistenceManager(), idBar, idBebida, horario);
+            long tuplasInsertadas = sqlCarnet.adicionarSirven (pmf.getPersistenceManager(), idBar, idBebida, horario);
     		tx.commit();
 
             log.trace ("Inserción de gustan: [" + idBar + ", " + idBebida + "]. " + tuplasInsertadas + " tuplas insertadas");
@@ -1284,7 +1594,7 @@ public class PersistenciaParranderos
 	        try
 	        {
 	            tx.begin();
-	            long resp = sqlSirven.eliminarSirven (pm, idBar, idBebida);	            
+	            long resp = sqlCarnet.eliminarSirven (pm, idBar, idBebida);	            
 	            tx.commit();
 
 	            return resp;
@@ -1311,7 +1621,7 @@ public class PersistenciaParranderos
 	 */
 	public List<Area> darSirven ()
 	{
-		return sqlSirven.darSirven (pmf.getPersistenceManager());
+		return sqlCarnet.darSirven (pmf.getPersistenceManager());
 	}
  
 	/**
@@ -1322,7 +1632,7 @@ public class PersistenciaParranderos
 	public List<long []> darBaresYCantidadBebidasSirven ()
 	{
 		List<long []> resp = new LinkedList<long []> ();
-		List<Object []> tuplas =  sqlSirven.darBaresYCantidadBebidasSirven (pmf.getPersistenceManager());
+		List<Object []> tuplas =  sqlCarnet.darBaresYCantidadBebidasSirven (pmf.getPersistenceManager());
         for ( Object [] tupla : tuplas)
         {
 			long [] datosResp = new long [2];
@@ -1354,7 +1664,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long tuplasInsertadas = sqlVisitan.adicionarVisitan(pm, idBebedor, idBar, fecha, horario);
+            long tuplasInsertadas = sqlDomiciliario.adicionarVisitan(pm, idBebedor, idBar, fecha, horario);
             tx.commit();
 
             log.trace ("Inserción de gustan: [" + idBebedor + ", " + idBar + "]. " + tuplasInsertadas + " tuplas insertadas");
@@ -1391,7 +1701,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long resp = sqlVisitan.eliminarVisitan(pm, idBebedor, idBar);
+            long resp = sqlDomiciliario.eliminarVisitan(pm, idBebedor, idBar);
             tx.commit();
 
             return resp;
@@ -1424,7 +1734,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long visitasEliminadas = sqlVisitan.eliminarVisitanPorIdBebedor (pm, idBebedor);
+            long visitasEliminadas = sqlDomiciliario.eliminarVisitanPorIdBebedor (pm, idBebedor);
             tx.commit();
 
             return visitasEliminadas;
@@ -1458,7 +1768,7 @@ public class PersistenciaParranderos
         try
         {
             tx.begin();
-            long visitasEliminadas = sqlVisitan.eliminarVisitanPorIdBar (pm, idBar);
+            long visitasEliminadas = sqlDomiciliario.eliminarVisitanPorIdBar (pm, idBar);
             tx.commit();
 
             return visitasEliminadas;
@@ -1485,7 +1795,7 @@ public class PersistenciaParranderos
 	 */
 	public List<TipoVisitante> darVisitan ()
 	{
-		return sqlVisitan.darVisitan (pmf.getPersistenceManager());
+		return sqlDomiciliario.darVisitan (pmf.getPersistenceManager());
 	}	
 
 	/**
