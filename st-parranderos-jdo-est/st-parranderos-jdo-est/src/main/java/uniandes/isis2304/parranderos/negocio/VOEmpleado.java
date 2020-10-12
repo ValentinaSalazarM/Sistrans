@@ -11,27 +11,28 @@
 package uniandes.isis2304.parranderos.negocio;
 
 /**
- * Interfaz para los métodos get de CARNET.
+ * Interfaz para los métodos get de EMPLEADO.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  */
-public interface VOCarnet 
+public interface VOEmpleado
 {
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
+	
 	/**
-	 * @return El tipo del carnet
+	 * @return El idVisitante respectivo
 	 */
-	public long getTipoCarnet();
+	public String getIdVisitante();
 
 	/**
-	 * @return El visitante dueño del carnet
+	 * @return El identificador del lugar donde trabaja el empleado
 	 */
-	public String getVisitante();
+	public String getLugarTrabajo();
 
 	/**
-	 * @return Una cadena de caracteres con la información del tipo de lector
+	 * @return Una cadena de caracteres con la información del empleado
 	 */
 	@Override
 	public String toString(); 

@@ -11,7 +11,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
 /**
- * Interfaz para los métodos get de TIPOLECTOR.
+ * Interfaz para los métodos get de VEHICULO.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  */
@@ -36,7 +36,7 @@ public interface VOVehiculo
 	public String getDueño();
 	
 	/**
-	 * @return Una cadena de caracteres con la información del tipo de lector
+	 * @return Una cadena de caracteres con la información del vehículo
 	 */
 	@Override
 	public String toString(); 

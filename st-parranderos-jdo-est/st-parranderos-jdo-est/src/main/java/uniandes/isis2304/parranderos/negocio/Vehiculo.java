@@ -10,7 +10,7 @@
 package uniandes.isis2304.parranderos.negocio;
 
 /**
- * Clase para modelar el concepto CARNET del negocio de Aforo-CCAndes
+ * Clase para modelar el concepto VEHICULO del negocio de Aforo-CCAndes
  *
  */
 public class Vehiculo implements VOVehiculo
@@ -113,7 +113,7 @@ public class Vehiculo implements VOVehiculo
 	@Override
 	public String toString() 
 	{
-		return "Vehiculo [Placa=" + placa + ", caracteristicas=" + caracteristicas + ", dueño=" + dueño + "]";
+		return "Vehiculo [placa=" + placa + ", caracteristicas=" + caracteristicas + ", dueño=" + dueño + "]";
 	}
 
 

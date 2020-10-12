@@ -21,7 +21,7 @@ public class Visitante implements VOVisitante
 	/**
 	 * El identificador ÚNICO de los visitantes
 	 */
-	private String identificador;
+	private String identificacion;
 	
 	/**
 	 * El identificador del tipo de visitante. Debe existir en la tabla TIPOVISITANTE
@@ -62,7 +62,7 @@ public class Visitante implements VOVisitante
      */
 	public Visitante() 
     {
-    	this.identificador = "";
+    	this.identificacion = "";
     	this.tipo = 0;
 		this.nombre = "";
 		this.correo = "";
@@ -83,7 +83,7 @@ public class Visitante implements VOVisitante
 	 */
     public Visitante(String identificador, String nombre, long tipo, String correo, String telefonoPropio, String nombreEmergencia, String telefonoEmergencia) 
     {
-    	this.identificador = identificador;
+    	this.identificacion = identificador;
     	this.tipo = tipo;
 		this.nombre = nombre;
 		this.correo = correo;
@@ -97,7 +97,7 @@ public class Visitante implements VOVisitante
 	 */
 	public String getIdentificador() 
 	{
-		return identificador;
+		return identificacion;
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class Visitante implements VOVisitante
 	 */
 	public void setIdentificador(String identificador) 
 	{
-		this.identificador = identificador;
+		this.identificacion = identificador;
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class Visitante implements VOVisitante
 	 */
 	public String toString() 
 	{
-		return "Visitante [identificador=" + identificador + ", tipo=" + tipo + ", nombre=" + nombre + ", correo=" + correo + ", telefonoPropio=" + telefonoPropio
+		return "Visitante [identificador=" + identificacion + ", tipo=" + tipo + ", nombre=" + nombre + ", correo=" + correo + ", telefonoPropio=" + telefonoPropio
 				+ ", nombreEmergencia=" + nombreEmergencia + ", telefonoEmergencia=" + telefonoEmergencia + "]";
 	}
 	
