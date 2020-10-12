@@ -39,10 +39,15 @@ public class LocalComercial implements VOLocalComercial
 	private long tipoLocal;
 	
 	/**
+	 * Indica si el establecimiento se encuentra en funcionamiento
+	 */
+	private boolean activo;
+	
+	/**
 	 * El identificador del centro comercial donde se localiza el local comercial. Debe existir en la tabla de CENTROCOMERCIAL
 	 */
 	private String idCentroComercial;
-	
+
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -57,6 +62,7 @@ public class LocalComercial implements VOLocalComercial
 		this.area = 0;
 		this.tipoLocal = 0;
 		this.idCentroComercial = "";
+		activo = true;
 	}
 
 	/**
@@ -66,13 +72,15 @@ public class LocalComercial implements VOLocalComercial
 	 * @param capacidadNormal - El identificador de la capacidad normal. Debe existir una capacidad normal con dicho identificador
 	 * @param tipoLocal - El identificador del tipo de local. Debe existir un tipo de local con dicho identificador 
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
+	 * @param activo - Estado de funcionamiento del local comercial
 	 */
-	public LocalComercial (String identificador, long area, long capacidadNormal, long tipoLocal, String idCentroComercial) 
+	public LocalComercial (String identificador, long area, long capacidadNormal, long tipoLocal, String idCentroComercial, boolean activo) 
 	{
 		this.identificador = identificador;
 		this.area = area;
 		this.capacidadNormal = capacidadNormal;
 		this.tipoLocal = tipoLocal;
+		this.activo = activo;
 		this.idCentroComercial = idCentroComercial;
 	}
 
@@ -142,6 +150,22 @@ public class LocalComercial implements VOLocalComercial
 	}
 
 	/**
+	 * @return El estado de funcionamiento del local comercial
+	 */
+	public boolean getActivo() 
+	{
+		return activo;
+	}
+
+	/**
+	 * @param activo - El nuevo estado de funcionamiento del local comercial
+	 */
+	public void setActivo(boolean activo) 
+	{
+		this.activo = activo;
+	}
+	
+	/**
 	 * @return El id del centro comercial del local comercial
 	 */
 	public String getIdCentroComercial() 
@@ -163,7 +187,7 @@ public class LocalComercial implements VOLocalComercial
 	@Override
 	public String toString() 
 	{
-		return "LocalComercial [identificador=" + identificador + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", tipoLocal=" + tipoLocal + ", idCentroComercial=" + idCentroComercial + "]";
+		return "LocalComercial [identificador=" + identificador + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", tipoLocal=" + tipoLocal + ", activo = " + activo + ", idCentroComercial=" + idCentroComercial + "]";
 	}
 
 	

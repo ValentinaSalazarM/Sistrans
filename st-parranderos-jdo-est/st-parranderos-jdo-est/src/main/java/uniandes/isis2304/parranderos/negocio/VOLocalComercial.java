@@ -43,6 +43,11 @@ public interface VOLocalComercial
 	public String getIdCentroComercial();
 
 	/**
+	 * @return El estado de funcionamiento del local comercial
+	 */
+	public boolean getActivo();
+	
+	/**
 	 * @return Una cadena con la información básica del local comercial
 	 */
 	@Override

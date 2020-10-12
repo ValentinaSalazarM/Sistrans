@@ -9,8 +9,6 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Timestamp;
-
 /**
  * Clase para modelar el concepto TIPOVISITANTE del negocio de Aforo-CCAndes
  *
@@ -31,9 +29,24 @@ public class TipoVisitante implements VOTipoVisitante
 	private String tipo;
 
 	/**
-	 * Hora de límite del tipo de visitante
+	 * Hora de inicio del horario válido del tipo de visitante
 	 */
-	private Timestamp horaLimite;
+	private int horaInicio;
+
+	/**
+	 * Minuto de inicio del horario válido del tipo de visitante
+	 */
+	private int minutoInicio;
+	
+	/**
+	 * Hora de límite de circulación del tipo de visitante
+	 */
+	private int horaLimite;
+	
+	/**
+	 * Minuto del horario límite de circulación del tipo de visitante
+	 */
+	private int minutoLimite;
 	
 	
 	/* ****************************************************************
@@ -46,20 +59,29 @@ public class TipoVisitante implements VOTipoVisitante
 	{
 		this.id = 0;
 		this.tipo = "Default";
-		this.horaLimite = new Timestamp (0);
-
+		this.horaInicio = 0;
+		this.minutoInicio = 0;
+		this.horaLimite = 0;
+		this.minutoLimite = 0;
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param id - El identificador del tipo de visitante
 	 * @param tipo - El nombre del tipo de visitante
+	 * @param horaInicio - Hora de inicio del horario válido del tipo de visitante
+	 * @param minutoInicio - Minuto de inicio del horario válido del tipo de visitante
+	 * @param horaLimite - Hora límite de circulación del tipo de visitante
+	 * @param minutoLimite - Minuto límite de circulación del tipo de visitante 
 	 */
-	public TipoVisitante(long id, String tipo, Timestamp horaApertura) 
+	public TipoVisitante(long id, String tipo, int horaInicio, int minutoInicio, int horaLimite, int minutoLimite) 
 	{
 		this.id = id;
 		this.tipo = tipo;
-		this.horaLimite = horaApertura;
+		this.horaInicio = horaInicio;
+		this.minutoInicio = minutoInicio;
+		this.horaLimite = horaLimite;
+		this.minutoLimite = minutoLimite;
 	}
 
 	/**
@@ -94,23 +116,71 @@ public class TipoVisitante implements VOTipoVisitante
 		this.tipo = tipo;
 	}
 
-
 	/**
-	 * @return La hora límite del tipo de visitante
+	 * @return La hora inicio del horario válido del tipo de visitante
 	 */
-	public Timestamp getHoraLimite() 
+	public int getHoraInicio() 
 	{
 		return horaLimite;
 	}
 
 	/**
-	 * @param horaApertura - La nueva hora límite del tipo de visitante
+	 * @param horaInicio - La nueva hora de inicio del horario válido del tipo de visitante
 	 */
-	public void setHoraLimite(Timestamp horaApertura) 
+	public void setHoraInicio(int horaInicio) 
 	{
-		this.horaLimite = horaApertura;
+		this.horaLimite = horaInicio;
 	}
 
+	/**
+	 * @return El minuto de inicio de circulación del tipo de visitante
+	 */
+	public int getMinutoInicio() 
+	{
+		return minutoInicio;
+	}
+
+	/**
+	 * @param minutoInicio - El nuevo minuto de inicio de circulación del tipo de visitante
+	 */
+	public void setMinutoInicio(int minutoInicio) 
+	{
+		this.minutoInicio = minutoInicio;
+	}	
+	
+	/**
+	 * @return La hora límite de circulación del tipo de visitante
+	 */
+	public int getHoraLimite() 
+	{
+		return horaLimite;
+	}
+
+	/**
+	 * @param horaLimite - La nueva hora límite del tipo de visitante
+	 */
+	public void setHoraLimite(int horaLimite) 
+	{
+		this.horaLimite = horaLimite;
+	}
+
+	/**
+	 * @return El minuto límite de circulación del tipo de visitante
+	 */
+	public int getMinutoLimite() 
+	{
+		return minutoLimite;
+	}
+
+	/**
+	 * @param minutoLimite - El nuevo minuto límite de circulación del tipo de visitante
+	 */
+	public void setMinutoLimite(int minutoLimite) 
+	{
+		this.minutoLimite = minutoLimite;
+	}
+
+	
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de visitante
 	 */

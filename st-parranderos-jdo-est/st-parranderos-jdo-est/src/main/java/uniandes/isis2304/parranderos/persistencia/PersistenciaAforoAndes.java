@@ -683,7 +683,7 @@ public class PersistenciaAforoAndes
         try
         {
             tx.begin();
-            long resp = sqlTipoCarnet.eliminarTipoCarnetPorNombre(pm, tipo);
+            long resp = sqlTipoCarnet.eliminarTipoCarnetPorTipo(pm, tipo);
             tx.commit();
             return resp;
         }
@@ -752,7 +752,7 @@ public class PersistenciaAforoAndes
 	 */
 	public List<TipoCarnet> darTiposCarnetPorNombre (String tipo)
 	{
-		return sqlTipoCarnet.darTiposCarnetPorNombre (pmf.getPersistenceManager(), tipo);
+		return sqlTipoCarnet.darTiposCarnetPorTipo (pmf.getPersistenceManager(), tipo);
 	}
  
 	/**

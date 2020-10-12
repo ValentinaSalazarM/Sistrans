@@ -10,8 +10,6 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Timestamp;
-
 /**
  * Interfaz para los métodos get de TIPOLOCAL.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
@@ -35,13 +33,23 @@ public interface VOTipoLocal
 	/**
 	 * @return La hora de apertura del tipo de local
 	 */
-	public Timestamp getHoraApertura(); 
+	public int getHoraApertura(); 
+	
+	/**
+	 * @return El minuto del horario de apertura del tipo de local
+	 */
+	public int getMinutoApertura();
 	
 	/**
 	 * @return La hora de cierre del tipo de local
 	 */
-	public Timestamp getHoraCierre(); 
+	public int getHoraCierre(); 
 
+	/**
+	 * @return El minuto del horario de cierre del tipo de local
+	 */
+	public int getMinutoCierre();
+	
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de local
 	 */

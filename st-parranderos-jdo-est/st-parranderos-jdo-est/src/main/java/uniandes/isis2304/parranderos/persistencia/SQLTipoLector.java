@@ -67,7 +67,7 @@ public class SQLTipoLector
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE LECTOR de la base de datos de AforoAndes, por su nombre
+	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE LECTOR de la base de datos de AforoAndes, por su tipo
 	 * @param pm - El manejador de persistencia
 	 * @param nombreTipoLector - El nombre del tipo de lector
 	 * @return EL número de tuplas eliminadas
@@ -109,7 +109,7 @@ public class SQLTipoLector
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE LECTOR de la 
-	 * base de datos de AforoAndes, por su nombre
+	 * base de datos de AforoAndes, por su tipo
 	 * @param pm - El manejador de persistencia
 	 * @param nombreTipoLector - El nombre del tipo de lector
 	 * @return El objeto TipoLector que tiene el tipo dado

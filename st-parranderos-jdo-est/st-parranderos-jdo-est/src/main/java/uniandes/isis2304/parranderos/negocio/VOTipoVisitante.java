@@ -10,8 +10,6 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Timestamp;
-
 /**
  * Interfaz para los métodos get de TIPOVISITANTE.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
@@ -33,9 +31,24 @@ public interface VOTipoVisitante
 	public String getTipo();
 
 	/**
-	 * @return La hora límite del tipo de visitante
+	 * @return La hora inicio del horario válido del tipo de visitante
 	 */
-	public Timestamp getHoraLimite(); 
+	public int getHoraInicio();
+	
+	/**
+	 * @return El minuto de inicio de circulación del tipo de visitante
+	 */
+	public int getMinutoInicio();
+	
+	/**
+	 * @return La hora límite de circulación del tipo de visitante
+	 */
+	public int getHoraLimite(); 
+	
+	/**
+	 * @return El minuto límite de circulación del tipo de visitante
+	 */
+	public int getMinutoLimite();
 	
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de visitante

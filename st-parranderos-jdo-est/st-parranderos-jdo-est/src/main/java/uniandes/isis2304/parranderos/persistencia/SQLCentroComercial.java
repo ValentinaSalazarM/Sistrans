@@ -63,7 +63,7 @@ class SQLCentroComercial
 	 */
 	public long adicionarCentroComercial (PersistenceManager pm, String idCentroComercial, String nombre, Calendar horaApertura) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCentroComercial () + "(id, nombre, horaApertura) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCentroComercial () + "(id, nombre) values (?, ?)");
         q.setParameters(idCentroComercial, nombre, horaApertura);
         return (long) q.executeUnique();
 	}
@@ -136,22 +136,5 @@ class SQLCentroComercial
 		q.setResultClass(CentroComercial.class);
 		return (List<CentroComercial>) q.executeList();
 	}
-
-	/**
-	 * 
-	 * Crea y ejecuta la sentencia SQL para cambiar la hora de apertura de un centro comercial en la 
-	 * base de datos de AforoAndes
-	 * @param pm - El manejador de persistencia
-	 * @param idCentroComercial - El identificador del centro comercial
-	 * @param horaApertura - La nueva horaApertura del centro comercial
-	 * @return El número de tuplas modificadas
-	 */
-	public long cambiarHoraAperturaCentroComercial (PersistenceManager pm, long idCentroComercial, Calendar horaApertura) 
-	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCentroComercial () + " SET horaApertura = ? WHERE identificador = ?");
-	     q.setParameters(horaApertura, idCentroComercial);
-	     return (long) q.executeUnique();            
-	}
-
 
 }

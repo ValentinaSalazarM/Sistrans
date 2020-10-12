@@ -9,8 +9,6 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Timestamp;
-
 /**
  * Clase para modelar el concepto TIPOLOCAL del negocio de Aforo-CCAndes
  *
@@ -31,14 +29,24 @@ public class TipoLocal implements VOTipoLocal
 	private String tipo;
 
 	/**
-	 * Hora de apertura del tipo de local
+	 * Hora de apertura del tipo de local. Debe existir en la tabla HORARIO
 	 */
-	private Timestamp horaApertura;
+	private int horaApertura;
 	
 	/**
-	 * Hora de cierre del tipo de local
+	 * Minuto del horario de apertura del tipo de local. Debe existir en la tabla HORARIO
 	 */
-	private Timestamp horaCierre;
+	private int minutoApertura;
+	
+	/**
+	 * Hora de cierre del tipo de local. Debe existir en la tabla HORARIO
+	 */
+	private int horaCierre;
+
+	/**
+	 * Minuto del horario de cierre del tipo de local. Debe existir en la tabla HORARIO
+	 */
+	private int minutoCierre;
 	
 	/* ****************************************************************
 	 * 			Métodos
@@ -50,22 +58,29 @@ public class TipoLocal implements VOTipoLocal
 	{
 		this.id = 0;
 		this.tipo = "Default";
-		this.horaApertura = new Timestamp (0);
-		this.horaCierre = new Timestamp (0);
+		this.horaApertura = 0;
+		this.minutoApertura = 0;
+		this.horaCierre = 0;
+		this.minutoCierre = 0;
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param id - El identificador del tipo de local
 	 * @param tipo - El nombre del tipo de local
+	 * @param horaApertura - Hora de apertura del local. Debe existir en la tabla HORARIO
+	 * @param minutoApertura - Minuto de apertura del local. Debe existir en la tabla HORARIO
+	 * @param horaCierre - Hora de cierre del local. Debe existir en la tabla HORARIO
+	 * @param minutoCierre - Minuto cierre del local. Debe existir en la tabla HORARIO
 	 */
-	public TipoLocal(long id, String tipo, Timestamp horaApertura, Timestamp horaCierre) 
+	public TipoLocal(long id, String tipo, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre) 
 	{
 		this.id = id;
 		this.tipo = tipo;
 		this.horaApertura = horaApertura;
+		this.minutoApertura = minutoApertura;
 		this.horaCierre = horaCierre;
-
+		this.minutoCierre = minutoCierre;
 	}
 
 	/**
@@ -104,23 +119,39 @@ public class TipoLocal implements VOTipoLocal
 	/**
 	 * @return La hora de apertura del tipo de local
 	 */
-	public Timestamp getHoraApertura() 
+	public int getHoraApertura() 
 	{
 		return horaApertura;
 	}
 
 	/**
-	 * @param horaApertura - La nueva hora de apertura del tipo de local
+	 * @param horaApertura - La nueva hora de apertura del tipo de local. Debe existir en la tabla HORARIO
 	 */
-	public void setHoraApertura(Timestamp horaApertura) 
+	public void setHoraApertura(int horaApertura) 
 	{
 		this.horaApertura = horaApertura;
 	}
+	
+	/**
+	 * @return El minuto del horario de apertura del tipo de local
+	 */
+	public int getMinutoApertura() 
+	{
+		return minutoApertura;
+	}
 
 	/**
-	 * @return La hora de cierre del tipo de local
+	 * @param minutoApertura - El nuevo minuto del horario de apertura del tipo de local. Debe existir en la tabla HORARIO
 	 */
-	public Timestamp getHoraCierre() 
+	public void setMinutoApertura(int minutoApertura) 
+	{
+		this.minutoApertura = minutoApertura;
+	}
+
+	/**
+	 * @return La hora de cierre del tipo de local. Debe existir en la tabla HORARIO
+	 */
+	public int getHoraCierre() 
 	{
 		return horaCierre;
 	}
@@ -128,9 +159,25 @@ public class TipoLocal implements VOTipoLocal
 	/**
 	 * @param horaCierre - La nueva hora de cierre del tipo de local
 	 */
-	public void setHoraCierre(Timestamp horaCierre) 
+	public void setHoraCierre(int horaCierre) 
 	{
 		this.horaCierre = horaCierre;
+	}
+	
+	/**
+	 * @return El minuto del horario de cierre del tipo de local. Debe existir en la tabla HORARIO
+	 */
+	public int getMinutoCierre() 
+	{
+		return minutoCierre;
+	}
+
+	/**
+	 * @param minutoCierre - El nuevo minuto del horario de cierre del tipo de local
+	 */
+	public void setMinutoCierre(int minutoCierre) 
+	{
+		this.minutoCierre = minutoCierre;
 	}
 
 	/**
@@ -139,7 +186,8 @@ public class TipoLocal implements VOTipoLocal
 	@Override
 	public String toString() 
 	{
-		return "TipoLocal [id=" + id + ", nombre=" + tipo + ", horaApertura= " + horaApertura + ", horaCierre =" + horaCierre + "]";
+		return "TipoLocal [id=" + id + ", nombre=" + tipo + ", horaApertura= " + horaApertura + ", minutoApertura = " + minutoApertura + " horaCierre =" 
+				+ horaCierre + "minutoCierre=" + minutoCierre + "]";
 	}
 
 	/**

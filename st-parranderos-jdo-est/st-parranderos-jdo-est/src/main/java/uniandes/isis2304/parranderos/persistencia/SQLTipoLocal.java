@@ -56,17 +56,21 @@ public class SQLTipoLocal
 	 * @param pm - El manejador de persistencia
 	 * @param idTipoLocal - El identificador del tipo de local
 	 * @param tipo - El nombre del tipo de local
+	 * @param horaApertura - Hora de apertura del tipo de local
+	 * @param minutoApertura - Minuto del horario de apertura del tipo de local
+	 * @param horaCierre - Hora de cierre del tipo de local
+	 * @param minutoCierre - Minuto del horario de cierre del tipo de local
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoLocal (PersistenceManager pm, long idTipoLocal, String tipo) 
+	public long adicionarTipoLocal (PersistenceManager pm, long idTipoLocal, String tipo, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoLocal() + "(id, tipo) values (?, ?)");
-        q.setParameters(idTipoLocal, tipo);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoLocal() + "(id, tipo, horaApertura, minutoApertura, horaCierre, minutoCierre) values (?, ?, ?, ?, ?, ?)");
+        q.setParameters(idTipoLocal, tipo, horaApertura, minutoApertura, horaCierre, minutoCierre);
         return (long) q.executeUnique();            
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE LOCAL de la base de datos de AforoAndes, por su nombre
+	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE LOCAL de la base de datos de AforoAndes, por su tipo
 	 * @param pm - El manejador de persistencia
 	 * @param nombreTipoLocal - El nombre del tipo de local
 	 * @return EL número de tuplas eliminadas
@@ -134,4 +138,5 @@ public class SQLTipoLocal
 		return (List<TipoLocal>) q.executeList();
 	}
 
+	
 }

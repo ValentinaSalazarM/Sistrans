@@ -65,7 +65,7 @@ class SQLBaño
 	 */
 	public long adicionarBaño (PersistenceManager pm, long idBaño, int cupoActual, long capacidadNormal, long area, int numeroSanitarios, long idCentroComercial) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBaño () + "(identificador, cupoactual, capacidadNormal, area, sanitarios, idcentrocomercial) values (?, ?, ?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBaño () + "(identificador, capacidadNormal, area, sanitarios, idcentrocomercial) values (?, ?, ?, ?, ?)");
         q.setParameters(idBaño, cupoActual, capacidadNormal, area, numeroSanitarios, idCentroComercial);
         return (long) q.executeUnique();
 	}

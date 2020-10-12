@@ -1,36 +1,39 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
  * Proyecto: Aforo-CCAndes
+
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 package uniandes.isis2304.parranderos.negocio;
 
 /**
- * Interfaz para los métodos get de CENTROCOMERCIAL.
+ * Interfaz para los métodos get de TIPOLECTOR.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  */
-public interface VOCentroComercial
+public interface VOHorario 
 {
+	/* ****************************************************************
+	 * 			Métodos
+	 *****************************************************************/
 	/**
-	 * @return El identificador del centro comercial
+	 * @return La hora del horario
 	 */
-	public String getIdentificador();
+	public int getHora();
 
 	/**
-	 * @return El nombre del centro comercial 
+	 * @return Los minutos del horario
 	 */
-	public String getNombre();
-	
+	public int getMinutos();
+
 	/**
-	 * @return Una cadena con la información básica del centro comercial
+	 * @return Una cadena de caracteres con la información del horario
 	 */
 	@Override
-	public String toString();
-
+	public String toString(); 
+	
 }

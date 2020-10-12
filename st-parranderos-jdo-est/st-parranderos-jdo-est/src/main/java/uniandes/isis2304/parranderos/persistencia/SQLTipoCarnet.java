@@ -67,12 +67,12 @@ public class SQLTipoCarnet
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE CARNET de la base de datos de AforoAndes, por su nombre
+	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE CARNET de la base de datos de AforoAndes, por su tipo
 	 * @param pm - El manejador de persistencia
 	 * @param nombreTipoCarnet - El nombre del tipo de carnet
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarTipoCarnetPorNombre (PersistenceManager pm, String nombreTipoCarnet)
+	public long eliminarTipoCarnetPorTipo (PersistenceManager pm, String nombreTipoCarnet)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoCarnet () + " WHERE tipo = ?");
         q.setParameters(nombreTipoCarnet);
@@ -109,12 +109,12 @@ public class SQLTipoCarnet
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN TIPO DE CARNET de la 
-	 * base de datos de AforoAndes, por su nombre
+	 * base de datos de AforoAndes, por su tipo
 	 * @param pm - El manejador de persistencia
 	 * @param nombreTipoCarnet - El nombre del tipo de carnet
 	 * @return El objeto TIPOCARNET que tiene el tipo dado
 	 */
-	public List<TipoCarnet> darTiposCarnetPorNombre (PersistenceManager pm, String nombreTipoCarnet) 
+	public List<TipoCarnet> darTiposCarnetPorTipo (PersistenceManager pm, String nombreTipoCarnet) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoCarnet  () + " WHERE tipo = ?");
 		q.setResultClass(TipoCarnet.class);
