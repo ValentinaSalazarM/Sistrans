@@ -36,6 +36,7 @@ public interface VORegistranCarnet
 	 */
 	public String getVisitante();
 
+
 	/**
 	 * @return La hora de entrada registrada
 	 */
