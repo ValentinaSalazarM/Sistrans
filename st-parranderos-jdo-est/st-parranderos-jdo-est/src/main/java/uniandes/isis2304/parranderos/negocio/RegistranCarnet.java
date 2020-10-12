@@ -9,7 +9,7 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  * Clase para modelar la relación REGISTRANCARNET del negocio de Aforo-CCAndes:
@@ -17,7 +17,7 @@ import java.sql.Timestamp;
  * Se modela mediante los identificadores del lector y del carnet (tipoCarnet y Visitante) respectivamente
  * Debe existir un lector con el identificador dado
  * Debe existir un carnet con el tipoCarnet y el visitante dado 
- * Adicionalmente contiene la hora de entrada y la hora de salida.
+ * Adicionalmente contiene la fecha de la visita, la hora de entrada y la hora de salida.
  * 
  */
 public class RegistranCarnet implements VORegistranCarnet
@@ -41,14 +41,19 @@ public class RegistranCarnet implements VORegistranCarnet
 	private String idVisitante;
 	
 	/**
-	 * La hora en que se efectuó la lectura de entrada
+	 * Fecha en la que se realizó la visita
 	 */
-	private Timestamp horaEntrada;
+	private Date fecha;
 	
 	/**
-	 * La hora en que se efectuó la lectura de salida
+	 * Identificador del horario en que se efectuó la lectura de entrada. Debe existir en la tabla HORARIO
 	 */
-	private Timestamp horaSalida;
+	private long horaEntrada;
+	
+	/**
+	 * Identificador del horario en que se efectuó la lectura de salida. Debe existir en la tabla HORARIO
+	 */
+	private long horaSalida;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -61,8 +66,9 @@ public class RegistranCarnet implements VORegistranCarnet
 		this.idLector = "";
 		this.tipoCarnet = 0;
 		this.idVisitante = "";
-		this.horaEntrada = new Timestamp (0);
-		this.horaSalida = new Timestamp (0);
+		this.fecha = new Date(0);
+		this.horaEntrada = 0;
+		this.horaSalida = 0;
 	}
 
 	/**
@@ -70,14 +76,16 @@ public class RegistranCarnet implements VORegistranCarnet
 	 * @param lector - El identificador del lector. Debe existir un lector con dicho identificador
 	 * @param tipoCarnet - El tipo de carnet. Debe exixtir un carnet con dicho tipo
 	 * @param idVisitante - El identificador del visitante dueño del carnet. Debe existir un carnet con dicho dueño.
-	 * @param horaEntrada - La hora de entrada en la cual se realiza la lectura
-	 * @param horaSalida - La hora de salida en la cual se realiza la lectura
+	 * @param fecha - Fecha en la que se efectuó la visita
+	 * @param horaEntrada - El identificador del horario en el cual se realiza la lectura de entrada. Debe existir un horario con dicho identificador
+	 * @param horaSalida -  El identificador del horario en el cual se realiza la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public RegistranCarnet(String lector, long tipoCarnet, String idVisitante, Timestamp horaEntrada, Timestamp horaSalida) 
+	public RegistranCarnet(String lector, long tipoCarnet, String idVisitante, Date fecha, long horaEntrada, long horaSalida) 
 	{
 		this.idLector = lector;
 		this.tipoCarnet = tipoCarnet;
 		this.idVisitante = idVisitante;
+		this.fecha = fecha;
 		this.horaEntrada = horaEntrada;
 		this.horaSalida = horaSalida;
 	}
@@ -86,7 +94,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @return El lector que realiza el registro
 	 */
-	public String getLector() 
+	public String getIdLector() 
 	{
 		return idLector;
 	}
@@ -94,7 +102,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @param lector - El nuevo lector. Debe existir un lector con dicho identificador
 	 */
-	public void setLector(String lector) 
+	public void setIdLector(String lector) 
 	{
 		this.idLector = lector;
 	}
@@ -118,7 +126,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @return El visitante asociado al carnet registrado
 	 */
-	public String getVisitante() 
+	public String getIdVisitante() 
 	{
 		return idVisitante;
 	}
@@ -126,39 +134,55 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @param visitante - El nuevo visitante. Debe existir un visitante con dicho identificador
 	 */
-	public void setVisitante(String visitante) 
+	public void setIdVisitante(String visitante) 
 	{
 		this.idVisitante = visitante;
 	}
 
 	/**
-	 * @return La hora de entrada registrada
+	 * @return La fecha en la que se realizó la visita
 	 */
-	public Timestamp getHoraEntrada() 
+	public Date getFecha() 
+	{
+		return fecha;
+	}
+
+	/**
+	 * @param fecha - La nueva fecha en la que se registra la visitia
+	 */
+	public void setFecha(Date fecha) 
+	{
+		this.fecha = fecha;
+	}
+
+	/**
+	 * @return El identificador del horario en el cual se realiza la lectura de entrada
+	 */
+	public long getHoraEntrada() 
 	{
 		return horaEntrada;
 	}
 
 	/**
-	 * @param horaEntrada - La nueva hora de entrada registrada
+	 * @param horaEntrada - El nuevo identificador del horario en el que se realizó la lectura de entrada. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraEntrada(Timestamp horaEntrada) 
+	public void setHoraEntrada(long horaEntrada) 
 	{
 		this.horaEntrada = horaEntrada;
 	}
 
 	/**
-	 * @return La horaSalida registrada
+	 * @return El identificador del horario en el cual se realiza la lectura de salida
 	 */
-	public Timestamp getHoraSalida() 
+	public long getHoraSalida() 
 	{
 		return horaSalida;
 	}
 
 	/**
-	 * @param horaSalida - La nueva hora de salida registrada
+	 * @param horaSalida - El nuevo identificador del horario en el que se realizó la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraSalida(Timestamp horaSalida) 
+	public void setHoraSalida(long horaSalida) 
 	{
 		this.horaSalida = horaSalida;
 	}
@@ -169,7 +193,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	@Override
 	public String toString() 
 	{
-		return "RegistranCarnet [idLector=" + idLector + ", tipoCarnet=" + tipoCarnet + ", idVisitante=" + idVisitante + ", horaEntrada="
+		return "RegistranCarnet [idLector=" + idLector + ", tipoCarnet=" + tipoCarnet + ", idVisitante=" + idVisitante + ", fecha=" + fecha + ", horaEntrada="
 				+ horaEntrada + ", horaSalida=" + horaSalida + "]";
 	}
 }

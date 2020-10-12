@@ -28,7 +28,7 @@ public class VisitanParqueadero implements VOVisitanParqueadero
 	private String idParqueadero;
 
 	/**
-	 * El identificador del visitante que visita un parqueadero
+	 * El identificador del visitante que visita un parqueadero. Debe existir en la tabla VISITANTE
 	 */
 	private String idVisitante;
 

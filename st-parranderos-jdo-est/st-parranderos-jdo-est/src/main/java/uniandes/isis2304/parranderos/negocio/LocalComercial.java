@@ -71,10 +71,10 @@ public class LocalComercial implements VOLocalComercial
 	 * @param area - El identificador del area. Debe existir un área con dicho identificador
 	 * @param capacidadNormal - El identificador de la capacidad normal. Debe existir una capacidad normal con dicho identificador
 	 * @param tipoLocal - El identificador del tipo de local. Debe existir un tipo de local con dicho identificador 
-	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 * @param activo - Estado de funcionamiento del local comercial
+	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
-	public LocalComercial (String identificador, long area, long capacidadNormal, long tipoLocal, String idCentroComercial, boolean activo) 
+	public LocalComercial (String identificador, long area, long capacidadNormal, long tipoLocal, boolean activo, String idCentroComercial) 
 	{
 		this.identificador = identificador;
 		this.area = area;

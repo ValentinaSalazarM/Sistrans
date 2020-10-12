@@ -9,7 +9,7 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  * Interfaz para los métodos get de REGISTRANVEHICULO.
@@ -24,7 +24,7 @@ public interface VORegistranVehiculo
 	/**
 	 * @return El lector que realiza el registro
 	 */
-	public String getLector(); 
+	public String getIdLector(); 
 
 	/**
 	 * @return La placa del vehículo registrado
@@ -32,14 +32,19 @@ public interface VORegistranVehiculo
 	public String getPlaca();
 
 	/**
-	 * @return La hora de entrada registrada
+	 * @return La fecha en la que se realizó la visita
 	 */
-	public Timestamp getHoraEntrada();
+	public Date getFecha();
 	
 	/**
-	 * @return La horaSalida registrada
+	 * @return El identificador del horario en el cual se realiza la lectura de entrada
 	 */
-	public Timestamp getHoraSalida();
+	public long getHoraEntrada();
+	
+	/**
+	 * @return El identificador del horario en el cual se realiza la lectura de salida
+	 */
+	public long getHoraSalida();
 	
 	/** 
 	 * @return Una cadena con la información básica

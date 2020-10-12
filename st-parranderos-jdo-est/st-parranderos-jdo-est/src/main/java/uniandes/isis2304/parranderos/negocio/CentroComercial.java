@@ -46,10 +46,8 @@ public class CentroComercial implements VOCentroComercial
 	 * Constructor con valores
 	 * @param identificador - El identificador del centro comercial
 	 * @param nombre - El nombre del centro comercial
-	 * @param cupoActual - El cupo actual del centro comercial
-	 * @param aforoTotal - El aforo total del centro comercial
 	 */
-	public CentroComercial (String identificador, String nombre, int cupoActual, int aforoTotal) 
+	public CentroComercial (String identificador, String nombre) 
 	{
 		this.identificador = identificador;
 		this.nombre = nombre;

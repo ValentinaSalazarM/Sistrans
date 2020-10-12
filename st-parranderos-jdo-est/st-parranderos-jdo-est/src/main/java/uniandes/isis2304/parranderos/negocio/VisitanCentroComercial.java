@@ -23,12 +23,12 @@ public class VisitanCentroComercial implements VOVisitanCentroComercial
 	 * 			Atributos
 	 *****************************************************************/
 	/**
-	 * El identificador del centro comercial que es visitado
+	 * El identificador del centro comercial que es visitado. Debe existir en la tabla CENTROCOMERCIAL
 	 */
 	private String idCentroComercial;
 
 	/**
-	 * El identificador del visitante que visita un centro comercial
+	 * El identificador del visitante que visita un centro comercial. Debe existir en la tabla VISITANTE
 	 */
 	private String idVisitante;
 

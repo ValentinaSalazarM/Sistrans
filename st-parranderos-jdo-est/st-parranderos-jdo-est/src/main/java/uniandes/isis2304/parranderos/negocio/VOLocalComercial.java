@@ -38,14 +38,14 @@ public interface VOLocalComercial
 	public long getTipoLocal();
 
 	/**
-	 * @return El id del centro comercial del local comercial
-	 */
-	public String getIdCentroComercial();
-
-	/**
 	 * @return El estado de funcionamiento del local comercial
 	 */
 	public boolean getActivo();
+
+	/**
+	 * @return El id del centro comercial del local comercial
+	 */
+	public String getIdCentroComercial();
 	
 	/**
 	 * @return Una cadena con la información básica del local comercial

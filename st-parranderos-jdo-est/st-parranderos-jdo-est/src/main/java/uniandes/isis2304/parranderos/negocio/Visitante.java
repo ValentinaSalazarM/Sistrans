@@ -74,7 +74,7 @@ public class Visitante implements VOVisitante
 	/**
 	 * Constructor con valores
 	 * @param identificador - El id del visitante
-	 * @param tipo - El identificador del tipo de visitante 
+	 * @param tipo - El identificador del tipo de visitante. Debe existir un tipo con dicho identificador
 	 * @param nombre - El nombre del visitante
 	 * @param correo - El correo del visitante
 	 * @param telefonoPropio - El teléfono del visitante
@@ -117,7 +117,7 @@ public class Visitante implements VOVisitante
 	}
 
 	/**
-	 * @param tipo - El nuevo tipo de visitante
+	 * @param tipo - El nuevo tipo de visitante. Debe existir un tipo con dicho identificador
 	 */
 	public void setTipo(long tipo) 
 	{

@@ -23,12 +23,12 @@ public class VisitanBaño implements VOVisitanBaño
 	 * 			Atributos
 	 *****************************************************************/
 	/**
-	 * El identificador del baño que es visitado
+	 * El identificador del baño que es visitado. Debe existir en la tabla BAÑO
 	 */
 	private String idBaño;
 
 	/**
-	 * El identificador del visitante que visita un baño
+	 * El identificador del visitante que visita un baño. Debe existir en la tabla VISITANTE
 	 */
 	private String idVisitante;
 

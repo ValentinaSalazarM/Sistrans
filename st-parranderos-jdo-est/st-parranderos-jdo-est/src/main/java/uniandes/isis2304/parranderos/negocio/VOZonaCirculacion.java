@@ -25,7 +25,6 @@ public interface VOZonaCirculacion
 	 */
 	public int getCapacidadNormal();
 
-
 	/**
 	 * @return El id del centro comercial de la zona de circulación
 	 */

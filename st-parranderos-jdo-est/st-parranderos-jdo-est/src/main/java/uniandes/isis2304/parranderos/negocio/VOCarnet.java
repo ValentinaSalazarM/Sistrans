@@ -31,7 +31,7 @@ public interface VOCarnet
 	public String getVisitante();
 
 	/**
-	 * @return Una cadena de caracteres con la información del tipo de lector
+	 * @return Una cadena de caracteres con la información del carnet
 	 */
 	@Override
 	public String toString(); 

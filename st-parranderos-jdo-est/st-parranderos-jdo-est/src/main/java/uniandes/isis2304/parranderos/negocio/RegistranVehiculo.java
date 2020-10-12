@@ -9,7 +9,7 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  * Clase para modelar la relación REGISTRANVEHICULO del negocio de Aforo-CCAndes:
@@ -17,7 +17,7 @@ import java.sql.Timestamp;
  * Se modela mediante los identificadores del lector y del vehículo (placa) respectivamente
  * Debe existir un lector con el identificador dado
  * Debe existir un vehículo con la placa dada 
- * Adicionalmente contiene la hora de entrada y la hora de salida.
+ * Adicionalmente contiene la fecha de la visita, la hora de entrada y la hora de salida.
  * 
  */
 public class RegistranVehiculo implements VORegistranVehiculo
@@ -36,14 +36,20 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	private String placa;
 	
 	/**
-	 * La hora en que se efectuó la lectura de entrada
+	 * Fecha en la que se realizó la visita
 	 */
-	private Timestamp horaEntrada;
+	private Date fecha;
 	
 	/**
-	 * La hora en que se efectuó la lectura de salida
+	 * Identificador del horario en que se efectuó la lectura de entrada. Debe existir en la tabla HORARIO
 	 */
-	private Timestamp horaSalida;
+	private long horaEntrada;
+	
+	/**
+	 * Identificador del horario en que se efectuó la lectura de salida. Debe existir en la tabla HORARIO
+	 */
+	private long horaSalida;
+
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -55,21 +61,25 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	{
 		this.idLector = "";
 		this.placa = "";
-		this.horaEntrada = new Timestamp (0);
-		this.horaSalida = new Timestamp (0);
+		this.fecha = new Date(0);
+		this.horaEntrada = 0;
+		this.horaSalida = 0;
+
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param idLector - El identificador del lector. Debe existir un lector con dicho identificador
 	 * @param placa - La placa del vehículo registrado. Debe existir un vehículo con dicha placa
-	 * @param horaEntrada - La hora de entrada en la cual se realiza la lectura
-	 * @param horaSalida - La hora de salida en la cual se realiza la lectura
+	 * @param fecha - Fecha en la que se efectuó la visita
+	 * @param horaEntrada - El identificador del horario en el cual se realiza la lectura de entrada. Debe existir un horario con dicho identificador
+	 * @param horaSalida -  El identificador del horario en el cual se realiza la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public RegistranVehiculo(String idLector, String placa, Timestamp horaEntrada, Timestamp horaSalida) 
+	public RegistranVehiculo(String idLector, String placa, Date fecha, long horaEntrada, long horaSalida) 
 	{
 		this.idLector = idLector;
 		this.placa = placa;
+		this.fecha = fecha;
 		this.horaEntrada = horaEntrada;
 		this.horaSalida = horaSalida;
 	}
@@ -78,7 +88,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	/**
 	 * @return El lector que realiza el registro
 	 */
-	public String getLector() 
+	public String getIdLector() 
 	{
 		return idLector;
 	}
@@ -86,7 +96,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	/**
 	 * @param lector - El nuevo lector. Debe existir un lector con dicho identificador
 	 */
-	public void setLector(String lector) 
+	public void setIdLector(String lector) 
 	{
 		this.idLector = lector;
 	}
@@ -108,44 +118,60 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	}
 
 	/**
-	 * @return La hora de entrada registrada
+	 * @return La fecha en la que se realizó la visita
 	 */
-	public Timestamp getHoraEntrada() 
+	public Date getFecha() 
+	{
+		return fecha;
+	}
+
+	/**
+	 * @param fecha - La nueva fecha en la que se registra la visitia
+	 */
+	public void setFecha(Date fecha) 
+	{
+		this.fecha = fecha;
+	}
+
+	/**
+	 * @return El identificador del horario en el cual se realiza la lectura de entrada
+	 */
+	public long getHoraEntrada() 
 	{
 		return horaEntrada;
 	}
 
 	/**
-	 * @param horaEntrada - La nueva hora de entrada registrada
+	 * @param horaEntrada - El nuevo identificador del horario en el que se realizó la lectura de entrada. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraEntrada(Timestamp horaEntrada) 
+	public void setHoraEntrada(long horaEntrada) 
 	{
 		this.horaEntrada = horaEntrada;
 	}
 
 	/**
-	 * @return La horaSalida registrada
+	 * @return El identificador del horario en el cual se realiza la lectura de salida
 	 */
-	public Timestamp getHoraSalida() 
+	public long getHoraSalida() 
 	{
 		return horaSalida;
 	}
 
 	/**
-	 * @param horaSalida - La nueva hora de salida registrada
+	 * @param horaSalida - El nuevo identificador del horario en el que se realizó la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraSalida(Timestamp horaSalida) 
+	public void setHoraSalida(long horaSalida) 
 	{
 		this.horaSalida = horaSalida;
 	}
-
+	
 	/** 
 	 * @return Una cadena con la información básica 
 	 */
 	@Override
 	public String toString() 
 	{
-		return "RegistranVehiculo [idLector=" + idLector + ", placa=" + placa + ", horaEntrada="
+		return "RegistranVehiculo [idLector=" + idLector + ", placa=" + placa + ", fecha=" + fecha + ", horaEntrada="
 				+ horaEntrada + ", horaSalida=" + horaSalida + "]";
 	}
 }

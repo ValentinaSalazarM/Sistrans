@@ -31,24 +31,14 @@ public interface VOTipoLocal
 	public String getTipo();
 
 	/**
-	 * @return La hora de apertura del tipo de local
+	 * @return El identificador del apertura de cierre del tipo de local.
 	 */
-	public int getHoraApertura(); 
+	public long getHoraApertura(); 
 	
 	/**
-	 * @return El minuto del horario de apertura del tipo de local
+	 * @return El identificador del horario de cierre del tipo de local.
 	 */
-	public int getMinutoApertura();
-	
-	/**
-	 * @return La hora de cierre del tipo de local
-	 */
-	public int getHoraCierre(); 
-
-	/**
-	 * @return El minuto del horario de cierre del tipo de local
-	 */
-	public int getMinutoCierre();
+	public long getHoraCierre(); 
 	
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de local

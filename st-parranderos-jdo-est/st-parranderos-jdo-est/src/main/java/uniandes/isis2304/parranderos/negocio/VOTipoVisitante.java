@@ -31,24 +31,14 @@ public interface VOTipoVisitante
 	public String getTipo();
 
 	/**
-	 * @return La hora inicio del horario válido del tipo de visitante
+	 * @return El identificador del horario de inicio válido del tipo de visitante. 
 	 */
-	public int getHoraInicio();
+	public long getHoraInicio();
 	
 	/**
-	 * @return El minuto de inicio de circulación del tipo de visitante
+	 * @return El identificador del horario límite de circulación 
 	 */
-	public int getMinutoInicio();
-	
-	/**
-	 * @return La hora límite de circulación del tipo de visitante
-	 */
-	public int getHoraLimite(); 
-	
-	/**
-	 * @return El minuto límite de circulación del tipo de visitante
-	 */
-	public int getMinutoLimite();
+	public long getHoraLimite(); 
 	
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de visitante

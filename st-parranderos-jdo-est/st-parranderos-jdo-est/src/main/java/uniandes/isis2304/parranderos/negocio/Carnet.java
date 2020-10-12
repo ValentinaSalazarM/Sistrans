@@ -77,7 +77,7 @@ public class Carnet implements VOCarnet
 	}
 
 	/**
-	 * @param visitante - El nuevo visitante dueño del carnet
+	 * @param visitante - El identificador del nuevo dueño del carnet. Debe existir un visitante con dicho identificador
 	 */
 	public void setVisitante(String visitante) {
 		this.idVisitante = visitante;

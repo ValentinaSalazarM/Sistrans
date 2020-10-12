@@ -29,24 +29,15 @@ public class TipoLocal implements VOTipoLocal
 	private String tipo;
 
 	/**
-	 * Hora de apertura del tipo de local. Debe existir en la tabla HORARIO
+	 * Identificador del horario de apertura del tipo de local. Debe existir en la tabla HORARIO
 	 */
-	private int horaApertura;
+	private long horaApertura;
 	
 	/**
-	 * Minuto del horario de apertura del tipo de local. Debe existir en la tabla HORARIO
+	 * Identificador del horario cierre del tipo de local. Debe existir en la tabla HORARIO
 	 */
-	private int minutoApertura;
-	
-	/**
-	 * Hora de cierre del tipo de local. Debe existir en la tabla HORARIO
-	 */
-	private int horaCierre;
+	private long horaCierre;
 
-	/**
-	 * Minuto del horario de cierre del tipo de local. Debe existir en la tabla HORARIO
-	 */
-	private int minutoCierre;
 	
 	/* ****************************************************************
 	 * 			Métodos
@@ -59,28 +50,22 @@ public class TipoLocal implements VOTipoLocal
 		this.id = 0;
 		this.tipo = "Default";
 		this.horaApertura = 0;
-		this.minutoApertura = 0;
 		this.horaCierre = 0;
-		this.minutoCierre = 0;
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param id - El identificador del tipo de local
 	 * @param tipo - El nombre del tipo de local
-	 * @param horaApertura - Hora de apertura del local. Debe existir en la tabla HORARIO
-	 * @param minutoApertura - Minuto de apertura del local. Debe existir en la tabla HORARIO
-	 * @param horaCierre - Hora de cierre del local. Debe existir en la tabla HORARIO
-	 * @param minutoCierre - Minuto cierre del local. Debe existir en la tabla HORARIO
+	 * @param horaApertura - Identificador del horario de apertura del local. Debe existir un horario con dicho identificador
+	 * @param horaCierre - Identificador del horario de cierre del local. Debe existir un horario con dicho identificador
 	 */
-	public TipoLocal(long id, String tipo, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre) 
+	public TipoLocal(long id, String tipo, long horaApertura, long horaCierre) 
 	{
 		this.id = id;
 		this.tipo = tipo;
 		this.horaApertura = horaApertura;
-		this.minutoApertura = minutoApertura;
 		this.horaCierre = horaCierre;
-		this.minutoCierre = minutoCierre;
 	}
 
 	/**
@@ -117,77 +102,44 @@ public class TipoLocal implements VOTipoLocal
 
 
 	/**
-	 * @return La hora de apertura del tipo de local
+	 * @return El identificador del apertura de cierre del tipo de local.
 	 */
-	public int getHoraApertura() 
+	public long getHoraApertura() 
 	{
 		return horaApertura;
 	}
 
 	/**
-	 * @param horaApertura - La nueva hora de apertura del tipo de local. Debe existir en la tabla HORARIO
+	 * @param horaApertura - El identificador del nuevo horario de apertura del tipo de local. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraApertura(int horaApertura) 
+	public void setHoraApertura(long horaApertura) 
 	{
 		this.horaApertura = horaApertura;
 	}
 	
 	/**
-	 * @return El minuto del horario de apertura del tipo de local
+	 * @return El identificador del horario de cierre del tipo de local.
 	 */
-	public int getMinutoApertura() 
-	{
-		return minutoApertura;
-	}
-
-	/**
-	 * @param minutoApertura - El nuevo minuto del horario de apertura del tipo de local. Debe existir en la tabla HORARIO
-	 */
-	public void setMinutoApertura(int minutoApertura) 
-	{
-		this.minutoApertura = minutoApertura;
-	}
-
-	/**
-	 * @return La hora de cierre del tipo de local. Debe existir en la tabla HORARIO
-	 */
-	public int getHoraCierre() 
+	public long getHoraCierre() 
 	{
 		return horaCierre;
 	}
 
 	/**
-	 * @param horaCierre - La nueva hora de cierre del tipo de local
+	 * @param horaCierre - El identificador del nuevo horario de cierre del tipo de local. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraCierre(int horaCierre) 
+	public void setHoraCierre(long horaCierre) 
 	{
 		this.horaCierre = horaCierre;
 	}
 	
-	/**
-	 * @return El minuto del horario de cierre del tipo de local. Debe existir en la tabla HORARIO
-	 */
-	public int getMinutoCierre() 
-	{
-		return minutoCierre;
-	}
-
-	/**
-	 * @param minutoCierre - El nuevo minuto del horario de cierre del tipo de local
-	 */
-	public void setMinutoCierre(int minutoCierre) 
-	{
-		this.minutoCierre = minutoCierre;
-	}
-
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de local
 	 */
 	@Override
 	public String toString() 
 	{
-		return "TipoLocal [id=" + id + ", nombre=" + tipo + ", horaApertura= " + horaApertura + ", minutoApertura = " + minutoApertura + " horaCierre =" 
-				+ horaCierre + "minutoCierre=" + minutoCierre + "]";
+		return "TipoLocal [id=" + id + ", nombre=" + tipo + ", horaApertura= " + horaApertura + " horaCierre=" + horaCierre + "]";
 	}
 
 	/**

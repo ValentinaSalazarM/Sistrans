@@ -29,24 +29,14 @@ public class TipoVisitante implements VOTipoVisitante
 	private String tipo;
 
 	/**
-	 * Hora de inicio del horario válido del tipo de visitante
+	 * Identificador del horario de inicio válido del tipo de visitante. Debe existir en la tabla HORARIO
 	 */
-	private int horaInicio;
-
-	/**
-	 * Minuto de inicio del horario válido del tipo de visitante
-	 */
-	private int minutoInicio;
+	private long horaInicio;
 	
 	/**
-	 * Hora de límite de circulación del tipo de visitante
+	 * Identificador del horario límite de circulación del tipo de visitante. Debe existir en la tabla HORARIO
 	 */
-	private int horaLimite;
-	
-	/**
-	 * Minuto del horario límite de circulación del tipo de visitante
-	 */
-	private int minutoLimite;
+	private long horaLimite;
 	
 	
 	/* ****************************************************************
@@ -60,28 +50,22 @@ public class TipoVisitante implements VOTipoVisitante
 		this.id = 0;
 		this.tipo = "Default";
 		this.horaInicio = 0;
-		this.minutoInicio = 0;
 		this.horaLimite = 0;
-		this.minutoLimite = 0;
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param id - El identificador del tipo de visitante
 	 * @param tipo - El nombre del tipo de visitante
-	 * @param horaInicio - Hora de inicio del horario válido del tipo de visitante
-	 * @param minutoInicio - Minuto de inicio del horario válido del tipo de visitante
-	 * @param horaLimite - Hora límite de circulación del tipo de visitante
-	 * @param minutoLimite - Minuto límite de circulación del tipo de visitante 
+	 * @param horaInicio - Identificador del horario de inicio de circulación del tipo de visitante. Debe existir un horario con dicho identificador
+	 * @param horaLimite - Identificador del horario límite de circulación del tipo de visitante. Debe existir un horario con dicho identificador
 	 */
-	public TipoVisitante(long id, String tipo, int horaInicio, int minutoInicio, int horaLimite, int minutoLimite) 
+	public TipoVisitante(long id, String tipo, long horaInicio, long horaLimite) 
 	{
 		this.id = id;
 		this.tipo = tipo;
 		this.horaInicio = horaInicio;
-		this.minutoInicio = minutoInicio;
 		this.horaLimite = horaLimite;
-		this.minutoLimite = minutoLimite;
 	}
 
 	/**
@@ -117,77 +101,44 @@ public class TipoVisitante implements VOTipoVisitante
 	}
 
 	/**
-	 * @return La hora inicio del horario válido del tipo de visitante
+	 * @return El identificador del horario de inicio válido del tipo de visitante. 
 	 */
-	public int getHoraInicio() 
+	public long getHoraInicio() 
 	{
-		return horaLimite;
+		return horaInicio;
 	}
 
 	/**
-	 * @param horaInicio - La nueva hora de inicio del horario válido del tipo de visitante
+	 * @param horaInicio - El nuevo identificador del horario de inicio válido del tipo de visitante. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraInicio(int horaInicio) 
+	public void setHoraInicio(long horaInicio) 
 	{
-		this.horaLimite = horaInicio;
+		this.horaInicio = horaInicio;
 	}
-
-	/**
-	 * @return El minuto de inicio de circulación del tipo de visitante
-	 */
-	public int getMinutoInicio() 
-	{
-		return minutoInicio;
-	}
-
-	/**
-	 * @param minutoInicio - El nuevo minuto de inicio de circulación del tipo de visitante
-	 */
-	public void setMinutoInicio(int minutoInicio) 
-	{
-		this.minutoInicio = minutoInicio;
-	}	
 	
 	/**
-	 * @return La hora límite de circulación del tipo de visitante
+	 * @return El identificador del horario límite de circulación 
 	 */
-	public int getHoraLimite() 
+	public long getHoraLimite() 
 	{
 		return horaLimite;
 	}
 
 	/**
-	 * @param horaLimite - La nueva hora límite del tipo de visitante
+	 * @param horaLimite - El nuevo identificador del horario límite de circulación del tipo de visitante. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraLimite(int horaLimite) 
+	public void setHoraLimite(long horaLimite) 
 	{
 		this.horaLimite = horaLimite;
 	}
 
-	/**
-	 * @return El minuto límite de circulación del tipo de visitante
-	 */
-	public int getMinutoLimite() 
-	{
-		return minutoLimite;
-	}
-
-	/**
-	 * @param minutoLimite - El nuevo minuto límite de circulación del tipo de visitante
-	 */
-	public void setMinutoLimite(int minutoLimite) 
-	{
-		this.minutoLimite = minutoLimite;
-	}
-
-	
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de visitante
 	 */
 	@Override
 	public String toString() 
 	{
-		return "TipoVisitante [id=" + id + ", nombre=" + tipo + ", horaLimite= " + horaLimite + "]";
+		return "TipoVisitante [id=" + id + ", tipo=" + tipo + ", horaInicio=" + horaInicio + ", horaLimite= " + horaLimite + "]";
 	}
 
 	/**

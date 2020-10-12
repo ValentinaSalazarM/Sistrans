@@ -19,14 +19,18 @@ public class Horario implements VOHorario
 	 * 			Atributos
 	 *****************************************************************/
 	/**
+	 * Identificador ÚNICO del horario
+	 */
+	private long id;
+	/**
 	 * La hora del horario
 	 */
 	private int hora;
 
 	/**
-	 * Los minutos del horario
+	 * El minuto del horario
 	 */
-	private int minutos;
+	private int minuto;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -37,20 +41,36 @@ public class Horario implements VOHorario
 	public Horario() 
 	{
 		this.hora = 0;
-		this.minutos = 0;
+		this.minuto = 0;
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param hora - La hora del horario
-	 * @param minutos - Los minutos del horario
+	 * @param minuto - El minuto del horario
 	 */
 	public Horario(int hora, int minutos) 
 	{
 		this.hora = hora;
-		this.minutos = minutos;
+		this.minuto = minutos;
 	}
 	
+	/**
+	 * @return El identificador del horario
+	 */
+	public long getId() 
+	{
+		return id;
+	}
+
+	/**
+	 * @param id - El nuevo identificador del horario
+	 */
+	public void setId(long id) 
+	{
+		this.id = id;
+	}
+
 	/**
 	 * @return La hora del horario
 	 */
@@ -68,19 +88,19 @@ public class Horario implements VOHorario
 	}
 
 	/**
-	 * @return Los minutos del horario
+	 * @return El minuto del horario
 	 */
-	public int getMinutos() 
+	public int getMinuto() 
 	{
-		return minutos;
+		return minuto;
 	}
 
 	/**
-	 * @param minutos - Los nuevos minutos del horario
+	 * @param minuto - El nuevo minuto del horario
 	 */
-	public void setMinutos(int minutos) 
+	public void setMinuto(int minuto) 
 	{
-		this.minutos = minutos;
+		this.minuto = minuto;
 	}
 
 	/**
@@ -89,7 +109,7 @@ public class Horario implements VOHorario
 	@Override
 	public String toString() 
 	{
-		return "Horario [hora=" + hora + ", minutos=" + minutos + "]";
+		return "Horario [id= " + id + ", hora=" + hora + ", minuto=" + minuto + "]";
 	}
 
 }

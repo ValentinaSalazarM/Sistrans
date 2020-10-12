@@ -29,7 +29,7 @@ public class Vehiculo implements VOVehiculo
 	private String caracteristicas;
 	
 	/**
-	 * Identificador del dueño del vehículo
+	 * Identificador del dueño del vehículo. Debe existir en la tabla VISITANTE
 	 */
 	private String dueño;
 
@@ -50,7 +50,7 @@ public class Vehiculo implements VOVehiculo
 	 * Constructor con valores
 	 * @param placa - La placa del vehículo
 	 * @param caracteristicas - Las características del vehículo
-	 * @param dueño - El identificador del visitante dueño del vehículo
+	 * @param dueño - El identificador del visitante dueño del vehículo. Debe existir un visitante con dicho identificador
 	 */
 	public Vehiculo(String placa, String caracteristicas, String dueño) 
 	{
@@ -100,7 +100,7 @@ public class Vehiculo implements VOVehiculo
 	}
 
 	/**
-	 * @param dueño - El nuevo identificador del dueño del vehículo
+	 * @param dueño - El nuevo identificador del dueño del vehículo. Debe existir un visitante con dicho identificador
 	 */
 	public void setDueño(String dueño) 
 	{

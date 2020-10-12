@@ -23,12 +23,12 @@ public class VisitanAscensor implements VOVisitanAscensor
 	 * 			Atributos
 	 *****************************************************************/
 	/**
-	 * El identificador del ascensor que es visitado
+	 * El identificador del ascensor que es visitado. Debe existir en la tabla ASCENSOR
 	 */
 	private String idAscensor;
 
 	/**
-	 * El identificador del visitante que visita un ascensor
+	 * El identificador del visitante que visita un ascensor. Debe existir en la tabla VISITANTE
 	 */
 	private String idVisitante;
 

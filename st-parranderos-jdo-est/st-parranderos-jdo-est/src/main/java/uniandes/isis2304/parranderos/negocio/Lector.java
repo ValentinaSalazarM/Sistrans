@@ -73,7 +73,7 @@ public class Lector implements VOLector
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador si es diferente de NULL
 	 * @param idLocalComercial - El identificador del local comercial. Debe existir un local comercial con dicho identificador si es diferente de NULL
 	 * @param idBaño - El identificador del baño. Debe existir un baño con dicho identificador si es diferente de NULL
-	 * @param idAscensor - El identificador del ascensor. Debe existir ascensor con dicho identificador si es diferente de NULL
+	 * @param idAscensor - El identificador del ascensor. Debe existir un ascensor con dicho identificador si es diferente de NULL
 	 * @param idParqueadero - El identificador del parqueadero. Debe existir un parqueadero con dicho identificador si es diferente de NULL
 	 */
 	public Lector(long id, String idCentroComercial, String idLocalComercial, String idBaño, String idAscensor, String idParqueadero) 
