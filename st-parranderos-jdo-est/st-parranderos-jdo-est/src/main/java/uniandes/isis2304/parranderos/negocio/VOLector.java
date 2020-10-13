@@ -24,7 +24,12 @@ public interface VOLector
 	 * @return El id del lector
 	 */
 	public long getId();
-
+	
+	/**
+	 * @return El id del tipo de lector. Debe existir un tipo de lector con dicho identificador
+	 */
+	public long getTipoLector();
+	
 	/**
 	 * @return El id del centro comercial donde se localiza el lector
 	 */

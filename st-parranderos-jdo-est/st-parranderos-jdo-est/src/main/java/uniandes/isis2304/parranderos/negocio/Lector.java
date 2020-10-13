@@ -31,6 +31,11 @@ public class Lector implements VOLector
 	private String idCentroComercial;
 
 	/**
+	 * El identificador del tipo de lector. Debe existir en la tabla TIPOLECTOR
+	 */
+	private long tipoLector;
+	
+	/**
 	 * El identificador del local comercial donde se localiza el lector
 	 */
 	private String idLocalComercial;
@@ -60,6 +65,7 @@ public class Lector implements VOLector
 	public Lector() 
 	{
 		this.id = 0;
+		this.tipoLector = 0;
 		this.idCentroComercial = "";
 		this.idLocalComercial = "";
 		this.idBaño = "";
@@ -70,15 +76,17 @@ public class Lector implements VOLector
 	/**
 	 * Constructor con valores
 	 * @param id - El identificador del lector
+	 * @param tipoLector - El identificador del tipo de lector
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador si es diferente de NULL
 	 * @param idLocalComercial - El identificador del local comercial. Debe existir un local comercial con dicho identificador si es diferente de NULL
 	 * @param idBaño - El identificador del baño. Debe existir un baño con dicho identificador si es diferente de NULL
 	 * @param idAscensor - El identificador del ascensor. Debe existir un ascensor con dicho identificador si es diferente de NULL
 	 * @param idParqueadero - El identificador del parqueadero. Debe existir un parqueadero con dicho identificador si es diferente de NULL
 	 */
-	public Lector(long id, String idCentroComercial, String idLocalComercial, String idBaño, String idAscensor, String idParqueadero) 
+	public Lector(long id, long tipoLector, String idCentroComercial, String idLocalComercial, String idBaño, String idAscensor, String idParqueadero) 
 	{
 		this.id = id;
+		this.tipoLector = tipoLector;
 		this.idCentroComercial = idCentroComercial;
 		this.idLocalComercial = idLocalComercial;
 		this.idBaño = idBaño;
@@ -103,6 +111,21 @@ public class Lector implements VOLector
 		this.id = id;
 	}
 
+	/**
+	 * @return El id del tipo de lector. Debe existir un tipo de lector con dicho identificador
+	 */
+	public long getTipoLector() 
+	{
+		return tipoLector;
+	}
+
+	/**
+	 * @param tipoLector - El nuevo id del tipo de lector
+	 */
+	public void setTipoLector(long tipoLector) 
+	{
+		this.id = tipoLector;
+	}
 	/**
 	 * @return El id del centro comercial donde se localiza el lector
 	 */
@@ -189,7 +212,7 @@ public class Lector implements VOLector
 	@Override
 	public String toString() 
 	{
-		return "Lector [id" + id + ", idCentroComercial=" + idCentroComercial + ", idLocalComercial=" + idLocalComercial + 
+		return "Lector [id" + id + ", tipoLector=" + tipoLector + ", idCentroComercial=" + idCentroComercial + ", idLocalComercial=" + idLocalComercial + 
 				", idBaño="+ idBaño + ", idAscensor=" + idAscensor +", idParqueadero=" + idParqueadero + "]";
 	}
 	
