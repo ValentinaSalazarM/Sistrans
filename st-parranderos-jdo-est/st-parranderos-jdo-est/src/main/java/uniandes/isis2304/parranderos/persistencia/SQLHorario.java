@@ -75,7 +75,7 @@ class SQLHorario
  * @param id - El identificador del horaro
  * @return Las tuplas eliminadas
  */
-	public long eliminarAreasPorID (PersistenceManager pm, long id)
+	public long eliminarHorarioPorID(PersistenceManager pm, long id)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaHorario () + " WHERE id = ?");
         q.setParameters(id);

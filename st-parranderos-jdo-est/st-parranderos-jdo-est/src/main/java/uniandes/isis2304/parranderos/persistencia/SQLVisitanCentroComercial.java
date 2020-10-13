@@ -80,4 +80,6 @@ public class SQLVisitanCentroComercial
 		q.setResultClass(VisitanCentroComercial.class);
 		return (List<VisitanCentroComercial>) q.executeList();
 	}
+	
+	
 }

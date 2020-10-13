@@ -80,5 +80,19 @@ public class SQLVisitanAscensor
 		q.setResultClass(VisitanAscensor.class);
 		return (List<VisitanAscensor>) q.executeList();
 	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar UN VISITANASCENSOR de la base de datos, por sus identificadores
+	 * @param pm - El manejador de persistencia
+	 * @param idAscensor - El identificador del baño
+	 * @param idVisitante - El identificador del bar
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarVisitanLocal (PersistenceManager pm, long idAscensor, long idVisitante) 
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanAscensor() + " WHERE idascensor = ? AND idvisitante = ?");
+        q.setParameters(idAscensor, idVisitante);
+        return (long) q.executeUnique();
+	}
 
 }

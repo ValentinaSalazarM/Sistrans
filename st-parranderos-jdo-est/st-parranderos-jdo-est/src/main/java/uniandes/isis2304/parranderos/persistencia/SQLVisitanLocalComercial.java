@@ -80,5 +80,18 @@ public class SQLVisitanLocalComercial
 		return (List<VisitanLocalComercial>) q.executeList();
 	}
 
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar UN VISITANLOCALCOMERCIAL de la base de datos, por sus identificadores
+	 * @param pm - El manejador de persistencia
+	 * @param idLocal- El identificador del parqueadero
+	 * @param idVisitante - El identificador del bar
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarVisitanLocal (PersistenceManager pm, long idLocal, long idVisitante) 
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanParqueadero () + " WHERE idlocalcomercial = ? AND idvisitante = ?");
+        q.setParameters(idLocal, idVisitante);
+        return (long) q.executeUnique();
+	}
 
 }

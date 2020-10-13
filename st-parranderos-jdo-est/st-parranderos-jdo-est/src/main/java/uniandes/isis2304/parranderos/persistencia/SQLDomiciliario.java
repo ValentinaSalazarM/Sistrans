@@ -15,15 +15,13 @@
 
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.TipoVisitante;
+import uniandes.isis2304.parranderos.negocio.Domiciliario;
+
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto VISITAN de Parranderos
@@ -62,111 +60,78 @@ class SQLDomiciliario
 		this.pp = pp;
 	}
 	
+	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar un VISITAN a la base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para adicionar un DOMICILIARIO a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @param idBar - El identificador del bar
-	 * @param fecha - La fecha en que se realizó la visita
-	 * @param horario - EL horario en que se realizó la visita (DIURNO, NOCTURNO, TODOS)
-	 * @return EL número de tuplas insertadas
+	 * @param idvisitante - El identificador del visitante
+	 * @param compañia - La compañía del domiciliario
+	 * @return Las tuplas insertadas
 	 */
-	public long adicionarVisitan (PersistenceManager pm, long idBebedor, long idBar, Timestamp fecha, String horario) 
+	public long adicionarDomiciliario (PersistenceManager pm, long idvisitante, String compañia) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBaño () + "(idbebedor, idbar, fechavisita, horario) values (?, ?, ?, ?)");
-        q.setParameters(idBebedor, idBar, fecha, horario);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaDomiciliario() + "(idvisitante, compañia) values (?, ?)");
+        q.setParameters(idvisitante, compañia);
         return (long) q.executeUnique();
 	}
 
+
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar TODAS LAS VISITAS de la base de datos de Parranderos
+	 * Crea y ejecuta la sentencia SQL para eliminar los DOMICILIARIOS de la base de datos, por su identificador
 	 * @param pm - El manejador de persistencia
+	 * @param idDomiciliario - El identificador del domiciliario
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarVisitan (PersistenceManager pm) 
+	public long eliminarDomiciliarioPorID(PersistenceManager pm, long idDomiciliario) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño ());
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaDomiciliario() + " WHERE idvisitante = ?");
+        q.setParameters(idDomiciliario);
         return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar UN VISITAN de la base de datos de Parranderos, por sus identificadores
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de un DOMICILIARIO de la 
+	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @param idBar - El identificador del bar
-	 * @return EL número de tuplas eliminadas
+	 * @param id - El identificador del Domiciliario
+	 * @return El objeto DOMICILIARIO 
 	 */
-	public long eliminarVisitan (PersistenceManager pm, long idBebedor, long idBar) 
+	public Domiciliario darDomiciliarioPorID(PersistenceManager pm,long id) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE idbebedor = ? AND idbar = ?");
-        q.setParameters(idBebedor, idBar);
-        return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaDomiciliario() + " WHERE idvisitante = ?");
+		q.setResultClass(Domiciliario.class);
+		q.setParameters(id);
+		return (Domiciliario) q.executeUnique();
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS DOMICILIARIOS de la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Una lista de objetos DOMICILIARIOS
+	 */
+	public List<Domiciliario> darDomiciliarios(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaDomiciliario());
+		q.setResultClass(Domiciliario.class);
+		return (List<Domiciliario>) q.executeList();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para ELIMINAR TODAS LAS VISITAS DE UN BEBEDOR de la base de datos de Parranderos, por su identificador
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar la compañia de un domiciliario en la 
+	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idBebedor - El identificador del bebedor
-	 * @return EL número de tuplas eliminadas
+	 * @param id - El identificador del domiciliario 
+	 * @param  compañia - La compañia del domiciliario
+	 * @return El número de tuplas modificadas
 	 */
-	public long eliminarVisitanPorIdBebedor (PersistenceManager pm, long idBebedor) 
+	public long cambiarCompañia(PersistenceManager pm, long id , String compañia) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE idbebedor = ?");
-        q.setParameters(idBebedor);
-        return (long) q.executeUnique();
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaDomiciliario() + " SET compañia = ? WHERE idvisitante = ?");
+	     q.setParameters(compañia, id);
+	     return (long) q.executeUnique();            
 	}
 
-	/**
-	 * Crea y ejecuta la sentencia SQL para ELIMINAR TODAS LAS VISITAS HECHAS A UN BAR de la base de datos de Parranderos, por su identificador
-	 * @param pm - El manejador de persistencia
-	 * @param idBar - El identificador del bar
-	 * @return EL número de tuplas eliminadas
-	 */
-	public long eliminarVisitanPorIdBar (PersistenceManager pm, long idBar) 
-	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE idBar = ?");
-        q.setParameters(idBar);
-        return (long) q.executeUnique();
-	}
 
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de los VISITAN de la 
-	 * base de datos de Parranderos
-	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos VISITAN
-	 */
-	public List<TipoVisitante> darVisitan (PersistenceManager pm)
-	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBaño ());
-		q.setResultClass(TipoVisitante.class);
-		return (List<TipoVisitante>) q.execute();
-	}
-
-	/* ****************************************************************
-	 * 			Versión larga, a lo JDBC
-	 *****************************************************************/
-  	
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de los VISITAN de la 
-	 * base de datos de Parranderos
-	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos VISITAN
-	 */
-	private List<TipoVisitante> darVisitan_V2 (PersistenceManager pm)
-	{
-		Query q = pm.newQuery(SQL, "SELECT idBebedor, idBar, fechaVisita, horario FROM " + pp.darTablaBaño ());
-		List<TipoVisitante> resp = new LinkedList<>();
-		List results = q.executeList();
-		for (Object obj : results)
-		{
-			Object [] datos = (Object []) obj;
-			long idBebedor =  ((BigDecimal) datos [0]).longValue ();
-			long idBar = ((BigDecimal) datos [1]).longValue();
-			Timestamp fecha = (Timestamp) datos [2];
-			String horario = (String) datos [3];
-			resp.add (new TipoVisitante (idBebedor, idBar, fecha, horario));
-		}
-		return resp;		
-	}
-		 	
 }

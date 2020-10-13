@@ -12,6 +12,7 @@ package uniandes.isis2304.parranderos.persistencia;
  * @author Usuario
  *
  */
-public class SQLRegistranVehiculo {
+public class SQLRegistranVehiculo 
+{
 
 }

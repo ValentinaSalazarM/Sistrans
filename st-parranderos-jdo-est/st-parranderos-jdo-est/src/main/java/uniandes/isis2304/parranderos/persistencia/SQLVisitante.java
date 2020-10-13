@@ -66,7 +66,7 @@ public class SQLVisitante
 	 */
 	public long adicionarVisitante(PersistenceManager pm, long identificacion, String nombre, String tipo, String correo,String telefonopropio, String nombreEmergencia, String telefonoEmergencia) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVisitante() + "(identificador, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia ) values (?, ?, ?, ?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVisitante() + "(identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia ) values (?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(identificacion, nombre, tipo, correo, telefonopropio, nombreEmergencia, telefonoEmergencia);
         return (long) q.executeUnique();
 	}
@@ -79,7 +79,7 @@ public class SQLVisitante
 	 */
 	public long eliminarVisitantePorID (PersistenceManager pm, long identificador)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante() + " WHERE identificador = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante() + " WHERE identificacion = ?");
         q.setParameters(identificador);
         return (long) q.executeUnique();            
 	}
@@ -107,7 +107,7 @@ public class SQLVisitante
 	 */
 	public Visitante darVisitantePorId (PersistenceManager pm, long identificador) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisitante() + " WHERE identificador = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVisitante() + " WHERE identificacion = ?");
 		q.setResultClass(Visitante.class);
 		q.setParameters(identificador);
 		return (Visitante) q.executeUnique();
@@ -152,7 +152,7 @@ public class SQLVisitante
 	 */
 	public long cambiarTelefonoEmergencia (PersistenceManager pm, long identificador, String telefonoEmergencia) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaVisitante() + " SET telefonoemergencia = ? WHERE identificador = ?");
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaVisitante() + " SET telefonoemergencia = ? WHERE identificacion = ?");
 	     q.setParameters(telefonoEmergencia, identificador);
 	     return (long) q.executeUnique();            
 	}
@@ -167,7 +167,7 @@ public class SQLVisitante
 	 */
 	public long cambiarContactoEmergencia (PersistenceManager pm, long identificador, String contactoEmergencia) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaVisitante() + " SET nombreemergencia = ? WHERE identificador = ?");
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaVisitante() + " SET nombreemergencia = ? WHERE identificacion = ?");
 	     q.setParameters(contactoEmergencia, identificador);
 	     return (long) q.executeUnique();            
 	}
