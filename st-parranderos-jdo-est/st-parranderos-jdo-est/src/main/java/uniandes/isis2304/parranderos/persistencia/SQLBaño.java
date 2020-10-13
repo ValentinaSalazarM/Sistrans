@@ -71,19 +71,6 @@ class SQLBaño
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar un BAÑO de la base de datos de AforoAndes, por su número de sanitarios
-	 * @param pm - El manejador de persistencia
-	 * @param numeroSanitarios - El número de sanitarios del baño
-	 * @return EL número de tuplas eliminadas
-	 */
-	public long eliminarBañoPorSanitarios (PersistenceManager pm, int numeroSanitarios)
-	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE sanitarios = ?");
-        q.setParameters(numeroSanitarios);
-        return (long) q.executeUnique();            
-	}
-
-	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar UN BAÑO de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
 	 * @param idBaño - El identificador del baño
@@ -148,7 +135,7 @@ class SQLBaño
 	 * @param numeroSanitarios - El nuevo número de sanitarios del baño
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarPesoMaximoBaño (PersistenceManager pm, long idBaño, int numeroSanitarios) 
+	public long cambiarNumeroSanitarios (PersistenceManager pm, long idBaño, int numeroSanitarios) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaBaño () + " SET sanitarios = ? WHERE identificador = ?");
 	     q.setParameters(numeroSanitarios, idBaño);

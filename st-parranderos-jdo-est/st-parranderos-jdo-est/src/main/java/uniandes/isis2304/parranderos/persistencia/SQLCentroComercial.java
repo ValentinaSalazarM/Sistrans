@@ -136,5 +136,22 @@ class SQLCentroComercial
 		q.setResultClass(CentroComercial.class);
 		return (List<CentroComercial>) q.executeList();
 	}
+	
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el nombre de un centro comercial en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idCentroComercial - El identificador del centro comercial 
+	 * @param nombre - El nuevo nombre del Centro Comercial
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarNombre (PersistenceManager pm, long idCentroComercial, String nombre) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCentroComercial () + " SET nombre = ? WHERE idCentroComercial = ?");
+	     q.setParameters(nombre, idCentroComercial);
+	     return (long) q.executeUnique();            
+	}
+	
 
 }

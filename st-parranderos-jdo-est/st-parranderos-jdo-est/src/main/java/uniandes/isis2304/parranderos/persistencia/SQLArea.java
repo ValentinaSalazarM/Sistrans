@@ -138,4 +138,35 @@ class SQLArea
 		return (List<Area>) q.executeList();
 	}
 
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el valor del área en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param id - El id del área
+	 * @param valor - El nuevo valor del área
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarValorArea(PersistenceManager pm, long id, double valor) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaArea () + " SET valor = ? WHERE id = ?");
+	     q.setParameters(valor, id);
+	     return (long) q.executeUnique();            
+	}
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el aforo del área en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param id - El id del área
+	 * @param valor - El nuevo aforo dependiendo del área
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarAforo (PersistenceManager pm, long id, int aforo) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaArea () + " SET aforo = ? WHERE id = ?");
+	     q.setParameters(aforo, id);
+	     return (long) q.executeUnique();            
+	}
+
 }

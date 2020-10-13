@@ -213,6 +213,11 @@ public class PersistenciaAforoAndes
 	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
 	private SQLRegistranVehiculo sqlRegistranVehiculo;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLHorario sqlHorario;
 		
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
@@ -259,6 +264,7 @@ public class PersistenciaAforoAndes
 		tablas.add ("tipoCarnet_sequence");
 		tablas.add ("tipoLector_sequence");
 		tablas.add ("tipoVisitante_sequence");
+		tablas.add ("HORARIO");
 
 }
 
@@ -360,6 +366,7 @@ public class PersistenciaAforoAndes
 		sqlRegistranCarnet = new SQLRegistranCarnet(this);
 		sqlRegistranVehiculo = new SQLRegistranVehiculo(this);
 		sqlUtil = new SQLUtil(this);
+		sqlHorario = new SQLHorario(this);
 	}
 
 	/**
@@ -602,6 +609,13 @@ public class PersistenciaAforoAndes
 	}
 
 
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador
+	 */
+	public String darTablaHorario()
+	{
+		return tablas.get (31);
+	}
 	/**
 	 * Transacción para el generador de secuencia de 
 	 * Adiciona entradas al log de la aplicación

@@ -9,13 +9,12 @@
 
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.CentroComercial;
+import uniandes.isis2304.parranderos.negocio.LocalComercial;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto LOCAL COMERCIAL de AforoAndes
@@ -53,49 +52,36 @@ class SQLLocalComercial
 		this.pp = pp;
 	}
 	
-	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar un LOCAL COMERCIAL a la base de datos de AforoAndes
-	 * @param pm - El manejador de persistencia
-	 * @param idCentroComercial - El identificador del local comercial
-	 * @param cupoActual - El cupo actual del local comercial
-	 * @param capacidadNormal - El identificador de la capacidad normal del local comercial
-	 * @param area - El identificador del área del local comercial
-	 * @param pesoMaximo - El peso máximo del local comercial
-	 * @param idCentroComercial - El identificador del local comercial del local comercial
-	 * @return EL número de tuplas insertadas
-	 */
-	public long adicionarCentroComercial (PersistenceManager pm, String idCentroComercial, String nombre, Timestamp horaApertura) 
+/**
+ * Crea y ejecuta la sentencia SQL para adicionar un LOCALCOMERCIAL la base de datos de AforoAndes
+ * @param pm  - El manejador de persistencia
+ * @param identificador - El identificador del local
+ * @param capacidadNormal - La capacidad común del local comercia
+ * @param area - El área del local comercial
+ * @param tipoLocal - El tipo del local comercial
+ * @param activo - Si está en funcionamiento o no (es un booleano representado con 0 o 1)
+ * @param idCentroComercial - El identificador del centro comercial al que pertenece el local comercial
+ * @return El número de tuplas insertadas
+ */
+	public long adicionarLocalComercial (PersistenceManager pm, String identificador, int capacidadNormal, double area, String tipoLocal, int activo, long idCentroComercial) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCentroComercial () + "(id, nombre, horaApertura) values (?, ?, ?)");
-        q.setParameters(idCentroComercial, nombre);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaLocalComercial () + "(identificador, capacidadNormal, area, tipoLocal, activo, idcentrocomercial) values (?, ?, ?, ?, ?, ?)");
+        q.setParameters(identificador, capacidadNormal, area, tipoLocal, activo, idCentroComercial);
         return (long) q.executeUnique();
 	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar un LOCAL COMERCIAL de la base de datos de AforoAndes, por su nombre
-	 * @param pm - El manejador de persistencia
-	 * @param nombre - El peso máximo del local comercial
-	 * @return EL número de tuplas eliminadas
-	 */
-	public long eliminarCentroComercialPorNombre (PersistenceManager pm, String nombre)
+/**
+ * Crea y ejecuta la sentencia SQL para eliminar LOCAL COMERCIAL de la base de datos de AforoAndes, por su identificador
+ * @param pm - El manejador de persistencia
+ * @param identificador - El identificador del local
+ * @return El número de tuplas eliminadas
+ */
+	public long eliminarLocalComercialPorId (PersistenceManager pm, String identificador ) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE nombre = ?");
-        q.setParameters(nombre);
-        return (long) q.executeUnique();            
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaLocalComercial() + " WHERE identificador = ?");
+        q.setParameters(identificador);
+        return (long) q.executeUnique();  
 	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar UN LOCAL COMERCIAL de la base de datos de AforoAndes, por su identificador
-	 * @param pm - El manejador de persistencia
-	 * @param idCentroComercial - El identificador del local comercial
-	 * @return EL número de tuplas eliminadas
-	 */
-	public long eliminarCentroComercialPorId (PersistenceManager pm, long idCentroComercial)
-	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
-        q.setParameters(idCentroComercial);
-        return (long) q.executeUnique();            
-	}
+		
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN LOCAL COMERCIAL de la 
@@ -104,27 +90,27 @@ class SQLLocalComercial
 	 * @param idCentroComercial - El identificador del local comercial
 	 * @return El objeto LOCAL COMERCIAL que tiene el identificador dado
 	 */
-	public CentroComercial darCentroComercialPorId (PersistenceManager pm, long idCentroComercial) 
+	public LocalComercial darLocalComercialPorId (PersistenceManager pm, long identificador) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
-		q.setResultClass(CentroComercial.class);
-		q.setParameters(idCentroComercial);
-		return (CentroComercial) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaLocalComercial () + " WHERE identificador = ?");
+		q.setResultClass(LocalComercial.class);
+		q.setParameters(identificador);
+		return (LocalComercial) q.executeUnique();
 	}
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS LOCAL COMERCIALES de la 
-	 * base de datos de AforoAndes, por su nombre
+	 * base de datos de AforoAndes, por su idCentroComercial
 	 * @param pm - El manejador de persistencia
-	 * @param nombre - El nombre del local comercial buscado
-	 * @return Una lista de objetos LOCAL COMERCIAL que tienen el nombre dado
+	 * @param idCentroComercial - El identificador del centro comercial en el que se encuentra el local
+	 * @return Una lista de objetos LOCAL COMERCIAL que pertenecen a un centro comercial
 	 */
-	public List<CentroComercial> darCentrosComercialesPorNombre (PersistenceManager pm, String nombre) 
+	public List<LocalComercial> darLocalesComercialesPorIDCC (PersistenceManager pm, long idCentroComercial) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial () + " WHERE nombre = ?");
-		q.setResultClass(CentroComercial.class);
-		q.setParameters(nombre);
-		return (List<CentroComercial>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaLocalComercial() + " WHERE idcentrocomercial = ?");
+		q.setResultClass(LocalComercial.class);
+		q.setParameters(idCentroComercial);
+		return (List<LocalComercial>) q.executeList();
 	}
 
 	/**
@@ -133,28 +119,29 @@ class SQLLocalComercial
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos LOCAL COMERCIAL
 	 */
-	public List<CentroComercial> darCentrosComerciales (PersistenceManager pm)
+	public List<LocalComercial> darLocalesComerciales (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial ());
-		q.setResultClass(CentroComercial.class);
-		return (List<CentroComercial>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaLocalComercial ());
+		q.setResultClass(LocalComercial.class);
+		return (List<LocalComercial>) q.executeList();
 	}
 
 	/**
 	 * 
-	 * Crea y ejecuta la sentencia SQL para cambiar la hora de apertura de un local comercial en la 
+	 * Crea y ejecuta la sentencia SQL para cambiar el área de un local comercial en la 
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idCentroComercial - El identificador del local comercial
-	 * @param horaApertura - La nueva horaApertura del local comercial
+	 * @param idLocal- identificador del local
+	 * @param área - Área de un local comercial
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarHoraAperturaCentroComercial (PersistenceManager pm, long idCentroComercial, Timestamp horaApertura) 
+	public long cambiarArea (PersistenceManager pm, long identificador, double area) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCentroComercial () + " SET horaApertura = ? WHERE identificador = ?");
-	     q.setParameters(horaApertura, idCentroComercial);
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaLocalComercial () + " SET area = ? WHERE identificador = ?");
+	     q.setParameters(area, identificador);
 	     return (long) q.executeUnique();            
 	}
+
 
 
 }

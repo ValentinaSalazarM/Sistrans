@@ -137,5 +137,35 @@ class SQLCapacidadNormal
 		q.setResultClass(CapacidadNormal.class);
 		return (List<CapacidadNormal>) q.executeList();
 	}
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el valor de la capacidad normal en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param id - El id Capacidad Normal
+	 * @param valor - El nuevo valor de la capacidad
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarValorCapacidad (PersistenceManager pm, long id, double valor) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCapacidadNormal () + " SET valor = ? WHERE id = ?");
+	     q.setParameters(valor, id);
+	     return (long) q.executeUnique();            
+	}
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el aforo de la capacidad normal en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param id - El id Capacidad Normal
+	 * @param valor - El nuevo aforo de la capacidad
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarAforo (PersistenceManager pm, long id, int aforo) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCapacidadNormal () + " SET aforo = ? WHERE id = ?");
+	     q.setParameters(aforo, id);
+	     return (long) q.executeUnique();            
+	}
 
 }
