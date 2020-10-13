@@ -114,13 +114,13 @@ class SQLParqueadero
 	 * Crea y ejecuta la sentencia SQL para cambiar el área de un parqueadero en la 
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idLocal- identificador del parqueadero
+	 * @param idParqueadero - identificador del parqueadero
 	 * @param area - Identificador de la nueva área de un parqueadero
 	 * @return El número de tuplas modificadas
 	 */
 	public long cambiarAreaParqueadero (PersistenceManager pm, String idParqueadero, long area) 
 	{
-		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaLocalComercial () + " SET area = ? WHERE identificador = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaParqueadero () + " SET area = ? WHERE identificador = ?");
 		q.setParameters(area, idParqueadero);
 		return (long) q.executeUnique();            
 	}

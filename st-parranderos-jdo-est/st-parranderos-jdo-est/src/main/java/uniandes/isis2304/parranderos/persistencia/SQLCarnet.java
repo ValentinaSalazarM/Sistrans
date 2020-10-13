@@ -84,38 +84,23 @@ class SQLCarnet
 	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar UN CARNET de la base de datos de AforoAndes, por su tipo e identificador
 	 * @param pm - El manejador de persistencia
-	 * @param tipoCarnet - El identificador del tipo de carnet
 	 * @param idVisitante - El identificador del visitante del carnet
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarCarnetPorIdVisitante (PersistenceManager pm, long idVisitante)
+	public long eliminarCarnetPorIdVisitante (PersistenceManager pm, String idVisitante)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCarnet () + " WHERE idVisitante = ?");
         q.setParameters(idVisitante);
         return (long) q.executeUnique();
 	}
 
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN CARNET de la 
-	 * base de datos de AforoAndes, por su identificador
-	 * @param pm - El manejador de persistencia
-	 * @param idVisitante - El identificador del carnet
-	 * @return El objeto CARNET que tiene el identificador dado
-	 */
-	public Carnet darCarnetPorIdVisitante (PersistenceManager pm, long idVisitante) 
-	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarnet () + " WHERE idVisitante = ?");
-		q.setResultClass(Carnet.class);
-		q.setParameters(idVisitante);
-		return (Carnet) q.executeUnique();
-	}
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS CARNETS de la 
 	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
 	 * @param tipoCarnet - El identificador del tipo de carnet
-	 * @return Una lista de objetos CARNET que tienen el nombre dado
+	 * @return Una lista de objetos CARNET que tienen el tipo dado
 	 */
 	public List<Carnet> darCarnetsPorTipo (PersistenceManager pm, long tipoCarnet) 
 	{
@@ -123,6 +108,21 @@ class SQLCarnet
 		q.setResultClass(Carnet.class);
 		q.setParameters(tipoCarnet);
 		return (List<Carnet>) q.executeList();
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN CARNET de la 
+	 * base de datos de AforoAndes, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param idVisitante - El identificador del dueño del carnet
+	 * @return El objeto CARNET que tiene el identificador de visitante dado
+	 */
+	public Carnet darCarnetPorIdVisitante (PersistenceManager pm, String idVisitante) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarnet () + " WHERE idVisitante = ?");
+		q.setResultClass(Carnet.class);
+		q.setParameters(idVisitante);
+		return (Carnet) q.executeUnique();
 	}
 
 	/**

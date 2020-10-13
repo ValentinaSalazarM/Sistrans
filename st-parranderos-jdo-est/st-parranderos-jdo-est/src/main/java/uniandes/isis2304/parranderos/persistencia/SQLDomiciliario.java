@@ -24,10 +24,9 @@ import uniandes.isis2304.parranderos.negocio.Domiciliario;
 
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto VISITAN de Parranderos
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto DOMICILIARIO de AFORO-CCANDES
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
- * @author Germán Bravo
  */
 class SQLDomiciliario 
 {
@@ -64,28 +63,40 @@ class SQLDomiciliario
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un DOMICILIARIO a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param idvisitante - El identificador del visitante
-	 * @param compañia - La compañía del domiciliario
+	 * @param idVisitante - El identificador del visitante
+	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
 	 * @return Las tuplas insertadas
 	 */
-	public long adicionarDomiciliario (PersistenceManager pm, long idvisitante, String compañia) 
+	public long adicionarDomiciliario (PersistenceManager pm, String idVisitante, String empresaDomicilios) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaDomiciliario() + "(idvisitante, compañia) values (?, ?)");
-        q.setParameters(idvisitante, compañia);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaDomiciliario() + "(idvisitante, empresaDomicilios) values (?, ?)");
+        q.setParameters(idVisitante, empresaDomicilios);
         return (long) q.executeUnique();
 	}
-
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar los DOMICILIARIOS de la base de datos, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idDomiciliario - El identificador del domiciliario
+	 * @param idVisitante - El identificador del domiciliario
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarDomiciliarioPorID(PersistenceManager pm, long idDomiciliario) 
+	public long eliminarDomiciliarioPorId(PersistenceManager pm, String idVisitante) 
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaDomiciliario() + " WHERE idvisitante = ?");
-        q.setParameters(idDomiciliario);
+        q.setParameters(idVisitante);
+        return (long) q.executeUnique();
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar los DOMICILIARIOS de la base de datos, por su empresa
+	 * @param pm - El manejador de persistencia
+	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarDomiciliarioPorEmpresa(PersistenceManager pm, String empresaDomicilios) 
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaDomiciliario() + " WHERE empresaDomicilios = ?");
+        q.setParameters(empresaDomicilios);
         return (long) q.executeUnique();
 	}
 
@@ -93,15 +104,30 @@ class SQLDomiciliario
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de un DOMICILIARIO de la 
 	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param id - El identificador del Domiciliario
+	 * @param idDomiciliario - El identificador del Domiciliario
 	 * @return El objeto DOMICILIARIO 
 	 */
-	public Domiciliario darDomiciliarioPorID(PersistenceManager pm,long id) 
+	public Domiciliario darDomiciliarioPorId(PersistenceManager pm, String idDomiciliario) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaDomiciliario() + " WHERE idvisitante = ?");
 		q.setResultClass(Domiciliario.class);
-		q.setParameters(id);
+		q.setParameters(idDomiciliario);
 		return (Domiciliario) q.executeUnique();
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de un DOMICILIARIO de la 
+	 * base de datos de AforoAndes, por su empresa
+	 * @param pm - El manejador de persistencia
+	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
+	 * @return Una lista de objetos DOMICILIARIOS
+	 */
+	public List<Domiciliario> darDomiciliariosPorEmpresa(PersistenceManager pm, String empresaDomicilios) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaDomiciliario() + " WHERE empresaDomicilios = ?");
+		q.setResultClass(Domiciliario.class);
+		q.setParameters(empresaDomicilios);
+		return (List<Domiciliario>) q.executeUnique();
 	}
 	
 	/**
@@ -123,13 +149,13 @@ class SQLDomiciliario
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
 	 * @param id - El identificador del domiciliario 
-	 * @param  compañia - La compañia del domiciliario
+	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarCompañia(PersistenceManager pm, long id , String compañia) 
+	public long cambiarEmpresaDomiciliario(PersistenceManager pm, String idDomiciliario, String empresaDomicilios) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaDomiciliario() + " SET compañia = ? WHERE idvisitante = ?");
-	     q.setParameters(compañia, id);
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaDomiciliario() + " SET empresaDomicilios = ? WHERE idvisitante = ?");
+	     q.setParameters(empresaDomicilios, idDomiciliario);
 	     return (long) q.executeUnique();            
 	}
 

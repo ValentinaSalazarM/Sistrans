@@ -26,7 +26,7 @@ public class Domiciliario implements VODomiciliario
 	/**
 	 * La compañía de domicilios para la que trabaja el domiciliario
 	 */
-	private String compañiaDomicilios;
+	private String empresaDomicilios;
 	
 	
 	/* ****************************************************************
@@ -38,18 +38,18 @@ public class Domiciliario implements VODomiciliario
 	public Domiciliario() 
 	{
 		this.idVisitante = "";
-		this.compañiaDomicilios = "";
+		this.empresaDomicilios = "";
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param idVisitante - El identificador del visitante respectivo. Debe existir un visitante con dicho identificador
-	 * @param compañiaDomicilios - Compañía para la que trabaja el domiciliario
+	 * @param empresaDomicilios - Compañía para la que trabaja el domiciliario
 	 */
-	public Domiciliario(String idVisitante, String compañiaDomicilios) 
+	public Domiciliario(String idVisitante, String empresaDomicilios) 
 	{
 		this.idVisitante = idVisitante;
-		this.compañiaDomicilios = compañiaDomicilios;
+		this.empresaDomicilios = empresaDomicilios;
 	}
 	
 	/**
@@ -69,19 +69,19 @@ public class Domiciliario implements VODomiciliario
 	}
 
 	/**
-	 * @return La compañiaDomicilios en la que trabaja el domiciliario
+	 * @return La empresaDomicilios en la que trabaja el domiciliario
 	 */
-	public String getCompañiaDomicilios() 
+	public String getEmpresaDomicilios() 
 	{
-		return compañiaDomicilios;
+		return empresaDomicilios;
 	}
 
 	/**
-	 * @param compañiaDomicilios - La nueva compañia de domicilios del domiciliario 
+	 * @param empresaDomicilios - La nueva compañia de domicilios del domiciliario 
 	 */
-	public void setCompañiaDomicilios(String compañiaDomicilios) 
+	public void setEmpresaDomicilios(String empresaDomicilios) 
 	{
-		this.compañiaDomicilios = compañiaDomicilios;
+		this.empresaDomicilios = empresaDomicilios;
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Domiciliario implements VODomiciliario
 	@Override
 	public String toString() 
 	{
-		return "Domiciliario [idVisitante=" + idVisitante + ", compañiaDomicilios=" + compañiaDomicilios + "]";
+		return "Domiciliario [idVisitante=" + idVisitante + ", empresaDomicilios=" + empresaDomicilios + "]";
 	}
 
 

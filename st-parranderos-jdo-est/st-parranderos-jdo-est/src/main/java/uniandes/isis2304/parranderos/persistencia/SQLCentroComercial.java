@@ -57,7 +57,6 @@ class SQLCentroComercial
 	 * @param pm - El manejador de persistencia
 	 * @param idCentroComercial - El identificador del centro comercial
 	 * @param nombre - El nombre del centro comercial
-	 * @param horaApertura - La hora de apertura 
 	 * @return EL número de tuplas insertadas
 	 */
 	public long adicionarCentroComercial (PersistenceManager pm, String idCentroComercial, String nombre) 
@@ -68,9 +67,22 @@ class SQLCentroComercial
 	}
 
 	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar UN CENTRO COMERCIAL de la base de datos de AforoAndes, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param idCentroComercial - El identificador del centro comercial
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarCentroComercialPorId (PersistenceManager pm, String idCentroComercial)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
+        q.setParameters(idCentroComercial);
+        return (long) q.executeUnique();            
+	}
+
+	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar un CENTRO COMERCIAL de la base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
-	 * @param nombre - El peso máximo del centro comercial
+	 * @param nombre - El nombre del centro comercial
 	 * @return EL número de tuplas eliminadas
 	 */
 	public long eliminarCentroComercialPorNombre (PersistenceManager pm, String nombre)
@@ -79,20 +91,7 @@ class SQLCentroComercial
         q.setParameters(nombre);
         return (long) q.executeUnique();            
 	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar UN CENTRO COMERCIAL de la base de datos de AforoAndes, por su identificador
-	 * @param pm - El manejador de persistencia
-	 * @param idCentroComercial - El identificador del centro comercial
-	 * @return EL número de tuplas eliminadas
-	 */
-	public long eliminarCentroComercialPorId (PersistenceManager pm, long idCentroComercial)
-	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
-        q.setParameters(idCentroComercial);
-        return (long) q.executeUnique();            
-	}
-
+	
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN CENTRO COMERCIAL de la 
 	 * base de datos de AforoAndes, por su identificador
@@ -100,7 +99,7 @@ class SQLCentroComercial
 	 * @param idCentroComercial - El identificador del centro comercial
 	 * @return El objeto CENTRO COMERCIAL que tiene el identificador dado
 	 */
-	public CentroComercial darCentroComercialPorId (PersistenceManager pm, long idCentroComercial) 
+	public CentroComercial darCentroComercialPorId (PersistenceManager pm, String idCentroComercial) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCentroComercial () + " WHERE id = ?");
 		q.setResultClass(CentroComercial.class);
@@ -145,7 +144,7 @@ class SQLCentroComercial
 	 * @param nombre - El nuevo nombre del Centro Comercial
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarNombre (PersistenceManager pm, long idCentroComercial, String nombre) 
+	public long cambiarNombreCentroComercial (PersistenceManager pm, String idCentroComercial, String nombre) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCentroComercial () + " SET nombre = ? WHERE idCentroComercial = ?");
 	     q.setParameters(nombre, idCentroComercial);

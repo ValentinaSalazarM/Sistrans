@@ -155,5 +155,20 @@ class SQLAscensor
 	     return (long) q.executeUnique();            
 	}
 
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el área de un ascensor en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idAscensor- identificador del ascensor
+	 * @param area - Identificador de la nueva área de un ascensor
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarAreaAscensor (PersistenceManager pm, String idAscensor, long area) 
+	{
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaAscensor () + " SET area = ? WHERE identificador = ?");
+		q.setParameters(area, idAscensor);
+		return (long) q.executeUnique();            
+	}
 
 }

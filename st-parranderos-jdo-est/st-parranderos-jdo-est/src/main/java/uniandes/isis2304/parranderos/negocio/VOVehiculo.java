@@ -31,9 +31,9 @@ public interface VOVehiculo
 	public String getCaracteristicas();
 
 	/**
-	 * @return El identificador del dueño del vehículo
+	 * @return El identificador del propietario del vehículo
 	 */
-	public String getDueño();
+	public String getPropietario();
 	
 	/**
 	 * @return Una cadena de caracteres con la información del vehículo

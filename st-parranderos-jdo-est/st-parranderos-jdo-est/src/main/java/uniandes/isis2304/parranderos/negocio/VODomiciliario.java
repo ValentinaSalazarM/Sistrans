@@ -29,7 +29,7 @@ public interface VODomiciliario
 	/**
 	 * @return La compañiaDomicilios en la que trabaja el domiciliario
 	 */
-	public String getCompañiaDomicilios();
+	public String getEmpresaDomicilios();
 
 	/**
 	 * @return Una cadena de caracteres con la información del domiciliario

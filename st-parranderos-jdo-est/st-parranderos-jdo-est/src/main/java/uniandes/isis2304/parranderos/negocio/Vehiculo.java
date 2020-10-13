@@ -29,9 +29,9 @@ public class Vehiculo implements VOVehiculo
 	private String caracteristicas;
 	
 	/**
-	 * Identificador del dueño del vehículo. Debe existir en la tabla VISITANTE
+	 * Identificador del propietario del vehículo. Debe existir en la tabla VISITANTE
 	 */
-	private String dueño;
+	private String propietario;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -43,20 +43,20 @@ public class Vehiculo implements VOVehiculo
 	{
 		this.placa = "";
 		this.caracteristicas = "";
-		this.dueño = "";
+		this.propietario = "";
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param placa - La placa del vehículo
 	 * @param caracteristicas - Las características del vehículo
-	 * @param dueño - El identificador del visitante dueño del vehículo. Debe existir un visitante con dicho identificador
+	 * @param propietario - El identificador del visitante propietario del vehículo. Debe existir un visitante con dicho identificador
 	 */
 	public Vehiculo(String placa, String caracteristicas, String dueño) 
 	{
 		this.placa = placa;
 		this.caracteristicas = caracteristicas;
-		this.dueño = dueño;
+		this.propietario = dueño;
 	}
 	
 	/**
@@ -92,19 +92,19 @@ public class Vehiculo implements VOVehiculo
 	}
 
 	/**
-	 * @return El identificador del dueño del vehículo
+	 * @return El identificador del propietario del vehículo
 	 */
-	public String getDueño() 
+	public String getPropietario() 
 	{
-		return dueño;
+		return propietario;
 	}
 
 	/**
-	 * @param dueño - El nuevo identificador del dueño del vehículo. Debe existir un visitante con dicho identificador
+	 * @param propietario - El nuevo identificador del propietario del vehículo. Debe existir un visitante con dicho identificador
 	 */
-	public void setDueño(String dueño) 
+	public void setPropietario(String propietario) 
 	{
-		this.dueño = dueño;
+		this.propietario = propietario;
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class Vehiculo implements VOVehiculo
 	@Override
 	public String toString() 
 	{
-		return "Vehiculo [placa=" + placa + ", caracteristicas=" + caracteristicas + ", dueño=" + dueño + "]";
+		return "Vehiculo [placa=" + placa + ", caracteristicas=" + caracteristicas + ", propietario=" + propietario + "]";
 	}
 
 

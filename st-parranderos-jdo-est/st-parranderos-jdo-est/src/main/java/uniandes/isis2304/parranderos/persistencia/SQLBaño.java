@@ -154,5 +154,19 @@ class SQLBaño
 	     return (long) q.executeUnique();            
 	}
 
-
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el área de un baño en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idBaño- identificador del baño
+	 * @param area - Identificador de la nueva área de un baño
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarAreaBaño (PersistenceManager pm, String idBaño, long area) 
+	{
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaBaño () + " SET area = ? WHERE identificador = ?");
+		q.setParameters(area, idBaño);
+		return (long) q.executeUnique();            
+	}
 }

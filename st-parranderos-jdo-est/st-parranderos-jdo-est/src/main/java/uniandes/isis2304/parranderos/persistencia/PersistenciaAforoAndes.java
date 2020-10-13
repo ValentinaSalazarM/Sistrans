@@ -32,6 +32,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import uniandes.isis2304.parranderos.negocio.Visitante;
 import uniandes.isis2304.parranderos.negocio.CapacidadNormal;
+import uniandes.isis2304.parranderos.negocio.Carnet;
+import uniandes.isis2304.parranderos.negocio.CentroComercial;
+import uniandes.isis2304.parranderos.negocio.Domiciliario;
 import uniandes.isis2304.parranderos.negocio.Ascensor;
 import uniandes.isis2304.parranderos.negocio.Baño;
 import uniandes.isis2304.parranderos.negocio.Ascensor;
@@ -1104,6 +1107,40 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+	
+	/**
+	 * Método que actualiza, de manera transaccional, el valor de un ASCENSOR
+	 * @param idAscensor - El identificador del parqueadero que se quiere modificar
+	 * @param area - Identificador de la nueva área de un ascensor
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarAreaAscensor (String idAscensor, long area)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlAscensor.cambiarAreaAscensor (pm, idAscensor, area);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los BAÑOS
@@ -1128,7 +1165,7 @@ public class PersistenciaAforoAndes
 			long tuplasInsertadas = sqlBaño.adicionarBaño (pm, idBaño, capacidadNormal, area, numeroSanitarios, idCentroComercial);
 			tx.commit();
 
-			log.trace ("Inserción de Baño: " + idBaño + ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("Inserción de Baño: " + idBaño + "| " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Baño(idBaño, area, capacidadNormal, numeroSanitarios, idCentroComercial);
 		}
@@ -1215,7 +1252,6 @@ public class PersistenciaAforoAndes
 		}
 	}
 
-
 	/**
 	 * Método que consulta todas las tuplas en la tabla BAÑO que tienen el identificador dado
 	 * @param idBaño - El identificador del baño
@@ -1225,7 +1261,6 @@ public class PersistenciaAforoAndes
 	{
 		return sqlBaño.darBañoPorId (pmf.getPersistenceManager(), idBaño);
 	}
-
 
 	/**
 	 * Método que consulta todas las tuplas en la tabla BAÑO que tienen el número de sanitarios dado
@@ -1278,7 +1313,697 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+	
+	/**
+	 * Método que actualiza, de manera transaccional, el valor de un BAÑO
+	 * @param idBaño - El identificador del parqueadero que se quiere modificar
+	 * @param area - Identificador de la nueva área de un baño
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarAreaBaño (String idBaño, long area)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlBaño.cambiarAreaBaño (pm, idBaño, area);
+			tx.commit();
 
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar las CAPACIDADESNORMALES
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla CAPACIDADNORMAL
+	 * Adiciona entradas al log de la aplicación
+	 * @param valor - El valor de la capacidad normal
+	 * @param aforo - El aforo de la capacidad normal
+	 * @return El objeto CapacidadNormal adicionado. null si ocurre alguna Excepción
+	 */
+	public CapacidadNormal adicionarCapacidadNormal (double valor, int aforo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long idCapacidadNormal = nextvalCapacidadNormal();
+			long tuplasInsertadas = sqlCapacidadNormal.adicionarCapacidadNormal(pm, idCapacidadNormal, valor, aforo);
+			tx.commit();
+
+			log.trace ("Inserción de la capacidad normal con valor: " + valor + " y aforo: " + aforo + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new CapacidadNormal (idCapacidadNormal, valor, aforo);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla CapacidadNormal, dado el valor de la capacidad normal
+	 * Adiciona entradas al log de la aplicación
+	 * @param valorArea - El valor de la capacidad normal
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarCapacidadNormalPorValor (double valor) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCapacidadNormal.eliminarCapacidadNormalesPorValor(pm, valor);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla CapacidadNormal, dado el identificador de la capacidad normal
+	 * Adiciona entradas al log de la aplicación
+	 * @param idCapacidadNormal - El identificador de la capacidad normal
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarCapacidadNormalPorId (long idCapacidadNormal) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCapacidadNormal.eliminarCapacidadNormalPorId(pm, idCapacidadNormal);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla CapacidadNormal con un identificador dado
+	 * @param idCapacidadNormal - El identificador de la capacidad normal
+	 * @return El objeto CapacidadNormal, construido con base en las tuplas de la tabla CAPACIDADNORMAL con el identificador dado
+	 */
+	public CapacidadNormal darCapacidadNormalPorId (long idCapacidadNormal)
+	{
+		return sqlCapacidadNormal.darCapacidadNormalPorId (pmf.getPersistenceManager(), idCapacidadNormal);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla CapacidadNormal que tienen el valor dado
+	 * @param valor - El valor de la capacidad normal
+	 * @return La lista de objetos CapacidadNormal, construidos con base en las tuplas de la tabla CAPACIDADNORMAL
+	 */
+	public List<CapacidadNormal> darCapacidadesNormalesPorValor (double valor)
+	{
+		return sqlCapacidadNormal.darCapacidadesNormalesPorValor(pmf.getPersistenceManager(), valor);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla CapacidadNormal
+	 * @return La lista de objetos CapacidadNormal, construidos con base en las tuplas de la tabla CAPACIDADNORMAL
+	 */
+	public List<CapacidadNormal> darCapacidadesNormales ()
+	{
+		return sqlCapacidadNormal.darCapacidadesNormales (pmf.getPersistenceManager());
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, el valor de una CAPACIDADNORMAL
+	 * @param idCapacidadNormal - El identificador de la capacidad normal que se quiere modificar
+	 * @param valor - El nuevo valor de la capacidad normal
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarValorCapacidad (long idCapacidadNormal, double valor)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCapacidadNormal.cambiarValorCapacidad(pm, idCapacidadNormal, valor);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, el valor de una CAPACIDADNORMAL
+	 * @param idCapacidadNormal - El identificador de la capacidad normal que se quiere modificar
+	 * @param aforo - El nuevo aforo de la capacidad normal
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarAforoCapacidad (long idCapacidadNormal, int aforo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCapacidadNormal.cambiarAforoCapacidad(pm, idCapacidadNormal, aforo);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar los CARNETS
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla CARNET
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipoCarnet - El identificador del tipo de carnet
+	 * @param idVisitante - El identificador del visitante del carnet
+	 * @return El objeto Carnet adicionado. null si ocurre alguna Excepción
+	 */
+	public Carnet adicionarCarnet (long tipoCarnet, String idVisitante)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlCarnet.adicionarCarnet(pm, tipoCarnet, idVisitante);
+			tx.commit();
+
+			log.trace ("Inserción del carnet con tipoCarnet: " + tipoCarnet + " e idVisitante: " + idVisitante + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Carnet(tipoCarnet, idVisitante);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Carnet, dado el tipo del carnet
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipoCarnet - El identificador del tipo de carnet
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarCarnetsPorTipo (long tipoCarnet) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCarnet.eliminarCarnetsPorTipo (pm, tipoCarnet);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Carnet, dado identificador del visitante
+	 * Adiciona entradas al log de la aplicación
+	 * @param idVisitante - El identificador del visitante del carnet
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarCarnetPorIdVisitante (String idVisitante) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCarnet.eliminarCarnetPorIdVisitante(pm, idVisitante);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Carnet con un tipo dado
+	 * @param tipoCarnet - El identificador del tipo de carnet
+	 * @return La lista de objetos Carnet que tienen el tipo buscado, construidos con base en las tuplas de la tabla CARNET
+	 */
+	public List<Carnet> darCarnetsPorTipo (long tipoCarnet)
+	{
+		return sqlCarnet.darCarnetsPorTipo (pmf.getPersistenceManager(), tipoCarnet);
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Carnet con un identificador de visitante dado
+	 * @param idVisitante - El identificador del dueño del carnet
+	 * @return El objeto Carnet, construido con base en las tuplas de la tabla CARNET con el idVisitante dado
+	 */
+	public Carnet darCarnetPorIdVisitante (String idVisitante)
+	{
+		return sqlCarnet.darCarnetPorIdVisitante (pmf.getPersistenceManager(), idVisitante);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Carnet
+	 * @return La lista de objetos Carnet, construidos con base en las tuplas de la tabla CARNET
+	 */
+	public List<Carnet> darCarnets ()
+	{
+		return sqlCarnet.darCarnets (pmf.getPersistenceManager());
+	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar lOS CENTROCOMERCIALES
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla CENTROCOMERCIAL
+	 * Adiciona entradas al log de la aplicación
+	 * @param idCentroComercial - El identificador del centro comercial
+	 * @param nombre - El nombre del centro comercial
+	 * @return El objeto Área adicionado. null si ocurre alguna Excepción
+	 */
+	public CentroComercial adicionarCentroComercial (String id, String nombre)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlCentroComercial.adicionarCentroComercial (pm, id, nombre);
+			tx.commit();
+
+			log.trace ("Inserción de Centro Comercial:  " + id + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new CentroComercial (id, nombre);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla CentroComercial, dado el identificador del centro comercial
+	 * Adiciona entradas al log de la aplicación
+	 * @param idCentroComercial - El identificador del centro comercial
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarCentroComercialPorId (String idCentroComercial) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCentroComercial.eliminarCentroComercialPorId (pm, idCentroComercial);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla CentroComercial, dado el identificador del centro comercial
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre del centro comercial
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarCentroComercialPorNombre (String nombre) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCentroComercial.eliminarCentroComercialPorNombre(pm, nombre);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla CentroComercial con un identificador dado
+	 * @param idCentroComercial - El identificador del centro comercial
+	 * @return El objeto CentroComercial, construido con base en las tuplas de la tabla CENTROCOMERCIAL con el identificador dado
+	 */
+	public CentroComercial darCentroComercialPorId (String idCentroComercial)
+	{
+		return sqlCentroComercial.darCentroComercialPorId(pmf.getPersistenceManager(), idCentroComercial);
+	}
+
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla CentroComercial
+	 * @return La lista de objetos CentroComercial, construidos con base en las tuplas de la tabla CENTROCOMERCIAL
+	 */
+	public List<CentroComercial> darCentrosComerciales ()
+	{
+		return sqlCentroComercial.darCentrosComerciales (pmf.getPersistenceManager());
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, el nombre de un CENTROCOMERCIAL
+	 * @param idCentroComercial - El identificador del centro comercial 
+	 * @param nombre - El nuevo nombre del Centro Comercial
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarValorCapacidad (String idCentroComercial, String nombre)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCentroComercial.cambiarNombreCentroComercial(pm, idCentroComercial, nombre);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar los DOMICILIARIOS
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla DOMICILIARIO
+	 * Adiciona entradas al log de la aplicación
+	 * @param idVisitante - El identificador del visitante
+	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
+	 * @return El objeto Domiciliario adicionado. null si ocurre alguna Excepción
+	 */
+	public Domiciliario adicionarDomiciliario (String idVisitante, String empresaDomicilios)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlDomiciliario.adicionarDomiciliario(pm, idVisitante, empresaDomicilios);
+			tx.commit();
+
+			log.trace ("Inserción del Domiciliario: " + idVisitante + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Domiciliario(idVisitante, empresaDomicilios);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Domiciliario, dado el identificador del domiciliario
+	 * Adiciona entradas al log de la aplicación
+	 * @param idVisitante - El identificador del domiciliario
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarDomiciliarioPorId (String idVisitante) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlDomiciliario.eliminarDomiciliarioPorId(pm, idVisitante);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Domiciliario, dado la empresa donde trabaja el domiciliario
+	 * Adiciona entradas al log de la aplicación
+	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarDomiciliarioPorEmpresa (String empresaDomicilios) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlDomiciliario.eliminarDomiciliarioPorEmpresa(pm, empresaDomicilios);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Domiciliario con un identificador dado
+	 * @param idDomiciliario - El identificador de la capacidad normal
+	 * @return El objeto Domiciliario, construido con base en las tuplas de la tabla DOMICILIARIO con el identificador dado
+	 */
+	public Domiciliario darDomiciliarioPorId (String idDomiciliario)
+	{
+		return sqlDomiciliario.darDomiciliarioPorId (pmf.getPersistenceManager(), idDomiciliario);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Domiciliario que tienen el valor dado
+	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
+	 * @return La lista de objetos Domiciliario, construidos con base en las tuplas de la tabla DOMICILIARIO
+	 */
+	public List<Domiciliario> darDomiciliariosPorEmpresa (String empresaDomicilios)
+	{
+		return sqlDomiciliario.darDomiciliariosPorEmpresa(pmf.getPersistenceManager(), empresaDomicilios);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Domiciliario
+	 * @return La lista de objetos Domiciliario, construidos con base en las tuplas de la tabla DOMICILIARIO
+	 */
+	public List<Domiciliario> darDomiciliarios ()
+	{
+		return sqlDomiciliario.darDomiciliarios (pmf.getPersistenceManager());
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, el valor de una DOMICILIARIO
+	 * @param id - El identificador del domiciliario que se quiere modificar
+	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarEmpresaDomiciliario (String idDomiciliario, String empresaDomicilios)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlDomiciliario.cambiarEmpresaDomiciliario(pm, idDomiciliario, empresaDomicilios);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los LOCALESCOMERCIALES
 	 *****************************************************************/
@@ -1324,7 +2049,6 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
-
 
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla LOCALCOMERCIAL, dado el identificador del local comercial
@@ -1581,207 +2305,11 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+
 	
-	/* ****************************************************************
-	 * 			Métodos para manejar las CAPACIDADESNORMALES
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla CAPACIDADNORMAL
-	 * Adiciona entradas al log de la aplicación
-	 * @param valor - El valor de la capacidad normal
-	 * @param aforo - El aforo de la capacidad normal
-	 * @return El objeto Área adicionado. null si ocurre alguna Excepción
-	 */
-	public CapacidadNormal adicionarCapacidadNormal (double valor, int aforo)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long idCapacidadNormal = nextvalCapacidadNormal();
-			long tuplasInsertadas = sqlCapacidadNormal.adicionarCapacidadNormal(pm, idCapacidadNormal, valor, aforo);
-			tx.commit();
-
-			log.trace ("Inserción de la capacidad normal con valor: " + valor + " y aforo: " + aforo + "| " + tuplasInsertadas + " tuplas insertadas");
-
-			return new CapacidadNormal (idCapacidadNormal, valor, aforo);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla CapacidadNormal, dado el valor de la capacidad normal
-	 * Adiciona entradas al log de la aplicación
-	 * @param valorArea - El valor de la capacidad normal
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarCapacidadNormalPorValor (double valor) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlCapacidadNormal.eliminarCapacidadNormalesPorValor(pm, valor);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla CapacidadNormal, dado el identificador de la capacidad normal
-	 * Adiciona entradas al log de la aplicación
-	 * @param idCapacidadNormal - El identificador de la capacidad normal
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarCapacidadNormalPorId (long idCapacidadNormal) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlCapacidadNormal.eliminarCapacidadNormalPorId(pm, idCapacidadNormal);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla CapacidadNormal con un identificador dado
-	 * @param idCapacidadNormal - El identificador de la capacidad normal
-	 * @return El objeto Area, construido con base en las tuplas de la tabla CAPACIDADNORMAL con el identificador dado
-	 */
-	public CapacidadNormal darCapacidadNormalPorId (long idCapacidadNormal)
-	{
-		return sqlCapacidadNormal.darCapacidadNormalPorId (pmf.getPersistenceManager(), idCapacidadNormal);
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla CapacidadNormal que tienen el valor dado
-	 * @param valor - El valor de la capacidad normal
-	 * @return La lista de objetos Area, construidos con base en las tuplas de la tabla CAPACIDADNORMAL
-	 */
-	public List<CapacidadNormal> darCapacidadNormalPorValor (double valor)
-	{
-		return sqlCapacidadNormal.darCapacidadesNormalesPorValor(pmf.getPersistenceManager(), valor);
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla CapacidadNormal
-	 * @return La lista de objetos CapacidadNormal, construidos con base en las tuplas de la tabla CAPACIDADNORMAL
-	 */
-	public List<CapacidadNormal> darCapacidadesNormales ()
-	{
-		return sqlCapacidadNormal.darCapacidadesNormales (pmf.getPersistenceManager());
-	}
-
-	/**
-	 * Método que actualiza, de manera transaccional, el valor de una CAPACIDADNORMAL
-	 * @param idCapacidadNormal - El identificador de la capacidad normal que se quiere modificar
-	 * @param valor - El nuevo valor de la capacidad normal
-	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
-	 */
-	public long cambiarValorCapacidad (long idCapacidadNormal, double valor)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlCapacidadNormal.cambiarValorCapacidad(pm, idCapacidadNormal, valor);
-			tx.commit();
-
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que actualiza, de manera transaccional, el valor de una CAPACIDADNORMAL
-	 * @param idCapacidadNormal - El identificador de la capacidad normal que se quiere modificar
-	 * @param aforo - El nuevo aforo de la capacidad normal
-	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
-	 */
-	public long cambiarAforoCapacidad (long idCapacidadNormal, int aforo)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlCapacidadNormal.cambiarAforoCapacidad(pm, idCapacidadNormal, aforo);
-			tx.commit();
-
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
+	
+	
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los TIPOS DE CARNET
 	 *****************************************************************/
