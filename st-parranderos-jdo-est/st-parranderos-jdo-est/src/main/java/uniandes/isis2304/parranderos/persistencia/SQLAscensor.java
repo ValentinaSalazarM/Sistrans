@@ -62,24 +62,11 @@ class SQLAscensor
 	 * @param idCentroComercial - El identificador del centro comercial del ascensor
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarAscensor (PersistenceManager pm, long idAscensor, long capacidadNormal, long area, double pesoMaximo, long idCentroComercial) 
+	public long adicionarAscensor (PersistenceManager pm, String idAscensor, long capacidadNormal, long area, double pesoMaximo, String idCentroComercial) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaAscensor () + "(identificador, capacidadNormal, area, pesoMaximo, idCentroComercial) values (?, ?, ?, ?, ?)");
         q.setParameters(idAscensor, capacidadNormal, area, pesoMaximo, idCentroComercial);
         return (long) q.executeUnique();
-	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar un ASCENSOR de la base de datos de AforoAndes, por su peso máximo
-	 * @param pm - El manejador de persistencia
-	 * @param pesoMaximo - El peso máximo del ascensor
-	 * @return EL número de tuplas eliminadas
-	 */
-	public long eliminarAscensorPorPeso (PersistenceManager pm, double pesoMaximo)
-	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor () + " WHERE pesoMaximo = ?");
-        q.setParameters(pesoMaximo);
-        return (long) q.executeUnique();            
 	}
 
 	/**
@@ -88,10 +75,23 @@ class SQLAscensor
 	 * @param idAscensor - El identificador del ascensor
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarAscensorPorId (PersistenceManager pm, long idAscensor)
+	public long eliminarAscensorPorId (PersistenceManager pm, String idAscensor)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor () + " WHERE identificador = ?");
         q.setParameters(idAscensor);
+        return (long) q.executeUnique();            
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar un ASCENSOR de la base de datos de AforoAndes, por su peso máximo
+	 * @param pm - El manejador de persistencia
+	 * @param pesoMaximo - El peso máximo del ascensor
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarAscensorPorPesoMaximo (PersistenceManager pm, double pesoMaximo)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor () + " WHERE pesoMaximo = ?");
+        q.setParameters(pesoMaximo);
         return (long) q.executeUnique();            
 	}
 
@@ -102,14 +102,14 @@ class SQLAscensor
 	 * @param idAscensor - El identificador del ascensor
 	 * @return El objeto ASCENSOR que tiene el identificador dado
 	 */
-	public Ascensor darAscensorPorId (PersistenceManager pm, long idAscensor) 
+	public Ascensor darAscensorPorId (PersistenceManager pm, String idAscensor) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaAscensor () + " WHERE identificador = ?");
 		q.setResultClass(Ascensor.class);
 		q.setParameters(idAscensor);
 		return (Ascensor) q.executeUnique();
 	}
-
+	
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS ASCENSORES de la 
 	 * base de datos de AforoAndes, por su nombre
@@ -124,6 +124,7 @@ class SQLAscensor
 		q.setParameters(pesoMaximo);
 		return (List<Ascensor>) q.executeList();
 	}
+
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS ASCENSORES de la 
@@ -147,7 +148,7 @@ class SQLAscensor
 	 * @param pesoMaximo - El nuevo peso máximo del ascensor
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarPesoMaximoAscensor (PersistenceManager pm, long idAscensor, double pesoMaximo) 
+	public long cambiarPesoMaximoAscensor (PersistenceManager pm, String idAscensor, double pesoMaximo) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaAscensor () + " SET pesoMaximo = ? WHERE identificador = ?");
 	     q.setParameters(pesoMaximo, idAscensor);

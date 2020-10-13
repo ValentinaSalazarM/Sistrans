@@ -61,7 +61,7 @@ class SQLParqueadero
 	 * @param idCentroComercial - El identificador del centro comercial del parqueadero
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarParqueadero (PersistenceManager pm, long idParqueadero, long capacidadNormal, long area, long idCentroComercial) 
+	public long adicionarParqueadero (PersistenceManager pm, String idParqueadero, long capacidadNormal, long area, String idCentroComercial) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaParqueadero () + "(identificador, capacidadNormal, area, idcentrocomercial) values (?, ?, ?, ?)");
         q.setParameters(idParqueadero, capacidadNormal, area, idCentroComercial);
@@ -74,7 +74,7 @@ class SQLParqueadero
 	 * @param idParqueadero - El identificador del parqueadero
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarParqueaderoPorId (PersistenceManager pm, long idParqueadero)
+	public long eliminarParqueaderoPorId (PersistenceManager pm, String idParqueadero)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaParqueadero () + " WHERE identificador = ?");
         q.setParameters(idParqueadero);
@@ -88,7 +88,7 @@ class SQLParqueadero
 	 * @param idParqueadero - El identificador del parqueadero
 	 * @return El objeto PARQUEADERO que tiene el identificador dado
 	 */
-	public Parqueadero darParqueaderoPorId (PersistenceManager pm, long idParqueadero) 
+	public Parqueadero darParqueaderoPorId (PersistenceManager pm, String idParqueadero) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaParqueadero () + " WHERE identificador = ?");
 		q.setResultClass(Parqueadero.class);
@@ -100,7 +100,7 @@ class SQLParqueadero
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS PARQUEADEROS de la 
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos PARQUEADERO
+	 * @return Una lista de objetos PARQUEADEROS
 	 */
 	public List<Parqueadero> darParqueaderos (PersistenceManager pm)
 	{
@@ -109,5 +109,20 @@ class SQLParqueadero
 		return (List<Parqueadero>) q.executeList();
 	}
 
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el área de un parqueadero en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idLocal- identificador del parqueadero
+	 * @param area - Identificador de la nueva área de un parqueadero
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarAreaParqueadero (PersistenceManager pm, String idParqueadero, long area) 
+	{
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaLocalComercial () + " SET area = ? WHERE identificador = ?");
+		q.setParameters(area, idParqueadero);
+		return (long) q.executeUnique();            
+	}
 
 }

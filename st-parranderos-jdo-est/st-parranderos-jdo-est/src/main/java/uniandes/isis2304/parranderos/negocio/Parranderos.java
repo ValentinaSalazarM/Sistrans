@@ -552,7 +552,7 @@ public class Parranderos
 	public long aumentarSedesBaresCiudad (String ciudad)
 	{
         log.info ("Aumentando sedes de bares de una ciudad: " + ciudad);
-        long resp = pp.aumentarSedesBaresCiudad (ciudad);
+        long resp = pp.cambiarValorArea (ciudad);
         log.info ("Aumentando sedes de bares de una ciudad: " + resp + " tuplas actualizadas");
         return resp;
 	}

@@ -117,7 +117,7 @@ class SQLCapacidadNormal
 	 * @param valorCapacidadNormal - El valor de area buscado
 	 * @return Una lista de objetos CAPACIDADNORMAL que tienen el nombre dado
 	 */
-	public List<CapacidadNormal> darCapacidadesNormalesPorValor (PersistenceManager pm, String valorCapacidadNormal) 
+	public List<CapacidadNormal> darCapacidadesNormalesPorValor (PersistenceManager pm, double valorCapacidadNormal) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal () + " WHERE valor = ?");
 		q.setResultClass(CapacidadNormal.class);
@@ -161,7 +161,7 @@ class SQLCapacidadNormal
 	 * @param valor - El nuevo aforo de la capacidad
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarAforo (PersistenceManager pm, long id, int aforo) 
+	public long cambiarAforoCapacidad (PersistenceManager pm, long id, int aforo) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCapacidadNormal () + " SET aforo = ? WHERE id = ?");
 	     q.setParameters(aforo, id);

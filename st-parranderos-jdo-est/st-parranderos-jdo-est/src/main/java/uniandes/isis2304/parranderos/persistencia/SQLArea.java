@@ -58,8 +58,8 @@ class SQLArea
 	 * Crea y ejecuta la sentencia SQL para adicionar un AREA a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
 	 * @param idArea - El identificador del area
-	 * @param valor - El valor del area
-	 * @param aforo - El aforo del area
+	 * @param valor - El valor del área
+	 * @param aforo - El aforo del área
 	 * @return El número de tuplas insertadas
 	 */
 	public long adicionarArea (PersistenceManager pm, long idArea, double valor, int aforo) 
@@ -117,7 +117,7 @@ class SQLArea
 	 * @param valorArea - El valor de area buscado
 	 * @return Una lista de objetos AREA que tienen el nombre dado
 	 */
-	public List<Area> darAreasPorValor (PersistenceManager pm, String valorArea) 
+	public List<Area> darAreasPorValor (PersistenceManager pm, double valorArea) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaArea () + " WHERE valor = ?");
 		q.setResultClass(Area.class);
@@ -162,7 +162,7 @@ class SQLArea
 	 * @param valor - El nuevo aforo dependiendo del área
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarAforo (PersistenceManager pm, long id, int aforo) 
+	public long cambiarAforoArea (PersistenceManager pm, long id, int aforo) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaArea () + " SET aforo = ? WHERE id = ?");
 	     q.setParameters(aforo, id);

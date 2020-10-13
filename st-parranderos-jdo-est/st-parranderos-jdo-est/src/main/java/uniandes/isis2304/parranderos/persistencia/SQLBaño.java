@@ -56,17 +56,16 @@ class SQLBaño
 	 * Crea y ejecuta la sentencia SQL para adicionar un BAÑO a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
 	 * @param idBaño - El identificador del baño
-	 * @param cupoActual - El cupo actual del baño
 	 * @param capacidadNormal - El identificador de la capacidad normal del baño
 	 * @param area - El identificador del área del baño
 	 * @param numeroSanitarios - El número de sanitarios del baño
 	 * @param idCentroComercial - El identificador del centro comercial del baño
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarBaño (PersistenceManager pm, long idBaño, int cupoActual, long capacidadNormal, long area, int numeroSanitarios, long idCentroComercial) 
+	public long adicionarBaño (PersistenceManager pm, String idBaño, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBaño () + "(identificador, capacidadNormal, area, sanitarios, idcentrocomercial) values (?, ?, ?, ?, ?)");
-        q.setParameters(idBaño, cupoActual, capacidadNormal, area, numeroSanitarios, idCentroComercial);
+        q.setParameters(idBaño, capacidadNormal, area, numeroSanitarios, idCentroComercial);
         return (long) q.executeUnique();
 	}
 
@@ -76,7 +75,7 @@ class SQLBaño
 	 * @param idBaño - El identificador del baño
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarBañoPorId (PersistenceManager pm, long idBaño)
+	public long eliminarBañoPorId (PersistenceManager pm, String idBaño)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE identificador = ?");
         q.setParameters(idBaño);
@@ -84,13 +83,26 @@ class SQLBaño
 	}
 
 	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar UN BAÑO de la base de datos de AforoAndes, por su número de sanitarios
+	 * @param pm - El manejador de persistencia
+	 * @param sanitarios - El número de sanitarios del baño
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarBañoPorSanitarios (PersistenceManager pm, int sanitarios)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño () + " WHERE sanitarios = ?");
+        q.setParameters(sanitarios);
+        return (long) q.executeUnique();            
+	}
+	
+	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN BAÑO de la 
 	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
 	 * @param idBaño - El identificador del baño
 	 * @return El objeto BAÑO que tiene el identificador dado
 	 */
-	public Baño darBañoPorId (PersistenceManager pm, long idBaño) 
+	public Baño darBañoPorId (PersistenceManager pm, String idBaño) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBaño () + " WHERE identificador = ?");
 		q.setResultClass(Baño.class);
@@ -135,7 +147,7 @@ class SQLBaño
 	 * @param numeroSanitarios - El nuevo número de sanitarios del baño
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarNumeroSanitarios (PersistenceManager pm, long idBaño, int numeroSanitarios) 
+	public long cambiarNumeroSanitariosBaño (PersistenceManager pm, String idBaño, int numeroSanitarios) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaBaño () + " SET sanitarios = ? WHERE identificador = ?");
 	     q.setParameters(numeroSanitarios, idBaño);
