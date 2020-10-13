@@ -40,6 +40,7 @@ public class Horario implements VOHorario
 	 */
 	public Horario() 
 	{
+		this.id = 0;
 		this.hora = 0;
 		this.minuto = 0;
 	}
@@ -49,8 +50,9 @@ public class Horario implements VOHorario
 	 * @param hora - La hora del horario
 	 * @param minuto - El minuto del horario
 	 */
-	public Horario(int hora, int minutos) 
+	public Horario(long id, int hora, int minutos) 
 	{
+		this.id = id;
 		this.hora = hora;
 		this.minuto = minutos;
 	}

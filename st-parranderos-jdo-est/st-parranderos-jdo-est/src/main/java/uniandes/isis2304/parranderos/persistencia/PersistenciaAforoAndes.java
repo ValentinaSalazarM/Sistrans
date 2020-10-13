@@ -34,6 +34,7 @@ import uniandes.isis2304.parranderos.negocio.Carnet;
 import uniandes.isis2304.parranderos.negocio.CentroComercial;
 import uniandes.isis2304.parranderos.negocio.Domiciliario;
 import uniandes.isis2304.parranderos.negocio.Empleado;
+import uniandes.isis2304.parranderos.negocio.Horario;
 import uniandes.isis2304.parranderos.negocio.Ascensor;
 import uniandes.isis2304.parranderos.negocio.Baño;
 import uniandes.isis2304.parranderos.negocio.Area;
@@ -2607,5 +2608,47 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar LOS HORARIOS 
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla HORARIO
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El identificador del horario
+     * @param hora - La hora del horario
+     * @param minuto - El minuto del horario
+	 * @return El objeto HORARIO adicionado. null si ocurre alguna Excepción
+	 */
+	public Horario adicionarHorario(long id, int hora, int minuto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlHorario.adicionarHorario(pm, id, hora, minuto);
+			tx.commit();
+
+			log.trace ("Inserción de un Horario:  " + id + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Horario (id, hora, minuto);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
 
 }

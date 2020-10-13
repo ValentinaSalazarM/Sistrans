@@ -63,7 +63,7 @@ class SQLHorario
  * @param minuto - El minuto del horario
  * @return - Las tuplas insertadas
  */
-	public long adicionarHorario (PersistenceManager pm, int hora, int minuto, long id ) 
+	public long adicionarHorario (PersistenceManager pm,long id, int hora, int minuto) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaHorario() + "(id, hora, minuto) values (?, ?, ?)");
         q.setParameters(id, hora, minuto);
