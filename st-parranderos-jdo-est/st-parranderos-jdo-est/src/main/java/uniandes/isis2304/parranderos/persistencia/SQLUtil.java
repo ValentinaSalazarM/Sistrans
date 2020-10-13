@@ -19,10 +19,9 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto BAR de Parranderos
+ * Clase que encapsula los métodos que hacen acceso a la base de datos
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
- * @author Germán Bravo
  */
 class SQLUtil
 {
@@ -61,9 +60,87 @@ class SQLUtil
 	 * @param pm - El manejador de persistencia
 	 * @return El número de secuencia generado
 	 */
-	public long nextval (PersistenceManager pm)
+	public long nextvalHorario (PersistenceManager pm)
 	{
-        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqParranderos () + ".nextval FROM DUAL");
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqHorario () + ".nextval FROM DUAL");
+        q.setResultClass(Long.class);
+        long resp = (long) q.executeUnique();
+        return resp;
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para obtener un nuevo número de secuencia
+	 * @param pm - El manejador de persistencia
+	 * @return El número de secuencia generado
+	 */
+	public long nextvalcapacidadNormal (PersistenceManager pm)
+	{
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqCapacidadNormal() + ".nextval FROM DUAL");
+        q.setResultClass(Long.class);
+        long resp = (long) q.executeUnique();
+        return resp;
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para obtener un nuevo número de secuencia
+	 * @param pm - El manejador de persistencia
+	 * @return El número de secuencia generado
+	 */
+	public long nextvalArea (PersistenceManager pm)
+	{
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqArea () + ".nextval FROM DUAL");
+        q.setResultClass(Long.class);
+        long resp = (long) q.executeUnique();
+        return resp;
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para obtener un nuevo número de secuencia
+	 * @param pm - El manejador de persistencia
+	 * @return El número de secuencia generado
+	 */
+	public long nextvalTipoLocal (PersistenceManager pm)
+	{
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqTipoLocal() + ".nextval FROM DUAL");
+        q.setResultClass(Long.class);
+        long resp = (long) q.executeUnique();
+        return resp;
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para obtener un nuevo número de secuencia
+	 * @param pm - El manejador de persistencia
+	 * @return El número de secuencia generado
+	 */
+	public long nextvalTipoCarnet (PersistenceManager pm)
+	{
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqTipoCarnet() + ".nextval FROM DUAL");
+        q.setResultClass(Long.class);
+        long resp = (long) q.executeUnique();
+        return resp;
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para obtener un nuevo número de secuencia
+	 * @param pm - El manejador de persistencia
+	 * @return El número de secuencia generado
+	 */
+	public long nextvalTipoLector (PersistenceManager pm)
+	{
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqTipoLector() + ".nextval FROM DUAL");
+        q.setResultClass(Long.class);
+        long resp = (long) q.executeUnique();
+        return resp;
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para obtener un nuevo número de secuencia
+	 * @param pm - El manejador de persistencia
+	 * @return El número de secuencia generado
+	 */
+	public long nextvalTipoVisitante (PersistenceManager pm)
+	{
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqTipoVisitante() + ".nextval FROM DUAL");
         q.setResultClass(Long.class);
         long resp = (long) q.executeUnique();
         return resp;
@@ -77,22 +154,65 @@ class SQLUtil
 	 */
 	public long [] limpiarParranderos (PersistenceManager pm)
 	{
-        Query qGustan = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaArea ());          
-        Query qSirven = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor ());
-        Query qVisitan = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño ());
-        Query qBebida = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante ());
-        Query qBebedor = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal ());
-        Query qBar = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial ());
+        Query qRegistranVehiculo = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranVehiculo());          
+        Query qRegistranCarnet = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranCarnet ());
+        Query qVisitanParqueadero = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanParqueadero());
+        Query qVisitanLocalComercial = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanLocalComercial());
+        Query qVisitanBaño = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanBaño());
+        Query qVisitanAscensor = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanAscensor());
+        Query qVisitanCentroComercial = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanCentroComercial());
+        Query qVehiculo = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVehiculo());
+        Query qEmpleado = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaEmpleado());
+        Query qDomiciliario = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaDomiciliario());
+        Query qCarnet = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCarnet());
+        Query qTipoCarnet = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoCarnet());
+        Query qLector = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaLector());
+        Query qTipoLector = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoLector());
+        Query qZonaCirculacion = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaZonaCirculacion());
+        Query qLocalComercial = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaLocalComercial());
+        Query qTipoLocal = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoLocal());
+        Query qParqueadero = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaParqueadero());
+        Query qBaño = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBaño());
+        Query qAscensor = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAscensor());
+        Query qCapacidadNormal = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCapacidadNormal ());
+        Query qArea = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaArea());
+        Query qCentroComercial = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCentroComercial());
+        Query qVisitante = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitante ());
+        Query qTipoVisitante = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoVisitante());
+        Query qHorario = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaHorario ());
 
-        long gustanEliminados = (long) qGustan.executeUnique ();
-        long sirvenEliminados = (long) qSirven.executeUnique ();
-        long visitanEliminadas = (long) qVisitan.executeUnique ();
-        long bebidasEliminadas = (long) qBebida.executeUnique ();
-        long tiposBebidaEliminados = (long) qTipoBebida.executeUnique ();
-        long bebedoresEliminados = (long) qBebedor.executeUnique ();
-        long baresEliminados = (long) qBar.executeUnique ();
-        return new long[] {gustanEliminados, sirvenEliminados, visitanEliminadas, bebidasEliminadas, 
-        		tiposBebidaEliminados, bebedoresEliminados, baresEliminados};
+        long registranVehiculoEliminados = (long) qRegistranVehiculo.executeUnique ();
+        long  registranCarnetEliminados = (long) qRegistranCarnet.executeUnique ();
+        long  visitanParqueaderoEliminados = (long) qVisitanParqueadero.executeUnique ();
+        long  visitanLocalComercialEliminados = (long) qVisitanLocalComercial.executeUnique ();
+        long  visitanBañoEliminados = (long) qVisitanBaño.executeUnique ();
+        long  visitanAscensorEliminados = (long) qVisitanAscensor.executeUnique ();
+        long  visitanCentroComercialEliminados = (long) qVisitanCentroComercial.executeUnique ();
+        long  vehiculoEliminados = (long) qVehiculo.executeUnique ();
+        long  empleadoEliminados = (long) qEmpleado.executeUnique ();
+        long  domiciliarioEliminados = (long) qDomiciliario.executeUnique ();
+        long  carnetEliminados = (long) qCarnet.executeUnique ();
+        long  tipoCarnetEliminados = (long) qTipoCarnet.executeUnique ();
+        long  lectorEliminados = (long) qLector.executeUnique ();
+        long  tipoLectorEliminados = (long) qTipoLector.executeUnique ();
+        long  zonaCirculacionEliminados = (long) qZonaCirculacion.executeUnique ();
+        long  localComercialEliminados = (long) qLocalComercial.executeUnique ();
+        long  tipoLocalEliminados = (long) qTipoLocal.executeUnique ();
+        long  parqueaderoEliminados = (long) qParqueadero.executeUnique ();
+        long  bañoEliminados = (long) qBaño.executeUnique ();
+        long  ascensorEliminados = (long) qAscensor.executeUnique ();
+        long  capacidadNormalEliminados = (long) qCapacidadNormal.executeUnique ();
+        long  areaEliminados = (long) qArea.executeUnique ();
+        long  centroComercialEliminados = (long) qCentroComercial.executeUnique ();
+        long  visitanteEliminados = (long) qVisitante.executeUnique ();
+        long  tipoVisitanteEliminados = (long) qTipoVisitante.executeUnique ();
+        long  horarioEliminados = (long) qHorario.executeUnique ();
+
+
+        return new long[] {registranVehiculoEliminados, registranCarnetEliminados, visitanParqueaderoEliminados, visitanLocalComercialEliminados, visitanBañoEliminados, visitanAscensorEliminados, 
+        		visitanCentroComercialEliminados, vehiculoEliminados, empleadoEliminados, domiciliarioEliminados, carnetEliminados, tipoCarnetEliminados, lectorEliminados, tipoLectorEliminados,
+        		zonaCirculacionEliminados, localComercialEliminados, tipoLocalEliminados, parqueaderoEliminados, bañoEliminados, ascensorEliminados, capacidadNormalEliminados, areaEliminados,
+        		centroComercialEliminados, visitanteEliminados, tipoVisitanteEliminados, horarioEliminados};
 	}
 
 }
