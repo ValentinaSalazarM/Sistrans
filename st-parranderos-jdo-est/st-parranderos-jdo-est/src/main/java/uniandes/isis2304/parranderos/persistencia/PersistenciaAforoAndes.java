@@ -16,7 +16,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
 
-import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,21 +29,18 @@ import org.apache.log4j.Logger;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import uniandes.isis2304.parranderos.negocio.Visitante;
 import uniandes.isis2304.parranderos.negocio.CapacidadNormal;
 import uniandes.isis2304.parranderos.negocio.Carnet;
 import uniandes.isis2304.parranderos.negocio.CentroComercial;
 import uniandes.isis2304.parranderos.negocio.Domiciliario;
+import uniandes.isis2304.parranderos.negocio.Empleado;
 import uniandes.isis2304.parranderos.negocio.Ascensor;
 import uniandes.isis2304.parranderos.negocio.Baño;
-import uniandes.isis2304.parranderos.negocio.Ascensor;
-import uniandes.isis2304.parranderos.negocio.TipoLocal;
 import uniandes.isis2304.parranderos.negocio.Area;
 import uniandes.isis2304.parranderos.negocio.LocalComercial;
 import uniandes.isis2304.parranderos.negocio.Parqueadero;
-import uniandes.isis2304.parranderos.negocio.Area;
 import uniandes.isis2304.parranderos.negocio.TipoCarnet;
-import uniandes.isis2304.parranderos.negocio.TipoVisitante;
+
 
 /**
  * Clase para el manejador de persistencia del proyecto Aforo-CCAndes
@@ -644,6 +640,7 @@ public class PersistenciaAforoAndes
 		log.trace ("Generando secuencia para Horario: " + resp);
 		return resp;
 	}
+
 
 	/**
 	 * Transacción para el generador de secuencia de CapacidadNormal
@@ -2445,5 +2442,170 @@ public class PersistenciaAforoAndes
 		return sqlTipoCarnet.darTipoCarnetPorId (pmf.getPersistenceManager(), idTipoCarnet);
 	}
 
+	/* ****************************************************************
+	 * 			Métodos para manejar los EMPLEADOS
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Empleado
+	 * Adiciona entradas al log de la aplicación
+	 * @param idvisitante - El identificador del visitante
+	 * @param lugartrabajo - El lugar de trabajo del empleado 
+	 * @return El objeto Empleado adicionado. null si ocurre alguna Excepción
+	 */
+	public Empleado adicionarEmpleado(String idvisitante, String lugartrabajo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlEmpleado.adicionarEmpleado(pm, idvisitante, lugartrabajo);
+			tx.commit();
+
+			log.trace ("Inserción del Empleado " + idvisitante + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Empleado(idvisitante, lugartrabajo);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Empleado, dado el identificador de este 
+	 * Adiciona entradas al log de la aplicación
+	 * @param idvisitante - El identificador del empleado
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarEmpleadoPorID(String idvisitante) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlEmpleado.eliminarEmpleadoPorID(pm, idvisitante);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Empleado, dado el lugar de trabajo del empleado
+	 * Adiciona entradas al log de la aplicación
+	 * @param lugartrabajo - El lugar de trabajo del empleado
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarEmpleadoPorLugar (String lugartrabajo) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlEmpleado.eliminarEmpleadoPorLugarDeTrabajo(pm, lugartrabajo);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Empleado con un identificador dado
+	 * @param idEmpleado - El identificador del empleado 
+	 * @return El objeto Empleado, construido con base en las tuplas de la tabla EMPLEADO con el identificador dado
+	 */
+	public Empleado darEmpleadoPorId (String idEmpleado)
+	{
+		return sqlEmpleado.darEmpleadoPorID(pmf.getPersistenceManager(), idEmpleado);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla EMPLEADO que tienen el valor dado
+	 * @param lugartrabajo - El lugar de trabajo del empleado 
+	 * @return La lista de objetos Empleado, construidos con base en las tuplas de la tabla EMPLEADO
+	 */
+	public List<Empleado> darEmpleadosPorLugar (String lugar)
+	{
+		return sqlEmpleado.darEmpleadoPorLugar(pmf.getPersistenceManager(),lugar);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Empleado
+	 * @return La lista de objetos Empleado, construidos con base en las tuplas de la tabla EMPLEADO
+	 */
+	public List<Empleado> darEmpleados ()
+	{
+		return sqlEmpleado.darEmpleados(pmf.getPersistenceManager());
+	}
+	
+	/**
+	 * Método que actualiza, de manera transaccional, el valor de un EMPLEADO
+	 * @param id - El identificador del empleado que se quiere modificar
+	 * @param lugartrabajo - El lugar de trabajo del empleado
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarLugarEmpleado(String id, String lugartrabajo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlEmpleado.cambiarCompañia(pm, id, lugartrabajo);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 }

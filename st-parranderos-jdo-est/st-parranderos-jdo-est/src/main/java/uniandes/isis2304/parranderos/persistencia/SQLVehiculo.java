@@ -63,7 +63,7 @@ public class SQLVehiculo
  */
 	public long adicionarVehiculo(PersistenceManager pm, String placa, String caracteristicas, String dueño) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVehiculo() + "(placa, caracteristicas, dueño) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVehiculo() + "(placa, caracteristicas, propietario) values (?, ?, ?)");
         q.setParameters(placa, caracteristicas, dueño);
         return (long) q.executeUnique();
 	}
@@ -89,7 +89,7 @@ public class SQLVehiculo
 	 */
 	public long eliminarVehiculoPorDueño(PersistenceManager pm, String dueño)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVehiculo() + " WHERE dueño = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVehiculo() + " WHERE propietario = ?");
         q.setParameters(dueño);
         return (long) q.executeUnique();            
 	}
@@ -119,7 +119,7 @@ public class SQLVehiculo
 	 */
 	public Vehiculo darVehiculoPorDueño (PersistenceManager pm, String dueño) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVehiculo() + " WHERE dueño = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVehiculo() + " WHERE propietario = ?");
 		q.setResultClass(Vehiculo.class);
 		q.setParameters(dueño);
 		return (Vehiculo) q.executeUnique();

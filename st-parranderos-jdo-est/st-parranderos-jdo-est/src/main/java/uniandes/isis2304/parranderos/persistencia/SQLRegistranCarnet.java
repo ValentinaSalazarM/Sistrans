@@ -9,8 +9,6 @@
 package uniandes.isis2304.parranderos.persistencia;
 
 import java.sql.Date;
-
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -66,7 +64,7 @@ public class SQLRegistranCarnet
 	 * @param horasalida - La hora de salida 
 	 * @return Las tuplas insertadas 
 	 */
-	public long adicionarRegistranCarnet (PersistenceManager pm, long idlector, long tipoCarnet, long idvisitante, Date fecha, Timestamp horaentrada, Timestamp horasalida ) 
+	public long adicionarRegistranCarnet (PersistenceManager pm, String idlector, long tipoCarnet, String idvisitante, Date fecha, long horaentrada, long horasalida ) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaRegistranCarnet() + "(idlector, tipocarnet,idvisitante, fecha, horaentrada, horasalida) values (?, ?, ?, ?, ?, ?)");
         q.setParameters(idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
@@ -84,7 +82,7 @@ public class SQLRegistranCarnet
 	 * @param horasalida - Hora de salida 
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarRegistranCarnet (PersistenceManager pm, long idlector, long tipoCarnet, long idvisitante, Date fecha, Timestamp horaentrada, Timestamp horasalida ) 
+	public long eliminarRegistranCarnet (PersistenceManager pm, String idlector, long tipoCarnet, String idvisitante, Date fecha, long horaentrada, long horasalida ) 
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranCarnet() + " WHERE idlector = ? AND tipocarnet = ? AND idvisitante = ? AND fecha = ? AND horaentrada = ? AND horasalida = ?");
         q.setParameters(idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
@@ -98,7 +96,7 @@ public class SQLRegistranCarnet
 	 * @param idvisitante - El id del visitante al que pertenece el carnet
 	 * @return El objeto REGISTRANVISITANTE con el id del visitante dado
 	 */
-	public RegistranCarnet darResgitranCarnetPorIdVisitante (PersistenceManager pm,long idvisitante) 
+	public RegistranCarnet darResgitranCarnetPorIdVisitante (PersistenceManager pm,String idvisitante) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ?");
 		q.setResultClass(RegistranCarnet.class);
@@ -113,7 +111,7 @@ public class SQLRegistranCarnet
 	 * @param lectorid - El id del lector que registró el visitante
 	 * @return Una lista de objetos REGISTRANCARNET
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorLector (PersistenceManager pm, long idLector) 
+	public List<RegistranCarnet> darRegistranCarnetPorLector (PersistenceManager pm, String idLector) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idlector = ?");
 		q.setResultClass(RegistranCarnet.class);
@@ -128,7 +126,7 @@ public class SQLRegistranCarnet
 	 * @param horaentrada - La hora de ingreso del visitante
 	 * @return Una lista de objetos REGISTRANCARNET
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorHoraEntrada (PersistenceManager pm, Timestamp horaentrada) 
+	public List<RegistranCarnet> darRegistranCarnetPorHoraEntrada (PersistenceManager pm, long horaentrada) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE horaentrada = ?");
 		q.setResultClass(RegistranCarnet.class);
@@ -143,7 +141,7 @@ public class SQLRegistranCarnet
 	 * @param horasalida - La hora de salida 
 	 * @return Una lista de objetos REGISTRANCARNET
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorHoraSalida (PersistenceManager pm, Timestamp horasalida) 
+	public List<RegistranCarnet> darRegistranCarnetPorHoraSalida (PersistenceManager pm,long horasalida) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE horasalida = ?");
 		q.setResultClass(RegistranCarnet.class);

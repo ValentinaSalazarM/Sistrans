@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import uniandes.isis2304.parranderos.negocio.Domiciliario;
 import uniandes.isis2304.parranderos.negocio.Empleado;
 
 public class SQLEmpleado 
@@ -82,6 +84,32 @@ public class SQLEmpleado
 		return (Empleado) q.executeUnique();
 	}
 	
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de un EMPLEADO de la 
+	 * base de datos de AforoAndes, por su lugar de trabajo
+	 * @param pm - El manejador de persistencia
+	 * @param lugar - El lugar de trabajo del empleado
+	 * @return El objeto EMPLEADO
+	 */
+	public List<Empleado> darEmpleadoPorLugar(PersistenceManager pm, String lugartrabajo) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaEmpleado() + " WHERE lugartrabajo = ?");
+		q.setResultClass(Empleado.class);
+		q.setParameters(lugartrabajo);
+		return (List<Empleado>) q.executeUnique();
+	}
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar los EMPLEADOS de la base de datos, por su lugar de trabajo 
+	 * @param pm - El manejador de persistencia
+	 * @param lugartrabajo - El lugar de trabajo del empleado
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarEmpleadoPorLugarDeTrabajo(PersistenceManager pm, String lugartrabajo) 
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaEmpleado() + " WHERE lugartrabajo = ?");
+        q.setParameters(lugartrabajo);
+        return (long) q.executeUnique();
+	}
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS EMPLEADOS de la 
 	 * base de datos de AforoAndes

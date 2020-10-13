@@ -8,7 +8,6 @@
  */
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -61,7 +60,7 @@ public class SQLTipoLocal
 	 * @param horaCierre - Hora de cierre del tipo de local
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoLocal (PersistenceManager pm, long idTipoLocal,Timestamp horaApertura, Timestamp horaCierre, String tipo) 
+	public long adicionarTipoLocal (PersistenceManager pm, long idTipoLocal,long horaApertura, long horaCierre, String tipo) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoLocal() + "(id, tipo, horaApertura, horaCierre) values (?, ?, ?, ?)");
         q.setParameters(idTipoLocal, tipo, horaApertura,horaCierre);

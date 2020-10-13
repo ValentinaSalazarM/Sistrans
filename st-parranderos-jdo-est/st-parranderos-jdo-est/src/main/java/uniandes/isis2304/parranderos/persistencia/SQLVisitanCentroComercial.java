@@ -60,7 +60,7 @@ public class SQLVisitanCentroComercial
 	 * @param idvisitante - El identificador del visitante
 	 * @return Las tuplas insertadas
 	 */
-	public long adicionarVisitanCC (PersistenceManager pm, long idCC, long idvisitante) 
+	public long adicionarVisitanCC (PersistenceManager pm, String idCC, String idvisitante) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVisitanCentroComercial()+ "(idcentrocomercial, idvisitante) values (?, ?)");
         q.setParameters(idCC, idvisitante);
@@ -88,7 +88,7 @@ public class SQLVisitanCentroComercial
 	 * @param idVisitante - El identificador del bar
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarVisitanLocal (PersistenceManager pm, long idCC, long idVisitante) 
+	public long eliminarVisitanLocal (PersistenceManager pm, String idCC, String idVisitante) 
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanCentroComercial () + " WHERE idcentrocomercial = ? AND idvisitante = ?");
         q.setParameters(idCC, idVisitante);

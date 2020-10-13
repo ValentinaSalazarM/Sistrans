@@ -59,7 +59,7 @@ public class SQLZonaCirculacion
  * @param idCentroComercial - El identificador del centro comercial al que pertenece la zona de circulación 
  * @return
  */
-	public long adicionarZonaCirculacion (PersistenceManager pm, long identificador, long capacidadNormal, long idCentroComercial) 
+	public long adicionarZonaCirculacion (PersistenceManager pm, String identificador, int capacidadNormal, String idCentroComercial) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaZonaCirculacion() + "(identificador, capacidadNormal, idCentroComercial) values (?, ?, ?)");
         q.setParameters(identificador, capacidadNormal, idCentroComercial);
@@ -72,7 +72,7 @@ public class SQLZonaCirculacion
 	 * @param identificador - El identificador de la zona
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarZonaCirculacionPorID (PersistenceManager pm, long identificador)
+	public long eliminarZonaCirculacionPorID (PersistenceManager pm, String identificador)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaZonaCirculacion() + " WHERE identificador = ?");
         q.setParameters(identificador);
@@ -86,7 +86,7 @@ public class SQLZonaCirculacion
 	 * @param identificador - El identificador de la zona
 	 * @return El objeto ZONA DE CIRCULACION que tiene el identificador dado
 	 */
-	public ZonaCirculacion darZonaPorID (PersistenceManager pm, long identificador) 
+	public ZonaCirculacion darZonaPorID (PersistenceManager pm, String identificador) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaZonaCirculacion()+ " WHERE identificador = ?");
 		q.setResultClass(ZonaCirculacion.class);

@@ -8,7 +8,6 @@
  */
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -62,7 +61,7 @@ public class SQLTipoVisitante
 	 * @param horaInicio - Hora inicio del visitante en el centro comercial de acuerdo a su tipo
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoVisitante (PersistenceManager pm, long idTipoVisitante, String tipo, Timestamp horaLimite, Timestamp horainicio) 
+	public long adicionarTipoVisitante (PersistenceManager pm, long idTipoVisitante, String tipo, long horaLimite, long horainicio) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoVisitante() + "(id, tipo, horainicio, horalimite) values (?, ?, ?, ?)");
         q.setParameters(idTipoVisitante, tipo, horainicio, horaLimite);
@@ -147,7 +146,7 @@ public class SQLTipoVisitante
 	 * @param  horainicio - La nueva hora habilitada para el ingreso al centro comercial 
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarHoraInicio (PersistenceManager pm, long identificador, Timestamp horainicio) 
+	public long cambiarHoraInicio (PersistenceManager pm, long identificador, long horainicio) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoVisitante() + " SET horainicio = ? WHERE id = ?");
 	     q.setParameters(horainicio, identificador);
@@ -163,7 +162,7 @@ public class SQLTipoVisitante
 	 * @param  horalimite - La nueva hora habilitada para la salida del centro comercial
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarHoraLimite (PersistenceManager pm, long identificador, Timestamp horalimite) 
+	public long cambiarHoraLimite (PersistenceManager pm, long identificador, long horalimite) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoVisitante() + " SET horalimite = ? WHERE id = ?");
 	     q.setParameters(horalimite, identificador);
