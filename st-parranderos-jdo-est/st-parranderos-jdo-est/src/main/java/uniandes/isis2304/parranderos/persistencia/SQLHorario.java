@@ -18,7 +18,7 @@ import javax.jdo.Query;
 import uniandes.isis2304.parranderos.negocio.Horario;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Area de AFORO-CCANDES
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Horario de AFORO-CCANDES
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
  */
@@ -57,9 +57,9 @@ class SQLHorario
 /**
  * Crea y ejecuta la sentencia SQL para adicionar un HORARIO a la base de datos de AforoAndes
  * @param pm - El manejador de persistencia
+ * @param id - El identificador del horario
  * @param hora - La hora del horario
  * @param minuto - El minuto del horario
- * @param id - El identificador
  * @return - Las tuplas insertadas
  */
 	public long adicionarHorario (PersistenceManager pm, int hora, int minuto, long id ) 
@@ -87,7 +87,7 @@ class SQLHorario
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN HORARIO de la 
 	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param id - El identificador del area
+	 * @param id - El identificador del horario
 	 * @return El objeto HORARIO que tiene el identificador dado
 	 */
 	public Horario darHorarioPorId (PersistenceManager pm, long id) 
@@ -97,9 +97,20 @@ class SQLHorario
 		q.setParameters(id);
 		return (Horario) q.executeUnique();
 	}
-
-
-
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar UN HORARIO de la base de datos de Parranderos, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param idHorario - El identificador del horario
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarHorarioPorId (PersistenceManager pm, long idHorario)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaHorario () + " WHERE id = ?");
+        q.setParameters(idHorario);
+        return (long) q.executeUnique();            
+	}
+	
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS HORARIOS de la 
 	 * base de datos de AforoAndes
@@ -118,7 +129,7 @@ class SQLHorario
 	 * Crea y ejecuta la sentencia SQL para cambiar la hora en la
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param id - El id del área
+	 * @param id - El id del horario
 	 * @param hora - La nueva hora del horario
 	 * @return El número de tuplas modificadas
 	 */
@@ -134,7 +145,7 @@ class SQLHorario
 	 * Crea y ejecuta la sentencia SQL para cambiar el minuto en la
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param id - El id del área
+	 * @param id - El id del horario
 	 * @param minuto - El minuto modificado
 	 * @return El número de tuplas modificadas
 	 */

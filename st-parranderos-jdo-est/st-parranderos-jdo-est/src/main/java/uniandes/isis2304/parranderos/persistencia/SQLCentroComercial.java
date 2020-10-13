@@ -9,7 +9,6 @@
 
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -61,10 +60,10 @@ class SQLCentroComercial
 	 * @param horaApertura - La hora de apertura 
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarCentroComercial (PersistenceManager pm, String idCentroComercial, String nombre, Calendar horaApertura) 
+	public long adicionarCentroComercial (PersistenceManager pm, String idCentroComercial, String nombre) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCentroComercial () + "(id, nombre) values (?, ?)");
-        q.setParameters(idCentroComercial, nombre, horaApertura);
+        q.setParameters(idCentroComercial, nombre);
         return (long) q.executeUnique();
 	}
 

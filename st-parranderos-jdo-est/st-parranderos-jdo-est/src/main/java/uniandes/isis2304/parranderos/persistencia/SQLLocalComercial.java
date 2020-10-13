@@ -135,7 +135,7 @@ class SQLLocalComercial
 	 * @param área - Área de un local comercial
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarArea (PersistenceManager pm, long identificador, double area) 
+	public long cambiarArea (PersistenceManager pm, long identificador, long area) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaLocalComercial () + " SET area = ? WHERE identificador = ?");
 	     q.setParameters(area, identificador);

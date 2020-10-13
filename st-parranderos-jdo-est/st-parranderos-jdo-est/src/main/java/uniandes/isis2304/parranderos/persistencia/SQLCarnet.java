@@ -111,7 +111,7 @@ class SQLCarnet
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS CARNETS de la 
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS CARNETS de la 
 	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
 	 * @param tipoCarnet - El identificador del tipo de carnet
@@ -126,7 +126,7 @@ class SQLCarnet
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS CARNETS de la 
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS CARNETS de la 
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos CARNET
