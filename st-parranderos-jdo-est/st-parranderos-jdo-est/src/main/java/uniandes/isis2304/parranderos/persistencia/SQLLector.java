@@ -48,7 +48,7 @@ public class SQLLector
 	 * @param idbaño - El identificador del baño en el caso de que pertenezca a un baño
 	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarLector (PersistenceManager pm, long id, String tipolector, long idcentrocomercial, long idlocalcomercial, long idascensor, long idparqueadero, long idbaño ) 
+	public long adicionarLector (PersistenceManager pm, long id, long tipolector, String idcentrocomercial, String idlocalcomercial, String idascensor, String idparqueadero, String idbaño ) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaLector () + "(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño) values (?, ?, ?, ? , ? , ? , ? )");
         q.setParameters(id, tipolector, idcentrocomercial,idlocalcomercial, idascensor,idparqueadero, idbaño);
@@ -104,7 +104,7 @@ public class SQLLector
 	 * @param tipo - El tipo del lector
 	 * @return El objeto LECTOR que tiene el tipo dado
 	 */
-	public List<Lector> darLectoresPorTipo (PersistenceManager pm, String tipolector) 
+	public List<Lector> darLectoresPorTipo (PersistenceManager pm, long tipolector) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaLector () + " WHERE tipolector = ?");
 		q.setResultClass(Lector.class);
@@ -121,7 +121,7 @@ public class SQLLector
 	 * @param tipo- El nuevo tipo del lector con el id ingresado
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarTipoLector (PersistenceManager pm, long id, String tipolector) 
+	public long cambiarTipoLector (PersistenceManager pm, long id, long tipolector) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaLector() + " SET tipolector = ? WHERE id = ?");
 	     q.setParameters(tipolector, id);

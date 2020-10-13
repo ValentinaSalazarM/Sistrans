@@ -46,7 +46,7 @@ public class SQLEmpleado
 	 * @param lugarTrabajo - El lugar de trabajo del empleado 
 	 * @return Las tuplas insertadas
 	 */
-	public long adicionarEmpleado (PersistenceManager pm, long idvisitante, String lugarTrabajo) 
+	public long adicionarEmpleado (PersistenceManager pm, String idvisitante, String lugarTrabajo) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEmpleado() + "(idvisitante, lugartrabajo) values (?, ?)");
         q.setParameters(idvisitante, lugarTrabajo);
@@ -60,7 +60,7 @@ public class SQLEmpleado
 	 * @param idEmpleado - El identificador del empleado
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarEmpleadoPorID(PersistenceManager pm, long idEmpleado) 
+	public long eliminarEmpleadoPorID(PersistenceManager pm, String idEmpleado) 
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaEmpleado() + " WHERE idvisitante = ?");
         q.setParameters(idEmpleado);
@@ -74,7 +74,7 @@ public class SQLEmpleado
 	 * @param id - El identificador del empleado
 	 * @return El objeto EMPLEADO
 	 */
-	public Empleado darEmpleadoPorID(PersistenceManager pm,long id) 
+	public Empleado darEmpleadoPorID(PersistenceManager pm, String id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaEmpleado() + " WHERE idvisitante = ?");
 		q.setResultClass(Empleado.class);
@@ -104,7 +104,7 @@ public class SQLEmpleado
 	 * @param  lugarTrabajo - El lugar de trabajo del empleado
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarCompañia(PersistenceManager pm, long id , String lugarTrabajo) 
+	public long cambiarCompañia(PersistenceManager pm, String id , String lugarTrabajo) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaDomiciliario() + " SET lugartrabajo = ? WHERE idvisitante = ?");
 	     q.setParameters(lugarTrabajo, id);

@@ -10,7 +10,6 @@
 
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.sql.Timestamp;
 
 import java.util.List;
 
@@ -64,7 +63,7 @@ class SQLHorario
  * @param minuto - El minuto del horario
  * @return - Las tuplas insertadas
  */
-	public long adicionarHorario (PersistenceManager pm, Timestamp hora, Timestamp minuto, long id ) 
+	public long adicionarHorario (PersistenceManager pm, int hora, int minuto, long id ) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaHorario() + "(id, hora, minuto) values (?, ?, ?)");
         q.setParameters(id, hora, minuto);
@@ -135,7 +134,7 @@ class SQLHorario
 	 * @param hora - La nueva hora del horario
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarHora(PersistenceManager pm, long id, Timestamp hora) 
+	public long cambiarHora(PersistenceManager pm, long id, int hora) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaHorario () + " SET hora = ? WHERE id = ?");
 	     q.setParameters(hora, id);
@@ -151,7 +150,7 @@ class SQLHorario
 	 * @param minuto - El minuto modificado
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarMinuto(PersistenceManager pm, long id, Timestamp minuto) 
+	public long cambiarMinuto(PersistenceManager pm, long id, int minuto) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaHorario () + " SET minuto = ? WHERE id = ?");
 	     q.setParameters(minuto, id);
