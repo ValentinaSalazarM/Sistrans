@@ -8,6 +8,7 @@
  */
 package uniandes.isis2304.parranderos.persistencia;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -57,15 +58,13 @@ public class SQLTipoLocal
 	 * @param idTipoLocal - El identificador del tipo de local
 	 * @param tipo - El nombre del tipo de local
 	 * @param horaApertura - Hora de apertura del tipo de local
-	 * @param minutoApertura - Minuto del horario de apertura del tipo de local
 	 * @param horaCierre - Hora de cierre del tipo de local
-	 * @param minutoCierre - Minuto del horario de cierre del tipo de local
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoLocal (PersistenceManager pm, long idTipoLocal, String tipo, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre) 
+	public long adicionarTipoLocal (PersistenceManager pm, long idTipoLocal,Timestamp horaApertura, Timestamp horaCierre, String tipo) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoLocal() + "(id, tipo, horaApertura, minutoApertura, horaCierre, minutoCierre) values (?, ?, ?, ?, ?, ?)");
-        q.setParameters(idTipoLocal, tipo, horaApertura, minutoApertura, horaCierre, minutoCierre);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoLocal() + "(id, tipo, horaApertura, horaCierre) values (?, ?, ?, ?)");
+        q.setParameters(idTipoLocal, tipo, horaApertura,horaCierre);
         return (long) q.executeUnique();            
 	}
 
@@ -137,6 +136,25 @@ public class SQLTipoLocal
 		q.setResultClass(TipoLocal.class);
 		return (List<TipoLocal>) q.executeList();
 	}
+	
+
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el tipo de un TIPOLOCAL en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param identificador - El identificador del tipo
+	 * @param  tipo - El nuevo tipo del tipo local
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarTipoLocal (PersistenceManager pm, long identificador, String tipo) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoLocal() + " SET tipo = ? WHERE id = ?");
+	     q.setParameters(tipo, identificador);
+	     return (long) q.executeUnique();            
+	}
+
+
 
 	
 }

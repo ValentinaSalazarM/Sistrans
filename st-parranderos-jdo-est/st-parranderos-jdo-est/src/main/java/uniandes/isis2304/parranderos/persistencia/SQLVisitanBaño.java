@@ -79,5 +79,19 @@ public class SQLVisitanBaño
 		q.setResultClass(VisitanBaño.class);
 		return (List<VisitanBaño>) q.executeList();
 	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar UN VISITANBAÑO de la base de datos, por sus identificadores
+	 * @param pm - El manejador de persistencia
+	 * @param idBaño- El identificador del baño
+	 * @param idVisitante - El identificador del bar
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarVisitanLocal (PersistenceManager pm, long idBaño, long idVisitante) 
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanBaño() + " WHERE idbaño = ? AND idvisitante = ?");
+        q.setParameters(idBaño, idVisitante);
+        return (long) q.executeUnique();
+	}
 
 }

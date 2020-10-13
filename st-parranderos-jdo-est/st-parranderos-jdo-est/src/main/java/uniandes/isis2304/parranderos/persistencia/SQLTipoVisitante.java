@@ -58,12 +58,14 @@ public class SQLTipoVisitante
 	 * @param pm - El manejador de persistencia
 	 * @param idTipoVisitante - El identificador del tipo de visitante
 	 * @param tipo - El nombre del tipo de visitante
+	 * @param horalimite - Hora máxima de visita en el centro comercial
+	 * @param horaInicio - Hora inicio del visitante en el centro comercial de acuerdo a su tipo
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoVisitante (PersistenceManager pm, long idTipoVisitante, String tipo, Timestamp horaLimite) 
+	public long adicionarTipoVisitante (PersistenceManager pm, long idTipoVisitante, String tipo, Timestamp horaLimite, Timestamp horainicio) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoVisitante() + "(id, tipo, horaLimite) values (?, ?, ?)");
-        q.setParameters(idTipoVisitante, tipo, horaLimite);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoVisitante() + "(id, tipo, horainicio, horalimite) values (?, ?, ?, ?)");
+        q.setParameters(idTipoVisitante, tipo, horainicio, horaLimite);
         return (long) q.executeUnique();            
 	}
 
@@ -136,4 +138,35 @@ public class SQLTipoVisitante
 		return (List<TipoVisitante>) q.executeList();
 	}
 
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar la hora de inicio de un TIPOVISITANTE en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param identificador - El identificador del tipo
+	 * @param  horainicio - La nueva hora habilitada para el ingreso al centro comercial 
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarHoraInicio (PersistenceManager pm, long identificador, Timestamp horainicio) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoVisitante() + " SET horainicio = ? WHERE id = ?");
+	     q.setParameters(horainicio, identificador);
+	     return (long) q.executeUnique();            
+	}
+
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar la hora limite de un TIPOVISITANTE en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param identificador - El identificador del tipo
+	 * @param  horalimite - La nueva hora habilitada para la salida del centro comercial
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarHoraLimite (PersistenceManager pm, long identificador, Timestamp horalimite) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoVisitante() + " SET horalimite = ? WHERE id = ?");
+	     q.setParameters(horalimite, identificador);
+	     return (long) q.executeUnique();            
+	}
 }
