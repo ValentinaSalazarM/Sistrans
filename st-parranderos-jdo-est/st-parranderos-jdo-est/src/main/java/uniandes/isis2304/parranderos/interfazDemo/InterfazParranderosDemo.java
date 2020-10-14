@@ -4,7 +4,7 @@
  * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
+ * Proyecto: AforoAndes Uniandes
  * @version 1.0
  * @author Germán Bravo
  * Julio de 2018
@@ -47,7 +47,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.parranderos.interfazApp.PanelDatos;
-import uniandes.isis2304.parranderos.negocio.Parranderos;
+import uniandes.isis2304.parranderos.negocio.AforoAndes;
 import uniandes.isis2304.parranderos.negocio.VOVisitante;
 import uniandes.isis2304.parranderos.negocio.VOCapacidadNormal;
 import uniandes.isis2304.parranderos.negocio.VOAscensor;
@@ -94,7 +94,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
     /**
      * Asociación a la clase principal del negocio.
      */
-    private Parranderos parranderos;
+    private AforoAndes aforoAndes;
     
 	/* ****************************************************************
 	 * 			Atributos de interfaz
@@ -134,7 +134,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
         }
         
         tableConfig = openConfig ("Tablas BD", CONFIG_TABLAS);
-        parranderos = new Parranderos (tableConfig);
+        aforoAndes = new AforoAndes (tableConfig);
         
     	String path = guiConfig.get("bannerPath").getAsString();
         panelDatos = new PanelDatos ( );
@@ -169,7 +169,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
 //			e.printStackTrace ();
 			log.info ("NO se encontró un archivo de configuración válido");			
-			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "Parranderos App", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "AforoAndes App", JOptionPane.ERROR_MESSAGE);
 		}	
         return config;
     }
@@ -186,7 +186,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
     	if ( guiConfig == null )
     	{
     		log.info ( "Se aplica configuración por defecto" );			
-			titulo = "Parranderos APP Default";
+			titulo = "AforoAndes APP Default";
 			alto = 300;
 			ancho = 500;
     	}
@@ -262,14 +262,14 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
 			String nombreTipoBebida = "Vino tinto";
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida (nombreTipoBebida);
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida (nombreTipoBebida);
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTipoBebida);
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre (nombreTipoBebida);
 				errorTipoBebida = true;
 			}
-			List <VOLocalComercial> lista = parranderos.darVOTiposBebida();
-			long tbEliminados = parranderos.eliminarTipoCarnetPorId (tipoBebida.getId ());
+			List <VOLocalComercial> lista = aforoAndes.darVOTiposBebida();
+			long tbEliminados = aforoAndes.eliminarTipoCarnetPorId (tipoBebida.getId ());
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de TipoBebida\n\n";
@@ -278,7 +278,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado += "Adicionado el tipo de bebida con nombre: " + nombreTipoBebida + "\n";
 			resultado += "\n\n************ Ejecutando la demo ************ \n";
@@ -318,18 +318,18 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			String nombreTipoBebida = "Vino tinto";
 			String nombreBebida = "120";
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida (nombreTipoBebida);
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida (nombreTipoBebida);
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTipoBebida);
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre (nombreTipoBebida);
 				errorTipoBebida = true;
 			}
-			VOAscensor bebida = parranderos.adicionarBebida(nombreBebida, tipoBebida.getId (), 10);
+			VOAscensor bebida = aforoAndes.adicionarBebida(nombreBebida, tipoBebida.getId (), 10);
 			
-			List <VOLocalComercial> listaTiposBebida = parranderos.darVOTiposBebida();
-			List <VOAscensor> listaBebidas = parranderos.darVOBebidas();
-			long bebEliminadas = parranderos.eliminarBebidaPorNombre(nombreBebida);
-			long tbEliminados = parranderos.eliminarTipoCarnetPorId (tipoBebida.getId ());
+			List <VOLocalComercial> listaTiposBebida = aforoAndes.darVOTiposBebida();
+			List <VOAscensor> listaBebidas = aforoAndes.darVOBebidas();
+			long bebEliminadas = aforoAndes.eliminarBebidaPorNombre(nombreBebida);
+			long tbEliminados = aforoAndes.eliminarTipoCarnetPorId (tipoBebida.getId ());
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Bebidas\n\n";
@@ -338,7 +338,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado += "Adicionado el tipo de bebida con nombre: " + nombreTipoBebida + "\n";
 			resultado += "Adicionada la bebida con nombre: " + nombreBebida + "\n";
@@ -377,26 +377,26 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
 			String nombreTipoBebida = "Vino tinto";
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida (nombreTipoBebida);
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida (nombreTipoBebida);
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTipoBebida);
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre (nombreTipoBebida);
 				errorTipoBebida = true;
 			}
-			VOAscensor bebida1 = parranderos.adicionarBebida("120", tipoBebida.getId (), 10);
-			VOAscensor bebida2 = parranderos.adicionarBebida("Gato Negro", tipoBebida.getId (), 11);
-			VOAscensor bebida3 = parranderos.adicionarBebida("Don Pedro", tipoBebida.getId (), 12);
+			VOAscensor bebida1 = aforoAndes.adicionarBebida("120", tipoBebida.getId (), 10);
+			VOAscensor bebida2 = aforoAndes.adicionarBebida("Gato Negro", tipoBebida.getId (), 11);
+			VOAscensor bebida3 = aforoAndes.adicionarBebida("Don Pedro", tipoBebida.getId (), 12);
 			
-			List <VOLocalComercial> listaTiposBebida = parranderos.darVOTiposBebida();
-			List <VOAscensor> listaBebidas1 = parranderos.darVOBebidas();
-			List <VOArea> listaSirven = parranderos.darVOSirven ();
-			long noServidasEliminadas = parranderos.eliminarBebidasNoServidas();
-			List <VOAscensor> listaBebidas2 = parranderos.darVOBebidas();
+			List <VOLocalComercial> listaTiposBebida = aforoAndes.darVOTiposBebida();
+			List <VOAscensor> listaBebidas1 = aforoAndes.darVOBebidas();
+			List <VOArea> listaSirven = aforoAndes.darVOSirven ();
+			long noServidasEliminadas = aforoAndes.eliminarBebidasNoServidas();
+			List <VOAscensor> listaBebidas2 = aforoAndes.darVOBebidas();
 			
-			long bebEliminadas1 = parranderos.eliminarBebidaPorId(bebida1.getId ());
-			long bebEliminadas2 = parranderos.eliminarBebidaPorId(bebida2.getId ());
-			long bebEliminadas3 = parranderos.eliminarBebidaPorId(bebida3.getId ());
-			long tbEliminados = parranderos.eliminarTipoBebidaPorNombre (nombreTipoBebida);
+			long bebEliminadas1 = aforoAndes.eliminarBebidaPorId(bebida1.getId ());
+			long bebEliminadas2 = aforoAndes.eliminarBebidaPorId(bebida2.getId ());
+			long bebEliminadas3 = aforoAndes.eliminarBebidaPorId(bebida3.getId ());
+			long tbEliminados = aforoAndes.eliminarTipoBebidaPorNombre (nombreTipoBebida);
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de borrado de las bebidas no servidas 1\n\n";
@@ -405,7 +405,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado +=  "\n" + listarTiposBebida (listaTiposBebida);
 			resultado += "\n" + listarBebidas (listaBebidas1);
@@ -446,31 +446,31 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
 			String nombreTipoBebida = "Vino tinto";
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida (nombreTipoBebida);
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida (nombreTipoBebida);
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTipoBebida);
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre (nombreTipoBebida);
 				errorTipoBebida = true;
 			}
-			VOAscensor bebida1 = parranderos.adicionarBebida("120", tipoBebida.getId (), 10);
-			VOAscensor bebida2 = parranderos.adicionarBebida("Gato Negro", tipoBebida.getId (), 11);
-			VOAscensor bebida3 = parranderos.adicionarBebida("Don Pedro", tipoBebida.getId (), 12);
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
-			parranderos.adicionarSirven (bar1.getId (), bebida1.getId (), "diurno");
+			VOAscensor bebida1 = aforoAndes.adicionarBebida("120", tipoBebida.getId (), 10);
+			VOAscensor bebida2 = aforoAndes.adicionarBebida("Gato Negro", tipoBebida.getId (), 11);
+			VOAscensor bebida3 = aforoAndes.adicionarBebida("Don Pedro", tipoBebida.getId (), 12);
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
+			aforoAndes.adicionarSirven (bar1.getId (), bebida1.getId (), "diurno");
 			
-			List <VOLocalComercial> listaTiposBebida = parranderos.darVOTiposBebida();
-			List <VOAscensor> listaBebidas1 = parranderos.darVOBebidas();
-			List <VOVisitante> bares = parranderos.darVOBares ();
-			List <VOArea> sirven = parranderos.darVOSirven ();
-			long noServidasEliminadas = parranderos.eliminarBebidasNoServidas();
-			List <VOAscensor> listaBebidas2 = parranderos.darVOBebidas();
+			List <VOLocalComercial> listaTiposBebida = aforoAndes.darVOTiposBebida();
+			List <VOAscensor> listaBebidas1 = aforoAndes.darVOBebidas();
+			List <VOVisitante> bares = aforoAndes.darVOBares ();
+			List <VOArea> sirven = aforoAndes.darVOSirven ();
+			long noServidasEliminadas = aforoAndes.eliminarBebidasNoServidas();
+			List <VOAscensor> listaBebidas2 = aforoAndes.darVOBebidas();
 			
-			long sirvenEliminados = parranderos.eliminarSirven(bar1.getId (), bebida1.getId ());
-			long bebEliminadas1 = parranderos.eliminarBebidaPorId(bebida1.getId ());
-			long bebEliminadas2 = parranderos.eliminarBebidaPorId(bebida2.getId ());
-			long bebEliminadas3 = parranderos.eliminarBebidaPorId(bebida3.getId ());
-			long tbEliminados = parranderos.eliminarTipoBebidaPorNombre (nombreTipoBebida);
-			long baresEliminados = parranderos.eliminarBarPorNombre ("Los Amigos");
+			long sirvenEliminados = aforoAndes.eliminarSirven(bar1.getId (), bebida1.getId ());
+			long bebEliminadas1 = aforoAndes.eliminarBebidaPorId(bebida1.getId ());
+			long bebEliminadas2 = aforoAndes.eliminarBebidaPorId(bebida2.getId ());
+			long bebEliminadas3 = aforoAndes.eliminarBebidaPorId(bebida3.getId ());
+			long tbEliminados = aforoAndes.eliminarTipoBebidaPorNombre (nombreTipoBebida);
+			long baresEliminados = aforoAndes.eliminarBarPorNombre ("Los Amigos");
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de borrado de las bebidas no servidas 2\n\n";
@@ -479,7 +479,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado += "\n" + listarTiposBebida (listaTiposBebida);
 			resultado += "\n" + listarBebidas (listaBebidas1);
@@ -521,11 +521,11 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
 			
-			List <VOVisitante> lista = parranderos.darVOBares ();
+			List <VOVisitante> lista = aforoAndes.darVOBares ();
 			
-			long baresEliminados = parranderos.eliminarBarPorNombre("Los Amigos");
+			long baresEliminados = aforoAndes.eliminarBarPorNombre("Los Amigos");
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Bares\n\n";
@@ -565,59 +565,59 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida ("Vino tinto");
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida ("Vino tinto");
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre ("Vino tinto");
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre ("Vino tinto");
 				errorTipoBebida = true;
 			}
-			VOAscensor bebida1 = parranderos.adicionarBebida ("120", tipoBebida.getId (), 10);
-			VOAscensor bebida2 = parranderos.adicionarBebida ("121", tipoBebida.getId (), 10);
-			VOAscensor bebida3 = parranderos.adicionarBebida ("122", tipoBebida.getId (), 10);
-			VOAscensor bebida4 = parranderos.adicionarBebida ("123", tipoBebida.getId (), 10);
-			VOAscensor bebida5 = parranderos.adicionarBebida ("124", tipoBebida.getId (), 10);
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
-			VOVisitante bar2 = parranderos.adicionarBar ("Los Amigos2", "Bogotá", "Bajo", 3);
-			VOVisitante bar3 = parranderos.adicionarBar ("Los Amigos3", "Bogotá", "Bajo", 4);
-			VOVisitante bar4 = parranderos.adicionarBar ("Los Amigos4", "Medellín", "Bajo", 5);
-			parranderos.adicionarSirven (bar1.getId (), bebida1.getId (), "diurno");
-			parranderos.adicionarSirven (bar1.getId (), bebida2.getId (), "diurno");
-			parranderos.adicionarSirven (bar2.getId (), bebida1.getId (), "diurno");
-			parranderos.adicionarSirven (bar2.getId (), bebida2.getId (), "diurno");
-			parranderos.adicionarSirven (bar2.getId (), bebida3.getId (), "diurno");
-			parranderos.adicionarSirven (bar3.getId (), bebida1.getId (), "diurno");
-			parranderos.adicionarSirven (bar3.getId (), bebida2.getId (), "diurno");
-			parranderos.adicionarSirven (bar3.getId (), bebida3.getId (), "diurno");
-			parranderos.adicionarSirven (bar3.getId (), bebida4.getId (), "diurno");
-			parranderos.adicionarSirven (bar3.getId (), bebida5.getId (), "diurno");
+			VOAscensor bebida1 = aforoAndes.adicionarBebida ("120", tipoBebida.getId (), 10);
+			VOAscensor bebida2 = aforoAndes.adicionarBebida ("121", tipoBebida.getId (), 10);
+			VOAscensor bebida3 = aforoAndes.adicionarBebida ("122", tipoBebida.getId (), 10);
+			VOAscensor bebida4 = aforoAndes.adicionarBebida ("123", tipoBebida.getId (), 10);
+			VOAscensor bebida5 = aforoAndes.adicionarBebida ("124", tipoBebida.getId (), 10);
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
+			VOVisitante bar2 = aforoAndes.adicionarBar ("Los Amigos2", "Bogotá", "Bajo", 3);
+			VOVisitante bar3 = aforoAndes.adicionarBar ("Los Amigos3", "Bogotá", "Bajo", 4);
+			VOVisitante bar4 = aforoAndes.adicionarBar ("Los Amigos4", "Medellín", "Bajo", 5);
+			aforoAndes.adicionarSirven (bar1.getId (), bebida1.getId (), "diurno");
+			aforoAndes.adicionarSirven (bar1.getId (), bebida2.getId (), "diurno");
+			aforoAndes.adicionarSirven (bar2.getId (), bebida1.getId (), "diurno");
+			aforoAndes.adicionarSirven (bar2.getId (), bebida2.getId (), "diurno");
+			aforoAndes.adicionarSirven (bar2.getId (), bebida3.getId (), "diurno");
+			aforoAndes.adicionarSirven (bar3.getId (), bebida1.getId (), "diurno");
+			aforoAndes.adicionarSirven (bar3.getId (), bebida2.getId (), "diurno");
+			aforoAndes.adicionarSirven (bar3.getId (), bebida3.getId (), "diurno");
+			aforoAndes.adicionarSirven (bar3.getId (), bebida4.getId (), "diurno");
+			aforoAndes.adicionarSirven (bar3.getId (), bebida5.getId (), "diurno");
 			
-			List <VOLocalComercial> listaTiposBebida = parranderos.darVOTiposBebida ();
-			List <VOAscensor> listaBebidas = parranderos.darVOBebidas ();
-			List <VOVisitante> listaBares = parranderos.darVOBares ();
-			List <VOArea> listaSirven = parranderos.darVOSirven ();
+			List <VOLocalComercial> listaTiposBebida = aforoAndes.darVOTiposBebida ();
+			List <VOAscensor> listaBebidas = aforoAndes.darVOBebidas ();
+			List <VOVisitante> listaBares = aforoAndes.darVOBares ();
+			List <VOArea> listaSirven = aforoAndes.darVOSirven ();
 
-			List <long []> listaByB = parranderos.darBaresYCantidadBebidasSirven();
+			List <long []> listaByB = aforoAndes.darBaresYCantidadBebidasSirven();
 
-			long sirvenEliminados = parranderos.eliminarSirven (bar1.getId (), bebida1.getId ());
-			sirvenEliminados += parranderos.eliminarSirven (bar1.getId (), bebida2.getId ());
-			sirvenEliminados += parranderos.eliminarSirven (bar2.getId (), bebida1.getId ());
-			sirvenEliminados += parranderos.eliminarSirven (bar2.getId (), bebida2.getId ());
-			sirvenEliminados += parranderos.eliminarSirven (bar2.getId (), bebida3.getId ());
-			sirvenEliminados += parranderos.eliminarSirven (bar3.getId (), bebida1.getId ());
-			sirvenEliminados += parranderos.eliminarSirven (bar3.getId (), bebida2.getId ());
-			sirvenEliminados += parranderos.eliminarSirven (bar3.getId (), bebida3.getId ());
-			sirvenEliminados += parranderos.eliminarSirven (bar3.getId (), bebida4.getId ());
-			sirvenEliminados += parranderos.eliminarSirven (bar3.getId (), bebida5.getId ());
-			long bebidasEliminadas = parranderos.eliminarBebidaPorNombre ("120");
-			bebidasEliminadas += parranderos.eliminarBebidaPorNombre ("121");
-			bebidasEliminadas += parranderos.eliminarBebidaPorNombre ("122");
-			bebidasEliminadas += parranderos.eliminarBebidaPorNombre ("123");
-			bebidasEliminadas += parranderos.eliminarBebidaPorNombre ("124");
-			long tbEliminados = parranderos.eliminarTipoBebidaPorNombre ("Vino tinto");
-			long baresEliminados = parranderos.eliminarBarPorNombre ("Los Amigos1");
-			baresEliminados += parranderos.eliminarBarPorNombre ("Los Amigos2");
-			baresEliminados += parranderos.eliminarBarPorNombre ("Los Amigos3");
-			baresEliminados += parranderos.eliminarBarPorId (bar4.getId ());
+			long sirvenEliminados = aforoAndes.eliminarSirven (bar1.getId (), bebida1.getId ());
+			sirvenEliminados += aforoAndes.eliminarSirven (bar1.getId (), bebida2.getId ());
+			sirvenEliminados += aforoAndes.eliminarSirven (bar2.getId (), bebida1.getId ());
+			sirvenEliminados += aforoAndes.eliminarSirven (bar2.getId (), bebida2.getId ());
+			sirvenEliminados += aforoAndes.eliminarSirven (bar2.getId (), bebida3.getId ());
+			sirvenEliminados += aforoAndes.eliminarSirven (bar3.getId (), bebida1.getId ());
+			sirvenEliminados += aforoAndes.eliminarSirven (bar3.getId (), bebida2.getId ());
+			sirvenEliminados += aforoAndes.eliminarSirven (bar3.getId (), bebida3.getId ());
+			sirvenEliminados += aforoAndes.eliminarSirven (bar3.getId (), bebida4.getId ());
+			sirvenEliminados += aforoAndes.eliminarSirven (bar3.getId (), bebida5.getId ());
+			long bebidasEliminadas = aforoAndes.eliminarBebidaPorNombre ("120");
+			bebidasEliminadas += aforoAndes.eliminarBebidaPorNombre ("121");
+			bebidasEliminadas += aforoAndes.eliminarBebidaPorNombre ("122");
+			bebidasEliminadas += aforoAndes.eliminarBebidaPorNombre ("123");
+			bebidasEliminadas += aforoAndes.eliminarBebidaPorNombre ("124");
+			long tbEliminados = aforoAndes.eliminarTipoBebidaPorNombre ("Vino tinto");
+			long baresEliminados = aforoAndes.eliminarBarPorNombre ("Los Amigos1");
+			baresEliminados += aforoAndes.eliminarBarPorNombre ("Los Amigos2");
+			baresEliminados += aforoAndes.eliminarBarPorNombre ("Los Amigos3");
+			baresEliminados += aforoAndes.eliminarBarPorId (bar4.getId ());
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Bares y cantidad de visitas que reciben\n\n";
@@ -626,7 +626,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado += "\n" + listarTiposBebida (listaTiposBebida);
 			resultado += "\n" + listarBebidas (listaBebidas);
@@ -664,19 +664,19 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
-			VOVisitante bar2 = parranderos.adicionarBar ("Los Amigos2", "Bogotá", "Bajo", 3);
-			VOVisitante bar3 = parranderos.adicionarBar ("Los Amigos3", "Bogotá", "Bajo", 4);
-			VOVisitante bar4 = parranderos.adicionarBar ("Los Amigos4", "Medellín", "Bajo", 5);
-			List <VOVisitante> listaBares = parranderos.darVOBares ();
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
+			VOVisitante bar2 = aforoAndes.adicionarBar ("Los Amigos2", "Bogotá", "Bajo", 3);
+			VOVisitante bar3 = aforoAndes.adicionarBar ("Los Amigos3", "Bogotá", "Bajo", 4);
+			VOVisitante bar4 = aforoAndes.adicionarBar ("Los Amigos4", "Medellín", "Bajo", 5);
+			List <VOVisitante> listaBares = aforoAndes.darVOBares ();
 			
-			long baresModificados = parranderos.aumentarSedesBaresCiudad("Bogotá");
-			List <VOVisitante> listaBares2 = parranderos.darVOBares ();
+			long baresModificados = aforoAndes.aumentarSedesBaresCiudad("Bogotá");
+			List <VOVisitante> listaBares2 = aforoAndes.darVOBares ();
 
-			long baresEliminados = parranderos.eliminarBarPorId (bar1.getId ());
-			baresEliminados += parranderos.eliminarBarPorId (bar2.getId ());
-			baresEliminados += parranderos.eliminarBarPorId (bar3.getId ());
-			baresEliminados += parranderos.eliminarBarPorId (bar4.getId ());
+			long baresEliminados = aforoAndes.eliminarBarPorId (bar1.getId ());
+			baresEliminados += aforoAndes.eliminarBarPorId (bar2.getId ());
+			baresEliminados += aforoAndes.eliminarBarPorId (bar3.getId ());
+			baresEliminados += aforoAndes.eliminarBarPorId (bar4.getId ());
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 
 			String resultado = "Demo de modificación número de sedes de los bares de una ciudad\n\n";
@@ -718,18 +718,18 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOCapacidadNormal bdor1 = parranderos.adicionarBebedor ("Pepito", "Bogotá", "Alto");
-			VOCapacidadNormal bdor2 = parranderos.adicionarBebedor ("Pepito", "Medellín", "Alto");
-			VOCapacidadNormal bdor3 = parranderos.adicionarBebedor ("Pedrito", "Cali", "Alto");
+			VOCapacidadNormal bdor1 = aforoAndes.adicionarBebedor ("Pepito", "Bogotá", "Alto");
+			VOCapacidadNormal bdor2 = aforoAndes.adicionarBebedor ("Pepito", "Medellín", "Alto");
+			VOCapacidadNormal bdor3 = aforoAndes.adicionarBebedor ("Pedrito", "Cali", "Alto");
 			
-			List <VOCapacidadNormal> bebedores = parranderos.darVOBebedores();
-			VOCapacidadNormal bdor5 = parranderos.darBebedorPorId(bdor1.getId ());
-			VOCapacidadNormal bdor6 = parranderos.darBebedorPorId(0);
-			List <VOCapacidadNormal> pepitos = parranderos.darVOBebedoresPorNombre("Pepito");
-			List <VOCapacidadNormal> pedritos = parranderos.darVOBebedoresPorNombre("Pedrito");
+			List <VOCapacidadNormal> bebedores = aforoAndes.darVOBebedores();
+			VOCapacidadNormal bdor5 = aforoAndes.darBebedorPorId(bdor1.getId ());
+			VOCapacidadNormal bdor6 = aforoAndes.darBebedorPorId(0);
+			List <VOCapacidadNormal> pepitos = aforoAndes.darVOBebedoresPorNombre("Pepito");
+			List <VOCapacidadNormal> pedritos = aforoAndes.darVOBebedoresPorNombre("Pedrito");
 			
-			long pepitosEliminados = parranderos.eliminarBebedorPorNombre ("Pepito");
-			long pedritosEliminados = parranderos.eliminarBebedorPorNombre ("Pedrito");
+			long pepitosEliminados = aforoAndes.eliminarBebedorPorNombre ("Pepito");
+			long pedritosEliminados = aforoAndes.eliminarBebedorPorNombre ("Pedrito");
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Bebedores\n\n";
@@ -780,35 +780,35 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
     		// Ejecución de la demo y recolección de los resultados.
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida ("Vino tinto");
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida ("Vino tinto");
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre ("Vino tinto");
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre ("Vino tinto");
 				errorTipoBebida = true;
 			}
-			VOAscensor bebida1 = parranderos.adicionarBebida ("120", tipoBebida.getId (), 10);
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
-			VOCapacidadNormal bdor1 = parranderos.adicionarBebedor ("Pepito", "Bogotá", "Alto");
+			VOAscensor bebida1 = aforoAndes.adicionarBebida ("120", tipoBebida.getId (), 10);
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
+			VOCapacidadNormal bdor1 = aforoAndes.adicionarBebedor ("Pepito", "Bogotá", "Alto");
 			
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "nocturno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "todos");
-			parranderos.adicionarGustan (bdor1.getId (), bebida1.getId ());
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "nocturno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "todos");
+			aforoAndes.adicionarGustan (bdor1.getId (), bebida1.getId ());
 
-			List <VOLocalComercial> listaTipos = parranderos.darVOTiposBebida();
-			List <VOAscensor> listaBebidas = parranderos.darVOBebidas();
-			List <VOVisitante> listaBares = parranderos.darVOBares ();
-			List <VOCapacidadNormal> bebedores = parranderos.darVOBebedores();
-			List <VOTipoLocal> listaGustan = parranderos.darVOGustan();
-			List <VOTipoVisitante> listaVisitan = parranderos.darVOVisitan();
+			List <VOLocalComercial> listaTipos = aforoAndes.darVOTiposBebida();
+			List <VOAscensor> listaBebidas = aforoAndes.darVOBebidas();
+			List <VOVisitante> listaBares = aforoAndes.darVOBares ();
+			List <VOCapacidadNormal> bebedores = aforoAndes.darVOBebedores();
+			List <VOTipoLocal> listaGustan = aforoAndes.darVOGustan();
+			List <VOTipoVisitante> listaVisitan = aforoAndes.darVOVisitan();
 
-			VOCapacidadNormal bdor2 = parranderos.darBebedorCompleto(bdor1.getId ());
+			VOCapacidadNormal bdor2 = aforoAndes.darBebedorCompleto(bdor1.getId ());
 
-			long gustanEliminados = parranderos.eliminarGustan (bdor1.getId (), bebida1.getId ());
-			long bebidasEliminadas = parranderos.eliminarBebidaPorNombre ("120");
-			long tiposEliminados = parranderos.eliminarTipoBebidaPorNombre ("Vino tinto");
-			long [] bebedorVisitasEliminados = parranderos.eliminarBebedorYVisitas_v1 (bdor1.getId ());
-			long baresEliminados = parranderos.eliminarBarPorNombre ("Los Amigos");
+			long gustanEliminados = aforoAndes.eliminarGustan (bdor1.getId (), bebida1.getId ());
+			long bebidasEliminadas = aforoAndes.eliminarBebidaPorNombre ("120");
+			long tiposEliminados = aforoAndes.eliminarTipoBebidaPorNombre ("Vino tinto");
+			long [] bebedorVisitasEliminados = aforoAndes.eliminarBebedorYVisitas_v1 (bdor1.getId ());
+			long baresEliminados = aforoAndes.eliminarBarPorNombre ("Los Amigos");
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de toda la información de un bebedor\n\n";
@@ -817,7 +817,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado += "\n" + listarTiposBebida (listaTipos);
 			resultado += "\n" + listarBebidas (listaBebidas);
@@ -866,37 +866,37 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
     		// Ejecución de la demo y recolección de los resultados.
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOCapacidadNormal bdor1 = parranderos.adicionarBebedor ("Pepito", "Bogotá", "Alto");
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
+			VOCapacidadNormal bdor1 = aforoAndes.adicionarBebedor ("Pepito", "Bogotá", "Alto");
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida ("Vino tinto");
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida ("Vino tinto");
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre ("Vino tinto");
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre ("Vino tinto");
 				errorTipoBebida = true;
 			}
-			VOAscensor bebida1 = parranderos.adicionarBebida ("120", tipoBebida.getId (), 10);
+			VOAscensor bebida1 = aforoAndes.adicionarBebida ("120", tipoBebida.getId (), 10);
 			
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "nocturno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "todos");
-			parranderos.adicionarGustan (bdor1.getId (), bebida1.getId ());
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "nocturno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "todos");
+			aforoAndes.adicionarGustan (bdor1.getId (), bebida1.getId ());
 
-			List <VOLocalComercial> listaTipos = parranderos.darVOTiposBebida();
-			List <VOAscensor> listaBebidas = parranderos.darVOBebidas();
-			List <VOVisitante> listaBares = parranderos.darVOBares ();
-			List <VOCapacidadNormal> bebedores = parranderos.darVOBebedores();
-			List <VOTipoLocal> listaGustan = parranderos.darVOGustan();
-			List <VOTipoVisitante> listaVisitan = parranderos.darVOVisitan();
+			List <VOLocalComercial> listaTipos = aforoAndes.darVOTiposBebida();
+			List <VOAscensor> listaBebidas = aforoAndes.darVOBebidas();
+			List <VOVisitante> listaBares = aforoAndes.darVOBares ();
+			List <VOCapacidadNormal> bebedores = aforoAndes.darVOBebedores();
+			List <VOTipoLocal> listaGustan = aforoAndes.darVOGustan();
+			List <VOTipoVisitante> listaVisitan = aforoAndes.darVOVisitan();
 
-			VOCapacidadNormal bdor2 = parranderos.darBebedorCompleto(bdor1.getId ());
+			VOCapacidadNormal bdor2 = aforoAndes.darBebedorCompleto(bdor1.getId ());
 
 			// No se elimina la tupla de GUSTAN para estudiar la coherencia de las operaciones en la base de daatos
 			long gustanEliminados = 0;
-			long bebidasEliminadas = parranderos.eliminarBebidaPorNombre ("120");
-			long tiposEliminados = parranderos.eliminarTipoBebidaPorNombre ("Vino tinto");
-			long [] bebedorVisitasEliminados = parranderos.eliminarBebedorYVisitas_v1 (bdor1.getId ());
-			long baresEliminados = parranderos.eliminarBarPorNombre ("Los Amigos");
+			long bebidasEliminadas = aforoAndes.eliminarBebidaPorNombre ("120");
+			long tiposEliminados = aforoAndes.eliminarTipoBebidaPorNombre ("Vino tinto");
+			long [] bebedorVisitasEliminados = aforoAndes.eliminarBebedorYVisitas_v1 (bdor1.getId ());
+			long baresEliminados = aforoAndes.eliminarBarPorNombre ("Los Amigos");
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de toda la información de un bebedor\n";
@@ -907,7 +907,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado += "\n" + listarTiposBebida (listaTipos);
 			resultado += "\n" + listarBebidas (listaBebidas);
@@ -961,37 +961,37 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
     		// Ejecución de la demo y recolección de los resultados.
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOCapacidadNormal bdor1 = parranderos.adicionarBebedor ("Pepito", "Bogotá", "Alto");
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
+			VOCapacidadNormal bdor1 = aforoAndes.adicionarBebedor ("Pepito", "Bogotá", "Alto");
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos", "Bogotá", "Bajo", 2);
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida ("Vino tinto");
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida ("Vino tinto");
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre ("Vino tinto");
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre ("Vino tinto");
 				errorTipoBebida = true;
 			}
-			VOAscensor bebida1 = parranderos.adicionarBebida ("120", tipoBebida.getId (), 10);
+			VOAscensor bebida1 = aforoAndes.adicionarBebida ("120", tipoBebida.getId (), 10);
 			
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "nocturno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "todos");
-			parranderos.adicionarGustan (bdor1.getId (), bebida1.getId ());
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "nocturno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "todos");
+			aforoAndes.adicionarGustan (bdor1.getId (), bebida1.getId ());
 
-			List <VOLocalComercial> listaTipos = parranderos.darVOTiposBebida();
-			List <VOAscensor> listaBebidas = parranderos.darVOBebidas();
-			List <VOVisitante> listaBares = parranderos.darVOBares ();
-			List <VOCapacidadNormal> bebedores = parranderos.darVOBebedores();
-			List <VOTipoLocal> listaGustan = parranderos.darVOGustan();
-			List <VOTipoVisitante> listaVisitan = parranderos.darVOVisitan();
+			List <VOLocalComercial> listaTipos = aforoAndes.darVOTiposBebida();
+			List <VOAscensor> listaBebidas = aforoAndes.darVOBebidas();
+			List <VOVisitante> listaBares = aforoAndes.darVOBares ();
+			List <VOCapacidadNormal> bebedores = aforoAndes.darVOBebedores();
+			List <VOTipoLocal> listaGustan = aforoAndes.darVOGustan();
+			List <VOTipoVisitante> listaVisitan = aforoAndes.darVOVisitan();
 
-			VOCapacidadNormal bdor2 = parranderos.darBebedorCompleto(bdor1.getId ());
+			VOCapacidadNormal bdor2 = aforoAndes.darBebedorCompleto(bdor1.getId ());
 
 			// No se elimina la tupla de GUSTAN para estudiar la coherencia de las operaciones en la base de daatos
 			long gustanEliminados = 0;
-			long bebidasEliminadas = parranderos.eliminarBebidaPorNombre ("120");
-			long tiposEliminados = parranderos.eliminarTipoBebidaPorNombre ("Vino tinto");
-			long [] bebedorVisitasEliminados = parranderos.eliminarBebedorYVisitas_v2 (bdor1.getId ());
-			long baresEliminados = parranderos.eliminarBarPorNombre ("Los Amigos");
+			long bebidasEliminadas = aforoAndes.eliminarBebidaPorNombre ("120");
+			long tiposEliminados = aforoAndes.eliminarTipoBebidaPorNombre ("Vino tinto");
+			long [] bebedorVisitasEliminados = aforoAndes.eliminarBebedorYVisitas_v2 (bdor1.getId ());
+			long baresEliminados = aforoAndes.eliminarBarPorNombre ("Los Amigos");
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de toda la información de un bebedor\n";
@@ -1002,7 +1002,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado += "\n" + listarTiposBebida (listaTipos);
 			resultado += "\n" + listarBebidas (listaBebidas);
@@ -1048,13 +1048,13 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOCapacidadNormal bdor1 = parranderos.adicionarBebedor ("Pepito", "Bogotá", "Alto");
+			VOCapacidadNormal bdor1 = aforoAndes.adicionarBebedor ("Pepito", "Bogotá", "Alto");
 			
-			List<VOCapacidadNormal> bebedores1 = parranderos.darVOBebedores ();
-			long bebedoresActualizados = parranderos.cambiarCiudadBebedor (bdor1.getId (), "Medellín");
-			List<VOCapacidadNormal> bebedores2 = parranderos.darVOBebedores ();
+			List<VOCapacidadNormal> bebedores1 = aforoAndes.darVOBebedores ();
+			long bebedoresActualizados = aforoAndes.cambiarCiudadBebedor (bdor1.getId (), "Medellín");
+			List<VOCapacidadNormal> bebedores2 = aforoAndes.darVOBebedores ();
 			
-			long bebedoresEliminados = parranderos.eliminarBebedorPorNombre ("Pepito");
+			long bebedoresEliminados = aforoAndes.eliminarBebedorPorNombre ("Pepito");
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de modificación de la ciudad de un bebedor\n\n";
@@ -1092,35 +1092,35 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
-			VOVisitante bar2 = parranderos.adicionarBar ("Los Amigos2", "Bogotá", "Bajo", 3);
-			VOVisitante bar3 = parranderos.adicionarBar ("Los Amigos3", "Bogotá", "Bajo", 4);
-			VOVisitante bar4 = parranderos.adicionarBar ("Los Amigos4", "Medellín", "Bajo", 5);
-			VOCapacidadNormal bdor1 = parranderos.adicionarBebedor ("Pepito", "Bogotá", "Alto");
-			VOCapacidadNormal bdor2 = parranderos.adicionarBebedor ("Juanito", "Bogotá", "Alto");
-			VOCapacidadNormal bdor3 = parranderos.adicionarBebedor ("Carlitos", "Medellín", "Alto");
-			VOCapacidadNormal bdor4 = parranderos.adicionarBebedor ("Luis", "Cartagena", "Medio");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "nocturno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "todos");
-			parranderos.adicionarVisitan (bdor1.getId (), bar2.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar3.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor2.getId (), bar3.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor2.getId (), bar4.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
+			VOVisitante bar2 = aforoAndes.adicionarBar ("Los Amigos2", "Bogotá", "Bajo", 3);
+			VOVisitante bar3 = aforoAndes.adicionarBar ("Los Amigos3", "Bogotá", "Bajo", 4);
+			VOVisitante bar4 = aforoAndes.adicionarBar ("Los Amigos4", "Medellín", "Bajo", 5);
+			VOCapacidadNormal bdor1 = aforoAndes.adicionarBebedor ("Pepito", "Bogotá", "Alto");
+			VOCapacidadNormal bdor2 = aforoAndes.adicionarBebedor ("Juanito", "Bogotá", "Alto");
+			VOCapacidadNormal bdor3 = aforoAndes.adicionarBebedor ("Carlitos", "Medellín", "Alto");
+			VOCapacidadNormal bdor4 = aforoAndes.adicionarBebedor ("Luis", "Cartagena", "Medio");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "nocturno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "todos");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar2.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar3.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor2.getId (), bar3.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor2.getId (), bar4.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
 
-			List<VOVisitante> bares = parranderos.darVOBares();
-			List<VOCapacidadNormal> bebedores = parranderos.darVOBebedores();
-			List<VOTipoVisitante> visitan = parranderos.darVOVisitan ();
-			List<Object []> bebedoresYNumVisitas = parranderos.darBebedoresYNumVisitasRealizadas ();
+			List<VOVisitante> bares = aforoAndes.darVOBares();
+			List<VOCapacidadNormal> bebedores = aforoAndes.darVOBebedores();
+			List<VOTipoVisitante> visitan = aforoAndes.darVOVisitan ();
+			List<Object []> bebedoresYNumVisitas = aforoAndes.darBebedoresYNumVisitasRealizadas ();
 
-			long [] elimBdor1 = parranderos.eliminarBebedorYVisitas_v1 (bdor1.getId ());
-			long [] elimBdor2 = parranderos.eliminarBebedorYVisitas_v1 (bdor2.getId ());
-			long [] elimBdor3 = parranderos.eliminarBebedorYVisitas_v1 (bdor3.getId ());
-			long [] elimBdor4 = parranderos.eliminarBebedorYVisitas_v1 (bdor4.getId ());
-			long baresEliminados = parranderos.eliminarBarPorNombre ("Los Amigos1");
-			baresEliminados += parranderos.eliminarBarPorNombre ("Los Amigos2");
-			baresEliminados += parranderos.eliminarBarPorNombre ("Los Amigos3");
-			baresEliminados += parranderos.eliminarBarPorNombre ("Los Amigos4");
+			long [] elimBdor1 = aforoAndes.eliminarBebedorYVisitas_v1 (bdor1.getId ());
+			long [] elimBdor2 = aforoAndes.eliminarBebedorYVisitas_v1 (bdor2.getId ());
+			long [] elimBdor3 = aforoAndes.eliminarBebedorYVisitas_v1 (bdor3.getId ());
+			long [] elimBdor4 = aforoAndes.eliminarBebedorYVisitas_v1 (bdor4.getId ());
+			long baresEliminados = aforoAndes.eliminarBarPorNombre ("Los Amigos1");
+			baresEliminados += aforoAndes.eliminarBarPorNombre ("Los Amigos2");
+			baresEliminados += aforoAndes.eliminarBarPorNombre ("Los Amigos3");
+			baresEliminados += aforoAndes.eliminarBarPorNombre ("Los Amigos4");
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de dar bebedores y cuántas visitan han realizado\n\n";
@@ -1163,32 +1163,32 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
-			VOVisitante bar2 = parranderos.adicionarBar ("Los Amigos2", "Bogotá", "Bajo", 3);
-			VOVisitante bar3 = parranderos.adicionarBar ("Los Amigos3", "Bogotá", "Bajo", 4);
-			VOVisitante bar4 = parranderos.adicionarBar ("Los Amigos4", "Medellín", "Bajo", 5);
-			VOCapacidadNormal bdor1 = parranderos.adicionarBebedor ("Pepito", "Bogotá", "Alto");
-			VOCapacidadNormal bdor2 = parranderos.adicionarBebedor ("Juanito", "Medellín", "Alto");
-			VOCapacidadNormal bdor3 = parranderos.adicionarBebedor ("Pedrito", "Medellín", "Alto");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar2.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar3.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor2.getId (), bar3.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
-			parranderos.adicionarVisitan (bdor1.getId (), bar4.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
+			VOVisitante bar2 = aforoAndes.adicionarBar ("Los Amigos2", "Bogotá", "Bajo", 3);
+			VOVisitante bar3 = aforoAndes.adicionarBar ("Los Amigos3", "Bogotá", "Bajo", 4);
+			VOVisitante bar4 = aforoAndes.adicionarBar ("Los Amigos4", "Medellín", "Bajo", 5);
+			VOCapacidadNormal bdor1 = aforoAndes.adicionarBebedor ("Pepito", "Bogotá", "Alto");
+			VOCapacidadNormal bdor2 = aforoAndes.adicionarBebedor ("Juanito", "Medellín", "Alto");
+			VOCapacidadNormal bdor3 = aforoAndes.adicionarBebedor ("Pedrito", "Medellín", "Alto");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar2.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar3.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor2.getId (), bar3.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar4.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
 
-			List<VOVisitante> bares = parranderos.darVOBares();
-			List<VOCapacidadNormal> bebedores = parranderos.darVOBebedores();
-			List<VOTipoVisitante> visitan = parranderos.darVOVisitan ();
-			long bebedoresBogota = parranderos.darCantidadBebedoresCiudadVisitanBares ("Bogotá");
-			long bebedoresMedellin = parranderos.darCantidadBebedoresCiudadVisitanBares ("Medellín");
+			List<VOVisitante> bares = aforoAndes.darVOBares();
+			List<VOCapacidadNormal> bebedores = aforoAndes.darVOBebedores();
+			List<VOTipoVisitante> visitan = aforoAndes.darVOVisitan ();
+			long bebedoresBogota = aforoAndes.darCantidadBebedoresCiudadVisitanBares ("Bogotá");
+			long bebedoresMedellin = aforoAndes.darCantidadBebedoresCiudadVisitanBares ("Medellín");
 
-			long [] elimBdor1 = parranderos.eliminarBebedorYVisitas_v1 (bdor1.getId ());
-			long [] elimBdor2 = parranderos.eliminarBebedorYVisitas_v1 (bdor2.getId ());
-			long elimBdor3 = parranderos.eliminarBebedorPorId (bdor3.getId ());
-			long baresEliminados = parranderos.eliminarBarPorNombre ("Los Amigos1");
-			baresEliminados += parranderos.eliminarBarPorNombre ("Los Amigos2");
-			baresEliminados += parranderos.eliminarBarPorNombre ("Los Amigos3");
-			baresEliminados += parranderos.eliminarBarPorNombre ("Los Amigos4");
+			long [] elimBdor1 = aforoAndes.eliminarBebedorYVisitas_v1 (bdor1.getId ());
+			long [] elimBdor2 = aforoAndes.eliminarBebedorYVisitas_v1 (bdor2.getId ());
+			long elimBdor3 = aforoAndes.eliminarBebedorPorId (bdor3.getId ());
+			long baresEliminados = aforoAndes.eliminarBarPorNombre ("Los Amigos1");
+			baresEliminados += aforoAndes.eliminarBarPorNombre ("Los Amigos2");
+			baresEliminados += aforoAndes.eliminarBarPorNombre ("Los Amigos3");
+			baresEliminados += aforoAndes.eliminarBarPorNombre ("Los Amigos4");
 
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de dar cantidad de bebedores de una ciudad que vistan baresn\n\n";
@@ -1235,24 +1235,24 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida ("Vino tinto");
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida ("Vino tinto");
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre ("Vino tinto");
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre ("Vino tinto");
 				errorTipoBebida = true;
 			}
-			VOAscensor bebida1 = parranderos.adicionarBebida ("120", tipoBebida.getId (), 10);
-			VOCapacidadNormal bdor1 = parranderos.adicionarBebedor ("Pepito", "Bogotá", "Alto");
-			parranderos.adicionarGustan (bdor1.getId (), bebida1.getId ());
+			VOAscensor bebida1 = aforoAndes.adicionarBebida ("120", tipoBebida.getId (), 10);
+			VOCapacidadNormal bdor1 = aforoAndes.adicionarBebedor ("Pepito", "Bogotá", "Alto");
+			aforoAndes.adicionarGustan (bdor1.getId (), bebida1.getId ());
 
-			List <VOLocalComercial> listaTiposBebida = parranderos.darVOTiposBebida ();
-			List <VOAscensor> listaBebidas = parranderos.darVOBebidas ();
-			List <VOCapacidadNormal> listaBebedores = parranderos.darVOBebedores ();
-			List <VOTipoLocal> listaGustan = parranderos.darVOGustan();
-			long gustanEliminados = parranderos.eliminarGustan (bdor1.getId (), bebida1.getId ());
-			long bebidasEliminadas = parranderos.eliminarBebidaPorNombre ("120");
-			long tbEliminados = parranderos.eliminarTipoBebidaPorNombre ("Vino tinto");
-			long bebedoresEliminados = parranderos.eliminarBebedorPorNombre ("Pepito");
+			List <VOLocalComercial> listaTiposBebida = aforoAndes.darVOTiposBebida ();
+			List <VOAscensor> listaBebidas = aforoAndes.darVOBebidas ();
+			List <VOCapacidadNormal> listaBebedores = aforoAndes.darVOBebedores ();
+			List <VOTipoLocal> listaGustan = aforoAndes.darVOGustan();
+			long gustanEliminados = aforoAndes.eliminarGustan (bdor1.getId (), bebida1.getId ());
+			long bebidasEliminadas = aforoAndes.eliminarBebidaPorNombre ("120");
+			long tbEliminados = aforoAndes.eliminarTipoBebidaPorNombre ("Vino tinto");
+			long bebedoresEliminados = aforoAndes.eliminarBebedorPorNombre ("Pepito");
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Gustan\n\n";
@@ -1261,7 +1261,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado += "\n" + listarTiposBebida (listaTiposBebida);
 			resultado += "\n" + listarBebidas (listaBebidas);
@@ -1305,25 +1305,25 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
 			boolean errorTipoBebida = false;
-			VOLocalComercial tipoBebida = parranderos.adicionarTipoBebida ("Vino tinto");
+			VOLocalComercial tipoBebida = aforoAndes.adicionarTipoBebida ("Vino tinto");
 			if (tipoBebida == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre ("Vino tinto");
+				tipoBebida = aforoAndes.darTipoBebidaPorNombre ("Vino tinto");
 				errorTipoBebida = true;
 			}
-			VOAscensor bebida1 = parranderos.adicionarBebida ("120", tipoBebida.getId (), 10);
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
-			parranderos.adicionarSirven (bar1.getId (), bebida1.getId (), "diurno");
+			VOAscensor bebida1 = aforoAndes.adicionarBebida ("120", tipoBebida.getId (), 10);
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
+			aforoAndes.adicionarSirven (bar1.getId (), bebida1.getId (), "diurno");
 
-			List <VOLocalComercial> listaTiposBebida = parranderos.darVOTiposBebida ();
-			List <VOAscensor> listaBebidas = parranderos.darVOBebidas ();
-			List <VOVisitante> listaBares = parranderos.darVOBares ();
-			List <VOArea> listaSirven = parranderos.darVOSirven();
+			List <VOLocalComercial> listaTiposBebida = aforoAndes.darVOTiposBebida ();
+			List <VOAscensor> listaBebidas = aforoAndes.darVOBebidas ();
+			List <VOVisitante> listaBares = aforoAndes.darVOBares ();
+			List <VOArea> listaSirven = aforoAndes.darVOSirven();
 			
-			long sirvenEliminados = parranderos.eliminarSirven (bar1.getId (), bebida1.getId ());
-			long bebidasEliminadas = parranderos.eliminarBebidaPorNombre ("120");
-			long tbEliminados = parranderos.eliminarTipoBebidaPorNombre ("Vino tinto");
-			long baresEliminados = parranderos.eliminarBarPorNombre ("Los Amigos1");
+			long sirvenEliminados = aforoAndes.eliminarSirven (bar1.getId (), bebida1.getId ());
+			long bebidasEliminadas = aforoAndes.eliminarBebidaPorNombre ("120");
+			long tbEliminados = aforoAndes.eliminarTipoBebidaPorNombre ("Vino tinto");
+			long baresEliminados = aforoAndes.eliminarBarPorNombre ("Los Amigos1");
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Sirven\n\n";
@@ -1332,7 +1332,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 			{
 				resultado += "*** Exception creando tipo de bebida !!\n";
 				resultado += "*** Es probable que ese tipo de bebida ya existiera y hay restricción de UNICIDAD sobre el nombre del tipo de bebida\n";
-				resultado += "*** Revise el log de parranderos para más detalles\n";
+				resultado += "*** Revise el log de aforoAndes para más detalles\n";
 			}
 			resultado += "\n" + listarTiposBebida (listaTiposBebida);
 			resultado += "\n" + listarBebidas (listaBebidas);
@@ -1374,16 +1374,16 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		{
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			VOVisitante bar1 = parranderos.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
-			VOCapacidadNormal bdor1 = parranderos.adicionarBebedor ("Pepito", "Bogotá", "Alto");
-			parranderos.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
+			VOVisitante bar1 = aforoAndes.adicionarBar ("Los Amigos1", "Bogotá", "Bajo", 2);
+			VOCapacidadNormal bdor1 = aforoAndes.adicionarBebedor ("Pepito", "Bogotá", "Alto");
+			aforoAndes.adicionarVisitan (bdor1.getId (), bar1.getId (), new Timestamp (System.currentTimeMillis()), "diurno");
 
-			List <VOVisitante> listaBares = parranderos.darVOBares ();
-			List <VOCapacidadNormal> listaBebedores = parranderos.darVOBebedores ();
-			List <VOTipoVisitante> listaVisitan = parranderos.darVOVisitan();
-			long visitanEliminados = parranderos.eliminarVisitan (bdor1.getId (), bar1.getId ());
-			long baresEliminados = parranderos.eliminarBarPorNombre ("Los Amigos1");
-			long bebedoresEliminadas = parranderos.eliminarBebedorPorNombre ("Pepito");
+			List <VOVisitante> listaBares = aforoAndes.darVOBares ();
+			List <VOCapacidadNormal> listaBebedores = aforoAndes.darVOBebedores ();
+			List <VOTipoVisitante> listaVisitan = aforoAndes.darVOVisitan();
+			long visitanEliminados = aforoAndes.eliminarVisitan (bdor1.getId (), bar1.getId ());
+			long baresEliminados = aforoAndes.eliminarBarPorNombre ("Los Amigos1");
+			long bebedoresEliminadas = aforoAndes.eliminarBebedorPorNombre ("Pepito");
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de Visitan\n\n";
@@ -1412,11 +1412,11 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 	 * 			Métodos administrativos
 	 *****************************************************************/
 	/**
-	 * Muestra el log de Parranderos
+	 * Muestra el log de AforoAndes
 	 */
 	public void mostrarLogParranderos ()
 	{
-		mostrarArchivo ("parranderos.log");
+		mostrarArchivo ("aforoAndes.log");
 	}
 	
 	/**
@@ -1428,16 +1428,16 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 	}
 	
 	/**
-	 * Limpia el contenido del log de parranderos
+	 * Limpia el contenido del log de aforoAndes
 	 * Muestra en el panel de datos la traza de la ejecución
 	 */
 	public void limpiarLogParranderos ()
 	{
 		// Ejecución de la operación y recolección de los resultados
-		boolean resp = limpiarArchivo ("parranderos.log");
+		boolean resp = limpiarArchivo ("aforoAndes.log");
 
 		// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-		String resultado = "\n\n************ Limpiando el log de parranderos ************ \n";
+		String resultado = "\n\n************ Limpiando el log de aforoAndes ************ \n";
 		resultado += "Archivo " + (resp ? "limpiado exitosamente" : "NO PUDO ser limpiado !!");
 		resultado += "\nLimpieza terminada";
 
@@ -1462,7 +1462,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 	}
 	
 	/**
-	 * Limpia todas las tuplas de todas las tablas de la base de datos de parranderos
+	 * Limpia todas las tuplas de todas las tablas de la base de datos de aforoAndes
 	 * Muestra en el panel de datos el número de tuplas eliminadas de cada tabla
 	 */
 	public void limpiarBD ()
@@ -1470,7 +1470,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		try 
 		{
     		// Ejecución de la demo y recolección de los resultados
-			long eliminados [] = parranderos.limpiarParranderos();
+			long eliminados [] = aforoAndes.limpiarParranderos();
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "\n\n************ Limpiando la base de datos ************ \n";
@@ -1502,19 +1502,19 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 	}
 	
 	/**
-	 * Muestra el modelo conceptual de Parranderos
+	 * Muestra el modelo conceptual de AforoAndes
 	 */
 	public void mostrarModeloConceptual ()
 	{
-		mostrarArchivo ("data/Modelo Conceptual Parranderos.pdf");
+		mostrarArchivo ("data/Modelo Conceptual AforoAndes.pdf");
 	}
 	
 	/**
-	 * Muestra el esquema de la base de datos de Parranderos
+	 * Muestra el esquema de la base de datos de AforoAndes
 	 */
 	public void mostrarEsquemaBD ()
 	{
-		mostrarArchivo ("data/Esquema BD Parranderos.pdf");
+		mostrarArchivo ("data/Esquema BD AforoAndes.pdf");
 	}
 	
 	/**
@@ -1526,7 +1526,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 	}
 	
 	/**
-	 * Muestra la arquitectura de referencia para Parranderos
+	 * Muestra la arquitectura de referencia para AforoAndes
 	 */
 	public void mostrarArqRef ()
 	{
@@ -1552,7 +1552,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		resultado += " * Licenciado	bajo	el	esquema	Academic Free License versión 2.1\n";
 		resultado += " * \n";		
 		resultado += " * Curso: isis2304 - Sistemas Transaccionales\n";
-		resultado += " * Proyecto: Parranderos Uniandes\n";
+		resultado += " * Proyecto: AforoAndes Uniandes\n";
 		resultado += " * @version 1.0\n";
 		resultado += " * @author Germán Bravo\n";
 		resultado += " * Julio de 2018\n";
@@ -1747,7 +1747,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 	{
 		String resultado = "************ Error en la ejecución\n";
 		resultado += e.getLocalizedMessage() + ", " + darDetalleException(e);
-		resultado += "\n\nRevise datanucleus.log y parranderos.log para más detalles";
+		resultado += "\n\nRevise datanucleus.log y aforoAndes.log para más detalles";
 		return resultado;
 	}
 

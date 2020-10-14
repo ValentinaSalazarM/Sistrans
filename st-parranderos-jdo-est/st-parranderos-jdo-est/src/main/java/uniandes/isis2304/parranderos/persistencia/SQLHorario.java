@@ -100,7 +100,7 @@ class SQLHorario
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar UN HORARIO de la base de datos de Parranderos, por su identificador
+	 * Crea y ejecuta la sentencia SQL para eliminar UN HORARIO de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
 	 * @param idHorario - El identificador del horario
 	 * @return EL número de tuplas eliminadas

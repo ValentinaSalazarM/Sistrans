@@ -4,7 +4,7 @@
  * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
+ * Proyecto: AforoAndes Uniandes
  * @version 1.0
  * @author Germán Bravo
  * Julio de 2018
@@ -149,10 +149,9 @@ class SQLUtil
 	/**
 	 * Crea y ejecuta las sentencias SQL para cada tabla de la base de datos - EL ORDEN ES IMPORTANTE 
 	 * @param pm - El manejador de persistencia
-	 * @return Un arreglo con 7 números que indican el número de tuplas borradas en las tablas GUSTAN, SIRVEN, VISITAN, BEBIDA,
-	 * TIPOBEBIDA, BEBEDOR y BAR, respectivamente
+	 * @return Un arreglo de 25 posiciones con números que indican el número de tuplas borradas en las tablas de AforoAndes
 	 */
-	public long [] limpiarParranderos (PersistenceManager pm)
+	public long [] limpiarAforoAndes (PersistenceManager pm)
 	{
         Query qRegistranVehiculo = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranVehiculo());          
         Query qRegistranCarnet = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranCarnet ());

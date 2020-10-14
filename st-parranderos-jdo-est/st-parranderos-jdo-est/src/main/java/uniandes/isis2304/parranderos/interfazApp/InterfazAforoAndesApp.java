@@ -1,16 +1,10 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Proyecto: Aforo-CCAndes
+ *  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 package uniandes.isis2304.parranderos.interfazApp;
@@ -46,8 +40,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
-import uniandes.isis2304.parranderos.negocio.Parranderos;
-import uniandes.isis2304.parranderos.negocio.VOLocalComercial;
+import uniandes.isis2304.parranderos.negocio.AforoAndes;
+import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
 
 /**
  * Clase principal de la interfaz
@@ -86,7 +80,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     /**
      * Asociación a la clase principal del negocio.
      */
-    private Parranderos parranderos;
+    private AforoAndes aforoAndes;
     
 	/* ****************************************************************
 	 * 			Atributos de interfaz
@@ -126,7 +120,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
         }
         
         tableConfig = openConfig ("Tablas BD", CONFIG_TABLAS);
-        parranderos = new Parranderos (tableConfig);
+        aforoAndes = new AforoAndes (tableConfig);
         
     	String path = guiConfig.get("bannerPath").getAsString();
         panelDatos = new PanelDatos ( );
@@ -161,7 +155,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 		{
 //			e.printStackTrace ();
 			log.info ("NO se encontró un archivo de configuración válido");			
-			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "Parranderos App", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "AforoAndes App", JOptionPane.ERROR_MESSAGE);
 		}	
         return config;
     }
@@ -178,7 +172,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     	if ( guiConfig == null )
     	{
     		log.info ( "Se aplica configuración por defecto" );			
-			titulo = "Parranderos APP Default";
+			titulo = "AforoAndes APP Default";
 			alto = 300;
 			ancho = 500;
     	}
@@ -250,7 +244,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String nombreTipo = JOptionPane.showInputDialog (this, "Nombre del tipo de bedida?", "Adicionar tipo de bebida", JOptionPane.QUESTION_MESSAGE);
     		if (nombreTipo != null)
     		{
-        		VOLocalComercial tb = parranderos.adicionarTipoBebida (nombreTipo);
+        		VOTipoBebida tb = aforoAndes.adicionarTipoBebida (nombreTipo);
         		if (tb == null)
         		{
         			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombreTipo);
@@ -280,7 +274,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     {
     	try 
     	{
-			List <VOLocalComercial> lista = parranderos.darVOTiposBebida();
+			List <VOTipoBebida> lista = aforoAndes.darVOTiposBebida();
 
 			String resultado = "En listarTipoBebida";
 			resultado +=  "\n" + listarTiposBebida (lista);
@@ -307,7 +301,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		if (idTipoStr != null)
     		{
     			long idTipo = Long.valueOf (idTipoStr);
-    			long tbEliminados = parranderos.eliminarTipoBebidaPorId (idTipo);
+    			long tbEliminados = aforoAndes.eliminarTipoBebidaPorId (idTipo);
 
     			String resultado = "En eliminar TipoBebida\n\n";
     			resultado += tbEliminados + " Tipos de bebida eliminados\n";
@@ -337,7 +331,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
     		String nombreTb = JOptionPane.showInputDialog (this, "Nombre del tipo de bedida?", "Buscar tipo de bebida por nombre", JOptionPane.QUESTION_MESSAGE);
     		if (nombreTb != null)
     		{
-    			VOLocalComercial tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTb);
+    			VOTipoBebida tipoBebida = aforoAndes.darTipoBebidaPorNombre (nombreTb);
     			String resultado = "En buscar Tipo Bebida por nombre\n\n";
     			if (tipoBebida != null)
     			{
@@ -368,11 +362,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	 * 			Métodos administrativos
 	 *****************************************************************/
 	/**
-	 * Muestra el log de Parranderos
+	 * Muestra el log de AforoAndes
 	 */
 	public void mostrarLogParranderos ()
 	{
-		mostrarArchivo ("parranderos.log");
+		mostrarArchivo ("aforoAndes.log");
 	}
 	
 	/**
@@ -384,16 +378,16 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	}
 	
 	/**
-	 * Limpia el contenido del log de parranderos
+	 * Limpia el contenido del log de aforoAndes
 	 * Muestra en el panel de datos la traza de la ejecución
 	 */
 	public void limpiarLogParranderos ()
 	{
 		// Ejecución de la operación y recolección de los resultados
-		boolean resp = limpiarArchivo ("parranderos.log");
+		boolean resp = limpiarArchivo ("aforoAndes.log");
 
 		// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-		String resultado = "\n\n************ Limpiando el log de parranderos ************ \n";
+		String resultado = "\n\n************ Limpiando el log de aforoAndes ************ \n";
 		resultado += "Archivo " + (resp ? "limpiado exitosamente" : "NO PUDO ser limpiado !!");
 		resultado += "\nLimpieza terminada";
 
@@ -418,7 +412,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	}
 	
 	/**
-	 * Limpia todas las tuplas de todas las tablas de la base de datos de parranderos
+	 * Limpia todas las tuplas de todas las tablas de la base de datos de AforoAndes
 	 * Muestra en el panel de datos el número de tuplas eliminadas de cada tabla
 	 */
 	public void limpiarBD ()
@@ -426,17 +420,35 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 		try 
 		{
     		// Ejecución de la demo y recolección de los resultados
-			long eliminados [] = parranderos.limpiarParranderos();
+			long eliminados [] = aforoAndes.limpiarAforoAndes();
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "\n\n************ Limpiando la base de datos ************ \n";
-			resultado += eliminados [0] + " Gustan eliminados\n";
-			resultado += eliminados [1] + " Sirven eliminados\n";
-			resultado += eliminados [2] + " Visitan eliminados\n";
-			resultado += eliminados [3] + " Bebidas eliminadas\n";
-			resultado += eliminados [4] + " Tipos de bebida eliminados\n";
-			resultado += eliminados [5] + " Bebedores eliminados\n";
-			resultado += eliminados [6] + " Bares eliminados\n";
+			resultado += eliminados [0] + " RegistranVehiculo eliminados\n";
+			resultado += eliminados [1] + " RegistranCarnet eliminados\n";
+			resultado += eliminados [2] + " VisitanParqueadero eliminados\n";
+			resultado += eliminados [3] + " VisitanLocalComercial eliminados\n";
+			resultado += eliminados [4] + " VisitanBaño eliminados\n";
+			resultado += eliminados [5] + " VisitanCentroComercial eliminados\n";
+			resultado += eliminados [6] + " Vehículo eliminados\n";
+			resultado += eliminados [7] + " Empleado eliminados\n";
+			resultado += eliminados [8] + " Domiciliario eliminados\n";
+			resultado += eliminados [9] + " Carnet eliminados\n";
+			resultado += eliminados [10] + " TipoCarnet eliminados\n";
+			resultado += eliminados [11] + " Lector eliminados\n";
+			resultado += eliminados [12] + " ZonaCirculacion eliminados\n";
+			resultado += eliminados [13] + " LocalComercial eliminados\n";
+			resultado += eliminados [14] + " TipoLocal eliminados\n";
+			resultado += eliminados [15] + " Parqueadero eliminados\n";
+			resultado += eliminados [16] + " Baño eliminados\n";
+			resultado += eliminados [17] + " Ascensor eliminados\n";
+			resultado += eliminados [18] + " CapacidadNormal eliminados\n";
+			resultado += eliminados [20] + " Area eliminados\n";
+			resultado += eliminados [21] + " CentroComercial eliminados\n";
+			resultado += eliminados [22] + " Visitante eliminados\n";
+			resultado += eliminados [23] + " TipoVisitante eliminados\n";
+			resultado += eliminados [24] + " Horario eliminados\n";
+
 			resultado += "\nLimpieza terminada";
    
 			panelDatos.actualizarInterfaz(resultado);
@@ -458,19 +470,19 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	}
 	
 	/**
-	 * Muestra el modelo conceptual de Parranderos
+	 * Muestra el modelo conceptual de AforoAndes
 	 */
 	public void mostrarModeloConceptual ()
 	{
-		mostrarArchivo ("data/Modelo Conceptual Parranderos.pdf");
+		mostrarArchivo ("data/Modelo Conceptual AforoAndes.pdf");
 	}
 	
 	/**
-	 * Muestra el esquema de la base de datos de Parranderos
+	 * Muestra el esquema de la base de datos de AforoAndes
 	 */
 	public void mostrarEsquemaBD ()
 	{
-		mostrarArchivo ("data/Esquema BD Parranderos.pdf");
+		mostrarArchivo ("data/Esquema BD AforoAndes.pdf");
 	}
 	
 	/**
@@ -478,11 +490,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	 */
 	public void mostrarScriptBD ()
 	{
-		mostrarArchivo ("data/EsquemaParranderos.sql");
+		mostrarArchivo ("data/EsquemaAforoCCAndes.sql");
 	}
 	
 	/**
-	 * Muestra la arquitectura de referencia para Parranderos
+	 * Muestra la arquitectura de referencia para AforoAndes
 	 */
 	public void mostrarArqRef ()
 	{
@@ -505,15 +517,12 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 		String resultado = "\n\n ************************************\n\n";
 		resultado += " * Universidad	de	los	Andes	(Bogotá	- Colombia)\n";
 		resultado += " * Departamento	de	Ingeniería	de	Sistemas	y	Computación\n";
-		resultado += " * Licenciado	bajo	el	esquema	Academic Free License versión 2.1\n";
 		resultado += " * \n";		
 		resultado += " * Curso: isis2304 - Sistemas Transaccionales\n";
-		resultado += " * Proyecto: Parranderos Uniandes\n";
-		resultado += " * @version 1.0\n";
-		resultado += " * @author Germán Bravo\n";
-		resultado += " * Julio de 2018\n";
+		resultado += " * Proyecto: AforoAndes\n";
+		resultado += " * @author kvsalazar, mcteran\n";
+		resultado += " * Octubre de 2020\n";
 		resultado += " * \n";
-		resultado += " * Revisado por: Claudia Jiménez, Christian Ariza\n";
 		resultado += "\n ************************************\n\n";
 
 		panelDatos.actualizarInterfaz(resultado);		
@@ -528,11 +537,11 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
      * @param lista - La lista con los tipos de bebida
      * @return La cadena con una líea para cada tipo de bebida recibido
      */
-    private String listarTiposBebida(List<VOLocalComercial> lista) 
+    private String listarTiposBebida(List<VOTipoBebida> lista) 
     {
     	String resp = "Los tipos de bebida existentes son:\n";
     	int i = 1;
-        for (VOLocalComercial tb : lista)
+        for (VOTipoBebida tb : lista)
         {
         	resp += i++ + ". " + tb.toString() + "\n";
         }
@@ -564,7 +573,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 	{
 		String resultado = "************ Error en la ejecución\n";
 		resultado += e.getLocalizedMessage() + ", " + darDetalleException(e);
-		resultado += "\n\nRevise datanucleus.log y parranderos.log para más detalles";
+		resultado += "\n\nRevise datanucleus.log y aforoAndes.log para más detalles";
 		return resultado;
 	}
 
