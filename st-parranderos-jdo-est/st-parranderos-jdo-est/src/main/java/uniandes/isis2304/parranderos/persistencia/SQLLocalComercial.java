@@ -141,6 +141,22 @@ class SQLLocalComercial
 
 	/**
 	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el estado de actividad de un local comercial en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idLocal- identificador del local
+	 * @param activo - Nuevo estado de actividad del local comercial(1 si está activo o 0 de lo contrario)
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarActividadLocalComercial (PersistenceManager pm, String idLocal, int activo) 
+	{
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaLocalComercial () + " SET activo = ? WHERE identificador = ?");
+		q.setParameters(activo, idLocal);
+		return (long) q.executeUnique();            
+	}
+	
+	/**
+	 * 
 	 * Crea y ejecuta la sentencia SQL para cambiar el área de un local comercial en la 
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia

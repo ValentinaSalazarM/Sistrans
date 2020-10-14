@@ -54,33 +54,33 @@ class SQLHorario
 	{
 		this.pp = pp;
 	}
-	
-/**
- * Crea y ejecuta la sentencia SQL para adicionar un HORARIO a la base de datos de AforoAndes
- * @param pm - El manejador de persistencia
- * @param id - El identificador del horario
- * @param hora - La hora del horario
- * @param minuto - El minuto del horario
- * @return - Las tuplas insertadas
- */
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para adicionar un HORARIO a la base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param id - El identificador del horario
+	 * @param hora - La hora del horario
+	 * @param minuto - El minuto del horario
+	 * @return - Las tuplas insertadas
+	 */
 	public long adicionarHorario (PersistenceManager pm,long id, int hora, int minuto) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaHorario() + "(id, hora, minuto) values (?, ?, ?)");
-        q.setParameters(id, hora, minuto);
-        return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaHorario() + "(id, hora, minuto) values (?, ?, ?)");
+		q.setParameters(id, hora, minuto);
+		return (long) q.executeUnique();
 	}
 
-/**
- * Crea y ejecuta la sentencia SQL para eliminar un HORARIO a la base de datos de AforoAndes
- * @param pm - El manejador de persistencia
- * @param id - El identificador del horaro
- * @return Las tuplas eliminadas
- */
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar un HORARIO a la base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param id - El identificador del horaro
+	 * @return Las tuplas eliminadas
+	 */
 	public long eliminarHorarioPorID(PersistenceManager pm, long id)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaHorario () + " WHERE id = ?");
-        q.setParameters(id);
-        return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaHorario () + " WHERE id = ?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
 	}
 
 
@@ -98,7 +98,7 @@ class SQLHorario
 		q.setParameters(id);
 		return (Horario) q.executeUnique();
 	}
-	
+
 	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar UN HORARIO de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
@@ -107,11 +107,11 @@ class SQLHorario
 	 */
 	public long eliminarHorarioPorId (PersistenceManager pm, long idHorario)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaHorario () + " WHERE id = ?");
-        q.setParameters(idHorario);
-        return (long) q.executeUnique();            
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaHorario () + " WHERE id = ?");
+		q.setParameters(idHorario);
+		return (long) q.executeUnique();            
 	}
-	
+
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS HORARIOS de la 
 	 * base de datos de AforoAndes
@@ -136,11 +136,11 @@ class SQLHorario
 	 */
 	public long cambiarHora(PersistenceManager pm, long id, int hora) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaHorario () + " SET hora = ? WHERE id = ?");
-	     q.setParameters(hora, id);
-	     return (long) q.executeUnique();            
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaHorario () + " SET hora = ? WHERE id = ?");
+		q.setParameters(hora, id);
+		return (long) q.executeUnique();            
 	}
-	
+
 	/**
 	 * 
 	 * Crea y ejecuta la sentencia SQL para cambiar el minuto en la
@@ -152,10 +152,10 @@ class SQLHorario
 	 */
 	public long cambiarMinuto(PersistenceManager pm, long id, int minuto) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaHorario () + " SET minuto = ? WHERE id = ?");
-	     q.setParameters(minuto, id);
-	     return (long) q.executeUnique();            
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaHorario () + " SET minuto = ? WHERE id = ?");
+		q.setParameters(minuto, id);
+		return (long) q.executeUnique();            
 	}
-	
+
 
 }

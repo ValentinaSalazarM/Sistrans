@@ -50,7 +50,7 @@ public class SQLLector
 	 */
 	public long adicionarLector (PersistenceManager pm, long id, long tipolector, String idcentrocomercial, String idlocalcomercial, String idascensor, String idparqueadero, String idbaño ) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaLector () + "(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño) values (?, ?, ?, ? , ? , ? , ? )");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaLector () + "(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño) values (?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(id, tipolector, idcentrocomercial,idlocalcomercial, idascensor,idparqueadero, idbaño);
         return (long) q.executeUnique();
 	}
@@ -61,10 +61,23 @@ public class SQLLector
 	 * @param id - El identificador del lector
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarLectorPorID (PersistenceManager pm, long id)
+	public long eliminarLectorPorId (PersistenceManager pm, long id)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaLector() + " WHERE id = ?");
         q.setParameters(id);
+        return (long) q.executeUnique();            
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar un LECTOR de la base de datos de AforoAndes, por su tipo
+	 * @param pm - El manejador de persistencia
+	 * @param tipoLector - El tipo del lector
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarLectorPorTipo (PersistenceManager pm, long tipoLector)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaLector() + " WHERE tipoLector = ?");
+        q.setParameters(tipoLector);
         return (long) q.executeUnique();            
 	}
 	
@@ -75,11 +88,10 @@ public class SQLLector
 	 * @param id - El id del lector
 	 * @return El objeto LECTOR que tiene el identificador dado
 	 */
-	public Lector darLectorPorID(PersistenceManager pm, long id) 
+	public Lector darLectorPorId(PersistenceManager pm, long id) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaLector () + " WHERE id = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaLector () + " WHERE id LIKE '%" + id + "'");
 		q.setResultClass(Lector.class);
-		q.setParameters(id);
 		return (Lector) q.executeUnique();
 	}
 	
@@ -128,5 +140,4 @@ public class SQLLector
 	     return (long) q.executeUnique();            
 	}
 	
-
 }

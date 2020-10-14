@@ -914,7 +914,7 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de un AREA
+	 * Método que actualiza, de manera transaccional, el aforo de un AREA
 	 * @param idArea - El identificador del área que se quiere modificar
 	 * @param aforo - El nuevo aforo del área
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
@@ -1122,7 +1122,7 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de un ASCENSOR
+	 * Método que actualiza, de manera transaccional, el área de un ASCENSOR
 	 * @param idAscensor - El identificador del parqueadero que se quiere modificar
 	 * @param area - Identificador de la nueva área de un ascensor
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
@@ -1328,7 +1328,7 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de un BAÑO
+	 * Método que actualiza, de manera transaccional, el área de un BAÑO
 	 * @param idBaño - El identificador del parqueadero que se quiere modificar
 	 * @param area - Identificador de la nueva área de un baño
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
@@ -1528,7 +1528,7 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de una CAPACIDADNORMAL
+	 * Método que actualiza, de manera transaccional, el aforo de una CAPACIDADNORMAL
 	 * @param idCapacidadNormal - El identificador de la capacidad normal que se quiere modificar
 	 * @param aforo - El nuevo aforo de la capacidad normal
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
@@ -1767,7 +1767,7 @@ public class PersistenciaAforoAndes
 
 
 	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla CentroComercial, dado el identificador del centro comercial
+	 * Método que elimina, de manera transaccional, una tupla en la tabla CentroComercial, dado el nombre del centro comercial
 	 * Adiciona entradas al log de la aplicación
 	 * @param nombre - El nombre del centro comercial
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
@@ -1808,6 +1808,15 @@ public class PersistenciaAforoAndes
 		return sqlCentroComercial.darCentroComercialPorId(pmf.getPersistenceManager(), idCentroComercial);
 	}
 
+	/**
+	 * Método que consulta todas las tuplas en la tabla CentroComercial con un nomre dado
+	 * @param nombre - El nombre del centro comercial
+	 * @return El objeto CentroComercial, construido con base en las tuplas de la tabla CENTROCOMERCIAL con el nombre dado
+	 */
+	public List<CentroComercial> darCentrosComercialesPorNombre (String nombre)
+	{
+		return sqlCentroComercial.darCentrosComercialesPorNombre(pmf.getPersistenceManager(), nombre);
+	}
 
 	/**
 	 * Método que consulta todas las tuplas en la tabla CentroComercial
@@ -1824,7 +1833,7 @@ public class PersistenciaAforoAndes
 	 * @param nombre - El nuevo nombre del Centro Comercial
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
-	public long cambiarValorCapacidad (String idCentroComercial, String nombre)
+	public long cambiarNombreCentroComercial (String idCentroComercial, String nombre)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1966,7 +1975,7 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que consulta todas las tuplas en la tabla Domiciliario que tienen el valor dado
+	 * Método que consulta todas las tuplas en la tabla Domiciliario que trabajan en la empresa dada
 	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
 	 * @return La lista de objetos Domiciliario, construidos con base en las tuplas de la tabla DOMICILIARIO
 	 */
@@ -1998,6 +2007,503 @@ public class PersistenciaAforoAndes
 		{
 			tx.begin();
 			long resp = sqlDomiciliario.cambiarEmpresaDomiciliario(pm, idDomiciliario, empresaDomicilios);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar los EMPLEADOS
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Empleado
+	 * Adiciona entradas al log de la aplicación
+	 * @param idVisitante - El identificador del visitante
+	 * @param lugartrabajo - El lugar de trabajo del empleado 
+	 * @return El objeto Empleado adicionado. null si ocurre alguna Excepción
+	 */
+	public Empleado adicionarEmpleado(String idVisitante, String lugartrabajo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlEmpleado.adicionarEmpleado(pm, idVisitante, lugartrabajo);
+			tx.commit();
+
+			log.trace ("Inserción del Empleado " + idVisitante + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Empleado(idVisitante, lugartrabajo);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Empleado, dado el identificador de este 
+	 * Adiciona entradas al log de la aplicación
+	 * @param idVisitante - El identificador del empleado
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarEmpleadoPorId(String idVisitante) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlEmpleado.eliminarEmpleadoPorID(pm, idVisitante);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Empleado, dado el lugar de trabajo del empleado
+	 * Adiciona entradas al log de la aplicación
+	 * @param lugartrabajo - El lugar de trabajo del empleado
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarEmpleadoPorLugar (String lugartrabajo) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlEmpleado.eliminarEmpleadoPorLugarDeTrabajo(pm, lugartrabajo);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Empleado con un identificador dado
+	 * @param idEmpleado - El identificador del empleado 
+	 * @return El objeto Empleado, construido con base en las tuplas de la tabla EMPLEADO con el identificador dado
+	 */
+	public Empleado darEmpleadoPorId (String idEmpleado)
+	{
+		return sqlEmpleado.darEmpleadoPorID(pmf.getPersistenceManager(), idEmpleado);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla EMPLEADO que tienen el valor dado
+	 * @param lugartrabajo - El lugar de trabajo del empleado 
+	 * @return La lista de objetos Empleado, construidos con base en las tuplas de la tabla EMPLEADO
+	 */
+	public List<Empleado> darEmpleadosPorLugar (String lugar)
+	{
+		return sqlEmpleado.darEmpleadoPorLugar(pmf.getPersistenceManager(),lugar);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Empleado
+	 * @return La lista de objetos Empleado, construidos con base en las tuplas de la tabla EMPLEADO
+	 */
+	public List<Empleado> darEmpleados ()
+	{
+		return sqlEmpleado.darEmpleados(pmf.getPersistenceManager());
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, el valor de un EMPLEADO
+	 * @param idEmpleado - El identificador del empleado que se quiere modificar
+	 * @param lugartrabajo - El lugar de trabajo del empleado
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarLugarEmpleado(String idEmpleado, String lugartrabajo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlEmpleado.cambiarCompañia(pm, idEmpleado, lugartrabajo);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar LOS HORARIOS 
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla HORARIO
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El identificador del horario
+	 * @param hora - La hora del horario
+	 * @param minuto - El minuto del horario
+	 * @return El objeto HORARIO adicionado. null si ocurre alguna Excepción
+	 */
+	public Horario adicionarHorario( int hora, int minuto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long idHorario = nextvalHorario ();
+			long tuplasInsertadas = sqlHorario.adicionarHorario(pm, idHorario, hora, minuto);
+			tx.commit();
+
+			log.trace ("Inserción de un Horario:  " + idHorario + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Horario (idHorario, hora, minuto);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Horario, dado el identificador de este 
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El identificador del horario 
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarHorarioPorId(long id) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlHorario.eliminarHorarioPorID(pm, id);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Horario con un identificador dado
+	 * @param id - El identificador del horario 
+	 * @return El objeto Horario, construido con base en las tuplas de la tabla HORARIO con el identificador dado
+	 */
+	public Horario darHorarioPorId (long id)
+	{
+		return sqlHorario.darHorarioPorId(pmf.getPersistenceManager(), id);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Horario
+	 * @return La lista de objetos Horario, construidos con base en las tuplas de la tabla HORARIO
+	 */
+	public List<Horario> darHorarios ()
+	{
+		return sqlHorario.darHorarios(pmf.getPersistenceManager());
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, la hora de un horario
+	 * @param id - El identificador del horario a modificar
+	 * @param hora - La hora que pertenece al horario
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarHoraHorario(long id, int hora)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlHorario.cambiarHora(pm, id, hora);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, el minuto del horario
+	 * @param id - El identificador del horario a modificar
+	 * @param minuto - El minuto que pertenece al horario
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarMinutoHorario (long id, int minuto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlHorario.cambiarMinuto(pm, id, minuto);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar LOS LECTORES
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla LECTOR 
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El identificador del lector
+	 * @param tipolector - El tipo del lector
+	 * @param idCentroComercial - El identificador del centro comercial 
+	 * @param idLocalComercial - El identificador del local comercial en el caso de que pertenezca a un local
+	 * @param idAscensor - El identificador del ascensor en el caso de que pertenezca a un ascensor
+	 * @param idParqueadero - El identificador del parqueadero en el caso de que pertenezca a un parqueadero
+	 * @param idBaño - El identificador del baño en el caso de que pertenezca a un baño
+	 * @return El objeto LECTOR adicionado. null si ocurre alguna Excepción
+	 */
+	public Lector adicionarLector(long id, long tipolector, String idCentroComercial, String idLocalComercial, String idAscensor, String idParqueadero, String idBaño )
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlLector.adicionarLector(pm, id, tipolector, idCentroComercial, idLocalComercial, idAscensor, idParqueadero, idBaño);
+			tx.commit();
+
+			log.trace ("Inserción de un Lector:  " + id + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Lector (id, tipolector, idCentroComercial,idLocalComercial, idAscensor,idParqueadero, idBaño);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Lector, dado el identificador de este 
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El identificador del lector 
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarLectorPorId(long id) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlLector.eliminarLectorPorId(pm, id);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Lector, dado el tipo de este 
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipoLector - El tipo del lector 
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarLectoresPorTipo (long tipoLector) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlLector.eliminarLectorPorTipo(pm, tipoLector);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Lector con un identificador dado
+	 * @param id - El identificador del lector
+	 * @return El objeto Lector, construido con base en las tuplas de la tabla LECTOR con el identificador dado
+	 */
+	public Lector darLectorPorId (long id)
+	{
+		return sqlLector.darLectorPorId(pmf.getPersistenceManager(), id);
+	}
+
+	/**
+	 * Método que consulta los LECTORES por tipo
+	 * @param tipo - El tipo del lector
+	 * @return La lista de objetos Lector, construidos con base en las tuplas de la tabla LECTOR
+	 */
+	public List<Lector> darLectoresPorTipo (long tipo)
+	{
+		return sqlLector.darLectoresPorTipo(pmf.getPersistenceManager(),tipo);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Lector
+	 * @return La lista de objetos Lector, construidos con base en las tuplas de la tabla LECTOR
+	 */
+	public List<Lector> darLectores ()
+	{
+		return sqlLector.darLectores(pmf.getPersistenceManager());
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, el tipo del lector
+	 * @param id - El identificador del lector a modificar 
+	 * @param tipo - Tipo del lector 
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarTipoLector (long id, long tipo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlLector.cambiarTipoLector(pm, id, tipo);
 			tx.commit();
 
 			return resp;
@@ -2159,7 +2665,40 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de un LOCALCOMERCIAL
+	 * Método que actualiza, de manera transaccional, el estado de actividad de un LOCALCOMERCIAL
+	 * @param idLocal - El identificador del local que se quiere modificar
+	 * @param activo - Nuevo estado de actividad del local comercial(1 si está activo o 0 de lo contrario)
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarActividadLocalComercial (String idLocal, int activo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlLocalComercial.cambiarActividadLocalComercial(pm, idLocal, activo);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	/**
+	 * Método que actualiza, de manera transaccional, el área de un LOCALCOMERCIAL
 	 * @param idLocal - El identificador del local que se quiere modificar
 	 * @param area - Identificador de la nueva área de un local comercial
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
@@ -2287,7 +2826,7 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de un PARQUEADERO
+	 * Método que actualiza, de manera transaccional, el area de un PARQUEADERO
 	 * @param idParqueadero - El identificador del parqueadero que se quiere modificar
 	 * @param area - Identificador de la nueva área de un parqueadero
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
@@ -2318,607 +2857,6 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
-
-
-
-
-
-	/* ****************************************************************
-	 * 			Métodos para manejar los TIPOS DE CARNET
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoCarnet
-	 * Adiciona entradas al log de la aplicación
-	 * @param tipo - El nombre del tipo de carnet
-	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
-	 */
-	public TipoCarnet adicionarTipoCarnet(String tipo)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long idTipoCarnet = nextvalTipoCarnet ();
-			long tuplasInsertadas = sqlTipoCarnet.adicionarTipoCarnet(pm, idTipoCarnet, tipo);
-			tx.commit();
-
-			log.trace ("Inserción de tipo de carnet: " + tipo + ": " + tuplasInsertadas + " tuplas insertadas");
-
-			return new TipoCarnet(idTipoCarnet, tipo);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoCarnet, dado el nombre del tipo de carnet
-	 * Adiciona entradas al log de la aplicación
-	 * @param tipo - El nombre del tipo de carnet
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarTipoCarnetPorNombre (String tipo) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlTipoCarnet.eliminarTipoCarnetPorTipo(pm, tipo);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			//        	e.printStackTrace();
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoCarnet, dado el identificador del tipo de carnet
-	 * Adiciona entradas al log de la aplicación
-	 * @param idTipoCarnet - El identificador del tipo de carnet
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarTipoCarnetPorId (long idTipoCarnet) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlTipoCarnet.eliminarTipoCarnetPorId(pm, idTipoCarnet);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			//        	e.printStackTrace();
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla TipoCarnet
-	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
-	 */
-	public List<TipoCarnet> darTiposCarnet ()
-	{
-		return sqlTipoCarnet.darTiposCarnet (pmf.getPersistenceManager());
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla TipoCarnet que tienen el nombre dado
-	 * @param tipo - El nombre del tipo de carnet
-	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
-	 */
-	public List<TipoCarnet> darTiposCarnetPorNombre (String tipo)
-	{
-		return sqlTipoCarnet.darTiposCarnetPorTipo (pmf.getPersistenceManager(), tipo);
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla TipoCarnet con un identificador dado
-	 * @param idTipoCarnet - El identificador del tipo de carnet
-	 * @return El objeto TipoCarnet, construido con base en las tuplas de la tabla TipoCarnet con el identificador dado
-	 */
-	public TipoCarnet darTipoCarnetPorId (long idTipoCarnet)
-	{
-		return sqlTipoCarnet.darTipoCarnetPorId (pmf.getPersistenceManager(), idTipoCarnet);
-	}
-
-	/* ****************************************************************
-	 * 			Métodos para manejar los EMPLEADOS
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla Empleado
-	 * Adiciona entradas al log de la aplicación
-	 * @param idvisitante - El identificador del visitante
-	 * @param lugartrabajo - El lugar de trabajo del empleado 
-	 * @return El objeto Empleado adicionado. null si ocurre alguna Excepción
-	 */
-	public Empleado adicionarEmpleado(String idvisitante, String lugartrabajo)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long tuplasInsertadas = sqlEmpleado.adicionarEmpleado(pm, idvisitante, lugartrabajo);
-			tx.commit();
-
-			log.trace ("Inserción del Empleado " + idvisitante + "| " + tuplasInsertadas + " tuplas insertadas");
-
-			return new Empleado(idvisitante, lugartrabajo);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla Empleado, dado el identificador de este 
-	 * Adiciona entradas al log de la aplicación
-	 * @param idvisitante - El identificador del empleado
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarEmpleadoPorID(String idvisitante) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlEmpleado.eliminarEmpleadoPorID(pm, idvisitante);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla Empleado, dado el lugar de trabajo del empleado
-	 * Adiciona entradas al log de la aplicación
-	 * @param lugartrabajo - El lugar de trabajo del empleado
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarEmpleadoPorLugar (String lugartrabajo) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlEmpleado.eliminarEmpleadoPorLugarDeTrabajo(pm, lugartrabajo);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla Empleado con un identificador dado
-	 * @param idEmpleado - El identificador del empleado 
-	 * @return El objeto Empleado, construido con base en las tuplas de la tabla EMPLEADO con el identificador dado
-	 */
-	public Empleado darEmpleadoPorId (String idEmpleado)
-	{
-		return sqlEmpleado.darEmpleadoPorID(pmf.getPersistenceManager(), idEmpleado);
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla EMPLEADO que tienen el valor dado
-	 * @param lugartrabajo - El lugar de trabajo del empleado 
-	 * @return La lista de objetos Empleado, construidos con base en las tuplas de la tabla EMPLEADO
-	 */
-	public List<Empleado> darEmpleadosPorLugar (String lugar)
-	{
-		return sqlEmpleado.darEmpleadoPorLugar(pmf.getPersistenceManager(),lugar);
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla Empleado
-	 * @return La lista de objetos Empleado, construidos con base en las tuplas de la tabla EMPLEADO
-	 */
-	public List<Empleado> darEmpleados ()
-	{
-		return sqlEmpleado.darEmpleados(pmf.getPersistenceManager());
-	}
-
-	/**
-	 * Método que actualiza, de manera transaccional, el valor de un EMPLEADO
-	 * @param id - El identificador del empleado que se quiere modificar
-	 * @param lugartrabajo - El lugar de trabajo del empleado
-	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
-	 */
-	public long cambiarLugarEmpleado(String id, String lugartrabajo)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlEmpleado.cambiarCompañia(pm, id, lugartrabajo);
-			tx.commit();
-
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/* ****************************************************************
-	 * 			Métodos para manejar LOS HORARIOS 
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla HORARIO
-	 * Adiciona entradas al log de la aplicación
-	 * @param id - El identificador del horario
-	 * @param hora - La hora del horario
-	 * @param minuto - El minuto del horario
-	 * @return El objeto HORARIO adicionado. null si ocurre alguna Excepción
-	 */
-	public Horario adicionarHorario( int hora, int minuto)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long idHorario = nextvalHorario ();
-			long tuplasInsertadas = sqlHorario.adicionarHorario(pm, idHorario, hora, minuto);
-			tx.commit();
-
-			log.trace ("Inserción de un Horario:  " + idHorario + "| " + tuplasInsertadas + " tuplas insertadas");
-
-			return new Horario (idHorario, hora, minuto);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla Horario, dado el identificador de este 
-	 * Adiciona entradas al log de la aplicación
-	 * @param id - El identificador del horario 
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarHorarioPorID(long id) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlHorario.eliminarHorarioPorID(pm, id);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-	/**
-	 * Método que consulta todas las tuplas en la tabla Horario con un identificador dado
-	 * @param id - El identificador del horario 
-	 * @return El objeto Horario, construido con base en las tuplas de la tabla HORARIO con el identificador dado
-	 */
-	public Horario darHorarioPorID (long id)
-	{
-		return sqlHorario.darHorarioPorId(pmf.getPersistenceManager(), id);
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla Horario
-	 * @return La lista de objetos Horario, construidos con base en las tuplas de la tabla HORARIO
-	 */
-	public List<Horario> darHorarios ()
-	{
-		return sqlHorario.darHorarios(pmf.getPersistenceManager());
-	}
-
-	/**
-	 * Método que actualiza, de manera transaccional, la hora de un horario
-	 * @param id - El identificador del horario a modificar
-	 * @param hora - La hora que pertenece al horario
-	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
-	 */
-	public long cambiarHora(long id, int hora)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlHorario.cambiarHora(pm, id, hora);
-			tx.commit();
-
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que actualiza, de manera transaccional, el minuto del horario
-	 * @param id - El identificador del horario a modificar
-	 * @param minuto - El minuto que pertenece al horario
-	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
-	 */
-	public long cambiarMinuto (long id, int minuto)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlHorario.cambiarMinuto(pm, id, minuto);
-			tx.commit();
-
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/* ****************************************************************
-	 * 			Métodos para manejar LOS LECTORES
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla LECTOR 
-	 * Adiciona entradas al log de la aplicación
-	 * @param id - El identificador del lector
-	 * @param tipolector - El tipo del lector
-	 * @param idcentrocomercial - El identificador del centro comercial 
-	 * @param idlocalcomercial - El identificador del local comercial en el caso de que pertenezca a un local
-	 * @param idascensor - El identificador del ascensor en el caso de que pertenezca a un ascensor
-	 * @param idbaño - El identificador del baño en el caso de que pertenezca a un baño
-	 * @return El objeto LECTOR adicionado. null si ocurre alguna Excepción
-	 */
-	public Lector adicionarLector(long id, long tipolector, String idcentrocomercial, String idlocalcomercial, String idascensor, String idparqueadero, String idbaño )
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long tuplasInsertadas = sqlLector.adicionarLector(pm, id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño);
-			tx.commit();
-
-			log.trace ("Inserción de un Lector:  " + id + "| " + tuplasInsertadas + " tuplas insertadas");
-
-			return new Lector (id, tipolector, idcentrocomercial,idlocalcomercial, idascensor,idparqueadero, idbaño);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla Lector, dado el identificador de este 
-	 * Adiciona entradas al log de la aplicación
-	 * @param id - El identificador del lector 
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarLectorPorId(long id) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlLector.eliminarLectorPorID(pm, id);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla Lector con un identificador dado
-	 * @param id - El identificador del lector
-	 * @return El objeto Lector, construido con base en las tuplas de la tabla LECTOR con el identificador dado
-	 */
-	public Lector darLectorPorId (long id)
-	{
-		return sqlLector.darLectorPorID(pmf.getPersistenceManager(), id);
-	}
-
-	/**
-	 * Método que consulta los HORARIOS por tipo
-	 * @param tipo - El tipo del lector
-	 * @return La lista de objetos Lector, construidos con base en las tuplas de la tabla LECTOR
-	 */
-	public List<Lector> darLectorPorTipo (long tipo)
-	{
-		return sqlLector.darLectoresPorTipo(pmf.getPersistenceManager(),tipo);
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla Lector
-	 * @return La lista de objetos Lector, construidos con base en las tuplas de la tabla LECTOR
-	 */
-	public List<Lector> darLectores ()
-	{
-		return sqlLector.darLectores(pmf.getPersistenceManager());
-	}
-
-	/**
-	 * Método que actualiza, de manera transaccional, el tipo del lector
-	 * @param id - El identificador del lector a modificar 
-	 * @param tipo - Tipo del lector 
-	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
-	 */
-	public long cambiarTipo (long id, long tipo)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlLector.cambiarTipoLector(pm, id, tipo);
-			tx.commit();
-
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
 	/* ****************************************************************
 	 * 			Métodos para manejar los REGISTRANCARNET
 	 *****************************************************************/
@@ -2926,28 +2864,28 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que inserta, de manera transaccional, una tupla en la tabla RegistranCarnet
 	 * Adiciona entradas al log de la aplicación
-	 * @param idlector - El id del lector 
+	 * @param idLector - El id del lector 
 	 * @param tipoCarnet - El tipo del carnet del visitante
-	 * @param idvisitante - El identificador del visitante
+	 * @param idVisitante - El identificador del visitante
 	 * @param fecha - La fecha de ingreso
-	 * @param horaentrada - La hora de ingreso
-	 * @param horasalida - La hora de salida 
+	 * @param horaEntrada - La hora de ingreso
+	 * @param horaSalida - La hora de salida 
 	 * @return Las tuplas insertadas 
 	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
 	 */
-	public RegistranCarnet adicionarRegistranCarnet(String idlector, long tipoCarnet, String idvisitante, Date fecha, long horaentrada, long horasalida )
+	public RegistranCarnet adicionarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Date fecha, long horaEntrada, long horaSalida )
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlRegistranCarnet.adicionarRegistranCarnet(pm, idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
+			long tuplasInsertadas = sqlRegistranCarnet.adicionarRegistranCarnet(pm, idLector, tipoCarnet, idVisitante, fecha, horaEntrada, horaSalida);
 			tx.commit();
 
-			log.trace ("Inserción de un registro de carnet: " + idlector + " " + tipoCarnet + " " + idvisitante + " " + fecha + " " + " " + horaentrada + " " + horasalida + ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("Inserción de un registro de carnet: " + idLector + " " + tipoCarnet + " " + idVisitante + " " + fecha + " " + " " + horaEntrada + " " + horaSalida + ": " + tuplasInsertadas + " tuplas insertadas");
 
-			return new RegistranCarnet(idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
+			return new RegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaEntrada, horaSalida);
 		}
 		catch (Exception e)
 		{
@@ -3000,9 +2938,9 @@ public class PersistenciaAforoAndes
 	 * @param id - El identificador del visitante
 	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
 	 */
-	public RegistranCarnet darRegistranCarnetPorIDVisitante (String idvisitante)
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteFecha (String idvisitante)
 	{
-		return sqlRegistranCarnet.darResgitranCarnetPorIdVisitante(pmf.getPersistenceManager(), idvisitante);
+		return sqlRegistranCarnet.darResistranCarnetPorIdVisitanteFecha(pmf.getPersistenceManager(), idvisitante);
 	}
 
 	/**
@@ -3186,6 +3124,142 @@ public class PersistenciaAforoAndes
 	public List<RegistranVehiculo> darRegistranVehiculo ()
 	{
 		return sqlRegistranVehiculo.darRegistranVehiculo(pmf.getPersistenceManager());
+	}
+	
+
+	/* ****************************************************************
+	 * 			Métodos para manejar los TIPOS DE CARNET
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoCarnet
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo de carnet
+	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
+	 */
+	public TipoCarnet adicionarTipoCarnet(String tipo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long idTipoCarnet = nextvalTipoCarnet ();
+			long tuplasInsertadas = sqlTipoCarnet.adicionarTipoCarnet(pm, idTipoCarnet, tipo);
+			tx.commit();
+
+			log.trace ("Inserción de tipo de carnet: " + tipo + ": " + tuplasInsertadas + " tuplas insertadas");
+
+			return new TipoCarnet(idTipoCarnet, tipo);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoCarnet, dado el nombre del tipo de carnet
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo de carnet
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoCarnetPorNombre (String tipo) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlTipoCarnet.eliminarTipoCarnetPorTipo(pm, tipo);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoCarnet, dado el identificador del tipo de carnet
+	 * Adiciona entradas al log de la aplicación
+	 * @param idTipoCarnet - El identificador del tipo de carnet
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoCarnetPorId (long idTipoCarnet) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlTipoCarnet.eliminarTipoCarnetPorId(pm, idTipoCarnet);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoCarnet
+	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
+	 */
+	public List<TipoCarnet> darTiposCarnet ()
+	{
+		return sqlTipoCarnet.darTiposCarnet (pmf.getPersistenceManager());
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoCarnet que tienen el nombre dado
+	 * @param tipo - El nombre del tipo de carnet
+	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
+	 */
+	public List<TipoCarnet> darTiposCarnetPorNombre (String tipo)
+	{
+		return sqlTipoCarnet.darTiposCarnetPorTipo (pmf.getPersistenceManager(), tipo);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoCarnet con un identificador dado
+	 * @param idTipoCarnet - El identificador del tipo de carnet
+	 * @return El objeto TipoCarnet, construido con base en las tuplas de la tabla TipoCarnet con el identificador dado
+	 */
+	public TipoCarnet darTipoCarnetPorId (long idTipoCarnet)
+	{
+		return sqlTipoCarnet.darTipoCarnetPorId (pmf.getPersistenceManager(), idTipoCarnet);
 	}
 
 	/* ****************************************************************
@@ -3694,6 +3768,173 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar VEHICULO
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla VEHICULO
+	 * @param placa - La placa con la que se identifica el vehículo
+	 * @param caracteristicas - Las característias del vehículo
+	 * @param dueño - El dueño del vehículo
+	 * @return Las tuplas insertadas
+	 * @return El objeto VEHICULO adicionado. null si ocurre alguna Excepción
+	 */
+	public Vehiculo adicionarVehiculo( String placa, String caracteristicas, String dueño)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlVehiculo.adicionarVehiculo(pm, placa, caracteristicas, dueño);
+			tx.commit();
+
+			log.trace ("Inserción de un vehículo:  " + placa + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Vehiculo (placa, caracteristicas, dueño);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Vehiculo, dado su placa 
+	 * Adiciona entradas al log de la aplicación
+	 * @param placa - La placa del vehiculo
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarVehiculoPorPlaca(String placa) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlVehiculo.eliminarVehiculoPorPlaca(pm, placa);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Vehiculo, dado su dueño
+	 * Adiciona entradas al log de la aplicación
+	 * @param dueño - El dueño del vehiculo
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarVehiculoPorDueño(String dueño) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlVehiculo.eliminarVehiculoPorDueño(pm, dueño);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Vehiculo con un identificador dado
+	 * @param placa - La placa del vehiculo
+	 * @return El objeto Vehiculo, construido con base en las tuplas de la tabla VEHICULO con la placa dada
+	 */
+	public Vehiculo darVehiculoPorPlaca (String placa)
+	{
+		return sqlVehiculo.darVehiculoPorPlaca(pmf.getPersistenceManager(), placa);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Vehiculo con un propietario dado
+	 * @param dueño - El dueño del vehículo
+	 * @return La lista de objetos Vehiculo, construidos con base en las tuplas de la tabla Vehiculo con un propietario dado
+	 */
+	public List<Vehiculo> darVehiculosPorDueño (String dueño)
+	{
+		return sqlVehiculo.darVehiculosPorDueño(pmf.getPersistenceManager(), dueño);
+	}	
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Vehiculo
+	 * @return La lista de objetos Vehiculo, construidos con base en las tuplas de la tabla Vehiculo
+	 */
+	public List<Vehiculo> darVehiculos ()
+	{
+		return sqlVehiculo.darVehiculos(pmf.getPersistenceManager());
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, las caracteristicas del vehiculo
+	 * @param placa - La placa del vehiculo a modificar
+	 * @param caracteristicas - Las caracteristicas nuevas 
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarCaracteristicasVehiculo (String placa, String caracteristicas)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlVehiculo.cambiarCaracteristicas(pm, placa, caracteristicas);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 	/* ****************************************************************
 	 * 			Métodos para manejar VISITANASCENSOR
@@ -4083,7 +4324,7 @@ public class PersistenciaAforoAndes
 	{
 		return sqlVisitanLocalComercial.darVisitanLocalComercial(pmf.getPersistenceManager());
 	}
-
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar VISITANTE
 	 *****************************************************************/
@@ -4134,7 +4375,7 @@ public class PersistenciaAforoAndes
 	 * @param id - El identificador del visitante
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarVisitantePorID(String id) 
+	public long eliminarVisitantePorId(String id) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -4159,6 +4400,7 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+	
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Visitante, dado su nombre  
 	 * Adiciona entradas al log de la aplicación
@@ -4190,12 +4432,13 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+	
 	/**
 	 * Método que consulta todas las tuplas en la tabla Visitante con un identificador dado
 	 * @param id - El identificador del visitante
 	 * @return El objeto Visitante, construido con base en las tuplas de la tabla VISITANTE con el identificador dado
 	 */
-	public Visitante darVisitantePorID (String id)
+	public Visitante darVisitantePorId (String id)
 	{
 		return sqlVisitante.darVisitantePorId(pmf.getPersistenceManager(), id);
 	}
@@ -4225,7 +4468,7 @@ public class PersistenciaAforoAndes
 	 * @param nombreemergencia - nombre de emergencia nuevo
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
-	public long cambiarContactoEmergencia (String id, String nombreemergencia)
+	public long cambiarContactoEmergenciaVisitante (String id, String nombreemergencia)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -4251,13 +4494,14 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+	
 	/**
 	 * Método que actualiza, de manera transaccional, el telefono de emergencia del visitante
 	 * @param id - El identificador del visitante a modificar
 	 * @param telefono - telefono de emergencia nuevo
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
-	public long cambiarTelefonoEmergencia (String id, String telefono)
+	public long cambiarTelefonoEmergenciaVisitante (String id, String telefono)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -4285,171 +4529,6 @@ public class PersistenciaAforoAndes
 	}
 
 	/* ****************************************************************
-	 * 			Métodos para manejar VEHICULO
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla VEHICULO
-	 * @param placa - La placa con la que se identifica el vehículo
-	 * @param caracteristicas - Las característias del vehículo
-	 * @param dueño - El dueño del vehículo
-	 * @return Las tuplas insertadas
-	 * @return El objeto VEHICULO adicionado. null si ocurre alguna Excepción
-	 */
-	public Vehiculo adicionarVehiculo( String placa, String caracteristicas, String dueño)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long tuplasInsertadas = sqlVehiculo.adicionarVehiculo(pm, placa, caracteristicas, dueño);
-			tx.commit();
-
-			log.trace ("Inserción de un vehículo:  " + placa + "| " + tuplasInsertadas + " tuplas insertadas");
-
-			return new Vehiculo (placa, caracteristicas, dueño);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla Vehiculo, dado su placa 
-	 * Adiciona entradas al log de la aplicación
-	 * @param placa - La placa del vehiculo
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarVehiculoPorPlaca(String placa) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlVehiculo.eliminarVehiculoPorPlaca(pm, placa);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla Vehiculo, dado su dueño
-	 * Adiciona entradas al log de la aplicación
-	 * @param dueño - El dueño del vehiculo
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarVehiculoPorDueño(String dueño) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlVehiculo.eliminarVehiculoPorDueño(pm, dueño);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla Vehiculo con un identificador dado
-	 * @param placa - La placa del vehiculo
-	 * @return El objeto Vehiculo, construido con base en las tuplas de la tabla VEHICULO con la placa dada
-	 */
-	public Vehiculo darVehiculoPorPlaca (String placa)
-	{
-		return sqlVehiculo.darVehiculoPorPlaca(pmf.getPersistenceManager(), placa);
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla Vehiculo con dueño
-	 * @param dueño - El dueño del vehículo
-	 * @return El objeto Vehiculo, construido con base en las tuplas de la tabla VEHICULO con su propietario insertado 
-	 */
-	public Vehiculo darVehiculoPorDueño (String dueño)
-	{
-		return sqlVehiculo.darVehiculoPorDueño(pmf.getPersistenceManager(), dueño);
-	}	
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla Vehiculo
-	 * @return La lista de objetos Vehiculo, construidos con base en las tuplas de la tabla Vehiculo
-	 */
-	public List<Vehiculo> darVehiculos ()
-	{
-		return sqlVehiculo.darVehiculos(pmf.getPersistenceManager());
-	}
-
-	/**
-	 * Método que actualiza, de manera transaccional, las caracteristicas del vehiculo
-	 * @param placa - La placa del vehiculo a modificar
-	 * @param caracteristicas - Las caracteristicas nuevas 
-	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
-	 */
-	public long cambiarCaracteristicasVehiculo (String placa, String caracteristicas)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlVehiculo.cambiarCaracteristicas(pm, placa, caracteristicas);
-			tx.commit();
-
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-	/* ****************************************************************
 	 * 			Métodos para manejar ZONACIRCULACION
 	 *****************************************************************/
 
@@ -4471,7 +4550,7 @@ public class PersistenciaAforoAndes
 			long tuplasInsertadas = sqlZonaCirculacion.adicionarZonaCirculacion(pm, identificador, capacidadNormal, idCentroComercial);
 			tx.commit();
 
-			log.trace ("Inserción de un vehículo:  " + identificador + "| " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("Inserción de una zona de circulación:  " + identificador + "| " + tuplasInsertadas + " tuplas insertadas");
 
 			return new ZonaCirculacion (identificador, capacidadNormal, idCentroComercial);
 		}
@@ -4542,5 +4621,39 @@ public class PersistenciaAforoAndes
 		return sqlZonaCirculacion.darZonas(pmf.getPersistenceManager());
 	}
 
-
+	/**
+	 * Elimina todas las tuplas de todas las tablas de la base de datos de AforoAndes
+	 * Crea y ejecuta las sentencias SQL para cada tabla de la base de datos - EL ORDEN ES IMPORTANTE 
+	 * @return Un arreglo con 25 números que indican el número de tuplas borradas en las tablas 
+	 */
+	public long [] limpiarParranderos ()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long [] resp = sqlUtil.limpiarAforoAndes (pm);
+            tx.commit ();
+            log.info ("Borrada la base de datos");
+            return resp;
+        }
+        catch (Exception e)
+        {
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	long[] resp = new long[25];
+        	for ( int i = 0 ; i < resp.length; i++ )
+        		resp[i] = -1;
+        	return resp;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+		
+	}
 }

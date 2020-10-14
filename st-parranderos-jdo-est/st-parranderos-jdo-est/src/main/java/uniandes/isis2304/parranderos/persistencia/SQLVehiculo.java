@@ -114,15 +114,15 @@ public class SQLVehiculo
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de un VEHICULO de la 
 	 * base de datos de AforoAndes, por su dueño
 	 * @param pm - El manejador de persistencia
-	 * @param dueño -El dueño del vehiculo
-	 * @return El objeto VEHICULO que pertenece al dueño ingresado 
+	 * @param propietario -El dueño del vehiculo
+	 * @return Una lista de objetos VEHICULOS que pertenecen al dueño ingresado
 	 */
-	public Vehiculo darVehiculoPorDueño (PersistenceManager pm, String dueño) 
+	public List<Vehiculo> darVehiculosPorDueño (PersistenceManager pm, String propietario) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVehiculo() + " WHERE propietario = ?");
 		q.setResultClass(Vehiculo.class);
-		q.setParameters(dueño);
-		return (Vehiculo) q.executeUnique();
+		q.setParameters(propietario);
+		return (List<Vehiculo>) q.executeUnique();
 	}
 
 	/**

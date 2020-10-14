@@ -69,13 +69,13 @@ public class SQLZonaCirculacion
 	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar UNA ZONA DE CIRCULACIÓN de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param identificador - El identificador de la zona
+	 * @param id - El identificador de la zona
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarZonaCirculacionPorID (PersistenceManager pm, String identificador)
+	public long eliminarZonaCirculacionPorId (PersistenceManager pm, String id)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaZonaCirculacion() + " WHERE identificador = ?");
-        q.setParameters(identificador);
+        q.setParameters(id);
         return (long) q.executeUnique();            
 	}
 
@@ -86,7 +86,7 @@ public class SQLZonaCirculacion
 	 * @param identificador - El identificador de la zona
 	 * @return El objeto ZONA DE CIRCULACION que tiene el identificador dado
 	 */
-	public ZonaCirculacion darZonaPorID (PersistenceManager pm, String identificador) 
+	public ZonaCirculacion darZonaPorId (PersistenceManager pm, String identificador) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaZonaCirculacion()+ " WHERE identificador = ?");
 		q.setResultClass(ZonaCirculacion.class);
