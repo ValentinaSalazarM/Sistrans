@@ -24,18 +24,11 @@ public class Lector implements VOLector
 	 * El identificador ÚNICO del lector
 	 */
 	private long id;
-	
-	/**
-	 * El identificador del centro comercial donde se localiza el lector
-	 */
-	private long tipolector;
 
-	
 	/**
 	 * El identificador del centro comercial donde se localiza el lector
 	 */
 	private String idCentroComercial;
-
 
 	/**
 	 * El identificador del tipo de lector. Debe existir en la tabla TIPOLECTOR
@@ -50,7 +43,7 @@ public class Lector implements VOLector
 	/**
 	 * El identificador del baño donde se localiza el lector
 	 */
-	private String idBaño;
+	private String idBano;
 
 	/**
 	 * El identificador del ascensor donde se localiza el lector
@@ -72,10 +65,10 @@ public class Lector implements VOLector
 	public Lector() 
 	{
 		this.id = 0;
-		this.tipolector = 0;
+		this.tipoLector = 0;
 		this.idCentroComercial = "";
 		this.idLocalComercial = "";
-		this.idBaño = "";
+		this.idBano = "";
 		this.idAscensor = "";
 		this.idParqueadero = "";
 	}
@@ -86,17 +79,17 @@ public class Lector implements VOLector
 	 * @param tiplector - El tipo del lector. Debe existir un tipo de lector con ese identificador. 
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador si es diferente de NULL
 	 * @param idLocalComercial - El identificador del local comercial. Debe existir un local comercial con dicho identificador si es diferente de NULL
-	 * @param idBaño - El identificador del baño. Debe existir un baño con dicho identificador si es diferente de NULL
+	 * @param idBano - El identificador del baño. Debe existir un baño con dicho identificador si es diferente de NULL
 	 * @param idAscensor - El identificador del ascensor. Debe existir un ascensor con dicho identificador si es diferente de NULL
 	 * @param idParqueadero - El identificador del parqueadero. Debe existir un parqueadero con dicho identificador si es diferente de NULL
 	 */
 	public Lector(long id, long tipolector, String idCentroComercial, String idLocalComercial, String idBaño, String idAscensor, String idParqueadero) 
 	{
 		this.id = id;
-		this.tipolector = tipolector;
+		this.tipoLector = tipolector;
 		this.idCentroComercial = idCentroComercial;
 		this.idLocalComercial = idLocalComercial;
-		this.idBaño = idBaño;
+		this.idBano = idBaño;
 		this.idAscensor = idAscensor;
 		this.idParqueadero = idParqueadero;
 	}
@@ -130,7 +123,7 @@ public class Lector implements VOLector
 	 */
 	public void setTipoLector(long tipoLector) 
 	{
-		this.id = tipoLector;
+		this.tipoLector = tipoLector;
 	}
 	/**
 	 * @return El id del centro comercial donde se localiza el lector
@@ -169,15 +162,15 @@ public class Lector implements VOLector
 	 */
 	public String getIdBaño() 
 	{
-		return idBaño;
+		return idBano;
 	}
 
 	/**
-	 * @param idBaño - El nuevo id del baño donde se localiza el lector
+	 * @param idBano - El nuevo id del baño donde se localiza el lector
 	 */
 	public void setIdBaño(String idBaño) 
 	{	
-		this.idBaño = idBaño;
+		this.idBano = idBaño;
 	}
 
 	/**
@@ -219,7 +212,7 @@ public class Lector implements VOLector
 	public String toString() 
 	{
 		return "Lector [id" + id + ", tipoLector=" + tipoLector + ", idCentroComercial=" + idCentroComercial + ", idLocalComercial=" + idLocalComercial + 
-				", idBaño="+ idBaño + ", idAscensor=" + idAscensor +", idParqueadero=" + idParqueadero + "]";
+				", idBano="+ idBano + ", idAscensor=" + idAscensor +", idParqueadero=" + idParqueadero + "]";
 	}
 	
 }

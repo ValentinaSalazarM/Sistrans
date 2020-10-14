@@ -13,7 +13,7 @@ package uniandes.isis2304.parranderos.negocio;
  * Clase para modelar el concepto BAÑO del negocio de Aforo-CCAndes
  *
  */
-public class Baño implements VOBaño
+public class Bano implements VOBano
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -50,7 +50,7 @@ public class Baño implements VOBaño
 	/**
 	 * Constructor por defecto
 	 */
-	public Baño() 
+	public Bano() 
 	{
 		this.identificador = "";
 		this.capacidadNormal = 0;
@@ -67,7 +67,7 @@ public class Baño implements VOBaño
 	 * @param sanitarios - El número de sanitarios del baño (mayor a 0)
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
-	public Baño(String identificador, long area, long capacidadNormal, int sanitarios, String idCentroComercial) 
+	public Bano(String identificador, long area, long capacidadNormal, int sanitarios, String idCentroComercial) 
 	{
 		this.identificador = identificador;
 		this.area = area;
@@ -163,7 +163,7 @@ public class Baño implements VOBaño
 	@Override
 	public String toString() 
 	{
-		return "Baño [identificador=" + identificador + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", sanitarios=" + sanitarios + ", idCentroComercial=" + idCentroComercial + "]";
+		return "Bano [identificador=" + identificador + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", sanitarios=" + sanitarios + ", idCentroComercial=" + idCentroComercial + "]";
 	}
 
 	

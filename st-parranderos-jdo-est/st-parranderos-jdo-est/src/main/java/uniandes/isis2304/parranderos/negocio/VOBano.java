@@ -13,7 +13,7 @@ package uniandes.isis2304.parranderos.negocio;
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  */
-public interface VOBaño
+public interface VOBano
 {
 	/**
 	 * @return El identificador del baño

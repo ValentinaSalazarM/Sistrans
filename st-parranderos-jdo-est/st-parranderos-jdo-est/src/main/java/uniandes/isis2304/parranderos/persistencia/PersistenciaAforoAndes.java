@@ -38,7 +38,7 @@ import uniandes.isis2304.parranderos.negocio.Empleado;
 import uniandes.isis2304.parranderos.negocio.Horario;
 import uniandes.isis2304.parranderos.negocio.Lector;
 import uniandes.isis2304.parranderos.negocio.Ascensor;
-import uniandes.isis2304.parranderos.negocio.Baño;
+import uniandes.isis2304.parranderos.negocio.Bano;
 import uniandes.isis2304.parranderos.negocio.Area;
 import uniandes.isis2304.parranderos.negocio.LocalComercial;
 import uniandes.isis2304.parranderos.negocio.Parqueadero;
@@ -58,7 +58,7 @@ import uniandes.isis2304.parranderos.negocio.ZonaCirculacion;
  * Traduce la información entre objetos Java y tuplas de la base de datos, en ambos sentidos
  * Sigue un patrón SINGLETON (Sólo puede haber UN objeto de esta clase) para comunicarse de manera correcta
  * con la base de datos
- * Se apoya en las clases SQLArea, SQLAscensor, SQLBaño, SQLCapacidadNormal, SQLCarnet, SQLCentroComercial, SQLDomiciliario,
+ * Se apoya en las clases SQLArea, SQLAscensor, SQLBano, SQLCapacidadNormal, SQLCarnet, SQLCentroComercial, SQLDomiciliario,
  * SQLEmpleado, SQLLector, SQLLocalComercial, SQLParqueadero, SQLRegistranCarnet, SQLRegistranVehiculo, SQLTipoCarnet, SQLTipoLector,
  * SQLTipoLocal, SQLTipoVisitante, SQLVehiculo, SQLVisitanAscensor, SQLVisitanBaño, SQLVisitanCentroComercial, SQLVisitanParqueadero,
  * SQLVisitante y SQLZonaCirculacion que son las que realizan el acceso a la base de datos
@@ -135,7 +135,7 @@ public class PersistenciaAforoAndes
 	/**
 	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
-	private SQLBaño sqlBaño;
+	private SQLBano sqlBaño;
 
 	/**
 	 * Atributo para el acceso a la tabla  de la base de datos
@@ -336,7 +336,7 @@ public class PersistenciaAforoAndes
 		sqlArea = new SQLArea(this);
 		sqlCapacidadNormal = new SQLCapacidadNormal(this);
 		sqlAscensor = new SQLAscensor(this);
-		sqlBaño = new SQLBaño(this);
+		sqlBaño = new SQLBano(this);
 		sqlParqueadero = new SQLParqueadero(this);
 		sqlTipoLocal = new SQLTipoLocal(this);
 		sqlLocalComercial = new SQLLocalComercial(this);
@@ -412,7 +412,7 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de Baño de AforoAndes
+	 * @return La cadena de caracteres con el nombre de la tabla de Bano de AforoAndes
 	 */
 	public String darTablaBaño ()
 	{
@@ -1092,9 +1092,9 @@ public class PersistenciaAforoAndes
 	 * @param area - El identificador del área del baño
 	 * @param numeroSanitarios - El número de sanitarios del baño
 	 * @param idCentroComercial - El identificador del centro comercial del baño
-	 * @return El objeto Baño adicionado. null si ocurre alguna Excepción
+	 * @return El objeto Bano adicionado. null si ocurre alguna Excepción
 	 */
-	public Baño adicionarBaño (String idBaño, int cupoActual, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
+	public Bano adicionarBaño (String idBaño, int cupoActual, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1104,9 +1104,9 @@ public class PersistenciaAforoAndes
 			long tuplasInsertadas = sqlBaño.adicionarBaño (pm, idBaño, capacidadNormal, area, numeroSanitarios, idCentroComercial);
 			tx.commit();
 
-			log.trace ("Inserción de Baño: " + idBaño + "| " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("Inserción de Bano: " + idBaño + "| " + tuplasInsertadas + " tuplas insertadas");
 
-			return new Baño(idBaño, area, capacidadNormal, numeroSanitarios, idCentroComercial);
+			return new Bano(idBaño, area, capacidadNormal, numeroSanitarios, idCentroComercial);
 		}
 		catch (Exception e)
 		{
@@ -1196,7 +1196,7 @@ public class PersistenciaAforoAndes
 	 * @param idBaño - El identificador del baño
 	 * @return El objeto BAÑO, construido con base en la tuplas de la tabla BAÑO, que tiene el identificador dado
 	 */
-	public Baño darBañoPorId (String idBaño)
+	public Bano darBañoPorId (String idBaño)
 	{
 		return sqlBaño.darBañoPorId (pmf.getPersistenceManager(), idBaño);
 	}
@@ -1206,7 +1206,7 @@ public class PersistenciaAforoAndes
 	 * @param numeroSanitarios - El número de sanitarios del baño
 	 * @return La lista de objetos BAÑO, construidos con base en las tuplas de la tabla BAÑO
 	 */
-	public List<Baño> darBañosPorSanitarios (int numeroSanitarios)
+	public List<Bano> darBañosPorSanitarios (int numeroSanitarios)
 	{
 		return sqlBaño.darBañosPorSanitarios (pmf.getPersistenceManager(), numeroSanitarios);
 	}
@@ -1215,7 +1215,7 @@ public class PersistenciaAforoAndes
 	 * Método que consulta todas las tuplas en la tabla BAÑO
 	 * @return La lista de objetos BAÑO, construidos con base en las tuplas de la tabla BAÑO
 	 */
-	public List<Baño> darBaños ()
+	public List<Bano> darBaños ()
 	{
 		return sqlBaño.darBaños (pmf.getPersistenceManager());
 	}

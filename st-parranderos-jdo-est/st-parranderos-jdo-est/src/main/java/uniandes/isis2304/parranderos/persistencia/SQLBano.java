@@ -14,14 +14,14 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.Baño;
+import uniandes.isis2304.parranderos.negocio.Bano;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto BAÑO de AforoAndes
  * Nótese que es una clase que es sólo conocida en el paquete de persistencia
  * 
  */
-class SQLBaño 
+class SQLBano 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -47,7 +47,7 @@ class SQLBaño
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLBaño (PersistenciaAforoAndes pp)
+	public SQLBano (PersistenciaAforoAndes pp)
 	{
 		this.pp = pp;
 	}
@@ -102,12 +102,12 @@ class SQLBaño
 	 * @param idBaño - El identificador del baño
 	 * @return El objeto BAÑO que tiene el identificador dado
 	 */
-	public Baño darBañoPorId (PersistenceManager pm, String idBaño) 
+	public Bano darBañoPorId (PersistenceManager pm, String idBaño) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBaño () + " WHERE identificador = ?");
-		q.setResultClass(Baño.class);
+		q.setResultClass(Bano.class);
 		q.setParameters(idBaño);
-		return (Baño) q.executeUnique();
+		return (Bano) q.executeUnique();
 	}
 
 	/**
@@ -117,12 +117,12 @@ class SQLBaño
 	 * @param numeroSanitarios - El número de sanitarios de baño buscado
 	 * @return Una lista de objetos BAÑO que tienen el número de sanitarios dado
 	 */
-	public List<Baño> darBañosPorSanitarios (PersistenceManager pm, int numeroSanitarios) 
+	public List<Bano> darBañosPorSanitarios (PersistenceManager pm, int numeroSanitarios) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBaño () + " WHERE sanitarios = ?");
-		q.setResultClass(Baño.class);
+		q.setResultClass(Bano.class);
 		q.setParameters(numeroSanitarios);
-		return (List<Baño>) q.executeList();
+		return (List<Bano>) q.executeList();
 	}
 
 	/**
@@ -131,11 +131,11 @@ class SQLBaño
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos BAÑO
 	 */
-	public List<Baño> darBaños (PersistenceManager pm)
+	public List<Bano> darBaños (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBaño ());
-		q.setResultClass(Baño.class);
-		return (List<Baño>) q.executeList();
+		q.setResultClass(Bano.class);
+		return (List<Bano>) q.executeList();
 	}
 
 	/**

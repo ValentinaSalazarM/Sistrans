@@ -440,7 +440,7 @@ public class InterfazParranderosApp extends JFrame implements ActionListener
 			resultado += eliminados [13] + " LocalComercial eliminados\n";
 			resultado += eliminados [14] + " TipoLocal eliminados\n";
 			resultado += eliminados [15] + " Parqueadero eliminados\n";
-			resultado += eliminados [16] + " Baño eliminados\n";
+			resultado += eliminados [16] + " Bano eliminados\n";
 			resultado += eliminados [17] + " Ascensor eliminados\n";
 			resultado += eliminados [18] + " CapacidadNormal eliminados\n";
 			resultado += eliminados [20] + " Area eliminados\n";

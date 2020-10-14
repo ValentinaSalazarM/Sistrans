@@ -343,14 +343,14 @@ public class AforoAndes
 	 * @param area - El identificador del área del baño
 	 * @param numeroSanitarios - El número de sanitarios del baño
 	 * @param idCentroComercial - El identificador del centro comercial del baño
-	 * @return El objeto Baño adicionado. null si ocurre alguna Excepción
+	 * @return El objeto Bano adicionado. null si ocurre alguna Excepción
 	 */
-	public Baño adicionarBaño (String idBaño, int cupoActual, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
+	public Bano adicionarBaño (String idBaño, int cupoActual, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
 	{
-		log.info ("Adicionando Baño con identificador: " + idBaño );
-		Baño baño = pp.adicionarBaño(idBaño, cupoActual, capacidadNormal, area, numeroSanitarios, idCentroComercial);
-		log.info ("Adicionando Baño: " + baño);
-		return baño;
+		log.info ("Adicionando Bano con identificador: " + idBaño );
+		Bano bano = pp.adicionarBaño(idBaño, cupoActual, capacidadNormal, area, numeroSanitarios, idCentroComercial);
+		log.info ("Adicionando Bano: " + bano);
+		return bano;
 	}
 
 	/**
@@ -361,9 +361,9 @@ public class AforoAndes
 	 */
 	public long eliminarBañoPorId (String idBaño) 
 	{
-		log.info ("Eliminando Baño por id: " + idBaño);
+		log.info ("Eliminando Bano por id: " + idBaño);
 		long resp = pp.eliminarBañoPorId (idBaño);		
-		log.info ("Eliminando Baño por id: " + resp + " tuplas eliminadas");
+		log.info ("Eliminando Bano por id: " + resp + " tuplas eliminadas");
 		return resp;
 	}
 
@@ -375,9 +375,9 @@ public class AforoAndes
 	 */
 	public long eliminarBañoPorSanitarios (int sanitarios) 
 	{
-		log.info ("Eliminando Baño por número de sanitarios: " + sanitarios);
+		log.info ("Eliminando Bano por número de sanitarios: " + sanitarios);
 		long resp = pp.eliminarBañoPorSanitarios(sanitarios);		
-		log.info ("Eliminando Baño por número de sanitarios: " + resp + " tuplas eliminadas");
+		log.info ("Eliminando Bano por número de sanitarios: " + resp + " tuplas eliminadas");
 		return resp;
 	}
 
@@ -387,12 +387,12 @@ public class AforoAndes
 	 * @param idBaño - El identificador del baño
 	 * @return El objeto BAÑO, construido con base en la tuplas de la tabla BAÑO, que tiene el identificador dado
 	 */
-	public Baño darBañoPorId (String idBaño)
+	public Bano darBañoPorId (String idBaño)
 	{
 		log.info ("Dar información de un baño por id: " + idBaño);
-		Baño baño = pp.darBañoPorId (idBaño);
-		log.info ("Buscando baño por Id: " + baño != null ? baño : "NO EXISTE");
-		return baño;
+		Bano bano = pp.darBañoPorId (idBaño);
+		log.info ("Buscando baño por Id: " + bano != null ? bano : "NO EXISTE");
+		return bano;
 	}
 
 	/**
@@ -400,12 +400,12 @@ public class AforoAndes
 	 * @param numeroSanitarios - El número de sanitarios del baño
 	 * @return La lista de objetos BAÑO, construidos con base en las tuplas de la tabla BAÑO
 	 */
-	public List<Baño> darBañosPorSanitarios (int numeroSanitarios)
+	public List<Bano> darBañosPorSanitarios (int numeroSanitarios)
 	{
 		log.info ("Dar información de baños por número de sanitarios: " + numeroSanitarios);
-		List<Baño> baños = pp.darBañosPorSanitarios (numeroSanitarios);
-		log.info ("Dar información de baños por número de sanitarios: " + baños.size() + " baños con ese número de sanitarios existentes");
-		return baños;
+		List<Bano> banos = pp.darBañosPorSanitarios (numeroSanitarios);
+		log.info ("Dar información de baños por número de sanitarios: " + banos.size() + " baños con ese número de sanitarios existentes");
+		return banos;
 
 	}
 
@@ -413,28 +413,28 @@ public class AforoAndes
 	 * Método que consulta todas las tuplas en la tabla BAÑO
 	 * @return La lista de objetos BAÑO, construidos con base en las tuplas de la tabla BAÑO
 	 */
-	public List<Baño> darBaños ()
+	public List<Bano> darBaños ()
 	{
-		log.info ("Listando Baño");
-		List<Baño> baños = pp.darBaños ();	
-		log.info ("Listando Baño: " + baños.size() + " baños existentes");
-		return baños;
+		log.info ("Listando Bano");
+		List<Bano> banos = pp.darBaños ();	
+		log.info ("Listando Bano: " + banos.size() + " baños existentes");
+		return banos;
 	}
 
 	/**
-	 * Encuentra todos los baños en AforoAndes y los devuelve como VOBaño
+	 * Encuentra todos los baños en AforoAndes y los devuelve como VOBano
 	 * Adiciona entradas al log de la aplicación
-	 * @return Una lista de objetos VOBaño con todas los baños que conoce la aplicación, llenos con su información básica
+	 * @return Una lista de objetos VOBano con todas los baños que conoce la aplicación, llenos con su información básica
 	 */
-	public List<VOBaño> darVOBaños ()
+	public List<VOBano> darVOBaños ()
 	{
-		log.info ("Generando los VO de Baño");
-		List<VOBaño> voBaño = new LinkedList<VOBaño> ();
-		for (Baño baño : pp.darBaños ())
+		log.info ("Generando los VO de Bano");
+		List<VOBano> voBaño = new LinkedList<VOBano> ();
+		for (Bano bano : pp.darBaños ())
 		{
-			voBaño.add (baño);
+			voBaño.add (bano);
 		}
-		log.info ("Generando los VO de Baño: " + voBaño.size() + " baños existentes");
+		log.info ("Generando los VO de Bano: " + voBaño.size() + " baños existentes");
 		return voBaño;
 	}
 
