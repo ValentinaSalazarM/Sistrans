@@ -4582,7 +4582,7 @@ public class PersistenciaAforoAndes
 		try
 		{
 			tx.begin();
-			long resp = sqlZonaCirculacion.eliminarZonaCirculacionPorID(pm, identificador);
+			long resp = sqlZonaCirculacion.eliminarZonaCirculacionPorId(pm, identificador);
 			tx.commit();
 			return resp;
 		}
@@ -4608,7 +4608,7 @@ public class PersistenciaAforoAndes
 	 */
 	public ZonaCirculacion darZonaPorID (String id)
 	{
-		return sqlZonaCirculacion.darZonaPorID(pmf.getPersistenceManager(), id);
+		return sqlZonaCirculacion.darZonaPorId(pmf.getPersistenceManager(), id);
 	}
 
 

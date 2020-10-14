@@ -1893,13 +1893,13 @@ public class AforoAndes
 	 */
 	public List<VOZonaCirculacion> darVOZonasCirculacion ()
 	{
-		log.info ("Generando los VO de Tipos de bebida");        
+		log.info ("Generando los VO de zonas de circulación");        
         List<VOZonaCirculacion> voZonasCirculacion = new LinkedList<VOZonaCirculacion> ();
-        for (ZonaCirculacion tb : pp.darZonasCirculacion())
+        for (ZonaCirculacion zonaCirculacion : pp.darZonasCirculacion())
         {
-        	voZonasCirculacion.add (tb);
+        	voZonasCirculacion.add (zonaCirculacion);
         }
-        log.info ("Generando los VO de Tipos de bebida: " + voZonasCirculacion.size() + " existentes");
+        log.info ("Generando los VO de zonas de circulación: " + voZonasCirculacion.size() + " zonas de circulación existentes");
         return voZonasCirculacion;
 	}
 
@@ -1909,10 +1909,10 @@ public class AforoAndes
 	 */
 	public List<ZonaCirculacion> darZonasCirculacion ()
 	{
-		log.info ("Consultando Tipos de bebida");
-        List<ZonaCirculacion> tiposBebida = pp.darZonasCirculacion();	
-        log.info ("Consultando Tipos de bebida: " + tiposBebida.size() + " existentes");
-        return tiposBebida;
+		log.info ("Consultando zonas de circulación");
+        List<ZonaCirculacion> zonasCirculacion = pp.darZonasCirculacion();	
+        log.info ("Consultando zonas de circulación: " + zonasCirculacion.size() + " zonas de circulación existentes");
+        return zonasCirculacion;
 	}
 	
 	/* ****************************************************************
