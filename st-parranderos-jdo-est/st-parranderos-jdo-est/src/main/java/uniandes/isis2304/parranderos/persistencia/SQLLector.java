@@ -90,7 +90,7 @@ public class SQLLector
 	 */
 	public Lector darLectorPorId(PersistenceManager pm, long id) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaLector () + " WHERE id LIKE '%" + id + "'");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaLector () + " WHERE id LIKE '" + id + "%'");
 		q.setResultClass(Lector.class);
 		return (Lector) q.executeUnique();
 	}

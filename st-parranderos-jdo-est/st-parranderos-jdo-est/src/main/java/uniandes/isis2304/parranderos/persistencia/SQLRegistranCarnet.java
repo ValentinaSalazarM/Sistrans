@@ -8,7 +8,7 @@
  */
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -51,7 +51,7 @@ public class SQLRegistranCarnet
 	{
 		this.pp = pp;
 	}
-	
+
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para añadir UN REGISTRANCARNET a la base de datos 
@@ -64,11 +64,11 @@ public class SQLRegistranCarnet
 	 * @param horasalida - La hora de salida 
 	 * @return Las tuplas insertadas 
 	 */
-	public long adicionarRegistranCarnet (PersistenceManager pm, String idlector, long tipoCarnet, String idvisitante, Date fecha, long horaentrada, long horasalida ) 
+	public long adicionarRegistranCarnet (PersistenceManager pm, String idlector, long tipoCarnet, String idvisitante, Timestamp fecha, long horaentrada, long horasalida ) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaRegistranCarnet() + "(idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (?, ?, ?, ?, ?, ?)");
-        q.setParameters(idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
-        return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaRegistranCarnet() + "(idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (?, ?, ?, ?, ?, ?)");
+		q.setParameters(idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
+		return (long) q.executeUnique();
 	}
 
 	/**
@@ -82,11 +82,11 @@ public class SQLRegistranCarnet
 	 * @param horasalida - Hora de salida 
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarRegistranCarnet (PersistenceManager pm, String idlector, long tipoCarnet, String idvisitante, Date fecha, long horaentrada, long horasalida ) 
+	public long eliminarRegistranCarnet (PersistenceManager pm, String idlector, long tipoCarnet, String idvisitante, Timestamp fecha, long horaentrada, long horasalida ) 
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranCarnet() + " WHERE idlector = ? AND tipocarnet = ? AND idvisitante = ? AND fecha =  AND horaentrada = ? AND horasalida = ?");
-        q.setParameters(idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
-        return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranCarnet() + " WHERE idlector = ? AND tipocarnet = ? AND idvisitante = ? AND fecha =  AND horaentrada = ? AND horasalida = ?");
+		q.setParameters(idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
+		return (long) q.executeUnique();
 	}
 
 	/**
@@ -105,12 +105,28 @@ public class SQLRegistranCarnet
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN REGISTRANCARNET de la 
+	 * base de datos de AforoAndes, por su idvisitante
+	 * @param pm - El manejador de persistencia
+	 * @param idvisitante - El id del visitante al que pertenece el carnet
+	 * @return Una lista de objetos REGISTRANCARNET con el id del visitante dado
+	 */
+	public List<RegistranCarnet> darResistranCarnetPorIdVisitante (PersistenceManager pm, String idvisitante) 
+	{
+		Query q;
+		q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha = fechaInicio ");
+		q.setParameters(idvisitante );
+		q.setResultClass(RegistranCarnet.class);
+		return (List<RegistranCarnet>) q.executeUnique();
+	}
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN REGISTRANCARNET de la 
 	 * base de datos de AforoAndes, por su idvisitante en una fecha o rango de fechas
 	 * @param pm - El manejador de persistencia
 	 * @param idvisitante - El id del visitante al que pertenece el carnet
-	 * @return El objeto REGISTRANVISITANTE con el id del visitante dado
+	 * @return Una lista de objetos REGISTRANCARNET con el id del visitante dado y en la fecha o rango dados
 	 */
-	public RegistranCarnet darResistranCarnetPorIdVisitanteFecha (PersistenceManager pm,String idvisitante, Date fechaInicio, Date fechaFin) 
+	public List<RegistranCarnet> darResistranCarnetPorIdVisitanteFecha (PersistenceManager pm,String idvisitante, Timestamp fechaInicio, Timestamp fechaFin) 
 	{
 		Query q;
 		if ( fechaFin != null )
@@ -120,13 +136,13 @@ public class SQLRegistranCarnet
 		}
 		else
 		{
-			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha = fechaInicio ");
-			q.setParameters(idvisitante, fechaInicio, fechaFin );
+			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha = ?");
+			q.setParameters(idvisitante, fechaInicio );
 		}
 		q.setResultClass(RegistranCarnet.class);
-		return (RegistranCarnet) q.executeUnique();
+		return (List<RegistranCarnet>) q.executeUnique();
 	}
-	
+
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN REGISTRANCARNET de la 
 	 * base de datos de AforoAndes, por su idvisitante en una hora o rango de horas
@@ -134,53 +150,54 @@ public class SQLRegistranCarnet
 	 * @param idvisitante - El id del visitante al que pertenece el carnet
 	 * @return El objeto REGISTRANVISITANTE con el id del visitante dado
 	 */
-	public RegistranCarnet darResistranCarnetPorIdVisitanteHora (PersistenceManager pm, String idvisitante, Date fecha, long horaEntradaInicio, long horaEntradaFin) 
+	public RegistranCarnet darResistranCarnetPorIdVisitanteHora (PersistenceManager pm, String idvisitante, Timestamp fecha, long horaEntradaInicio, long horaEntradaFin) 
 	{
-//		Query q;
-//		if ( fechaFin != null )
-//		{
-//			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha BETWEEN ? AND ? ORDER BY fecha");
-//			q.setParameters(idvisitante, fechaInicio, fechaFin );
-//		}
-//		else
-//		{
-//			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha = fechaInicio ");
-//			q.setParameters(idvisitante, fechaInicio, fechaFin );
-//		}
-//		q.setResultClass(RegistranCarnet.class);
-//		return (RegistranCarnet) q.executeUnique();
+		//		Query q;
+		//		if ( fechaFin != null )
+		//		{
+		//			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha BETWEEN ? AND ? ORDER BY fecha");
+		//			q.setParameters(idvisitante, fechaInicio, fechaFin );
+		//		}
+		//		else
+		//		{
+		//			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha = fechaInicio ");
+		//			q.setParameters(idvisitante, fechaInicio, fechaFin );
+		//		}
+		//		q.setResultClass(RegistranCarnet.class);
+		//		return (RegistranCarnet) q.executeUnique();
 	}
 
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS REGISTRANCARNET de la 
-	 * base de datos de AforoAndes, por su hora de ingreso
-	 * @param pm - El manejador de persistencia
-	 * @param horaentrada - La hora de ingreso del visitante
-	 * @return Una lista de objetos REGISTRANCARNET
-	 */
-	public List<RegistranCarnet> darRegistranCarnetPorHoraEntrada (PersistenceManager pm, long horaentrada) 
-	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE horaentrada = ?");
-		q.setResultClass(RegistranCarnet.class);
-		q.setParameters(horaentrada);
-		return (List<RegistranCarnet>) q.executeList();
-	}
 	
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS REGISTRANCARNET de la 
-	 * base de datos de AforoAndes, por su hora de salida
-	 * @param pm - El manejador de persistencia
-	 * @param horasalida - La hora de salida 
-	 * @return Una lista de objetos REGISTRANCARNET
-	 */
-	public List<RegistranCarnet> darRegistranCarnetPorHoraSalida (PersistenceManager pm,long horasalida) 
-	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE horasalida = ?");
-		q.setResultClass(RegistranCarnet.class);
-		q.setParameters(horasalida);
-		return (List<RegistranCarnet>) q.executeList();
-	}
-	
+	//	/**
+	//	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS REGISTRANCARNET de la 
+	//	 * base de datos de AforoAndes, por su hora de ingreso
+	//	 * @param pm - El manejador de persistencia
+	//	 * @param horaentrada - La hora de ingreso del visitante
+	//	 * @return Una lista de objetos REGISTRANCARNET
+	//	 */
+	//	public List<RegistranCarnet> darRegistranCarnetPorHoraEntrada (PersistenceManager pm, long horaentrada) 
+	//	{
+	//		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE horaentrada = ?");
+	//		q.setResultClass(RegistranCarnet.class);
+	//		q.setParameters(horaentrada);
+	//		return (List<RegistranCarnet>) q.executeList();
+	//	}
+	//	
+	//	/**
+	//	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS REGISTRANCARNET de la 
+	//	 * base de datos de AforoAndes, por su hora de salida
+	//	 * @param pm - El manejador de persistencia
+	//	 * @param horasalida - La hora de salida 
+	//	 * @return Una lista de objetos REGISTRANCARNET
+	//	 */
+	//	public List<RegistranCarnet> darRegistranCarnetPorHoraSalida (PersistenceManager pm,long horasalida) 
+	//	{
+	//		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE horasalida = ?");
+	//		q.setResultClass(RegistranCarnet.class);
+	//		q.setParameters(horasalida);
+	//		return (List<RegistranCarnet>) q.executeList();
+	//	}
+	//	
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS REGISTRANCARNET de la 
 	 * base de datos de AforoAndes, por su fecha
@@ -188,7 +205,7 @@ public class SQLRegistranCarnet
 	 * @param fecha - La fecha del registro
 	 * @return Una lista de objetos REGISTRANCARNET
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorFecha(PersistenceManager pm, Date fecha) 
+	public List<RegistranCarnet> darRegistranCarnetPorFecha(PersistenceManager pm, Timestamp fecha) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE fecha = ?");
 		q.setResultClass(RegistranCarnet.class);
@@ -208,7 +225,7 @@ public class SQLRegistranCarnet
 		q.setResultClass(RegistranCarnet.class);
 		return (List<RegistranCarnet>) q.executeList();
 	}
-	
-	
+
+
 
 }

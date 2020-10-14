@@ -8,7 +8,7 @@
  */
 package uniandes.isis2304.parranderos.persistencia;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -63,7 +63,7 @@ public class SQLRegistranVehiculo
 	 * @param horasalida - Hora de salida del vehículo del centro comercial 
 	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarRegistranVehiculo (PersistenceManager pm, String idlector, String vehiculo, Date fecha, long horaentrada, long horasalida ) 
+	public long adicionarRegistranVehiculo (PersistenceManager pm, String idlector, String vehiculo, Timestamp fecha, long horaentrada, long horasalida ) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaRegistranVehiculo() + "(idlector, vehiculo, fecha, horaentrada, horasalida) values (?, ?, ?, ?, ?)");
         q.setParameters(idlector, vehiculo, fecha, horaentrada, horasalida);
@@ -80,7 +80,7 @@ public class SQLRegistranVehiculo
 	 * @param horasalida - Hora de salida del vehículo del centro comercial 
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarRegistranVehiculo (PersistenceManager pm, String idlector, String vehiculo, Date fecha, long horaentrada, long horasalida) 
+	public long eliminarRegistranVehiculo (PersistenceManager pm, String idlector, String vehiculo, Timestamp fecha, long horaentrada, long horasalida) 
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranVehiculo() + " WHERE idlector = ? AND vehiculo = ? AND fecha = ? AND horaentrada = ? AND horasalida = ?");
         q.setParameters(idlector, vehiculo,fecha, horaentrada, horasalida);
@@ -154,7 +154,7 @@ public class SQLRegistranVehiculo
 	 * @param fecha - La fecha del registro
 	 * @return Una lista de objetos REGISTRANVEHICULO
 	 */
-	public List<RegistranVehiculo> darRegistranVehiculoPorFecha(PersistenceManager pm, Date fecha) 
+	public List<RegistranVehiculo> darRegistranVehiculoPorFecha(PersistenceManager pm, Timestamp fecha) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranVehiculo () + " WHERE fecha = ?");
 		q.setResultClass(RegistranVehiculo.class);

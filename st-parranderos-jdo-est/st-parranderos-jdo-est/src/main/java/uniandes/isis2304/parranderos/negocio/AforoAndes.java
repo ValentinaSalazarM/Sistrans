@@ -9,7 +9,7 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -1511,12 +1511,12 @@ public class AforoAndes
 	 * @return Las tuplas insertadas 
 	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
 	 */
-	public RegistranCarnet adicionarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Date fecha, long horaEntrada, long horaSalida )
+	public RegistranCarnet adicionarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida )
 	{
-		log.info ("Adicionando bebedor: " + nombre);
-		Bebedor bebedor = pp.adicionarBebedor (nombre, presupuesto, ciudad);
-		log.info ("Adicionando bebedor: " + bebedor);
-		return bebedor;
+		log.info ("Adicionando RegistranCarnet del lector: " + idLector + " y el visitante: " + idVisitante);
+		RegistranCarnet registranCarnet = pp.adicionarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaEntrada, horaSalida);
+		log.info ("Adicionando RegistranCarnet: " + registranCarnet);
+		return registranCarnet;
 	}
 
 	/**
@@ -1524,7 +1524,7 @@ public class AforoAndes
 	 * Adiciona entradas al log de la aplicación 
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarRegistranCarnet(String idlector, long tipoCarnet, String idvisitante, Date fecha, long horaentrada, long horasalida)
+	public long eliminarRegistranCarnet(String idlector, long tipoCarnet, String idvisitante, Timestamp fecha, long horaentrada, long horasalida)
 	{
 		log.info ("Eliminando bebedor por nombre: " + nombre);
 		long resp = pp.eliminarBebedorPorNombre (nombre);
@@ -1547,7 +1547,7 @@ public class AforoAndes
 	 * @param fecha - La fecha registrada del carnet
 	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorFecha (Date fecha)
+	public List<RegistranCarnet> darRegistranCarnetPorFecha (Timestamp fecha)
 	{
 
 	}
@@ -1591,11 +1591,213 @@ public class AforoAndes
 
 	}
 
+	/* ****************************************************************
+	 * 			Métodos para manejar los TIPOS DE CARNET
+	 *****************************************************************/
 
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoCarnet
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo de carnet
+	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
+	 */
+	public TipoCarnet adicionarTipoCarnet(String tipo)
+	{
+		log.info ("Adicionando Tipo de carnet: " + tipo);
+		TipoCarnet tipoCarnet = pp.adicionarTipoCarnet(tipo);	
+		log.info ("Adicionando Tipo de carnet: " + tipoCarnet);
+		return tipoCarnet;
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoCarnet, dado el nombre del tipo de carnet
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo de carnet
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoCarnetPorTipo (String tipo) 
+	{
+		log.info ("Eliminando Tipo de carnet por tipo: " + tipo);
+		long resp = pp.eliminarTipoCarnetPorTipo(tipo);
+		log.info ("Eliminando Tipo de carnet por tipo: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoCarnet, dado el identificador del tipo de carnet
+	 * Adiciona entradas al log de la aplicación
+	 * @param idTipoCarnet - El identificador del tipo de carnet
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoCarnetPorId (long idTipoCarnet) 
+	{
+		log.info ("Eliminando Tipo de carnet por id: " + idTipoCarnet);
+		long resp = pp.eliminarTipoCarnetPorId(idTipoCarnet);	
+		log.info ("Eliminando Tipo de carnet por id: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoCarnet
+	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
+	 */
+	public List<TipoCarnet> darTiposCarnet ()
+	{
+		log.info ("Consultando Tipos de carnet");
+		List<TipoCarnet> tiposCarnet = pp.darTiposCarnet();
+		log.info ("Consultando Tipos de carnet: " + tiposCarnet.size() + " existentes");
+		return tiposCarnet;
+	}
+
+	/**
+	 * Encuentra todos los tipos de carnet en AforoAndes y los devuelve como una lista de VOTipoCarnet
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoCarnet con todos los tipos de carnet que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOTipoCarnet> darVOTiposCarnet ()
+	{
+		log.info ("Generando los VO de Tipos de carnet");        
+		List<VOTipoCarnet> voTipos = new LinkedList<VOTipoCarnet> ();
+		for (TipoCarnet tc : pp.darTiposCarnet ())
+		{
+			voTipos.add (tc);
+		}
+		log.info ("Generando los VO de Tipos de carnet: " + voTipos.size() + " existentes");
+		return voTipos;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoCarnet que tienen el nombre dado
+	 * @param tipo - El nombre del tipo de carnet
+	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
+	 */
+	public List<TipoCarnet> darTiposCarnetPorTipo (String tipo)
+	{
+		log.info ("Dar información de tipos de carnet por tipo: " + tipo);
+		List<TipoCarnet> tiposCarnet = pp.darTiposCarnetPorTipo(tipo);
+		log.info ("Dar información de tipos de carnet por tipo: " + tiposCarnet.size() + " tipos de carnet con ese tipo existentes");
+		return tiposCarnet;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoCarnet con un identificador dado
+	 * @param idTipoCarnet - El identificador del tipo de carnet
+	 * @return El objeto TipoCarnet, construido con base en las tuplas de la tabla TipoCarnet con el identificador dado
+	 */
+	public TipoCarnet darTipoCarnetPorId (long idTipoCarnet)
+	{
+		log.info ("Dar información de tipos de carnet por id: " + idTipoCarnet);
+		TipoCarnet tipoCarnet = pp.darTipoCarnetPorId(idTipoCarnet);
+		log.info ("Buscando tipo de carnet por Id: " + tipoCarnet != null ? tipoCarnet : "NO EXISTE");
+		return tipoCarnet;
+	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar los TIPOS DE LECTOR
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoCarnet
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo de carnet
+	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
+	 */
+	public TipoLector adicionarTipoLector(String tipo)
+	{
+		log.info ("Adicionando Tipo de lector: " + tipo);
+		TipoLector tipoLector = pp.adicionarTipoLector(tipo);	
+		log.info ("Adicionando Tipo de lector: " + tipoLector);
+		return tipoLector;
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoLector, dado el nombre del tipo de lector
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo de lector
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoLectorPorTipo (String tipo) 
+	{
+		log.info ("Eliminando Tipo de lector por tipo: " + tipo);
+		long resp = pp.eliminarTipoLectorPorTipo(tipo);
+		log.info ("Eliminando Tipo de lector por tipo: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoLector, dado el identificador del tipo de lector
+	 * Adiciona entradas al log de la aplicación
+	 * @param idTipoLector - El identificador del tipo de lector
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoLectorPorId (long idTipoLector) 
+	{
+		log.info ("Eliminando Tipo de lector por id: " + idTipoLector);
+		long resp = pp.eliminarTipoLectorPorId(idTipoLector);	
+		log.info ("Eliminando Tipo de lector por id: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoLector
+	 * @return La lista de objetos TipoLector, construidos con base en las tuplas de la tabla TipoLector
+	 */
+	public List<TipoLector> darTiposLector ()
+	{
+		log.info ("Consultando Tipos de lector");
+		List<TipoLector> tiposLector = pp.darTiposLector();
+		log.info ("Consultando Tipos de lector: " + tiposLector.size() + " existentes");
+		return tiposLector;
+	}
+
+	/**
+	 * Encuentra todos los tipos de lector en AforoAndes y los devuelve como una lista de VOTipoLector
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoLector con todos los tipos de lector que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOTipoLector> darVOTiposLector ()
+	{
+		log.info ("Generando los VO de Tipos de lector");        
+		List<VOTipoLector> voTipos = new LinkedList<VOTipoLector> ();
+		for (TipoLector tl : pp.darTiposLector ())
+		{
+			voTipos.add (tl);
+		}
+		log.info ("Generando los VO de Tipos de lector: " + voTipos.size() + " existentes");
+		return voTipos;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoLector que tienen el nombre dado
+	 * @param tipo - El nombre del tipo de lector
+	 * @return La lista de objetos TipoLector, construidos con base en las tuplas de la tabla TipoLector
+	 */
+	public List<TipoLector> darTiposLectorPorTipo (String tipo)
+	{
+		log.info ("Dar información de tipos de lector por tipo: " + tipo);
+		List<TipoLector> tiposLector = pp.darTiposLectorPorTipo(tipo);
+		log.info ("Dar información de tipos de lector por tipo: " + tiposLector.size() + " tipos de lector con ese tipo existentes");
+		return tiposLector;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoLector con un identificador dado
+	 * @param idTipoLector - El identificador del tipo de lector
+	 * @return El objeto TipoLector, construido con base en las tuplas de la tabla TipoLector con el identificador dado
+	 */
+	public TipoLector darTipoLectorPorId (long idTipoLector)
+	{
+		log.info ("Dar información de tipos de lector por id: " + idTipoLector);
+		TipoLector tipoLector = pp.darTipoLectorPorId(idTipoLector);
+		log.info ("Buscando tipo de lector por Id: " + tipoLector != null ? tipoLector : "NO EXISTE");
+		return tipoLector;
+	}
+
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los VEHICULOS
 	 *****************************************************************/
-	
+
 	/**
 	 * Adicionar de manera persistente un vehiculo
 	 * @param placa - La placa con la que se identifica el vehículo
@@ -1606,12 +1808,12 @@ public class AforoAndes
 	 */
 	public Vehiculo adicionarVehiculo( String placa, String caracteristicas, String dueño)
 	{
-        log.info ("Adicionando vehículo: " + nombre);
-        Vehiculo vehiculo = pp.adicionarVehiculo(placa, caracteristicas, dueño);
-        log.info ("Adicionando vehículo: " + vehiculo);
-        return vehiculo;
+		log.info ("Adicionando vehículo: " + nombre);
+		Vehiculo vehiculo = pp.adicionarVehiculo(placa, caracteristicas, dueño);
+		log.info ("Adicionando vehículo: " + vehiculo);
+		return vehiculo;
 	}
-	
+
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Vehiculo, dado su placa 
 	 * Adiciona entradas al log de la aplicación
@@ -1620,12 +1822,12 @@ public class AforoAndes
 	 */
 	public long eliminarVehiculoPorPlaca(String placa) 
 	{
-        log.info ("Eliminando vehículo por placa: " + placa);
-        long resp = pp.eliminarVehiculoPorPlaca(placa);
-        log.info ("Eliminando vehículo por placa: " + resp + " tuplas eliminadas");
-        return resp;
+		log.info ("Eliminando vehículo por placa: " + placa);
+		long resp = pp.eliminarVehiculoPorPlaca(placa);
+		log.info ("Eliminando vehículo por placa: " + resp + " tuplas eliminadas");
+		return resp;
 	}
-	
+
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Vehiculo, dado su dueño
 	 * Adiciona entradas al log de la aplicación
@@ -1634,12 +1836,12 @@ public class AforoAndes
 	 */
 	public long eliminarVehiculoPorDueño(String dueño) 
 	{
-        log.info ("Eliminando vehículo por propietario: " + dueño);
-        long resp = pp.eliminarVehiculoPorDueño(dueño);
-        log.info ("Eliminando vehículo por propietario: " + resp + " tuplas eliminadas");
-        return resp;
+		log.info ("Eliminando vehículo por propietario: " + dueño);
+		long resp = pp.eliminarVehiculoPorDueño(dueño);
+		log.info ("Eliminando vehículo por propietario: " + resp + " tuplas eliminadas");
+		return resp;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla Vehiculo con un identificador dado
 	 * @param placa - La placa del vehiculo
@@ -1647,12 +1849,12 @@ public class AforoAndes
 	 */
 	public Vehiculo darVehiculoPorPlaca (String placa)
 	{
-        log.info ("Dar información de un vehiculo por placa: " + placa);
-        Vehiculo vehiculo = pp.darVehiculoPorPlaca(placa);
-        log.info ("Buscando vehiculo por placa: " + vehiculo != null ? vehiculo : "NO EXISTE");
-        return vehiculo;
+		log.info ("Dar información de un vehiculo por placa: " + placa);
+		Vehiculo vehiculo = pp.darVehiculoPorPlaca(placa);
+		log.info ("Buscando vehiculo por placa: " + vehiculo != null ? vehiculo : "NO EXISTE");
+		return vehiculo;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla Vehiculo con un propietario dado
 	 * @param dueño - El dueño del vehículo
@@ -1660,24 +1862,24 @@ public class AforoAndes
 	 */
 	public List<Vehiculo> darVehiculosPorDueño (String dueño)	
 	{
-        log.info ("Dar información de vehículos por propietario: " + dueño);
-        List<Vehiculo> vehiculos = pp.darVehiculosPorDueño(dueño);
-        log.info ("Dar información de vehículos por propietario: " + vehiculos.size() + " vehículos con ese propietario existentes");
-        return vehiculos;
+		log.info ("Dar información de vehículos por propietario: " + dueño);
+		List<Vehiculo> vehiculos = pp.darVehiculosPorDueño(dueño);
+		log.info ("Dar información de vehículos por propietario: " + vehiculos.size() + " vehículos con ese propietario existentes");
+		return vehiculos;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla Vehiculo
 	 * @return La lista de objetos Vehiculo, construidos con base en las tuplas de la tabla Vehiculo
 	 */
 	public List<Vehiculo> darVehiculos ()
 	{
-        log.info ("Listando vehículos");
-        List<Vehiculo> vehiculos = pp.darVehiculos ();	
-        log.info ("Listando vehículos: " + vehiculos.size() + " vehículos existentes");
-        return vehiculos;
+		log.info ("Listando vehículos");
+		List<Vehiculo> vehiculos = pp.darVehiculos ();	
+		log.info ("Listando vehículos: " + vehiculos.size() + " vehículos existentes");
+		return vehiculos;
 	}
-	
+
 	/**
 	 * Encuentra todos los vehículos en AforoAndes y los devuelve como VOVehiculo
 	 * Adiciona entradas al log de la aplicación
@@ -1685,16 +1887,16 @@ public class AforoAndes
 	 */
 	public List<VOVehiculo> darVOVehiculos ()
 	{
-        log.info ("Generando los VO de vehículos");
-         List<VOVehiculo> voVehiculos = new LinkedList<VOVehiculo> ();
-        for (Vehiculo vehiculo : pp.darVehiculos ())
-        {
-        	voVehiculos.add (vehiculo);
-        }
-        log.info ("Generando los VO de vehículos: " + voVehiculos.size() + " vehículos existentes");
-       return voVehiculos;
+		log.info ("Generando los VO de vehículos");
+		List<VOVehiculo> voVehiculos = new LinkedList<VOVehiculo> ();
+		for (Vehiculo vehiculo : pp.darVehiculos ())
+		{
+			voVehiculos.add (vehiculo);
+		}
+		log.info ("Generando los VO de vehículos: " + voVehiculos.size() + " vehículos existentes");
+		return voVehiculos;
 	}
-	
+
 	/**
 	 * Método que actualiza, de manera transaccional, las caracteristicas del vehiculo
 	 * @param placa - La placa del vehiculo a modificar
@@ -1703,15 +1905,15 @@ public class AforoAndes
 	 */
 	public long cambiarCaracteristicasVehiculo (String placa, String caracteristicas)
 	{
-        log.info ("Cambiando las características del vehículo: " + placa);
-        long cambios = pp.cambiarCaracteristicasVehiculo(placa, caracteristicas);
-        return cambios;
+		log.info ("Cambiando las características del vehículo: " + placa);
+		long cambios = pp.cambiarCaracteristicasVehiculo(placa, caracteristicas);
+		return cambios;
 	}
-	
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los VISITANTES
 	 *****************************************************************/
-	
+
 	/**
 	 * Adicionar de manera persistente un visitante
 	 * @param identificacion - La identificación de cada visitante del centro comercial
@@ -1725,12 +1927,12 @@ public class AforoAndes
 	 */
 	public Visitante adicionarVisitante( String identificacion, String nombre, long tipo, String correo,String telefonopropio, String nombreEmergencia, String telefonoEmergencia)
 	{
-        log.info ("Adicionando visitante: " + nombre);
-        Visitante visitante = pp.adicionarVisitante(identificacion, nombre, tipo, correo, telefonopropio, nombreEmergencia, telefonoEmergencia);
-        log.info ("Adicionando visitante: " + visitante);
-        return visitante;
+		log.info ("Adicionando visitante: " + nombre);
+		Visitante visitante = pp.adicionarVisitante(identificacion, nombre, tipo, correo, telefonopropio, nombreEmergencia, telefonoEmergencia);
+		log.info ("Adicionando visitante: " + visitante);
+		return visitante;
 	}
-	
+
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Visitante, dado el identificador de este 
 	 * Adiciona entradas al log de la aplicación
@@ -1739,12 +1941,12 @@ public class AforoAndes
 	 */
 	public long eliminarVisitantePorId(String id) 
 	{
-        log.info ("Eliminando visitante por identificación: " + id);
-        long resp = pp.eliminarVisitantePorId(id);
-        log.info ("Eliminando visitante: " + resp);
-        return resp;
+		log.info ("Eliminando visitante por identificación: " + id);
+		long resp = pp.eliminarVisitantePorId(id);
+		log.info ("Eliminando visitante: " + resp);
+		return resp;
 	}
-	
+
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Visitante, dado su nombre  
 	 * Adiciona entradas al log de la aplicación
@@ -1753,12 +1955,12 @@ public class AforoAndes
 	 */
 	public long eliminarVisitantePorNombre(String nombre) 
 	{
-        log.info ("Eliminando visitante por nombre: " + nombre);
-        long resp = pp.eliminarVisitantePorNombre(nombre);
-        log.info ("Eliminando visitante: " + resp + " tuplas eliminadas");
-        return resp;
+		log.info ("Eliminando visitante por nombre: " + nombre);
+		long resp = pp.eliminarVisitantePorNombre(nombre);
+		log.info ("Eliminando visitante: " + resp + " tuplas eliminadas");
+		return resp;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla Visitante con un identificador dado
 	 * @param id - El identificador del visitante
@@ -1766,12 +1968,12 @@ public class AforoAndes
 	 */
 	public Visitante darVisitantePorId (String id)
 	{
-        log.info ("Dar información de un visitante por identificación: " + id);
-        Visitante visitante = pp.darVisitantePorId(id);
-        log.info ("Buscando visitante por identificación: " + visitante != null ? visitante : "NO EXISTE");
-        return visitante;
+		log.info ("Dar información de un visitante por identificación: " + id);
+		Visitante visitante = pp.darVisitantePorId(id);
+		log.info ("Buscando visitante por identificación: " + visitante != null ? visitante : "NO EXISTE");
+		return visitante;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla Visitante dado su nombre
 	 * @param nombre - el nombre del visitante
@@ -1779,24 +1981,24 @@ public class AforoAndes
 	 */
 	public Visitante darVisitantePorNombre (String nombre)
 	{
-        log.info ("Dar información de un visitante por nombre: " + nombre);
-        Visitante visitante = pp.darVisitantePorNombre(nombre);
-        log.info ("Buscando visitante por identificación: " + visitante != null ? visitante : "NO EXISTE");
-        return visitante;
+		log.info ("Dar información de un visitante por nombre: " + nombre);
+		Visitante visitante = pp.darVisitantePorNombre(nombre);
+		log.info ("Buscando visitante por identificación: " + visitante != null ? visitante : "NO EXISTE");
+		return visitante;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla Visitante
 	 * @return La lista de objetos Visitante, construidos con base en las tuplas de la tabla VISITANTE
 	 */
 	public List<Visitante> darVisitantes ()
 	{
-        log.info ("Listando visitantes");
-        List<Visitante> visitantes = pp.darVisitantes();	
-        log.info ("Listando visitantes: " + visitantes.size() + " visitantes existentes");
-        return visitantes;
+		log.info ("Listando visitantes");
+		List<Visitante> visitantes = pp.darVisitantes();	
+		log.info ("Listando visitantes: " + visitantes.size() + " visitantes existentes");
+		return visitantes;
 	}
-	
+
 	/**
 	 * Encuentra todos los bares en AforoAndes y los devuelce como VOVisitante
 	 * Adiciona entradas al log de la aplicación
@@ -1822,11 +2024,11 @@ public class AforoAndes
 	 */
 	public long cambiarContactoEmergenciaVisitante (String id, String nombreemergencia)
 	{
-        log.info ("Cambiando contacto de emergencia del visitante: " + id);
-        long cambios = pp.cambiarContactoEmergenciaVisitante(id, nombreemergencia);
-        return cambios;
+		log.info ("Cambiando contacto de emergencia del visitante: " + id);
+		long cambios = pp.cambiarContactoEmergenciaVisitante(id, nombreemergencia);
+		return cambios;
 	}
-	
+
 	/**
 	 * Método que actualiza, de manera transaccional, el telefono de emergencia del visitante
 	 * @param id - El identificador del visitante a modificar
@@ -1835,28 +2037,28 @@ public class AforoAndes
 	 */
 	public long cambiarTelefonoEmergencia (String id, String telefono)
 	{
-        log.info ("Cambiando teléfono de emergencia del visitante: " + id);
-        long cambios = pp.cambiarTelefonoEmergenciaVisitante(id, telefono);
-        return cambios;
+		log.info ("Cambiando teléfono de emergencia del visitante: " + id);
+		long cambios = pp.cambiarTelefonoEmergenciaVisitante(id, telefono);
+		return cambios;
 	}
-	
+
 	/* ****************************************************************
 	 * 			Métodos para manejar las ZONAS DE CIRCULACIÓN
 	 *****************************************************************/
 	/**
 	 * Adicionar de manera persistente una zona de circulación
-     * @param identificador - Identificador de la zona de circulación
-     * @param capacidadNormal - Capacidad normal de la zona de circulación
-     * @param idCentroComercial - El identificador del centro comercial al que pertenece la zona de circulación 
+	 * @param identificador - Identificador de la zona de circulación
+	 * @param capacidadNormal - Capacidad normal de la zona de circulación
+	 * @param idCentroComercial - El identificador del centro comercial al que pertenece la zona de circulación 
 	 * @return Las tuplas insertadas
 	 * @return El objeto  ZONACIRCULACION  adicionado. null si ocurre alguna Excepción
 	 */
 	public ZonaCirculacion adicionarZona(String identificador, int capacidadNormal, String idCentroComercial )
 	{
-        log.info ("Adicionando Zona de circulación: " + identificador);
-        ZonaCirculacion zonaCirculacion = pp.adicionarZona(identificador, capacidadNormal, idCentroComercial);
-        log.info ("Adicionando Zona de circulación: " + zonaCirculacion);
-        return zonaCirculacion;
+		log.info ("Adicionando Zona de circulación: " + identificador);
+		ZonaCirculacion zonaCirculacion = pp.adicionarZona(identificador, capacidadNormal, idCentroComercial);
+		log.info ("Adicionando Zona de circulación: " + zonaCirculacion);
+		return zonaCirculacion;
 	}
 
 	/**
@@ -1868,11 +2070,11 @@ public class AforoAndes
 	public long eliminarZonaPorId(String id) 
 	{
 		log.info ("Eliminando Zona de circulación por id: " + id);
-        long resp = pp.eliminarZonaPorId(id)	;
-        log.info ("Eliminando Zona de circulación por id: " + resp + " tuplas eliminadas");
-        return resp;
+		long resp = pp.eliminarZonaPorId(id)	;
+		log.info ("Eliminando Zona de circulación por id: " + resp + " tuplas eliminadas");
+		return resp;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla ZonaCirculacion con un identificador dado
 	 * @param id - Identificador de la zona de circulacion
@@ -1880,12 +2082,12 @@ public class AforoAndes
 	 */
 	public ZonaCirculacion darZonaPorId (String id)
 	{
-        log.info ("Dar información de un zona de circulación por id: " + id);
-        ZonaCirculacion zonaCirculacion = pp.darZonaPorID(id);
-        log.info ("Buscando zona de circulación por Id: " + zonaCirculacion != null ? zonaCirculacion : "NO EXISTE");
-        return zonaCirculacion;
+		log.info ("Dar información de un zona de circulación por id: " + id);
+		ZonaCirculacion zonaCirculacion = pp.darZonaPorID(id);
+		log.info ("Buscando zona de circulación por Id: " + zonaCirculacion != null ? zonaCirculacion : "NO EXISTE");
+		return zonaCirculacion;
 	}
-	
+
 	/**
 	 * Encuentra todas las zonas de circulación en AforoAndes y los devuelve como una lista de VOZonaCirculacion
 	 * Adiciona entradas al log de la aplicación
@@ -1894,13 +2096,13 @@ public class AforoAndes
 	public List<VOZonaCirculacion> darVOZonasCirculacion ()
 	{
 		log.info ("Generando los VO de zonas de circulación");        
-        List<VOZonaCirculacion> voZonasCirculacion = new LinkedList<VOZonaCirculacion> ();
-        for (ZonaCirculacion zonaCirculacion : pp.darZonasCirculacion())
-        {
-        	voZonasCirculacion.add (zonaCirculacion);
-        }
-        log.info ("Generando los VO de zonas de circulación: " + voZonasCirculacion.size() + " zonas de circulación existentes");
-        return voZonasCirculacion;
+		List<VOZonaCirculacion> voZonasCirculacion = new LinkedList<VOZonaCirculacion> ();
+		for (ZonaCirculacion zonaCirculacion : pp.darZonasCirculacion())
+		{
+			voZonasCirculacion.add (zonaCirculacion);
+		}
+		log.info ("Generando los VO de zonas de circulación: " + voZonasCirculacion.size() + " zonas de circulación existentes");
+		return voZonasCirculacion;
 	}
 
 	/**
@@ -1910,11 +2112,11 @@ public class AforoAndes
 	public List<ZonaCirculacion> darZonasCirculacion ()
 	{
 		log.info ("Consultando zonas de circulación");
-        List<ZonaCirculacion> zonasCirculacion = pp.darZonasCirculacion();	
-        log.info ("Consultando zonas de circulación: " + zonasCirculacion.size() + " zonas de circulación existentes");
-        return zonasCirculacion;
+		List<ZonaCirculacion> zonasCirculacion = pp.darZonasCirculacion();	
+		log.info ("Consultando zonas de circulación: " + zonasCirculacion.size() + " zonas de circulación existentes");
+		return zonasCirculacion;
 	}
-	
+
 	/* ****************************************************************
 	 * 			Métodos para administración
 	 *****************************************************************/

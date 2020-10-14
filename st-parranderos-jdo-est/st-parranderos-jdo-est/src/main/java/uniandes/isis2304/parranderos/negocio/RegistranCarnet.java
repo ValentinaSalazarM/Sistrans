@@ -9,7 +9,7 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Clase para modelar la relación REGISTRANCARNET del negocio de Aforo-CCAndes:
@@ -43,7 +43,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * Fecha en la que se realizó la visita
 	 */
-	private Date fecha;
+	private Timestamp fecha;
 	
 	/**
 	 * Identificador del horario en que se efectuó la lectura de entrada. Debe existir en la tabla HORARIO
@@ -66,7 +66,7 @@ public class RegistranCarnet implements VORegistranCarnet
 		this.idLector = "";
 		this.tipoCarnet = 0;
 		this.idVisitante = "";
-		this.fecha = new Date(0);
+		this.fecha = new Timestamp(0);
 		this.horaEntrada = 0;
 		this.horaSalida = 0;
 	}
@@ -80,7 +80,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	 * @param horaEntrada - El identificador del horario en el cual se realiza la lectura de entrada. Debe existir un horario con dicho identificador
 	 * @param horaSalida -  El identificador del horario en el cual se realiza la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public RegistranCarnet(String lector, long tipoCarnet, String idVisitante, Date fecha, long horaEntrada, long horaSalida) 
+	public RegistranCarnet(String lector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida) 
 	{
 		this.idLector = lector;
 		this.tipoCarnet = tipoCarnet;
@@ -142,7 +142,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @return La fecha en la que se realizó la visita
 	 */
-	public Date getFecha() 
+	public Timestamp getFecha() 
 	{
 		return fecha;
 	}
@@ -150,7 +150,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @param fecha - La nueva fecha en la que se registra la visitia
 	 */
-	public void setFecha(Date fecha) 
+	public void setFecha(Timestamp fecha) 
 	{
 		this.fecha = fecha;
 	}

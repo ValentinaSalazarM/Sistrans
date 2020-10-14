@@ -72,7 +72,7 @@ public class SQLTipoLector
 	 * @param nombreTipoLector - El nombre del tipo de lector
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarTipoLectorPorNombre (PersistenceManager pm, String nombreTipoLector)
+	public long eliminarTipoLectorPorTipo (PersistenceManager pm, String nombreTipoLector)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoLector () + " WHERE tipo = ?");
         q.setParameters(nombreTipoLector);
@@ -114,7 +114,7 @@ public class SQLTipoLector
 	 * @param nombreTipoLector - El nombre del tipo de lector
 	 * @return El objeto TipoLector que tiene el tipo dado
 	 */
-	public List<TipoLector> darTiposLectorPorNombre (PersistenceManager pm, String nombreTipoLector) 
+	public List<TipoLector> darTiposLectorPorTipo (PersistenceManager pm, String nombreTipoLector) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoLector  () + " WHERE tipo = ?");
 		q.setResultClass(TipoLector.class);

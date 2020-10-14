@@ -9,7 +9,7 @@
 
 package uniandes.isis2304.parranderos.negocio;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Clase para modelar la relación REGISTRANVEHICULO del negocio de Aforo-CCAndes:
@@ -38,7 +38,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	/**
 	 * Fecha en la que se realizó la visita
 	 */
-	private Date fecha;
+	private Timestamp fecha;
 	
 	/**
 	 * Identificador del horario en que se efectuó la lectura de entrada. Debe existir en la tabla HORARIO
@@ -61,7 +61,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	{
 		this.idLector = "";
 		this.placa = "";
-		this.fecha = new Date(0);
+		this.fecha = new Timestamp(0);
 		this.horaEntrada = 0;
 		this.horaSalida = 0;
 
@@ -75,7 +75,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	 * @param horaEntrada - El identificador del horario en el cual se realiza la lectura de entrada. Debe existir un horario con dicho identificador
 	 * @param horaSalida -  El identificador del horario en el cual se realiza la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public RegistranVehiculo(String idLector, String placa, Date fecha, long horaEntrada, long horaSalida) 
+	public RegistranVehiculo(String idLector, String placa, Timestamp fecha, long horaEntrada, long horaSalida) 
 	{
 		this.idLector = idLector;
 		this.placa = placa;
@@ -120,7 +120,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	/**
 	 * @return La fecha en la que se realizó la visita
 	 */
-	public Date getFecha() 
+	public Timestamp getFecha() 
 	{
 		return fecha;
 	}
@@ -128,7 +128,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	/**
 	 * @param fecha - La nueva fecha en la que se registra la visitia
 	 */
-	public void setFecha(Date fecha) 
+	public void setFecha(Timestamp fecha) 
 	{
 		this.fecha = fecha;
 	}
