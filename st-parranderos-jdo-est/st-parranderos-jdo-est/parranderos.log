@@ -133,3 +133,6 @@ ORA-00001: restricción única (ISIS2304A222020.UN_TIPOBEB_NOMBRE) violada
 22:37:40,583 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
 22:37:40,586 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
 22:37:40,650 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:06:24,858 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+20:06:24,861 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+20:06:24,966 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD

@@ -87,7 +87,7 @@ public class SQLVisitanBaño
 	 * @param idVisitante - El identificador del bar
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarVisitanLocal (PersistenceManager pm, String idBaño, String idVisitante) 
+	public long eliminarVisitanBaño (PersistenceManager pm, String idBaño, String idVisitante) 
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanBaño() + " WHERE idbaño = ? AND idvisitante = ?");
         q.setParameters(idBaño, idVisitante);

@@ -60,7 +60,7 @@ public class SQLTipoLocal
 	 * @param horaCierre - Hora de cierre del tipo de local
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoLocal (PersistenceManager pm, long idTipoLocal,long horaApertura, long horaCierre, String tipo) 
+	public long adicionarTipoLocal (PersistenceManager pm, long idTipoLocal, String tipo, long horaApertura, long horaCierre) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoLocal() + "(id, tipo, horaApertura, horaCierre) values (?, ?, ?, ?)");
         q.setParameters(idTipoLocal, tipo, horaApertura,horaCierre);
