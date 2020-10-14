@@ -1,15 +1,36 @@
 {
-	"title": "Nombres de las tablas de Parranderos Uniandes para la aplicación A",
-	"unidadPersistencia": "Parranderos",
+	"title": "Nombres de las tablas de AforoAndes para la aplicación A",
+	"unidadPersistencia": "AforoAndes",
 	"tablas":
 	[
-		"Parranderos_sequence",
-		"A_TIPOBEBIDA",
-		"A_BEBIDA",
-		"A_BAR",
-		"A_BEBEDOR",
-		"A_GUSTAN",
-		"A_SIRVEN",
-		"A_VISITAN"
+		"HORARIO"",
+		"TIPOVISITANTE ",
+		"VISITANTE",
+		"CENTROCOMERCIAL ",
+		"AREA ",
+		"CAPACIDADNORMAL ",
+		"ASCENSOR ",
+		"BANO ",
+		"PARQUEADERO ",
+		"TIPOLOCAL ",
+		"LOCALCOMERCIAL",
+		" ZONACIRCULACION",
+		"TIPOLECTOR ",
+		"LECTOR",
+		"TIPOCARNET ",
+		"CARNET",
+		"DOMICILIARIO ",
+		"EMPLEADO",
+		"VEHICULO ",
+		"REGISTRANCARNET",
+		"REGISTRANVEHICULO",
+		"horario_sequence ",
+		"capacidadNormal_sequence ",
+		" area_sequence",
+		"tipoLocal_sequence",
+		"tipoCarnet_sequence",
+		"tipoLector_sequence",
+		"tipoVisitante_sequence"
+		
 	]
 }

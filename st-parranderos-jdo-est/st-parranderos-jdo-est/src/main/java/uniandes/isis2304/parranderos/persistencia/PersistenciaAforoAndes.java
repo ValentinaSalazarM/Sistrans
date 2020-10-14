@@ -228,7 +228,7 @@ public class PersistenciaAforoAndes
 		tablas.add ("AREA");
 		tablas.add ("CAPACIDADNORMAL");
 		tablas.add ("ASCENSOR");
-		tablas.add ("BAÑO");
+		tablas.add ("BANO");
 		tablas.add ("PARQUEADERO");
 		tablas.add ("TIPOLOCAL");
 		tablas.add ("LOCALCOMERCIAL");
@@ -240,11 +240,6 @@ public class PersistenciaAforoAndes
 		tablas.add ("DOMICILIARIO");
 		tablas.add ("EMPLEADO");
 		tablas.add ("VEHICULO");
-		tablas.add ("VISITANCENTROCOMERCIAL");
-		tablas.add ("VISITANASCENSOR");
-		tablas.add ("VISITANBAÑO");
-		tablas.add ("VISITANLOCALCOMERCIAL");
-		tablas.add ("VISITANPARQUEADERO");
 		tablas.add ("REGISTRANCARNET");
 		tablas.add ("REGISTRANVEHICULO");
 		tablas.add("horario_sequence");
