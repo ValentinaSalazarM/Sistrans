@@ -149,17 +149,12 @@ class SQLUtil
 	/**
 	 * Crea y ejecuta las sentencias SQL para cada tabla de la base de datos - EL ORDEN ES IMPORTANTE 
 	 * @param pm - El manejador de persistencia
-	 * @return Un arreglo de 25 posiciones con números que indican el número de tuplas borradas en las tablas de AforoAndes
+	 * @return Un arreglo con números que indican el número de tuplas borradas en las tablas de AforoAndes
 	 */
 	public long [] limpiarAforoAndes (PersistenceManager pm)
 	{
         Query qRegistranVehiculo = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranVehiculo());          
         Query qRegistranCarnet = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranCarnet ());
-        Query qVisitanParqueadero = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanParqueadero());
-        Query qVisitanLocalComercial = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanLocalComercial());
-        Query qVisitanBaño = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanBaño());
-        Query qVisitanAscensor = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanAscensor());
-        Query qVisitanCentroComercial = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVisitanCentroComercial());
         Query qVehiculo = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVehiculo());
         Query qEmpleado = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaEmpleado());
         Query qDomiciliario = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaDomiciliario());
@@ -182,11 +177,6 @@ class SQLUtil
 
         long registranVehiculoEliminados = (long) qRegistranVehiculo.executeUnique ();
         long  registranCarnetEliminados = (long) qRegistranCarnet.executeUnique ();
-        long  visitanParqueaderoEliminados = (long) qVisitanParqueadero.executeUnique ();
-        long  visitanLocalComercialEliminados = (long) qVisitanLocalComercial.executeUnique ();
-        long  visitanBañoEliminados = (long) qVisitanBaño.executeUnique ();
-        long  visitanAscensorEliminados = (long) qVisitanAscensor.executeUnique ();
-        long  visitanCentroComercialEliminados = (long) qVisitanCentroComercial.executeUnique ();
         long  vehiculoEliminados = (long) qVehiculo.executeUnique ();
         long  empleadoEliminados = (long) qEmpleado.executeUnique ();
         long  domiciliarioEliminados = (long) qDomiciliario.executeUnique ();
@@ -208,8 +198,7 @@ class SQLUtil
         long  horarioEliminados = (long) qHorario.executeUnique ();
 
 
-        return new long[] {registranVehiculoEliminados, registranCarnetEliminados, visitanParqueaderoEliminados, visitanLocalComercialEliminados, visitanBañoEliminados, visitanAscensorEliminados, 
-        		visitanCentroComercialEliminados, vehiculoEliminados, empleadoEliminados, domiciliarioEliminados, carnetEliminados, tipoCarnetEliminados, lectorEliminados, tipoLectorEliminados,
+        return new long[] {registranVehiculoEliminados, registranCarnetEliminados, vehiculoEliminados, empleadoEliminados, domiciliarioEliminados, carnetEliminados, tipoCarnetEliminados, lectorEliminados, tipoLectorEliminados,
         		zonaCirculacionEliminados, localComercialEliminados, tipoLocalEliminados, parqueaderoEliminados, bañoEliminados, ascensorEliminados, capacidadNormalEliminados, areaEliminados,
         		centroComercialEliminados, visitanteEliminados, tipoVisitanteEliminados, horarioEliminados};
 	}

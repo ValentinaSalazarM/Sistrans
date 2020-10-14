@@ -69,19 +69,6 @@ public class SQLTipoVisitante
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE VISITANTE de la base de datos de AforoAndes, por su nombre
-	 * @param pm - El manejador de persistencia
-	 * @param nombreTipoVisitante - El nombre del tipo de visitante
-	 * @return EL número de tuplas eliminadas
-	 */
-	public long eliminarTipoVisitantePorNombre (PersistenceManager pm, String nombreTipoVisitante)
-	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoVisitante () + " WHERE tipo = ?");
-        q.setParameters(nombreTipoVisitante);
-        return (long) q.executeUnique();            
-	}
-
-	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE VISITANTE de la base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
 	 * @param idTipoVisitante - El identificador del tipo de visitante
@@ -91,6 +78,19 @@ public class SQLTipoVisitante
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoVisitante () + " WHERE id = ?");
         q.setParameters(idTipoVisitante);
+        return (long) q.executeUnique();            
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar TIPOS DE VISITANTE de la base de datos de AforoAndes, por su nombre
+	 * @param pm - El manejador de persistencia
+	 * @param nombreTipoVisitante - El nombre del tipo de visitante
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarTipoVisitantePorTipo (PersistenceManager pm, String nombreTipoVisitante)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaTipoVisitante () + " WHERE tipo = ?");
+        q.setParameters(nombreTipoVisitante);
         return (long) q.executeUnique();            
 	}
 
@@ -116,7 +116,7 @@ public class SQLTipoVisitante
 	 * @param nombreTipoVisitante - El nombre del tipo de visitante
 	 * @return El objeto TipoVisitante que tiene el tipo dado
 	 */
-	public List<TipoVisitante> darTiposVisitantePorNombre (PersistenceManager pm, String nombreTipoVisitante) 
+	public List<TipoVisitante> darTiposVisitantePorTipo (PersistenceManager pm, String nombreTipoVisitante) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoVisitante  () + " WHERE tipo = ?");
 		q.setResultClass(TipoVisitante.class);

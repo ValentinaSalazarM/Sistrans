@@ -1500,7 +1500,7 @@ public class AforoAndes
 	 *****************************************************************/
 
 	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla RegistranCarnet
+	 * Adiciona de manera persitente un registro de carnet
 	 * Adiciona entradas al log de la aplicación
 	 * @param idLector - El id del lector 
 	 * @param tipoCarnet - El tipo del carnet del visitante
@@ -1596,7 +1596,7 @@ public class AforoAndes
 	 *****************************************************************/
 
 	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoCarnet
+	 * Adiciona de manera persistente un tipo de carnet
 	 * Adiciona entradas al log de la aplicación
 	 * @param tipo - El nombre del tipo de carnet
 	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
@@ -1697,9 +1697,9 @@ public class AforoAndes
 	 *****************************************************************/
 
 	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoCarnet
+	 * Adiciona de manera pesistente un tipo de lector
 	 * Adiciona entradas al log de la aplicación
-	 * @param tipo - El nombre del tipo de carnet
+	 * @param tipo - El nombre del tipo de lector
 	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
 	 */
 	public TipoLector adicionarTipoLector(String tipo)
@@ -1795,6 +1795,252 @@ public class AforoAndes
 
 	
 	/* ****************************************************************
+	 * 			Métodos para manejar los TIPOS DE LOCAL
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoLocal
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo del local
+	 * @param horaApertura - Identificador del horario de apertura del local
+	 * @param horaCierre - Identificador del horario de cierre del local
+	 * @return El objeto TipoLocal adicionado. null si ocurre alguna Excepción
+	 */
+	public TipoLocal adicionarTipoLocal(String tipo, long horaApertura, long horaCierre)
+	{
+		log.info ("Adicionando Tipo de local: " + tipo);
+		TipoLocal tipoLector = pp.adicionarTipoLocal(tipo, horaApertura, horaCierre);
+		log.info ("Adicionando Tipo de local: " + tipoLector);
+		return tipoLector;
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoLocal, dado el nombre del tipo del local
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo del local
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoLocalPorNombre (String tipo, long horaApertura, long horaCierre) 
+	{
+		log.info ("Eliminando Tipo de local por tipo: " + tipo);
+		long resp = pp.eliminarTipoLocalPorTipo(tipo, horaApertura, horaCierre);
+		log.info ("Eliminando Tipo de local por tipo: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoLocal, dado el identificador del tipo del local
+	 * Adiciona entradas al log de la aplicación
+	 * @param idTipoLocal - El identificador del tipo del local
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoLocalPorId (long idTipoLocal) 
+	{
+		log.info ("Eliminando Tipo de local por id: " + idTipoLocal);
+		long resp = pp.eliminarTipoLocalPorId(idTipoLocal);	
+		log.info ("Eliminando Tipo de local por id: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoLocal
+	 * @return La lista de objetos TipoLocal, construidos con base en las tuplas de la tabla TipLocal
+	 */
+	public List<TipoLocal> darTiposLocal ()
+	{
+		log.info ("Consultando Tipos de lector");
+		List<TipoLocal> tiposLocal = pp.darTiposLocal();
+		log.info ("Consultando Tipos de local: " + tiposLocal.size() + " existentes");
+		return tiposLocal;
+	}
+
+	/**
+	 * Encuentra todos los tipos de local en AforoAndes y los devuelve como una lista de VOTipoLocal
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoLocal con todos los tipos de local que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOTipoLocal> darVOTiposLocal ()
+	{
+		log.info ("Generando los VO de Tipos de local");        
+		List<VOTipoLocal> voTipos = new LinkedList<VOTipoLocal> ();
+		for (TipoLocal tl : pp.darTiposLocal ())
+		{
+			voTipos.add (tl);
+		}
+		log.info ("Generando los VO de Tipos de local: " + voTipos.size() + " existentes");
+		return voTipos;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoLocal que tienen el nombre dado
+	 * @param tipo - El nombre del tipo del local
+	 * @return La lista de objetos TipoLocal, construidos con base en las tuplas de la tabla TipoLocal
+	 */
+	public List<TipoLocal> darTiposLocalPorTipo (String tipo)
+	{
+		log.info ("Dar información de tipos de local por tipo: " + tipo);
+		List<TipoLocal> tiposLocal = pp.darTiposLocalPorTipo(tipo);
+		log.info ("Dar información de tipos de local por tipo: " + tiposLocal.size() + " tipos de local con ese tipo existentes");
+		return tiposLocal;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoLector con un identificador dado
+	 * @param idTipoLector - El identificador del tipo de lector
+	 * @return El objeto TipoLector, construido con base en las tuplas de la tabla TipoLector con el identificador dado
+	 */
+	public TipoLocal darTipoLocalPorId (long idTipoLocal)
+	{
+		log.info ("Dar información de tipos de local por id: " + idTipoLocal);
+		TipoLocal tipoLocal = pp.darTipoLocalPorId(idTipoLocal);
+		log.info ("Buscando tipo de local por Id: " + tipoLocal != null ? tipoLocal : "NO EXISTE");
+		return tipoLocal;
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, la hora de apertura
+	 * @param id - El identificador del tipo local a modificar
+	 * @param horaApertura - El identificador del horario de apertura del tipo de local
+	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un tipo de local con ese identificador no existe
+	 */
+	public long cambiarHoraAperturaTipoLocal (long id, long horaApertura)
+	{
+        log.info ("Cambiando hora de apertura del tipo de local: " + id);
+        long cambios = pp.cambiarHoraAperturaTipoLocal(id, horaApertura);
+        return cambios;
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, la hora limite
+	 * @param id - El identificador del visitante a modificar
+	 * @param horaCierre - El identificador de la hora de cierre del tipo de local
+	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un tipo de local con ese identificador no existe
+	 */
+	public long cambiarHoraCierreTipoLocal (long id, long horaCierre)
+	{
+        log.info ("Cambiando hora de cierre del tipo de local: " + id);
+        long cambios = pp.cambiarHoraCierreTipoLocal(id, horaCierre);
+        return cambios;
+	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los TIPOS DE VISITANTE
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoVisitante
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo del visitante
+	 * @param horainicio - El identificador del horario de inicio de circulación del tipo del visitante
+	 * @param horalimite - El identificador del horario límite de circulación del tipo del visitante
+	 * @return El objeto TipoVisitante adicionado. null si ocurre alguna Excepción
+	 */
+	public TipoVisitante adicionarTipoVisitante( String tipo, long horainicio, long horalimite )
+	{
+		log.info ("Adicionando Tipo de visitante: " + tipo);
+		TipoVisitante tipoVisitante = pp.adicionarTipoVisitante(tipo, horainicio, horalimite);
+		log.info ("Adicionando Tipo de lector: " + tipoVisitante);
+		return tipoVisitante;
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoVisitante, dado el nombre del tipo de lector
+	 * Adiciona entradas al log de la aplicación
+	 * @param tipo - El nombre del tipo de lector
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoVisitantePorTipo (String tipo) 
+	{
+		log.info ("Eliminando Tipo de visitante por tipo: " + tipo);
+		long resp = pp.eliminarTipoVisitantePorTipo(tipo);
+		log.info ("Eliminando Tipo de visitante por tipo: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoVisitante, dado el identificador del tipo de visitante
+	 * Adiciona entradas al log de la aplicación
+	 * @param idTipoVisitnte - El identificador del tipo del visitante
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarTipoVisitantePorId (long idTipoVisitante) 
+	{
+		log.info ("Eliminando Tipo de visitante por id: " + idTipoVisitante);
+		long resp = pp.eliminarTipoVisitantePorId(idTipoVisitante);	
+		log.info ("Eliminando Tipo de visitante por id: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoVisitante
+	 * @return La lista de objetos TipoVisitante, construidos con base en las tuplas de la tabla TipoVisitante
+	 */
+	public List<TipoVisitante> darTiposVisitante ()
+	{
+		log.info ("Consultando Tipos de visitante");
+		List<TipoVisitante> tiposVisitante = pp.darTiposVisitante();
+		log.info ("Consultando Tipos de visitante: " + tiposVisitante.size() + " existentes");
+		return tiposVisitante;
+	}
+
+	/**
+	 * Encuentra todos los tipos de visitante en AforoAndes y los devuelve como una lista de VOTipoVisitante
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoVisitante con todos los tipos de visitante que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOTipoVisitante> darVOTiposVisitante ()
+	{
+		log.info ("Generando los VO de Tipos de visitante");        
+		List<VOTipoVisitante> voTipos = new LinkedList<VOTipoVisitante> ();
+		for (TipoVisitante tv : pp.darTiposVisitante ())
+		{
+			voTipos.add (tv);
+		}
+		log.info ("Generando los VO de Tipos de visitante: " + voTipos.size() + " existentes");
+		return voTipos;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoVisitante que tienen el nombre dado
+	 * @param tipo - El nombre del tipo de visitante
+	 * @return La lista de objetos TipoVisitante, construidos con base en las tuplas de la tabla TipoVisitante
+	 */
+	public List<TipoVisitante> darTiposVisitantePorTipo (String tipo)
+	{
+		log.info ("Dar información de tipos de visitante por tipo: " + tipo);
+		List<TipoVisitante> tiposLector = pp.darTiposVisitantePorTipo(tipo);
+		log.info ("Dar información de tipos de visitante por tipo: " + tiposLector.size() + " tipos de visitante con ese tipo existentes");
+		return tiposLector;
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, la hora de inicio
+	 * @param id - El identificador del tipo de visitante a modificar
+	 * @param horainicio - El identificador del horario de inicio
+	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un tipo de visitante con ese identificador no existe
+	 */
+	public long cambiarHoraInicioTipoVisitante (long id, long horainicio)
+	{
+        log.info ("Cambiando hora de inicio del tipo de visitante: " + id);
+        long cambios = pp.cambiarHoraInicioTipoVisitante(id, horainicio);
+        return cambios;
+	}
+	
+	/**
+	 * Método que actualiza, de manera transaccional, la hora limite
+	 * @param id - El identificador del tipo de visitante a modificar
+	 * @param horalimite - El identificador de la hora límite del tipo de visitante
+	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un tipo de visitante con ese identificador no existe
+	 */
+	public long cambiarHoraLimiteTipoVisitante (long id, long horalimite)
+	{
+        log.info ("Cambiando hora límite del tipo de visitante: " + id);
+        long cambios = pp.cambiarHoraInicioTipoVisitante(id, horalimite);
+        return cambios;
+	}
+
+	
+	/* ****************************************************************
 	 * 			Métodos para manejar los VEHICULOS
 	 *****************************************************************/
 
@@ -1808,7 +2054,7 @@ public class AforoAndes
 	 */
 	public Vehiculo adicionarVehiculo( String placa, String caracteristicas, String dueño)
 	{
-		log.info ("Adicionando vehículo: " + nombre);
+		log.info ("Adicionando vehículo: " + placa);
 		Vehiculo vehiculo = pp.adicionarVehiculo(placa, caracteristicas, dueño);
 		log.info ("Adicionando vehículo: " + vehiculo);
 		return vehiculo;

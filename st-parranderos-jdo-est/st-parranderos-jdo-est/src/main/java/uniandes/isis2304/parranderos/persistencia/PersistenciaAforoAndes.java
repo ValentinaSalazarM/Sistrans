@@ -49,11 +49,6 @@ import uniandes.isis2304.parranderos.negocio.TipoLector;
 import uniandes.isis2304.parranderos.negocio.TipoLocal;
 import uniandes.isis2304.parranderos.negocio.TipoVisitante;
 import uniandes.isis2304.parranderos.negocio.Vehiculo;
-import uniandes.isis2304.parranderos.negocio.VisitanAscensor;
-import uniandes.isis2304.parranderos.negocio.VisitanBaño;
-import uniandes.isis2304.parranderos.negocio.VisitanCentroComercial;
-import uniandes.isis2304.parranderos.negocio.VisitanLocalComercial;
-import uniandes.isis2304.parranderos.negocio.VisitanParqueadero;
 import uniandes.isis2304.parranderos.negocio.Visitante;
 import uniandes.isis2304.parranderos.negocio.ZonaCirculacion;
 
@@ -196,31 +191,6 @@ public class PersistenciaAforoAndes
 	 * Atributo para el acceso a la tabla  de la base de datos
 	 */
 	private SQLVehiculo sqlVehiculo;
-
-	/**
-	 * Atributo para el acceso a la tabla  de la base de datos
-	 */
-	private SQLVisitanCentroComercial sqlVisitanCentroComercial;
-
-	/**
-	 * Atributo para el acceso a la tabla  de la base de datos
-	 */
-	private SQLVisitanAscensor sqlVisitanAscensor;
-
-	/**
-	 * Atributo para el acceso a la tabla  de la base de datos
-	 */
-	private SQLVisitanBaño sqlVisitanBaño;
-
-	/**
-	 * Atributo para el acceso a la tabla  de la base de datos
-	 */
-	private SQLVisitanLocalComercial sqlVisitanLocalComercial;
-
-	/**
-	 * Atributo para el acceso a la tabla  de la base de datos
-	 */
-	private SQLVisitanParqueadero sqlVisitanParqueadero;
 
 	/**
 	 * Atributo para el acceso a la tabla  de la base de datos
@@ -378,11 +348,6 @@ public class PersistenciaAforoAndes
 		sqlDomiciliario = new SQLDomiciliario(this);
 		sqlEmpleado = new SQLEmpleado(this);
 		sqlVehiculo = new SQLVehiculo(this);
-		sqlVisitanCentroComercial = new SQLVisitanCentroComercial(this);
-		sqlVisitanAscensor = new SQLVisitanAscensor(this);
-		sqlVisitanBaño = new SQLVisitanBaño(this);
-		sqlVisitanLocalComercial = new SQLVisitanLocalComercial(this);
-		sqlVisitanParqueadero = new SQLVisitanParqueadero(this);
 		sqlRegistranCarnet = new SQLRegistranCarnet(this);
 		sqlRegistranVehiculo = new SQLRegistranVehiculo(this);
 		sqlUtil = new SQLUtil(this);
@@ -535,50 +500,11 @@ public class PersistenciaAforoAndes
 		return tablas.get (18);
 	}
 	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de VisitanCentroComercial de AforoAndes
-	 */
-	public String darTablaVisitanCentroComercial ()
-	{
-		return tablas.get (19);
-	}
-	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de VisitanAscensor de AforoAndes
-	 */
-	public String darTablaVisitanAscensor ()
-	{
-		return tablas.get (20);
-	}
-
-	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de VisitanBaño de AforoAndes
-	 */
-	public String darTablaVisitanBaño ()
-	{
-		return tablas.get (21);
-	}
-
-	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de VisitanLocalComercial de AforoAndes
-	 */
-	public String darTablaVisitanLocalComercial ()
-	{
-		return tablas.get (22);
-	}
-
-	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de VisitanParqueadero de AforoAndes
-	 */
-	public String darTablaVisitanParqueadero ()
-	{
-		return tablas.get (23);
-	}
-
-	/**
 	 * @return La cadena de caracteres con el nombre de la tabla de RegistranCarnet de AforoAndes
 	 */
 	public String darTablaRegistranCarnet ()
 	{
-		return tablas.get (24);
+		return tablas.get (19);
 	}
 
 	/**
@@ -586,7 +512,7 @@ public class PersistenciaAforoAndes
 	 */
 	public String darTablaRegistranVehiculo ()
 	{
-		return tablas.get (25);
+		return tablas.get (20);
 	}
 
 	/**
@@ -594,7 +520,7 @@ public class PersistenciaAforoAndes
 	 */
 	public String darSeqHorario()
 	{
-		return tablas.get (26);
+		return tablas.get (21);
 	}
 
 	/**
@@ -602,7 +528,7 @@ public class PersistenciaAforoAndes
 	 */
 	public String darSeqCapacidadNormal ()
 	{
-		return tablas.get (27);
+		return tablas.get (22);
 	}
 
 	/**
@@ -610,7 +536,7 @@ public class PersistenciaAforoAndes
 	 */
 	public String darSeqArea ()
 	{
-		return tablas.get (28);
+		return tablas.get (23);
 	}
 
 	/**
@@ -618,7 +544,7 @@ public class PersistenciaAforoAndes
 	 */
 	public String darSeqTipoLocal ()
 	{
-		return tablas.get (29);
+		return tablas.get (24);
 	}
 
 	/**
@@ -626,7 +552,7 @@ public class PersistenciaAforoAndes
 	 */
 	public String darSeqTipoCarnet ()
 	{
-		return tablas.get (30);
+		return tablas.get (25);
 	}
 
 	/**
@@ -634,7 +560,7 @@ public class PersistenciaAforoAndes
 	 */
 	public String darSeqTipoLector ()
 	{
-		return tablas.get (31);
+		return tablas.get (26);
 	}
 
 	/**
@@ -642,7 +568,7 @@ public class PersistenciaAforoAndes
 	 */
 	public String darSeqTipoVisitante ()
 	{
-		return tablas.get (32);
+		return tablas.get (27);
 	}
 
 	/**
@@ -3416,6 +3342,8 @@ public class PersistenciaAforoAndes
 	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoLocal
 	 * Adiciona entradas al log de la aplicación
 	 * @param tipo - El nombre del tipo del local
+	 * @param horaApertura - Identificador del horario de apertura del local
+	 * @param horaCierre - Identificador del horario de cierre del local
 	 * @return El objeto TipoLocal adicionado. null si ocurre alguna Excepción
 	 */
 	public TipoLocal adicionarTipoLocal(String tipo, long horaApertura, long horaCierre)
@@ -3454,14 +3382,14 @@ public class PersistenciaAforoAndes
 	 * @param tipo - El nombre del tipo del local
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarTipoLocalPorNombre (String tipo, long horaApertura, long horaCierre) 
+	public long eliminarTipoLocalPorTipo (String tipo, long horaApertura, long horaCierre) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long resp = sqlTipoLocal.eliminarTipoLocalPorNombre(pm, tipo);
+			long resp = sqlTipoLocal.eliminarTipoLocalPorTipo(pm, tipo);
 			tx.commit();
 			return resp;
 		}
@@ -3528,9 +3456,9 @@ public class PersistenciaAforoAndes
 	 * @param tipo - El nombre del tipo del local
 	 * @return La lista de objetos TipoLocal, construidos con base en las tuplas de la tabla TipoLocal
 	 */
-	public List<TipoLocal> darTiposLocalPorNombre (String tipo)
+	public List<TipoLocal> darTiposLocalPorTipo (String tipo)
 	{
-		return sqlTipoLocal.darTiposLocalPorNombre(pmf.getPersistenceManager(), tipo);
+		return sqlTipoLocal.darTiposLocalPorTipo(pmf.getPersistenceManager(), tipo);
 	}
 
 	/**
@@ -3545,19 +3473,52 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el tipo del local
-	 * @param id - El identificador del tipo a modificar 
-	 * @param tipo - Tipo del local
+	 * Método que actualiza, de manera transaccional, la hora de apertura
+	 * @param id - El identificador del tipo local a modificar
+	 * @param horaApertura - El identificador del horario de apertura del tipo de local
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
-	public long cambiarTipoLocal (long id, String tipo)
+	public long cambiarHoraAperturaTipoLocal (long id, long horaApertura)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long resp = sqlTipoLocal.cambiarTipoLocal(pm, id, tipo);
+			long resp = sqlTipoLocal.cambiarHoraApertura(pm, id, horaApertura);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, la hora limite
+	 * @param id - El identificador del visitante a modificar
+	 * @param horaCierre - El identificador de la hora de cierre del tipo de local
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarHoraCierreTipoLocal (long id, long horaCierre)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlTipoLocal.cambiarHoraCierre(pm, id, horaCierre);
 			tx.commit();
 
 			return resp;
@@ -3585,6 +3546,8 @@ public class PersistenciaAforoAndes
 	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoVisitante
 	 * Adiciona entradas al log de la aplicación
 	 * @param tipo - El nombre del tipo del visitante
+	 * @param horainicio - El identificador del horario de inicio de circulación del tipo del visitante
+	 * @param horalimite - El identificador del horario límite de circulación del tipo del visitante
 	 * @return El objeto TipoVisitante adicionado. null si ocurre alguna Excepción
 	 */
 	public TipoVisitante adicionarTipoVisitante( String tipo, long horainicio, long horalimite )
@@ -3620,17 +3583,17 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoVisitante, dado el nombre del tipo de visitante
 	 * Adiciona entradas al log de la aplicación
-	 * @param nombre - El nombre del visitante
+	 * @param tipo - El nombre del visitante
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarTipoVisitantePorNombre (String nombreTipoVisitante) 
+	public long eliminarTipoVisitantePorTipo(String tipo) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long resp = sqlTipoVisitante.eliminarTipoVisitantePorNombre(pm, nombreTipoVisitante);
+			long resp = sqlTipoVisitante.eliminarTipoVisitantePorTipo(pm, tipo);
 			tx.commit();
 			return resp;
 		}
@@ -3697,9 +3660,9 @@ public class PersistenciaAforoAndes
 	 * @param nombre - El nombre del visitante
 	 * @return La lista de objetos TipoVisitante, construidos con base en las tuplas de la tabla TipoVisitante
 	 */
-	public List<TipoVisitante> darTiposVisitantePorNombre (String nombre)
+	public List<TipoVisitante> darTiposVisitantePorTipo (String tipo)
 	{
-		return sqlTipoVisitante.darTiposVisitantePorNombre(pmf.getPersistenceManager(), nombre);
+		return sqlTipoVisitante.darTiposVisitantePorTipo(pmf.getPersistenceManager(), tipo);
 	}
 
 	/**
@@ -3710,13 +3673,12 @@ public class PersistenciaAforoAndes
 	public TipoVisitante darTipoVisitantePorId (long idTipoVisitante)
 	{
 		return sqlTipoVisitante.darTipoVisitantePorId (pmf.getPersistenceManager(), idTipoVisitante);
-
 	}
 
 	/**
 	 * Método que actualiza, de manera transaccional, la hora de inicio
-	 * @param id - El identificador del visitante a modificar
-	 * @param horainicio - La hora de inicio
+	 * @param id - El identificador del tipo de visitante a modificar
+	 * @param horainicio - El identificador del horario de inicio
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
 	public long cambiarHoraInicioTipoVisitante (long id, long horainicio)
@@ -3748,8 +3710,8 @@ public class PersistenciaAforoAndes
 
 	/**
 	 * Método que actualiza, de manera transaccional, la hora limite
-	 * @param id - El identificador del visitante a modificar
-	 * @param horalimite - La hora limite
+	 * @param id - El identificador del tipo de visitante a modificar
+	 * @param horalimite - El identificador de la hora límite del tipo de visitante
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
 	public long cambiarHoraLimiteTipoVisitante (long id, long horalimite)
@@ -3944,395 +3906,6 @@ public class PersistenciaAforoAndes
 			}
 			pm.close();
 		}
-	}
-
-	/* ****************************************************************
-	 * 			Métodos para manejar VISITANASCENSOR
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla VisitanAscensor
-	 * Adiciona entradas al log de la aplicación
-	 * @return El objeto VisitanAscensor adicionado. null si ocurre alguna Excepción
-	 */
-	public VisitanAscensor adicionarVisitanAscensor(String idAscensor, String idvisitante )
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long tuplasInsertadas = sqlVisitanAscensor.adicionarVisitanAscensor(pm, idAscensor, idvisitante);
-			tx.commit();
-
-			log.trace ("Inserción de tipo de visitante del ascensor: " + idAscensor +" " + idvisitante + ": " + tuplasInsertadas + " tuplas insertadas");
-
-			return new VisitanAscensor(idAscensor, idvisitante);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla VisitanAscensor
-	 * Adiciona entradas al log de la aplicación 
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarVisitanAscensor (String idAscensor, String idVisitante)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlVisitanAscensor.eliminarVisitanAscensor(pm, idAscensor, idVisitante);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla VisitanAscensor
-	 * @return La lista de objetos VisitanAscensor, construidos con base en las tuplas de la tabla VisitanAscensor
-	 */
-	public List<VisitanAscensor> darVisitanAscensor ()
-	{
-		return sqlVisitanAscensor.darVisitanAscensor(pmf.getPersistenceManager());
-	}
-
-	/* ****************************************************************
-	 * 			Métodos para manejar VISITANBAÑO
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla VisitanBaño
-	 * Adiciona entradas al log de la aplicación
-	 * @return El objeto VisitanBaño adicionado. null si ocurre alguna Excepción
-	 */
-	public VisitanBaño adicionarVisitanBaño(String idBaño, String idvisitante )
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long tuplasInsertadas = sqlVisitanBaño.adicionarVisitanBaño(pm, idBaño, idvisitante);
-			tx.commit();
-
-			log.trace ("Inserción de tipo de visitante: " + idBaño +" " + idvisitante + ": " + tuplasInsertadas + " tuplas insertadas");
-
-			return new VisitanBaño(idBaño, idvisitante);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla VisitanBaño
-	 * Adiciona entradas al log de la aplicación 
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarVisitanBaño (String idBaño, String idVisitante)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlVisitanBaño.eliminarVisitanBaño(pm, idBaño, idVisitante);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla VisitanBaño
-	 * @return La lista de objetos VisitanBaño, construidos con base en las tuplas de la tablaVisitanBaño
-	 */
-	public List<VisitanBaño> darVisitanBaño ()
-	{
-		return sqlVisitanBaño.darVisitanBaño(pmf.getPersistenceManager());
-	}
-	/* ****************************************************************
-	 * 			Métodos para manejar VISITANCENTROCOMERCIAL
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla VisitanCentroComercial
-	 * Adiciona entradas al log de la aplicación
-	 * @return El objeto VisitanCentroComercial adicionado. null si ocurre alguna Excepción
-	 */
-	public VisitanCentroComercial adicionarVisitanCentroComercial(String idCC, String idvisitante )
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long tuplasInsertadas = sqlVisitanCentroComercial.adicionarVisitanCC(pm, idCC, idvisitante);
-			tx.commit();
-
-			log.trace ("Inserción de tipo de visitante del centro comercial: " + idCC +" " + idvisitante + ": " + tuplasInsertadas + " tuplas insertadas");
-
-			return new VisitanCentroComercial(idCC, idvisitante);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla VisitanCentroComercial
-	 * Adiciona entradas al log de la aplicación 
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarVisitanCentroComercial (String idCC, String idVisitante)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlVisitanCentroComercial.eliminarVisitanCC(pm, idCC, idVisitante);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla VisitanCentroComercial
-	 * @return La lista de objetos VisitanCentroComercial, construidos con base en las tuplas de la tabla VisitanCentroComercial
-	 */
-	public List<VisitanCentroComercial> darVisitanCentroComercial ()
-	{
-		return sqlVisitanCentroComercial.darVisitanCC(pmf.getPersistenceManager());
-	}
-
-	/* ****************************************************************
-	 * 			Métodos para manejar VISITANPARQUEADERO
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla VisitanParqueadero
-	 * Adiciona entradas al log de la aplicación
-	 * @return El objeto VisitanParqueadero adicionado. null si ocurre alguna Excepción
-	 */
-	public VisitanParqueadero adicionarVisitanParqueadero(String idParqueadero, String idvisitante )
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long tuplasInsertadas = sqlVisitanParqueadero.adicionarVisitanParqueadero(pm, idParqueadero, idvisitante);
-			tx.commit();
-
-			log.trace ("Inserción de tipo de visitant al parqueadero: " + idParqueadero +" " + idvisitante + ": " + tuplasInsertadas + " tuplas insertadas");
-
-			return new VisitanParqueadero(idParqueadero, idvisitante);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla VisitanParqueadero
-	 * Adiciona entradas al log de la aplicación 
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarVisitanParqueaderoComercial (String idParqueadero, String idVisitante)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlVisitanParqueadero.eliminarVisitanParqueadero(pm, idParqueadero, idVisitante);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla VisitanParqueadero
-	 * @return La lista de objetos VisitanParqueadero, construidos con base en las tuplas de la tabla VisitanParqueadero
-	 */
-	public List<VisitanParqueadero> darVisitanParqueadero()
-	{
-		return sqlVisitanParqueadero.darVisitanParqueadero(pmf.getPersistenceManager());
-	}
-
-	/* ****************************************************************
-	 * 			Métodos para manejar VISITANLOCALCOMERCIAL
-	 *****************************************************************/
-
-	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla VisitanLocalComercial
-	 * Adiciona entradas al log de la aplicación
-	 * @return El objeto VisitanLocalComercial adicionado. null si ocurre alguna Excepción
-	 */
-	public VisitanLocalComercial adicionarVisitanLocalComercial(String idLocal, String idvisitante )
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long tuplasInsertadas = sqlVisitanLocalComercial.adicionarVisitanLocalComercial(pm, idLocal, idvisitante);
-			tx.commit();
-
-			log.trace ("Inserción de un visitante al local comercial: " + idLocal +" " + idvisitante + ": " + tuplasInsertadas + " tuplas insertadas");
-
-			return new VisitanLocalComercial(idLocal, idvisitante);
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return null;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tablaVisitanLocalComercial
-	 * Adiciona entradas al log de la aplicación 
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	public long eliminarVisitanLocalComercial (String idLocal, String idVisitante)
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx=pm.currentTransaction();
-		try
-		{
-			tx.begin();
-			long resp = sqlVisitanLocalComercial.eliminarVisitanLocalComercial(pm, idLocal, idVisitante);
-			tx.commit();
-			return resp;
-		}
-		catch (Exception e)
-		{
-			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			return -1;
-		}
-		finally
-		{
-			if (tx.isActive())
-			{
-				tx.rollback();
-			}
-			pm.close();
-		}
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla VisitanLocalComercial
-	 * @return La lista de objetos VisitanLocalComercial, construidos con base en las tuplas de la tabla VisitanLocalComercial
-	 */
-	public List<VisitanLocalComercial> darVisitanLocalComercial ()
-	{
-		return sqlVisitanLocalComercial.darVisitanLocalComercial(pmf.getPersistenceManager());
 	}
 	
 	/* ****************************************************************
@@ -4634,7 +4207,7 @@ public class PersistenciaAforoAndes
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de AforoAndes
 	 * Crea y ejecuta las sentencias SQL para cada tabla de la base de datos - EL ORDEN ES IMPORTANTE 
-	 * @return Un arreglo con 25 números que indican el número de tuplas borradas en las tablas 
+	 * @return Un arreglo con números que indican el número de tuplas borradas en las tablas 
 	 */
 	public long [] limpiarParranderos ()
 	{
