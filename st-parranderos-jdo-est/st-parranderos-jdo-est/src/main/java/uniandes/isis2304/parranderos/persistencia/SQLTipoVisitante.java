@@ -61,7 +61,7 @@ public class SQLTipoVisitante
 	 * @param horaInicio - Hora inicio del visitante en el centro comercial de acuerdo a su tipo
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarTipoVisitante (PersistenceManager pm, long idTipoVisitante, String tipo, long horaLimite, long horainicio) 
+	public long adicionarTipoVisitante (PersistenceManager pm, long idTipoVisitante, String tipo, long horainicio, long horaLimite ) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoVisitante() + "(id, tipo, horainicio, horalimite) values (?, ?, ?, ?)");
         q.setParameters(idTipoVisitante, tipo, horainicio, horaLimite);
