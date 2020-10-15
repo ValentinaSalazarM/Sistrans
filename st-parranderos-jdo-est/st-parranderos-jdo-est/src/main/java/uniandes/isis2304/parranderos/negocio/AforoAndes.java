@@ -1513,7 +1513,7 @@ public class AforoAndes
 	 */
 	public RegistranCarnet adicionarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida )
 	{
-		log.info ("Adicionando RegistranCarnet del lector: " + idLector + " y el visitante: " + idVisitante);
+		log.info ("Adicionando RegistranCarnet con lector: " + idLector + " y visitante: " + idVisitante);
 		RegistranCarnet registranCarnet = pp.adicionarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaEntrada, horaSalida);
 		log.info ("Adicionando RegistranCarnet: " + registranCarnet);
 		return registranCarnet;
@@ -1522,34 +1522,20 @@ public class AforoAndes
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla RegistranCarnet
 	 * Adiciona entradas al log de la aplicación 
+	 * @param idLector - El identificador del lector por el cual ingresa el visitante
+	 * @param tipoCarnet - El tipo del carnet del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @param fecha - La fecha de ingreso
+	 * @param horaentrada - Hora de entrada 
+	 * @param horasalida - Hora de salida 
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarRegistranCarnet(String idlector, long tipoCarnet, String idvisitante, Timestamp fecha, long horaentrada, long horasalida)
+	public long eliminarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaentrada, long horasalida)
 	{
-		log.info ("Eliminando bebedor por nombre: " + nombre);
-		long resp = pp.eliminarBebedorPorNombre (nombre);
-		log.info ("Eliminando bebedor por nombre: " + resp + " tuplas eliminadas");
+		log.info ("Eliminando RegistranCarnet del lector: " + idLector + " y visitante: " + idVisitante);
+		long resp = pp.eliminarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaentrada, horasalida);
+		log.info ("Eliminando RegistranCarnet: " + resp + " tuplas eliminadas");
 		return resp;
-	}
-
-	/**
-	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
-	 * @param id - El identificador del visitante
-	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
-	 */
-	public RegistranCarnet darRegistranCarnetPorIdVisitante (String idvisitante)
-	{
-
-	}
-
-	/**
-	 * Método que consulta los REGISTRANCARNET por fecha
-	 * @param fecha - La fecha registrada del carnet
-	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
-	 */
-	public List<RegistranCarnet> darRegistranCarnetPorFecha (Timestamp fecha)
-	{
-
 	}
 
 	/**
@@ -1557,40 +1543,216 @@ public class AforoAndes
 	 * @param idLector - El id del lector por el cual quedó registrada la visita
 	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorLector (String idlector)
+	public List<RegistranCarnet> darRegistranCarnetPorLector (String idLector) 
 	{
-
+        log.info ("Dar información de RegistranCarnet por idLector: " + idLector);
+        List<RegistranCarnet> registros = pp.darRegistranCarnetPorLector(idLector);
+        log.info ("Dar información de RegistranCarnet por idLector: " + registros.size() + " registros con ese idLector existentes");
+        return registros;
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
+	 */
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitante (String idVisitante)
+	{
+        log.info ("Dar información de RegistranCarnet por idVisitante: " + idVisitante);
+        List<RegistranCarnet> registros = pp.darRegistranCarnetPorIdVisitante(idVisitante);
+        log.info ("Dar información de RegistranCarnet por idVisitante: " + registros.size() + " registros con ese idVisitante existentes");
+        return registros;
 	}
 
 	/**
-	 * Método que consulta los REGISTRANCARNET por horaEntrada
-	 * @param entrada - La hora de entrada del visitante
-	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
+	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador de visitante y una fecha o rango de fechas
+	 * @param idVisitante - El identificador del visitante
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta o null si solo se requiere una fecha
+	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorHoraEntrada (long entrada)
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteFecha (String idVisitante, Timestamp fechaInicio, Timestamp fechaFin)
 	{
-
+        log.info ("Dar información de RegistranCarnet por idVisitante: " + idVisitante);
+        List<RegistranCarnet> registros = pp.darRegistranCarnetPorIdVisitanteFecha(idVisitante, fechaInicio, fechaFin);
+        log.info ("Dar información de RegistranCarnet por idVisitante: " + registros.size() + " registros con ese idVisitante y fecha(s) existentes");
+        return registros;
 	}
-
-	/**
-	 * Método que consulta los REGISTRANCARNET por horaSalida
-	 * @param salida - La hora de salida del visitante
-	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
-	 */
-	public List<RegistranCarnet> darRegistranCarnetPorHoraSalida (long salida)
-	{
-
-	}
-
+	
 	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet
 	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
 	 */
 	public List<RegistranCarnet> darRegistranCarnet ()
 	{
-
+        log.info ("Listando RegistranCarnet");
+        List<RegistranCarnet> registros = pp.darRegistranCarnet();	
+        log.info ("Listando RegistranCarnet: " + registros.size() + " registros existentes");
+        return registros;
+	}
+	
+	/**
+	 * Encuentra todos los registros de carnet en AforoAndes y los devuelve como VORegistranCarnet
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VORegistranCarnet con todos los registros de carnet que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VORegistranCarnet> darVORegistranCarnet ()
+	{
+        log.info ("Generando los VO de RegistranCarnet");
+         List<VORegistranCarnet> voRegistranCarnet = new LinkedList<VORegistranCarnet> ();
+        for (RegistranCarnet registro : pp.darRegistranCarnet ())
+        {
+        	voRegistranCarnet.add (registro);
+        }
+        log.info ("Generando los VO de RegistranCarnet: " + voRegistranCarnet.size() + " registros existentes");
+       return voRegistranCarnet;
+	}
+	
+	/**
+	 * Método que actualiza, de manera transaccional, la hora de salida de un registro
+	 * @param idLector - Lector donde se realizó el registro de la visita
+	 * @param idVisitante - Identificador del visitante 
+	 * @param fecha - La fecha en la que se realizó el registro
+	 * @param horaEntrada - La hora de entrada de la visita
+	 * @param horaSalida - La hora de salida de la visita
+	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un registro con ese identificador no existe
+	 */
+	public long cambiarHoraSalidaRegistranCarnet (String idLector, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida) 
+	{
+        log.info ("Cambiando hora de salida del registro del visitante: " + idVisitante);
+        long cambios = pp.cambiarHoraSalidaRegistranCarnet(idLector, idVisitante, fecha, horaEntrada, horaSalida);
+        return cambios;
 	}
 
+	/* ****************************************************************
+	 * 			Métodos para manejar los REGISTRANVEHICULO
+	 *****************************************************************/
+
+	/**
+	 * Adiciona de manera persitente un registro de carnet
+	 * Adiciona entradas al log de la aplicación
+	 * @param idLector - El id del lector 
+	 * @param vehiculo - La placa del vehículo ingresado
+	 * @param fecha - La fecha de ingreso
+	 * @param horaEntrada - La hora de ingreso
+	 * @param horaSalida - La hora de salida 
+	 * @return Las tuplas insertadas 
+	 * @return El objeto RegistranVehiculo adicionado. null si ocurre alguna Excepción
+	 */
+	public RegistranVehiculo adicionarRegistranVehiculo (String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida )
+	{
+		log.info ("Adicionando RegistranVehiculo con lector: " + idLector + " y vehículo: " + vehiculo);
+		RegistranVehiculo registranVehiculo = pp.adicionarRegistranVehiculo(idLector, vehiculo, fecha, horaEntrada, horaSalida);
+		log.info ("Adicionando RegistranVehiculo: " + registranVehiculo);
+		return registranVehiculo;
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla RegistranVehiculo
+	 * Adiciona entradas al log de la aplicación 
+	 * @param idLector - El identificador del lector por el cual ingresa el visitante
+	 * @param tipoCarnet - El tipo del carnet del visitante
+	 * @param vehiculo - La placa del vehiculo registrado 
+	 * @param fecha - La fecha de ingreso
+	 * @param horaentrada - Hora de entrada 
+	 * @param horasalida - Hora de salida 
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarRegistranVehiculo(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaentrada, long horasalida)
+	{
+		log.info ("Eliminando RegistranVehiculo del lector: " + idLector + " y vehículo: " + idVisitante);
+		long resp = pp.eliminarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaentrada, horasalida);
+		log.info ("Eliminando RegistranVehiculo: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	/**
+	 * Método que consulta los REGISTRANVEHICULO por lector
+	 * @param idLector - El id del lector por el cual quedó registrada la visita
+	 * @return La lista de objetos RegistranVehiculo, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
+	 */
+	public List<RegistranVehiculo> darRegistranVehiculoPorLector (String idLector) 
+	{
+        log.info ("Dar información de RegistranVehiculo por idLector: " + idLector);
+        List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorLector(idLector);
+        log.info ("Dar información de RegistranVehiculo por idLector: " + registros.size() + " registros con ese idLector existentes");
+        return registros;
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
+	 * @param vehiculo - La placa del vehículo ingresado 
+	 * @return El objeto RegistranVehiculo, construido con base en las tuplas de la tabla REGISTRANVEHICULO con el identificador dado
+	 */
+	public List<RegistranVehiculo> darRegistranVehiculoPorPlaca (String vehiculo)
+	{
+        log.info ("Dar información de RegistranVehiculo por vehículo: " + vehiculo);
+        List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorPlaca(vehiculo);
+        log.info ("Dar información de RegistranVehiculo por vehículo: " + registros.size() + " registros con ese vehículo existentes");
+        return registros;
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador de visitante y una fecha o rango de fechas
+	 * @param id - El identificador del visitante
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta o null si solo se requiere una fecha
+	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANVEHICULO con el identificador dado
+	 */
+	public List<RegistranVehiculo> darRegistranVehiculoPorPlacaFecha (String vehiculo, Timestamp fechaInicio, Timestamp fechaFin)
+	{
+        log.info ("Dar información de RegistranCarnet por vehículo: " + vehiculo);
+        List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorPlacaFecha(vehiculo, fechaInicio, fechaFin);
+        log.info ("Dar información de RegistranCarnet por vehículo: " + registros.size() + " registros con ese vehículo y fecha(s) existentes");
+        return registros;
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla RegistranVehiculo
+	 * @return La lista de objetos RegistranVehiculo, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
+	 */
+	public List<RegistranVehiculo> darRegistranVehiculo ()
+	{
+        log.info ("Listando RegistranVehiculo");
+        List<RegistranVehiculo> registros = pp.darRegistranVehiculo();	
+        log.info ("Listando RegistranVehiculo: " + registros.size() + " registros existentes");
+        return registros;
+	}
+	
+	/**
+	 * Encuentra todos los registros de vehículo en AforoAndes y los devuelve como VORegistranVehiculo
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VORegistranVehiculo con todos los registros de vehículo que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VORegistranVehiculo> darVORegistranVehiculo ()
+	{
+        log.info ("Generando los VO de RegistranVehiculo");
+         List<VORegistranVehiculo> voRegistranVehiculo = new LinkedList<VORegistranVehiculo> ();
+        for (RegistranVehiculo registro : pp.darRegistranVehiculo ())
+        {
+        	voRegistranVehiculo.add (registro);
+        }
+        log.info ("Generando los VO de RegistranVehiculo: " + voRegistranVehiculo.size() + " registros existentes");
+       return voRegistranVehiculo;
+	}
+	
+	/**
+	 * Método que actualiza, de manera transaccional, la hora de salida de un registro
+	 * @param idLector - Lector donde se realizó el registro de la visita
+	 * @param vehiculo - Placa del vehículo 
+	 * @param fecha - La fecha en la que se realizó el registro
+	 * @param horaEntrada - La hora de entrada de la visita
+	 * @param horaSalida - La hora de salida de la visita
+	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un registro con ese identificador no existe
+	 */
+	public long cambiarHoraSalidaRegistranVehiculo (String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida) 
+	{
+        log.info ("Cambiando hora de salida del registro del vehículo: " + vehiculo);
+        long cambios = pp.cambiarHoraSalidaRegistranVehiculo(idLector, vehiculo, fecha, horaEntrada, horaSalida);
+        return cambios;
+	}
+
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los TIPOS DE CARNET
 	 *****************************************************************/

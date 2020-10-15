@@ -85,6 +85,19 @@ class SQLHorario
 
 
 	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar UN HORARIO de la base de datos de AforoAndes, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param idHorario - El identificador del horario
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarHorarioPorId (PersistenceManager pm, long idHorario)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaHorario () + " WHERE id = ?");
+		q.setParameters(idHorario);
+		return (long) q.executeUnique();            
+	}
+
+	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN HORARIO de la 
 	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
@@ -100,18 +113,21 @@ class SQLHorario
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para eliminar UN HORARIO de la base de datos de AforoAndes, por su identificador
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN HORARIO de la 
+	 * base de datos de AforoAndes, por su identificador
 	 * @param pm - El manejador de persistencia
-	 * @param idHorario - El identificador del horario
-	 * @return EL número de tuplas eliminadas
+	 * @param id - La hora del horario
+	 * @param minuto - El minuto del horario
+	 * @return El objeto HORARIO que tiene el identificador dado
 	 */
-	public long eliminarHorarioPorId (PersistenceManager pm, long idHorario)
+	public Horario darHorarioPorHorayMinuto (PersistenceManager pm, int hora, int minuto) 
 	{
-		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaHorario () + " WHERE id = ?");
-		q.setParameters(idHorario);
-		return (long) q.executeUnique();            
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaHorario () + " WHERE hora = ? AND minuto = ?");
+		q.setResultClass(Horario.class);
+		q.setParameters(hora, minuto);
+		return (Horario) q.executeUnique();
 	}
-
+	
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS HORARIOS de la 
 	 * base de datos de AforoAndes

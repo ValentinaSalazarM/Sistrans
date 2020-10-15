@@ -2826,16 +2826,22 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla RegistranCarnet
 	 * Adiciona entradas al log de la aplicación 
+	 * @param idLector - El identificador del lector por el cual ingresa el visitante
+	 * @param tipoCarnet - El tipo del carnet del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @param fecha - La fecha de ingreso
+	 * @param horaentrada - Hora de entrada 
+	 * @param horasalida - Hora de salida 
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarRegistranCarnet(String idlector, long tipoCarnet, String idvisitante, Timestamp fecha, long horaentrada, long horasalida)
+	public long eliminarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaentrada, long horasalida)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long resp = sqlRegistranCarnet.eliminarRegistranCarnet(pm, idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
+			long resp = sqlRegistranCarnet.eliminarRegistranCarnet(pm, idLector, tipoCarnet, idVisitante, fecha, horaentrada, horasalida);
 			tx.commit();
 			return resp;
 		}
@@ -2855,24 +2861,37 @@ public class PersistenciaAforoAndes
 	}
 	
 	/**
+	 * Método que consulta los REGISTRANCARNET por lector
+	 * @param idLector - El id del lector por el cual quedó registrada la visita
+	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
+	 */
+	public List<RegistranCarnet> darRegistranCarnetPorLector (String idLector)
+	{
+		return sqlRegistranCarnet.darRegistranCarnetPorLector(pmf.getPersistenceManager(), idLector);
+	}
+
+	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
-	 * @param id - El identificador del visitante
+	 * @param idVisitante - El identificador del visitante
 	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteFecha (String idvisitante, Timestamp fechaInicio, Timestamp fechaFin)
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitante (String idVisitante)
 	{
-		return sqlRegistranCarnet.darResistranCarnetPorIdVisitanteFecha(pmf.getPersistenceManager(), idvisitante, fechaInicio, fechaFin);
+		return sqlRegistranCarnet.darResistranCarnetPorIdVisitante(pmf.getPersistenceManager(), idVisitante);
 	}
 	
 	/**
-	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
-	 * @param id - El identificador del visitante
+	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador de visitante y una fecha o rango de fechas
+	 * @param idVisitante - El identificador del visitante
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta o null si solo se requiere una fecha
 	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorIdVisitante (String idvisitante)
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteFecha (String idVisitante, Timestamp fechaInicio, Timestamp fechaFin)
 	{
-		return sqlRegistranCarnet.darResistranCarnetPorIdVisitante(pmf.getPersistenceManager(), idvisitante);
+		return sqlRegistranCarnet.darResistranCarnetPorIdVisitanteFecha(pmf.getPersistenceManager(), idVisitante, fechaInicio, fechaFin);
 	}
+	
 
 	/**
 	 * Método que consulta los REGISTRANCARNET por fecha
@@ -2884,36 +2903,7 @@ public class PersistenciaAforoAndes
 		return sqlRegistranCarnet.darRegistranCarnetPorFecha(pmf.getPersistenceManager(), fecha);
 	}
 
-	/**
-	 * Método que consulta los REGISTRANCARNET por lector
-	 * @param idLector - El id del lector por el cual quedó registrada la visita
-	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
-	 */
-	public List<RegistranCarnet> darRegistranCarnetPorLector (String idlector)
-	{
-		return sqlRegistranCarnet.darRegistranCarnetPorLector(pmf.getPersistenceManager(), idlector);
-	}
-
-//	/**
-//	 * Método que consulta los REGISTRANCARNET por horaEntrada
-//	 * @param entrada - La hora de entrada del visitante
-//	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
-//	 */
-//	public List<RegistranCarnet> darRegistranCarnetPorHoraEntrada (long entrada)
-//	{
-//		return sqlRegistranCarnet.darRegistranCarnetPorHoraEntrada(pmf.getPersistenceManager(), entrada);
-//	}
-//
-//	/**
-//	 * Método que consulta los REGISTRANCARNET por horaSalida
-//	 * @param salida - La hora de salida del visitante
-//	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
-//	 */
-//	public List<RegistranCarnet> darRegistranCarnetPorHoraSalida (long salida)
-//	{
-//		return sqlRegistranCarnet.darRegistranCarnetPorHoraSalida(pmf.getPersistenceManager(), salida);
-//	}
-
+	
 	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet
 	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
@@ -2923,6 +2913,42 @@ public class PersistenciaAforoAndes
 		return sqlRegistranCarnet.darRegistranCarnet(pmf.getPersistenceManager());
 	}
 
+	/**
+	 * Método que actualiza, de manera transaccional, la hora de salida de un registro
+	 * @param idLector - Lector donde se realizó el registro de la visita
+	 * @param idVisitante - Identificador del visitante 
+	 * @param fecha - La fecha en la que se realizó el registro
+	 * @param horaEntrada - La hora de entrada de la visita
+	 * @param horaSalida - La hora de salida de la visita
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarHoraSalidaRegistranCarnet (String idLector, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlRegistranCarnet.cambiarHoraSalidaRegistranCarnet(pm, idLector, idVisitante, fecha, horaEntrada, horaSalida);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
 	/* ****************************************************************
 	 * 			Métodos para manejar los REGISTRANVEHICULO
 	 *****************************************************************/
@@ -2930,27 +2956,27 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que inserta, de manera transaccional, una tupla en la tabla RegistranVehiculo
 	 * Adiciona entradas al log de la aplicación
-	 * @param idlector - El id del lector 
+	 * @param idLector - El id del lector 
 	 * @param vehiculo - La placa del vehículo ingresado
 	 * @param fecha - La fecha de ingreso
-	 * @param horaentrada - La hora de ingreso
-	 * @param horasalida - La hora de salida 
+	 * @param horaEntrada - La hora de ingreso
+	 * @param horaSalida - La hora de salida 
 	 * @return Las tuplas insertadas 
 	 * @return El objeto RegistranVehiculo adicionado. null si ocurre alguna Excepción
 	 */
-	public RegistranVehiculo adicionarRegistranVehiculo (String idlector, String vehiculo, Timestamp fecha, long horaentrada, long horasalida )
+	public RegistranVehiculo adicionarRegistranVehiculo (String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida )
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlRegistranVehiculo.adicionarRegistranVehiculo(pm, idlector, vehiculo, fecha, horaentrada, horasalida);
+			long tuplasInsertadas = sqlRegistranVehiculo.adicionarRegistranVehiculo(pm, idLector, vehiculo, fecha, horaEntrada, horaSalida);
 			tx.commit();
 
-			log.trace ("Inserción de un registro de un vehículo: " + idlector + " " + vehiculo + " " + fecha + " " + " " + horaentrada + " " + horasalida + ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("Inserción de un registro de un vehículo: " + idLector + " " + vehiculo + " " + fecha + " " + " " + horaEntrada + " " + horaSalida + ": " + tuplasInsertadas + " tuplas insertadas");
 
-			return new RegistranVehiculo(idlector, vehiculo, fecha, horaentrada, horasalida);
+			return new RegistranVehiculo(idLector, vehiculo, fecha, horaEntrada, horaSalida);
 		}
 		catch (Exception e)
 		{
@@ -2970,6 +2996,11 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla RegistranVehiculo
 	 * Adiciona entradas al log de la aplicación 
+	 * @param idlector - El identificador del lector por el cual ingresa el vehículo
+	 * @param vehiculo - La placa del vehiculo registrado 
+	 * @param fecha - Fecha de registro del vehículo
+	 * @param horaentrada - Hora de entrada del vehículo al centro comercial
+	 * @param horasalida - Hora de salida del vehículo del centro comercial 
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
 	public long eliminarRegistranVehiculo (String idlector, String vehiculo, Timestamp fecha, long horaentrada, long horasalida )
@@ -2997,15 +3028,25 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+	
+	/**
+	 * Método que consulta los REGISTRANVEHICULO por lector
+	 * @param idLector - El id del lector por el cual quedó registrada la visita
+	 * @return La lista de objetos RegistranVehiculo, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
+	 */
+	public List<RegistranVehiculo> darRegistranVehiculoPorLector (String idLector)
+	{
+		return sqlRegistranVehiculo.darRegistranVehiculosPorLector(pmf.getPersistenceManager(), idLector);
+	}
 
 	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranVehiculo por la placa del vehiculo
 	 * @param vehiculo - La placa del vehículo ingresado 
-	 * @return El objeto RegistranVehiculo, construido con base en las tuplas de la tabla REGISTRANVEHICULO con el identificador dado
+	 * @return La lista de objetos RegistranVehiculo, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
 	 */
-	public RegistranVehiculo darRegistranVehiculoPorPlaca (String vehiculo)
+	public List<RegistranVehiculo> darRegistranVehiculoPorPlaca (String vehiculo)
 	{
-		return sqlRegistranVehiculo.darResgitranPorPlaca(pmf.getPersistenceManager(),vehiculo);
+		return sqlRegistranVehiculo.darRegistranVehiculoPorPlaca(pmf.getPersistenceManager(),vehiculo);
 	}
 
 	/**
@@ -3019,44 +3060,62 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que consulta los REGISTRANVEHICULO por lector
-	 * @param idLector - El id del lector por el cual quedó registrada la visita
+	 * Método que consulta los REGISTRANVEHICULO por fecha
+	 * @param vehiculo - La placa del carro registrado 
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta o null si solo se requiere una fecha
 	 * @return La lista de objetos RegistranVehiculo, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
 	 */
-	public List<RegistranVehiculo> darRegistranVehiculoPorLector (String idlector)
+	public List<RegistranVehiculo> darRegistranVehiculoPorPlacaFecha (String vehiculo, Timestamp fechaInicio, Timestamp fechaFin)
 	{
-		return sqlRegistranVehiculo.darRegistranVehiculosPorLector(pmf.getPersistenceManager(), idlector);
-	}
-
-	/**
-	 * Método que consulta los REGISTRANVEHICULO por horaEntrada
-	 * @param entrada - La hora de entrada del visitante
-	 * @return La lista de objetos RegistranVehiculo, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
-	 */
-	public List<RegistranVehiculo> darRegistranVehiculoPorHoraEntrada (long entrada)
-	{
-		return sqlRegistranVehiculo.darRegistranVehiculosPorHoraEntrada(pmf.getPersistenceManager(), entrada);
-	}
-
-	/**
-	 * Método que consulta los REGISTRANVEHICULO por horaSalida
-	 * @param salida - La hora de salida del visitante
-	 * @return La lista de objetos REGISTRANVEHICULO, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
-	 */
-	public List<RegistranVehiculo> darRegistranVehiculoPorHoraSalida (long salida)
-	{
-		return sqlRegistranVehiculo.darRegistranVehiculosPorHoraSalida(pmf.getPersistenceManager(), salida);
+		return sqlRegistranVehiculo.darRegistranVehiculoPorPlacaFecha(pmf.getPersistenceManager(), vehiculo, fechaInicio, fechaFin);
 	}
 
 	/**
 	 * Método que consulta todas las tuplas en la tabla  REGISTRANVEHICULO
-	 * @return La lista de objetos REGISTRANVEHICULO, construidos con base en las tuplas de la tabla REGISTRANCARNET
+	 * @return La lista de objetos REGISTRANVEHICULO, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
 	 */
 	public List<RegistranVehiculo> darRegistranVehiculo ()
 	{
 		return sqlRegistranVehiculo.darRegistranVehiculo(pmf.getPersistenceManager());
 	}
 	
+	/**
+	 * Método que actualiza, de manera transaccional, la hora de salida de un registro
+	 * @param idLector - Lector donde se realizó el registro de la visita
+	 * @param vehiculo - Placa del vehículo registrado 
+	 * @param fecha - La fecha en la que se realizó el registro
+	 * @param horaEntrada - La hora de entrada de la visita
+	 * @param horaSalida - La hora de salida de la visita
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarHoraSalidaRegistranVehiculo (String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlRegistranVehiculo.cambiarHoraSalidaRegistranVehiculo(pm, idLector, vehiculo, fecha, horaEntrada, horaSalida);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los TIPOS DE CARNET

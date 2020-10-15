@@ -13,6 +13,8 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import uniandes.isis2304.parranderos.negocio.RegistranCarnet;
 import uniandes.isis2304.parranderos.negocio.RegistranVehiculo;
 
 
@@ -73,33 +75,18 @@ public class SQLRegistranVehiculo
 	/**
 	 * Crea y ejecuta la sentencia SQL para eliminar UN REGISTRANVEHICULO de la base de datos por sus identificadores
 	 * @param pm - El manejador de persistencia
-	 * @param idlector - El identificador del lector por el cual ingresa el vehículo
+	 * @param idLector - El identificador del lector por el cual ingresa el vehículo
 	 * @param  vehiculo - La placa del vehiculo registrado 
 	 * @param fecha - Fecha de registro del vehículo
-	 * @param horaentrada - Hora de entrada del vehículo al centro comercial
-	 * @param horasalida - Hora de salida del vehículo del centro comercial 
+	 * @param horaEntrada - Hora de entrada del vehículo al centro comercial
+	 * @param horaSalida - Hora de salida del vehículo del centro comercial 
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarRegistranVehiculo (PersistenceManager pm, String idlector, String vehiculo, Timestamp fecha, long horaentrada, long horasalida) 
+	public long eliminarRegistranVehiculo (PersistenceManager pm, String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida) 
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranVehiculo() + " WHERE idlector = ? AND vehiculo = ? AND fecha = ? AND horaentrada = ? AND horasalida = ?");
-        q.setParameters(idlector, vehiculo,fecha, horaentrada, horasalida);
+        q.setParameters(idLector, vehiculo, fecha, horaEntrada, horaSalida);
         return (long) q.executeUnique();
-	}
-	
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN REGISTRANVEHICULO de la 
-	 * base de datos de AforoAndes, por su vehiculo
-	 * @param pm - El manejador de persistencia
-	 * @param vehiculo -La placa del carro registrado 
-	 * @return El objeto REGISTRANVEHICULO que tiene la placa dada 
-	 */
-	public RegistranVehiculo darResgitranPorPlaca (PersistenceManager pm, String vehiculo) 
-	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranVehiculo () + " WHERE vehiculo = ?");
-		q.setResultClass(RegistranVehiculo.class);
-		q.setParameters(vehiculo);
-		return (RegistranVehiculo) q.executeUnique();
 	}
 	
 	/**
@@ -118,34 +105,20 @@ public class SQLRegistranVehiculo
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS REGISTRANVEHICULO de la 
-	 * base de datos de AforoAndes, por su hora de ingreso
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN REGISTRANVEHICULO de la 
+	 * base de datos de AforoAndes, por su vehiculo
 	 * @param pm - El manejador de persistencia
-	 * @param horaentrada - La hora de ingreso del vehículo al centro comercial
-	 * @return Una lista de objetos REGISTRANVEHICULO
+	 * @param vehiculo - La placa del carro registrado 
+	 * @return Una lista de objetos REGISTRANVEHICULO con la placa dada
 	 */
-	public List<RegistranVehiculo> darRegistranVehiculosPorHoraEntrada (PersistenceManager pm, long horaentrada) 
+	public List<RegistranVehiculo> darRegistranVehiculoPorPlaca (PersistenceManager pm, String vehiculo) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranVehiculo () + " WHERE horaentrada = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranVehiculo () + " WHERE vehiculo = ?");
 		q.setResultClass(RegistranVehiculo.class);
-		q.setParameters(horaentrada);
-		return (List<RegistranVehiculo>) q.executeList();
+		q.setParameters(vehiculo);
+		return (List<RegistranVehiculo>) q.executeUnique();
 	}
 	
-	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS REGISTRANVEHICULO de la 
-	 * base de datos de AforoAndes, por su hora de salida
-	 * @param pm - El manejador de persistencia
-	 * @param horasalida - La hora de salida del centro comercial
-	 * @return Una lista de objetos REGISTRANVEHICULO
-	 */
-	public List<RegistranVehiculo> darRegistranVehiculosPorHoraSalida (PersistenceManager pm, long horasalida) 
-	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranVehiculo () + " WHERE horasalida = ?");
-		q.setResultClass(RegistranVehiculo.class);
-		q.setParameters(horasalida);
-		return (List<RegistranVehiculo>) q.executeList();
-	}
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS REGISTRANVEHICULO de la 
@@ -161,6 +134,32 @@ public class SQLRegistranVehiculo
 		q.setParameters(fecha);
 		return (List<RegistranVehiculo>) q.executeList();
 	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN REGISTRANVEHICULO de la 
+	 * base de datos de AforoAndes, por su vehiculo
+	 * @param pm - El manejador de persistencia
+	 * @param vehiculo - La placa del carro registrado 
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta o null si solo se requiere una fecha
+	 * @return Una lista de objetos REGISTRANVEHICULO con la placa del vehículo dado y en la fecha o rango dados
+	 */
+	public List<RegistranVehiculo> darRegistranVehiculoPorPlacaFecha (PersistenceManager pm, String vehiculo, Timestamp fechaInicio, Timestamp fechaFin) 
+	{
+		Query q;
+		if ( fechaFin != null )
+		{
+			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranVehiculo() + " WHERE vehiculo = ? AND fecha BETWEEN ? AND ? ORDER BY fecha");
+			q.setParameters(vehiculo, fechaInicio, fechaFin );
+		}
+		else
+		{
+			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranVehiculo () + " WHERE vehiculo = ? AND fecha = ?");
+			q.setParameters(vehiculo, fechaInicio );
+		}
+		q.setResultClass(RegistranCarnet.class);
+		return (List<RegistranVehiculo>) q.executeUnique();	}
+	
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de REGISTRANVEHICULO de la 
 	 * base de datos de AforoAndes
@@ -172,5 +171,24 @@ public class SQLRegistranVehiculo
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranVehiculo());
 		q.setResultClass(RegistranVehiculo.class);
 		return (List<RegistranVehiculo>) q.executeList();
+	}
+	
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar la hora de salida de un registro de vehículo en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idLector - Lector donde se realizó el registro de la visita
+	 * @param vehiculo - La placa del vehículo registrado 
+	 * @param fecha - La fecha en la que se realizó el registro
+	 * @param horaEntrada - La hora de entrada de la visita
+	 * @param horaSalida - La hora de salida de la visita
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarHoraSalidaRegistranVehiculo (PersistenceManager pm, String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida) 
+	{
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaRegistranVehiculo () + " SET horaSalida = ? WHERE idLector = ? AND vehiculo = ? AND fecha = ? AND horaEntrada = ?");
+		q.setParameters(horaSalida, idLector, vehiculo, fecha, horaEntrada);
+		return (long) q.executeUnique();            
 	}
 }
