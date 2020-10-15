@@ -361,13 +361,13 @@ insert into EMPLEADO (idvisitante, lugartrabajo) values ('9129086599', 'LC108');
 insert into EMPLEADO (idvisitante, lugartrabajo) values ('5053459221', 'LC109');
 insert into EMPLEADO (idvisitante, lugartrabajo) values ('2656125483','LC211' );
 
-insert into VEHICULO (placa, caracteristicas, idvisitante) values ('ABC244', 'Ford', '3207271921');
-insert into VEHICULO (placa, caracteristicas, idvisitante) values ('YUA782', 'Mazda verde', '9677906902');
-insert into VEHICULO (placa, caracteristicas, idvisitante) values ('WWI827', 'Mercedes C180', '9858905085');
-insert into VEHICULO (placa, caracteristicas, idvisitante) values ('WNW134', 'Jeepeta', '9435262533');
-insert into VEHICULO (placa, caracteristicas, idvisitante) values ('CNI543', 'Mercho percho', '4581036125');
-insert into VEHICULO (placa, caracteristicas, idvisitante) values ('DNE134', 'Audi','5053459221' );
-insert into VEHICULO (placa, caracteristicas, idvisitante) values ('2NK445', 'Lambo', '2092327757');
+insert into VEHICULO (placa, caracteristicas, propietario) values ('ABC244', 'Ford', '3207271921');
+insert into VEHICULO (placa, caracteristicas, propietario) values ('YUA782', 'Mazda verde', '9677906902');
+insert into VEHICULO (placa, caracteristicas, propietario) values ('WWI827', 'Mercedes C180', '9858905085');
+insert into VEHICULO (placa, caracteristicas, propietario) values ('WNW134', 'Jeepeta', '9435262533');
+insert into VEHICULO (placa, caracteristicas, propietario) values ('CNI543', 'Mercho percho', '4581036125');
+insert into VEHICULO (placa, caracteristicas, propietario) values ('DNE134', 'Audi','5053459221' );
+insert into VEHICULO (placa, caracteristicas, propietario) values ('2NK445', 'Lambo', '2092327757');
 
 
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (4, 2, '8931131694', TO_DATE('2019/07/09', 'yyyy/mm/dd'), 22, 47);
