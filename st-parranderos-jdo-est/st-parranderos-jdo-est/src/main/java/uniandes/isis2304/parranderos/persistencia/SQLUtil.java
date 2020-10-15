@@ -16,14 +16,15 @@
 package uniandes.isis2304.parranderos.persistencia;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.aforoandes.negocio.LocalComercial;
 import uniandes.isis2304.aforoandes.negocio.RFC1Hora;
+import uniandes.isis2304.aforoandes.negocio.RFC2Hora;
 import uniandes.isis2304.aforoandes.negocio.Visitante;
 
 /**
@@ -213,6 +214,9 @@ class SQLUtil
 
 	/**
 	 * Creación y ejecución de la sentencia SQL para buscar todos los visitantes atendidos por un establecimiento en una fecha o rango de fechas
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param idLocalComercial - El id del local comercial a consultar
 	 */
 	public List<Visitante> RFC1Fecha ( PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, String idLocalComercial ) 
 	{
@@ -255,8 +259,108 @@ class SQLUtil
 
 	/**
 	 * Creación y ejecución de la sentencia SQL para buscar todos los visitantes atendidos por un establecimiento en un rango de horas
+	 * @param fecha - La fecha de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param idLocalComercial - El id del local comercial a consultar
 	 */
 	public List<RFC1Hora> RFC1Horas (PersistenceManager pm, Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial) 
+	{
+		Query q;
+
+		q = pm.newQuery (SQL,"SELECT VISITANTE.*, HORA, MINUTO" + 
+				"FROM LECTOR" + 
+				"JOIN" + 
+				"    (" + 
+				"        SELECT IDLECTOR, IDVISITANTE, HORA, MINUTO" + 
+				"        FROM HORARIO" + 
+				"        JOIN REGISTRANCARNET" + 
+				"        ON HORARIO.ID = REGISTRANCARNET.HORAENTRADA" + 
+				"        WHERE FECHA = ?" + 
+				"        AND HORA BETWEEN ? AND ?" + 
+				"    ) INF_VISITAS" + 
+				"ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
+				"JOIN VISITANTE" + 
+				"ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"WHERE LECTOR.IDLOCALCOMERCIAL = ?");
+		q.setParameters(fecha, horaInicio, horaFin, idLocalComercial);		
+		q.setResultClass(RFC1Hora.class);
+		List<RFC1Hora> list = q.executeList();
+		Iterator<RFC1Hora> it = list.iterator();
+		while ( it.hasNext() )
+		{
+			RFC1Hora actual = it.next();
+			if ( (actual.getHora() == horaInicio && actual.getMinuto() < minutoInicio) || (actual.getHora() == horaFin && actual.getMinuto() > minutoFin)) 
+			{
+				list.remove(actual);
+			}
+		}
+		return list;
+	}
+
+	/**
+	 * Creación y ejecución de la sentencia SQL para buscar los 20 establecimientos más populares en una fecha o rango de fechas
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param idLocalComercial - El id del local comercial a consultar
+	 */
+	public List<LocalComercial> RFC2Fecha ( PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin ) 
+	{
+		Query q;
+		if ( fechaFin == null )
+		{
+			q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.*" + 
+					"FROM LECTOR" + 
+					"JOIN" + 
+					"    (SELECT *" + 
+					"    FROM" + 
+					"        (SELECT IDLECTOR, COUNT(*) AS NUM_VISITAS" + 
+					"        FROM REGISTRANCARNET" + 
+					"        WHERE FECHA = ?" + 
+					"        GROUP BY IDLECTOR" + 
+					"        ORDER BY NUM_VISITAS DESC)" + 
+					"    WHERE ROWNUM <= 20 " + 
+					"    ) AUX" + 
+					"ON AUX.IDLECTOR = LECTOR.ID" + 
+					"JOIN LOCALCOMERCIAL" + 
+					"ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR");
+			q.setParameters(fechaInicio);		
+		}
+		else
+		{
+			q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.*" + 
+					"FROM LECTOR" + 
+					"JOIN" + 
+					"    (SELECT *" + 
+					"    FROM" + 
+					"        (SELECT IDLECTOR, COUNT(*) AS NUM_VISITAS" + 
+					"        FROM REGISTRANCARNET" + 
+					"        WHERE FECHA BETWEEN ? AND ?"+ 
+					"        GROUP BY IDLECTOR" + 
+					"        ORDER BY NUM_VISITAS DESC)" + 
+					"    WHERE ROWNUM <= 20 " + 
+					"    ) AUX" + 
+					"ON AUX.IDLECTOR = LECTOR.ID" + 
+					"JOIN LOCALCOMERCIAL" + 
+					"ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR");
+			q.setParameters(fechaInicio, fechaFin);				
+		}
+		q.setResultClass(LocalComercial.class);
+		return (List<LocalComercial>) q.executeList();
+	}
+
+	/**
+	 * Creación y ejecución de la sentencia SQL para buscar los 20 establecimientos más populares en un rango de horas
+	 * @param fecha - La fecha de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param idLocalComercial - El id del local comercial a consultar
+	 */
+	public List<RFC2Hora> RFC2Horas (PersistenceManager pm, Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial) 
 	{
 		Query q;
 

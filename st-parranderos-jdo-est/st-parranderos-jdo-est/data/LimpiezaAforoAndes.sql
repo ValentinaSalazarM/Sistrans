@@ -1,6 +1,31 @@
 --- Sentencias SQL para la creación del esquema de parranderos
 --- Las tablas tienen prefijo A_ para facilitar su acceso desde SQL Developer
-    
+
+-- Eliminar el contenido de todas las tablas de la base de datos
+delete from REGISTRANVEHICULO;
+delete from REGISTRANCARNET;
+delete from VEHICULO;
+delete from EMPLEADO;
+delete from CARNET;
+delete from TIPOCARNET;
+delete from LECTOR;
+delete from TIPOLECTOR;
+delete from ZONACIRCULACION;
+delete from LOCALCOMERCIAL;
+delete from TIPOLOCAL;
+delete from PARQUEADERO;
+delete from BANO;
+delete from ASCENSOR;
+delete from CAPACIDADNORMAL;
+delete from AREA;
+delete from CENTROCOMERCIAL;
+delete from VISITANTE;
+delete from LECTOR;
+delete from TIPOVISITANTE;
+delete from HORARIO;
+
+commit;
+
 -- Eliminar todas las tablas de la base de datos
 DROP TABLE "AREA" CASCADE CONSTRAINTS;
 DROP TABLE "ASCENSOR" CASCADE CONSTRAINTS;
@@ -33,29 +58,3 @@ DROP SEQUENCE tipoCarnet_sequence;
 DROP SEQUENCE tipoLector_sequence;
 DROP SEQUENCE tipoVisitante_sequence;
 COMMMIT;
-
--- Eliminar el contenido de todas las tablas de la base de datos
-delete from REGISTRANVEHICULO;
-delete from REGISTRANCARNET;
-delete from VEHICULO;
-delete from EMPLEADO;
-delete from CARNET;
-delete from TIPOCARNET;
-delete from LECTOR;
-delete from TIPOLECTOR;
-delete from ZONACIRCULACION;
-delete from LOCALCOMERCIAL;
-delete from TIPOLOCAL;
-delete from PARQUEADERO;
-delete from BANO;
-delete from ASCENSOR;
-delete from CAPACIDADNORMAL;
-delete from AREA;
-delete from CENTROCOMERCIAL;
-delete from VISITANTE;
-delete from LECTOR;
-delete from TIPOVISITANTE;
-delete from HORARIO;
-
-commit;
-
