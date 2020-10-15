@@ -30,27 +30,29 @@ import org.apache.log4j.Logger;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import uniandes.isis2304.parranderos.negocio.CapacidadNormal;
-import uniandes.isis2304.parranderos.negocio.Carnet;
-import uniandes.isis2304.parranderos.negocio.CentroComercial;
-import uniandes.isis2304.parranderos.negocio.Domiciliario;
-import uniandes.isis2304.parranderos.negocio.Empleado;
-import uniandes.isis2304.parranderos.negocio.Horario;
-import uniandes.isis2304.parranderos.negocio.Lector;
-import uniandes.isis2304.parranderos.negocio.Ascensor;
-import uniandes.isis2304.parranderos.negocio.Bano;
-import uniandes.isis2304.parranderos.negocio.Area;
-import uniandes.isis2304.parranderos.negocio.LocalComercial;
-import uniandes.isis2304.parranderos.negocio.Parqueadero;
-import uniandes.isis2304.parranderos.negocio.RegistranCarnet;
-import uniandes.isis2304.parranderos.negocio.RegistranVehiculo;
-import uniandes.isis2304.parranderos.negocio.TipoCarnet;
-import uniandes.isis2304.parranderos.negocio.TipoLector;
-import uniandes.isis2304.parranderos.negocio.TipoLocal;
-import uniandes.isis2304.parranderos.negocio.TipoVisitante;
-import uniandes.isis2304.parranderos.negocio.Vehiculo;
-import uniandes.isis2304.parranderos.negocio.Visitante;
-import uniandes.isis2304.parranderos.negocio.ZonaCirculacion;
+
+import uniandes.isis2304.aforoandes.negocio.Area;
+import uniandes.isis2304.aforoandes.negocio.Ascensor;
+import uniandes.isis2304.aforoandes.negocio.Bano;
+import uniandes.isis2304.aforoandes.negocio.CapacidadNormal;
+import uniandes.isis2304.aforoandes.negocio.Carnet;
+import uniandes.isis2304.aforoandes.negocio.CentroComercial;
+import uniandes.isis2304.aforoandes.negocio.Domiciliario;
+import uniandes.isis2304.aforoandes.negocio.Empleado;
+import uniandes.isis2304.aforoandes.negocio.Horario;
+import uniandes.isis2304.aforoandes.negocio.Lector;
+import uniandes.isis2304.aforoandes.negocio.LocalComercial;
+import uniandes.isis2304.aforoandes.negocio.Parqueadero;
+import uniandes.isis2304.aforoandes.negocio.RFC1Hora;
+import uniandes.isis2304.aforoandes.negocio.RegistranCarnet;
+import uniandes.isis2304.aforoandes.negocio.RegistranVehiculo;
+import uniandes.isis2304.aforoandes.negocio.TipoCarnet;
+import uniandes.isis2304.aforoandes.negocio.TipoLector;
+import uniandes.isis2304.aforoandes.negocio.TipoLocal;
+import uniandes.isis2304.aforoandes.negocio.TipoVisitante;
+import uniandes.isis2304.aforoandes.negocio.Vehiculo;
+import uniandes.isis2304.aforoandes.negocio.Visitante;
+import uniandes.isis2304.aforoandes.negocio.ZonaCirculacion;
 
 
 /**
@@ -4258,12 +4260,34 @@ public class PersistenciaAforoAndes
 		return sqlZonaCirculacion.darZonas(pmf.getPersistenceManager());
 	}
 
+	/* ****************************************************************
+	 * 	Métodos para manejar los Requerimientos Funcionales de Consulta
+	 *****************************************************************/
+	
+	/**
+	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
+	 * @return La lista de objetos Visitante de acuerdo a la consulta realizada
+	 */
+	public List<Visitante> RFC1Fecha (Timestamp fechaInicio, Timestamp fechaFin, String idLocalComercial)
+	{
+		return sqlUtil.RFC1Fecha(pmf.getPersistenceManager(), fechaInicio, fechaFin, idLocalComercial);
+	}
+	
+	/**
+	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
+	 * @return La lista de objetos Visitante de acuerdo a la consulta realizada
+	 */
+	public List<RFC1Hora> RFC1Horas (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial)
+	{
+		return sqlUtil.RFC1Horas(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin, idLocalComercial)
+	}
+	
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de AforoAndes
 	 * Crea y ejecuta las sentencias SQL para cada tabla de la base de datos - EL ORDEN ES IMPORTANTE 
 	 * @return Un arreglo con números que indican el número de tuplas borradas en las tablas 
 	 */
-	public long [] limpiarParranderos ()
+	public long [] limpiarAforoAndes ()
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();

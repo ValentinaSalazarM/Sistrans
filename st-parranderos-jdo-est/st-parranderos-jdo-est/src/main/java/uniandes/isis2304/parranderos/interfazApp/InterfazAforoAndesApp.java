@@ -40,8 +40,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
-import uniandes.isis2304.parranderos.negocio.AforoAndes;
-import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
+import uniandes.isis2304.aforoandes.negocio.AforoAndes;
+import uniandes.isis2304.aforoandes.negocio.VOTipoBebida;
 
 /**
  * Clase principal de la interfaz

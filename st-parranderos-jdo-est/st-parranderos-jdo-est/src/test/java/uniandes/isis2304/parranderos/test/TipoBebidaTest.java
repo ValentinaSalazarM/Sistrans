@@ -28,8 +28,9 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import uniandes.isis2304.parranderos.negocio.AforoAndes;
-import uniandes.isis2304.parranderos.negocio.VOLocalComercial;
+
+import uniandes.isis2304.aforoandes.negocio.AforoAndes;
+import uniandes.isis2304.aforoandes.negocio.VOLocalComercial;
 
 /**
  * Clase con los métdos de prueba de funcionalidad sobre TIPOBEBIDA
@@ -142,7 +143,7 @@ public class TipoBebidaTest
 		}
 		finally
 		{
-			aforoAndes.limpiarParranderos ();
+			aforoAndes.limpiarAforoAndes ();
     		aforoAndes.cerrarUnidadPersistencia ();    		
 		}
 	}
@@ -198,7 +199,7 @@ public class TipoBebidaTest
 		}    				
 		finally
 		{
-			aforoAndes.limpiarParranderos ();
+			aforoAndes.limpiarAforoAndes ();
     		aforoAndes.cerrarUnidadPersistencia ();    		
 		}
 	}

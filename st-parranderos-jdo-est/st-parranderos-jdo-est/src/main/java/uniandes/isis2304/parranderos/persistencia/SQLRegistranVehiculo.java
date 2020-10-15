@@ -14,8 +14,8 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.parranderos.negocio.RegistranCarnet;
-import uniandes.isis2304.parranderos.negocio.RegistranVehiculo;
+import uniandes.isis2304.aforoandes.negocio.RegistranCarnet;
+import uniandes.isis2304.aforoandes.negocio.RegistranVehiculo;
 
 
 

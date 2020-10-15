@@ -28,8 +28,8 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import uniandes.isis2304.parranderos.negocio.AforoAndes;
-import uniandes.isis2304.parranderos.negocio.VOLocalComercial;
+
+import uniandes.isis2304.aforoandes.negocio.AforoAndes;
 
 /**
  * Clase con métodos de prueba de conexión a la base de datos
@@ -190,7 +190,7 @@ public class ConexionTest
 		// Ahora si se puede probar si la tabla existe o no...
 		try
 		{
-			aforoAndes.darTiposBebida ();
+			aforoAndes.darVisitantes();
 			fail ("Debería fallar. La tabla consultada no existe en la BD");
 		}
 		catch (Exception e)
@@ -205,7 +205,7 @@ public class ConexionTest
 		}
 		finally
 		{
-			aforoAndes.limpiarParranderos ();
+			aforoAndes.limpiarAforoAndes();
     		aforoAndes.cerrarUnidadPersistencia ();    		
 		}
     }
@@ -235,7 +235,7 @@ public class ConexionTest
 		{
 //			e.printStackTrace ();
 			log.info ("NO se encontró un archivo de configuración válido");			
-			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de tablas válido: ", "TipoBebidaTest", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de tablas válido: ", "VisitanteTest", JOptionPane.ERROR_MESSAGE);
 		}	
         return config;
     }	

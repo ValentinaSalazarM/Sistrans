@@ -46,15 +46,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+
+import uniandes.isis2304.aforoandes.negocio.AforoAndes;
+import uniandes.isis2304.aforoandes.negocio.VOArea;
+import uniandes.isis2304.aforoandes.negocio.VOAscensor;
+import uniandes.isis2304.aforoandes.negocio.VOCapacidadNormal;
+import uniandes.isis2304.aforoandes.negocio.VOLocalComercial;
+import uniandes.isis2304.aforoandes.negocio.VOTipoLocal;
+import uniandes.isis2304.aforoandes.negocio.VOTipoVisitante;
+import uniandes.isis2304.aforoandes.negocio.VOVisitante;
 import uniandes.isis2304.parranderos.interfazApp.PanelDatos;
-import uniandes.isis2304.parranderos.negocio.AforoAndes;
-import uniandes.isis2304.parranderos.negocio.VOVisitante;
-import uniandes.isis2304.parranderos.negocio.VOCapacidadNormal;
-import uniandes.isis2304.parranderos.negocio.VOAscensor;
-import uniandes.isis2304.parranderos.negocio.VOTipoLocal;
-import uniandes.isis2304.parranderos.negocio.VOArea;
-import uniandes.isis2304.parranderos.negocio.VOLocalComercial;
-import uniandes.isis2304.parranderos.negocio.VOTipoVisitante;
 
 /**
  * Clase principal de la interfaz
@@ -1470,7 +1471,7 @@ public class InterfazParranderosDemo extends JFrame implements ActionListener
 		try 
 		{
     		// Ejecución de la demo y recolección de los resultados
-			long eliminados [] = aforoAndes.limpiarParranderos();
+			long eliminados [] = aforoAndes.limpiarAforoAndes();
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "\n\n************ Limpiando la base de datos ************ \n";
