@@ -203,7 +203,7 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 				{
 					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
 					double pesoMaximo = Double.parseDouble(pesoMaximoStr);
-					double area = Double.parseDouble(areaStr);
+					long area = Long.parseLong(areaStr);
 					if ( interfaz.buscarAreaPorValor(area) == null)
 					{
 						interfaz.adicionarArea();

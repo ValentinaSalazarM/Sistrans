@@ -1,0 +1,3 @@
+19:39:30,255 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+19:39:30,256 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+19:39:30,305 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - NO se encontró un archivo de configuración válido

@@ -10,6 +10,7 @@
 package uniandes.isis2304.parranderos.interfazApp;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -395,7 +396,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 * Adiciona un ascensor con la información dada por el usuario
 	 * Se crea una nueva tupla de Ascensor en la base de datos, si un ascensor con ese nombre no existía
 	 */
-	public void adicionarAscensor( String idAscensor, int capacidadNormal, double area, double pesoMaximo, String idCentroComercial, DialogoAdicionarAscensor pDialogo)
+	public void adicionarAscensor( String idAscensor, int capacidadNormal, long area, double pesoMaximo, String idCentroComercial, DialogoAdicionarAscensor pDialogo)
 	{
 		try 
 		{
@@ -403,7 +404,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			VOAscensor tb = aforoAndes.adicionarAscensor(idAscensor, capacidadNormal, area, pesoMaximo, idCentroComercial);
 			if (tb == null)
 			{
-				throw new Exception ("No se pudo crear un ascensor con nombre: " + nombreTipo);
+				throw new Exception ("No se pudo crear un ascensor con nombre: " + idAscensor);
 			}
 			String resultado = "En adicionarAscensor\n\n";
 			resultado += "Tipo de bebida adicionado exitosamente: " + tb;
@@ -452,7 +453,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String idTipoStr = JOptionPane.showInputDialog (this, "Id del tipo de bedida?", "Borrar ascensor por Id", JOptionPane.QUESTION_MESSAGE);
 			if (idTipoStr != null)
 			{
-				long idTipo = Long.valueOf (idTipoStr);
+				String idTipo = idTipoStr;
 				long tbEliminados = aforoAndes.eliminarAscensorPorId (idTipo);
 
 				String resultado = "En eliminar Ascensor\n\n";
@@ -849,6 +850,8 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	
 	/* ****************************************************************
 	 * 			CRUD de CentroComercial
 	 *****************************************************************/
