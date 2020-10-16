@@ -32,7 +32,7 @@
 			  [
 				  {
 					  "label": "Adicionar",
-					  "event": "adicionarBano"
+					  "event": "agregarBano"
 				  },
 				  {
 					  "label": "Listar",
@@ -43,7 +43,7 @@
 					  "event": "eliminarBañoPorId"
 				  },
 				  {
-					"label": "Borrar po númro de sanitarios",
+					"label": "Borrar por númro de sanitarios",
 					"event": "eliminarBañoPorSanitarios"
 				  },
 				  {

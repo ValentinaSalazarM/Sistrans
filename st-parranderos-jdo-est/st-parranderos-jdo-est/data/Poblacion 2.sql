@@ -398,14 +398,19 @@ insert into VEHICULO (placa, caracteristicas, propietario) values ('DNE134', 'Au
 insert into VEHICULO (placa, caracteristicas, propietario) values ('2NK445', 'Lambo', '2092327757');
 
 
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 2, '8931131694', TO_DATE('2019/07/09', 'yyyy/mm/dd'), 22, 47);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 2, '8931131694', TO_DATE('2019/07/19', 'yyyy/mm/dd'), 22, 47);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 1, '7351276611', TO_DATE('2019/07/19', 'yyyy/mm/dd'), 12, 36);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 1, '4199487271', TO_DATE('2019/07/19', 'yyyy/mm/dd'), 23, 24);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (12, 1, '5053459221', TO_DATE('2020/08/09', 'yyyy/mm/dd'), 34, 48);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (12, 1, '2264841791', TO_DATE('2020/12/09', 'yyyy/mm/dd'), 52, 31);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (13, 1, '5053459221', TO_DATE('2020/11/09', 'yyyy/mm/dd'), 34, 48);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (13, 1, '2264841791', TO_DATE('2020/04/09', 'yyyy/mm/dd'), 15, 34);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '5053459221', TO_DATE('2020/11/09', 'yyyy/mm/dd'), 34, 48);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '2264841791', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 35, 16);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 2, '8931131694', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 37, 12);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 2, '8931131694', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 5, 6);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 2, '2991300528', TO_DATE('2019/01/09', 'yyyy/mm/dd'), 10, 2);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (15, 2, '2991300528', TO_DATE('2020/08/12', 'yyyy/mm/dd'), 10, 45);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (15, 1, '3749127802' ,TO_DATE('2020/01/12', 'yyyy/mm/dd'), 2, 26);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (16, 2, '9677906902', TO_DATE('2019/02/09', 'yyyy/mm/dd'), 8, 20);
@@ -422,8 +427,6 @@ insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentra
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (21, 1, '3757003542', TO_DATE('2020/01/24', 'yyyy/mm/dd'), 26, 18);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (22, 1,'6555390862' , TO_DATE('2018/12/09', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (22, 1, '3757003542', TO_DATE('2020/05/24', 'yyyy/mm/dd'), 26, 18);
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (35, 1,'6555390862' , TO_DATE('2018/12/09', 'yyyy/mm/dd'), 18, 40);
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (34, 1, '3757003542', TO_DATE('2019/05/26', 'yyyy/mm/dd'), 28, 19);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (23, 1,'6555390862' , TO_DATE('2020/12/19', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (23, 1, '3757003542', TO_DATE('2019/05/16', 'yyyy/mm/dd'), 28, 19);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (24, 1,'6555390862' , TO_DATE('2020/11/19', 'yyyy/mm/dd'), 18, 40);
@@ -440,10 +443,11 @@ insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentra
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (29, 1, '3757003542', TO_DATE('2018/08/19', 'yyyy/mm/dd'), 54, 19);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (30, 1,'6555390862' , TO_DATE('2020/06/13', 'yyyy/mm/dd'), 18, 30);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (30, 1, '3757003542', TO_DATE('2018/08/14', 'yyyy/mm/dd'), 18, 19);
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (31,   1, '4199487271', TO_DATE('2020/06/13', 'yyyy/mm/dd'), 18, 40);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (31, 1, '4199487271', TO_DATE('2020/06/13', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (32,1, '9858905085' , TO_DATE('2018/05/14', 'yyyy/mm/dd'), 18, 20);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (33,1, '7351276611' , TO_DATE('2020/05/04', 'yyyy/mm/dd'), 18, 54);
-
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (34, 1, '3757003542', TO_DATE('2019/05/26', 'yyyy/mm/dd'), 28, 19);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (35, 1,'6555390862' , TO_DATE('2018/12/09', 'yyyy/mm/dd'), 18, 40);
 
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (4,'ABC244', TO_DATE('2019/01/11', 'yyyy/mm/dd'), 34, 53);
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (9,'YUA782',TO_DATE('2020/02/09', 'yyyy/mm/dd'), 45, 10);
@@ -453,3 +457,4 @@ insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalid
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (9,'DNE134', TO_DATE('2020/06/30', 'yyyy/mm/dd'), 8, 23);
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (4,'2NK445', TO_DATE('2019/07/26', 'yyyy/mm/dd'), 6, 12);
 
+COMMIT;
