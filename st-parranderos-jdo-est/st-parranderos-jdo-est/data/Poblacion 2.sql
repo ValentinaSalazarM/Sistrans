@@ -153,20 +153,20 @@ insert into CAPACIDADNORMAL (id, valor, aforo) values (5, 200, 100);
 insert into CAPACIDADNORMAL (id, valor, aforo) values (6, 300, 150);
 insert into CAPACIDADNORMAL (id, valor, aforo) values (7, 400, 200);
 insert into CAPACIDADNORMAL (id, valor, aforo) values (8, 500, 250);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (9, 400, 300);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (9, 420, 300);
 insert into CAPACIDADNORMAL (id, valor, aforo) values (10, 350, 176);
 insert into CAPACIDADNORMAL (id, valor, aforo) values (11, 14, 2);
 
-insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC123', 10, 4, 1123, 4);
-insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC122', 3, NULL, 1429, 11);
-insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC124', 5, 7, 1364, 14);
-insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC125', 10, NULL, 1078, 13);
-insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC126', 9, 2, 1247, 7);
-insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC127', 8, NULL, 1280, 15);
+insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC123', 11, 4, 1123, 4);
+insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC122', 11, NULL, 1429, 11);
+insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC124', 1, 7, 1364, 14);
+insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC125', 11, NULL, 1078, 13);
+insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC126', 1, 2, 1247, 7);
+insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC127', 1, NULL, 1280, 15);
 insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC128', 11, NULL, 1499, 3);
-insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC129', 10, NULL, 1068, 13);
-insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC110', 7, NULL, 1415, 2);
-insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC223', NULL, 6, 1435, 14);
+insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC129', 11, NULL, 1068, 13);
+insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC110', 1, NULL, 1415, 2);
+insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC223', 1, 6, 1435, 14);
 
 
 insert into BANO (identificador, capacidadnormal, area, sanitarios, idcentrocomercial) values ('BA123', 3, NULL, 28, 10);
@@ -422,8 +422,8 @@ insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentra
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (21, 1, '3757003542', TO_DATE('2020/01/24', 'yyyy/mm/dd'), 26, 18);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (22, 1,'6555390862' , TO_DATE('2018/12/09', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (22, 1, '3757003542', TO_DATE('2020/05/24', 'yyyy/mm/dd'), 26, 18);
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (22, 1,'6555390862' , TO_DATE('2018/12/09', 'yyyy/mm/dd'), 18, 40);
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (22, 1, '3757003542', TO_DATE('2019/05/26', 'yyyy/mm/dd'), 28, 19);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (35, 1,'6555390862' , TO_DATE('2018/12/09', 'yyyy/mm/dd'), 18, 40);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (34, 1, '3757003542', TO_DATE('2019/05/26', 'yyyy/mm/dd'), 28, 19);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (23, 1,'6555390862' , TO_DATE('2020/12/19', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (23, 1, '3757003542', TO_DATE('2019/05/16', 'yyyy/mm/dd'), 28, 19);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (24, 1,'6555390862' , TO_DATE('2020/11/19', 'yyyy/mm/dd'), 18, 40);
