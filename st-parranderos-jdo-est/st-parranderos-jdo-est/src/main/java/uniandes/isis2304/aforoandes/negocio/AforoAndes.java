@@ -346,10 +346,10 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del baño
 	 * @return El objeto Bano adicionado. null si ocurre alguna Excepción
 	 */
-	public Bano adicionarBaño (String idBaño, int cupoActual, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
+	public Bano adicionarBaño (String idBaño, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
 	{
 		log.info ("Adicionando Bano con identificador: " + idBaño );
-		Bano bano = pp.adicionarBaño(idBaño, cupoActual, capacidadNormal, area, numeroSanitarios, idCentroComercial);
+		Bano bano = pp.adicionarBaño(idBaño, capacidadNormal, area, numeroSanitarios, idCentroComercial);
 		log.info ("Adicionando Bano: " + bano);
 		return bano;
 	}
@@ -477,7 +477,7 @@ public class AforoAndes
 	 * @param aforo - El aforo de la capacidad normal
 	 * @return El objeto CapacidadNormal adicionado. null si ocurre alguna Excepción
 	 */
-	public CapacidadNormal adicionarCapacidadNormal (int valor, int aforo)
+	public CapacidadNormal adicionarCapacidadNormal (double valor, int aforo)
 	{
 		log.info ("Adicionando CapacidadNormal con valor: " + valor + " y aforo: " + aforo);
 		CapacidadNormal capacidadNormal = pp.adicionarCapacidadNormal (valor, aforo);		

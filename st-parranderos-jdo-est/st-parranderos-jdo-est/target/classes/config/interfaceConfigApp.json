@@ -26,6 +26,38 @@
 				}
 			]
 		},
+
+		{ "menuTitle": "Baño",
+			"options":
+			  [
+				  {
+					  "label": "Adicionar",
+					  "event": "adicionarBano"
+				  },
+				  {
+					  "label": "Listar",
+					  "event": "listarBanos"
+				  },
+				  {
+					  "label": "Borrar por Id",
+					  "event": "eliminarBañoPorId"
+				  },
+				  {
+					"label": "Borrar po númro de sanitarios",
+					"event": "eliminarBañoPorSanitarios"
+				  },
+				  {
+					  "label": "Buscar baño por Id",
+					  "event": "buscarBanoPorID"
+				  },
+
+				  {
+					"label": "Buscar baños por sanitarios",
+					"event": "buscarLosBanosPorSanitarios"
+				  }
+			  ]
+		  },
+
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[

@@ -1092,7 +1092,7 @@ public class PersistenciaAforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del baño
 	 * @return El objeto Bano adicionado. null si ocurre alguna Excepción
 	 */
-	public Bano adicionarBaño (String idBaño, int cupoActual, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
+	public Bano adicionarBaño (String idBaño, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1295,7 +1295,7 @@ public class PersistenciaAforoAndes
 	 * @param aforo - El aforo de la capacidad normal
 	 * @return El objeto CapacidadNormal adicionado. null si ocurre alguna Excepción
 	 */
-	public CapacidadNormal adicionarCapacidadNormal (int valor, int aforo)
+	public CapacidadNormal adicionarCapacidadNormal (double valor, int aforo)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();

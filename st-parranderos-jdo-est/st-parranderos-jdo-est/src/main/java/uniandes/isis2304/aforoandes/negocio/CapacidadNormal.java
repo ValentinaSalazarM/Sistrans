@@ -26,7 +26,7 @@ public class CapacidadNormal implements VOCapacidadNormal
 	/**
 	 * El valor numérico de la capacidad normal
 	 */
-	private int valor;
+	private double valor;
 	
 	/**
 	 * El aforo correspondiente a la capacidad normal
@@ -46,13 +46,16 @@ public class CapacidadNormal implements VOCapacidadNormal
 		this.aforo = 0;
 	}
 
+
+
+
 	/**
 	 * Constructor con valores
 	 * @param id - El identificador de la capacidad normal
 	 * @param valor - El valor numérico de la capacidad normal
 	 * @param aforo - El aforo correspondiente a la capacidad normal
 	 */
-	public CapacidadNormal (long id, int valor, int aforo) 
+	public CapacidadNormal (long id, double valor, int aforo) 
 	{
 		this.id = id;
 		this.valor = valor;
@@ -76,17 +79,9 @@ public class CapacidadNormal implements VOCapacidadNormal
 	}
 
 	/**
-	 * @return El valor numérico de la capacidad normal
-	 */
-	public int getValor() 
-	{
-		return valor;
-	}
-
-	/**
 	 * @param valor - El nuevo valor numérico de la capacidad normal
 	 */
-	public void setValor(int valor) 
+	public void setValor(double valor) 
 	{
 		this.valor = valor;
 	}
@@ -114,4 +109,14 @@ public class CapacidadNormal implements VOCapacidadNormal
 	{
 		return "CapacidadNormal [id=" + id + ", valor=" + valor + ", aforo=" + aforo + "]";
 	}
+
+	/**
+	 * @return the valor
+	 */
+	public double getValor() 
+	{
+		return valor;
+	}
+
+
 }
