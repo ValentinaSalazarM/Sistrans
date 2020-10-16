@@ -49,6 +49,7 @@ import uniandes.isis2304.aforoandes.negocio.VOAscensor;
 import uniandes.isis2304.aforoandes.negocio.VOBano;
 import uniandes.isis2304.aforoandes.negocio.VOCapacidadNormal;
 import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
+import uniandes.isis2304.aforoandes.negocio.VOParqueadero;
 import uniandes.isis2304.aforoandes.negocio.VOTipoVisitante;
 import uniandes.isis2304.aforoandes.negocio.VOVisitante;
 import uniandes.isis2304.aforoandes.negocio.Visitante;
@@ -837,6 +838,49 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	/* ****************************************************************
+	 * 			CRUD de PARQUEADERO
+	 *****************************************************************/
+
+	/**
+	 * Crea una ventana de diálogo para agregar un parqueadero
+	 */
+	public void agregarParqueadero( )
+	{
+		DialogoAdicionarParqueadero dialogo = new DialogoAdicionarParqueadero( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("Operación finalizada");
+	}
+	
+	/**
+	 * Adiciona un parqueadero con la información dada por el usuario
+	 * Se crea una nueva tupla de Parqueadero en la base de datos, si un parqueadero con ese nombre no existía
+	 */
+	public void adicionarParqueadero( String idParqueadero,long capacidadNormal, long area, String idCentroComercial, DialogoAdicionarParqueadero pDialogo)
+	{
+		try 
+		{
+			long idArea = buscarAreaPorValor(area).getId();
+			VOParqueadero tb = aforoAndes.adicionarParqueadero(idParqueadero, capacidadNormal, area, idCentroComercial);
+			if (tb == null)
+			{
+				throw new Exception ("No se pudo crear un baño con nombre: " + idParqueadero);
+			}
+			String resultado = "En adicionar Parqueadero \n\n";
+			resultado += "Parqueadero adicionado exitosamente: " + tb;
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
 
 	/* ****************************************************************
 	 * 			CRUD de Ascensor
