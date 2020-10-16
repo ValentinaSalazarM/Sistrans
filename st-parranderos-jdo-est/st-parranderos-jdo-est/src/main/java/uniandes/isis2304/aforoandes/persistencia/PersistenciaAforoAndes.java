@@ -13,7 +13,7 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-package uniandes.isis2304.parranderos.persistencia;
+package uniandes.isis2304.aforoandes.persistencia;
 
 
 import java.sql.Timestamp;
@@ -44,6 +44,7 @@ import uniandes.isis2304.aforoandes.negocio.Lector;
 import uniandes.isis2304.aforoandes.negocio.LocalComercial;
 import uniandes.isis2304.aforoandes.negocio.Parqueadero;
 import uniandes.isis2304.aforoandes.negocio.RFC1Hora;
+import uniandes.isis2304.aforoandes.negocio.RFC2Hora;
 import uniandes.isis2304.aforoandes.negocio.RegistranCarnet;
 import uniandes.isis2304.aforoandes.negocio.RegistranVehiculo;
 import uniandes.isis2304.aforoandes.negocio.TipoCarnet;
@@ -787,11 +788,11 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que consulta todas las tuplas en la tabla Area que tienen el valor dado
 	 * @param valor - El valor del área
-	 * @return La lista de objetos Area, construidos con base en las tuplas de la tabla AREA
+	 * @return El objeto Area, construido con base en las tuplas de la tabla AREA con el valor dado
 	 */
-	public List<Area> darAreaPorValor (double valor)
+	public Area darAreaPorValor (double valor)
 	{
-		return sqlArea.darAreasPorValor(pmf.getPersistenceManager(), valor);
+		return sqlArea.darAreaPorValor(pmf.getPersistenceManager(), valor);
 	}
 
 	/**
@@ -1294,7 +1295,7 @@ public class PersistenciaAforoAndes
 	 * @param aforo - El aforo de la capacidad normal
 	 * @return El objeto CapacidadNormal adicionado. null si ocurre alguna Excepción
 	 */
-	public CapacidadNormal adicionarCapacidadNormal (double valor, int aforo)
+	public CapacidadNormal adicionarCapacidadNormal (int valor, int aforo)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -2197,6 +2198,17 @@ public class PersistenciaAforoAndes
 	public Horario darHorarioPorId (long id)
 	{
 		return sqlHorario.darHorarioPorId(pmf.getPersistenceManager(), id);
+	}
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Horario con una hora y un minuto dado
+	 * @param hora - La hora del horario buscado
+	 * @param minuto - El minuto del horario buscado
+	 * @return El objeto Horario, construido con base en las tuplas de la tabla HORARIO con el identificador dado
+	 */
+	public Horario darHorarioPorHorayMinuto (int hora, int minuto)
+	{
+		return sqlHorario.darHorarioPorHoraYMinuto(pmf.getPersistenceManager(), hora, minuto);
 	}
 
 	/**
@@ -3712,13 +3724,13 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que consulta todas las tuplas en la tabla TipoVisitante que tienen el nombre dado
+	 * Método que consulta todas las tuplas en la tabla TipoVisitante que tienen el tipo dado
 	 * @param nombre - El nombre del visitante
-	 * @return La lista de objetos TipoVisitante, construidos con base en las tuplas de la tabla TipoVisitante
+	 * @return El objeto TipoVisitante, construido con base en las tuplas de la tabla TipoVisitante con el tipo dado
 	 */
-	public List<TipoVisitante> darTiposVisitantePorTipo (String tipo)
+	public TipoVisitante darTipoVisitantePorTipo (String tipo)
 	{
-		return sqlTipoVisitante.darTiposVisitantePorTipo(pmf.getPersistenceManager(), tipo);
+		return sqlTipoVisitante.darTipoVisitantePorTipo(pmf.getPersistenceManager(), tipo);
 	}
 
 	/**
@@ -4266,6 +4278,9 @@ public class PersistenciaAforoAndes
 	
 	/**
 	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param idLocalComercial - El id del local comercial a consultar
 	 * @return La lista de objetos Visitante de acuerdo a la consulta realizada
 	 */
 	public List<Visitante> RFC1Fecha (Timestamp fechaInicio, Timestamp fechaFin, String idLocalComercial)
@@ -4275,11 +4290,37 @@ public class PersistenciaAforoAndes
 	
 	/**
 	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
+	 * @param fecha - La fecha de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param idLocalComercial - El id del local comercial a consultar
 	 * @return La lista de objetos Visitante de acuerdo a la consulta realizada
 	 */
 	public List<RFC1Hora> RFC1Horas (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial)
 	{
-		return sqlUtil.RFC1Horas(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin, idLocalComercial)
+		return sqlUtil.RFC1Horas(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin, idLocalComercial);
+	}
+	
+	/**
+	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @return La lista de objetos Visitante de acuerdo a la consulta realizada
+	 */
+	public List<LocalComercial> RFC2Fecha (Timestamp fechaInicio, Timestamp fechaFin)
+	{
+		return sqlUtil.RFC2Fecha(pmf.getPersistenceManager(),fechaInicio, fechaFin);
+	}
+	
+	/**
+	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
+	 * @return La lista de objetos Visitante de acuerdo a la consulta realizada
+	 */
+	public List<RFC2Hora> RFC2Horas (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin)
+	{
+		return sqlUtil.RFC2Horas(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin);
 	}
 	
 	/**

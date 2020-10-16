@@ -9,11 +9,13 @@
 package uniandes.isis2304.aforoandes.negocio;
 
 /**
- * @author Usuario
- *
+ * Clase para modelar un objeto resultante de la consulta del RFC1 por rango de horas
  */
-public class RFC1Hora 
+public class RFC1Hora implements VOVisitante
 {
+	/* ****************************************************************
+	 * 			Atributos
+	 *****************************************************************/
 	/**
 	 * El identificador ÚNICO de los visitantes
 	 */
@@ -59,129 +61,151 @@ public class RFC1Hora
 	 */
 	private int minuto;
 
+	/* ****************************************************************
+	 * 			Métodos
+	 *****************************************************************/
+	
 	/**
-	 * @return the identificacion
+	 * @return El identificador del visitante
 	 */
-	public String getIdentificacion() {
+	public String getIdentificador() 
+	{
 		return identificacion;
 	}
 
 	/**
-	 * @param identificacion the identificacion to set
+	 * @param identificador - El nuevo identificador del visitante
 	 */
-	public void setIdentificacion(String identificacion) {
-		this.identificacion = identificacion;
+	public void setIdentificador(String identificador) 
+	{
+		this.identificacion = identificador;
 	}
 
 	/**
-	 * @return the tipo
+	 * @return El identificador del tipo de visitante
 	 */
-	public long getTipo() {
+	public long getTipo() 
+	{
 		return tipo;
 	}
 
 	/**
-	 * @param tipo the tipo to set
+	 * @param tipo - El nuevo tipo de visitante. Debe existir un tipo con dicho identificador
 	 */
-	public void setTipo(long tipo) {
+	public void setTipo(long tipo) 
+	{
 		this.tipo = tipo;
 	}
 
 	/**
-	 * @return the nombre
+	 * @return El nombre del visitante
 	 */
-	public String getNombre() {
+	public String getNombre() 
+	{
 		return nombre;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre - El nuevo nombre del visitante
 	 */
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) 
+	{
 		this.nombre = nombre;
 	}
 
 	/**
-	 * @return the correo
+	 * @return El correo del visitante
 	 */
-	public String getCorreo() {
+	public String getCorreo() 
+	{
 		return correo;
 	}
 
 	/**
-	 * @param correo the correo to set
+	 * @param correo - El nuevo correo del visitante
 	 */
-	public void setCorreo(String correo) {
+	public void setCorreo(String correo) 
+	{
 		this.correo = correo;
 	}
 
 	/**
-	 * @return the telefonoPropio
+	 * @return El telefono propio del visitante
 	 */
-	public String getTelefonoPropio() {
+	public String getTelefonoPropio() 
+	{
 		return telefonoPropio;
 	}
 
 	/**
-	 * @param telefonoPropio the telefonoPropio to set
+	 * @param telefonoPropio - El nuevo telefono propio del visitante
 	 */
-	public void setTelefonoPropio(String telefonoPropio) {
+	public void setTelefonoPropio(String telefonoPropio) 
+	{
 		this.telefonoPropio = telefonoPropio;
 	}
 
 	/**
-	 * @return the nombreEmergencia
+	 * @return El nombre de emergencia del visitante
 	 */
-	public String getNombreEmergencia() {
+	public String getNombreEmergencia() 
+	{
 		return nombreEmergencia;
 	}
 
 	/**
-	 * @param nombreEmergencia the nombreEmergencia to set
+	 * @param nombreEmergencia - El nuevo nombre de emergencia del visitante
 	 */
-	public void setNombreEmergencia(String nombreEmergencia) {
+	public void setNombreEmergencia(String nombreEmergencia) 
+	{
 		this.nombreEmergencia = nombreEmergencia;
 	}
 
 	/**
-	 * @return the telefonoEmergencia
+	 * @return El telefono de emergencia del visitante
 	 */
-	public String getTelefonoEmergencia() {
+	public String getTelefonoEmergencia() 
+	{
 		return telefonoEmergencia;
 	}
 
 	/**
-	 * @param telefonoEmergencia the telefonoEmergencia to set
+	 * @param telefonoEmergencia - El nuevo telefono de emergencia del visitante
 	 */
-	public void setTelefonoEmergencia(String telefonoEmergencia) {
+	public void setTelefonoEmergencia(String telefonoEmergencia) 
+	{
 		this.telefonoEmergencia = telefonoEmergencia;
 	}
 
 	/**
-	 * @return the hora
+	 * @return La hora de las visitas realizadas por el visitante
 	 */
-	public int getHora() {
+	public int getHora() 
+	{
 		return hora;
 	}
 
 	/**
-	 * @param hora the hora to set
+	 * @param hora - La nueva hora de las visitas realizadas por el visitante
 	 */
-	public void setHora(int hora) {
+	public void setHora(int hora) 
+	{
 		this.hora = hora;
 	}
 
 	/**
-	 * @return the minuto
+	 * @return El minuto de las visitas realizadas por el visitante
 	 */
-	public int getMinuto() {
+	public int getMinuto() 
+	{
 		return minuto;
 	}
 
 	/**
-	 * @param minuto the minuto to set
+	 * @param hora - El nuevo minuto de las visitas realizadas por el visitante
 	 */
-	public void setMinuto(int minuto) {
+	public void setMinuto(int minuto) 
+	{
 		this.minuto = minuto;
 	}
 	

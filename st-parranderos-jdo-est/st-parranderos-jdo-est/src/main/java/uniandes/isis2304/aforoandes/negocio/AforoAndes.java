@@ -16,7 +16,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
 
-import uniandes.isis2304.parranderos.persistencia.PersistenciaAforoAndes;
+import uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes;
 
 /**
  * Clase principal del negocio
@@ -132,15 +132,14 @@ public class AforoAndes
 	/**
 	 * Método que consulta todas las tuplas en la tabla Area que tienen el valor dado
 	 * @param valor - El valor del área
-	 * @return La lista de objetos Area, construidos con base en las tuplas de la tabla AREA
+	 * @return El objeto Area, construido con base en las tuplas de la tabla AREA con el valor dado
 	 */
-	public List<Area> darAreaPorValor (double valor)
+	public Area darAreaPorValor (double valor)
 	{
-		log.info ("Dar información de áreas por valor: " + valor);
-		List<Area> areas = pp.darAreaPorValor (valor);
-		log.info ("Dar información de áreas por valor: " + areas.size() + " áreas con ese valor existentes");
-		return areas;
-
+		log.info ("Dar información de área por valor: " + valor);
+		Area area = pp.darAreaPorValor (valor);
+		log.info ("Buscando área por valor: " + area != null ? area : "NO EXISTE");
+		return area;
 	}
 
 	/**
@@ -212,8 +211,9 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del ascensor
 	 * @return El objeto Ascensor adicionado. null si ocurre alguna Excepción
 	 */
-	public Ascensor adicionarAscensor(String idAscensor, long capacidadNormal, long area, double pesoMaximo, String idCentroComercial)	
+	public Ascensor adicionarAscensor(String idAscensor, int capacidadNormal, long area, double pesoMaximo, String idCentroComercial)	
 	{
+		
 		log.info ("Adicionando Ascensor con identificador: " + idAscensor );
 		Ascensor ascensor = pp.adicionarAscensor(idAscensor, capacidadNormal, area, pesoMaximo, idCentroComercial);
 		log.info ("Adicionando Ascensor: " + ascensor);
@@ -477,7 +477,7 @@ public class AforoAndes
 	 * @param aforo - El aforo de la capacidad normal
 	 * @return El objeto CapacidadNormal adicionado. null si ocurre alguna Excepción
 	 */
-	public CapacidadNormal adicionarCapacidadNormal (double valor, int aforo)
+	public CapacidadNormal adicionarCapacidadNormal (int valor, int aforo)
 	{
 		log.info ("Adicionando CapacidadNormal con valor: " + valor + " y aforo: " + aforo);
 		CapacidadNormal capacidadNormal = pp.adicionarCapacidadNormal (valor, aforo);		
@@ -2098,11 +2098,13 @@ public class AforoAndes
 	 * @param horalimite - El identificador del horario límite de circulación del tipo del visitante
 	 * @return El objeto TipoVisitante adicionado. null si ocurre alguna Excepción
 	 */
-	public TipoVisitante adicionarTipoVisitante( String tipo, long horainicio, long horalimite )
+	public TipoVisitante adicionarTipoVisitante( String tipo, int horainicio, int minutoInicio, int horalimite, int minutoLimite )
 	{
+		long horarioinicio = pp.darHorarioPorHorayMinuto(horainicio, minutoInicio).getId();
+		long horarioLimite = pp.darHorarioPorHorayMinuto(horalimite, minutoLimite).getId();
 		log.info ("Adicionando Tipo de visitante: " + tipo);
-		TipoVisitante tipoVisitante = pp.adicionarTipoVisitante(tipo, horainicio, horalimite);
-		log.info ("Adicionando Tipo de lector: " + tipoVisitante);
+		TipoVisitante tipoVisitante = pp.adicionarTipoVisitante(tipo, horarioinicio, horarioLimite);
+		log.info ("Adicionando Tipo de visitante: " + tipoVisitante);
 		return tipoVisitante;
 	}
 
@@ -2166,14 +2168,14 @@ public class AforoAndes
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoVisitante que tienen el nombre dado
 	 * @param tipo - El nombre del tipo de visitante
-	 * @return La lista de objetos TipoVisitante, construidos con base en las tuplas de la tabla TipoVisitante
+	 * @return El objeto TipoVisitante, construido con base en las tuplas de la tabla TipoVisitante con el tipo dado
 	 */
-	public List<TipoVisitante> darTiposVisitantePorTipo (String tipo)
+	public TipoVisitante darTipoVisitantePorTipo (String tipo)
 	{
 		log.info ("Dar información de tipos de visitante por tipo: " + tipo);
-		List<TipoVisitante> tiposLector = pp.darTiposVisitantePorTipo(tipo);
-		log.info ("Dar información de tipos de visitante por tipo: " + tiposLector.size() + " tipos de visitante con ese tipo existentes");
-		return tiposLector;
+		TipoVisitante tipoVisitante = pp.darTipoVisitantePorTipo(tipo);
+		log.info ("Buscando tipo de visitante por tipo: " + tipo != null ? tipo : "NO EXISTE");
+		return tipoVisitante;
 	}
 
 	/**
@@ -2329,15 +2331,15 @@ public class AforoAndes
 	 * @param nombre - Nombre del visitante
 	 * @param tipo - Tipo de visitante
 	 * @param correo - Correo del visitante
-	 * @param telefonopropio - Telefono del visitante
+	 * @param telefonoPropio - Telefono del visitante
 	 * @param nombreEmergencia - Contacto de emergencia del visitante
 	 * @param telefonoEmergencia - Telefono del contacto de emergencia del visitante
 	 * @return El objeto VISITANTE adicionado. null si ocurre alguna Excepción
 	 */
-	public Visitante adicionarVisitante( String identificacion, String nombre, long tipo, String correo,String telefonopropio, String nombreEmergencia, String telefonoEmergencia)
+	public Visitante adicionarVisitante( String identificacion, String nombre, long tipo, String correo, String telefonoPropio, String nombreEmergencia, String telefonoEmergencia)
 	{
 		log.info ("Adicionando visitante: " + nombre);
-		Visitante visitante = pp.adicionarVisitante(identificacion, nombre, tipo, correo, telefonopropio, nombreEmergencia, telefonoEmergencia);
+		Visitante visitante = pp.adicionarVisitante(identificacion, nombre, tipo, correo, telefonoPropio, nombreEmergencia, telefonoEmergencia);
 		log.info ("Adicionando visitante: " + visitante);
 		return visitante;
 	}

@@ -6,7 +6,7 @@
  * Proyecto: Aforo-CCAndes
  *  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-package uniandes.isis2304.parranderos.persistencia;
+package uniandes.isis2304.aforoandes.persistencia;
 
 import java.util.List;
 

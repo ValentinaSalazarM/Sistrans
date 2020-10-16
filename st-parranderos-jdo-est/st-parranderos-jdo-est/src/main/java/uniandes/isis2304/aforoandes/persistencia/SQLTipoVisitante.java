@@ -6,7 +6,7 @@
  * Proyecto: Aforo-CCAndes
  *  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-package uniandes.isis2304.parranderos.persistencia;
+package uniandes.isis2304.aforoandes.persistencia;
 
 import java.util.List;
 
@@ -116,12 +116,12 @@ public class SQLTipoVisitante
 	 * @param nombreTipoVisitante - El nombre del tipo de visitante
 	 * @return El objeto TipoVisitante que tiene el tipo dado
 	 */
-	public List<TipoVisitante> darTiposVisitantePorTipo (PersistenceManager pm, String nombreTipoVisitante) 
+	public TipoVisitante darTipoVisitantePorTipo (PersistenceManager pm, String nombreTipoVisitante) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoVisitante  () + " WHERE tipo = ?");
 		q.setResultClass(TipoVisitante.class);
 		q.setParameters(nombreTipoVisitante);
-		return (List<TipoVisitante>) q.executeList();
+		return (TipoVisitante) q.executeUnique();
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-package uniandes.isis2304.parranderos.persistencia;
+package uniandes.isis2304.aforoandes.persistencia;
 
 import java.util.List;
 
@@ -115,14 +115,14 @@ class SQLArea
 	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
 	 * @param valorArea - El valor de area buscado
-	 * @return Una lista de objetos AREA que tienen el nombre dado
+	 * @return El objeto AREA que tiene el valor dado
 	 */
-	public List<Area> darAreasPorValor (PersistenceManager pm, double valorArea) 
+	public Area darAreaPorValor (PersistenceManager pm, double valorArea) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaArea () + " WHERE valor = ?");
 		q.setResultClass(Area.class);
 		q.setParameters(valorArea);
-		return (List<Area>) q.executeList();
+		return (Area) q.executeList();
 	}
 
 	/**

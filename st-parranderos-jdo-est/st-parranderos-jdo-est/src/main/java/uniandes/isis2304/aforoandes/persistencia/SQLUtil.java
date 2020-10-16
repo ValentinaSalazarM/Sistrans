@@ -13,7 +13,7 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-package uniandes.isis2304.parranderos.persistencia;
+package uniandes.isis2304.aforoandes.persistencia;
 
 import java.sql.Timestamp;
 import java.util.Iterator;
@@ -358,34 +358,18 @@ class SQLUtil
 	 * @param minutoFin - El minuto de inicio del rango de consulta
 	 * @param horaFin - La hora de fin del rango de consulta
 	 * @param minutoFin - El minuto de fin del rango de consulta
-	 * @param idLocalComercial - El id del local comercial a consultar
 	 */
-	public List<RFC2Hora> RFC2Horas (PersistenceManager pm, Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial) 
+	public List<RFC2Hora> RFC2Horas (PersistenceManager pm, Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin) 
 	{
 		Query q;
-
-		q = pm.newQuery (SQL,"SELECT VISITANTE.*, HORA, MINUTO" + 
-				"FROM LECTOR" + 
-				"JOIN" + 
-				"    (" + 
-				"        SELECT IDLECTOR, IDVISITANTE, HORA, MINUTO" + 
-				"        FROM HORARIO" + 
-				"        JOIN REGISTRANCARNET" + 
-				"        ON HORARIO.ID = REGISTRANCARNET.HORAENTRADA" + 
-				"        WHERE FECHA = ?" + 
-				"        AND HORA BETWEEN ? AND ?" + 
-				"    ) INF_VISITAS" + 
-				"ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
-				"JOIN VISITANTE" + 
-				"ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
-				"WHERE LECTOR.IDLOCALCOMERCIAL = ?");
-		q.setParameters(fecha, horaInicio, horaFin, idLocalComercial);		
-		q.setResultClass(RFC1Hora.class);
-		List<RFC1Hora> list = q.executeList();
-		Iterator<RFC1Hora> it = list.iterator();
+		q = pm.newQuery (SQL,"");
+		q.setParameters(fecha, horaInicio, horaFin);		
+		q.setResultClass(RFC2Hora.class);
+		List<RFC2Hora> list = q.executeList();
+		Iterator<RFC2Hora> it = list.iterator();
 		while ( it.hasNext() )
 		{
-			RFC1Hora actual = it.next();
+			RFC2Hora actual = it.next();
 			if ( (actual.getHora() == horaInicio && actual.getMinuto() < minutoInicio) || (actual.getHora() == horaFin && actual.getMinuto() > minutoFin)) 
 			{
 				list.remove(actual);

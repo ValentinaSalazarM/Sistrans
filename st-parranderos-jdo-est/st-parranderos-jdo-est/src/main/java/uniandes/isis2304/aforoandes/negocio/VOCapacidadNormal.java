@@ -27,7 +27,7 @@ public interface VOCapacidadNormal
 	/**
 	 * @return El valor numérico de la capacidad normal
 	 */
-	public double getValor();
+	public int getValor();
 
 	/**
 	 * @return El aforo correspondiente a la capacidad normal

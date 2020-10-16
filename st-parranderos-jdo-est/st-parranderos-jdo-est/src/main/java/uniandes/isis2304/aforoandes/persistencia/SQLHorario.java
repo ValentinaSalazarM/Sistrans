@@ -8,7 +8,7 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-package uniandes.isis2304.parranderos.persistencia;
+package uniandes.isis2304.aforoandes.persistencia;
 
 
 import java.util.List;
@@ -115,13 +115,13 @@ class SQLHorario
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN HORARIO de la 
-	 * base de datos de AforoAndes, por su identificador
+	 * base de datos de AforoAndes, por su hora y minuto
 	 * @param pm - El manejador de persistencia
-	 * @param id - La hora del horario
-	 * @param minuto - El minuto del horario
+	 * @param hora - La hora del horario buscado
+	 * @param minuto - El minuto del horario buscado
 	 * @return El objeto HORARIO que tiene el identificador dado
 	 */
-	public Horario darHorarioPorHorayMinuto (PersistenceManager pm, int hora, int minuto) 
+	public Horario darHorarioPorHoraYMinuto (PersistenceManager pm, int hora, int minuto) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaHorario () + " WHERE hora = ? AND minuto = ?");
 		q.setResultClass(Horario.class);

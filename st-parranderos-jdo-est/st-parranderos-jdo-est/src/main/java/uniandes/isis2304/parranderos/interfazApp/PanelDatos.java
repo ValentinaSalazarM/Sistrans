@@ -24,7 +24,6 @@ import javax.swing.border.TitledBorder;
 /**
  * Clase de interfaz para mostrar los resultados de la ejecución de las 
  * operaciones realizadas por el usuario
- * @author Germán Bravo
  */
 @SuppressWarnings("serial")
 public class PanelDatos extends JPanel

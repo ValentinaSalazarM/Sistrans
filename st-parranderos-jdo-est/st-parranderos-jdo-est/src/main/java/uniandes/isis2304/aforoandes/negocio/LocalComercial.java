@@ -52,6 +52,7 @@ public class LocalComercial implements VOLocalComercial
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
+	
 	/**
 	 * Constructor por defecto
 	 */
