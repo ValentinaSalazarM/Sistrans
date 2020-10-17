@@ -75,7 +75,6 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 	 */
 	private JTextField txtArea;
 
-
 	/**
 	 * Etiqueta del id del centro comercial donde se encuentra el parqueadero
 	 */
@@ -84,7 +83,7 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 	/**
 	 * Listado de los centros comerciales disponibles
 	 */
-	private JComboBox<VOCentroComercial> cbCentrosComerciales;
+	private JComboBox<String> cbCentrosComerciales;
 
 	/**
 	 * Botón para agregar al parqueadero
@@ -110,7 +109,7 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
 		setTitle( "Agregar ascensor" );
-		setLocationRelativeTo( null );
+		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
 		campos.setLayout( new GridLayout( 6, 2 ) );
@@ -134,10 +133,11 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 
 		lblCentroComercial = new JLabel( "Id Centro Comercial: " );
 		campos.add( lblCentroComercial );
+		cbCentrosComerciales = new JComboBox<>();
 
 		for ( VOCentroComercial tv: pPrincipal.listarCentrosComerciales())
 		{
-			cbCentrosComerciales.addItem(tv);
+			cbCentrosComerciales.addItem(tv.getIdentificador() + " - " + tv.getNombre());
 		}
 		campos.add( cbCentrosComerciales );
 
@@ -177,8 +177,10 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 			String identificador = txtIdentificador.getText();
 			String capacidadNormalStr = txtCapacidadNormal.getText();
 			String areaStr = txtArea.getText();
-			String idCentroComercial = ((VOCentroComercial)cbCentrosComerciales.getSelectedItem()).getIdentificador();
-			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || areaStr.equals( "" ) || idCentroComercial.equals( "" ) )
+			String comboBox = (String) (cbCentrosComerciales.getSelectedItem());
+			String idCentroComercial = comboBox.split(" - ")[0];
+			
+			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || idCentroComercial.equals( "" ) )
 			{
 				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar parqueadero", JOptionPane.ERROR_MESSAGE );
 			}
@@ -186,13 +188,16 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 			{
 				try
 				{
-					long capacidadNormal = Long.parseLong(capacidadNormalStr);
-					long area = Long.parseLong(areaStr);
+					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
+					double area = Long.parseLong(areaStr);
 					if ( interfaz.buscarAreaPorValor(area) == null)
 					{
 						interfaz.adicionarArea();
 					}
-					
+					if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
+					{
+						interfaz.adicionarCapacidadNormal();
+					}				
 					interfaz.adicionarParqueadero(identificador, capacidadNormal, area, idCentroComercial, this);
 				}
 				catch( NumberFormatException e2 )

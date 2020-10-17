@@ -9,13 +9,14 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
+import uniandes.isis2304.aforoandes.negocio.VOTipoLocal;
 
 /**
  * Diálogo para introducir la información necesaria para crear un ascensor 
  */
 @SuppressWarnings("serial")
 
-public class DialogoAdicionarBano extends JDialog implements ActionListener
+public class DialogoAdicionarLocalComercial extends JDialog implements ActionListener
 {
 
 	// -----------------------------------------------------------------
@@ -25,7 +26,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	/**
 	 * Comando para agregar la banda.
 	 */
-	public final static String AGREGAR = "Agregar Bano";
+	public final static String AGREGAR = "Agregar Local Comercial";
 
 	/**
 	 * Comando para cancelar el proceso.
@@ -76,17 +77,27 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	private JTextField txtArea;
 
 	/**
-	 * Etiqueta del número de sanitarios del baño
+	 * Etiqueta del tipo del local
 	 */
-	private JLabel lblSanitarios;
+	private JLabel lblTipo;
 
 	/**
-	 * Campo de texto para el número de sanitarios
+	 * Listado de los tipos de local disponibles
 	 */
-	private JTextField txtSanitarios;
+	private JComboBox<String> cbTipoLocal;
 
 	/**
-	 * Etiqueta del id del centro comercial donde se encuentra el ascensor
+	 * Etiqueta del estado de actividad del espacio
+	 */
+	private JLabel lblActivo;
+
+	/**
+	 * CheckBox para el estado de actividad del espacio
+	 */
+	private JCheckBox cbActivo;
+
+	/**
+	 * Etiqueta del id del centro comercial donde se encuentra el local
 	 */
 	private JLabel lblCentroComercial;
 
@@ -95,6 +106,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	 */
 	private JComboBox<String> cbCentrosComerciales;
 
+	
 	/**
 	 * Botón para agregar al ascensor
 	 */
@@ -113,7 +125,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	 * Crea la ventana de diálogo de la banda.
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
-	public DialogoAdicionarBano( InterfazAforoAndesApp pPrincipal )
+	public DialogoAdicionarLocalComercial( InterfazAforoAndesApp pPrincipal )
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
@@ -141,15 +153,24 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 		txtArea = new JTextField( );
 		campos.add( txtArea );
 
-		lblSanitarios = new JLabel( "Sanitarios: " );
-		campos.add( lblSanitarios );
-		txtSanitarios = new JTextField( );
-		campos.add( txtSanitarios);
+		lblTipo = new JLabel( "Tipo de local: " );
+		campos.add( lblTipo );
 
+		cbTipoLocal = new JComboBox<>();
+		for ( VOTipoLocal tipo: pPrincipal.listarTiposLocal())
+		{
+			cbTipoLocal.addItem(tipo.getId() + " - " + tipo.getTipo());
+		}
+		campos.add( cbTipoLocal );
+
+		lblActivo = new JLabel( "Activo: " );
+		campos.add(lblActivo);
+		cbActivo = new JCheckBox();
+		campos.add( cbActivo );
+		
 		lblCentroComercial = new JLabel( "Id Centro Comercial: " );
 		campos.add( lblCentroComercial );
 		cbCentrosComerciales = new JComboBox<>();
-
 		for ( VOCentroComercial tv: pPrincipal.listarCentrosComerciales())
 		{
 			cbCentrosComerciales.addItem(tv.getIdentificador() + " - " + tv.getNombre());
@@ -192,19 +213,20 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 			String identificador = txtIdentificador.getText();
 			String capacidadNormalStr = txtCapacidadNormal.getText();
 			String areaStr = txtArea.getText();
-			String sanitariosStr = txtSanitarios.getText();
-			String comboBox = (String) (cbCentrosComerciales.getSelectedItem());
-			String idCentroComercial = comboBox.split(" - ")[0];
-			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || sanitariosStr.equals( "" ) || idCentroComercial.equals( "" ) )
+			String comboBoxTipo = (String) (cbTipoLocal.getSelectedItem());
+			long tipo = Long.valueOf(comboBoxTipo.split(" - ")[0]);
+			String comboBoxCC = (String) (cbCentrosComerciales.getSelectedItem());
+			String idCentroComercial = comboBoxCC.split(" - ")[0];
+			Boolean activo = cbActivo.isSelected();
+			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || idCentroComercial.equals( "" ) )
 			{
-				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar Centro Comercial", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar Local Comercial", JOptionPane.ERROR_MESSAGE );
 			}
 			else
 			{
 				try
 				{
 					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
-					int sanitarios = Integer.parseInt(sanitariosStr);
 					double area = Long.parseLong(areaStr);
 					if ( interfaz.buscarAreaPorValor(area) == null)
 					{
@@ -214,11 +236,10 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 					{
 						interfaz.adicionarCapacidadNormal();
 					}
-					interfaz.adicionarBano(identificador, capacidadNormal, area, sanitarios, idCentroComercial, this);;
 				}
 				catch( NumberFormatException e2 )
 				{
-					JOptionPane.showMessageDialog( this, "La capacidad normal (int), el área (double) y el número de sanitarios (integer) deben ser números.", "Agregar Baño", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( this, "La capacidad normal (int), el área (double) y el peso máximo (double) deben ser números.", "Agregar Ascensor", JOptionPane.ERROR_MESSAGE );
 				}
 			}
 		}

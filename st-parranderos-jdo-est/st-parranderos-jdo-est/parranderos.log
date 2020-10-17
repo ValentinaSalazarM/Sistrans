@@ -1,24 +1,12 @@
-19:39:30,255 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-19:39:30,256 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-19:39:30,305 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - NO se encontró un archivo de configuración válido
-22:07:54,823 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-22:07:54,823 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-22:07:54,836 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - NO se encontró un archivo de configuración válido
-22:13:11,292 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-22:13:11,292 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-22:13:11,304 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-22:17:37,924 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-22:17:37,925 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-22:17:37,991 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-00:13:59,096 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-00:13:59,098 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-00:13:59,158 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-00:22:14,544 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-00:22:14,545 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-00:22:14,609 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-00:23:44,659 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-00:23:44,660 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-00:23:44,727 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-00:26:09,565 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-00:26:09,566 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-00:26:09,635 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+18:14:20,855 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+18:14:20,855 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+18:14:20,867 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+18:17:34,654 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+18:17:34,664 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+18:17:34,676 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+18:20:13,012 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+18:20:13,012 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+18:20:13,024 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+18:40:28,011 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+18:40:28,011 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+18:40:28,023 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD

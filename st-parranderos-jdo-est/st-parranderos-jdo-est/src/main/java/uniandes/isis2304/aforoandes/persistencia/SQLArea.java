@@ -122,7 +122,7 @@ class SQLArea
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaArea () + " WHERE valor = ?");
 		q.setResultClass(Area.class);
 		q.setParameters(valorArea);
-		return (Area) q.executeList();
+		return (Area) q.executeUnique();
 	}
 
 	/**

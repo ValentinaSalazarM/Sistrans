@@ -247,6 +247,7 @@ insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, act
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC103', NULL, 5, 7, 1, 15);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC104', 8, 9, 10, 1, 1);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ( 'LC105', 7, 9, 5, 0, 1);
+
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC106', 8, 9, 8, 0, 6);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC107', 6, 4, 11, 0, 6);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC108', 7, 1, 2, 0, 14);
@@ -272,6 +273,7 @@ insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, act
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC303', NULL, 7, 12, 0, 15);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC311', NULL, 9, 2, 1, 4);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC305', NULL, 5, 13, 1, 4);
+insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC306', NULL, 4, 1, 1, 4);
 
 
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (1, 2, 6, NULL, NULL, NULL,NULL);

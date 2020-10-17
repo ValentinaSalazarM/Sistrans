@@ -115,14 +115,14 @@ class SQLCapacidadNormal
 	 * base de datos de AforoAndes, por su nombre
 	 * @param pm - El manejador de persistencia
 	 * @param valorCapacidadNormal - El valor de area buscado
-	 * @return Una lista de objetos CAPACIDADNORMAL que tienen el nombre dado
+	 * @return El objeto CAPACIDADNORMAL que tiene el valor dado
 	 */
-	public List<CapacidadNormal> darCapacidadesNormalesPorValor (PersistenceManager pm, double valorCapacidadNormal) 
+	public CapacidadNormal darCapacidadNormalPorValor (PersistenceManager pm, double valorCapacidadNormal) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCapacidadNormal () + " WHERE valor = ?");
 		q.setResultClass(CapacidadNormal.class);
 		q.setParameters(valorCapacidadNormal);
-		return (List<CapacidadNormal>) q.executeList();
+		return (CapacidadNormal) q.executeUnique();
 	}
 
 	/**

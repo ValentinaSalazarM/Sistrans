@@ -17,47 +17,19 @@
 					"event": "listarAscensor"
 				},
 				{
-					"label": "Borrar por Id",
-					"event": "eliminarAscensorPorId"
+					"label": "Buscar por identificador",
+					"event": "buscarAscensorPorIdentificador"
 				},
 				{
-					"label": "Buscar por peso máximo",
-					"event": "buscarAscensorPorPesoMáximo"
+					"label": "Cambiar peso máximo",
+					"event": "cambiarPesoMaximoAscensor"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarAscensorPorId"
 				}
 			]
 		},
-
-		{ "menuTitle": "Baño",
-			"options":
-			  [
-				  {
-					  "label": "Adicionar",
-					  "event": "agregarBano"
-				  },
-				  {
-					  "label": "Listar",
-					  "event": "listarBanos"
-				  },
-				  {
-					  "label": "Borrar por Id",
-					  "event": "eliminarBañoPorId"
-				  },
-				  {
-					"label": "Borrar por númro de sanitarios",
-					"event": "eliminarBañoPorSanitarios"
-				  },
-				  {
-					  "label": "Buscar baño por Id",
-					  "event": "buscarBanoPorID"
-				  },
-
-				  {
-					"label": "Buscar baños por sanitarios",
-					"event": "buscarLosBanosPorSanitarios"
-				  }
-			  ]
-		  },
-
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[

@@ -93,7 +93,7 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 	/**
 	 * Listado de los centros comerciales disponibles
 	 */
-	private JComboBox<VOCentroComercial> cbCentrosComerciales;
+	private JComboBox<String> cbCentrosComerciales;
 
 	/**
 	 * Botón para agregar al ascensor
@@ -119,7 +119,7 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
 		setTitle( "Agregar ascensor" );
-		setLocationRelativeTo( null );
+		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
 		campos.setLayout( new GridLayout( 6, 2 ) );
@@ -148,10 +148,10 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 
 		lblCentroComercial = new JLabel( "Id Centro Comercial: " );
 		campos.add( lblCentroComercial );
-
+		cbCentrosComerciales = new JComboBox<>();
 		for ( VOCentroComercial tv: pPrincipal.listarCentrosComerciales())
 		{
-			cbCentrosComerciales.addItem(tv);
+			cbCentrosComerciales.addItem(tv.getIdentificador() + " - " + tv.getNombre());
 		}
 		campos.add( cbCentrosComerciales );
 
@@ -192,10 +192,11 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 			String capacidadNormalStr = txtCapacidadNormal.getText();
 			String areaStr = txtArea.getText();
 			String pesoMaximoStr = txtPesoMaximo.getText();
-			String idCentroComercial = ((VOCentroComercial)cbCentrosComerciales.getSelectedItem()).getIdentificador();
-			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || areaStr.equals( "" ) || pesoMaximoStr.equals( "" ) || idCentroComercial.equals( "" ) )
+			String comboBox = (String) (cbCentrosComerciales.getSelectedItem());
+			String idCentroComercial = comboBox.split(" - ")[0];
+			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || pesoMaximoStr.equals( "" ) || idCentroComercial.equals( "" ) )
 			{
-				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar Centro Comercial", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar Ascensor", JOptionPane.ERROR_MESSAGE );
 			}
 			else
 			{
@@ -203,10 +204,14 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 				{
 					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
 					double pesoMaximo = Double.parseDouble(pesoMaximoStr);
-					long area = Long.parseLong(areaStr);
+					double area = Long.parseLong(areaStr);
 					if ( interfaz.buscarAreaPorValor(area) == null)
 					{
 						interfaz.adicionarArea();
+					}
+					if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
+					{
+						interfaz.adicionarCapacidadNormal();
 					}
 					interfaz.adicionarAscensor(identificador, capacidadNormal, area, pesoMaximo, idCentroComercial, this);;
 				}

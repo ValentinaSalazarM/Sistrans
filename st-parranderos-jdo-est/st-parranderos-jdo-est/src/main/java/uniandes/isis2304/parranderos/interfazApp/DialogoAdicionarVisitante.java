@@ -96,7 +96,7 @@ public class DialogoAdicionarVisitante extends JDialog implements ActionListener
 	/**
 	 * Listado de los tipos de visitante disponibles
 	 */
-	private JComboBox<VOTipoVisitante> cbTipoVisitante;
+	private JComboBox<String> cbTipoVisitante;
 
 	/**
 	 * Campo de texto correo.
@@ -168,9 +168,10 @@ public class DialogoAdicionarVisitante extends JDialog implements ActionListener
 		panelInfo.add( txtNombre );
 
 		lblTipo = new JLabel( "Tipo de visitante: " );
+		cbTipoVisitante = new JComboBox<>();
 		for ( VOTipoVisitante tv: pPrincipal.listarTiposVisitante())
 		{
-			cbTipoVisitante.addItem(tv);
+			cbTipoVisitante.addItem(tv.getId() + " - " + tv.getTipo());
 		}
 		panelInfo.add( lblTipo );
 		panelInfo.add( cbTipoVisitante );
@@ -220,7 +221,8 @@ public class DialogoAdicionarVisitante extends JDialog implements ActionListener
 		if( e.getActionCommand( ).equals( AGREGAR ) )
 		{
 			String identificacion = txtIdentificacion.getText( );
-			long tipo = ((VOTipoVisitante)cbTipoVisitante.getSelectedItem()).getId();
+			String comboBox = (String) cbTipoVisitante.getSelectedItem();
+			long tipo = Long.valueOf(comboBox.split(" - ")[0]);
 			String nombre = txtNombre.getText( );
 			String correo = txtCorreo.getText( );
 			String telefonoPropio = txtTelefonoPropio.getText( );

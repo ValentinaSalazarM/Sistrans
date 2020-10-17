@@ -1404,9 +1404,9 @@ public class PersistenciaAforoAndes
 	 * @param valor - El valor de la capacidad normal
 	 * @return La lista de objetos CapacidadNormal, construidos con base en las tuplas de la tabla CAPACIDADNORMAL
 	 */
-	public List<CapacidadNormal> darCapacidadesNormalesPorValor (double valor)
+	public CapacidadNormal darCapacidadNormalPorValor (double valor)
 	{
-		return sqlCapacidadNormal.darCapacidadesNormalesPorValor(pmf.getPersistenceManager(), valor);
+		return sqlCapacidadNormal.darCapacidadNormalPorValor(pmf.getPersistenceManager(), valor);
 	}
 
 	/**
@@ -3450,7 +3450,7 @@ public class PersistenciaAforoAndes
 	 * @param tipo - El nombre del tipo del local
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarTipoLocalPorTipo (String tipo, long horaApertura, long horaCierre) 
+	public long eliminarTipoLocalPorTipo (String tipo) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -3522,17 +3522,17 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoLocal que tienen el nombre dado
 	 * @param tipo - El nombre del tipo del local
-	 * @return La lista de objetos TipoLocal, construidos con base en las tuplas de la tabla TipoLocal
+	 * @return El objeto TipoLocal, construido con base en las tuplas de la tabla TipoLocal con el nombre dado
 	 */
-	public List<TipoLocal> darTiposLocalPorTipo (String tipo)
+	public TipoLocal darTipoLocalPorTipo (String tipo)
 	{
-		return sqlTipoLocal.darTiposLocalPorTipo(pmf.getPersistenceManager(), tipo);
+		return sqlTipoLocal.darTipoLocalPorTipo(pmf.getPersistenceManager(), tipo);
 	}
 
 	/**
-	 * Método que consulta todas las tuplas en la tabla TipoLector con un identificador dado
-	 * @param idTipoLector - El identificador del tipo de lector
-	 * @return El objeto TipoLector, construido con base en las tuplas de la tabla TipoLector con el identificador dado
+	 * Método que consulta todas las tuplas en la tabla TipoLocal con un identificador dado
+	 * @param idTipoLector - El identificador del tipo de local
+	 * @return El objeto TipoLocal, construido con base en las tuplas de la tabla TipoLocal con el identificador dado
 	 */
 	public TipoLocal darTipoLocalPorId (long idTipoLocal)
 	{

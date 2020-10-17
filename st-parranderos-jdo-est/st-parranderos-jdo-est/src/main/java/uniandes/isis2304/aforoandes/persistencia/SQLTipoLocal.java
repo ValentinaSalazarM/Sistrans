@@ -115,12 +115,12 @@ public class SQLTipoLocal
 	 * @param nombreTipoLocal - El nombre del tipo de local
 	 * @return El objeto TIPOLOCAL que tiene el tipo dado
 	 */
-	public List<TipoLocal> darTiposLocalPorTipo (PersistenceManager pm, String nombreTipoLocal) 
+	public TipoLocal darTipoLocalPorTipo (PersistenceManager pm, String nombreTipoLocal) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoLocal  () + " WHERE tipo = ?");
 		q.setResultClass(TipoLocal.class);
 		q.setParameters(nombreTipoLocal);
-		return (List<TipoLocal>) q.executeList();
+		return (TipoLocal) q.executeUnique();
 	}
 
 	/**

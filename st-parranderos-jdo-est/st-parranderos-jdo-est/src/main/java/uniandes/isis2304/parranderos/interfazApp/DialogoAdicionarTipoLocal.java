@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
  */
 @SuppressWarnings("serial")
 
-public class DialogoAdicionarTipoVisitante extends JDialog implements ActionListener
+public class DialogoAdicionarTipoLocal extends JDialog implements ActionListener
 {
 
 	// -----------------------------------------------------------------
@@ -54,24 +54,24 @@ public class DialogoAdicionarTipoVisitante extends JDialog implements ActionList
 	private JTextField txtTipo;
 
 	/**
-	 * Etiqueta de la hora de inicio de circulación.
+	 * Etiqueta de la hora de apertura del local.
 	 */
-	private JLabel lblHorarioInicio;
+	private JLabel lblHoraApertura;
 
 	/**
-	 * Campo de texto para la hora de inicio de circulación.
+	 * Campo de texto para la hora de apertura del local.
 	 */
-	private JTextField txtHorarioInicio;
+	private JTextField txtHoraApertura;
 
 	/**
-	 * Etiqueta de la hora límite de circulación.
+	 * Etiqueta de la hora de cierre del local.
 	 */
-	private JLabel lblHorarioLimite;
+	private JLabel lblHoraCierre;
 
 	/**
-	 * Campo de la hora límite de circulación.
+	 * Campo de la hora de cierre del local.
 	 */
-	private JTextField txtHorarioLimite;
+	private JTextField txtHoraCierre;
 
 	/**
 	 * Bot�n para agregar el tipo.
@@ -91,7 +91,7 @@ public class DialogoAdicionarTipoVisitante extends JDialog implements ActionList
 	 * Crea la ventana de diálogo del tipo de visitante
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
-	public DialogoAdicionarTipoVisitante( InterfazAforoAndesApp pPrincipal )
+	public DialogoAdicionarTipoLocal( InterfazAforoAndesApp pPrincipal )
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
@@ -109,15 +109,15 @@ public class DialogoAdicionarTipoVisitante extends JDialog implements ActionList
 		txtTipo = new JTextField( );
 		campos.add( txtTipo );
 
-		lblHorarioInicio = new JLabel( "Hora de inicio de circulación en formato 24h (formato hh:mm): " );
-		campos.add( lblHorarioInicio );
-		txtHorarioInicio = new JTextField( );
-		campos.add( txtHorarioInicio );
+		lblHoraApertura = new JLabel( "Hora de apertura en formato 24h (formato hh:mm): " );
+		campos.add( lblHoraApertura );
+		txtHoraApertura = new JTextField( );
+		campos.add( txtHoraApertura );
 
-		lblHorarioLimite = new JLabel( "Hora límite de circulación en formato 24h (formato hh:mm): " );
-		campos.add( lblHorarioLimite );
-		txtHorarioLimite = new JTextField( );
-		campos.add( txtHorarioLimite );
+		lblHoraCierre = new JLabel( "Hora de cierre en formato 24h (formato hh:mm): " );
+		campos.add( lblHoraCierre );
+		txtHoraCierre = new JTextField( );
+		campos.add( txtHoraCierre );
 
 		campos.add( new JLabel() );        
 
@@ -152,37 +152,37 @@ public class DialogoAdicionarTipoVisitante extends JDialog implements ActionList
 
 		if( comando.equals( AGREGAR ) )
 		{
-			String horarioInicio = txtHorarioInicio.getText( );
-			String horarioLimite =  txtHorarioLimite.getText( );
+			String horarioApertura = txtHoraApertura.getText( );
+			String horarioCierre =  txtHoraCierre.getText( );
 			String tipo = txtTipo.getText();
 
-			if( tipo.equals( "" ) || horarioInicio.equals( "" ) || horarioLimite.equals( "" ))
+			if( tipo.equals( "" ) || horarioApertura.equals( "" ) || horarioCierre.equals( "" ))
 			{
-				JOptionPane.showMessageDialog( this, "Debe llenar todos los campos", "Agregar Tipo Visitante", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( this, "Debe llenar todos los campos", "Agregar Tipo Local", JOptionPane.ERROR_MESSAGE );
 			}
 			else
 			{    
 				try
 				{
-					int horaInicio = 0;
-					int horaLimite = 0;
-					int minutoInicio = 0;
-					int minutoLimite = 0;
-					horaInicio = Integer.parseInt( horarioInicio.split(":")[0]);
-					minutoInicio = Integer.parseInt( horarioInicio.split(":")[1]);
-					horaLimite = Integer.parseInt( horarioLimite.split(":")[0]);
-					minutoLimite = Integer.parseInt( horarioLimite.split(":")[1]);
+					int horaApertura = 0;
+					int horaCierre = 0;
+					int minutoApertura = 0;
+					int minutoCierre = 0;
+					horaApertura = Integer.parseInt( horarioApertura.split(":")[0]);
+					minutoApertura = Integer.parseInt( horarioApertura.split(":")[1]);
+					horaCierre = Integer.parseInt( horarioCierre.split(":")[0]);
+					minutoCierre = Integer.parseInt( horarioCierre.split(":")[1]);
 
-					if ( horaLimite < horaInicio || (horaLimite == horaInicio && minutoLimite <= minutoInicio))
+					if ( horaCierre < horaApertura || (horaCierre == horaApertura && minutoCierre <= minutoApertura))
 					{
-						JOptionPane.showMessageDialog( this, "La hora límite debe ser posterior a la hora de inicio", "Agregar Tipo Visitante", JOptionPane.ERROR_MESSAGE );
+						JOptionPane.showMessageDialog( this, "La hora de cierre debe ser posterior a la hora de apertura", "Agregar Tipo Local", JOptionPane.ERROR_MESSAGE );
 					}
 
-					interfaz.agregarTipoVisitante(tipo, horaInicio, minutoInicio, horaLimite, minutoLimite, this);
+					interfaz.adicionarTipoLocal(tipo, horaApertura, minutoApertura, horaCierre, minutoCierre, this);
 				}
 				catch( NumberFormatException e2 )
 				{
-					JOptionPane.showMessageDialog( this, "Las horas deben ser números separados por ':'", "Agregar Tipo Visitante", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( this, "Las horas deben ser números separados por ':'", "Agregar Tipo Local", JOptionPane.ERROR_MESSAGE );
 				}
 			}
 		}

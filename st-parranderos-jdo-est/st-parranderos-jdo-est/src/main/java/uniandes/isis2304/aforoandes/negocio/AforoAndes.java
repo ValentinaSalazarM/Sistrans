@@ -211,7 +211,7 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del ascensor
 	 * @return El objeto Ascensor adicionado. null si ocurre alguna Excepción
 	 */
-	public Ascensor adicionarAscensor(String idAscensor, int capacidadNormal, long area, double pesoMaximo, String idCentroComercial)	
+	public Ascensor adicionarAscensor(String idAscensor, long capacidadNormal, long area, double pesoMaximo, String idCentroComercial)	
 	{
 		
 		log.info ("Adicionando Ascensor con identificador: " + idAscensor );
@@ -530,14 +530,14 @@ public class AforoAndes
 	/**
 	 * Método que consulta todas las tuplas en la tabla CapacidadNormal que tienen el valor dado
 	 * @param valor - El valor de la capacidad normal
-	 * @return La lista de objetos CapacidadNormal, construidos con base en las tuplas de la tabla CAPACIDADNORMAL
+	 * @return El objeto CapacidadNormal, construido con base en las tuplas de la tabla CAPACIDADNORMAL con el valor dado
 	 */
-	public List<CapacidadNormal> darCapacidadesNormalesPorValor (double valor)
+	public CapacidadNormal darCapacidadNormalPorValor (double valor)
 	{
-		log.info ("Dar información de capacidades normales por valor: " + valor);
-		List<CapacidadNormal> capacidadesNormales = pp.darCapacidadesNormalesPorValor (valor);
-		log.info ("Dar información de CapacidadNormal por valor: " + capacidadesNormales.size() + " capacidades normales con ese valor existentes");
-		return capacidadesNormales;
+		log.info ("Dar información de capacidad normal por valor: " + valor);
+		CapacidadNormal capacidadNormal = pp.darCapacidadNormalPorValor (valor);
+		log.info ("Buscando capacidad normal por valor: " + capacidadNormal != null ? capacidadNormal : "NO EXISTE");
+		return capacidadNormal;
 
 	}
 
@@ -1965,16 +1965,20 @@ public class AforoAndes
 	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoLocal
 	 * Adiciona entradas al log de la aplicación
 	 * @param tipo - El nombre del tipo del local
-	 * @param horaApertura - Identificador del horario de apertura del local
-	 * @param horaCierre - Identificador del horario de cierre del local
+	 * @param horaApertura - La hora de apertura del tipo del local
+	 * @param minutoApertura - El minuto de apertura del tipo del local
+	 * @param horaCierre - La hora de cierre del tipo del local
+	 * @param minutoCierre - El minuto de cierre del tipo de local
 	 * @return El objeto TipoLocal adicionado. null si ocurre alguna Excepción
 	 */
-	public TipoLocal adicionarTipoLocal(String tipo, long horaApertura, long horaCierre)
+	public TipoLocal adicionarTipoLocal( String tipo, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre )
 	{
+		long horarioApertura = pp.darHorarioPorHorayMinuto(horaApertura, minutoApertura).getId();
+		long horarioCierre = pp.darHorarioPorHorayMinuto(horaCierre, minutoCierre).getId();
 		log.info ("Adicionando Tipo de local: " + tipo);
-		TipoLocal tipoLector = pp.adicionarTipoLocal(tipo, horaApertura, horaCierre);
-		log.info ("Adicionando Tipo de local: " + tipoLector);
-		return tipoLector;
+		TipoLocal tipoLocal = pp.adicionarTipoLocal(tipo, horarioApertura, horarioCierre);
+		log.info ("Adicionando Tipo de local: " + tipoLocal);
+		return tipoLocal;
 	}
 
 	/**
@@ -1983,10 +1987,10 @@ public class AforoAndes
 	 * @param tipo - El nombre del tipo del local
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarTipoLocalPorNombre (String tipo, long horaApertura, long horaCierre) 
+	public long eliminarTipoLocalPorTipo (String tipo) 
 	{
 		log.info ("Eliminando Tipo de local por tipo: " + tipo);
-		long resp = pp.eliminarTipoLocalPorTipo(tipo, horaApertura, horaCierre);
+		long resp = pp.eliminarTipoLocalPorTipo(tipo);
 		log.info ("Eliminando Tipo de local por tipo: " + resp + " tuplas eliminadas");
 		return resp;
 	}
@@ -2037,20 +2041,20 @@ public class AforoAndes
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoLocal que tienen el nombre dado
 	 * @param tipo - El nombre del tipo del local
-	 * @return La lista de objetos TipoLocal, construidos con base en las tuplas de la tabla TipoLocal
+	 * @return El objeto TipoLocal, construido con base en las tuplas de la tabla TipoLocal con el tipo dado
 	 */
-	public List<TipoLocal> darTiposLocalPorTipo (String tipo)
+	public TipoLocal darTipoLocalPorTipo (String tipo)
 	{
 		log.info ("Dar información de tipos de local por tipo: " + tipo);
-		List<TipoLocal> tiposLocal = pp.darTiposLocalPorTipo(tipo);
-		log.info ("Dar información de tipos de local por tipo: " + tiposLocal.size() + " tipos de local con ese tipo existentes");
-		return tiposLocal;
+		TipoLocal tipoLocal = pp.darTipoLocalPorTipo(tipo);
+		log.info ("Buscando tipo de local por tipo: " + tipoLocal != null ? tipoLocal : "NO EXISTE");
+		return tipoLocal;
 	}
 
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoLector con un identificador dado
 	 * @param idTipoLector - El identificador del tipo de lector
-	 * @return El objeto TipoLector, construido con base en las tuplas de la tabla TipoLector con el identificador dado
+	 * @return El objeto TipoLocal, construido con base en las tuplas de la tabla TipoLocal con el identificador dado
 	 */
 	public TipoLocal darTipoLocalPorId (long idTipoLocal)
 	{
@@ -2094,8 +2098,10 @@ public class AforoAndes
 	 * Método que inserta, de manera transaccional, una tupla en la tabla TipoVisitante
 	 * Adiciona entradas al log de la aplicación
 	 * @param tipo - El nombre del tipo del visitante
-	 * @param horainicio - El identificador del horario de inicio de circulación del tipo del visitante
-	 * @param horalimite - El identificador del horario límite de circulación del tipo del visitante
+	 * @param horainicio - La hora de inicio de circulación del tipo del visitante
+	 * @param minutoInicio - El minuto de inicio de circulación del tipo del visitante
+	 * @param horalimite - La hora límite de circulación del tipo del visitante
+	 * @param minutoLimite - El minuto límite de circulación del tipo del visitante
 	 * @return El objeto TipoVisitante adicionado. null si ocurre alguna Excepción
 	 */
 	public TipoVisitante adicionarTipoVisitante( String tipo, int horainicio, int minutoInicio, int horalimite, int minutoLimite )
