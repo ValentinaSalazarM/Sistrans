@@ -10,7 +10,7 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-package uniandes.isis2304.parranderos.interfazApp;
+package uniandes.isis2304.aforoandes.interfazApp;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -150,10 +150,10 @@ public class DialogoAdicionarVisitante extends JDialog implements ActionListener
 		setLayout( new java.awt.BorderLayout( ) );
 
 		panelInfo = new JPanel( );
-		panelInfo.setPreferredSize( new Dimension( 450, 200 ) );
+		panelInfo.setPreferredSize( new Dimension( 650, 300 ) );
 
 		panelInfo.setBorder( new TitledBorder( "Información" ) );
-		GridLayout layout = new GridLayout( 5, 2, -175, 30 );
+		GridLayout layout = new GridLayout( 7, 2, -175, 30 );
 		layout.setVgap( 10 );
 		panelInfo.setLayout( layout );
 

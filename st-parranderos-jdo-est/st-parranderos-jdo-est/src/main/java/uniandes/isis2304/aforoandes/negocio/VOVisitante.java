@@ -22,7 +22,7 @@ public interface VOVisitante
 	/**
 	 * @return El identificador del visitante
 	 */
-	public String getIdentificador();
+	public String getIdentificacion();
 	
 	/**
 	 * @return El identificador del tipo de visitante

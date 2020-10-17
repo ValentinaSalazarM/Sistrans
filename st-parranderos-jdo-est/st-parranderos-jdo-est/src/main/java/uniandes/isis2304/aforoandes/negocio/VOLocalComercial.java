@@ -25,12 +25,12 @@ public interface VOLocalComercial
 	/**
 	 * @return El id de la capacidad normal del local comercial
 	 */
-	public long getCapacidadNormal();
+	public Long getCapacidadNormal();
 
 	/**
 	 * @return El id del área del local comercial
 	 */
-	public long getArea();
+	public Long getArea();
 
 	/**
 	 * @return El id del tipo de local

@@ -1,4 +1,4 @@
-package uniandes.isis2304.parranderos.interfazApp;
+package uniandes.isis2304.aforoandes.interfazApp;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -15,7 +15,7 @@ import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
  */
 @SuppressWarnings("serial")
 
-public class DialogoAdicionarBano extends JDialog implements ActionListener
+public class DialogoAdicionarParqueadero extends JDialog implements ActionListener
 {
 
 	// -----------------------------------------------------------------
@@ -25,7 +25,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	/**
 	 * Comando para agregar la banda.
 	 */
-	public final static String AGREGAR = "Agregar Bano";
+	public final static String AGREGAR = "Agregar Parqueadero";
 
 	/**
 	 * Comando para cancelar el proceso.
@@ -76,17 +76,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	private JTextField txtArea;
 
 	/**
-	 * Etiqueta del número de sanitarios del baño
-	 */
-	private JLabel lblSanitarios;
-
-	/**
-	 * Campo de texto para el número de sanitarios
-	 */
-	private JTextField txtSanitarios;
-
-	/**
-	 * Etiqueta del id del centro comercial donde se encuentra el ascensor
+	 * Etiqueta del id del centro comercial donde se encuentra el parqueadero
 	 */
 	private JLabel lblCentroComercial;
 
@@ -96,7 +86,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	private JComboBox<String> cbCentrosComerciales;
 
 	/**
-	 * Botón para agregar al ascensor
+	 * Botón para agregar al parqueadero
 	 */
 	private JButton btnAgregar;
 
@@ -113,7 +103,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	 * Crea la ventana de diálogo de la banda.
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
-	public DialogoAdicionarBano( InterfazAforoAndesApp pPrincipal )
+	public DialogoAdicionarParqueadero( InterfazAforoAndesApp pPrincipal )
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
@@ -140,11 +130,6 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 		campos.add( lblArea );
 		txtArea = new JTextField( );
 		campos.add( txtArea );
-
-		lblSanitarios = new JLabel( "Sanitarios: " );
-		campos.add( lblSanitarios );
-		txtSanitarios = new JTextField( );
-		campos.add( txtSanitarios);
 
 		lblCentroComercial = new JLabel( "Id Centro Comercial: " );
 		campos.add( lblCentroComercial );
@@ -192,19 +177,18 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 			String identificador = txtIdentificador.getText();
 			String capacidadNormalStr = txtCapacidadNormal.getText();
 			String areaStr = txtArea.getText();
-			String sanitariosStr = txtSanitarios.getText();
 			String comboBox = (String) (cbCentrosComerciales.getSelectedItem());
 			String idCentroComercial = comboBox.split(" - ")[0];
-			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || sanitariosStr.equals( "" ) || idCentroComercial.equals( "" ) )
+			
+			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || idCentroComercial.equals( "" ) )
 			{
-				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar Centro Comercial", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar parqueadero", JOptionPane.ERROR_MESSAGE );
 			}
 			else
 			{
 				try
 				{
 					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
-					int sanitarios = Integer.parseInt(sanitariosStr);
 					double area = Long.parseLong(areaStr);
 					if ( interfaz.buscarAreaPorValor(area) == null)
 					{
@@ -213,12 +197,12 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 					if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
 					{
 						interfaz.adicionarCapacidadNormal();
-					}
-					interfaz.adicionarBano(identificador, capacidadNormal, area, sanitarios, idCentroComercial, this);;
+					}				
+					interfaz.adicionarParqueadero(identificador, capacidadNormal, area, idCentroComercial, this);
 				}
 				catch( NumberFormatException e2 )
 				{
-					JOptionPane.showMessageDialog( this, "La capacidad normal (int), el área (double) y el número de sanitarios (integer) deben ser números.", "Agregar Baño", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( this, "La capacidad normal (int) y el área (double) deben ser números ", "Agregar Parqueadero", JOptionPane.ERROR_MESSAGE );
 				}
 			}
 		}

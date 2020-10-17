@@ -26,12 +26,12 @@ public class Ascensor implements VOAscensor
 	/**
 	 * El identificador de la capacidad normal del ascensor. Debe existir en la tabla de CAPACIDADNORMAL
 	 */
-	private long capacidadNormal;
+	private Long capacidadNormal;
 	
 	/**
 	 * El identificador del área del ascensor. Debe existir en la tabla de AREA
 	 */
-	private long area;
+	private Long area;
 	
 	/**
 	 * El peso maximo del ascensor (mayor estricto a 0).
@@ -53,8 +53,8 @@ public class Ascensor implements VOAscensor
 	public Ascensor() 
 	{
 		this.identificador = "";
-		this.capacidadNormal = 0;
-		this.area = 0;
+		this.capacidadNormal = null;
+		this.area = null;
 		this.pesoMaximo = 0;
 		this.idCentroComercial = "";
 	}
@@ -67,7 +67,7 @@ public class Ascensor implements VOAscensor
 	 * @param pesoMaximo - El peso máximo del ascensor (mayor a 0)
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador.
 	 */
-	public Ascensor(String identificador, long area, long capacidadNormal, double pesoMaximo, String idCentroComercial) 
+	public Ascensor(String identificador, Long area, Long capacidadNormal, double pesoMaximo, String idCentroComercial) 
 	{
 		this.identificador = identificador;
 		this.area = area;
@@ -76,7 +76,6 @@ public class Ascensor implements VOAscensor
 		this.idCentroComercial = idCentroComercial;
 	}
 
-	
 	/**
 	 * @return El identificador del ascensor
 	 */
@@ -96,7 +95,7 @@ public class Ascensor implements VOAscensor
 	/**
 	 * @return El id de la capacidad normal del ascensor
 	 */
-	public long getCapacidadNormal() 
+	public Long getCapacidadNormal() 
 	{
 		return capacidadNormal;
 	}
@@ -104,7 +103,7 @@ public class Ascensor implements VOAscensor
 	/**
 	 * @param capacidadNormal - El nuevo identificador de la capacidad normal del ascensor
 	 */
-	public void setCapacidadNormal(long capacidadNormal) 
+	public void setCapacidadNormal(Long capacidadNormal) 
 	{
 		this.capacidadNormal = capacidadNormal;
 	}
@@ -112,7 +111,7 @@ public class Ascensor implements VOAscensor
 	/**
 	 * @return El id del área del ascensor
 	 */
-	public long getArea() 
+	public Long getArea() 
 	{
 		return area;
 	}
@@ -120,7 +119,7 @@ public class Ascensor implements VOAscensor
 	/**
 	 * @param area - El nuevo identificador del área del ascensor
 	 */
-	public void setArea(long area) 
+	public void setArea(Long area) 
 	{
 		this.area = area;
 	}

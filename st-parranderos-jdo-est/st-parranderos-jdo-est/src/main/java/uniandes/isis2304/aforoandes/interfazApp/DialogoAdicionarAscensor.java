@@ -1,4 +1,4 @@
-package uniandes.isis2304.parranderos.interfazApp;
+package uniandes.isis2304.aforoandes.interfazApp;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -15,7 +15,7 @@ import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
  */
 @SuppressWarnings("serial")
 
-public class DialogoAdicionarParqueadero extends JDialog implements ActionListener
+public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 {
 
 	// -----------------------------------------------------------------
@@ -25,7 +25,7 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 	/**
 	 * Comando para agregar la banda.
 	 */
-	public final static String AGREGAR = "Agregar Parqueadero";
+	public final static String AGREGAR = "Agregar Ascensor";
 
 	/**
 	 * Comando para cancelar el proceso.
@@ -76,7 +76,17 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 	private JTextField txtArea;
 
 	/**
-	 * Etiqueta del id del centro comercial donde se encuentra el parqueadero
+	 * Etiqueta del peso máximo del ascensor
+	 */
+	private JLabel lblPesoMaximo;
+
+	/**
+	 * Campo de texto para el peso máximo del ascensor
+	 */
+	private JTextField txtPesoMaximo;
+
+	/**
+	 * Etiqueta del id del centro comercial donde se encuentra el ascensor
 	 */
 	private JLabel lblCentroComercial;
 
@@ -86,7 +96,7 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 	private JComboBox<String> cbCentrosComerciales;
 
 	/**
-	 * Botón para agregar al parqueadero
+	 * Botón para agregar al ascensor
 	 */
 	private JButton btnAgregar;
 
@@ -103,7 +113,7 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 	 * Crea la ventana de diálogo de la banda.
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
-	public DialogoAdicionarParqueadero( InterfazAforoAndesApp pPrincipal )
+	public DialogoAdicionarAscensor( InterfazAforoAndesApp pPrincipal )
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
@@ -131,10 +141,14 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 		txtArea = new JTextField( );
 		campos.add( txtArea );
 
+		lblPesoMaximo = new JLabel( "Peso Máximo: " );
+		campos.add( lblPesoMaximo );
+		txtPesoMaximo = new JTextField( );
+		campos.add( txtPesoMaximo );
+
 		lblCentroComercial = new JLabel( "Id Centro Comercial: " );
 		campos.add( lblCentroComercial );
 		cbCentrosComerciales = new JComboBox<>();
-
 		for ( VOCentroComercial tv: pPrincipal.listarCentrosComerciales())
 		{
 			cbCentrosComerciales.addItem(tv.getIdentificador() + " - " + tv.getNombre());
@@ -177,18 +191,19 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 			String identificador = txtIdentificador.getText();
 			String capacidadNormalStr = txtCapacidadNormal.getText();
 			String areaStr = txtArea.getText();
+			String pesoMaximoStr = txtPesoMaximo.getText();
 			String comboBox = (String) (cbCentrosComerciales.getSelectedItem());
 			String idCentroComercial = comboBox.split(" - ")[0];
-			
-			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || idCentroComercial.equals( "" ) )
+			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || pesoMaximoStr.equals( "" ) || idCentroComercial.equals( "" ) )
 			{
-				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar parqueadero", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar Ascensor", JOptionPane.ERROR_MESSAGE );
 			}
 			else
 			{
 				try
 				{
 					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
+					double pesoMaximo = Double.parseDouble(pesoMaximoStr);
 					double area = Long.parseLong(areaStr);
 					if ( interfaz.buscarAreaPorValor(area) == null)
 					{
@@ -197,12 +212,12 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 					if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
 					{
 						interfaz.adicionarCapacidadNormal();
-					}				
-					interfaz.adicionarParqueadero(identificador, capacidadNormal, area, idCentroComercial, this);
+					}
+					interfaz.adicionarAscensor(identificador, capacidadNormal, area, pesoMaximo, idCentroComercial, this);;
 				}
 				catch( NumberFormatException e2 )
 				{
-					JOptionPane.showMessageDialog( this, "La capacidad normal (int) y el área (double) deben ser números ", "Agregar Parqueadero", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( this, "La capacidad normal (int), el área (double) y el peso máximo (double) deben ser números.", "Agregar Ascensor", JOptionPane.ERROR_MESSAGE );
 				}
 			}
 		}

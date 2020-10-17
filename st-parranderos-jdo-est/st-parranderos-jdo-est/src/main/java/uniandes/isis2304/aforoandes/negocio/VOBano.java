@@ -23,12 +23,12 @@ public interface VOBano
 	/**
 	 * @return El id de la capacidad normal del baño
 	 */
-	public long getCapacidadNormal();
+	public Long getCapacidadNormal();
 
 	/**
 	 * @return El id del área del baño
 	 */
-	public long getArea();
+	public Long getArea();
 
 	/**
 	 * @return El número de sanitarios en el baño

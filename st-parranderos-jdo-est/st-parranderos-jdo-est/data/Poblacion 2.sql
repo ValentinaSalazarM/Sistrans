@@ -1,126 +1,126 @@
-
-insert into HORARIO (id, hora , minuto) values (1, 9, 0);
-insert into HORARIO (id, hora , minuto) values (2, 8, 0);
-insert into HORARIO (id, hora , minuto) values (3, 23, 0);
-insert into HORARIO (id, hora , minuto) values (4, 15, 8);
-insert into HORARIO (id, hora , minuto) values (5, 13, 58);
-insert into HORARIO (id, hora , minuto) values (6, 15, 27);
-insert into HORARIO (id, hora , minuto) values (7, 13, 50);
-insert into HORARIO (id, hora , minuto) values (8, 7, 24);
-insert into HORARIO (id, hora , minuto) values (9, 0, 0);
-insert into HORARIO (id, hora , minuto) values (10, 7, 27);
-insert into HORARIO (id, hora , minuto) values (11, 0, 24);
-insert into HORARIO (id, hora , minuto) values (12, 5, 1);
-insert into HORARIO (id, hora , minuto) values (13, 1, 28);
-insert into HORARIO (id, hora , minuto) values (14, 1, 25);
-insert into HORARIO (id, hora , minuto) values (15, 6, 0);
-insert into HORARIO (id, hora , minuto) values (16, 0, 15);
-insert into HORARIO (id, hora , minuto) values (17, 8, 16);
-insert into HORARIO (id, hora , minuto) values (18, 3, 5);
-insert into HORARIO (id, hora , minuto) values (19, 6, 22);
-insert into HORARIO (id, hora , minuto) values (20, 1, 35);
-insert into HORARIO (id, hora , minuto) values (21, 10, 56);
-insert into HORARIO (id, hora , minuto) values (22, 4, 11);
-insert into HORARIO (id, hora , minuto) values (23, 16, 26);
-insert into HORARIO (id, hora , minuto) values (24, 18, 41);
-insert into HORARIO (id, hora , minuto) values (25, 4, 3);
-insert into HORARIO (id, hora , minuto) values (26, 9, 48);
-insert into HORARIO (id, hora , minuto) values (27, 4, 42);
-insert into HORARIO (id, hora , minuto) values (28, 0, 39);
-insert into HORARIO (id, hora , minuto) values (29, 20, 3);
-insert into HORARIO (id, hora , minuto) values (30, 10, 58);
-insert into HORARIO (id, hora , minuto) values (31, 5, 35);
-insert into HORARIO (id, hora , minuto) values (32, 12, 57);
-insert into HORARIO (id, hora , minuto) values (33, 1, 13);
-insert into HORARIO (id, hora , minuto) values (34, 20, 17);
-insert into HORARIO (id, hora , minuto) values (35, 12, 13);
-insert into HORARIO (id, hora , minuto) values (36, 5, 21);
-insert into HORARIO (id, hora , minuto) values (37, 3, 6);
-insert into HORARIO (id, hora , minuto) values (38, 8, 47);
-insert into HORARIO (id, hora , minuto) values (39, 1, 13);
-insert into HORARIO (id, hora , minuto) values (40, 13, 25);
-insert into HORARIO (id, hora , minuto) values (41, 2, 43);
-insert into HORARIO (id, hora , minuto) values (42, 9, 17);
-insert into HORARIO (id, hora , minuto) values (43, 15, 6);
-insert into HORARIO (id, hora , minuto) values (44, 19, 34);
-insert into HORARIO (id, hora , minuto) values (45, 19, 40);
-insert into HORARIO (id, hora , minuto) values (46, 10, 38);
-insert into HORARIO (id, hora , minuto) values (47, 17, 58);
-insert into HORARIO (id, hora , minuto) values (48, 9, 21);
-insert into HORARIO (id, hora , minuto) values (49, 13, 3);
-insert into HORARIO (id, hora , minuto) values (50, 23, 59);
-insert into HORARIO (id, hora , minuto) values (51, 0, 0);
-insert into HORARIO (id, hora , minuto) values (52, 17, 58);
-insert into HORARIO (id, hora , minuto) values (53, 12, 0);
-insert into HORARIO (id, hora , minuto) values (54, 11, 0);
-insert into HORARIO (id, hora , minuto) values (55, 21, 0);
-insert into HORARIO (id, hora , minuto) values (56, 8, 0);
-insert into HORARIO (id, hora , minuto) values (57, 16, 0);
-insert into HORARIO (id, hora , minuto) values (58, 20, 0);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 8, 00);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 8, 15);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 8, 24);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 8, 39);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 9, 13);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 9, 25);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 9, 25);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 9, 28);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 10, 25);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 10, 35);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 10, 46);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 10, 53);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 11, 11);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 11, 22);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 11, 33);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 11, 44);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 12, 35);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 12, 38);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 12, 42);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 12, 52);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 13, 02);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 13, 17);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 13, 28);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 13, 30);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 14, 00);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 14, 19);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 14, 47);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 14, 59);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 15, 05);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 15, 15);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 15, 25);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 15, 32);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 16, 27);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 16, 28);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 16, 40);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 16, 41);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 16, 52);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 17, 00);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 17, 25);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 17, 14);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 17, 18);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 18, 09);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 18, 10);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 18, 11);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 19, 12);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 19, 17);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 19, 27);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 19, 37);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 20, 47);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 20, 58);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 20, 59);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 20, 00);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 01);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 08);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 18);
+insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 28);
 
 
-insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (100, 'Domiciliario',1, 2);
-insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (200, 'Aseo', 2, 3);
-insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (300, 'Cliente', 3, 4);
-insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (400, 'Mantenimiento', 5, 6);
-insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (500, 'Vigilancia', 7, 8);
-insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (600, 'Empleado', 9, 10);
 
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8931131694', 'Imojean Kuhnert', 200, 'bamberger0@vinaora.com', '4538031952', 'Bell Amberger', '1884042683');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('7345698805', 'Berrie Keller', 500, 'agerlack1@scientificamerican.com', '6947638343', 'Anjanette Gerlack', '5965829789');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3313819561', 'Gabriel Cotilard', 500, 'tickov2@indiegogo.com', '3158897987', 'Truda Ickov', '6347254313');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5542884095', 'Thekla Hablet', 200, 'rredemile3@foxnews.com', '3397545911', 'Roby Redemile', '5937265525');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8736669663', 'Reid Geraudel', 100, 'tmedlin4@biglobe.ne.jp', '6471192206', 'Thain Medlin', '3459548801');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3444789209', 'Lorinda McMeeking', 100, 'adole5@imgur.com', '3368926961', 'Alonzo Dole', '8043043973');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4988009382', 'Gerrie Yushkov', 200, 'rajam6@time.com', '2748980444', 'Robinett Ajam', '7598740850');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3207271921', 'Ursola Chalcot', 300, 'aclissold7@economist.com', '5108128070', 'Aksel Clissold', '5013141229');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5087197394', 'Hiram Postance', 600, 'jfrost8@apache.org', '4785145126', 'Jannelle Frost', '8473672255');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('7967699977', 'Euell Roscoe', 100, 'kjarvis9@deviantart.com', '8967851210', 'Karylin Jarvis', '1568734891');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3757003542', 'Cornelia Samsworth', 600, 'hmcraveya@simplemachines.org', '7677906895', 'Huey McRavey', '2154014706');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9572093970', 'Xavier Raoult', 400, 'kdeeginb@thetimes.co.uk', '9294373596', 'Karlotta Deegin', '3797670629');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('6499672815', 'Chrisy Donahue', 600, 'tdowdamc@msu.edu', '6757810351', 'Tommie Dowdam', '9201522517');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3295104051', 'Allyn Blasing', 200, 'cstorcked@hubpages.com', '4079625001', 'Cristie Storcke', '7708574787');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4084383478', 'Kaycee World', 100, 'lmacgarritye@gov.uk', '7356624117', 'Lyon MacGarrity', '1589343210');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('1672124952', 'Fitzgerald Lidster', 400, 'rkenenf@sciencedaily.com', '3337508426', 'Riobard Kenen', '4547443164');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9223636222', 'Corette Benzie', 100, 'gyokleyg@nbcnews.com', '4122811490', 'Genni Yokley', '2795285308');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9521126747', 'Trixi Creenan', 200, 'claureth@nbcnews.com', '4327643213', 'Crysta Lauret', '7095944499');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8681423079', 'Woody Obbard', 100, 'tfarneyi@cnet.com', '4988631529', 'Tine Farney', '5641700461');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9677906902', 'Sacha Muat', 500, 'atremmelj@nhs.uk', '1933218023', 'Andee Tremmel', '8303646026');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2942684739', 'Brew Hounson', 200, 'llaughlink@diigo.com', '1501893934', 'Ludovico Laughlin', '6329167286');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4687115760', 'Orv Grimm', 500, 'fmottonl@twitpic.com', '2894443189', 'Fax Motton', '1878467319');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('7822018908', 'Simeon Girardet', 200, 'srakestrawm@hugedomains.com', '8824376126', 'Shandeigh Rakestraw', '5077399199');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5838732484', 'Lorie Cowland', 100, 'mgabern@phpbb.com', '5525554735', 'Myrtia Gaber', '9678892887');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('1329512008', 'Nathaniel Zannotti', 200, 'fmunneryo@newsvine.com', '3676261298', 'Filmore Munnery', '9499774042');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4759272103', 'Elijah Crawley', 200, 'atowardp@studiopress.com', '5489354349', 'Aleta Toward', '9371207695');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9858905085', 'Marshall Pablo', 300, 'diorizzoq@google.it', '5496394344', 'Darby Iorizzo', '6629312431');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2092327757', 'Mechelle Prattington', 500, 'avernir@umn.edu', '7826820143', 'Alexis Verni', '3326337890');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9615259409', 'Rene Matessian', 400, 'mjarrads@tinypic.com', '9907909201', 'Marcille Jarrad', '6528315806');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8629008404', 'Izaak Baudts', 600, 'dlat@mail.ru', '8484307399', 'Dulcy La Padula', '3155064972');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8875223261', 'Al Yo', 400, 'jleatu@webnode.com', '5672165047', 'Jameson Leat', '4018394377');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9851676277', 'Esdras Nineham', 600, 'agatchelv@mozilla.com', '9792654009', 'Aeriell Gatchel', '6248125053');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('7351276611', 'Novelia Arman', 100, 'mwenzelw@booking.com', '7805261056', 'Miguelita Wenzel', '6845633367');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3245779779', 'Merralee Bolland', 200, 'rburragex@amazon.co.jp', '8986747954', 'Raymund Burrage', '8994486588');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('6926557995', 'Oralie Baldock', 100, 'kedgary@google.ca', '6119436810', 'Kimble Edgar', '1603190160');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9435262533', 'Sayres McKinie', 300, 'bbilesz@technorati.com', '8137963121', 'Broderic Biles', '5366153698');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3858831986', 'Chastity Merrick', 600, 'mkoppes10@deviantart.com', '9874394912', 'Manya Koppes', '9882355126');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5283868270', 'Caprice Gascar', 500, 'aportch11@auda.org.au', '3498471437', 'Ailyn Portch', '1587228297');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3749127802', 'Rachele Giroldi', 500, 'etheakston12@instagram.com', '9098038873', 'Ellwood Theakston', '6809673647');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4199487271', 'Petronilla Regorz', 200, 'jbrotherton13@howstuffworks.com', '9568785830', 'Johnathon Brotherton', '1526048477');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('6555390862', 'Garvin Seys', 600, 'gmassey14@naver.com', '7676723490', 'Guinevere Massey', '8197468262');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3264019102', 'Simmonds Odell', 200, 'bjurries15@delicious.com', '7424743442', 'Bealle Jurries', '8922084153');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5259623754', 'Royce Igo', 100, 'ibocken16@github.com', '6978594104', 'Ileane Bocken', '3007844034');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9129086599', 'Victoir Hultberg', 600, 'sbeelby17@engadget.com', '9423683960', 'Susette Beelby', '6904826441');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4581036125', 'Elizabet Pawlowicz', 100, 'pyanukhin18@redcross.org', '5198115407', 'Petronille Yanukhin', '1257786289');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9441070040', 'Judah Esberger', 400, 'mbarok19@gov.uk', '5431843001', 'Mendie Barok', '6257408788');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2991300528', 'Lynne Marskell', 400, 'hturpie1a@phpbb.com', '2995479318', 'Harwell Turpie', '5669870824');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2264841791', 'Rosalia Lace', 400, 'flongden1b@nytimes.com', '7307707689', 'Fernando Longden', '6806496197');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5053459221', 'Conrad Dunphie', 600, 'mbanham1c@pinterest.com', '3174148044', 'Marty Banham', '5068979189');
-insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2656125483', 'Barbabas Quaintance', 600, 'cwhatman1d@rakuten.co.jp', '8442563563', 'Carita Whatman', '6968972188');
+insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Domiciliario', 5, 48);
+insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Aseo', 2, 55);
+insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Cliente', 8, 47);
+insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Mantenimiento', 5, 38);
+insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Vigilancia', 1, 56);
+insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Empleado', 1, 56);
 
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8931131694', 'Imojean Kuhnert', 2, 'bamberger0@vinaora.com', '4538031952', 'Bell Amberger', '1884042683');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('7345698805', 'Berrie Keller', 5, 'agerlack1@scientificamerican.com', '6947638343', 'Anjanette Gerlack', '5965829789');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3313819561', 'Gabriel Cotilard', 5, 'tickov2@indiegogo.com', '3158897987', 'Truda Ickov', '6347254313');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5542884095', 'Thekla Hablet', 2, 'rredemile3@foxnews.com', '3397545911', 'Roby Redemile', '5937265525');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8736669663', 'Reid Geraudel', 1, 'tmedlin4@biglobe.ne.jp', '6471192206', 'Thain Medlin', '3459548801');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3444789209', 'Lorinda McMeeking', 1, 'adole5@imgur.com', '3368926961', 'Alonzo Dole', '8043043973');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4988009382', 'Gerrie Yushkov', 2, 'rajam6@time.com', '2748980444', 'Robinett Ajam', '7598740850');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3207271921', 'Ursola Chalcot', 3, 'aclissold7@economist.com', '5108128070', 'Aksel Clissold', '5013141229');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5087197394', 'Hiram Postance', 6, 'jfrost8@apache.org', '4785145126', 'Jannelle Frost', '8473672255');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('7967699977', 'Euell Roscoe', 1, 'kjarvis9@deviantart.com', '8967851210', 'Karylin Jarvis', '1568734891');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3757003542', 'Cornelia Samsworth', 6, 'hmcraveya@simplemachines.org', '7677906895', 'Huey McRavey', '2154014706');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9572093970', 'Xavier Raoult', 4, 'kdeeginb@thetimes.co.uk', '9294373596', 'Karlotta Deegin', '3797670629');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('6499672815', 'Chrisy Donahue', 6, 'tdowdamc@msu.edu', '6757810351', 'Tommie Dowdam', '9201522517');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3295104051', 'Allyn Blasing', 2, 'cstorcked@hubpages.com', '4079625001', 'Cristie Storcke', '7708574787');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4084383478', 'Kaycee World', 1, 'lmacgarritye@gov.uk', '7356624117', 'Lyon MacGarrity', '1589343210');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('1672124952', 'Fitzgerald Lidster', 4, 'rkenenf@sciencedaily.com', '3337508426', 'Riobard Kenen', '4547443164');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9223636222', 'Corette Benzie', 1, 'gyokleyg@nbcnews.com', '4122811490', 'Genni Yokley', '2795285308');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9521126747', 'Trixi Creenan', 2, 'claureth@nbcnews.com', '4327643213', 'Crysta Lauret', '7095944499');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8681423079', 'Woody Obbard', 1, 'tfarneyi@cnet.com', '4988631529', 'Tine Farney', '5641700461');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9677906902', 'Sacha Muat', 5, 'atremmelj@nhs.uk', '1933218023', 'Andee Tremmel', '8303646026');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2942684739', 'Brew Hounson', 2, 'llaughlink@diigo.com', '1501893934', 'Ludovico Laughlin', '6329167286');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4687115760', 'Orv Grimm', 5, 'fmottonl@twitpic.com', '2894443189', 'Fax Motton', '1878467319');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('7822018908', 'Simeon Girardet', 2, 'srakestrawm@hugedomains.com', '8824376126', 'Shandeigh Rakestraw', '5077399199');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5838732484', 'Lorie Cowland', 1, 'mgabern@phpbb.com', '5525554735', 'Myrtia Gaber', '9678892887');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('1329512008', 'Nathaniel Zannotti', 2, 'fmunneryo@newsvine.com', '3676261298', 'Filmore Munnery', '9499774042');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4759272103', 'Elijah Crawley', 2, 'atowardp@studiopress.com', '5489354349', 'Aleta Toward', '9371207695');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9858905085', 'Marshall Pablo', 3, 'diorizzoq@google.it', '5496394344', 'Darby Iorizzo', '6629312431');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2092327757', 'Mechelle Prattington', 5, 'avernir@umn.edu', '7826820143', 'Alexis Verni', '3326337890');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9615259409', 'Rene Matessian', 4, 'mjarrads@tinypic.com', '9907909201', 'Marcille Jarrad', '6528315806');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8629008404', 'Izaak Baudts', 6, 'dlat@mail.ru', '8484307399', 'Dulcy La Padula', '3155064972');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('8875223261', 'Al Yo', 4, 'jleatu@webnode.com', '5672165047', 'Jameson Leat', '4018394377');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9851676277', 'Esdras Nineham', 6, 'agatchelv@mozilla.com', '9792654009', 'Aeriell Gatchel', '6248125053');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('7351276611', 'Novelia Arman', 1, 'mwenzelw@booking.com', '7805261056', 'Miguelita Wenzel', '6845633367');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3245779779', 'Merralee Bolland', 2, 'rburragex@amazon.co.jp', '8986747954', 'Raymund Burrage', '8994486588');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('6926557995', 'Oralie Baldock', 1, 'kedgary@google.ca', '6119436810', 'Kimble Edgar', '1603190160');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9435262533', 'Sayres McKinie', 3, 'bbilesz@technorati.com', '8137963121', 'Broderic Biles', '5366153698');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3858831986', 'Chastity Merrick', 6, 'mkoppes10@deviantart.com', '9874394912', 'Manya Koppes', '9882355126');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5283868270', 'Caprice Gascar', 5, 'aportch11@auda.org.au', '3498471437', 'Ailyn Portch', '1587228297');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3749127802', 'Rachele Giroldi', 5, 'etheakston12@instagram.com', '9098038873', 'Ellwood Theakston', '6809673647');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4199487271', 'Petronilla Regorz', 2, 'jbrotherton13@howstuffworks.com', '9568785830', 'Johnathon Brotherton', '1526048477');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('6555390862', 'Garvin Seys', 6, 'gmassey14@naver.com', '7676723490', 'Guinevere Massey', '8197468262');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('3264019102', 'Simmonds Odell', 2, 'bjurries15@delicious.com', '7424743442', 'Bealle Jurries', '8922084153');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5259623754', 'Royce Igo', 1, 'ibocken16@github.com', '6978594104', 'Ileane Bocken', '3007844034');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9129086599', 'Victoir Hultberg', 6, 'sbeelby17@engadget.com', '9423683960', 'Susette Beelby', '6904826441');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('4581036125', 'Elizabet Pawlowicz', 1, 'pyanukhin18@redcross.org', '5198115407', 'Petronille Yanukhin', '1257786289');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('9441070040', 'Judah Esberger', 4, 'mbarok19@gov.uk', '5431843001', 'Mendie Barok', '6257408788');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2991300528', 'Lynne Marskell', 4, 'hturpie1a@phpbb.com', '2995479318', 'Harwell Turpie', '5669870824');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2264841791', 'Rosalia Lace', 4, 'flongden1b@nytimes.com', '7307707689', 'Fernando Longden', '6806496197');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('5053459221', 'Conrad Dunphie', 6, 'mbanham1c@pinterest.com', '3174148044', 'Marty Banham', '5068979189');
+insert into VISITANTE (identificacion, nombre, tipo, correo, telefonopropio, nombreemergencia, telefonoemergencia) values ('2656125483', 'Barbabas Quaintance', 6, 'cwhatman1d@rakuten.co.jp', '8442563563', 'Carita Whatman', '6968972188');
+
+select identificacion
+from visitante;
 
 insert into CENTROCOMERCIAL (id, nombre) values (1, 'Titan');
 insert into CENTROCOMERCIAL (id, nombre) values (2, 'Parque la colina');
-insert into CENTROCOMERCIAL (id, nombre) values (3, 'Gran Estación');
+insert into CENTROCOMERCIAL (id, nombre) values (3, 'Gran Estacion');
 insert into CENTROCOMERCIAL (id, nombre) values (4, 'Multiplaza');
 insert into CENTROCOMERCIAL (id, nombre) values (5, 'Santa fe');
 insert into CENTROCOMERCIAL (id, nombre) values (6, 'Santa Ana');
@@ -134,28 +134,28 @@ insert into CENTROCOMERCIAL (id, nombre) values (13, 'Galerias');
 insert into CENTROCOMERCIAL (id, nombre) values (14, 'Atlantis');
 insert into CENTROCOMERCIAL (id, nombre) values (15, 'Buenavista');
 
-insert into AREA (id, valor, aforo) values (1, 1301, 86);
-insert into AREA (id, valor, aforo) values (2, 290, 19);
-insert into AREA (id, valor, aforo) values (3, 885, 59);
-insert into AREA (id, valor, aforo) values (4, 1396, 93);
-insert into AREA (id, valor, aforo) values (5, 324, 21);
-insert into AREA (id, valor, aforo) values (6, 688, 45);
-insert into AREA (id, valor, aforo) values (7, 483, 32);
-insert into AREA (id, valor, aforo) values (8, 279, 18);
-insert into AREA (id, valor, aforo) values (9, 235, 15);
-insert into AREA (id, valor, aforo) values (10, 217, 14);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 1301, 26);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 290, 19);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 885, 39);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 1396, 63);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 324, 21);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 688, 35);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 483, 32);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 279, 18);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 235, 15);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 217, 14);
 
-insert into CAPACIDADNORMAL (id, valor, aforo) values (1, 13, 2);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (2, 20, 10);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (3, 30, 15);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (4, 18, 9);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (5, 200, 100);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (6, 300, 150);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (7, 400, 200);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (8, 500, 250);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (9, 420, 300);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (10, 350, 176);
-insert into CAPACIDADNORMAL (id, valor, aforo) values (11, 14, 2);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 13, 2);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 20, 10);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 30, 15);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 18, 9);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 200, 100);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 300, 150);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 400, 70);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 500, 50);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 420, 100);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 350, 76);
+insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 14, 2);
 
 insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC123', 11, 4, 1123, 4);
 insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC122', 11, NULL, 1429, 11);
@@ -167,7 +167,6 @@ insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentro
 insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC129', 11, NULL, 1068, 13);
 insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC110', 1, NULL, 1415, 2);
 insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC223', 1, 6, 1435, 14);
-
 
 insert into BANO (identificador, capacidadnormal, area, sanitarios, idcentrocomercial) values ('BA123', 3, NULL, 28, 10);
 insert into BANO (identificador, capacidadnormal, area, sanitarios, idcentrocomercial) values ('BA124', 3, NULL, 24, 8);
@@ -190,21 +189,21 @@ insert into BANO (identificador, capacidadnormal, area, sanitarios, idcentrocome
 insert into BANO (identificador, capacidadnormal, area, sanitarios, idcentrocomercial) values ('BA301', 3, 6, 16, 4);
 insert into BANO (identificador, capacidadnormal, area, sanitarios, idcentrocomercial) values ('BA302', 3, 1, 15, 1);
 
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (1, 'Restaurante', 53, 51);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (2, 'Farmacia', 51, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (3, 'Parque temático', 54, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (4, 'Almacen', 54, 55);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (5, 'Supermercado', 56, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (6, 'Casino', 53, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (7, 'Bar', 53, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (8, 'Tecnologia', 51, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (9, 'Heladeria', 56, 55);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (10, 'Hogar', 55, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (11, 'Banco',56 , 57);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (12, 'Cajero', 51, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (13, 'Cinema', 51, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (14, 'Bolos', 53, 50);
-insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (15, 'Cafeteria', 2,58 );
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Restaurante', 5, 51);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Farmacia', 10, 50);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Parque tematico',12,40);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Almacen', 4, 55);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Supermercado', 6, 53);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Casino', 32, 50);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Bar', 30, 50);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Tecnologia', 5, 52);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Heladeria', 15, 45);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Hogar', 13, 45);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Banco', 12, 49);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Cajero', 20, 50);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Cinema', 6, 56);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Bolos', 9, 56);
+insert into TIPOLOCAL (id, tipo, horaapertura, horacierre) values (tipoLocal_sequence.nextval, 'Cafeteria', 2,56 );
 
 insert into PARQUEADERO (identificador, capacidadnormal, area, idcentrocomercial) values ('PAR1', 6, NULL, 10);
 insert into PARQUEADERO (identificador, capacidadnormal, area, idcentrocomercial) values ('PAR2', 8, NULL, 15);
@@ -238,16 +237,15 @@ insert into ZONACIRCULACION (identificador, capacidadnormal, idcentrocomercial) 
 insert into ZONACIRCULACION (identificador, capacidadnormal, idcentrocomercial) values ('ZC272', 11, 7);
 insert into ZONACIRCULACION (identificador, capacidadnormal, idcentrocomercial) values ('ZC172', 9, 10);
 
-insert into TIPOLECTOR (id, tipo) values (1, 'Temperatura');
-insert into TIPOLECTOR (id, tipo) values (2, 'Vehiculo');
-insert into TIPOLECTOR (id, tipo) values (3, 'Visitante');
+insert into TIPOLECTOR (id, tipo) values (tipoLector_sequence.nextval, 'Temperatura');
+insert into TIPOLECTOR (id, tipo) values (tipoLector_sequence.nextval, 'Vehiculo');
+insert into TIPOLECTOR (id, tipo) values (tipoLector_sequence.nextval, 'Visitante');
 
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC101', NULL, 7, 1, 1, 5);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC102', NULL, 4, 10, 1, 12);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC103', NULL, 5, 7, 1, 15);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC104', 8, 9, 10, 1, 1);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ( 'LC105', 7, 9, 5, 0, 1);
-
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC106', 8, 9, 8, 0, 6);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC107', 6, 4, 11, 0, 6);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC108', 7, 1, 2, 0, 14);
@@ -274,7 +272,6 @@ insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, act
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC311', NULL, 9, 2, 1, 4);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC305', NULL, 5, 13, 1, 4);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC306', NULL, 4, 1, 1, 4);
-
 
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (1, 2, 6, NULL, NULL, NULL,NULL);
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (2, 3, NULL, 'LC209', NULL, NULL, NULL);
@@ -315,8 +312,8 @@ insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascen
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (37, 3, NULL,'LC304', NULL, NULL, NULL);
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (38, 3, NULL,'LC305', NULL, NULL, NULL);
 
-insert into TIPOCARNET (id, tipo) values (1, 'QR');
-insert into TIPOCARNET (id, tipo) values (2, 'Fisico');
+insert into TIPOCARNET (id, tipo) values (tipoCarnet_sequence.nextval, 'QR');
+insert into TIPOCARNET (id, tipo) values (tipoCarnet_sequence.nextval, 'Fisico');
 
 insert into CARNET (tipocarnet, idvisitante) values (2, '8931131694');
 insert into CARNET (tipocarnet, idvisitante) values (1, '7345698805');
@@ -400,65 +397,95 @@ insert into VEHICULO (placa, caracteristicas, propietario) values ('DNE134', 'Au
 insert into VEHICULO (placa, caracteristicas, propietario) values ('2NK445', 'Lambo', '2092327757');
 
 
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (1, 1, '5053459221', TO_DATE('2018/12/01', 'yyyy/mm/dd'), 56, 28);
+--> Registro en el centro comercial
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (1, 1, '5053459221', TO_DATE('2018/12/01', 'yyyy/mm/dd'), 28, 56);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (1, 2, '8931131694', TO_DATE('2018/12/01', 'yyyy/mm/dd'), 8, 20);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (5, 2, '2991300528', TO_DATE('2020/08/12', 'yyyy/mm/dd'), 10, 45);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (5, 2, '2991300528', TO_DATE('2020/08/12', 'yyyy/mm/dd'), 10, 45);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (15, 1, '3749127802' ,TO_DATE('2020/01/12', 'yyyy/mm/dd'), 2, 26);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (15, 2, '2991300528', TO_DATE('2020/08/12', 'yyyy/mm/dd'), 10, 45);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (15, 1, '3749127802' ,TO_DATE('2020/01/12', 'yyyy/mm/dd'), 2, 26);
+
 
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 2, '8931131694', TO_DATE('2019/07/19', 'yyyy/mm/dd'), 22, 47);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 1, '7351276611', TO_DATE('2019/07/19', 'yyyy/mm/dd'), 12, 36);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 1, '4199487271', TO_DATE('2019/07/19', 'yyyy/mm/dd'), 23, 24);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 1, '7351276611', TO_DATE('2019/06/01', 'yyyy/mm/dd'), 27, 32);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 2, '2264841791', TO_DATE('2019/05/11', 'yyyy/mm/dd'), 3, 5);
 
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (12, 1, '5053459221', TO_DATE('2020/08/09', 'yyyy/mm/dd'), 34, 48);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (12, 1, '2264841791', TO_DATE('2020/12/09', 'yyyy/mm/dd'), 52, 31);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (13, 1, '5053459221', TO_DATE('2020/11/09', 'yyyy/mm/dd'), 34, 48);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (13, 1, '2264841791', TO_DATE('2020/04/09', 'yyyy/mm/dd'), 15, 34);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '5053459221', TO_DATE('2020/11/09', 'yyyy/mm/dd'), 34, 48);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '2264841791', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 35, 16);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 2, '8931131694', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 37, 12);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 2, '8931131694', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 5, 6);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 2, '2991300528', TO_DATE('2019/01/09', 'yyyy/mm/dd'), 10, 2);
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (15, 2, '2991300528', TO_DATE('2020/08/12', 'yyyy/mm/dd'), 10, 45);
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (15, 1, '3749127802' ,TO_DATE('2020/01/12', 'yyyy/mm/dd'), 2, 26);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (16, 2, '9677906902', TO_DATE('2019/02/09', 'yyyy/mm/dd'), 8, 20);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (16, 1, '2092327757', TO_DATE('2020/03/09', 'yyyy/mm/dd'), 35, 20);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (17, 2, '5838732484', TO_DATE('2018/04/09', 'yyyy/mm/dd'), 56, 28);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (17, 1, '3245779779', TO_DATE('2020/05/09', 'yyyy/mm/dd'), 49, 6);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (18, 1,'6555390862' , TO_DATE('2019/06/09', 'yyyy/mm/dd'), 53, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (18, 1, '3757003542', TO_DATE('2020/07/08', 'yyyy/mm/dd'), 5, 18);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (19, 1,'6555390862' , TO_DATE('2020/06/09', 'yyyy/mm/dd'), 53, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (19, 1, '3757003542', TO_DATE('2019/01/08', 'yyyy/mm/dd'), 12, 18);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (20, 1,'6555390862' , TO_DATE('2017/06/09', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (20, 1, '3757003542', TO_DATE('2018/01/08', 'yyyy/mm/dd'), 24, 18);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (21, 1,'6555390862' , TO_DATE('2018/12/09', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (21, 1, '3757003542', TO_DATE('2020/01/24', 'yyyy/mm/dd'), 26, 18);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (22, 1,'6555390862' , TO_DATE('2018/12/09', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (22, 1, '3757003542', TO_DATE('2020/05/24', 'yyyy/mm/dd'), 26, 18);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (23, 1,'6555390862' , TO_DATE('2020/12/19', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (23, 1, '3757003542', TO_DATE('2019/05/16', 'yyyy/mm/dd'), 28, 19);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (24, 1,'6555390862' , TO_DATE('2020/11/19', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (24, 1, '3757003542', TO_DATE('2019/11/16', 'yyyy/mm/dd'), 28, 19);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (25, 1,'6555390862' , TO_DATE('2020/08/19', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (25, 1, '3757003542', TO_DATE('2019/10/16', 'yyyy/mm/dd'), 28, 19);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (26, 1,'6555390862' , TO_DATE('2020/03/19', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (26, 1, '3757003542', TO_DATE('2019/03/16', 'yyyy/mm/dd'), 28, 19);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (27, 1,'6555390862' , TO_DATE('2020/04/19', 'yyyy/mm/dd'), 18, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (27, 1, '3757003542', TO_DATE('2019/07/16', 'yyyy/mm/dd'), 18, 19);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (28, 1,'6555390862' , TO_DATE('2020/04/30', 'yyyy/mm/dd'), 22, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (28, 1, '3757003542', TO_DATE('2019/07/29', 'yyyy/mm/dd'), 18, 19);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (29, 1,'6555390862' , TO_DATE('2020/06/30', 'yyyy/mm/dd'), 23, 34);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (29, 1, '3757003542', TO_DATE('2018/08/19', 'yyyy/mm/dd'), 54, 19);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (30, 1,'6555390862' , TO_DATE('2020/06/13', 'yyyy/mm/dd'), 18, 30);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (30, 1,'3749127802' , TO_DATE('2020/06/13', 'yyyy/mm/dd'), 35, 40);
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (30, 1, '3757003542', TO_DATE('2018/08/14', 'yyyy/mm/dd'), 18, 19);
 
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (30, 1, '3757003542', TO_DATE('2018/08/14', 'yyyy/mm/dd'), 18, 19);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (38, 1,'4199487271' , TO_DATE('2020/02/14', 'yyyy/mm/dd'), 18, 30);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (38, 1,'9858905085' , TO_DATE('2020/02/14', 'yyyy/mm/dd'), 35, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (38, 1, '6555390862', TO_DATE('2020/02/14', 'yyyy/mm/dd'), 18, 19);
 
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (31, 1, '4199487271', TO_DATE('2020/06/13', 'yyyy/mm/dd'), 18, 40);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (32,1, '9858905085' , TO_DATE('2018/05/14', 'yyyy/mm/dd'), 18, 20);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (33,1, '7351276611' , TO_DATE('2020/05/04', 'yyyy/mm/dd'), 18, 54);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (34, 1, '3757003542', TO_DATE('2019/05/26', 'yyyy/mm/dd'), 28, 19);
+
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (35, 1,'6555390862' , TO_DATE('2018/12/09', 'yyyy/mm/dd'), 18, 40);
+
 
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (4,'ABC244', TO_DATE('2019/01/11', 'yyyy/mm/dd'), 34, 53);
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (9,'YUA782',TO_DATE('2020/02/09', 'yyyy/mm/dd'), 45, 10);

@@ -56,7 +56,7 @@ public class TipoVisitante implements VOTipoVisitante
 	/**
 	 * Constructor con valores
 	 * @param id - El identificador del tipo de visitante
-	 * @param tipo - El nombre del tipo de visitante
+	 * @param tipo - El nombre del tips de visitante
 	 * @param horaInicio - Identificador del horario de inicio de circulación del tipo de visitante. Debe existir un horario con dicho identificador
 	 * @param horaLimite - Identificador del horario límite de circulación del tipo de visitante. Debe existir un horario con dicho identificador
 	 */

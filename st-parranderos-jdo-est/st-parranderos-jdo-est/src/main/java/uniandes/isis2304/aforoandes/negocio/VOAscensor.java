@@ -25,12 +25,12 @@ public interface VOAscensor
 	/**
 	 * @return El id de la capacidad normal del ascensor
 	 */
-	public long getCapacidadNormal();
+	public Long getCapacidadNormal();
 
 	/**
 	 * @return El id del área del ascensor
 	 */
-	public long getArea();
+	public Long getArea();
 
 	/**
 	 * @return El peso máximo del ascensor

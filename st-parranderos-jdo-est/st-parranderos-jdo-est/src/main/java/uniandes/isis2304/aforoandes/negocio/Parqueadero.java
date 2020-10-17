@@ -26,12 +26,12 @@ public class Parqueadero implements VOParqueadero
 	/**
 	 * El identificador de la capacidad normal del parqueadero. Debe existir en la tabla de CAPACIDADNORMAL
 	 */
-	private long capacidadNormal;
+	private Long capacidadNormal;
 	
 	/**
 	 * El identificador del área del parqueadero. Debe existir en la tabla de AREA
 	 */
-	private long area;
+	private Long area;
 	
 	/**
 	 * El identificador del centro comercial donde se localiza el parqueadero. Debe existir en la tabla de CENTROCOMERCIAL
@@ -48,8 +48,8 @@ public class Parqueadero implements VOParqueadero
 	public Parqueadero() 
 	{
 		this.identificador = "";
-		this.capacidadNormal = 0;
-		this.area = 0;
+		this.capacidadNormal = null;
+		this.area = null;
 		this.idCentroComercial = "";
 	}
 
@@ -60,7 +60,7 @@ public class Parqueadero implements VOParqueadero
 	 * @param capacidadNormal - El identificador de la capacidad normal. Debe existir una capacidad normal con dicho identificador
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
-	public Parqueadero(String identificador, long area, long capacidadNormal, String idCentroComercial) 
+	public Parqueadero(String identificador, Long area, long capacidadNormal, String idCentroComercial) 
 	{
 		this.identificador = identificador;
 		this.area = area;
@@ -88,7 +88,7 @@ public class Parqueadero implements VOParqueadero
 	/**
 	 * @return El id de la capacidad normal del parqueadero
 	 */
-	public long getCapacidadNormal() 
+	public Long getCapacidadNormal() 
 	{
 		return capacidadNormal;
 	}
@@ -96,7 +96,7 @@ public class Parqueadero implements VOParqueadero
 	/**
 	 * @param capacidadNormal - El nuevo identificador de la capacidad normal del parqueadero
 	 */
-	public void setCapacidadNormal(long capacidadNormal) 
+	public void setCapacidadNormal(Long capacidadNormal) 
 	{
 		this.capacidadNormal = capacidadNormal;
 	}
@@ -104,7 +104,7 @@ public class Parqueadero implements VOParqueadero
 	/**
 	 * @return El id del área del parqueadero
 	 */
-	public long getArea() 
+	public Long getArea() 
 	{
 		return area;
 	}
@@ -112,7 +112,7 @@ public class Parqueadero implements VOParqueadero
 	/**
 	 * @param area - El nuevo identificador del área del parqueadero
 	 */
-	public void setArea(long area) 
+	public void setArea(Long area) 
 	{
 		this.area = area;
 	}

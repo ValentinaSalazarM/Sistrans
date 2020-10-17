@@ -26,12 +26,12 @@ public class LocalComercial implements VOLocalComercial
 	/**
 	 * El identificador de la capacidad normal del local comercial. Debe existir en la tabla de CAPACIDADNORMAL
 	 */
-	private long capacidadNormal;
+	private Long capacidadNormal;
 	
 	/**
 	 * El identificador del área del local comercial. Debe existir en la tabla de AREA
 	 */
-	private long area;
+	private Long area;
 	
 	/**
 	 * El identificador del tipo de local. Debe exitir en la tabla de TIPOLOCAL
@@ -59,8 +59,8 @@ public class LocalComercial implements VOLocalComercial
 	public LocalComercial() 
 	{
 		this.identificador = "";
-		this.capacidadNormal = 0;
-		this.area = 0;
+		this.capacidadNormal = null;
+		this.area = null;
 		this.tipoLocal = 0;
 		this.idCentroComercial = "";
 		activo = true;
@@ -75,7 +75,7 @@ public class LocalComercial implements VOLocalComercial
 	 * @param activo - Estado de funcionamiento del local comercial
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
-	public LocalComercial (String identificador, long area, long capacidadNormal, long tipoLocal, boolean activo, String idCentroComercial) 
+	public LocalComercial (String identificador, Long area, Long capacidadNormal, long tipoLocal, boolean activo, String idCentroComercial) 
 	{
 		this.identificador = identificador;
 		this.area = area;
@@ -105,7 +105,7 @@ public class LocalComercial implements VOLocalComercial
 	/**
 	 * @return El id de la capacidad normal del local comercial
 	 */
-	public long getCapacidadNormal() 
+	public Long getCapacidadNormal() 
 	{
 		return capacidadNormal;
 	}
@@ -113,7 +113,7 @@ public class LocalComercial implements VOLocalComercial
 	/**
 	 * @param capacidadNormal - El nuevo identificador de la capacidad normal del ascensor
 	 */
-	public void setCapacidadNormal(long capacidadNormal) 
+	public void setCapacidadNormal(Long capacidadNormal) 
 	{
 		this.capacidadNormal = capacidadNormal;
 	}
@@ -121,7 +121,7 @@ public class LocalComercial implements VOLocalComercial
 	/**
 	 * @return El id del área del local comercial
 	 */
-	public long getArea() 
+	public Long getArea() 
 	{
 		return area;
 	}
@@ -129,7 +129,7 @@ public class LocalComercial implements VOLocalComercial
 	/**
 	 * @param area - El nuevo identificador del área del local comercial
 	 */
-	public void setArea(long area) 
+	public void setArea(Long area) 
 	{
 		this.area = area;
 	}
@@ -188,7 +188,7 @@ public class LocalComercial implements VOLocalComercial
 	@Override
 	public String toString() 
 	{
-		return "LocalComercial [identificador=" + identificador + ", capacidadNormal=" + capacidadNormal + ", area=" + area + ", tipoLocal=" + tipoLocal + ", activo = " + activo + ", idCentroComercial=" + idCentroComercial + "]";
+		return "LocalComercial [identificador = " + identificador + ", capacidadNormal = " + capacidadNormal + ", area = " + area + ", tipoLocal = " + tipoLocal + ", activo = " + activo + ", idCentroComercial = " + idCentroComercial + "]";
 	}
 
 	

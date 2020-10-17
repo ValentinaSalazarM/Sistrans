@@ -23,12 +23,12 @@ public interface VOParqueadero
 	/**
 	 * @return El id de la capacidad normal del parqueadero
 	 */
-	public long getCapacidadNormal();
+	public Long getCapacidadNormal();
 
 	/**
 	 * @return El id del área del parqueadero
 	 */
-	public long getArea();
+	public Long getArea();
 
 	/**
 	 * @return El id del centro comercial del parqueadero

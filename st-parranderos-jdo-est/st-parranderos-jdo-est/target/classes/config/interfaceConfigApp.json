@@ -14,7 +14,7 @@
 				},
 				{
 					"label": "Listar",
-					"event": "listarAscensor"
+					"event": "listarAscensores"
 				},
 				{
 					"label": "Buscar por identificador",
@@ -27,6 +27,60 @@
 				{
 					"label": "Eliminar por identificador",
 					"event": "eliminarAscensorPorId"
+				}
+			]
+		},
+		{ "menuTitle": "Local comercial",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarLocalComercial"
+				},
+				{
+					"label": "Listar",
+					"event": "listarLocalesComerciales"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarLocalComercialPorIdentificador"
+				},
+				{
+					"label": "Cambiar área",
+					"event": "cambiarAreaLocalComercial"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarLocalComercialPorIdentificador"
+				}
+			]
+		},
+		{ "menuTitle": "Visitante",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarVisitante"
+				},
+				{
+					"label": "Listar",
+					"event": "listarVisitantes"
+				},
+				{
+					"label": "Buscar por identificación",
+					"event": "buscarVisitantePorIdentificacion"
+				},
+				{
+					"label": "Cambiar teléfono de emergencia",
+					"event": "cambiarTelefonoEmergenciaVisitante"
+				},
+				{
+					"label": "Cambiar contacto de emergencia",
+					"event": "cambiarNombreEmergenciaVisitante"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarVisitantePorIdentificacion"
 				}
 			]
 		},

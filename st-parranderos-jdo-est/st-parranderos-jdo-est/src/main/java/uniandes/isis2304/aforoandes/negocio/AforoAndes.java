@@ -1167,10 +1167,10 @@ public class AforoAndes
 	 * @param idBaño - El identificador del baño en el caso de que pertenezca a un baño
 	 * @return El objeto LECTOR adicionado. null si ocurre alguna Excepción
 	 */
-	public Lector adicionarLector(long id, long tipolector, String idCentroComercial, String idLocalComercial, String idAscensor, String idParqueadero, String idBaño) 
+	public Lector adicionarLector(long id, long tipoLector, String idCentroComercial, String idLocalComercial, String idAscensor, String idParqueadero, String idBaño) 
 	{
 		log.info ("Adicionando lector: " + id);
-		Lector lector = pp.adicionarLector(id, tipolector, idCentroComercial, idLocalComercial, idAscensor, idParqueadero, idBaño);
+		Lector lector = pp.adicionarLector(id, tipoLector, idCentroComercial, idLocalComercial, idAscensor, idParqueadero, idBaño);
 		log.info ("Adicionando lector: " + lector);
 		return lector;
 	}

@@ -26,12 +26,12 @@ public class Bano implements VOBano
 	/**
 	 * El identificador de la capacidad normal del baño. Debe existir en la tabla de CAPACIDADNORMAL
 	 */
-	private long capacidadNormal;
+	private Long capacidadNormal;
 	
 	/**
 	 * El identificador del área del baño. Debe existir en la tabla de AREA
 	 */
-	private long area;
+	private Long area;
 	
 	/**
 	 * El número de sanitarios del baño (mayor estricto a 0).
@@ -53,8 +53,8 @@ public class Bano implements VOBano
 	public Bano() 
 	{
 		this.identificador = "";
-		this.capacidadNormal = 0;
-		this.area = 0;
+		this.capacidadNormal = null;
+		this.area = null;
 		this.sanitarios = 0;
 		this.idCentroComercial = "";
 	}
@@ -67,7 +67,7 @@ public class Bano implements VOBano
 	 * @param sanitarios - El número de sanitarios del baño (mayor a 0)
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
-	public Bano(String identificador, long area, long capacidadNormal, int sanitarios, String idCentroComercial) 
+	public Bano(String identificador, Long area, Long capacidadNormal, int sanitarios, String idCentroComercial) 
 	{
 		this.identificador = identificador;
 		this.area = area;
@@ -96,7 +96,7 @@ public class Bano implements VOBano
 	/**
 	 * @return El id de la capacidad normal del baño
 	 */
-	public long getCapacidadNormal() 
+	public Long getCapacidadNormal() 
 	{
 		return capacidadNormal;
 	}
@@ -104,7 +104,7 @@ public class Bano implements VOBano
 	/**
 	 * @param capacidadNormal - El nuevo identificador de la capacidad normal del baño
 	 */
-	public void setCapacidadNormal(long capacidadNormal) 
+	public void setCapacidadNormal(Long capacidadNormal) 
 	{
 		this.capacidadNormal = capacidadNormal;
 	}
@@ -112,7 +112,7 @@ public class Bano implements VOBano
 	/**
 	 * @return El id del área del baño
 	 */
-	public long getArea() 
+	public Long getArea() 
 	{
 		return area;
 	}
@@ -120,7 +120,7 @@ public class Bano implements VOBano
 	/**
 	 * @param area - El nuevo identificador del área del baño
 	 */
-	public void setArea(long area) 
+	public void setArea(Long area) 
 	{
 		this.area = area;
 	}

@@ -95,7 +95,7 @@ public class Visitante implements VOVisitante
 	/**
 	 * @return El identificador del visitante
 	 */
-	public String getIdentificador() 
+	public String getIdentificacion() 
 	{
 		return identificacion;
 	}
@@ -103,7 +103,7 @@ public class Visitante implements VOVisitante
 	/**
 	 * @param identificador - El nuevo identificador del visitante
 	 */
-	public void setIdentificador(String identificador) 
+	public void setIdentificacion(String identificador) 
 	{
 		this.identificacion = identificador;
 	}
@@ -210,8 +210,8 @@ public class Visitante implements VOVisitante
 	 */
 	public String toString() 
 	{
-		return "Visitante [identificador=" + identificacion + ", tipo=" + tipo + ", nombre=" + nombre + ", correo=" + correo + ", telefonoPropio=" + telefonoPropio
-				+ ", nombreEmergencia=" + nombreEmergencia + ", telefonoEmergencia=" + telefonoEmergencia + "]";
+		return "Visitante [identificador = " + identificacion + ", tipo = " + tipo + ", nombre = " + nombre + ", correo = " + correo + ", telefonoPropio = " + telefonoPropio
+				+ ", nombreEmergencia = " + nombreEmergencia + ", telefonoEmergencia = " + telefonoEmergencia + "]";
 	}
 	
 
