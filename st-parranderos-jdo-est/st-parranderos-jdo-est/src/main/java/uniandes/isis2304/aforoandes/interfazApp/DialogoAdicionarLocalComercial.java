@@ -12,7 +12,7 @@ import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
 import uniandes.isis2304.aforoandes.negocio.VOTipoLocal;
 
 /**
- * Diálogo para introducir la información necesaria para crear un ascensor 
+ * Diálogo para introducir la información necesaria para crear un local comercial 
  */
 @SuppressWarnings("serial")
 
@@ -121,7 +121,7 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 	// -----------------------------------------------------------------
 
 	/**
-	 * Crea la ventana de diálogo de la banda.
+	 * Crea la ventana de diálogo del espacio.
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
 	public DialogoAdicionarLocalComercial( InterfazAforoAndesApp pPrincipal )
@@ -156,7 +156,7 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 		campos.add( lblTipo );
 
 		cbTipoLocal = new JComboBox<>();
-		for ( VOTipoLocal tipo: pPrincipal.listarTiposLocal())
+		for ( VOTipoLocal tipo: pPrincipal.listarVOTiposLocal())
 		{
 			cbTipoLocal.addItem(tipo.getId() + " - " + tipo.getTipo());
 		}
@@ -165,7 +165,7 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 		lblCentroComercial = new JLabel( "Id Centro Comercial: " );
 		campos.add( lblCentroComercial );
 		cbCentrosComerciales = new JComboBox<>();
-		for ( VOCentroComercial tv: pPrincipal.listarCentrosComerciales())
+		for ( VOCentroComercial tv: pPrincipal.listarVOCentrosComerciales())
 		{
 			cbCentrosComerciales.addItem(tv.getIdentificador() + " - " + tv.getNombre());
 		}

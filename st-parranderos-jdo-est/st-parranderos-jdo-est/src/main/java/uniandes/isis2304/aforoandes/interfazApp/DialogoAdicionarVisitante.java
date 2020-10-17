@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import uniandes.isis2304.aforoandes.negocio.VOTipoVisitante;
@@ -148,6 +149,7 @@ public class DialogoAdicionarVisitante extends JDialog implements ActionListener
 		principal = pPrincipal;
 		setTitle( "Agregar visitante" );
 		setLayout( new java.awt.BorderLayout( ) );
+		panelInfo.setBorder( new EmptyBorder( 20, 20, 20, 20 ) );
 
 		panelInfo = new JPanel( );
 		panelInfo.setPreferredSize( new Dimension( 650, 300 ) );
@@ -169,7 +171,7 @@ public class DialogoAdicionarVisitante extends JDialog implements ActionListener
 
 		lblTipo = new JLabel( "Tipo de visitante: " );
 		cbTipoVisitante = new JComboBox<>();
-		for ( VOTipoVisitante tv: pPrincipal.listarTiposVisitante())
+		for ( VOTipoVisitante tv: pPrincipal.listarVOTiposVisitante())
 		{
 			cbTipoVisitante.addItem(tv.getId() + " - " + tv.getTipo());
 		}
@@ -241,7 +243,7 @@ public class DialogoAdicionarVisitante extends JDialog implements ActionListener
 				}
 				else
 				{
-					principal.adicionarVisitante(identificacion, nombre, tipo, correo, telefonoPropio, nombreEmergencia, telefonoEmergencia, this);
+					principal.adicionarVisitante(identificacion, nombre, tipo, correo, telefonoPropio, nombreEmergencia, telefonoEmergencia);
 					dispose( );
 				}
 			}

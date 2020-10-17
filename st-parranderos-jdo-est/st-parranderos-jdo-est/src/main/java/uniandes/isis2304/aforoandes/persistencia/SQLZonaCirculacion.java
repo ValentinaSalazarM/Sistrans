@@ -86,7 +86,7 @@ public class SQLZonaCirculacion
 	 * @param identificador - El identificador de la zona
 	 * @return El objeto ZONA DE CIRCULACION que tiene el identificador dado
 	 */
-	public ZonaCirculacion darZonaPorId (PersistenceManager pm, String identificador) 
+	public ZonaCirculacion darZonaCirculacionPorId (PersistenceManager pm, String identificador) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaZonaCirculacion()+ " WHERE identificador = ?");
 		q.setResultClass(ZonaCirculacion.class);
@@ -102,7 +102,7 @@ public class SQLZonaCirculacion
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos ZONA CIRCULACION
 	 */
-	public List<ZonaCirculacion> darZonas(PersistenceManager pm)
+	public List<ZonaCirculacion> darZonasCirculacion(PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaZonaCirculacion ());
 		q.setResultClass(ZonaCirculacion.class);

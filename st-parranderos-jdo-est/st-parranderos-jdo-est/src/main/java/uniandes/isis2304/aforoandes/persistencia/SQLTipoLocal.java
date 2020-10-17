@@ -138,17 +138,18 @@ public class SQLTipoLocal
 	
 	/**
 	 * 
-	 * Crea y ejecuta la sentencia SQL para cambiar la hora de apertura de un TIPOLOCAL en la 
+	 * Crea y ejecuta la sentencia SQL para cambiar el horario de funcionamiento de un TIPOLOCAL en la 
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param identificador - El identificador del tipo
-	 * @param  horaApertura - La nueva hora habilitada para la apertura del local
+	 * @param tipo - El tipo de local
+	 * @param  horaApertura - La nueva hora habilitada para la apertura del tipo de local
+	 * @param  horaCierre - La nueva hora límite para el cierre del tipo de local
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarHoraApertura (PersistenceManager pm, long identificador, long horaApertura) 
+	public long cambiarHorarioTipoLocal (PersistenceManager pm, String tipo, long horaApertura, long horaCierre) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoLocal() + " SET horaApertura = ? WHERE id = ?");
-	     q.setParameters(horaApertura, identificador);
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoLocal() + " SET horaApertura = ?, horaCierre = ? WHERE tipo = ?");
+	     q.setParameters(horaApertura, horaCierre, tipo);
 	     return (long) q.executeUnique();            
 	}
 
@@ -161,7 +162,7 @@ public class SQLTipoLocal
 	 * @param  horaCierre - La nueva hora habilitada para la salida del centro comercial
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarHoraCierre (PersistenceManager pm, long identificador, long horaCierre) 
+	public long cambiarHoraCierreTipoLocal (PersistenceManager pm, long identificador, long horaCierre) 
 	{
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoLocal() + " SET horaCierre = ? WHERE id = ?");
 	     q.setParameters(horaCierre, identificador);

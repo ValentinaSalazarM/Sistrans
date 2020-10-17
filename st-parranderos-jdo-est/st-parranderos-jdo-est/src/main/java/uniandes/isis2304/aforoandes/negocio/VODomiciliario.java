@@ -32,6 +32,16 @@ public interface VODomiciliario
 	public String getEmpresaDomicilios();
 
 	/**
+	 * @return La hora de inicio de turno del domiciliario
+	 */
+	public long getHoraInicioTurno(); 
+
+	/**
+	 * @return La hora de final de turno del domiciliario
+	 */
+	public long getHoraFinalTurno(); 
+	
+	/**
 	 * @return Una cadena de caracteres con la información del domiciliario
 	 */
 	@Override

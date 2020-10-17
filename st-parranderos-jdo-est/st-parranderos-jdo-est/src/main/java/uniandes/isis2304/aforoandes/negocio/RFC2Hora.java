@@ -21,12 +21,12 @@ public class RFC2Hora implements VOLocalComercial
 	/**
 	 * El identificador de la capacidad normal del local comercial. Debe existir en la tabla de CAPACIDADNORMAL
 	 */
-	private long capacidadNormal;
+	private Long capacidadNormal;
 	
 	/**
 	 * El identificador del área del local comercial. Debe existir en la tabla de AREA
 	 */
-	private long area;
+	private Long area;
 	
 	/**
 	 * El identificador del tipo de local. Debe exitir en la tabla de TIPOLOCAL
@@ -63,8 +63,8 @@ public class RFC2Hora implements VOLocalComercial
 	public RFC2Hora() 
 	{
 		this.identificador = "";
-		this.capacidadNormal = 0;
-		this.area = 0;
+		this.capacidadNormal = null;
+		this.area = null;
 		this.tipoLocal = 0;
 		this.idCentroComercial = "";
 		activo = true;
@@ -89,7 +89,7 @@ public class RFC2Hora implements VOLocalComercial
 	/**
 	 * @return El id de la capacidad normal del local comercial
 	 */
-	public long getCapacidadNormal() 
+	public Long getCapacidadNormal() 
 	{
 		return capacidadNormal;
 	}
@@ -97,7 +97,7 @@ public class RFC2Hora implements VOLocalComercial
 	/**
 	 * @param capacidadNormal - El nuevo identificador de la capacidad normal del ascensor
 	 */
-	public void setCapacidadNormal(long capacidadNormal) 
+	public void setCapacidadNormal(Long capacidadNormal) 
 	{
 		this.capacidadNormal = capacidadNormal;
 	}
@@ -105,7 +105,7 @@ public class RFC2Hora implements VOLocalComercial
 	/**
 	 * @return El id del área del local comercial
 	 */
-	public long getArea() 
+	public Long getArea() 
 	{
 		return area;
 	}
@@ -113,7 +113,7 @@ public class RFC2Hora implements VOLocalComercial
 	/**
 	 * @param area - El nuevo identificador del área del local comercial
 	 */
-	public void setArea(long area) 
+	public void setArea(Long area) 
 	{
 		this.area = area;
 	}

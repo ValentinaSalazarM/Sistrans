@@ -32,6 +32,16 @@ public interface VOEmpleado
 	public String getLugarTrabajo();
 
 	/**
+	 * @return La hora de inicio de turno del empleado
+	 */
+	public long getHoraInicioTurno(); 
+
+	/**
+	 * @return La hora de final de turno del empleado
+	 */
+	public long getHoraFinalTurno(); 
+	
+	/**
 	 * @return Una cadena de caracteres con la información del empleado
 	 */
 	@Override

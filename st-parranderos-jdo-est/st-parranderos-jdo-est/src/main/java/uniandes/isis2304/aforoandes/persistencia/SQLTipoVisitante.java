@@ -139,17 +139,18 @@ public class SQLTipoVisitante
 
 	/**
 	 * 
-	 * Crea y ejecuta la sentencia SQL para cambiar la hora de inicio de un TIPOVISITANTE en la 
+	 * Crea y ejecuta la sentencia SQL para cambiar el horario de circulación de un TIPOVISITANTE en la 
 	 * base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
-	 * @param identificador - El identificador del tipo
+	 * @param tipo - El tipo de visitante
 	 * @param  horainicio - La nueva hora habilitada para el ingreso al centro comercial 
+	 * @param  horaLimite - La nueva hora límite para el ingreso al centro comercial 
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarHoraInicio (PersistenceManager pm, long identificador, long horainicio) 
+	public long cambiarHorarioTipoVisitante (PersistenceManager pm, String tipo, long horainicio, long horaLimite) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoVisitante() + " SET horainicio = ? WHERE id = ?");
-	     q.setParameters(horainicio, identificador);
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaTipoVisitante() + " SET horainicio = ?, horaLimite = ? WHERE tipo = ?");
+	     q.setParameters(horainicio, horaLimite, tipo);
 	     return (long) q.executeUnique();            
 	}
 

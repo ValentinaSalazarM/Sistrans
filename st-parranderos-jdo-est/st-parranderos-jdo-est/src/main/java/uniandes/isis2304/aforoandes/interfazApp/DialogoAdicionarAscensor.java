@@ -149,7 +149,7 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 		lblCentroComercial = new JLabel( "Id Centro Comercial: " );
 		campos.add( lblCentroComercial );
 		cbCentrosComerciales = new JComboBox<>();
-		for ( VOCentroComercial tv: pPrincipal.listarCentrosComerciales())
+		for ( VOCentroComercial tv: pPrincipal.listarVOCentrosComerciales())
 		{
 			cbCentrosComerciales.addItem(tv.getIdentificador() + " - " + tv.getNombre());
 		}

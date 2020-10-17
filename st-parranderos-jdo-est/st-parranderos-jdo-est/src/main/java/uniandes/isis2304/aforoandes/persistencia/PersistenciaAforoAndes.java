@@ -1793,21 +1793,23 @@ public class PersistenciaAforoAndes
 	 * Adiciona entradas al log de la aplicación
 	 * @param idVisitante - El identificador del visitante
 	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
+	 * @param horaInicioTurno - El identificador del horario de inicio de turno.
+	 * @param horaFinalTurno - El identificador del horario de fin de turno. Debe existir un horario con dicho identificador
 	 * @return El objeto Domiciliario adicionado. null si ocurre alguna Excepción
 	 */
-	public Domiciliario adicionarDomiciliario (String idVisitante, String empresaDomicilios)
+	public Domiciliario adicionarDomiciliario (String idVisitante, String empresaDomicilios, long horaInicioTurno, long horaFinalTurno)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlDomiciliario.adicionarDomiciliario(pm, idVisitante, empresaDomicilios);
+			long tuplasInsertadas = sqlDomiciliario.adicionarDomiciliario(pm, idVisitante, empresaDomicilios, horaInicioTurno, horaFinalTurno);
 			tx.commit();
 
 			log.trace ("Inserción del Domiciliario: " + idVisitante + "| " + tuplasInsertadas + " tuplas insertadas");
 
-			return new Domiciliario(idVisitante, empresaDomicilios);
+			return new Domiciliario(idVisitante, empresaDomicilios, horaInicioTurno, horaFinalTurno);
 		}
 		catch (Exception e)
 		{
@@ -1918,9 +1920,9 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de una DOMICILIARIO
+	 * Método que actualiza, de manera transaccional, la empresa de un DOMICILIARIO
 	 * @param id - El identificador del domiciliario que se quiere modificar
-	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
+	 * @param empresaDomicilios - La nueva empresa donde trabaja el domiciliario
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
 	public long cambiarEmpresaDomiciliario (String idDomiciliario, String empresaDomicilios)
@@ -1949,6 +1951,42 @@ public class PersistenciaAforoAndes
 			pm.close();
 		}
 	}
+	
+	/**
+	 * Método que actualiza, de manera transaccional, el horario de un DOMICILIARIO
+	 * @param idDomiciliario - El identificador del domiciliario que se quiere modificar
+	 * @param lugarTrabajo - El lugar de trabajo del domiciliario
+	 * @param horaInicioTurno - El nuevo identificador del horario de inicio de turno. Debe existir un horario con dicho identificador
+	 * @param horaFinalTurno - El nuevo identificador del horario de fin de turno. Debe existir un horario con dicho identificador
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarHorarioTurnoDomiciliario(String idDomiciliario, long horaInicioTurno, long horaFinalTurno)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlDomiciliario.cambiarHorarioTurnoDomiciliario(pm, idDomiciliario, horaInicioTurno, horaFinalTurno);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los EMPLEADOS
@@ -1961,19 +1999,19 @@ public class PersistenciaAforoAndes
 	 * @param lugartrabajo - El lugar de trabajo del empleado 
 	 * @return El objeto Empleado adicionado. null si ocurre alguna Excepción
 	 */
-	public Empleado adicionarEmpleado(String idVisitante, String lugartrabajo)
+	public Empleado adicionarEmpleado(String idVisitante, String lugartrabajo, long horaInicioTurno, long horaFinalTurno)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlEmpleado.adicionarEmpleado(pm, idVisitante, lugartrabajo);
+			long tuplasInsertadas = sqlEmpleado.adicionarEmpleado(pm, idVisitante, lugartrabajo, horaInicioTurno, horaFinalTurno);
 			tx.commit();
 
 			log.trace ("Inserción del Empleado " + idVisitante + "| " + tuplasInsertadas + " tuplas insertadas");
 
-			return new Empleado(idVisitante, lugartrabajo);
+			return new Empleado(idVisitante, lugartrabajo, horaInicioTurno, horaFinalTurno);
 		}
 		catch (Exception e)
 		{
@@ -1993,17 +2031,17 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Empleado, dado el identificador de este 
 	 * Adiciona entradas al log de la aplicación
-	 * @param idVisitante - El identificador del empleado
+	 * @param idEmpleado - El identificador del empleado
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarEmpleadoPorId(String idVisitante) 
+	public long eliminarEmpleadoPorId(String idEmpleado) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long resp = sqlEmpleado.eliminarEmpleadoPorID(pm, idVisitante);
+			long resp = sqlEmpleado.eliminarEmpleadoPorID(pm, idEmpleado);
 			tx.commit();
 			return resp;
 		}
@@ -2084,19 +2122,55 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de un EMPLEADO
+	 * Método que actualiza, de manera transaccional, el lugar de trabajo de un EMPLEADO
 	 * @param idEmpleado - El identificador del empleado que se quiere modificar
-	 * @param lugartrabajo - El lugar de trabajo del empleado
+	 * @param lugarTrabajo - El lugar de trabajo del empleado
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
-	public long cambiarLugarEmpleado(String idEmpleado, String lugartrabajo)
+	public long cambiarLugarTrabajoEmpleado(String idEmpleado, String lugarTrabajo)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long resp = sqlEmpleado.cambiarCompañia(pm, idEmpleado, lugartrabajo);
+			long resp = sqlEmpleado.cambiarLugarTrabajoEmpleado(pm, idEmpleado, lugarTrabajo);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	
+	/**
+	 * Método que actualiza, de manera transaccional, el horario de turno de un EMPLEADO
+	 * @param idEmpleado - El identificador del empleado que se quiere modificar
+	 * @param lugarTrabajo - El lugar de trabajo del empleado
+	 * @param horaInicioTurno - El nuevo identificador del horario de inicio de turno. Debe existir un horario con dicho identificador
+	 * @param horaFinalTurno - El nuevo identificador del horario de fin de turno. Debe existir un horario con dicho identificador
+	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
+	 */
+	public long cambiarHorarioTurnoEmpleado(String idEmpleado, long horaInicioTurno, long horaFinalTurno)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlEmpleado.cambiarHorarioTurnoEmpleado(pm, idEmpleado, horaInicioTurno, horaFinalTurno);
 			tx.commit();
 
 			return resp;
@@ -3249,11 +3323,11 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoCarnet que tienen el nombre dado
 	 * @param tipo - El nombre del tipo de carnet
-	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
+	 * @return El objeto TipoCarnet, construido con base en las tuplas de la tabla TipoCarnet con el tipo dado
 	 */
-	public List<TipoCarnet> darTiposCarnetPorTipo (String tipo)
+	public TipoCarnet darTipoCarnetPorTipo (String tipo)
 	{
-		return sqlTipoCarnet.darTiposCarnetPorTipo (pmf.getPersistenceManager(), tipo);
+		return sqlTipoCarnet.darTipoCarnetPorTipo (pmf.getPersistenceManager(), tipo);
 	}
 
 	/**
@@ -3541,19 +3615,20 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, la hora de apertura
-	 * @param id - El identificador del tipo local a modificar
-	 * @param horaApertura - El identificador del horario de apertura del tipo de local
+	 * Método que actualiza, de manera transaccional, el horario de funcionamiento de un tipo de local
+	 * @param tipo - El tipo de local a modificar
+	 * @param horaApertura - El nuevo identificador del horario de apertura del tipo de local. Debe existir un horario con dicho identificador
+	 * @param horaCierre - El nuevo identificador del horario de apertura del tipo de local. Debe existir un horario con dicho identificador
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
-	public long cambiarHoraAperturaTipoLocal (long id, long horaApertura)
+	public long cambiarHorarioTipoLocal(String tipo, long horaApertura, long horaCierre)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long resp = sqlTipoLocal.cambiarHoraApertura(pm, id, horaApertura);
+			long resp = sqlTipoLocal.cambiarHorarioTipoLocal(pm, tipo, horaApertura, horaCierre);
 			tx.commit();
 
 			return resp;
@@ -3586,7 +3661,7 @@ public class PersistenciaAforoAndes
 		try
 		{
 			tx.begin();
-			long resp = sqlTipoLocal.cambiarHoraCierre(pm, id, horaCierre);
+			long resp = sqlTipoLocal.cambiarHoraCierreTipoLocal(pm, id, horaCierre);
 			tx.commit();
 
 			return resp;
@@ -3744,19 +3819,20 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, la hora de inicio
-	 * @param id - El identificador del tipo de visitante a modificar
-	 * @param horainicio - El identificador del horario de inicio
+	 * Método que actualiza, de manera transaccional, el horario de circulación de un tipo de visitante
+	 * @param tipo - El tipo de visitante a modificar
+	 * @param horaInicio - El nuevo identificador del horario de inicio de circulación. Debe existir un horario con dicho identificador
+	 * @param horaLimite - El nuevo identificador del horario límite de circulación. Debe existir un horario con dicho identificador
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
-	public long cambiarHoraInicioTipoVisitante (long id, long horainicio)
+	public long cambiarHorarioTipoVisitante(String tipo, long horaInicio, long horaLimite)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long resp = sqlTipoVisitante.cambiarHoraInicio(pm, id, horainicio);
+			long resp = sqlTipoVisitante.cambiarHorarioTipoVisitante(pm, tipo, horaInicio, horaLimite);
 			tx.commit();
 
 			return resp;
@@ -4191,7 +4267,7 @@ public class PersistenciaAforoAndes
 	 * @return Las tuplas insertadas
 	 * @return El objeto  ZONACIRCULACION  adicionado. null si ocurre alguna Excepción
 	 */
-	public ZonaCirculacion adicionarZona(String identificador, int capacidadNormal, String idCentroComercial )
+	public ZonaCirculacion adicionarZonaCirculacion(String identificador, int capacidadNormal, String idCentroComercial )
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -4226,7 +4302,7 @@ public class PersistenciaAforoAndes
 	 * @param id - Identificador de la zona de circulación
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarZonaPorId(String identificador) 
+	public long eliminarZonaCirculacionPorId(String identificador) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -4257,9 +4333,9 @@ public class PersistenciaAforoAndes
 	 * @param id - Identificador de la zona de circulacion
 	 * @return El objeto ZonaCirculacion, construido con base en las tuplas de la tabla ZONACIRCULACION con el identificador dado
 	 */
-	public ZonaCirculacion darZonaPorID (String id)
+	public ZonaCirculacion darZonaCirculacionPorId (String id)
 	{
-		return sqlZonaCirculacion.darZonaPorId(pmf.getPersistenceManager(), id);
+		return sqlZonaCirculacion.darZonaCirculacionPorId(pmf.getPersistenceManager(), id);
 	}
 
 
@@ -4269,7 +4345,7 @@ public class PersistenciaAforoAndes
 	 */
 	public List<ZonaCirculacion> darZonasCirculacion ()
 	{
-		return sqlZonaCirculacion.darZonas(pmf.getPersistenceManager());
+		return sqlZonaCirculacion.darZonasCirculacion(pmf.getPersistenceManager());
 	}
 
 	/* ****************************************************************

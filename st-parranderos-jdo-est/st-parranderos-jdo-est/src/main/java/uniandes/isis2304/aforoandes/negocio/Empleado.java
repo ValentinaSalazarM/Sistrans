@@ -28,6 +28,15 @@ public class Empleado implements VOEmpleado
 	 */
 	private String lugarTrabajo;
 	
+	/**
+	 * Identificador del horario de inicio de turno. Debe existir en la tabla HORARIO
+	 */
+	private long horaInicioTurno;
+	
+	/**
+	 * Identificador del horario final del turno. Debe existir en la tabla HORARIO
+	 */
+	private long horaFinalTurno;
 	
 	/* ****************************************************************
 	 * 			Métodos
@@ -39,17 +48,23 @@ public class Empleado implements VOEmpleado
 	{
 		this.idVisitante = "";
 		this.lugarTrabajo = "";
+		this.horaInicioTurno = 0;
+		this.horaFinalTurno = 0;
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param idVisitante - El identificador del visitante respectivo. Debe existir un visitante con dicho identificador
 	 * @param localTrabajo - El identificador del local comercial donde trabaja el empleado. Debe existir un local con dicho identificador
+	 * @param horaInicioTurno - El identificador del horario de inicio de turno. Debe existir un horario con dicho identificador
+	 * @param horaFinalTurno - El identificador del horario de fin de turno. Debe existir un horario con dicho identificador
 	 */
-	public Empleado(String idVisitante, String localTrabajo) 
+	public Empleado(String idVisitante, String localTrabajo, long horaInicioTurno, long horaFinalTurno) 
 	{
 		this.idVisitante = idVisitante;
 		this.lugarTrabajo = localTrabajo;
+		this.horaInicioTurno = horaInicioTurno;
+		this.horaFinalTurno = horaFinalTurno;
 	}
 	
 	/**
@@ -83,6 +98,39 @@ public class Empleado implements VOEmpleado
 	{
 		this.lugarTrabajo = lugarTrabajo;
 	}
+	
+	/**
+	 * @return La hora de inicio de turno del empleado
+	 */
+	public long getHoraInicioTurno() 
+	{
+		return horaInicioTurno;
+	}
+
+	/**
+	 * @return horaInicioTurno - La hora de inicio de turno del empleado
+	 */
+	public void setHoraInicioTurno(long horaInicioTurno) 
+	{
+		this.horaInicioTurno = horaInicioTurno;
+	}
+
+	/**
+	 * @return La hora de final de turno del empleado
+	 */
+	public long getHoraFinalTurno() 
+	{
+		return horaFinalTurno;
+	}
+
+	/**
+	 * @return horaInicioTurno - La hora de final de turno del empleado
+	 */
+	public void setHoraFinalTurno(long horaFinalTurno) 
+	{
+		this.horaFinalTurno = horaFinalTurno;
+	}
+
 
 	/**
 	 * @return Una cadena de caracteres con la información del empleado
@@ -90,7 +138,7 @@ public class Empleado implements VOEmpleado
 	@Override
 	public String toString() 
 	{
-		return "Empleado [idVisitante=" + idVisitante + ", lugarTrabajo=" + lugarTrabajo + "]";
+		return "Empleado [idVisitante = " + idVisitante + ", lugarTrabajo = " + lugarTrabajo + ", horaInicioTurno = " + horaInicioTurno + ", horaFinalTurno = " + horaFinalTurno + "]";
 	}
 
 

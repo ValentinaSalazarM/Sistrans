@@ -114,12 +114,12 @@ public class SQLTipoCarnet
 	 * @param nombreTipoCarnet - El nombre del tipo de carnet
 	 * @return El objeto TIPOCARNET que tiene el tipo dado
 	 */
-	public List<TipoCarnet> darTiposCarnetPorTipo (PersistenceManager pm, String nombreTipoCarnet) 
+	public TipoCarnet darTipoCarnetPorTipo (PersistenceManager pm, String nombreTipoCarnet) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoCarnet  () + " WHERE tipo = ?");
 		q.setResultClass(TipoCarnet.class);
 		q.setParameters(nombreTipoCarnet);
-		return (List<TipoCarnet>) q.executeList();
+		return (TipoCarnet) q.executeUnique();
 	}
 
 	/**

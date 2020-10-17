@@ -46,12 +46,14 @@ public class SQLEmpleado
 	 * @param pm - El manejador de persistencia
 	 * @param idvisitante - El identificador del visitante
 	 * @param lugarTrabajo - El lugar de trabajo del empleado 
+	 * @param horaInicioTurno - El identificador del horario de inicio de turno. Debe existir un horario con dicho identificador
+	 * @param horaFinalTurno - El identificador del horario de fin de turno. Debe existir un horario con dicho identificador
 	 * @return Las tuplas insertadas
 	 */
-	public long adicionarEmpleado (PersistenceManager pm, String idvisitante, String lugarTrabajo) 
+	public long adicionarEmpleado (PersistenceManager pm, String idvisitante, String lugarTrabajo, long horaInicioTurno, long horaFinalTurno) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEmpleado() + "(idvisitante, lugartrabajo) values (?, ?)");
-        q.setParameters(idvisitante, lugarTrabajo);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEmpleado() + "(idvisitante, lugartrabajo, horaInicioTurno, horaFinalTurno) values (?, ?, ?, ?)");
+        q.setParameters(idvisitante, lugarTrabajo, horaInicioTurno, horaFinalTurno);
         return (long) q.executeUnique();
 	}
 
@@ -132,12 +134,28 @@ public class SQLEmpleado
 	 * @param  lugarTrabajo - El lugar de trabajo del empleado
 	 * @return El número de tuplas modificadas
 	 */
-	public long cambiarCompañia(PersistenceManager pm, String id , String lugarTrabajo) 
+	public long cambiarLugarTrabajoEmpleado(PersistenceManager pm, String id , String lugarTrabajo) 
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaDomiciliario() + " SET lugartrabajo = ? WHERE idvisitante = ?");
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaEmpleado() + " SET lugarTrabajo = ? WHERE idvisitante = ?");
 	     q.setParameters(lugarTrabajo, id);
 	     return (long) q.executeUnique();            
 	}
 
-
+	/**
+	 * 
+	 * Crea y ejecuta la sentencia SQL para cambiar el lugar de trabajo de un empleado en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param id - El identificador del empleado
+	 * @param  lugarTrabajo - El nuevo lugar de trabajo del empleado
+	 * @param horaInicioTurno - El nuevo identificador del horario de inicio de turno. Debe existir un horario con dicho identificador
+	 * @param horaFinalTurno - El nuevo identificador del horario de fin de turno. Debe existir un horario con dicho identificador
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarHorarioTurnoEmpleado (PersistenceManager pm, String id, long horaInicioTurno, long horaFinalTurno) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaEmpleado() + " SET horaInicioTurno = ?, horaFinalTurno = ? WHERE idVisitante = ?");
+	     q.setParameters(horaInicioTurno, horaFinalTurno, id);
+	     return (long) q.executeUnique();            
+	}
 }

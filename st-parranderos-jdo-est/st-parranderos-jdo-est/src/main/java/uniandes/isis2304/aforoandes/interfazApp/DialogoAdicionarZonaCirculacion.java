@@ -11,11 +11,11 @@ import javax.swing.border.EmptyBorder;
 import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
 
 /**
- * Diálogo para introducir la información necesaria para crear un baño 
+ * Diálogo para introducir la información necesaria para crear una zona de circulación 
  */
 @SuppressWarnings("serial")
 
-public class DialogoAdicionarBano extends JDialog implements ActionListener
+public class DialogoAdicionarZonaCirculacion extends JDialog implements ActionListener
 {
 
 	// -----------------------------------------------------------------
@@ -25,7 +25,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	/**
 	 * Comando para agregar la banda.
 	 */
-	public final static String AGREGAR = "Agregar Baño";
+	public final static String AGREGAR = "Agregar Zona Circulación";
 
 	/**
 	 * Comando para cancelar el proceso.
@@ -66,27 +66,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	private JTextField txtCapacidadNormal;
 
 	/**
-	 * Etiqueta del área del espacio
-	 */
-	private JLabel lblArea;
-
-	/**
-	 * Campo de texto para el área del espacio
-	 */
-	private JTextField txtArea;
-
-	/**
-	 * Etiqueta del número de sanitarios del baño
-	 */
-	private JLabel lblSanitarios;
-
-	/**
-	 * Campo de texto para el número de sanitarios
-	 */
-	private JTextField txtSanitarios;
-
-	/**
-	 * Etiqueta del id del centro comercial donde se encuentra el ascensor
+	 * Etiqueta del id del centro comercial donde se encuentra el espacio
 	 */
 	private JLabel lblCentroComercial;
 
@@ -96,7 +76,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	private JComboBox<String> cbCentrosComerciales;
 
 	/**
-	 * Botón para agregar al ascensor
+	 * Botón para agregar al parqueadero
 	 */
 	private JButton btnAgregar;
 
@@ -110,20 +90,20 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	// -----------------------------------------------------------------
 
 	/**
-	 * Crea la ventana de diálogo del espacio.
+	 * Crea la ventana de diálogo de la banda.
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
-	public DialogoAdicionarBano( InterfazAforoAndesApp pPrincipal )
+	public DialogoAdicionarZonaCirculacion( InterfazAforoAndesApp pPrincipal )
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
-		setTitle( "Agregar Baño" );
+		setTitle( "Agregar Zona de circulación" );
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 6, 2 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 30, 30 ) );
+		campos.setLayout( new GridLayout( 7, 2 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblIdentificador = new JLabel( "Identificador: " );
@@ -135,16 +115,6 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 		campos.add( lblCapacidadNormal );
 		txtCapacidadNormal = new JTextField( );
 		campos.add( txtCapacidadNormal );
-
-		lblArea = new JLabel( "Área: " );
-		campos.add( lblArea );
-		txtArea = new JTextField( );
-		campos.add( txtArea );
-
-		lblSanitarios = new JLabel( "Número de sanitarios: " );
-		campos.add( lblSanitarios );
-		txtSanitarios = new JTextField( );
-		campos.add( txtSanitarios);
 
 		lblCentroComercial = new JLabel( "Id Centro Comercial: " );
 		campos.add( lblCentroComercial );
@@ -191,34 +161,23 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 		{
 			String identificador = txtIdentificador.getText();
 			String capacidadNormalStr = txtCapacidadNormal.getText();
-			String areaStr = txtArea.getText();
-			String sanitariosStr = txtSanitarios.getText();
 			String comboBox = (String) (cbCentrosComerciales.getSelectedItem());
 			String idCentroComercial = comboBox.split(" - ")[0];
-			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || sanitariosStr.equals( "" ) || idCentroComercial.equals( "" ) )
+			
+			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || idCentroComercial.equals( "" ) )
 			{
-				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar Centro Comercial", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar zona de circulación", JOptionPane.ERROR_MESSAGE );
 			}
 			else
 			{
 				try
 				{
-					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
-					int sanitarios = Integer.parseInt(sanitariosStr);
-					double area = Long.parseLong(areaStr);
-					if ( interfaz.buscarAreaPorValor(area) == null)
-					{
-						interfaz.adicionarArea();
-					}
-					if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
-					{
-						interfaz.adicionarCapacidadNormal();
-					}
-					interfaz.adicionarBano(identificador, capacidadNormal, area, sanitarios, idCentroComercial, this);;
+					int capacidadNormal = Integer.parseInt(capacidadNormalStr);				
+					interfaz.adicionarZonaCirculacion(identificador, capacidadNormal, idCentroComercial);
 				}
 				catch( NumberFormatException e2 )
 				{
-					JOptionPane.showMessageDialog( this, "La capacidad normal (int), el área (double) y el número de sanitarios (integer) deben ser números.", "Agregar Baño", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( this, "La capacidad normal debe ser un número entero.", "Agregar  zona de circulación", JOptionPane.ERROR_MESSAGE );
 				}
 			}
 		}

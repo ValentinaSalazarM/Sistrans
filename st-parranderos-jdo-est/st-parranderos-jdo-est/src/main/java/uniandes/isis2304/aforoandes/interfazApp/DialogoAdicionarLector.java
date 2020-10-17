@@ -115,6 +115,7 @@ public class DialogoAdicionarLector extends JDialog implements ActionListener
 	public DialogoAdicionarLector( InterfazAforoAndesApp pPrincipal )
 	{
 		super( pPrincipal, true );
+		setLocationRelativeTo( pPrincipal );
 
 		principal = pPrincipal;
 		setTitle( "Agregar lector" );
@@ -144,7 +145,7 @@ public class DialogoAdicionarLector extends JDialog implements ActionListener
 		
 		gbcC.gridy= 1;
 		cbTiposLector = new JComboBox<>();
-		for ( VOTipoLector tipo: pPrincipal.listarTiposLector())
+		for ( VOTipoLector tipo: pPrincipal.listarVOTiposLector())
 		{
 			cbTiposLector.addItem(tipo.getId() + " - " + tipo.getTipo());
 		}

@@ -97,11 +97,11 @@ public class DialogoAdicionarTipoVisitante extends JDialog implements ActionList
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
 		setTitle( "Agregar Tipo de Visitante" );
-		setLocationRelativeTo( null );
+		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 6, 2 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 30, 30 ) );
+		campos.setLayout( new GridLayout( 7, 2 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblTipo = new JLabel( "Tipo: " );
@@ -109,12 +109,12 @@ public class DialogoAdicionarTipoVisitante extends JDialog implements ActionList
 		txtTipo = new JTextField( );
 		campos.add( txtTipo );
 
-		lblHorarioInicio = new JLabel( "Hora de inicio de circulación en formato 24h (formato hh:mm): " );
+		lblHorarioInicio = new JLabel( "Hora de inicio de circulación en formato 24h (hh:mm): " );
 		campos.add( lblHorarioInicio );
 		txtHorarioInicio = new JTextField( );
 		campos.add( txtHorarioInicio );
 
-		lblHorarioLimite = new JLabel( "Hora límite de circulación en formato 24h (formato hh:mm): " );
+		lblHorarioLimite = new JLabel( "Hora límite de circulación en formato 24h (hh:mm): " );
 		campos.add( lblHorarioLimite );
 		txtHorarioLimite = new JTextField( );
 		campos.add( txtHorarioLimite );

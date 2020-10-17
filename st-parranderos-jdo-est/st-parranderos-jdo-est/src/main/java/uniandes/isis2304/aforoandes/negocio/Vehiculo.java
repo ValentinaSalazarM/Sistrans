@@ -113,7 +113,7 @@ public class Vehiculo implements VOVehiculo
 	@Override
 	public String toString() 
 	{
-		return "Vehiculo [placa=" + placa + ", caracteristicas=" + caracteristicas + ", propietario=" + propietario + "]";
+		return "Vehiculo [placa = " + placa + ", caracteristica s= " + caracteristicas + ", propietario = " + propietario + "]";
 	}
 
 

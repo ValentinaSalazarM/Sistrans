@@ -26,8 +26,70 @@
 				},
 				{
 					"label": "Eliminar por identificador",
-					"event": "eliminarAscensorPorId"
+					"event": "eliminarAscensorPorIdentificador"
 				}
+			]
+		},
+		{ "menuTitle": "Baño",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarBano"
+				},
+				{
+					"label": "Listar",
+					"event": "listarBanos"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarBanoPorIdentificador"
+				},
+				{
+					"label": "Buscar por número de sanitarios",
+					"event": "buscarBanoPorSanitarios"
+				},
+				{
+					"label": "Cambiar número de sanitarios",
+					"event": "cambiarNumeroSanitariosBano"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarBañoPorIdentificador"
+				},
+				{
+					"label": "Eliminar por número de sanitarios",
+					"event": "eliminarBañoPorSanitarios"
+				}	
+			]
+		},
+		{ "menuTitle": "Centro comercial",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarCentroComercial"
+				},
+				{
+					"label": "Listar",
+					"event": "listarCentrosComerciales"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarCentroComercialPorIdentificador"
+				},
+				{
+					"label": "Buscar por nombre",
+					"event": "buscarCentroComercialPorNombre"
+				},
+				{
+					"label": "Cambiar nombre",
+					"event": "cambiarNombreCentroComercial"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarCentroComercialPorIdentificador"
+				}	
 			]
 		},
 		{ "menuTitle": "Local comercial",
@@ -46,12 +108,70 @@
 					"event": "buscarLocalComercialPorIdentificador"
 				},
 				{
+					"label": "Buscar por identificador Centro Comercial",
+					"event": "buscarLocalComercialPorIDCC"
+				},
+				{
 					"label": "Cambiar área",
 					"event": "cambiarAreaLocalComercial"
 				},
 				{
+					"label": "Abrir o cerrar un establecimiento",
+					"event": "cambiarActividadLocalComercial"
+				},
+				{
 					"label": "Eliminar por identificador",
 					"event": "eliminarLocalComercialPorIdentificador"
+				},
+				{
+					"label": "Eliminar por actividad",
+					"event": "eliminarLocalComercialPorActividad"
+				}
+			]
+		},
+		{ "menuTitle": "Parqueadero",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarParqueadero"
+				},
+				{
+					"label": "Listar",
+					"event": "listarParqueaderos"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarParqueaderoPorIdentificador"
+				},
+				{
+					"label": "Cambiar área",
+					"event": "cambiarAreaParqueadero"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarParqueaderoPorIdentificador"
+				}
+			]
+		},
+		{ "menuTitle": "Zona circulación",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarZonaCirculacion"
+				},
+				{
+					"label": "Listar",
+					"event": "listarZonasCirculacion"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarZonaCirculacionPorIdentificador"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarZonaCirculacionPorIdentificador"
 				}
 			]
 		},
@@ -81,6 +201,27 @@
 				{
 					"label": "Eliminar por identificador",
 					"event": "eliminarVisitantePorIdentificacion"
+				}
+			]
+		},
+		{ "menuTitle": "Tipo local",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarTipoLocal"
+				},
+				{
+					"label": "Listar",
+					"event": "listarTiposLocal"
+				},
+				{
+					"label": "Buscar por tipo",
+					"event": "buscarTipoLocalPorTipo"
+				},
+				{
+					"label": "Eliminar por tipo",
+					"event": "eliminarTipoLocalPorTipo"
 				}
 			]
 		},

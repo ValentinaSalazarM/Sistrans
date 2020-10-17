@@ -28,6 +28,16 @@ public class Domiciliario implements VODomiciliario
 	 */
 	private String empresaDomicilios;
 	
+	/**
+	 * Identificador del horario de inicio de turno. Debe existir en la tabla HORARIO
+	 */
+	private long horaInicioTurno;
+	
+	/**
+	 * Identificador del horario final del turno. Debe existir en la tabla HORARIO
+	 */
+	private long horaFinalTurno;
+
 	
 	/* ****************************************************************
 	 * 			Métodos
@@ -39,17 +49,25 @@ public class Domiciliario implements VODomiciliario
 	{
 		this.idVisitante = "";
 		this.empresaDomicilios = "";
+		this.horaInicioTurno = 0;
+		this.horaFinalTurno = 0;
+
 	}
 
 	/**
 	 * Constructor con valores
 	 * @param idVisitante - El identificador del visitante respectivo. Debe existir un visitante con dicho identificador
 	 * @param empresaDomicilios - Compañía para la que trabaja el domiciliario
+	 * @param horaInicioTurno - El identificador del horario de inicio de turno. Debe existir un horario con dicho identificador
+	 * @param horaFinalTurno - El identificador del horario de fin de turno. Debe existir un horario con dicho identificador
 	 */
-	public Domiciliario(String idVisitante, String empresaDomicilios) 
+	public Domiciliario(String idVisitante, String empresaDomicilios, long horaInicioTurno, long horaFinalTurno) 
 	{
 		this.idVisitante = idVisitante;
 		this.empresaDomicilios = empresaDomicilios;
+		this.horaInicioTurno = horaInicioTurno;
+		this.horaFinalTurno = horaFinalTurno;
+
 	}
 	
 	/**
@@ -85,12 +103,44 @@ public class Domiciliario implements VODomiciliario
 	}
 
 	/**
+	 * @return La hora de inicio de turno del domiciliario
+	 */
+	public long getHoraInicioTurno() 
+	{
+		return horaInicioTurno;
+	}
+
+	/**
+	 * @return horaInicioTurno - La hora de inicio de turno del domiciliario. Debe existir un horario con dicho identificador
+	 */
+	public void setHoraInicioTurno(long horaInicioTurno) 
+	{
+		this.horaInicioTurno = horaInicioTurno;
+	}
+
+	/**
+	 * @return La hora de final de turno del domiciliario
+	 */
+	public long getHoraFinalTurno() 
+	{
+		return horaFinalTurno;
+	}
+
+	/**
+	 * @return horaInicioTurno - La hora de final de turno del domiciliario. Debe existir un horario con dicho identificador
+	 */
+	public void setHoraFinalTurno(long horaFinalTurno) 
+	{
+		this.horaFinalTurno = horaFinalTurno;
+	}
+
+	/**
 	 * @return Una cadena de caracteres con la información del domiciliario
 	 */
 	@Override
 	public String toString() 
 	{
-		return "Domiciliario [idVisitante=" + idVisitante + ", empresaDomicilios=" + empresaDomicilios + "]";
+		return "Domiciliario [idVisitante = " + idVisitante + ", empresaDomicilios = " + empresaDomicilios + ", horaInicioTurno = " + horaInicioTurno + ", horaFinalTurno = " + horaFinalTurno + "]";
 	}
 
 

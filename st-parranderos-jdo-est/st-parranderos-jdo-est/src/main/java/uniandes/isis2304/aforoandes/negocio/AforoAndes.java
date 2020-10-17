@@ -213,7 +213,7 @@ public class AforoAndes
 	 */
 	public Ascensor adicionarAscensor(String idAscensor, long capacidadNormal, long area, double pesoMaximo, String idCentroComercial)	
 	{
-		
+
 		log.info ("Adicionando Ascensor con identificador: " + idAscensor );
 		Ascensor ascensor = pp.adicionarAscensor(idAscensor, capacidadNormal, area, pesoMaximo, idCentroComercial);
 		log.info ("Adicionando Ascensor: " + ascensor);
@@ -477,7 +477,7 @@ public class AforoAndes
 	 * @param aforo - El aforo de la capacidad normal
 	 * @return El objeto CapacidadNormal adicionado. null si ocurre alguna Excepción
 	 */
-	public CapacidadNormal adicionarCapacidadNormal (double valor, int aforo)
+	public CapacidadNormal adicionarCapacidadNormal (int valor, int aforo)
 	{
 		log.info ("Adicionando CapacidadNormal con valor: " + valor + " y aforo: " + aforo);
 		CapacidadNormal capacidadNormal = pp.adicionarCapacidadNormal (valor, aforo);		
@@ -491,7 +491,7 @@ public class AforoAndes
 	 * @param valorArea - El valor de la capacidad normal
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarCapacidadNormalPorValor (double valor) 
+	public long eliminarCapacidadNormalPorValor (int valor) 
 	{
 		log.info ("Eliminando CapacidadNormal por valor: " + valor);
 		long resp = pp.eliminarCapacidadNormalPorValor (valor);		
@@ -532,7 +532,7 @@ public class AforoAndes
 	 * @param valor - El valor de la capacidad normal
 	 * @return El objeto CapacidadNormal, construido con base en las tuplas de la tabla CAPACIDADNORMAL con el valor dado
 	 */
-	public CapacidadNormal darCapacidadNormalPorValor (double valor)
+	public CapacidadNormal darCapacidadNormalPorValor (int valor)
 	{
 		log.info ("Dar información de capacidad normal por valor: " + valor);
 		CapacidadNormal capacidadNormal = pp.darCapacidadNormalPorValor (valor);
@@ -576,7 +576,7 @@ public class AforoAndes
 	 * @param valor - El nuevo valor de la capacidad normal
 	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que una capacidad normal con ese identificador no existe
 	 */
-	public long cambiarValorCapacidad (long idCapacidadNormal, double valor)
+	public long cambiarValorCapacidad (long idCapacidadNormal, int valor)
 	{
 		log.info ("Cambiando valor de la capacidad normal: " + idCapacidadNormal);
 		long cambios = pp.cambiarValorCapacidad (idCapacidadNormal, valor);
@@ -606,15 +606,16 @@ public class AforoAndes
 	/**
 	 * Adiciona de manera persistente un carnet 
 	 * Adiciona entradas al log de la aplicación
-	 * @param tipoCarnet - El identificador del tipo de carnet
+	 * @param tipoCarnetStr - El nombre del tipo de carnet
 	 * @param idVisitante - El identificador del visitante del carnet
 	 * @return El objeto Carnet adicionado. null si ocurre alguna Excepción
 	 */
-	public Carnet adicionarCarnet (long tipoCarnet, String idVisitante)
+	public Carnet adicionarCarnet (String tipoCarnetStr, String idVisitante)
 	{
-		log.info ("Adicionando Carnet con tipo: " + tipoCarnet + " y idVisitante: " + idVisitante);
+		long tipoCarnet = pp.darTipoCarnetPorTipo(tipoCarnetStr).getId();
+		log.info ("Adicionando Carnet con tipo: " + tipoCarnet + " e idVisitante: " + idVisitante);
 		Carnet carnet = pp.adicionarCarnet(tipoCarnet, idVisitante);
-		log.info ("Adicionando Carnetr: " + carnet);
+		log.info ("Adicionando Carnet: " + carnet);
 		return carnet;
 
 	}
@@ -649,12 +650,13 @@ public class AforoAndes
 
 	/**
 	 * Método que consulta todas las tuplas en la tabla Carnet con un tipo dado
-	 * @param tipoCarnet - El identificador del tipo de carnet
+	 * @param tipoCarnetStr - El identificador del tipo de carnet
 	 * @return La lista de objetos Carnet que tienen el tipo buscado, construidos con base en las tuplas de la tabla CARNET
 	 */
-	public List<Carnet> darCarnetsPorTipo (long tipoCarnet)
+	public List<Carnet> darCarnetsPorTipo (String tipoCarnetStr)
 	{
-		log.info ("Dar información de carnets por tipoCarnet: " + tipoCarnet);
+		long tipoCarnet = pp.darTipoCarnetPorTipo(tipoCarnetStr).getId();
+		log.info ("Dar información de carnets por tipoCarnet: " + tipoCarnetStr);
 		List<Carnet> carnets = pp.darCarnetsPorTipo(tipoCarnet);
 		log.info ("Dar información de carnets por tipoCarnet: " + carnets.size() + " carnets con ese tipo existentes");
 		return carnets;
@@ -827,13 +829,29 @@ public class AforoAndes
 	 * Adiciona de manera persistente un Domiciliario
 	 * Adiciona entradas al log de la aplicación
 	 * @param idVisitante - El identificador del visitante
+	 * @param horaInicioTurno - Hora de inicio del turno de trabajo
+	 * @param minutoInicioTurno - Minuto de inicio del turno de trabajo
+	 * @param horaFinalTurno - Hora final del turno de trabajo
+	 * @param minutoFinalTurno - Minuto final del turno de trabajo
 	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
 	 * @return El objeto Domiciliario adicionado. null si ocurre alguna Excepción
 	 */
-	public Domiciliario adicionarDomiciliario (String idVisitante, String empresaDomicilios)
+	public Domiciliario adicionarDomiciliario (String idVisitante, String empresaDomicilios, int horaInicioTurno, int minutoInicioTurno, int horaFinalTurno, int minutoFinalTurno)
 	{
+		Horario horarioInicioTurno = pp.darHorarioPorHorayMinuto(horaInicioTurno, minutoInicioTurno);
+		Horario horarioFinalTurno = pp.darHorarioPorHorayMinuto(minutoFinalTurno, horaFinalTurno);
+
+		if (horarioInicioTurno == null)
+		{	
+			horarioInicioTurno = pp.adicionarHorario(horaInicioTurno, minutoInicioTurno);
+		}
+		if (horarioFinalTurno == null)
+		{
+			horarioFinalTurno = pp.adicionarHorario(horaFinalTurno, minutoFinalTurno);
+		}
+
 		log.info ("Adicionando domiciliario: " + idVisitante);
-		Domiciliario domiciliario = pp.adicionarDomiciliario(idVisitante, empresaDomicilios);
+		Domiciliario domiciliario = pp.adicionarDomiciliario(idVisitante, empresaDomicilios, horarioInicioTurno.getId(), horarioFinalTurno.getId());
 		log.info ("Adicionando domiciliario: " + domiciliario);
 		return domiciliario;
 	}
@@ -922,7 +940,7 @@ public class AforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de una DOMICILIARIO
+	 * Método que actualiza, de manera transaccional, la empresa de un DOMICILIARIO
 	 * @param id - El identificador del domiciliario que se quiere modificar
 	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
 	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un domiciliario con ese identificador no existe
@@ -933,36 +951,82 @@ public class AforoAndes
 		long cambios = pp.cambiarEmpresaDomiciliario(idDomiciliario, empresaDomicilios);
 		return cambios;
 	}
+	
+	/**
+	 * Método que actualiza, de manera transaccional, el horario de turno de un DOMICILIARIO
+	 * @param idEmpleado - El identificador del empleado que se quiere modificar
+	 * @param lugarTrabajo - El lugar de trabajo del empleado
+	 * @param horaInicioTurno - Hora de inicio del turno de trabajo
+	 * @param minutoInicioTurno - Minuto de inicio del turno de trabajo
+	 * @param horaFinalTurno - Hora final del turno de trabajo
+	 * @param minutoFinalTurno - Minuto final del turno de trabajo
+	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un domiciliario con ese identificador no existe
+	 */
+	public long cambiarHorarioTurnoDomiciliario(String idDomiciliario, int horaInicioTurno, int minutoInicioTurno, int horaFinalTurno, int minutoFinalTurno)
+	{        
+		Horario horarioInicioTurno = pp.darHorarioPorHorayMinuto(horaInicioTurno, minutoInicioTurno);
+		Horario horarioFinalTurno = pp.darHorarioPorHorayMinuto(minutoFinalTurno, horaFinalTurno);
+
+		if (horarioInicioTurno == null)
+		{	
+			horarioInicioTurno = pp.adicionarHorario(horaInicioTurno, minutoInicioTurno);
+		}
+		if (horarioFinalTurno == null)
+		{
+			horarioFinalTurno = pp.adicionarHorario(horaFinalTurno, minutoFinalTurno);
+		}
+		
+		log.info ("Cambiando horario del turno del domiciliario: " + idDomiciliario);
+		long cambios = pp.cambiarHorarioTurnoDomiciliario(idDomiciliario, horarioInicioTurno.getId(), horarioFinalTurno.getId());
+		return cambios;
+	}
+
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los EMPLEADOS
 	 *****************************************************************/
 
 	/**
-	 * Adiciona de manera persistente un empleado
+	 * Adiciona de manera persistente un Empleado
 	 * Adiciona entradas al log de la aplicación
 	 * @param idVisitante - El identificador del visitante
-	 * @param lugartrabajo - El lugar de trabajo del empleado 
+	 * @param lugarTrabajo - El lugar de trabajo del empleado 
+	 * @param horaInicioTurno - Hora de inicio del turno de trabajo
+	 * @param minutoInicioTurno - Minuto de inicio del turno de trabajo
+	 * @param horaFinalTurno - Hora final del turno de trabajo
+	 * @param minutoFinalTurno - Minuto final del turno de trabajo
 	 * @return El objeto Empleado adicionado. null si ocurre alguna Excepción
 	 */
-	public Empleado adicionarEmpleado(String idVisitante, String lugartrabajo)
+	public Empleado adicionarEmpleado (String idVisitante, String lugarTrabajo, int horaInicioTurno, int minutoInicioTurno, int horaFinalTurno, int minutoFinalTurno)
 	{
-		log.info ("Adicionando empleado: " + idVisitante);
-		Empleado empleado = pp.adicionarEmpleado(idVisitante, lugartrabajo);
-		log.info ("Adicionando empleado: " + empleado);
+		Horario horarioInicioTurno = pp.darHorarioPorHorayMinuto(horaInicioTurno, minutoInicioTurno);
+		Horario horarioFinalTurno = pp.darHorarioPorHorayMinuto(minutoFinalTurno, horaFinalTurno);
+
+		if (horarioInicioTurno == null)
+		{	
+			horarioInicioTurno = pp.adicionarHorario(horaInicioTurno, minutoInicioTurno);
+		}
+		if (horarioFinalTurno == null)
+		{
+			horarioFinalTurno = pp.adicionarHorario(horaFinalTurno, minutoFinalTurno);
+		}
+		log.info ("Adicionando domiciliario: " + idVisitante);
+		Empleado empleado = pp.adicionarEmpleado(idVisitante, lugarTrabajo, horarioInicioTurno.getId(), horarioFinalTurno.getId());
+		log.info ("Adicionando domiciliario: " + empleado);
 		return empleado;
 	}
+
 
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Empleado, dado el identificador de este 
 	 * Adiciona entradas al log de la aplicación
-	 * @param idVisitante - El identificador del empleado
+	 * @param idEmpleado - El identificador del empleado
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarEmpleadoPorId(String idVisitante) 	
+	public long eliminarEmpleadoPorId(String idEmpleado) 	
 	{
-		log.info ("Eliminando empleado por idVisitante: " + idVisitante);
-		long resp = pp.eliminarEmpleadoPorId(idVisitante);
+		log.info ("Eliminando empleado por idVisitante: " + idEmpleado);
+		long resp = pp.eliminarEmpleadoPorId(idEmpleado);
 		log.info ("Eliminando empleado por idVisitante: " + resp + " tuplas eliminadas");
 		return resp;
 	}
@@ -1037,15 +1101,43 @@ public class AforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, el valor de un EMPLEADO
+	 * Método que actualiza, de manera transaccional, el lugar de trabajo de un EMPLEADO
 	 * @param idEmpleado - El identificador del empleado que se quiere modificar
 	 * @param lugartrabajo - El lugar de trabajo del empleado
 	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un empleado con ese identificador no existe
 	 */
-	public long cambiarLugarEmpleado(String idEmpleado, String lugartrabajo)
+	public long cambiarLugarTrabajoEmpleado(String idEmpleado, String lugartrabajo)
 	{        
-		log.info ("Cambiando empresa del domiciliario: " + idEmpleado);
-		long cambios = pp.cambiarLugarEmpleado(idEmpleado, lugartrabajo);
+		log.info ("Cambiando lugar de trabajo del empleado: " + idEmpleado);
+		long cambios = pp.cambiarLugarTrabajoEmpleado(idEmpleado, lugartrabajo);
+		return cambios;
+	}
+
+	/**
+	 * Método que actualiza, de manera transaccional, el horario de turno de un EMPLEADO
+	 * @param idEmpleado - El identificador del empleado que se quiere modificar
+	 * @param horaInicioTurno - Hora de inicio del turno de trabajo
+	 * @param minutoInicioTurno - Minuto de inicio del turno de trabajo
+	 * @param horaFinalTurno - Hora final del turno de trabajo
+	 * @param minutoFinalTurno - Minuto final del turno de trabajo
+	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un empleado con ese identificador no existe
+	 */
+	public long cambiarHorarioTurnoEmpleado(String idEmpleado, int horaInicioTurno, int minutoInicioTurno, int horaFinalTurno, int minutoFinalTurno)
+	{        
+		Horario horarioInicioTurno = pp.darHorarioPorHorayMinuto(horaInicioTurno, minutoInicioTurno);
+		Horario horarioFinalTurno = pp.darHorarioPorHorayMinuto(minutoFinalTurno, horaFinalTurno);
+
+		if (horarioInicioTurno == null)
+		{	
+			horarioInicioTurno = pp.adicionarHorario(horaInicioTurno, minutoInicioTurno);
+		}
+		if (horarioFinalTurno == null)
+		{
+			horarioFinalTurno = pp.adicionarHorario(horaFinalTurno, minutoFinalTurno);
+		}
+		
+		log.info ("Cambiando horario del turno del empleado: " + idEmpleado);
+		long cambios = pp.cambiarHorarioTurnoEmpleado(idEmpleado, horarioInicioTurno.getId(), horarioFinalTurno.getId());
 		return cambios;
 	}
 
@@ -1546,12 +1638,12 @@ public class AforoAndes
 	 */
 	public List<RegistranCarnet> darRegistranCarnetPorLector (String idLector) 
 	{
-        log.info ("Dar información de RegistranCarnet por idLector: " + idLector);
-        List<RegistranCarnet> registros = pp.darRegistranCarnetPorLector(idLector);
-        log.info ("Dar información de RegistranCarnet por idLector: " + registros.size() + " registros con ese idLector existentes");
-        return registros;
+		log.info ("Dar información de RegistranCarnet por idLector: " + idLector);
+		List<RegistranCarnet> registros = pp.darRegistranCarnetPorLector(idLector);
+		log.info ("Dar información de RegistranCarnet por idLector: " + registros.size() + " registros con ese idLector existentes");
+		return registros;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
 	 * @param idVisitante - El identificador del visitante
@@ -1559,10 +1651,10 @@ public class AforoAndes
 	 */
 	public List<RegistranCarnet> darRegistranCarnetPorIdVisitante (String idVisitante)
 	{
-        log.info ("Dar información de RegistranCarnet por idVisitante: " + idVisitante);
-        List<RegistranCarnet> registros = pp.darRegistranCarnetPorIdVisitante(idVisitante);
-        log.info ("Dar información de RegistranCarnet por idVisitante: " + registros.size() + " registros con ese idVisitante existentes");
-        return registros;
+		log.info ("Dar información de RegistranCarnet por idVisitante: " + idVisitante);
+		List<RegistranCarnet> registros = pp.darRegistranCarnetPorIdVisitante(idVisitante);
+		log.info ("Dar información de RegistranCarnet por idVisitante: " + registros.size() + " registros con ese idVisitante existentes");
+		return registros;
 	}
 
 	/**
@@ -1574,24 +1666,24 @@ public class AforoAndes
 	 */
 	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteFecha (String idVisitante, Timestamp fechaInicio, Timestamp fechaFin)
 	{
-        log.info ("Dar información de RegistranCarnet por idVisitante: " + idVisitante);
-        List<RegistranCarnet> registros = pp.darRegistranCarnetPorIdVisitanteFecha(idVisitante, fechaInicio, fechaFin);
-        log.info ("Dar información de RegistranCarnet por idVisitante: " + registros.size() + " registros con ese idVisitante y fecha(s) existentes");
-        return registros;
+		log.info ("Dar información de RegistranCarnet por idVisitante: " + idVisitante);
+		List<RegistranCarnet> registros = pp.darRegistranCarnetPorIdVisitanteFecha(idVisitante, fechaInicio, fechaFin);
+		log.info ("Dar información de RegistranCarnet por idVisitante: " + registros.size() + " registros con ese idVisitante y fecha(s) existentes");
+		return registros;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet
 	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
 	 */
 	public List<RegistranCarnet> darRegistranCarnet ()
 	{
-        log.info ("Listando RegistranCarnet");
-        List<RegistranCarnet> registros = pp.darRegistranCarnet();	
-        log.info ("Listando RegistranCarnet: " + registros.size() + " registros existentes");
-        return registros;
+		log.info ("Listando RegistranCarnet");
+		List<RegistranCarnet> registros = pp.darRegistranCarnet();	
+		log.info ("Listando RegistranCarnet: " + registros.size() + " registros existentes");
+		return registros;
 	}
-	
+
 	/**
 	 * Encuentra todos los registros de carnet en AforoAndes y los devuelve como VORegistranCarnet
 	 * Adiciona entradas al log de la aplicación
@@ -1599,16 +1691,16 @@ public class AforoAndes
 	 */
 	public List<VORegistranCarnet> darVORegistranCarnet ()
 	{
-        log.info ("Generando los VO de RegistranCarnet");
-         List<VORegistranCarnet> voRegistranCarnet = new LinkedList<VORegistranCarnet> ();
-        for (RegistranCarnet registro : pp.darRegistranCarnet ())
-        {
-        	voRegistranCarnet.add (registro);
-        }
-        log.info ("Generando los VO de RegistranCarnet: " + voRegistranCarnet.size() + " registros existentes");
-       return voRegistranCarnet;
+		log.info ("Generando los VO de RegistranCarnet");
+		List<VORegistranCarnet> voRegistranCarnet = new LinkedList<VORegistranCarnet> ();
+		for (RegistranCarnet registro : pp.darRegistranCarnet ())
+		{
+			voRegistranCarnet.add (registro);
+		}
+		log.info ("Generando los VO de RegistranCarnet: " + voRegistranCarnet.size() + " registros existentes");
+		return voRegistranCarnet;
 	}
-	
+
 	/**
 	 * Método que actualiza, de manera transaccional, la hora de salida de un registro
 	 * @param idLector - Lector donde se realizó el registro de la visita
@@ -1620,9 +1712,9 @@ public class AforoAndes
 	 */
 	public long cambiarHoraSalidaRegistranCarnet (String idLector, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida) 
 	{
-        log.info ("Cambiando hora de salida del registro del visitante: " + idVisitante);
-        long cambios = pp.cambiarHoraSalidaRegistranCarnet(idLector, idVisitante, fecha, horaEntrada, horaSalida);
-        return cambios;
+		log.info ("Cambiando hora de salida del registro del visitante: " + idVisitante);
+		long cambios = pp.cambiarHoraSalidaRegistranCarnet(idLector, idVisitante, fecha, horaEntrada, horaSalida);
+		return cambios;
 	}
 
 	/* ****************************************************************
@@ -1674,12 +1766,12 @@ public class AforoAndes
 	 */
 	public List<RegistranVehiculo> darRegistranVehiculoPorLector (String idLector) 
 	{
-        log.info ("Dar información de RegistranVehiculo por idLector: " + idLector);
-        List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorLector(idLector);
-        log.info ("Dar información de RegistranVehiculo por idLector: " + registros.size() + " registros con ese idLector existentes");
-        return registros;
+		log.info ("Dar información de RegistranVehiculo por idLector: " + idLector);
+		List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorLector(idLector);
+		log.info ("Dar información de RegistranVehiculo por idLector: " + registros.size() + " registros con ese idLector existentes");
+		return registros;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
 	 * @param vehiculo - La placa del vehículo ingresado 
@@ -1687,10 +1779,10 @@ public class AforoAndes
 	 */
 	public List<RegistranVehiculo> darRegistranVehiculoPorPlaca (String vehiculo)
 	{
-        log.info ("Dar información de RegistranVehiculo por vehículo: " + vehiculo);
-        List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorPlaca(vehiculo);
-        log.info ("Dar información de RegistranVehiculo por vehículo: " + registros.size() + " registros con ese vehículo existentes");
-        return registros;
+		log.info ("Dar información de RegistranVehiculo por vehículo: " + vehiculo);
+		List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorPlaca(vehiculo);
+		log.info ("Dar información de RegistranVehiculo por vehículo: " + registros.size() + " registros con ese vehículo existentes");
+		return registros;
 	}
 
 	/**
@@ -1702,24 +1794,24 @@ public class AforoAndes
 	 */
 	public List<RegistranVehiculo> darRegistranVehiculoPorPlacaFecha (String vehiculo, Timestamp fechaInicio, Timestamp fechaFin)
 	{
-        log.info ("Dar información de RegistranCarnet por vehículo: " + vehiculo);
-        List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorPlacaFecha(vehiculo, fechaInicio, fechaFin);
-        log.info ("Dar información de RegistranCarnet por vehículo: " + registros.size() + " registros con ese vehículo y fecha(s) existentes");
-        return registros;
+		log.info ("Dar información de RegistranCarnet por vehículo: " + vehiculo);
+		List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorPlacaFecha(vehiculo, fechaInicio, fechaFin);
+		log.info ("Dar información de RegistranCarnet por vehículo: " + registros.size() + " registros con ese vehículo y fecha(s) existentes");
+		return registros;
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranVehiculo
 	 * @return La lista de objetos RegistranVehiculo, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
 	 */
 	public List<RegistranVehiculo> darRegistranVehiculo ()
 	{
-        log.info ("Listando RegistranVehiculo");
-        List<RegistranVehiculo> registros = pp.darRegistranVehiculo();	
-        log.info ("Listando RegistranVehiculo: " + registros.size() + " registros existentes");
-        return registros;
+		log.info ("Listando RegistranVehiculo");
+		List<RegistranVehiculo> registros = pp.darRegistranVehiculo();	
+		log.info ("Listando RegistranVehiculo: " + registros.size() + " registros existentes");
+		return registros;
 	}
-	
+
 	/**
 	 * Encuentra todos los registros de vehículo en AforoAndes y los devuelve como VORegistranVehiculo
 	 * Adiciona entradas al log de la aplicación
@@ -1727,16 +1819,16 @@ public class AforoAndes
 	 */
 	public List<VORegistranVehiculo> darVORegistranVehiculo ()
 	{
-        log.info ("Generando los VO de RegistranVehiculo");
-         List<VORegistranVehiculo> voRegistranVehiculo = new LinkedList<VORegistranVehiculo> ();
-        for (RegistranVehiculo registro : pp.darRegistranVehiculo ())
-        {
-        	voRegistranVehiculo.add (registro);
-        }
-        log.info ("Generando los VO de RegistranVehiculo: " + voRegistranVehiculo.size() + " registros existentes");
-       return voRegistranVehiculo;
+		log.info ("Generando los VO de RegistranVehiculo");
+		List<VORegistranVehiculo> voRegistranVehiculo = new LinkedList<VORegistranVehiculo> ();
+		for (RegistranVehiculo registro : pp.darRegistranVehiculo ())
+		{
+			voRegistranVehiculo.add (registro);
+		}
+		log.info ("Generando los VO de RegistranVehiculo: " + voRegistranVehiculo.size() + " registros existentes");
+		return voRegistranVehiculo;
 	}
-	
+
 	/**
 	 * Método que actualiza, de manera transaccional, la hora de salida de un registro
 	 * @param idLector - Lector donde se realizó el registro de la visita
@@ -1748,12 +1840,12 @@ public class AforoAndes
 	 */
 	public long cambiarHoraSalidaRegistranVehiculo (String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida) 
 	{
-        log.info ("Cambiando hora de salida del registro del vehículo: " + vehiculo);
-        long cambios = pp.cambiarHoraSalidaRegistranVehiculo(idLector, vehiculo, fecha, horaEntrada, horaSalida);
-        return cambios;
+		log.info ("Cambiando hora de salida del registro del vehículo: " + vehiculo);
+		long cambios = pp.cambiarHoraSalidaRegistranVehiculo(idLector, vehiculo, fecha, horaEntrada, horaSalida);
+		return cambios;
 	}
 
-	
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los TIPOS DE CARNET
 	 *****************************************************************/
@@ -1834,12 +1926,12 @@ public class AforoAndes
 	 * @param tipo - El nombre del tipo de carnet
 	 * @return La lista de objetos TipoCarnet, construidos con base en las tuplas de la tabla TipoCarnet
 	 */
-	public List<TipoCarnet> darTiposCarnetPorTipo (String tipo)
+	public TipoCarnet darTiposCarnetPorTipo (String tipo)
 	{
 		log.info ("Dar información de tipos de carnet por tipo: " + tipo);
-		List<TipoCarnet> tiposCarnet = pp.darTiposCarnetPorTipo(tipo);
-		log.info ("Dar información de tipos de carnet por tipo: " + tiposCarnet.size() + " tipos de carnet con ese tipo existentes");
-		return tiposCarnet;
+		TipoCarnet tipoCarnet = pp.darTipoCarnetPorTipo(tipo);
+		log.info ("Buscando tipo de carnet por tipo: " + tipoCarnet != null ? tipoCarnet : "NO EXISTE");
+		return tipoCarnet;
 	}
 
 	/**
@@ -1956,7 +2048,7 @@ public class AforoAndes
 		return tipoLector;
 	}
 
-	
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los TIPOS DE LOCAL
 	 *****************************************************************/
@@ -1973,10 +2065,19 @@ public class AforoAndes
 	 */
 	public TipoLocal adicionarTipoLocal( String tipo, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre )
 	{
-		long horarioApertura = pp.darHorarioPorHorayMinuto(horaApertura, minutoApertura).getId();
-		long horarioCierre = pp.darHorarioPorHorayMinuto(horaCierre, minutoCierre).getId();
+		Horario horarioApertura = pp.darHorarioPorHorayMinuto(horaApertura, minutoApertura);
+		Horario horarioCierre = pp.darHorarioPorHorayMinuto(horaCierre, minutoCierre);
+
+		if (horarioApertura == null)
+		{	
+			horarioApertura = pp.adicionarHorario(horaApertura, minutoApertura);
+		}
+		if (horarioCierre == null)
+		{
+			horarioCierre = pp.adicionarHorario(horaCierre, minutoCierre);
+		}
 		log.info ("Adicionando Tipo de local: " + tipo);
-		TipoLocal tipoLocal = pp.adicionarTipoLocal(tipo, horarioApertura, horarioCierre);
+		TipoLocal tipoLocal = pp.adicionarTipoLocal(tipo, horarioApertura.getId(), horarioCierre.getId());
 		log.info ("Adicionando Tipo de local: " + tipoLocal);
 		return tipoLocal;
 	}
@@ -2065,16 +2166,30 @@ public class AforoAndes
 	}
 
 	/**
-	 * Método que actualiza, de manera transaccional, la hora de apertura
-	 * @param id - El identificador del tipo local a modificar
-	 * @param horaApertura - El identificador del horario de apertura del tipo de local
+	 * Método que actualiza, de manera transaccional, el horario de funcionamiento
+	 * @param horaApertura - Hora de apertura del tipo de local
+	 * @param minutoApertura - Minuto de apertura del tipo de local
+	 * @param horaCierre - Hora de cierre del tipo de local
+	 * @param minutoCierre - Minuto de cierre del tipo de local
 	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un tipo de local con ese identificador no existe
 	 */
-	public long cambiarHoraAperturaTipoLocal (long id, long horaApertura)
-	{
-        log.info ("Cambiando hora de apertura del tipo de local: " + id);
-        long cambios = pp.cambiarHoraAperturaTipoLocal(id, horaApertura);
-        return cambios;
+	public long cambiarHorarioTipoLocal(String tipoLocal, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre)
+	{        
+		Horario horarioApertura = pp.darHorarioPorHorayMinuto(horaApertura, minutoApertura);
+		Horario horarioCierre = pp.darHorarioPorHorayMinuto(horaCierre, minutoCierre);
+
+		if (horarioApertura == null)
+		{	
+			horarioApertura = pp.adicionarHorario(horaApertura, minutoApertura);
+		}
+		if (horarioCierre == null)
+		{
+			horarioCierre = pp.adicionarHorario(horaCierre, minutoCierre);
+		}
+		
+		log.info ("Cambiando horario de funcionamiento del tipo de local: " + tipoLocal);
+		long cambios = pp.cambiarHorarioTipoLocal(tipoLocal, horarioApertura.getId(), horarioCierre.getId());
+		return cambios;
 	}
 
 	/**
@@ -2085,11 +2200,11 @@ public class AforoAndes
 	 */
 	public long cambiarHoraCierreTipoLocal (long id, long horaCierre)
 	{
-        log.info ("Cambiando hora de cierre del tipo de local: " + id);
-        long cambios = pp.cambiarHoraCierreTipoLocal(id, horaCierre);
-        return cambios;
+		log.info ("Cambiando hora de cierre del tipo de local: " + id);
+		long cambios = pp.cambiarHoraCierreTipoLocal(id, horaCierre);
+		return cambios;
 	}
-	
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los TIPOS DE VISITANTE
 	 *****************************************************************/
@@ -2106,10 +2221,19 @@ public class AforoAndes
 	 */
 	public TipoVisitante adicionarTipoVisitante( String tipo, int horainicio, int minutoInicio, int horalimite, int minutoLimite )
 	{
-		long horarioinicio = pp.darHorarioPorHorayMinuto(horainicio, minutoInicio).getId();
-		long horarioLimite = pp.darHorarioPorHorayMinuto(horalimite, minutoLimite).getId();
+		Horario horarioinicio = pp.darHorarioPorHorayMinuto(horainicio, minutoInicio);
+		Horario horarioLimite = pp.darHorarioPorHorayMinuto(horalimite, minutoLimite);
+		if (horarioinicio == null)
+		{	
+			horarioinicio = pp.adicionarHorario(horainicio, minutoInicio);
+		}
+		if (horarioLimite == null)
+		{
+			horarioLimite = pp.adicionarHorario(horalimite, minutoLimite);
+		}
+		
 		log.info ("Adicionando Tipo de visitante: " + tipo);
-		TipoVisitante tipoVisitante = pp.adicionarTipoVisitante(tipo, horarioinicio, horarioLimite);
+		TipoVisitante tipoVisitante = pp.adicionarTipoVisitante(tipo, horarioinicio.getId(), horarioLimite.getId());
 		log.info ("Adicionando Tipo de visitante: " + tipoVisitante);
 		return tipoVisitante;
 	}
@@ -2183,18 +2307,32 @@ public class AforoAndes
 		log.info ("Buscando tipo de visitante por tipo: " + tipo != null ? tipo : "NO EXISTE");
 		return tipoVisitante;
 	}
-
+	
 	/**
-	 * Método que actualiza, de manera transaccional, la hora de inicio
-	 * @param id - El identificador del tipo de visitante a modificar
-	 * @param horainicio - El identificador del horario de inicio
+	 * Método que actualiza, de manera transaccional, el horario de circulación
+	 * @param horaInicio - Hora de inicio de circulación
+	 * @param minutoInicio - Minuto de inicio de circulación
+	 * @param horaLimite - Hora límite de circulación
+	 * @param minutoLimite - Minuto límite de circulación
 	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un tipo de visitante con ese identificador no existe
 	 */
-	public long cambiarHoraInicioTipoVisitante (long id, long horainicio)
-	{
-        log.info ("Cambiando hora de inicio del tipo de visitante: " + id);
-        long cambios = pp.cambiarHoraInicioTipoVisitante(id, horainicio);
-        return cambios;
+	public long cambiarHorarioTipoVisitante(String tipoVisitante, int horaInicio, int minutoInicio, int horaLimite, int minutoLimite)
+	{        
+		Horario horarioInicio = pp.darHorarioPorHorayMinuto(horaInicio, minutoInicio);
+		Horario horarioLimite = pp.darHorarioPorHorayMinuto(horaLimite, minutoLimite);
+
+		if (horarioInicio == null)
+		{	
+			horarioInicio = pp.adicionarHorario(horaInicio, minutoInicio);
+		}
+		if (horarioLimite == null)
+		{
+			horarioLimite = pp.adicionarHorario(horaLimite, minutoLimite);
+		}
+		
+		log.info ("Cambiando horario de circulación del tipo de visitante: " + tipoVisitante);
+		long cambios = pp.cambiarHorarioTipoVisitante(tipoVisitante, horaInicio, horaLimite);
+		return cambios;
 	}
 	
 	/**
@@ -2205,12 +2343,12 @@ public class AforoAndes
 	 */
 	public long cambiarHoraLimiteTipoVisitante (long id, long horalimite)
 	{
-        log.info ("Cambiando hora límite del tipo de visitante: " + id);
-        long cambios = pp.cambiarHoraInicioTipoVisitante(id, horalimite);
-        return cambios;
+		log.info ("Cambiando hora límite del tipo de visitante: " + id);
+		long cambios = pp.cambiarHoraLimiteTipoVisitante(id, horalimite);
+		return cambios;
 	}
 
-	
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los VEHICULOS
 	 *****************************************************************/
@@ -2470,10 +2608,10 @@ public class AforoAndes
 	 * @return Las tuplas insertadas
 	 * @return El objeto  ZONACIRCULACION  adicionado. null si ocurre alguna Excepción
 	 */
-	public ZonaCirculacion adicionarZona(String identificador, int capacidadNormal, String idCentroComercial )
+	public ZonaCirculacion adicionarZonaCirculacion (String identificador, int capacidadNormal, String idCentroComercial )
 	{
 		log.info ("Adicionando Zona de circulación: " + identificador);
-		ZonaCirculacion zonaCirculacion = pp.adicionarZona(identificador, capacidadNormal, idCentroComercial);
+		ZonaCirculacion zonaCirculacion = pp.adicionarZonaCirculacion(identificador, capacidadNormal, idCentroComercial);
 		log.info ("Adicionando Zona de circulación: " + zonaCirculacion);
 		return zonaCirculacion;
 	}
@@ -2484,10 +2622,10 @@ public class AforoAndes
 	 * @param id - Identificador de la zona de circulación
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarZonaPorId(String id) 
+	public long eliminarZonaCirculacionPorId(String id) 
 	{
 		log.info ("Eliminando Zona de circulación por id: " + id);
-		long resp = pp.eliminarZonaPorId(id)	;
+		long resp = pp.eliminarZonaCirculacionPorId(id)	;
 		log.info ("Eliminando Zona de circulación por id: " + resp + " tuplas eliminadas");
 		return resp;
 	}
@@ -2497,10 +2635,10 @@ public class AforoAndes
 	 * @param id - Identificador de la zona de circulacion
 	 * @return El objeto ZonaCirculacion, construido con base en las tuplas de la tabla ZONACIRCULACION con el identificador dado
 	 */
-	public ZonaCirculacion darZonaPorId (String id)
+	public ZonaCirculacion darZonaCirculacionPorId (String id)
 	{
 		log.info ("Dar información de un zona de circulación por id: " + id);
-		ZonaCirculacion zonaCirculacion = pp.darZonaPorID(id);
+		ZonaCirculacion zonaCirculacion = pp.darZonaCirculacionPorId(id);
 		log.info ("Buscando zona de circulación por Id: " + zonaCirculacion != null ? zonaCirculacion : "NO EXISTE");
 		return zonaCirculacion;
 	}
@@ -2537,7 +2675,7 @@ public class AforoAndes
 	/* ****************************************************************
 	 * 	Métodos para manejar los Requerimientos Funcionales de Consulta
 	 *****************************************************************/
-	
+
 	/**
 	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
 	 * @return La lista de objetos Visitante construidos de acuerdo a la consulta realizada
@@ -2561,7 +2699,7 @@ public class AforoAndes
 		log.info ("Consultando visitantes: " + visitantes.size() + " visitantes atendidos en el rango de horas");
 		return visitantes;
 	}
-	
+
 	/* ****************************************************************
 	 * 			Métodos para administración
 	 *****************************************************************/

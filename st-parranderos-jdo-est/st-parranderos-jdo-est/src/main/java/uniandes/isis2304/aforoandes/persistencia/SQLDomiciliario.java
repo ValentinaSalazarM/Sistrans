@@ -65,12 +65,14 @@ class SQLDomiciliario
 	 * @param pm - El manejador de persistencia
 	 * @param idVisitante - El identificador del visitante
 	 * @param empresaDomicilios - La empresa donde trabaja el domiciliario
+	 * @param horaInicioTurno - El identificador del horario de inicio de turno. Debe existir un horario con dicho identificador
+	 * @param horaFinalTurno - El identificador del horario de fin de turno. Debe existir un horario con dicho identificador
 	 * @return Las tuplas insertadas
 	 */
-	public long adicionarDomiciliario (PersistenceManager pm, String idVisitante, String empresaDomicilios) 
+	public long adicionarDomiciliario (PersistenceManager pm, String idVisitante, String empresaDomicilios, long horaInicioTurno, long horaFinalTurno) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaDomiciliario() + "(idvisitante, empresaDomicilios) values (?, ?)");
-        q.setParameters(idVisitante, empresaDomicilios);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaDomiciliario() + "(idvisitante, empresaDomicilios, horaInicioTurno, horaFinalTurno) values (?, ?, ?, ?)");
+        q.setParameters(idVisitante, empresaDomicilios, horaInicioTurno, horaFinalTurno);
         return (long) q.executeUnique();
 	}
 
@@ -159,5 +161,21 @@ class SQLDomiciliario
 	     return (long) q.executeUnique();            
 	}
 
+	/**
+	 * Crea y ejecuta la sentencia SQL para cambiar el lugar de trabajo de un domiciliario en la 
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param id - El identificador del domiciliario
+	 * @param  lugarTrabajo - El nuevo lugar de trabajo del domiciliario
+	 * @param horaInicioTurno - El nuevo identificador del horario de inicio de turno. Debe existir un horario con dicho identificador
+	 * @param horaFinalTurno - El nuevo identificador del horario de fin de turno. Debe existir un horario con dicho identificador
+	 * @return El número de tuplas modificadas
+	 */
+	public long cambiarHorarioTurnoDomiciliario (PersistenceManager pm, String id, long horaInicioTurno, long horaFinalTurno) 
+	{
+		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaDomiciliario() + " SET horaInicioTurno = ?, horaFinalTurno = ? WHERE idVisitante = ?");
+	     q.setParameters(horaInicioTurno, horaFinalTurno, id);
+	     return (long) q.executeUnique();            
+	}
 
 }

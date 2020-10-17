@@ -42,6 +42,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.aforoandes.negocio.AforoAndes;
 import uniandes.isis2304.aforoandes.negocio.Bano;
+import uniandes.isis2304.aforoandes.negocio.Carnet;
 import uniandes.isis2304.aforoandes.negocio.CentroComercial;
 import uniandes.isis2304.aforoandes.negocio.Lector;
 import uniandes.isis2304.aforoandes.negocio.LocalComercial;
@@ -49,7 +50,10 @@ import uniandes.isis2304.aforoandes.negocio.VOArea;
 import uniandes.isis2304.aforoandes.negocio.VOAscensor;
 import uniandes.isis2304.aforoandes.negocio.VOBano;
 import uniandes.isis2304.aforoandes.negocio.VOCapacidadNormal;
+import uniandes.isis2304.aforoandes.negocio.VOCarnet;
 import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
+import uniandes.isis2304.aforoandes.negocio.VODomiciliario;
+import uniandes.isis2304.aforoandes.negocio.VOEmpleado;
 import uniandes.isis2304.aforoandes.negocio.VOLector;
 import uniandes.isis2304.aforoandes.negocio.VOLocalComercial;
 import uniandes.isis2304.aforoandes.negocio.VOParqueadero;
@@ -58,6 +62,7 @@ import uniandes.isis2304.aforoandes.negocio.VOTipoLector;
 import uniandes.isis2304.aforoandes.negocio.VOTipoLocal;
 import uniandes.isis2304.aforoandes.negocio.VOTipoVisitante;
 import uniandes.isis2304.aforoandes.negocio.VOVisitante;
+import uniandes.isis2304.aforoandes.negocio.VOZonaCirculacion;
 
 
 /**
@@ -253,7 +258,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 	/**
 	 * Adiciona un área con la información dada por el usuario
-	 * Se crea una nueva tupla de Area en la base de datos, si un área con ese nombre no existía
+	 * Se crea una nueva tupla de Area en la base de datos, si un área con ese valor no existía
 	 */
 	public void adicionarArea()
 	{
@@ -360,11 +365,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String identificacion = JOptionPane.showInputDialog (this, "Identificador del área: ", "Actualizar valor del área", JOptionPane.QUESTION_MESSAGE);
+			String idStr = JOptionPane.showInputDialog (this, "Identificador del área: ", "Actualizar valor del área", JOptionPane.QUESTION_MESSAGE);
 			String valor = JOptionPane.showInputDialog (this, "Nuevo valor: ", "Actualizar valor del área", JOptionPane.QUESTION_MESSAGE);
-			if (identificacion != null && valor != null)
+			if (idStr != null && valor != null)
 			{	
-				long id = Long.valueOf (identificacion);
+				long id = Long.valueOf (idStr);
 				double valorS = Double.valueOf (valor);
 
 				long modificados = aforoAndes.cambiarValorArea(id, valorS);
@@ -378,6 +383,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e2 )
+		{
+			JOptionPane.showMessageDialog( this, "El identificador y el valor del área deben ser números.", "Actualizar valor del área", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -406,11 +415,16 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
+
 			else
 			{
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e2 )
+		{
+			JOptionPane.showMessageDialog( this, "El identificador y el aforo del área deben ser números.", "Actualizar valor del área", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -428,7 +442,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String id = JOptionPane.showInputDialog (this, "Id del área: ", "Borrar área por Id", JOptionPane.QUESTION_MESSAGE);
+			String id = JOptionPane.showInputDialog (this, "Identificador del área: ", "Borrar área por identificador", JOptionPane.QUESTION_MESSAGE);
 			if (id != null)
 			{
 				long idArea = Long.valueOf (id);
@@ -443,7 +457,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			{
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
-		} 
+		}
+		catch( NumberFormatException e2 )
+		{
+			JOptionPane.showMessageDialog( this, "El identificador del área debe ser un número.", "Actualizar valor del área", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -468,7 +486,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 	/**
 	 * Adiciona un ascensor con la información dada por el usuario
-	 * Se crea una nueva tupla de Ascensor en la base de datos, si un ascensor con ese nombre no existía
+	 * Se crea una nueva tupla de Ascensor en la base de datos, si un ascensor con ese identificador no existía
 	 */
 	public void adicionarAscensor( String idAscensor, int capacidadNormal, double area, double pesoMaximo, String idCentroComercial, DialogoAdicionarAscensor pDialogo)
 	{
@@ -525,18 +543,18 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String idAscensor = JOptionPane.showInputDialog (this, "Nombre del ascensor: ", "Buscar ascensor por nombre", JOptionPane.QUESTION_MESSAGE);
+			String idAscensor = JOptionPane.showInputDialog (this, "Identificador del ascensor: ", "Buscar ascensor por identificador", JOptionPane.QUESTION_MESSAGE);
 			if (idAscensor != null)
 			{
 				VOAscensor Ascensor = aforoAndes.darAscensorPorId(idAscensor);
-				String resultado = "En buscar Ascensor por nombre\n\n";
+				String resultado = "En buscar Ascensor por identificador\n\n";
 				if (Ascensor != null)
 				{
 					resultado += "El ascensor es: " + Ascensor;
 				}
 				else
 				{
-					resultado += "Un ascensor con nombre: " + idAscensor + " NO EXISTE\n";    				
+					resultado += "Un ascensor con identificador: " + idAscensor + " NO EXISTE\n";    				
 				}
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -561,8 +579,8 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String idAscensor = JOptionPane.showInputDialog (this, "Identificador del ascensor: ", "Actualizar peso máximo", JOptionPane.QUESTION_MESSAGE);
-			String pesoMaximoStr = JOptionPane.showInputDialog (this, "Nuevo peso máximo: ", "Actualizar peso máximo", JOptionPane.QUESTION_MESSAGE);
+			String idAscensor = JOptionPane.showInputDialog (this, "Identificador del ascensor: ", "Actualizar peso máximo del ascensor", JOptionPane.QUESTION_MESSAGE);
+			String pesoMaximoStr = JOptionPane.showInputDialog (this, "Nuevo peso máximo: ", "Actualizar peso máximo del ascensor", JOptionPane.QUESTION_MESSAGE);
 			if (idAscensor != null && pesoMaximoStr != null)
 			{	
 				double pesoMaximo = Double.valueOf (pesoMaximoStr);
@@ -577,6 +595,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "El peso máximo se un número.", "Actualizar peso máximo del ascensor", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -593,14 +615,14 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String idTipoStr = JOptionPane.showInputDialog (this, "Identificador del ascensor:", "Borrar ascensor por identificador", JOptionPane.QUESTION_MESSAGE);
-			if (idTipoStr != null)
+			String idAscensor = JOptionPane.showInputDialog (this, "Identificador del ascensor:", "Borrar ascensor por identificador", JOptionPane.QUESTION_MESSAGE);
+			if (idAscensor != null)
 			{
-				String idTipo = idTipoStr;
-				long tbEliminados = aforoAndes.eliminarAscensorPorId (idTipo);
+				String idTipo = idAscensor;
+				long ascensoresEliminados = aforoAndes.eliminarAscensorPorId (idTipo);
 
 				String resultado = "En eliminar Ascensor\n\n";
-				resultado += tbEliminados + " Ascensores eliminados\n";
+				resultado += ascensoresEliminados + " Ascensores eliminados\n";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -634,7 +656,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 	/**
 	 * Adiciona un baño con la información dada por el usuario
-	 * Se crea una nueva tupla de Bano en la base de datos, si un baño con ese nombre no existía
+	 * Se crea una nueva tupla de Bano en la base de datos, si un baño con ese identificador no existía
 	 */
 	public void adicionarBano( String idBano, int capacidadNormal, double area, int numSanitarios, String idCentroComercial, DialogoAdicionarBano pDialogo)
 	{
@@ -691,10 +713,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String identificacion = JOptionPane.showInputDialog (this, "Identifidor del baño: ", "Buscar baño por identificador", JOptionPane.QUESTION_MESSAGE);
-			if (identificacion != null)
+			String identificador = JOptionPane.showInputDialog (this, "Identificador del baño: ", "Buscar baño por identificador", JOptionPane.QUESTION_MESSAGE);
+			if (identificador != null)
 			{
-				VOBano baño= aforoAndes.darBañoPorId(identificacion);
+				VOBano baño= aforoAndes.darBañoPorId(identificador);
 				String resultado = "En buscar Baño por id\n\n";
 				if (baño != null)
 				{
@@ -702,7 +724,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				}
 				else
 				{
-					resultado += "El baño con identificación: " + identificacion + " NO EXISTE\n";    				
+					resultado += "El baño con identificación: " + identificador + " NO EXISTE\n";    				
 				}
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -742,6 +764,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "La cantidad de sanitarios debe ser un número.", "Buscar número de sanitarios", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -753,12 +779,12 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Cambiar el número de sanitarios de un baño
 	 */
-	public void cambiarNumeroSanitariosBaño( )
+	public void cambiarNumeroSanitariosBano( )
 	{
 		try 
 		{
-			String idBano = JOptionPane.showInputDialog (this, "Identificador del baño: ", "Actualizar número de sanitarios", JOptionPane.QUESTION_MESSAGE);
-			String numeroSanitariosStr = JOptionPane.showInputDialog (this, "Nuevo número de sanitarios: ", "Actualizar número de sanitarios", JOptionPane.QUESTION_MESSAGE);
+			String idBano = JOptionPane.showInputDialog (this, "Identificador del baño: ", "Actualizar número de sanitarios del baño", JOptionPane.QUESTION_MESSAGE);
+			String numeroSanitariosStr = JOptionPane.showInputDialog (this, "Nuevo número de sanitarios: ", "Actualizar número de sanitarios del baño", JOptionPane.QUESTION_MESSAGE);
 			if (idBano != null && numeroSanitariosStr != null)
 			{	
 				int numeroSanitarios = Integer.parseInt(numeroSanitariosStr);
@@ -772,7 +798,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			{
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
-		} 
+		}
+		catch( NumberFormatException e2 )
+		{
+			JOptionPane.showMessageDialog( this, "La cantidad de sanitarios debe ser un número.", "Actualizar número de sanitarios del baño", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -786,7 +816,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 * Borra de la base de datos el baño con el identificador dado por el usuario
 	 * Cuando dicho baño no existe, se indica que se borraron 0 registros de la base de datos
 	 */
-	public void eliminarBañoPorIdentificador( )
+	public void eliminarBanoPorIdentificador( )
 	{
 		try 
 		{
@@ -817,11 +847,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 * Borra de la base de datos el baño con los sanitarios dados
 	 * Cuando dicho baño no existe, se indica que se borraron 0 registros de la base de datos
 	 */
-	public void eliminarBañoPorSanitarios( )
+	public void eliminarBanoPorSanitarios( )
 	{
 		try 
 		{
-			String sanitariosStr = JOptionPane.showInputDialog (this, "Número de sanitarios del baño a eliminar: ", "Borrar baño por sanitarios", JOptionPane.QUESTION_MESSAGE);
+			String sanitariosStr = JOptionPane.showInputDialog (this, "Número de sanitarios del baño a eliminar: ", "Borrar baño por número de sanitarios", JOptionPane.QUESTION_MESSAGE);
 			if (sanitariosStr != null)
 			{
 				int sanitarios = Integer.valueOf (sanitariosStr);
@@ -835,7 +865,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			{
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
-		} 
+		}
+		catch( NumberFormatException e2 )
+		{
+			JOptionPane.showMessageDialog( this, "La cantidad de sanitarios debe ser un número.", "Borrar baño por número de sanitarios", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -851,7 +885,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 	/**
 	 * Adiciona una capacidad normal con la información dada por el usuario
-	 * Se crea una nueva tupla de Capacidad Normal en la base de datos, si un área con ese nombre no existía
+	 * Se crea una nueva tupla de Capacidad Normal en la base de datos, si una capacidad normal con ese valor no existía
 	 */
 	public void adicionarCapacidadNormal()
 	{
@@ -860,7 +894,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String valorStr = JOptionPane.showInputDialog (this, "Valor: ", "Adicionar capacidad normal", JOptionPane.QUESTION_MESSAGE);
 			String aforoStr = JOptionPane.showInputDialog (this, "Aforo: ", "Adicionar capacidad normal", JOptionPane.QUESTION_MESSAGE);
 
-			double valor = Double.parseDouble(valorStr);
+			Integer valor = Integer.parseInt(valorStr);
 			int aforo = Integer.parseInt(aforoStr);
 
 			if (valorStr != null && aforoStr != null)
@@ -882,7 +916,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		} 
 		catch (NumberFormatException e)
 		{
-			JOptionPane.showMessageDialog( this, "El valor (double) y el aforo (int) deben ser números.", "Adicionar capacidad normal", JOptionPane.ERROR_MESSAGE );
+			JOptionPane.showMessageDialog( this, "El valor (double) y el aforo (int) deben ser números enteros.", "Adicionar capacidad normal", JOptionPane.ERROR_MESSAGE );
 		}
 		catch (Exception e) 
 		{
@@ -915,21 +949,26 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Borra de la base de datos la capacidad  con el identificador dado por el usuario
-	 * Cuando dicha capacidad no existe, se indica que se borraron 0 registros de la base de datos
+	 * Busca la capacidad normal por el ID.
 	 */
-	public void eliminarCapacidadPorId( )
+	public void buscarCapacidadPorId( )
 	{
 		try 
 		{
-			String id = JOptionPane.showInputDialog (this, "Id de la capacidad: ", "Borrar capacidad por Id", JOptionPane.QUESTION_MESSAGE);
-			if (id != null)
+			String identificador = JOptionPane.showInputDialog (this, "Identificador de la capacidad: ", "Buscar capacidad normal por identificador", JOptionPane.QUESTION_MESSAGE);
+			if (identificador != null)
 			{
-				long idCapacidad = Long.valueOf (id);
-				long eliminadas = aforoAndes.eliminarCapacidadNormalPorId(idCapacidad);
-
-				String resultado = "En eliminar Capacidad\n\n";
-				resultado += eliminadas  + "Capacidades eliminadas\n";
+				long id = Long.valueOf (identificador);
+				VOCapacidadNormal capacidad = aforoAndes.darCapacidadNormalPorId(id);
+				String resultado = "En buscar Capacidad normal por id\n\n";
+				if (capacidad != null)
+				{
+					resultado += "La capacidad es: " + capacidad;
+				}
+				else
+				{
+					resultado += "La capacidad con identificación: " + identificador + " NO EXISTE\n";    				
+				}
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -938,6 +977,160 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "El identificador debe ser un número", "Buscar capacidad normal por identificador", JOptionPane.ERROR_MESSAGE );
+		}
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Busca la capacidad normal por el valor.
+	 */
+	public void buscarCapacidadNormalPorValor( )
+	{
+		try 
+		{
+			String valorStr = JOptionPane.showInputDialog (this, "Valor de la capacidad: ", "Buscar capacidades normales por valor", JOptionPane.QUESTION_MESSAGE);
+			if (valorStr != null)
+			{
+				Integer valor = Integer.parseInt(valorStr);
+				VOCapacidadNormal capacidadNormal = aforoAndes.darCapacidadNormalPorValor(valor);
+				String resultado = "En buscar Capacidad normal por valor\n\n";
+				if (capacidadNormal != null)
+				{
+					resultado += "La capacidad es: " + capacidadNormal;
+				}
+				else
+				{
+					resultado += "La capacidad con valor: " + valorStr + " NO EXISTE\n";    				
+				}
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "El valor debe ser un número entero", "Buscar capacidades normales por valor", JOptionPane.ERROR_MESSAGE );
+		}
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Cambiar el valor de una capacidad normal.
+	 */
+	public void cambiarValorCapacidad( )
+	{
+		try 
+		{
+			String identificacion = JOptionPane.showInputDialog (this, "Identificador de la capacidad: ", "Actualizar valor de capacidad normal", JOptionPane.QUESTION_MESSAGE);
+			String valorStr = JOptionPane.showInputDialog (this, "Nuevo valor: ", "Actualizar valor de capacidad normal", JOptionPane.QUESTION_MESSAGE);
+			if (identificacion != null && valorStr != null)
+			{	
+				long id = Long.valueOf (identificacion);
+				int valor = Integer.parseInt(valorStr);
+				long modificados = aforoAndes.cambiarValorCapacidad(id, valor);
+				String resultado = "En actualizar Capacidad Normal: \n\n";
+				resultado += modificados + " registros actualizados";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "El identificador y el valor deben ser números", "Actualizar valor de capacidad normal", JOptionPane.ERROR_MESSAGE );
+		}
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Cambiar el aforo de una capacidad normal.
+	 */
+	public void cambiarAforoCapacidad( )
+	{
+		try 
+		{
+			String identificacion = JOptionPane.showInputDialog (this, "Identificador de la capacidad: ", "Actualizar aforo de capacidad normal", JOptionPane.QUESTION_MESSAGE);
+			String aforoStr = JOptionPane.showInputDialog (this, "Nuevo aforo: ", "Actualizar aforo de capacidad normal", JOptionPane.QUESTION_MESSAGE);
+			if (identificacion != null && aforoStr != null)
+			{	
+				long id = Long.valueOf (identificacion);
+				int aforo = Integer.valueOf (aforoStr);
+
+				long modificados = aforoAndes.cambiarAforoCapacidad(id, aforo);
+				String resultado = "En actualizar Capacidad Normal: \n\n";
+				resultado += modificados + " registros actualizados";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "El identificador y el valor deben ser números", "Actualizar aforo de capacidad normal", JOptionPane.ERROR_MESSAGE );
+		}
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Borra de la base de datos la capacidad  con el identificador dado por el usuario
+	 * Cuando dicha capacidad no existe, se indica que se borraron 0 registros de la base de datos
+	 */
+	public void eliminarCapacidadPorId( )
+	{
+		try 
+		{
+			String id = JOptionPane.showInputDialog (this, "Identificador de la capacidad: ", "Borrar capacidad normal por identificador", JOptionPane.QUESTION_MESSAGE);
+			if (id != null)
+			{
+				long idCapacidad = Long.valueOf (id);
+				long capacidadesEliminadas = aforoAndes.eliminarCapacidadNormalPorId(idCapacidad);
+
+				String resultado = "En eliminar Capacidad\n\n";
+				resultado += capacidadesEliminadas  + "Capacidades eliminadas\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "El identificador debe ser un número", "Borrar capacidad normal por identificador", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -954,11 +1147,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String valor = JOptionPane.showInputDialog (this, "Valor de la capacidad: ", "Borrar capacidad por valor", JOptionPane.QUESTION_MESSAGE);
-			if (valor != null)
+			String valorStr = JOptionPane.showInputDialog (this, "Valor de la capacidad: ", "Borrar capacidad normal por valor", JOptionPane.QUESTION_MESSAGE);
+			if (valorStr != null)
 			{
-				double valorS = Double.valueOf (valor);
-				long eliminadas = aforoAndes.eliminarCapacidadNormalPorValor(valorS);
+				int valor = Integer.parseInt(valorStr);
+				long eliminadas = aforoAndes.eliminarCapacidadNormalPorValor(valor);
 
 				String resultado = "En eliminar Capacidad\n\n";
 				resultado += eliminadas  + "Capacidades eliminadas\n";
@@ -970,6 +1163,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "El valor debe ser un número entero.", "Borrar capacidad normal por valor", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -978,26 +1175,88 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}
 	}
 
+
+	/* ****************************************************************
+	 * 			CRUD de CentroComercial
+	 *****************************************************************/
+
 	/**
-	 * Busca la capacidad normal por el ID.
+	 * Adiciona un centro comercial con la información dada por el usuario
+	 * Se crea una nueva tupla de CentroComercial en la base de datos, si un centro comercial con ese identificador no existía
 	 */
-	public void buscarCapacidadPorID( )
+	public void adicionarCentroComercial()
+	{
+		try
+		{
+			String identificador = JOptionPane.showInputDialog (this, "Identificador del centro comercial: ", "Adicionar centro comercial", JOptionPane.QUESTION_MESSAGE);
+			String nombre = JOptionPane.showInputDialog (this, "Nombre del centro comercial: ", "Adicionar centro comercial", JOptionPane.QUESTION_MESSAGE);
+			if (identificador != null)
+			{
+
+				VOCentroComercial centroComercial = aforoAndes.adicionarCentroComercial(identificador, nombre);
+				if (centroComercial == null)
+				{
+					throw new Exception ("No se pudo crear un centro comercial con identificador: " + identificador);
+				}
+				String resultado = "En adicionar CentroComercial\n\n";
+				resultado += "CentroComercial adicionado exitosamente: " + centroComercial;
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Consulta en la base de datos los centros comerciales existentes y los muestra en el panel de datos de la aplicación
+	 */
+	public void listarCentrosComerciales( )
 	{
 		try 
 		{
-			String identificacion = JOptionPane.showInputDialog (this, "Identificacion de la capacidad: ", "Buscar capacidad por identificacion", JOptionPane.QUESTION_MESSAGE);
-			if (identificacion != null)
+			List <VOCentroComercial> lista = aforoAndes.darVOCentrosComerciales();
+
+			String resultado = "En listar CentroComercial";
+			resultado +=  "\n" + listarObjetos (lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
+	/**
+	 * Busca el centro comercial con el identificador indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void buscarCentroComercialPorIdentificador( )
+	{
+		try 
+		{
+			String idCentroComercial = JOptionPane.showInputDialog (this, "Identificacion del centro comercial: ", "Buscar centro comercial por identificación", JOptionPane.QUESTION_MESSAGE);
+			if (idCentroComercial != null)
 			{
-				long id = Long.valueOf (identificacion);
-				VOCapacidadNormal capacidad = aforoAndes.darCapacidadNormalPorId(id);
-				String resultado = "En buscar Capacidad normal por id\n\n";
-				if (capacidad != null)
+				VOCentroComercial centroComercial = aforoAndes.darCentroComercialPorId(idCentroComercial);
+				String resultado = "En buscar CentroComercial por identificacion\n\n";
+				if (centroComercial != null)
 				{
-					resultado += "La capacidad es: " + capacidad;
+					resultado += "El centro comercial es: " + centroComercial;
 				}
 				else
 				{
-					resultado += "La capacidad con identificación: " + identificacion + " NO EXISTE\n";    				
+					resultado += "Un centro comercial con identificacion: " + idCentroComercial + " NO EXISTE\n";    				
 				}
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -1016,26 +1275,18 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Busca la capacidad normal por el valor.
+	 * Busca el centro comercial con el identificador indicado por el usuario y lo muestra en el panel de datos
 	 */
-	public void buscarCapacidadNormalPorValor( )
+	public void buscarCentroComercialPorNombre( )
 	{
 		try 
 		{
-			String valor = JOptionPane.showInputDialog (this, "Valor de la capacidad: ", "Buscar capacidades por valor", JOptionPane.QUESTION_MESSAGE);
-			if (valor != null)
+			String nombre = JOptionPane.showInputDialog (this, "Nombre del centro comercial: ", "Buscar centro comercial por nombre", JOptionPane.QUESTION_MESSAGE);
+			if (nombre != null)
 			{
-				double value = Double.valueOf (valor);
-				VOCapacidadNormal capacidadNormal = aforoAndes.darCapacidadNormalPorValor(value);
-				String resultado = "En buscar Capacidad normal por valor\n\n";
-				if (capacidadNormal != null)
-				{
-					resultado += "La capacidad es: " + capacidadNormal;
-				}
-				else
-				{
-					resultado += "La capacidad con valor: " + valor + " NO EXISTE\n";    				
-				}
+				List<CentroComercial> lista = aforoAndes.darCentroComercialPorNombre(nombre);
+				String resultado = "En buscar CentroComercial por nombre: \n\n";
+				resultado +=  "\n" + listarObjetos (lista);
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -1053,21 +1304,18 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Cambiar el valor de una capacidad normal.
+	 * Cambiar el nombre al centro comercial con el identificador indicado por el usuario y lo muestra en el panel de datos
 	 */
-	public void cambiarValorCapacidad( )
+	public void cambiarNombreCentroComercial( )
 	{
 		try 
 		{
-			String identificacion = JOptionPane.showInputDialog (this, "Identificador de la capacidad: ", "Actualizar valor", JOptionPane.QUESTION_MESSAGE);
-			String valor = JOptionPane.showInputDialog (this, "Nuevo valor: ", "Actualizar valor", JOptionPane.QUESTION_MESSAGE);
-			if (identificacion != null && valor != null)
-			{	
-				long id = Long.valueOf (identificacion);
-				double valorS = Double.valueOf (valor);
-
-				long modificados = aforoAndes.cambiarValorCapacidad(id, valorS);
-				String resultado = "En actualizar Capacidad Normal: \n\n";
+			String idCentroComercial = JOptionPane.showInputDialog (this, "Identificador del centro comercial: ", "Actualizar nombre del centro comercial", JOptionPane.QUESTION_MESSAGE);
+			String nombre = JOptionPane.showInputDialog (this, "Nuevo nombre del centro comercial: ", "Actualizar nombre del centro comercial", JOptionPane.QUESTION_MESSAGE);
+			if (nombre != null)
+			{
+				long modificados = aforoAndes.cambiarNombreCentroComercial(idCentroComercial, nombre);
+				String resultado = "En actualizar CentroComercial por nombre: \n\n";
 				resultado += modificados + " registros actualizados";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -1086,21 +1334,346 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Cambiar el aforo de una capacidad normal.
+	 * Borra de la base de datos el centro comercial con la identificación dada por el usuario
+	 * Cuando dicho centro comercial no existe, se indica que se borraron 0 registros de la base de datos
 	 */
-	public void cambiarAforoCapacidad( )
+	public void eliminarCentroComercialPorIdentificador( )
 	{
 		try 
 		{
-			String identificacion = JOptionPane.showInputDialog (this, "Identificador de la capacidad: ", "Actualizar aforo", JOptionPane.QUESTION_MESSAGE);
-			String aforo = JOptionPane.showInputDialog (this, "Nuevo aforo: ", "Actualizar aforo de la capacidad normal", JOptionPane.QUESTION_MESSAGE);
-			if (identificacion != null && aforo != null)
-			{	
-				long id = Long.valueOf (identificacion);
-				int aforoS = Integer.valueOf (aforo);
+			String idCentroComercial = JOptionPane.showInputDialog (this, "Identificación del centro comercial: ", "Borrar centro comercial por identificación", JOptionPane.QUESTION_MESSAGE);
+			if (idCentroComercial != null)
+			{
+				long ccEliminados = aforoAndes.eliminarCentroComercialPorId(idCentroComercial);		
+				String resultado = "En eliminar CentroComercial\n\n";
+				resultado += ccEliminados + " Centros comerciales eliminados\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
 
-				long modificados = aforoAndes.cambiarAforoCapacidad(id, aforoS);
-				String resultado = "En actualizar Capacidad Normal: \n\n";
+	/* ****************************************************************
+	 * 			CRUD de Carnet
+	 *****************************************************************/
+
+	/**
+	 * Adiciona un carnet con la información dada por el usuario
+	 * Se crea una nueva tupla de Carnet en la base de datos, si un Carnet con ese identificador no existía
+	 */
+	public void adicionarCarnet()
+	{
+		try
+		{
+			String idVisitante = JOptionPane.showInputDialog (this, "Identificador del visitante dueño del carnet: ", "Adicionar carnet", JOptionPane.QUESTION_MESSAGE);
+			String tipoCarnetStr = JOptionPane.showInputDialog (this, "Tipo de carnet (QR o Fisico): ", "Adicionar carnet", JOptionPane.QUESTION_MESSAGE);
+			if (idVisitante != null)
+			{
+				if ( !tipoCarnetStr.equals("QR") && !tipoCarnetStr.equals("Fisico"))
+				{
+					JOptionPane.showInputDialog (this, "El tipo de carnet ingresado es inválido ", "Adicionar carnet", JOptionPane.ERROR_MESSAGE);
+				}
+				VOCarnet carnet = aforoAndes.adicionarCarnet(tipoCarnetStr, idVisitante);
+				if (carnet == null)
+				{
+					throw new Exception ("No se pudo crear un carnet del visitante: " + idVisitante);
+				}
+
+				String resultado = "En adicionar Carnet\n\n";
+				resultado += "Carnet adicionado exitosamente: " + carnet;
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Consulta en la base de datos los carnets existentes y los muestra en el panel de datos de la aplicación
+	 */
+	public void listarCarnets( )
+	{
+		try 
+		{
+			List <VOCarnet> lista = aforoAndes.darVOCarnets();
+
+			String resultado = "En listar Carnet";
+			resultado +=  "\n" + listarObjetos (lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
+	/**
+	 * Borra de la base de datos el carnet con la identificación dada por el usuario
+	 * Cuando dicho carnet no existe, se indica que se borraron 0 registros de la base de datos
+	 */
+	public void eliminarCarnetPorId( )
+	{
+		try 
+		{
+			String idVisitante = JOptionPane.showInputDialog (this, "Identificación del visitante dueño del carnet: ", "Borrar carnet por identificación", JOptionPane.QUESTION_MESSAGE);
+			if (idVisitante != null)
+			{
+				long carnetsEliminados = aforoAndes.eliminarCarnetPorIdVisitante(idVisitante);
+
+				String resultado = "En eliminar Carnet\n\n";
+				resultado += carnetsEliminados + " Carnets eliminados\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Busca el carnet con el identificador indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void buscarCarnetPorIdentificacion( )
+	{
+		try 
+		{
+			String idVisitante = JOptionPane.showInputDialog (this, "Identificacion del visitante dueño del carnet: ", "Buscar carnet por identificación", JOptionPane.QUESTION_MESSAGE);
+			if (idVisitante != null)
+			{
+				VOCarnet carnet = aforoAndes.darCarnetPorIdVisitante(idVisitante);
+				String resultado = "En buscar Carnet por identificacion\n\n";
+				if (carnet != null)
+				{
+					resultado += "El carnet es: " + carnet;
+				}
+				else
+				{
+					resultado += "Un carnet perteneciente al visitante: " + idVisitante + " NO EXISTE\n";    				
+				}
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Busca el carnet con el identificador indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void buscarCarnetsPorTipo( )
+	{
+		try 
+		{
+			String tipoCarnet = JOptionPane.showInputDialog (this, "Tipo del carnet: ", "Buscar carnets por tipo", JOptionPane.QUESTION_MESSAGE);
+			if (tipoCarnet != null)
+			{
+				List<Carnet> lista = aforoAndes.darCarnetsPorTipo(tipoCarnet);
+				String resultado = "En buscar Carnet por nombre: \n\n";
+				resultado +=  "\n" + listarObjetos (lista);
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/* ****************************************************************
+	 * 			CRUD de Domiciliario
+	 *****************************************************************/
+
+	/**
+	 * Crea una ventana de diálogo para agregar un domiciliario.
+	 */
+	public void adicionarDomiciliario( )
+	{
+		DialogoAdicionarDomiciliario dialogo = new DialogoAdicionarDomiciliario( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de adición");
+	}
+
+	/**
+	 * Adiciona un domiciliario con la información dada por el usuario
+	 * Se crea una nueva tupla de Domiciliario en la base de datos, si un domiciliario con esa identificación no existía
+	 * @param idVisitante - El identificador del visitante
+	 * @param empresaDomicilios - La empresa de domicilios donde trabaja el domiciliario
+	 * @param horaInicioTurno - Hora de inicio del turno de trabajo
+	 * @param minutoInicioTurno - Minuto de inicio del turno de trabajo
+	 * @param horaFinalTurno - Hora final del turno de trabajo
+	 * @param minutoFinalTurno - Minuto final del turno de trabajo
+	 */
+	public void adicionarDomiciliario (String idVisitante, String empresaDomicilios, int horaInicioTurno, int minutoInicioTurno, int horaFinalTurno, int minutoFinalTurno)
+	{
+		try
+		{
+			VODomiciliario domiciliario = aforoAndes.adicionarDomiciliario(idVisitante, empresaDomicilios, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno);
+			if (domiciliario == null)
+			{
+				throw new Exception ("No se pudo crear un domiciliario con identificación: " + idVisitante);
+			}
+			String resultado = "En adicionar Domiciliario\n\n";
+			resultado += "Domiciliario adicionado exitosamente: " + domiciliario;
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Consulta en la base de datos los domiciliarios existentes y los muestra en el panel de datos de la aplicación
+	 */
+	public void listarDomiciliarios( )
+	{
+		try 
+		{
+			List <VODomiciliario> lista = aforoAndes.darVODomiciliario();
+			String resultado = "En listar Domiciliario";
+			resultado +=  "\n" + listarObjetos (lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
+	/**
+	 * Borra de la base de datos el domiciliario con la identificación dada por el usuario
+	 * Cuando dicho domiciliario no existe, se indica que se borraron 0 registros de la base de datos
+	 */
+	public void eliminarDomiciliarioPorIdentificacion( )
+	{
+		try 
+		{
+			String idEmpleado = JOptionPane.showInputDialog (this, "Identificación del domiciliario: ", "Borrar domiciliario por identificación", JOptionPane.QUESTION_MESSAGE);
+			if (idEmpleado != null)
+			{
+				long domiciliariosEliminados = aforoAndes.eliminarDomiciliarioPorId(idEmpleado);
+
+				String resultado = "En eliminar Domiciliario\n\n";
+				resultado += domiciliariosEliminados + " Domiciliarios eliminados\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Busca el domiciliario con la identificación indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void buscarDomiciliarioPorIdentificacion( )
+	{
+		try 
+		{
+			String idEmpleado = JOptionPane.showInputDialog (this, "Identificacion del domiciliario: ", "Buscar domiciliario por identificación", JOptionPane.QUESTION_MESSAGE);
+			if (idEmpleado != null)
+			{
+				VODomiciliario visitante = aforoAndes.darDomiciliarioPorId(idEmpleado);
+				String resultado = "En buscar Domiciliario por identificacion\n\n";
+				if (visitante != null)
+				{
+					resultado += "El domiciliario es: " + visitante;
+				}
+				else
+				{
+					resultado += "Un domiciliario con identificacion: " + idEmpleado + " NO EXISTE\n";    				
+				}
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Cambiar la empresa de domicilios del domiciliario con el identificador indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void cambiarEmpresaDomiciliosDomiciliario( )
+	{
+		try 
+		{
+			String idDomiciliario = JOptionPane.showInputDialog (this, "Identificador del domiciliario: ", "Actualizar empresa del domiciliario", JOptionPane.QUESTION_MESSAGE);
+			String empresaDomicilios = JOptionPane.showInputDialog (this, "Nueva empresa de domicilios: ", "Actualizar empresa del domiciliario", JOptionPane.QUESTION_MESSAGE);
+
+			if (idDomiciliario != null && empresaDomicilios != null )
+			{	
+				long modificados = aforoAndes.cambiarEmpresaDomiciliario(idDomiciliario, empresaDomicilios);
+				String resultado = "En actualizar Domiciliario por empresa: \n\n";
 				resultado += modificados + " registros actualizados";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -1110,6 +1683,276 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	/**
+	 * Cambiar el horario de turno del domiciliario con el identificador indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void cambiarHorarioTurnoDomiciliario( )
+	{
+		try 
+		{
+			String idEmpleado = JOptionPane.showInputDialog (this, "Identificador del domiciliario: ", "Actualizar horario de turno del domiciliario", JOptionPane.QUESTION_MESSAGE);
+			String horaInicioTurnoStr = JOptionPane.showInputDialog (this, "Nueva hora de inicio del turno (hh:mm): ", "Actualizar horario de turno del domiciliario", JOptionPane.QUESTION_MESSAGE);
+			String horaFinalTurnoStr = JOptionPane.showInputDialog (this, "Nueva hora final del turno (hh:mm): ", "Actualizar horario de turno del domiciliario", JOptionPane.QUESTION_MESSAGE);
+
+			if (idEmpleado != null && horaInicioTurnoStr != null && horaFinalTurnoStr != null)
+			{	
+				int horaInicioTurno;
+				int minutoInicioTurno;
+				int horaFinalTurno;
+				int minutoFinalTurno;
+
+				horaInicioTurno = Integer.parseInt(horaInicioTurnoStr.split(":")[0]);
+				minutoInicioTurno = Integer.parseInt(horaInicioTurnoStr.split(":")[1]);
+				horaFinalTurno = Integer.parseInt(horaFinalTurnoStr.split(":")[0]);
+				minutoFinalTurno = Integer.parseInt(horaFinalTurnoStr.split(":")[1]);
+
+				if ( horaInicioTurno > horaFinalTurno || (horaFinalTurno == horaInicioTurno && minutoFinalTurno <= minutoInicioTurno))
+				{
+					JOptionPane.showMessageDialog( this, "La hora de final de turno debe ser posterior a la hora de inicio de turno", "Actualizar horario de turno del domiciliario", JOptionPane.ERROR_MESSAGE );
+				}
+				long modificados = aforoAndes.cambiarHorarioTurnoDomiciliario(idEmpleado, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno);
+				String resultado = "En actualizar Domiciliario por horario de turno: \n\n";
+				resultado += modificados + " registros actualizados";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "Las horas deben ser números separados por ':'", "Actualizar horario de turno del domiciliario", JOptionPane.ERROR_MESSAGE );
+		}
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/* ****************************************************************
+	 * 			CRUD de Empleado
+	 *****************************************************************/
+
+	/**
+	 * Crea una ventana de diálogo para agregar un empleado.
+	 */
+	public void adicionarEmpleado( )
+	{
+		DialogoAdicionarEmpleado dialogo = new DialogoAdicionarEmpleado( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de adición");
+	}
+
+	/**
+	 * Adiciona un empleado con la información dada por el usuario
+	 * Se crea una nueva tupla de Empleado en la base de datos, si un empleado con esa identificación no existía
+	 * @param idVisitante - El identificador del visitante
+	 * @param lugarTrabajo - El lugar de trabajo del empleado 
+	 * @param horaInicioTurno - Hora de inicio del turno de trabajo
+	 * @param minutoInicioTurno - Minuto de inicio del turno de trabajo
+	 * @param horaFinalTurno - Hora final del turno de trabajo
+	 * @param minutoFinalTurno - Minuto final del turno de trabajo
+	 */
+	public void adicionarEmpleado (String idVisitante, String lugarTrabajo, int horaInicioTurno, int minutoInicioTurno, int horaFinalTurno, int minutoFinalTurno)
+	{
+		try
+		{
+			VOEmpleado empleado = aforoAndes.adicionarEmpleado(idVisitante, lugarTrabajo, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno);
+			if (empleado == null)
+			{
+				throw new Exception ("No se pudo crear un empleado con identificación: " + idVisitante);
+			}
+			String resultado = "En adicionar Empleado\n\n";
+			resultado += "Empleado adicionado exitosamente: " + empleado;
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+
+		} 
+		catch (Exception e) 
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Consulta en la base de datos los empleados existentes y los muestra en el panel de datos de la aplicación
+	 */
+	public void listarEmpleados( )
+	{
+		try 
+		{
+			List <VOEmpleado> lista = aforoAndes.darVOEmpleados();
+
+			String resultado = "En listar Empleado";
+			resultado +=  "\n" + listarObjetos (lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
+	/**
+	 * Borra de la base de datos el empleado con la identificación dada por el usuario
+	 * Cuando dicho empleado no existe, se indica que se borraron 0 registros de la base de datos
+	 */
+	public void eliminarEmpleadoPorIdentificacion( )
+	{
+		try 
+		{
+			String idEmpleado = JOptionPane.showInputDialog (this, "Identificación del empleado: ", "Borrar empleado por identificación", JOptionPane.QUESTION_MESSAGE);
+			if (idEmpleado != null)
+			{
+				long empleadosEliminados = aforoAndes.eliminarEmpleadoPorId(idEmpleado);
+
+				String resultado = "En eliminar Empleado\n\n";
+				resultado += empleadosEliminados + " Empleados eliminados\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Busca el empleado con la identificación indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void buscarEmpleadoPorIdentificacion( )
+	{
+		try 
+		{
+			String idEmpleado = JOptionPane.showInputDialog (this, "Identificacion del empleado: ", "Buscar empleado por identificación", JOptionPane.QUESTION_MESSAGE);
+			if (idEmpleado != null)
+			{
+				VOEmpleado visitante = aforoAndes.darEmpleadoPorId(idEmpleado);
+				String resultado = "En buscar Empleado por identificacion\n\n";
+				if (visitante != null)
+				{
+					resultado += "El empleado es: " + visitante;
+				}
+				else
+				{
+					resultado += "Un empleado con identificacion: " + idEmpleado + " NO EXISTE\n";    				
+				}
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Cambiar el lugar de trabajo del empleado con el identificador indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void cambiarLugarTrabajoEmpleado( )
+	{
+		try 
+		{
+			String idEmpleado = JOptionPane.showInputDialog (this, "Identificador del domiciliario: ", "Actualizar lugar de trabajo del empleado", JOptionPane.QUESTION_MESSAGE);
+			String lugarTrabajo = JOptionPane.showInputDialog (this, "Nuevo identificador del local: ", "Actualizar lugar de trabajo del empleado", JOptionPane.QUESTION_MESSAGE);
+
+			if (idEmpleado != null && lugarTrabajo != null )
+			{	
+				long modificados = aforoAndes.cambiarLugarTrabajoEmpleado(idEmpleado, lugarTrabajo);
+				String resultado = "En actualizar Empleado por lugar de trabajo: \n\n";
+				resultado += modificados + " registros actualizados";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	/**
+	 * Cambiar el horario de turno del empleado con el identificador indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void cambiarHorarioTurnoEmpleado( )
+	{
+		try 
+		{
+			String idEmpleado = JOptionPane.showInputDialog (this, "Identificador del empleado: ", "Actualizar horario de turno del empleado", JOptionPane.QUESTION_MESSAGE);
+			String horaInicioTurnoStr = JOptionPane.showInputDialog (this, "Nueva hora de inicio del turno (hh:mm): ", "Actualizar horario de turno del empleado", JOptionPane.QUESTION_MESSAGE);
+			String horaFinalTurnoStr = JOptionPane.showInputDialog (this, "Nueva hora final del turno (hh:mm): ", "Actualizar horario de turno del empleado", JOptionPane.QUESTION_MESSAGE);
+
+			if (idEmpleado != null && horaInicioTurnoStr != null && horaFinalTurnoStr != null)
+			{	
+				int horaInicioTurno;
+				int minutoInicioTurno;
+				int horaFinalTurno;
+				int minutoFinalTurno;
+
+				horaInicioTurno = Integer.parseInt(horaInicioTurnoStr.split(":")[0]);
+				minutoInicioTurno = Integer.parseInt(horaInicioTurnoStr.split(":")[1]);
+				horaFinalTurno = Integer.parseInt(horaFinalTurnoStr.split(":")[0]);
+				minutoFinalTurno = Integer.parseInt(horaFinalTurnoStr.split(":")[1]);
+
+				if ( horaInicioTurno > horaFinalTurno || (horaFinalTurno == horaInicioTurno && minutoFinalTurno <= minutoInicioTurno))
+				{
+					JOptionPane.showMessageDialog( this, "La hora de final de turno debe ser posterior a la hora de inicio de turno", "Actualizar horario de turno del empleado", JOptionPane.ERROR_MESSAGE );
+				}
+				
+				long modificados = aforoAndes.cambiarHorarioTurnoEmpleado(idEmpleado, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno);
+				String resultado = "En actualizar Empleado por horario de turno: \n\n";
+				resultado += modificados + " registros actualizados";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "Las horas deben ser números separados por ':'", "Actualizar horario de turno del domiciliario", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1134,7 +1977,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 	/**
 	 * Adiciona un local comercial con la información dada por el usuario
-	 * Se crea una nueva tupla de LocalComercial en la base de datos, si un local comercial con ese nombre no existía
+	 * Se crea una nueva tupla de LocalComercial en la base de datos, si un local comercial con ese identificador no existía
 	 */
 	public void adicionarLocalComercial (String idLocalComercial, int capacidadNormal, double area, long tipoLocal, boolean activoBooleano, String idCentroComercial, DialogoAdicionarLocalComercial pDialogo) 
 	{
@@ -1191,10 +2034,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String identificacion = JOptionPane.showInputDialog (this, "Identifidor del local comercial: ", "Buscar local comercial por identificador", JOptionPane.QUESTION_MESSAGE);
-			if (identificacion != null)
+			String identificador = JOptionPane.showInputDialog (this, "Identificador del local comercial: ", "Buscar local comercial por identificador", JOptionPane.QUESTION_MESSAGE);
+			if (identificador != null)
 			{
-				VOLocalComercial localComercial= aforoAndes.darLocalComercialPorId(identificacion);
+				VOLocalComercial localComercial= aforoAndes.darLocalComercialPorId(identificador);
 				String resultado = "En buscar LocalComercial por id\n\n";
 				if (localComercial != null)
 				{
@@ -1202,7 +2045,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				}
 				else
 				{
-					resultado += "El local comercial con identificación: " + identificacion + " NO EXISTE\n";    				
+					resultado += "El local comercial con identificador: " + identificador + " NO EXISTE\n";    				
 				}
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -1272,6 +2115,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "El área debe ser un número", "Actualizar área de un local", JOptionPane.ERROR_MESSAGE );
+		}		
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1280,6 +2127,40 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * Cambiar la actividad de un local comercial
+	 */
+	public void cambiarActividadLocalComercial( )
+	{
+		try 
+		{
+			String idLocal = JOptionPane.showInputDialog (this, "Identificador del local comercial: ", "Actualizar actividad de un local", JOptionPane.QUESTION_MESSAGE);
+			String actividadStr = JOptionPane.showInputDialog (this, "Nuevo estado de actividad (1 - activo, 0 - inactivo): ", "Actualizar actividad de un local", JOptionPane.QUESTION_MESSAGE);
+			if (idLocal != null && actividadStr != null)
+			{	
+				int activo = Integer.parseInt(actividadStr);
+				long modificados = aforoAndes.cambiarActividadLocalComercial(idLocal, activo);
+				String resultado = "En actualizar LocalComercial: \n\n";
+				resultado += modificados + " registros actualizados";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "El estado de actividad debe ser un número", "Actualizar actividad de un local", JOptionPane.ERROR_MESSAGE );
+		}		
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
 
 	/**
 	 * Borra de la base de datos el local comercial con el identificador dado por el usuario
@@ -1338,6 +2219,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "La actividad debe ser un número", "Borrar local comercial por actividad", JOptionPane.ERROR_MESSAGE );
+		}		
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1361,7 +2246,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 	/**
 	 * Adiciona un lector con la información dada por el usuario
-	 * Se crea una nueva tupla de Lector en la base de datos, si un local comercial con ese nombre no existía
+	 * Se crea una nueva tupla de Lector en la base de datos, si un lector con ese identificador no existía
 	 */
 	public void adicionarLector(long id, long tipoLector, String idCentroComercial, String idLocalComercial, String idAscensor, String idParqueadero, String idBaño) 
 	{
@@ -1438,6 +2323,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "El identificador debe ser un número", "Buscar lector por identificador", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1453,7 +2342,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String idTipoStr = JOptionPane.showInputDialog (this, "Id del tipo del lector: ", "Buscar lector por tipo", JOptionPane.QUESTION_MESSAGE);
+			String idTipoStr = JOptionPane.showInputDialog (this, "Identificador del tipo del lector: ", "Buscar lector por tipo", JOptionPane.QUESTION_MESSAGE);
 			if (idTipoStr != null)
 			{
 				long idTipo = Long.valueOf(idTipoStr);
@@ -1468,6 +2357,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "El tipo de lector debe ser un número", "Borrar lector por identificador", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1500,6 +2393,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "El identificador del lector y del tipo de lector deben ser números", "Borrar lector por identificador", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1531,7 +2428,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			{
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
-		} 
+		}
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "El identificador debe ser un número", "Borrar lector por identificador", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1551,11 +2452,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		DialogoAdicionarParqueadero dialogo = new DialogoAdicionarParqueadero( this );
 		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("Operación finalizada");
+		panelDatos.actualizarInterfaz("En proceso de adición");
 	}
 	/**
 	 * Adiciona un parqueadero con la información dada por el usuario
-	 * Se crea una nueva tupla de Parqueadero en la base de datos, si un ascensor con ese nombre no existía
+	 * Se crea una nueva tupla de Parqueadero en la base de datos, si un parqueadero con ese identificador no existía
 	 */
 	public void adicionarParqueadero( String idParqueadero, int capacidadNormal, double area, String idCentroComercial, DialogoAdicionarParqueadero pDialogo)
 	{
@@ -1586,7 +2487,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos los parqueaderos existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public void listarParqueadero( )
+	public void listarParqueaderos( )
 	{
 		try 
 		{
@@ -1612,18 +2513,18 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String idParqueadero = JOptionPane.showInputDialog (this, "Nombre del parqueadero: ", "Buscar parqueadero por nombre", JOptionPane.QUESTION_MESSAGE);
+			String idParqueadero = JOptionPane.showInputDialog (this, "Identificador del parqueadero: ", "Buscar parqueadero por identificador", JOptionPane.QUESTION_MESSAGE);
 			if (idParqueadero != null)
 			{
 				VOParqueadero parqueadero = aforoAndes.darParqueaderoPorId(idParqueadero);
-				String resultado = "En buscar Ascensor por nombre\n\n";
+				String resultado = "En buscar Parqueadero por identificador\n\n";
 				if (parqueadero != null)
 				{
 					resultado += "El parqueadero es: " + parqueadero;
 				}
 				else
 				{
-					resultado += "Un parqueadero con nombre: " + idParqueadero + " NO EXISTE\n";    				
+					resultado += "Un parqueadero con identificador: " + idParqueadero + " NO EXISTE\n";    				
 				}
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -1642,14 +2543,14 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Cambiar el peso máximo de un ascensor
+	 * Cambiar el área de un parqueadero
 	 */
 	public void cambiarAreaParqueadero( )
 	{
 		try 
 		{
-			String idParqueadero = JOptionPane.showInputDialog (this, "Identificador del ascensor: ", "Actualizar área", JOptionPane.QUESTION_MESSAGE);
-			String areaStr = JOptionPane.showInputDialog (this, "Nuevo identificador del área: ", "Actualizar área", JOptionPane.QUESTION_MESSAGE);
+			String idParqueadero = JOptionPane.showInputDialog (this, "Identificador del ascensor: ", "Actualizar área del parqueadero", JOptionPane.QUESTION_MESSAGE);
+			String areaStr = JOptionPane.showInputDialog (this, "Nuevo identificador del área: ", "Actualizar área del parqueadero", JOptionPane.QUESTION_MESSAGE);
 			if (idParqueadero != null && areaStr != null)
 			{	
 				long area = Long.valueOf (areaStr);
@@ -1664,6 +2565,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch( NumberFormatException e )
+		{
+			JOptionPane.showMessageDialog( this, "El área debe ser un número", "Actualizar área del parqueadero", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1680,14 +2585,14 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String idTipoStr = JOptionPane.showInputDialog (this, "Identificador del parqueadero:", "Borrar parqueadero por identificador", JOptionPane.QUESTION_MESSAGE);
-			if (idTipoStr != null)
+			String idParqueadero = JOptionPane.showInputDialog (this, "Identificador del parqueadero:", "Borrar parqueadero por identificador", JOptionPane.QUESTION_MESSAGE);
+			if (idParqueadero != null)
 			{
-				String idTipo = idTipoStr;
-				long tbEliminados = aforoAndes.eliminarParqueaderoPorId (idTipo);
+				String idTipo = idParqueadero;
+				long parqueaderosEliminados = aforoAndes.eliminarParqueaderoPorId (idTipo);
 
 				String resultado = "En eliminar Parqueadero\n\n";
-				resultado += tbEliminados + " parqueaderos eliminados\n";
+				resultado += parqueaderosEliminados + " parqueaderos eliminados\n";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -1703,7 +2608,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-
 
 	/* ****************************************************************
 	 * 			CRUD de TipoLocal
@@ -1725,7 +2629,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 * @param minutoApertura - El minuto de inicio de circulación del tipo del visitante
 	 * @param horalimite - La hora límite de circulación del tipo del visitante
 	 * @param minutoApertura - El minuto límite de circulación del tipo del visitante
-	 * Se crea una nueva tupla de TipoVisitante en la base de datos, si un tipoVisitante con ese nombre no existía
+	 * Se crea una nueva tupla de TipoLocal en la base de datos, si un tipoLocal con ese nombre no existía
 	 */
 	public void adicionarTipoLocal( String tipo, int horaApertura, int minutoApertura, int horaCierre, int minutoCierre, DialogoAdicionarTipoLocal pDialogo )
 	{
@@ -1737,7 +2641,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				throw new Exception ("No se pudo crear un tipo de local con tipo: " + tipo);
 			}
 			String resultado = "En adicionar TipoLocal\n\n";
-			resultado += "Tipo de visitante adicionado exitosamente: " + tl;
+			resultado += "Tipo de local adicionado exitosamente: " + tl;
 			resultado += "\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 
@@ -1752,7 +2656,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos los tipos de local existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public void listarTipoLocal( )
+	public void listarTiposLocal( )
 	{
 		try 
 		{
@@ -1771,22 +2675,36 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}
 	}
 
-
 	/**
-	 * Borra de la base de datos el tipo local con el tipo dado por el usuario
-	 * Cuando dicho tipo no existe, se indica que se borraron 0 registros de la base de datos
+	 * Cambiar el horario de funcionamiento del tipo de local indicado por el usuario y lo muestra en el panel de datos
 	 */
-	public void eliminarTipoLocalPorTipo( )
+	public void cambiarHorarioTipoLocal( )
 	{
 		try 
 		{
-			String tipo = JOptionPane.showInputDialog (this, "Nombre del tipo de local: ", "Borrar tipo de local por tipo", JOptionPane.QUESTION_MESSAGE);
-			if (tipo != null)
-			{
-				long tlEliminados = aforoAndes.eliminarTipoLocalPorTipo(tipo);
+			String tipo = JOptionPane.showInputDialog (this, "Tipo de local: ", "Actualizar horario del tipo de local", JOptionPane.QUESTION_MESSAGE);
+			String horaAperturaStr = JOptionPane.showInputDialog (this, "Nueva hora de apertura (hh:mm): ", "Actualizar horario del tipo de local", JOptionPane.QUESTION_MESSAGE);
+			String horaCierreStr = JOptionPane.showInputDialog (this, "Nueva hora de cierre (hh:mm): ", "Actualizar horario del tipo de local", JOptionPane.QUESTION_MESSAGE);
 
-				String resultado = "En eliminar TipoLocal\n\n";
-				resultado += tlEliminados + " Tipos de local eliminados\n";
+			if (tipo != null && horaAperturaStr != null && horaCierreStr != null)
+			{	
+				int horaApertura;
+				int minutoApertura;
+				int horaCierre;
+				int minutoCierre;
+
+				horaApertura = Integer.parseInt(horaAperturaStr.split(":")[0]);
+				minutoApertura = Integer.parseInt(horaAperturaStr.split(":")[1]);
+				horaCierre = Integer.parseInt(horaCierreStr.split(":")[0]);
+				minutoCierre = Integer.parseInt(horaCierreStr.split(":")[1]);
+
+				if ( horaApertura > horaCierre || (horaCierre == horaApertura && minutoCierre <= minutoApertura))
+				{
+					JOptionPane.showMessageDialog( this, "La hora de cierre debe ser posterior a la hora de apertura", "Actualizar horario del tipo de local", JOptionPane.ERROR_MESSAGE );
+				}
+				long modificados = aforoAndes.cambiarHorarioTipoLocal(tipo, horaApertura, minutoApertura, horaCierre, minutoCierre);
+				String resultado = "En actualizar TipoLocal por horario de funcionamientos: \n\n";
+				resultado += modificados + " registros actualizados";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -1795,6 +2713,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "Las horas deben ser números separados por ':'", "Actualizar horario del tipo de local", JOptionPane.ERROR_MESSAGE );
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1806,7 +2728,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Busca el tipo de local con el nombre indicado por el usuario y lo muestra en el panel de datos
 	 */
-	public void buscarTipoLocalPorNombre( )
+	public void buscarTipoLocalPorTipo( )
 	{
 		try 
 		{
@@ -1839,6 +2761,36 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * Borra de la base de datos el tipo local con el tipo dado por el usuario
+	 * Cuando dicho tipo no existe, se indica que se borraron 0 registros de la base de datos
+	 */
+	public void eliminarTipoLocalPorTipo( )
+	{
+		try 
+		{
+			String tipo = JOptionPane.showInputDialog (this, "Nombre del tipo de local: ", "Borrar tipo de local por tipo", JOptionPane.QUESTION_MESSAGE);
+			if (tipo != null)
+			{
+				long tlEliminados = aforoAndes.eliminarTipoLocalPorTipo(tipo);
+				String resultado = "En eliminar TipoLocal\n\n";
+				resultado += tlEliminados + " Tipos de local eliminados\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
 	/* ****************************************************************
 	 * 			CRUD de TiposVisitante
 	 *****************************************************************/
@@ -1850,7 +2802,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		DialogoAdicionarTipoVisitante dialogo = new DialogoAdicionarTipoVisitante( this );
 		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("Operación finalizada");
+		panelDatos.actualizarInterfaz("En proceso de adición");
 	}
 
 	/**
@@ -1887,12 +2839,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos los tipos de visitante existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public void listarTipoVisitante( )
+	public void listarTiposVisitante( )
 	{
 		try 
 		{
 			List <VOTipoVisitante> lista = aforoAndes.darVOTiposVisitante();
-
 			String resultado = "En listar TipoVisitante";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
@@ -1906,42 +2857,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}
 	}
 
-
-	/**
-	 * Borra de la base de datos el tipo visitante con el tipo dado por el usuario
-	 * Cuando dicho tipo no existe, se indica que se borraron 0 registros de la base de datos
-	 */
-	public void eliminarTipoVisitantePorTipo( )
-	{
-		try 
-		{
-			String nombre = JOptionPane.showInputDialog (this, "Nombre del tipo de visitante: ", "Borrar tipo de visitante por tipo", JOptionPane.QUESTION_MESSAGE);
-			if (nombre != null)
-			{
-				long tbEliminados = aforoAndes.eliminarTipoVisitantePorTipo(nombre);
-
-				String resultado = "En eliminar TipoVisitante\n\n";
-				resultado += tbEliminados + " Tipos de visitante eliminados\n";
-				resultado += "\n Operación terminada";
-				panelDatos.actualizarInterfaz(resultado);
-			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-			}
-		} 
-		catch (Exception e) 
-		{
-			//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-	}
-
 	/**
 	 * Busca el tipo de visitante con el nombre indicado por el usuario y lo muestra en el panel de datos
 	 */
-	public void buscarTipoVisitantePorNombre( )
+	public void buscarTipoVisitantePorTipo( )
 	{
 		try 
 		{
@@ -1974,6 +2893,86 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * Cambiar el horario de circulación del tipo de visitante indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void cambiarHorarioTipoVisitante( )
+	{
+		try 
+		{
+			String tipo = JOptionPane.showInputDialog (this, "Tipo de visitante: ", "Actualizar horario del tipo de visitante", JOptionPane.QUESTION_MESSAGE);
+			String horarioInicioStr = JOptionPane.showInputDialog (this, "Nueva hora de inicio de circulación(hh:mm): ", "Actualizar horario del tipo de visitante", JOptionPane.QUESTION_MESSAGE);
+			String horarioLimiteStr = JOptionPane.showInputDialog (this, "Nueva hora final de circulación (hh:mm): ", "Actualizar horario del tipo de visitante", JOptionPane.QUESTION_MESSAGE);
+
+			if (tipo != null && horarioInicioStr != null && horarioLimiteStr != null)
+			{	
+				int horaInicio;
+				int minutoInicio;
+				int horaLimite;
+				int minutoLimite;
+
+				horaInicio = Integer.parseInt(horarioInicioStr.split(":")[0]);
+				minutoInicio = Integer.parseInt(horarioInicioStr.split(":")[1]);
+				horaLimite = Integer.parseInt(horarioLimiteStr.split(":")[0]);
+				minutoLimite = Integer.parseInt(horarioLimiteStr.split(":")[1]);
+
+				if ( horaInicio > horaLimite || (horaLimite == horaInicio && minutoLimite <= minutoInicio))
+				{
+					JOptionPane.showMessageDialog( this, "La hora límite debe ser posterior a la hora de inicio de circulación", "Actualizar horario del tipo de visitante", JOptionPane.ERROR_MESSAGE );
+				}
+				long modificados = aforoAndes.cambiarHorarioTipoVisitante(tipo, horaInicio, minutoInicio, horaLimite, minutoLimite);
+				String resultado = "En actualizar TipoVisitante por horario de circulación: \n\n";
+				resultado += modificados + " registros actualizados";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "Las horas deben ser números separados por ':'", "Actualizar horario del tipo de visitante", JOptionPane.ERROR_MESSAGE );
+		}
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Borra de la base de datos el tipo visitante con el tipo dado por el usuario
+	 * Cuando dicho tipo no existe, se indica que se borraron 0 registros de la base de datos
+	 */
+	public void eliminarTipoVisitantePorTipo( )
+	{
+		try 
+		{
+			String nombre = JOptionPane.showInputDialog (this, "Nombre del tipo de visitante: ", "Borrar tipo de visitante por tipo", JOptionPane.QUESTION_MESSAGE);
+			if (nombre != null)
+			{
+				long tbEliminados = aforoAndes.eliminarTipoVisitantePorTipo(nombre);
+
+				String resultado = "En eliminar TipoVisitante\n\n";
+				resultado += tbEliminados + " Tipos de visitante eliminados\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
 
 	/* ****************************************************************
 	 * 			CRUD de Visitante
@@ -1986,12 +2985,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		DialogoAdicionarVisitante dialogo = new DialogoAdicionarVisitante( this );
 		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("Operación finalizada");
+		panelDatos.actualizarInterfaz("En proceso de adición");
 	}
 
 	/**
-	 * Adiciona visitante con la información dada por el usuario
-	 * Se crea una nueva tupla de TipoVisitante en la base de datos, si un tipoVisitante con ese nombre no existía
+	 * Adiciona un visitante con la información dada por el usuario
 	 * @param identificacion - La identificación de cada visitante del centro comercial
 	 * @param nombre - Nombre del visitante
 	 * @param tipo - Tipo de visitante
@@ -1999,8 +2997,9 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 * @param telefonoPropio - Telefono del visitante
 	 * @param nombreEmergencia - Contacto de emergencia del visitante
 	 * @param telefonoEmergencia - Telefono del contacto de emergencia del visitante
+	 * Se crea una nueva tupla de Visitante en la base de datos, si un visitante con esa identificación no existía
 	 */
-	public void adicionarVisitante( String identificacion, String nombre, long tipo, String correo, String telefonoPropio, String nombreEmergencia, String telefonoEmergencia, DialogoAdicionarVisitante pDialogo)
+	public void adicionarVisitante( String identificacion, String nombre, long tipo, String correo, String telefonoPropio, String nombreEmergencia, String telefonoEmergencia)
 	{
 		try
 		{
@@ -2030,43 +3029,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		try 
 		{
 			List <VOVisitante> lista = aforoAndes.darVOVisitantes();
-
 			String resultado = "En listar Visitante";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
 			resultado += "\n Operación terminada";
-		} 
-		catch (Exception e) 
-		{
-			//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-	}
-
-
-	/**
-	 * Borra de la base de datos el visitante con la identificación dada por el usuario
-	 * Cuando dicho visitante no existe, se indica que se borraron 0 registros de la base de datos
-	 */
-	public void eliminarVisitantePorIdentificacion( )
-	{
-		try 
-		{
-			String identificacion = JOptionPane.showInputDialog (this, "Identificación del visitante: ", "Borrar visitante por identificación", JOptionPane.QUESTION_MESSAGE);
-			if (identificacion != null)
-			{
-				long tbEliminados = aforoAndes.eliminarVisitantePorId(identificacion);
-
-				String resultado = "En eliminar Visitante\n\n";
-				resultado += tbEliminados + " Visitantes eliminados\n";
-				resultado += "\n Operación terminada";
-				panelDatos.actualizarInterfaz(resultado);
-			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-			}
 		} 
 		catch (Exception e) 
 		{
@@ -2176,31 +3142,20 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}
 	}
 
-
-	/* ****************************************************************
-	 * 			CRUD de CentroComercial
-	 *****************************************************************/
-
 	/**
-	 * Adiciona un centro comercial con la información dada por el usuario
-	 * Se crea una nueva tupla de TipoVisitante en la base de datos, si un tipoVisitante con ese nombre no existía
+	 * Borra de la base de datos el visitante con la identificación dada por el usuario
+	 * Cuando dicho visitante no existe, se indica que se borraron 0 registros de la base de datos
 	 */
-	public void adicionarCentroComercial()
+	public void eliminarVisitantePorIdentificacion( )
 	{
-		try
+		try 
 		{
-			String identificador = JOptionPane.showInputDialog (this, "Identificador del centro comercial: ", "Adicionar centro comercial", JOptionPane.QUESTION_MESSAGE);
-			String nombre = JOptionPane.showInputDialog (this, "Nombre del centro comercial: ", "Adicionar centro comercial", JOptionPane.QUESTION_MESSAGE);
-			if (identificador != null)
+			String identificacion = JOptionPane.showInputDialog (this, "Identificación del visitante: ", "Borrar visitante por identificación", JOptionPane.QUESTION_MESSAGE);
+			if (identificacion != null)
 			{
-
-				VOCentroComercial centroComercial = aforoAndes.adicionarCentroComercial(identificador, nombre);
-				if (centroComercial == null)
-				{
-					throw new Exception ("No se pudo crear un centro comercial con identificador: " + identificador);
-				}
-				String resultado = "En adicionar CentroComercial\n\n";
-				resultado += "CentroComercial adicionado exitosamente: " + centroComercial;
+				long visitantesEliminados = aforoAndes.eliminarVisitantePorId(identificacion);
+				String resultado = "En eliminar Visitante\n\n";
+				resultado += visitantesEliminados + " Visitantes eliminados\n";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -2211,21 +3166,63 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		} 
 		catch (Exception e) 
 		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	/* ****************************************************************
+	 * 			CRUD de ZonaCirculación
+	 *****************************************************************/
+
+	/**
+	 * Crea una ventana de diálogo para agregar una zona de circulación
+	 */
+	public void adicionarZonaCirculacion( )
+	{
+		DialogoAdicionarZonaCirculacion dialogo = new DialogoAdicionarZonaCirculacion( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de adición");
+	}
+	/**
+	 * Adiciona una zona de circulación con la información dada por el usuario
+	 * Se crea una nueva tupla de ZonaCirculacion en la base de datos, si una zona de circulación con ese identificador no existía
+	 */
+	public void adicionarZonaCirculacion( String idZona, int capacidadNormal, String idCentroComercial)
+	{
+		try 
+		{
+			VOZonaCirculacion ascensor = aforoAndes.adicionarZonaCirculacion(idZona, capacidadNormal, idCentroComercial);
+
+			if (ascensor == null)
+			{
+				throw new Exception ("No se pudo crear una zona de circulación con identificador: " + idZona);
+			}
+			String resultado = "En adicionar Zona circulación\n\n";
+			resultado += "Zona circulacion adicionada exitosamente: " + ascensor;
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
 
 	/**
-	 * Consulta en la base de datos los centros comerciales existentes y los muestra en el panel de datos de la aplicación
+	 * Consulta en la base de datos las zonas de circulación existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public void listarCentroComercial( )
+	public void listarZonasCirculacion( )
 	{
 		try 
 		{
-			List <VOCentroComercial> lista = aforoAndes.darVOCentrosComerciales();
+			List <VOZonaCirculacion> lista = aforoAndes.darVOZonasCirculacion();
 
-			String resultado = "En listar CentroComercial";
+			String resultado = "En listar Zona circulación";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
 			resultado += "\n Operación terminada";
@@ -2238,57 +3235,25 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}
 	}
 
-
 	/**
-	 * Borra de la base de datos el centro comercial con la identificación dada por el usuario
-	 * Cuando dicho centro comercial no existe, se indica que se borraron 0 registros de la base de datos
+	 * Busca la zona de circulación con el identificador indicado por el usuario y la muestra en el panel de datos
 	 */
-	public void eliminarCentroComercialPorId( )
+	public void buscarZonaCirculacionPorIdentificador( )
 	{
 		try 
 		{
-			String idCentroComercial = JOptionPane.showInputDialog (this, "Identificación del centro comercial: ", "Borrar centro comercial por identificación", JOptionPane.QUESTION_MESSAGE);
-			if (idCentroComercial != null)
+			String idZona = JOptionPane.showInputDialog (this, "Identificador de la zona de circulación: ", "Buscar zona de circulación por identificador", JOptionPane.QUESTION_MESSAGE);
+			if (idZona != null)
 			{
-				long tbEliminados = aforoAndes.eliminarCentroComercialPorId(idCentroComercial);
-
-				String resultado = "En eliminar CentroComercial\n\n";
-				resultado += tbEliminados + " Centros comerciales eliminados\n";
-				resultado += "\n Operación terminada";
-				panelDatos.actualizarInterfaz(resultado);
-			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-			}
-		} 
-		catch (Exception e) 
-		{
-			//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-	}
-
-	/**
-	 * Busca el centro comercial con el identificador indicado por el usuario y lo muestra en el panel de datos
-	 */
-	public void buscarCentroComercialPorIdentificacion( )
-	{
-		try 
-		{
-			String idCentroComercial = JOptionPane.showInputDialog (this, "Identificacion del centro comercial: ", "Buscar centro comercial por identificación", JOptionPane.QUESTION_MESSAGE);
-			if (idCentroComercial != null)
-			{
-				VOCentroComercial centroComercial = aforoAndes.darCentroComercialPorId(idCentroComercial);
-				String resultado = "En buscar CentroComercial por identificacion\n\n";
-				if (centroComercial != null)
+				VOZonaCirculacion zonaCirculacion = aforoAndes.darZonaCirculacionPorId(idZona);
+				String resultado = "En buscar Zona circulacion por identificador\n\n";
+				if (zonaCirculacion != null)
 				{
-					resultado += "El centro comercial es: " + centroComercial;
+					resultado += "La zona de circulación es: " + zonaCirculacion;
 				}
 				else
 				{
-					resultado += "Un centro comercial con identificacion: " + idCentroComercial + " NO EXISTE\n";    				
+					resultado += "Una  zona de circulación con identificador: " + idZona + " NO EXISTE\n";    				
 				}
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -2307,18 +3272,21 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Busca el centro comercial con el identificador indicado por el usuario y lo muestra en el panel de datos
+	 * Borra de la base de datos la zona de circulación con el identificador dado por el usuario
+	 * Cuando dicha zona de circulación no existe, se indica que se borraron 0 registros de la base de datos
 	 */
-	public void buscarCentroComercialPorNombre( )
+	public void eliminarZonaCirculacionPorIdentificador( )
 	{
 		try 
 		{
-			String nombre = JOptionPane.showInputDialog (this, "Nombre del centro comercial: ", "Buscar centro comercial por nombre", JOptionPane.QUESTION_MESSAGE);
-			if (nombre != null)
+			String idParqueadero = JOptionPane.showInputDialog (this, "Identificador de la zona de circulación:", "Borrar zona de circulación por identificador", JOptionPane.QUESTION_MESSAGE);
+			if (idParqueadero != null)
 			{
-				List<CentroComercial> lista = aforoAndes.darCentroComercialPorNombre(nombre);
-				String resultado = "En buscar CentroComercial por nombre: \n\n";
-				resultado +=  "\n" + listarObjetos (lista);
+				String idTipo = idParqueadero;
+				long parqueaderosEliminados = aforoAndes.eliminarParqueaderoPorId (idTipo);
+
+				String resultado = "En eliminar ZonaCirculacion\n\n";
+				resultado += parqueaderosEliminados + " zonas de circulación eliminadas\n";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -2334,46 +3302,14 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-
-	/**
-	 * Cambiar el nombre al centro comercial con el identificador indicado por el usuario y lo muestra en el panel de datos
-	 */
-	public void cambiarNombreCentroComercial( )
-	{
-		try 
-		{
-			String idCentroComercial = JOptionPane.showInputDialog (this, "Identificador del centro comercial: ", "Actualizar nombre del centro comercial", JOptionPane.QUESTION_MESSAGE);
-			String nombre = JOptionPane.showInputDialog (this, "Nuevo nombre del centro comercial: ", "Actualizar nombre del centro comercial", JOptionPane.QUESTION_MESSAGE);
-			if (nombre != null)
-			{
-				long modificados = aforoAndes.cambiarNombreCentroComercial(idCentroComercial, nombre);
-				String resultado = "En actualizar CentroComercial por nombre: \n\n";
-				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
-				panelDatos.actualizarInterfaz(resultado);
-			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-			}
-		} 
-		catch (Exception e) 
-		{
-			//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-	}
-
-
-
+	
 	/* ****************************************************************
 	 * 			Métodos administrativos
 	 *****************************************************************/
 	/**
 	 * Muestra el log de AforoAndes
 	 */
-	public void mostrarLogParranderos ()
+	public void mostrarLogAforoAndes ()
 	{
 		mostrarArchivo ("aforoAndes.log");
 	}
@@ -2558,7 +3494,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos los centros comerciales existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public List <VOCentroComercial> listarCentrosComerciales( )
+	public List <VOCentroComercial> listarVOCentrosComerciales( )
 	{
 		return aforoAndes.darVOCentrosComerciales();
 	}
@@ -2575,7 +3511,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos los tipos de lector existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public List <VOTipoLector> listarTiposLector( )
+	public List <VOTipoLector> listarVOTiposLector( )
 	{
 		return aforoAndes.darVOTiposLector();
 	}
@@ -2583,7 +3519,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos los tipos de local existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public List <VOTipoLocal> listarTiposLocal( )
+	public List <VOTipoLocal> listarVOTiposLocal( )
 	{
 		return aforoAndes.darVOTiposLocal();
 	}
@@ -2591,7 +3527,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos los tipos de visitante existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public List <VOTipoVisitante> listarTiposVisitante( )
+	public List <VOTipoVisitante> listarVOTiposVisitante( )
 	{
 		return aforoAndes.darVOTiposVisitante();
 	}
@@ -2715,7 +3651,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try
 		{
-
 			// Unifica la interfaz para Mac y para Windows.
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
 			InterfazAforoAndesApp interfaz = new InterfazAforoAndesApp( );

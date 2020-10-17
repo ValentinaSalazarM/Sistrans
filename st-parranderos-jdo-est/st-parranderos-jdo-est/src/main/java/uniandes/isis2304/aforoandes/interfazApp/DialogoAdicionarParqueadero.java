@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
 
 /**
- * Diálogo para introducir la información necesaria para crear un ascensor 
+ * Diálogo para introducir la información necesaria para crear un parqueadero 
  */
 @SuppressWarnings("serial")
 
@@ -100,7 +100,7 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 	// -----------------------------------------------------------------
 
 	/**
-	 * Crea la ventana de diálogo de la banda.
+	 * Crea la ventana de diálogo del espacio.
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
 	public DialogoAdicionarParqueadero( InterfazAforoAndesApp pPrincipal )
@@ -108,12 +108,12 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
-		setTitle( "Agregar ascensor" );
+		setTitle( "Agregar parqueadero" );
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
 		campos.setLayout( new GridLayout( 6, 2 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 30, 30 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblIdentificador = new JLabel( "Identificador: " );
@@ -135,7 +135,7 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 		campos.add( lblCentroComercial );
 		cbCentrosComerciales = new JComboBox<>();
 
-		for ( VOCentroComercial tv: pPrincipal.listarCentrosComerciales())
+		for ( VOCentroComercial tv: pPrincipal.listarVOCentrosComerciales())
 		{
 			cbCentrosComerciales.addItem(tv.getIdentificador() + " - " + tv.getNombre());
 		}

@@ -23,7 +23,7 @@ public class DialogoAdicionarTipoLocal extends JDialog implements ActionListener
 	/**
 	 * Comando para agregar la banda.
 	 */
-	public final static String AGREGAR = "Agregar un tipo de visitante";
+	public final static String AGREGAR = "Agregar un tipo de local";
 
 	/**
 	 * Comando para cancelar el proceso.
@@ -88,7 +88,7 @@ public class DialogoAdicionarTipoLocal extends JDialog implements ActionListener
 	// -----------------------------------------------------------------
 
 	/**
-	 * Crea la ventana de diálogo del tipo de visitante
+	 * Crea la ventana de diálogo del tipo de local
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
 	public DialogoAdicionarTipoLocal( InterfazAforoAndesApp pPrincipal )
@@ -96,12 +96,12 @@ public class DialogoAdicionarTipoLocal extends JDialog implements ActionListener
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
-		setTitle( "Agregar Tipo de Visitante" );
-		setLocationRelativeTo( null );
+		setTitle( "Agregar Tipo de Local" );
+		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 6, 2 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 30, 30 ) );
+		campos.setLayout( new GridLayout( 7, 2 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblTipo = new JLabel( "Tipo: " );
@@ -109,12 +109,12 @@ public class DialogoAdicionarTipoLocal extends JDialog implements ActionListener
 		txtTipo = new JTextField( );
 		campos.add( txtTipo );
 
-		lblHoraApertura = new JLabel( "Hora de apertura en formato 24h (formato hh:mm): " );
+		lblHoraApertura = new JLabel( "Hora de apertura en formato 24h (hh:mm): " );
 		campos.add( lblHoraApertura );
 		txtHoraApertura = new JTextField( );
 		campos.add( txtHoraApertura );
 
-		lblHoraCierre = new JLabel( "Hora de cierre en formato 24h (formato hh:mm): " );
+		lblHoraCierre = new JLabel( "Hora de cierre en formato 24h (hh:mm): " );
 		campos.add( lblHoraCierre );
 		txtHoraCierre = new JTextField( );
 		campos.add( txtHoraCierre );
@@ -177,7 +177,7 @@ public class DialogoAdicionarTipoLocal extends JDialog implements ActionListener
 					{
 						JOptionPane.showMessageDialog( this, "La hora de cierre debe ser posterior a la hora de apertura", "Agregar Tipo Local", JOptionPane.ERROR_MESSAGE );
 					}
-
+					
 					interfaz.adicionarTipoLocal(tipo, horaApertura, minutoApertura, horaCierre, minutoCierre, this);
 				}
 				catch( NumberFormatException e2 )
