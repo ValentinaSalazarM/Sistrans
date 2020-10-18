@@ -233,15 +233,15 @@ public class DialogoAdicionarLector extends JDialog implements ActionListener
 			else
 			{
 				if(rdAscensor.isSelected())
-					principal.adicionarLector(idLector, tipoLector, null, null, espacio, null, null);
+					principal.adicionarLector(idLector, tipoLector, null, null, espacio, null, null, this);
 				else if(rdBaño.isSelected())
-					principal.adicionarLector(idLector, tipoLector, null, null, null, null, espacio);
+					principal.adicionarLector(idLector, tipoLector, null, null, null, null, espacio, this);
 				else if(rdCentroComercial.isSelected())
-					principal.adicionarLector(idLector, tipoLector, espacio, null, null, null, null);
+					principal.adicionarLector(idLector, tipoLector, espacio, null, null, null, null, this);
 				else if(rdLocalComercial.isSelected())
-					principal.adicionarLector(idLector, tipoLector, null, espacio, null, null, null);
+					principal.adicionarLector(idLector, tipoLector, null, espacio, null, null, null, this);
 				else if(rdParqueadero.isSelected())
-					principal.adicionarLector(idLector, tipoLector, null, null, null, espacio, null);
+					principal.adicionarLector(idLector, tipoLector, null, null, null, espacio, null, this);
 			}
 
 		}

@@ -96,7 +96,7 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 	private JComboBox<String> cbCentrosComerciales;
 
 	/**
-	 * Botón para agregar al ascensor
+	 * Botón para agregar 
 	 */
 	private JButton btnAgregar;
 

@@ -194,7 +194,7 @@ public class DialogoAdicionarEmpleado extends JDialog implements ActionListener
 						JOptionPane.showMessageDialog( this, "La hora de final de turno debe ser posterior a la hora de inicio", "Agregar Empleado", JOptionPane.ERROR_MESSAGE );
 					}
 					
-					interfaz.adicionarEmpleado(idEmpleado, lugarTrabajo, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno);
+					interfaz.adicionarEmpleado(idEmpleado, lugarTrabajo, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno, this);
 				}
 				catch( NumberFormatException e2 )
 				{

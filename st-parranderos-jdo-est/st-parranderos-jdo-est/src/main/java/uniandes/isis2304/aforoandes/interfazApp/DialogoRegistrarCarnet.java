@@ -90,7 +90,7 @@ public class DialogoRegistrarCarnet extends JDialog implements ActionListener
 	private JDateChooser dcFecha;
 	
 	/**
-	 * Etiqueta del id del centro comercial donde se encuentra el local
+	 * Etiqueta dee la hora de entrada registrada
 	 */
 	private JLabel lblHoraEntrada;
 	
@@ -100,7 +100,7 @@ public class DialogoRegistrarCarnet extends JDialog implements ActionListener
 	private JTextField txtHoraEntrada;
 
 	/**
-	 * Botón para agregar al ascensor
+	 * Botón para agregar 
 	 */
 	private JButton btnAgregar;
 

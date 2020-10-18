@@ -107,7 +107,7 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 	private JComboBox<String> cbCentrosComerciales;
 	
 	/**
-	 * Botón para agregar al ascensor
+	 * Botón para agregar 
 	 */
 	private JButton btnAgregar;
 

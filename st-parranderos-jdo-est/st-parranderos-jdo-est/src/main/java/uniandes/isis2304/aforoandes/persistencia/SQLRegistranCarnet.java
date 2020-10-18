@@ -10,7 +10,8 @@ package uniandes.isis2304.aforoandes.persistencia;
 
 import java.sql.Timestamp;
 import java.sql.Types;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -34,8 +35,6 @@ public class SQLRegistranCarnet
 	 * Se renombra acá para facilitar la escritura de las sentencias
 	 */
 	private final static String SQL = PersistenciaAforoAndes.SQL;
-
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -71,8 +70,9 @@ public class SQLRegistranCarnet
 	 */
 	public long adicionarRegistranCarnet (PersistenceManager pm, long idlector, long tipoCarnet, String idvisitante, Timestamp fecha, Long horaentrada, Long horasalida ) 
 	{
+        LocalDateTime dt1 = fecha.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaRegistranCarnet() + "(idlector, tipocarnet, idvisitante, fecha, horaentrada, horaSalida) values (?, ?, ?, ?, ?, ?)");
-		q.setParameters(idlector, tipoCarnet, idvisitante, fecha, horaentrada, Types.NULL);
+		q.setParameters(idlector, tipoCarnet, idvisitante, dt1, horaentrada, Types.NULL);
 		return (long) q.executeUnique();
 	}
 	
@@ -89,8 +89,9 @@ public class SQLRegistranCarnet
 	 */
 	public long eliminarRegistranCarnet (PersistenceManager pm, long idlector, long tipoCarnet, String idvisitante, Timestamp fecha, Long horaentrada, Long horasalida ) 
 	{
-		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranCarnet() + " WHERE idlector = ? AND tipocarnet = ? AND idvisitante = ? AND fecha =  AND horaentrada = ? AND horasalida = ?");
-		q.setParameters(idlector, tipoCarnet, idvisitante, fecha, horaentrada, horasalida);
+        LocalDateTime dt1 = fecha.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaRegistranCarnet() + " WHERE idlector = ? AND tipocarnet = ? AND idvisitante = ? AND fecha LIKE ?  AND horaentrada = ? AND horasalida = ?");
+		q.setParameters(idlector, tipoCarnet, idvisitante, dt1, horaentrada, horasalida);
 		return (long) q.executeUnique();
 	}
 
@@ -137,20 +138,24 @@ public class SQLRegistranCarnet
 	public RegistranCarnet darRegistranCarnetPorIdVisitanteFecha (PersistenceManager pm, String idVisitante, Timestamp fechaInicio, Timestamp fechaFin, long horaEntrada) 
 	{
 		Query q;
+        LocalDateTime dt1 = fechaInicio.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+
 		if ( fechaFin != null )
 		{
+			LocalDateTime dt2 = fechaFin.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
 			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha BETWEEN ? AND ? AND horaEntrada = ? ORDER BY fecha");
-			q.setParameters(idVisitante, sdf.format(fechaInicio), sdf.format(fechaFin), horaEntrada);
+			q.setParameters(idVisitante, dt1, dt2, horaEntrada);
 		}
 		else
 		{
-			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha LIKE ? AND horaEntrada = ?");
-			q.setParameters(idVisitante, sdf.format(fechaInicio), horaEntrada);
+			q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? AND fecha = ? AND horaEntrada = ?");
+			q.setParameters(idVisitante, dt1, horaEntrada);
 		}
-		System.out.println("-----------------------"+sdf.format(fechaInicio));
 
 		q.setResultClass(RegistranCarnet.class);
-		return (RegistranCarnet) q.executeUnique();
+		List<RegistranCarnet> lista = (List<RegistranCarnet>) q.executeList();
+		
+		return lista.get(0);
 	}
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS REGISTRANCARNET de la 
@@ -161,9 +166,10 @@ public class SQLRegistranCarnet
 	 */
 	public List<RegistranCarnet> darRegistranCarnetPorFecha(PersistenceManager pm, Timestamp fecha) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE fecha LIKE ?");
+        LocalDateTime dt1 = fecha.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE fecha = ?");
 		q.setResultClass(RegistranCarnet.class);
-		q.setParameters(sdf.format(fecha));
+		q.setParameters(dt1);
 		return (List<RegistranCarnet>) q.executeList();
 	}
 
@@ -194,9 +200,9 @@ public class SQLRegistranCarnet
 	 */
 	public long cambiarHoraSalidaRegistranCarnet (PersistenceManager pm, long idLector, String idVisitante, Timestamp fecha, Long horaEntrada, Long horaSalida) 
 	{
-		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaRegistranCarnet () + " SET horaSalida = ? WHERE idLector = ? AND idVisitante = ? AND fecha LIKE ? AND horaEntrada = ?");
-		q.setParameters(horaSalida, idLector, idVisitante, sdf.format(fecha), horaEntrada);
-		System.out.println("-----------------------"+sdf.format(fecha));
+        LocalDateTime dt1 = fecha.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaRegistranCarnet () + " SET horaSalida = ? WHERE idLector = ? AND idVisitante = ? AND fecha = ? AND horaEntrada = ?");
+		q.setParameters(horaSalida, idLector, idVisitante, dt1, horaEntrada);
 		return (long) q.executeUnique();            
 	}
 }

@@ -2730,6 +2730,9 @@ public class AforoAndes
 
 	/**
 	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param idLocalComercial - El id del local comercial a consultar
 	 * @return La lista de objetos Visitante construidos de acuerdo a la consulta realizada
 	 */
 	public List<Visitante> RFC1Fecha(Timestamp fechaInicio, Timestamp fechaFin, String idLocalComercial)
@@ -2742,14 +2745,45 @@ public class AforoAndes
 
 	/**
 	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en un rango de horas
+	 * @param fecha - La fecha de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
 	 * @return La lista de objetos Visitante construidos de acuerdo a la consulta realizada
 	 */
-	public List<RFC1Hora> RFC1Hora(Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial)
+	public List<Visitante> RFC1Hora(Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial)
 	{
 		log.info ("Consultando visitantes atendidos por el establecimiento: " + idLocalComercial);
-		List<RFC1Hora> visitantes = pp.RFC1Horas(fecha, horaInicio, minutoInicio, horaFin, minutoFin, idLocalComercial);
+		List<Visitante> visitantes = pp.RFC1Horas(fecha, horaInicio, minutoInicio, horaFin, minutoFin, idLocalComercial);
 		log.info ("Consultando visitantes: " + visitantes.size() + " visitantes atendidos en el rango de horas");
 		return visitantes;
+	}
+	
+	/**
+	 * Método que realiza la consulta de los establecimientos más visitados en una fecha o rango de fechas
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @return La lista de objetos Visitante construidos de acuerdo a la consulta realizada
+	 */
+	public List<LocalComercial> RFC2Fecha(Timestamp fechaInicio, Timestamp fechaFin)
+	{
+		log.info ("Consultando Top 20 establecimientos populares: ");
+		List<LocalComercial> establecimientos = pp.RFC2Fecha(fechaInicio, fechaFin);
+		log.info ("Consultando Top 20 establecimientos populares: " + establecimientos.size() + " establecimientos atendidos encontrados");
+		return establecimientos;
+	}
+
+	/**
+	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en un rango de horas
+	 * @return La lista de objetos Visitante construidos de acuerdo a la consulta realizada
+	 */
+	public List<LocalComercial> RFC2Hora(Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin)
+	{
+		log.info ("Consultando Top 20 establecimientos populares: ");
+		List<LocalComercial> establecimientos = pp.RFC2Horas(fecha, horaInicio, minutoInicio, horaFin, minutoFin);
+		log.info ("Consultando Top 20 establecimientos populares: " + establecimientos.size() + " establecimientos atendidos encontrados");
+		return establecimientos;
 	}
 
 	/* ****************************************************************

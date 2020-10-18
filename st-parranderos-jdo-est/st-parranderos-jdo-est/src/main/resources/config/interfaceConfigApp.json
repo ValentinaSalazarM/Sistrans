@@ -5,6 +5,19 @@
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
+		{ "menuTitle": "Requerimientos de consulta",
+		  "options":
+			[
+				{
+					"label": "RFC1 - Visitantes atendidos por un local",
+					"event": "consultarVisitantesPorEstablecimiento"
+				},
+				{
+					"label": "RFC2 - Establecimientos más visitados",
+					"event": "consultarEstablecimientosPopulares"
+				}
+			]
+		},
 		{ "menuTitle": "Ascensor",
 		  "options":
 			[

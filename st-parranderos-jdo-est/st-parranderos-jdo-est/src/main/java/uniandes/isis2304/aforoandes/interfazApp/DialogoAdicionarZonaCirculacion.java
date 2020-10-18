@@ -76,7 +76,7 @@ public class DialogoAdicionarZonaCirculacion extends JDialog implements ActionLi
 	private JComboBox<String> cbCentrosComerciales;
 
 	/**
-	 * Botón para agregar al parqueadero
+	 * Botón para agregar la zona de circulación
 	 */
 	private JButton btnAgregar;
 
@@ -173,7 +173,7 @@ public class DialogoAdicionarZonaCirculacion extends JDialog implements ActionLi
 				try
 				{
 					int capacidadNormal = Integer.parseInt(capacidadNormalStr);				
-					interfaz.adicionarZonaCirculacion(identificador, capacidadNormal, idCentroComercial);
+					interfaz.adicionarZonaCirculacion(identificador, capacidadNormal, idCentroComercial, this);
 				}
 				catch( NumberFormatException e2 )
 				{

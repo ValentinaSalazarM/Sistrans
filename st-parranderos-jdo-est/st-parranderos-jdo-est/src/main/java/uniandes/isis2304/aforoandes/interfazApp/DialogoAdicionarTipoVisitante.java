@@ -178,7 +178,7 @@ public class DialogoAdicionarTipoVisitante extends JDialog implements ActionList
 						JOptionPane.showMessageDialog( this, "La hora límite debe ser posterior a la hora de inicio", "Agregar Tipo Visitante", JOptionPane.ERROR_MESSAGE );
 					}
 
-					interfaz.agregarTipoVisitante(tipo, horaInicio, minutoInicio, horaLimite, minutoLimite, this);
+					interfaz.adicionarTipoVisitante(tipo, horaInicio, minutoInicio, horaLimite, minutoLimite, this);
 				}
 				catch( NumberFormatException e2 )
 				{

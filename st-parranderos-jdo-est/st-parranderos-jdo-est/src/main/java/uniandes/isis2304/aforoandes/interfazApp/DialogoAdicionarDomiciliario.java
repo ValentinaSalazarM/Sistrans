@@ -84,7 +84,7 @@ public class DialogoAdicionarDomiciliario extends JDialog implements ActionListe
 	private JTextField txtEmpresaDomicilios;
 
 	/**
-	 * Bot�n para agregar el tipo.
+	 * Bot�n para agregar 
 	 */
 	private JButton btnAgregar;
 
@@ -193,7 +193,7 @@ public class DialogoAdicionarDomiciliario extends JDialog implements ActionListe
 					{
 						JOptionPane.showMessageDialog( this, "La hora de final de turno debe ser posterior a la hora de inicio", "Agregar Domiciliario", JOptionPane.ERROR_MESSAGE );
 					}
-					interfaz.adicionarDomiciliario(idDomiciliario, empresaDomicilios, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno);
+					interfaz.adicionarDomiciliario(idDomiciliario, empresaDomicilios, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno, this);
 				}
 				catch( NumberFormatException e2 )
 				{

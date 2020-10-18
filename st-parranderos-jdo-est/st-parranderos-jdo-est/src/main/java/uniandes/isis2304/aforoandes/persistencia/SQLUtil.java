@@ -16,6 +16,8 @@
 package uniandes.isis2304.aforoandes.persistencia;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,8 +25,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.aforoandes.negocio.LocalComercial;
-import uniandes.isis2304.aforoandes.negocio.RFC1Hora;
-import uniandes.isis2304.aforoandes.negocio.RFC2Hora;
 import uniandes.isis2304.aforoandes.negocio.RFC3Fecha;
 import uniandes.isis2304.aforoandes.negocio.RFC3Hora;
 import uniandes.isis2304.aforoandes.negocio.Visitante;
@@ -223,38 +223,22 @@ class SQLUtil
 	public List<Visitante> RFC1Fecha ( PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, String idLocalComercial ) 
 	{
 		Query q;
-		if ( fechaFin == null )
-		{
-			q = pm.newQuery (SQL, "SELECT DISTINCT VISITANTE.*" + 
-					"	FROM LECTOR" + 
-					"	JOIN" + 
-					"    (" + 
-					"        SELECT IDLECTOR, IDVISITANTE" + 
-					"        FROM REGISTRANCARNET" + 
-					"        WHERE FECHA = ?" + 
-					"    ) INF_VISITAS" + 
-					"	ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
-					"	JOIN VISITANTE" + 
-					"	ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
-					"	WHERE LECTOR.IDLOCALCOMERCIAL = ?");
-			q.setParameters(fechaInicio, idLocalComercial);		
-		}
-		else
-		{
-			q = pm.newQuery (SQL, "SELECT DISTINCT VISITANTE.*" + 
-					"	FROM LECTOR" + 
-					"	JOIN" + 
-					"    (" + 
-					"        SELECT IDLECTOR, IDVISITANTE" + 
-					"        FROM REGISTRANCARNET" + 
-					"        WHERE FECHA BETWEEN ? AND ?" + 
-					"    ) INF_VISITAS" + 
-					"	ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
-					"	JOIN VISITANTE" + 
-					"	ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
-					"	WHERE LECTOR.IDLOCALCOMERCIAL = ?");
-			q.setParameters(fechaInicio, fechaFin, idLocalComercial);		
-		}
+		LocalDateTime dt1 = fechaInicio.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		LocalDateTime dt2 = fechaFin.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+
+		q = pm.newQuery (SQL, "SELECT DISTINCT VISITANTE.*" + 
+				"	FROM LECTOR" + 
+				"	JOIN" + 
+				"    (" + 
+				"        SELECT IDLECTOR, IDVISITANTE" + 
+				"        FROM REGISTRANCARNET" + 
+				"        WHERE FECHA BETWEEN ? AND ?" + 
+				"    ) INF_VISITAS" + 
+				"	ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
+				"	JOIN VISITANTE" + 
+				"	ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"	WHERE LECTOR.IDLOCALCOMERCIAL = ?");
+		q.setParameters(dt1, dt2, idLocalComercial);		
 		q.setResultClass(Visitante.class);
 		return (List<Visitante>) q.executeList();
 	}
@@ -268,37 +252,29 @@ class SQLUtil
 	 * @param minutoFin - El minuto de fin del rango de consulta
 	 * @param idLocalComercial - El id del local comercial a consultar
 	 */
-	public List<RFC1Hora> RFC1Horas (PersistenceManager pm, Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial) 
+	public List<Visitante> RFC1Horas (PersistenceManager pm, Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial) 
 	{
 		Query q;
+		LocalDateTime dt1 = fecha.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
 
-		q = pm.newQuery (SQL,"SELECT VISITANTE.*, HORA, MINUTO" + 
+		q = pm.newQuery (SQL,"SELECT DISTINCT VISITANTE.*" + 
 				"	FROM LECTOR" + 
 				"	JOIN" + 
 				"    (" + 
-				"        SELECT IDLECTOR, IDVISITANTE, HORA, MINUTO" + 
+				"        SELECT IDLECTOR, IDVISITANTE" + 
 				"        FROM HORARIO" + 
 				"        JOIN REGISTRANCARNET" + 
 				"        ON HORARIO.ID = REGISTRANCARNET.HORAENTRADA" + 
-				"        WHERE FECHA =  ?" + 
-				"        AND HORA BETWEEN ? AND ?" + 
+				"        WHERE FECHA = ?" + 
+				"        AND (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?)" + 
 				"    ) INF_VISITAS" + 
 				"	ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
 				"	JOIN VISITANTE" + 
 				"	ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
 				"	WHERE LECTOR.IDLOCALCOMERCIAL = ?");
-		q.setParameters(fecha, horaInicio, horaFin, idLocalComercial);		
-		q.setResultClass(RFC1Hora.class);
-		List<RFC1Hora> list = q.executeList();
-		Iterator<RFC1Hora> it = list.iterator();
-		while ( it.hasNext() )
-		{
-			RFC1Hora actual = it.next();
-			if ( (actual.getHora() == horaInicio && actual.getMinuto() < minutoInicio) || (actual.getHora() == horaFin && actual.getMinuto() > minutoFin)) 
-			{
-				list.remove(actual);
-			}
-		}
+		q.setParameters(dt1, horaInicio, horaFin, horaInicio, minutoInicio, horaFin, minutoFin, idLocalComercial);	
+		q.setResultClass(Visitante.class);
+		List<Visitante> list = q.executeList();
 		return list;
 	}
 
@@ -311,61 +287,45 @@ class SQLUtil
 	public List<LocalComercial> RFC2Fecha ( PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin ) 
 	{
 		Query q;
-		if ( fechaFin == null )
-		{
-			q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.*" + 
-					"	FROM LECTOR" + 
-					"	JOIN " + 
-					"    (SELECT IDLECTOR, NUM_VISITAS, RANK() OVER ( PARTITION BY IDLECTOR ORDER BY NUM_VISITAS DESC) RANK" + 
-					"    FROM" + 
-					"        (SELECT IDLECTOR, COUNT(*) AS NUM_VISITAS" + 
-					"        FROM REGISTRANCARNET" + 
-					"        WHERE FECHA = ?" + 
-					"        GROUP BY IDLECTOR)" + 
-					"    ) AUX" + 
-					"	ON AUX.IDLECTOR = LECTOR.ID" + 
-					"	JOIN LOCALCOMERCIAL" + 
-					"	ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
-					"	WHERE RANK <= 20");
-			q.setParameters(fechaInicio);		
-		}
-		else
-		{
-			q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.*" + 
-					"	FROM LECTOR" + 
-					"	JOIN " + 
-					"    (SELECT IDLECTOR, NUM_VISITAS, RANK() OVER ( PARTITION BY IDLECTOR ORDER BY NUM_VISITAS DESC) RANK" + 
-					"    FROM" + 
-					"        (SELECT IDLECTOR, COUNT(*) AS NUM_VISITAS" + 
-					"        FROM REGISTRANCARNET" + 
-					"        WHERE FECHA BETWEEN ? AND ?" + 
-					"        GROUP BY IDLECTOR)" + 
-					"    ) AUX" + 
-					"	ON AUX.IDLECTOR = LECTOR.ID" + 
-					"	JOIN LOCALCOMERCIAL" + 
-					"	ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
-					"	WHERE RANK <= 20");
-			q.setParameters(fechaInicio, fechaFin);				
-		}
+		LocalDateTime dt1 = fechaInicio.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		LocalDateTime dt2 = fechaFin.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.*" + 
+				"	FROM LECTOR" + 
+				"	JOIN " + 
+				"    (SELECT IDLECTOR, NUM_VISITAS, DENSE_RANK() OVER (ORDER BY NUM_VISITAS DESC) RANK" + 
+				"    FROM\r\n" + 
+				"        (SELECT IDLECTOR, COUNT(*) AS NUM_VISITAS" + 
+				"        FROM REGISTRANCARNET" + 
+				"        WHERE FECHA BETWEEN ? AND ?" + 
+				"        GROUP BY IDLECTOR)" + 
+				"    ) AUX" + 
+				"	ON AUX.IDLECTOR = LECTOR.ID" + 
+				"	JOIN LOCALCOMERCIAL" + 
+				"	ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+				"	WHERE RANK <= 20" + 
+				"	ORDER BY NUM_VISITAS DESC" + 
+				"");
+		q.setParameters(dt1, dt2);				
 		q.setResultClass(LocalComercial.class);
 		return (List<LocalComercial>) q.executeList();
 	}
 
 	/**
-	 * Creación y ejecución de la sentencia SQL para buscar los 20 establecimientos más populares en un rango de horas
+	 * Creación y ejecución de la sentencia SQL para buscar los 20 establecimientos más populares en un rango de horas. Los locales con el mismo número de visitas se incluyen
 	 * @param fecha - La fecha de consulta
 	 * @param horaInicio - La hora de inicio del rango de consulta
 	 * @param minutoFin - El minuto de inicio del rango de consulta
 	 * @param horaFin - La hora de fin del rango de consulta
 	 * @param minutoFin - El minuto de fin del rango de consulta
 	 */
-	public List<RFC2Hora> RFC2Horas (PersistenceManager pm, Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin) 
+	public List<LocalComercial> RFC2Horas (PersistenceManager pm, Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin) 
 	{
+		LocalDateTime dt1 = fecha.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
 		Query q;
-		q = pm.newQuery (SQL,"SELECT LOCALCOMERCIAL.*, HORA, MINUTO" + 
+		q = pm.newQuery (SQL,"SELECT LOCALCOMERCIAL.*" + 
 				"	FROM LECTOR" + 
-				"	JOIN " + 
-				"    (SELECT REGISTRANCARNET.IDLECTOR, HORARIO.HORA, HORARIO.MINUTO, RANK() OVER (PARTITION BY REGISTRANCARNET.IDLECTOR ORDER BY INF_VISITAS.NUM_VISITAS DESC) AS RANK" + 
+				"	JOIN" + 
+				"    (SELECT DISTINCT REGISTRANCARNET.IDLECTOR, NUM_VISITAS, DENSE_RANK() OVER (ORDER BY INF_VISITAS.NUM_VISITAS DESC) AS RANK" + 
 				"    FROM" + 
 				"        (" + 
 				"            SELECT IDLECTOR, COUNT(*) AS NUM_VISITAS" + 
@@ -377,124 +337,79 @@ class SQLUtil
 				"    ON INF_VISITAS.IDLECTOR = REGISTRANCARNET.IDLECTOR" + 
 				"    JOIN HORARIO" + 
 				"    ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
-				"    WHERE HORA BETWEEN ? AND ?" + 
+				"    WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?)" + 
 				"    ) AUX" + 
 				"	ON AUX.IDLECTOR = LECTOR.ID" + 
 				"	JOIN LOCALCOMERCIAL" + 
 				"	ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
-				"	WHERE RANK <= 20");
-		q.setParameters(fecha, horaInicio, horaFin);		
-		q.setResultClass(RFC2Hora.class);
-		List<RFC2Hora> list = q.executeList();
-		Iterator<RFC2Hora> it = list.iterator();
-		while ( it.hasNext() )
-		{
-			RFC2Hora actual = it.next();
-			if ( (actual.getHora() == horaInicio && actual.getMinuto() < minutoInicio) || (actual.getHora() == horaFin && actual.getMinuto() > minutoFin)) 
-			{
-				list.remove(actual);
-			}
-		}
+				"	WHERE RANK <= 20" + 
+				"");
+		q.setParameters(dt1, horaInicio, horaFin, horaInicio, minutoInicio, horaFin, minutoFin);		
+		q.setResultClass(LocalComercial.class);
+		List<LocalComercial> list = q.executeList();
 		return list;
 	}
-	
+
 	/**
 	 * Creación y ejecución de la sentencia SQL para calcular el índice de aforo de un centro comercial en una fecha o rango de fechas
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
 	 * @param fechaFin - La fecha de fin del rango de consulta
-	 * @param id - Identificador del centro comercial
+	 * @param idCentroComercial - Identificador del centro comercial
 	 */
-	public List<RFC3Fecha> RFC3FechaCentroComercial (PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, String id)
+	public List<RFC3Fecha> RFC3FechaCentroComercial (PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, String idCentroComercial)
 	{
+		LocalDateTime dt1 = fechaInicio.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		LocalDateTime dt2 = fechaFin.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+
 		Query q;
-		if ( fechaFin == null )
-		{
-			q = pm.newQuery (SQL, "SELECT IDCENTROCOMERCIAL, NUM_VISITAS/AFOROTOTAL AS INDICE" + 
-					"FROM" + 
-					"(" + 
-					"    SELECT LECTOR.IDCENTROCOMERCIAL, COUNT(*) AS NUM_VISITAS" + 
-					"    FROM REGISTRANCARNET JOIN LECTOR" + 
-					"    ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
-					"    WHERE FECHA = ? AND LECTOR.IDCENTROCOMERCIAL = ?" + 
-					"    GROUP BY LECTOR.IDCENTROCOMERCIAL" + 
-					")," + 
-					"(" + 
-					"    SELECT SUM(AFORO) AS AFOROTOTAL" + 
-					"    FROM" + 
-					"    (" + 
-					"        (SELECT AFORO" + 
-					"        FROM" + 
-					"        ASCENSOR JOIN CAPACIDADNORMAL" + 
-					"        ON ASCENSOR.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
-					"        WHERE ASCENSOR.IDCENTROCOMERCIAL = ?)" + 
-					"        UNION" + 
-					"        (SELECT AFORO" + 
-					"        FROM" + 
-					"        BANO JOIN CAPACIDADNORMAL" + 
-					"        ON BANO.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
-					"        WHERE BANO.IDCENTROCOMERCIAL = ?)" + 
-					"        UNION" + 
-					"        (SELECT AFORO" + 
-					"        FROM" + 
-					"        LOCALCOMERCIAL JOIN AREA" + 
-					"        ON LOCALCOMERCIAL.AREA = AREA.ID" + 
-					"        WHERE LOCALCOMERCIAL.IDCENTROCOMERCIAL = ?)" + 
-					"        UNION" + 
-					"        (SELECT AFORO" + 
-					"        FROM" + 
-					"        PARQUEADERO JOIN CAPACIDADNORMAL" + 
-					"        ON PARQUEADERO.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
-					"        WHERE PARQUEADERO.IDCENTROCOMERCIAL = ?)" + 
-					"    )" + 
-					")");
-			q.setParameters(fechaInicio, id, id, id, id, id);		
-		}
-		else
-		{
-			q = pm.newQuery (SQL, "SELECT IDCENTROCOMERCIAL, NUM_VISITAS/AFOROTOTAL AS INDICE" + 
-					"FROM" + 
-					"(" + 
-					"    SELECT LECTOR.IDCENTROCOMERCIAL, COUNT(*) AS NUM_VISITAS" + 
-					"    FROM REGISTRANCARNET JOIN LECTOR" + 
-					"    ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
-					"    WHERE FECHA BETWEEN ? AND ? AND LECTOR.IDCENTROCOMERCIAL = ?" + 
-					"    GROUP BY LECTOR.IDCENTROCOMERCIAL" + 
-					")," + 
-					"(" + 
-					"    SELECT SUM(AFORO) AS AFOROTOTAL" + 
-					"    FROM" + 
-					"    (" + 
-					"        (SELECT AFORO" + 
-					"        FROM" + 
-					"        ASCENSOR JOIN CAPACIDADNORMAL" + 
-					"        ON ASCENSOR.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
-					"        WHERE ASCENSOR.IDCENTROCOMERCIAL = ?)" + 
-					"        UNION" + 
-					"        (SELECT AFORO" + 
-					"        FROM" + 
-					"        BANO JOIN CAPACIDADNORMAL" + 
-					"        ON BANO.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
-					"        WHERE BANO.IDCENTROCOMERCIAL = ?)" + 
-					"        UNION" + 
-					"        (SELECT AFORO" + 
-					"        FROM" + 
-					"        LOCALCOMERCIAL JOIN AREA" + 
-					"        ON LOCALCOMERCIAL.AREA = AREA.ID" + 
-					"        WHERE LOCALCOMERCIAL.IDCENTROCOMERCIAL = ?)" + 
-					"        UNION" + 
-					"        (SELECT AFORO" + 
-					"        FROM" + 
-					"        PARQUEADERO JOIN CAPACIDADNORMAL" + 
-					"        ON PARQUEADERO.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
-					"        WHERE PARQUEADERO.IDCENTROCOMERCIAL = ?)" + 
-					"    )" + 
-					")");
-			q.setParameters(fechaInicio, fechaFin, id, id, id, id, id);		
-		}
+		q = pm.newQuery (SQL, "SELECT IDCENTROCOMERCIAL, ROUND(AVG(NUM_VISITAS/AFOROTOTAL),4) AS INDICE" + 
+				"	FROM" + 
+				"	(" + 
+				"    SELECT LECTOR.IDCENTROCOMERCIAL, HORA, MINUTO, COUNT(*) AS NUM_VISITAS" + 
+				"    FROM REGISTRANCARNET JOIN LECTOR" + 
+				"    ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+				"    WHERE FECHA BETWEEN ? AND ? AND LECTOR.IDCENTROCOMERCIAL = 6" + 
+				"    GROUP BY LECTOR.IDCENTROCOMERCIAL, HORA, MINUTO" + 
+				"	)," + 
+				"	(" + 
+				"    SELECT SUM(AFORO) AS AFOROTOTAL" + 
+				"    FROM" + 
+				"    (" + 
+				"        (SELECT AFORO" + 
+				"        FROM" + 
+				"        ASCENSOR JOIN CAPACIDADNORMAL" + 
+				"        ON ASCENSOR.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
+				"        WHERE ASCENSOR.IDCENTROCOMERCIAL = ?)" + 
+				"        UNION" + 
+				"        (SELECT AFORO" + 
+				"        FROM" + 
+				"        BANO JOIN CAPACIDADNORMAL " + 
+				"        ON BANO.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
+				"        WHERE BANO.IDCENTROCOMERCIAL = ?)" + 
+				"        UNION" + 
+				"        (SELECT AFORO" + 
+				"        FROM" + 
+				"        LOCALCOMERCIAL JOIN AREA " + 
+				"        ON LOCALCOMERCIAL.AREA = AREA.ID" + 
+				"        WHERE LOCALCOMERCIAL.IDCENTROCOMERCIAL = ?)" + 
+				"        UNION" + 
+				"        (SELECT AFORO" + 
+				"        FROM" + 
+				"        PARQUEADERO JOIN CAPACIDADNORMAL " + 
+				"        ON PARQUEADERO.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
+				"        WHERE PARQUEADERO.IDCENTROCOMERCIAL = ?)" + 
+				"    )" + 
+				"	)" + 
+				"	GROUP BY IDCENTROCOMERCIAL" + 
+				"");
+		
+		q.setParameters(dt1, dt2, idCentroComercial, idCentroComercial, idCentroComercial, idCentroComercial, idCentroComercial);		
 		q.setResultClass(RFC3Fecha.class);
 		return (List<RFC3Fecha>)q.executeList();
 	}
-	
+
 	/**
 	 * Creación y ejecución de la sentencia SQL para calcular el índice de aforo de un centro comercial en una fecha o rango de fechas
 	 * @param horaInicio - La fecha de inicio del rango de consulta
@@ -560,7 +475,7 @@ class SQLUtil
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Creación y ejecución de la sentencia SQL para calcular el índice de aforo de un local comercial en una fecha o rango de fechas
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
@@ -610,7 +525,7 @@ class SQLUtil
 		q.setResultClass(RFC3Fecha.class);
 		return (List<RFC3Fecha>)q.executeList();
 	}
-	
+
 	/**
 	 * Creación y ejecución de la sentencia SQL para calcular el índice de aforo de un local comercial en una fecha o rango de fechas
 	 * @param horaInicio - La fecha de inicio del rango de consulta

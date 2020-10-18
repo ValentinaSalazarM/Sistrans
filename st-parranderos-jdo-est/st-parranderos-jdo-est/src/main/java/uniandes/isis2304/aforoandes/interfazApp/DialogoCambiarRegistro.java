@@ -110,7 +110,7 @@ public class DialogoCambiarRegistro extends JDialog implements ActionListener
 	private JTextField txtHoraSalida;
 	
 	/**
-	 * Botón para agregar al ascensor
+	 * Botón para agregar 
 	 */
 	private JButton btnAgregar;
 

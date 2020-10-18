@@ -1,4 +1,4 @@
-insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 8, 00);
+12insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 8, 00);
 insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 8, 15);
 insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 8, 24);
 insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 8, 39);
@@ -54,8 +54,6 @@ insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 01
 insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 08);
 insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 18);
 insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 28);
-
-select * from horario;
 
 insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Domiciliario', 5, 48);
 insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Aseo', 2, 55);
@@ -148,6 +146,7 @@ insert into AREA (id, valor, aforo) values (area_sequence.nextval, 483, 32);
 insert into AREA (id, valor, aforo) values (area_sequence.nextval, 279, 18);
 insert into AREA (id, valor, aforo) values (area_sequence.nextval, 235, 15);
 insert into AREA (id, valor, aforo) values (area_sequence.nextval, 217, 14);
+insert into AREA (id, valor, aforo) values (area_sequence.nextval, 21, 2);
 
 insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 13, 2);
 insert into CAPACIDADNORMAL (id, valor, aforo) values (capacidadNormal_sequence.nextval, 20, 10);
@@ -247,9 +246,7 @@ insert into TIPOLECTOR (id, tipo) values (tipoLector_sequence.nextval, 'Visitant
 
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC101', NULL, 7, 1, 1, 5);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC102', NULL, 4, 10, 1, 12);
-
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC103', NULL, 5, 7, 1, 15);
-
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC104', 8, 9, 10, 1, 1);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ( 'LC105', 7, 9, 5, 0, 1);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC106', 8, 9, 8, 0, 6);
@@ -266,7 +263,6 @@ insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, act
 
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC904', 6, 1, 7, 0, 8);
 
-
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC202', NULL, 3, 3, 1, 2);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC203', 7, 7, 11, 0, 5);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC211', NULL, 4, 12, 1, 12);
@@ -281,6 +277,7 @@ insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, act
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC311', NULL, 9, 2, 1, 4);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC305', NULL, 5, 13, 1, 4);
 insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC306', NULL, 4, 1, 1, 4);
+insert into LOCALCOMERCIAL (identificador, capacidadnormal, area, tipolocal, activo, idcentrocomercial) values ('LC307', NULL, 41, 1, 1, 4);
 
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (1, 2, 6, NULL, NULL, NULL,NULL);
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (2, 3, NULL, 'LC209', NULL, NULL, NULL);
@@ -320,6 +317,8 @@ insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascen
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (36, 3, NULL,'LC303', NULL, NULL, NULL);
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (37, 3, NULL,'LC304', NULL, NULL, NULL);
 insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (38, 3, NULL,'LC305', NULL, NULL, NULL);
+insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (39, 3, NULL,'LC306', NULL, NULL, NULL);
+insert into LECTOR (id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (40, 3, NULL,'LC307', NULL, NULL, NULL);
 
 insert into TIPOCARNET (id, tipo) values (tipoCarnet_sequence.nextval, 'QR');
 insert into TIPOCARNET (id, tipo) values (tipoCarnet_sequence.nextval, 'Fisico');
@@ -414,12 +413,19 @@ insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentra
 --> Aseo
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (38, 1,'9858905085' , TO_DATE('2020/02/14', 'yyyy/mm/dd'), 35, 40);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (32,1, '3207271921' , TO_DATE('2018/05/14', 'yyyy/mm/dd'), 18, 20);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (40,1, '9858905085' , TO_DATE('2020/07/19', 'yyyy/mm/dd'), 14, 20);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (40,1, '9435262533' , TO_DATE('2020/07/19', 'yyyy/mm/dd'), 14, 20);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (40,1, '3207271921' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 14, 22);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (40,1, '9435262533' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
 
 -->Clientes
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (1, 2, '8931131694', TO_DATE('2018/12/01', 'yyyy/mm/dd'), 8, 20);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 2, '8931131694', TO_DATE('2019/07/19', 'yyyy/mm/dd'), 22, 36);
-insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 2, '4988009382', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 17, 21);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 2, '7822018908', TO_DATE('2019/07/19', 'yyyy/mm/dd'), 22, 36);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 2, '8931131694', TO_DATE('2019/10/19', 'yyyy/mm/dd'), 22, 36);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (40, 2, '7822018908', TO_DATE('2019/10/19', 'yyyy/mm/dd'), 14, 20);
 
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 2, '4988009382', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 17, 21);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '7822018908', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 5, 6);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (17, 1, '3245779779', TO_DATE('2020/05/09', 'yyyy/mm/dd'), 9, 16);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (11, 1, '4199487271', TO_DATE('2019/07/19', 'yyyy/mm/dd'), 23, 24);
@@ -435,6 +441,9 @@ insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentra
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (12, 1, '2264841791', TO_DATE('2020/12/09', 'yyyy/mm/dd'), 22, 31);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (13, 1, '8875223261', TO_DATE('2020/04/09', 'yyyy/mm/dd'), 15, 34);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '2264841791', TO_DATE('2019/04/24', 'yyyy/mm/dd'), 16, 29);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (39,1, '2264841791' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (38,1, '9615259409' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+
 
 -->Vigilancia
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (16, 2, '9677906902', TO_DATE('2019/02/09', 'yyyy/mm/dd'), 9, 20);
@@ -475,10 +484,18 @@ insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentra
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (12, 1, '5053459221', TO_DATE('2020/08/09', 'yyyy/mm/dd'), 30, 39);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (13, 1, '5053459221', TO_DATE('2020/11/09', 'yyyy/mm/dd'), 31, 39);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '5053459221', TO_DATE('2020/11/09', 'yyyy/mm/dd'), 32, 38);
-
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '3757003542', TO_DATE('2020/01/09', 'yyyy/mm/dd'), 11, NULL);
 
-select * from registrancarnet;
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (12,1, '6555390862' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (13,1, '5053459221' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14,2, '6499672815' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (15,1, '3757003542' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (16,1, '2656125483' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (17,1, '8629008404' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (18,1, '9129086599' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (19,1, '5087197394' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 16, 23);
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (38,1, '2656125483' , TO_DATE('2019/07/19', 'yyyy/mm/dd'), 24, 25);
+
 
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (4,'ABC244', TO_DATE('2019/01/11', 'yyyy/mm/dd'), 34, 43);
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (9,'YUA782',TO_DATE('2020/02/09', 'yyyy/mm/dd'), 8, 30);
@@ -488,6 +505,5 @@ insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalid
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (9,'DNE134', TO_DATE('2020/06/30', 'yyyy/mm/dd'), 8, 23);
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (4,'2NK445', TO_DATE('2019/07/26', 'yyyy/mm/dd'), 12, 20);
 
-SELECT * FROM REGISTRANCARNET WHERE idvisitante = '9858905085' and fecha = '17/10/20' AND horaEntrada = 61;
 
 COMMIT;

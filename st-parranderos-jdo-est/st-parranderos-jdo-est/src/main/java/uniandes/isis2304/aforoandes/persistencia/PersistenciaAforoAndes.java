@@ -43,8 +43,6 @@ import uniandes.isis2304.aforoandes.negocio.Horario;
 import uniandes.isis2304.aforoandes.negocio.Lector;
 import uniandes.isis2304.aforoandes.negocio.LocalComercial;
 import uniandes.isis2304.aforoandes.negocio.Parqueadero;
-import uniandes.isis2304.aforoandes.negocio.RFC1Hora;
-import uniandes.isis2304.aforoandes.negocio.RFC2Hora;
 import uniandes.isis2304.aforoandes.negocio.RegistranCarnet;
 import uniandes.isis2304.aforoandes.negocio.RegistranVehiculo;
 import uniandes.isis2304.aforoandes.negocio.TipoCarnet;
@@ -4399,16 +4397,16 @@ public class PersistenciaAforoAndes
 	 * @param idLocalComercial - El id del local comercial a consultar
 	 * @return La lista de objetos Visitante de acuerdo a la consulta realizada
 	 */
-	public List<RFC1Hora> RFC1Horas (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial)
+	public List<Visitante> RFC1Horas (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial)
 	{
 		return sqlUtil.RFC1Horas(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin, idLocalComercial);
 	}
 	
 	/**
-	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
+	 * Método que realiza la consulta de los establecimientos más visitados en una fecha o rango de fechas
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
 	 * @param fechaFin - La fecha de fin del rango de consulta
-	 * @return La lista de objetos Visitante de acuerdo a la consulta realizada
+	 * @return La lista de objetos LocalComercial de acuerdo a la consulta realizada
 	 */
 	public List<LocalComercial> RFC2Fecha (Timestamp fechaInicio, Timestamp fechaFin)
 	{
@@ -4416,10 +4414,14 @@ public class PersistenciaAforoAndes
 	}
 	
 	/**
-	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en una fecha o rango de fechas
-	 * @return La lista de objetos Visitante de acuerdo a la consulta realizada
+	 * Método que realiza la consulta de los establecimientos más visitados en un rango de horas
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @return La lista de objetos LocalComercial de acuerdo a la consulta realizada
 	 */
-	public List<RFC2Hora> RFC2Horas (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin)
+	public List<LocalComercial> RFC2Horas (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin)
 	{
 		return sqlUtil.RFC2Horas(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin);
 	}
