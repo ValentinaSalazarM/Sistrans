@@ -172,5 +172,37 @@ public class SQLVisitante
 	     return (long) q.executeUnique();            
 	}
 
-
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar el horario de circulación de un visitante
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Un arreglo de objetos cuyos elementos corresponden a los datos del visitante, las horas y minutos de habilitados para circulación.
+	 */
+	public Object[] darHorariosVisitante ( PersistenceManager pm, String idVisitante )
+	{
+		Query q = pm.newQuery(SQL, "SELECT AUX1.*, AUX2.HORALIMITE, AUX2.MINUTOLIMITE " + 
+				"	FROM " + 
+				"(" + 
+				"    SELECT VISITANTE.IDENTIFICACION, HORARIO.HORA AS HORAINICIO, HORARIO.MINUTO AS MINUTOINICIO " + 
+				"    FROM VISITANTE " + 
+				"    JOIN TIPOVISITANTE " + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID " + 
+				"    JOIN HORARIO " + 
+				"    ON TIPOVISITANTE.HORAINICIO = HORARIO.ID " + 
+				"    WHERE VISITANTE.IDENTIFICACION = ?" + 
+				") AUX1 " + 
+				"	JOIN " + 
+				"(" + 
+				"    SELECT VISITANTE.IDENTIFICACION, HORARIO.HORA AS HORALIMITE, HORARIO.MINUTO AS MINUTOLIMITE " + 
+				"    FROM VISITANTE " + 
+				"    JOIN TIPOVISITANTE " + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID " + 
+				"    JOIN HORARIO " + 
+				"    ON TIPOVISITANTE.HORALIMITE = HORARIO.ID " + 
+				") AUX2 " + 
+				" ON AUX1.IDENTIFICACION = AUX2.IDENTIFICACION " + 
+				"");
+		q.setParameters(idVisitante);
+		return (Object[]) q.executeUnique();            
+	}
 }

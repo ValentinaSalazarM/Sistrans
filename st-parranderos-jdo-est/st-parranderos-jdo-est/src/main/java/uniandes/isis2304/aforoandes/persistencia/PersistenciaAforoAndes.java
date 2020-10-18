@@ -2542,26 +2542,23 @@ public class PersistenciaAforoAndes
 	 * @param capacidadNormal - La capacidad común del local comercial
 	 * @param area - El área del local comercial
 	 * @param tipoLocal - El tipo del local comercial
-	 * @param activoBooleano - Si está en funcionamiento o no 
+	 * @param activo - Si está en funcionamiento o no 
 	 * @param idCentroComercial - El identificador del centro comercial al que pertenece el local comercial
 	 * @return El objeto LocalComercial adicionado. null si ocurre alguna Excepción
 	 */
-	public LocalComercial adicionarLocalComercial (String idLocalComercial, long capacidadNormal, long area, long tipoLocal, boolean activoBooleano, String idCentroComercial) 
+	public LocalComercial adicionarLocalComercial (String idLocalComercial, long capacidadNormal, long area, long tipoLocal, int activo, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			int activo = 0;
-			if ( activoBooleano )
-				activo = 1;
 			long tuplasInsertadas = sqlLocalComercial.adicionarLocalComercial(pm, idLocalComercial, capacidadNormal, area, tipoLocal, activo, idCentroComercial);
 			tx.commit();
 
 			log.trace ("Inserción de LocalComercial: " + idLocalComercial + ": " + tuplasInsertadas + " tuplas insertadas");
 
-			return new LocalComercial(idLocalComercial, area, capacidadNormal, tipoLocal, activoBooleano, idCentroComercial);
+			return new LocalComercial(idLocalComercial, area, capacidadNormal, tipoLocal, activo, idCentroComercial);
 		}
 		catch (Exception e)
 		{
@@ -2739,6 +2736,18 @@ public class PersistenciaAforoAndes
 		}
 	}
 
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar el horario de funcionamiento de un local
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Un arreglo de objetos, de tamaño 5. Los elementos del arreglo corresponden a los datos del local, las horas y minutos de apertura y cierre.
+	 */
+	
+	public Object[] darHorariosLocal ( String idLocal )
+	{
+		return (Object[]) sqlLocalComercial.darHorariosLocal(pmf.getPersistenceManager(), idLocal);		
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los PARQUEADEROS
 	 *****************************************************************/
@@ -2882,7 +2891,7 @@ public class PersistenciaAforoAndes
 	 * @return Las tuplas insertadas 
 	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
 	 */
-	public RegistranCarnet adicionarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida )
+	public RegistranCarnet adicionarRegistranCarnet(long idLector, long tipoCarnet, String idVisitante, Timestamp fecha, Long horaEntrada, Long horaSalida )
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -2922,7 +2931,7 @@ public class PersistenciaAforoAndes
 	 * @param horasalida - Hora de salida 
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaentrada, long horasalida)
+	public long eliminarRegistranCarnet(long idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaentrada, long horasalida)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -2953,7 +2962,7 @@ public class PersistenciaAforoAndes
 	 * @param idLector - El id del lector por el cual quedó registrada la visita
 	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorLector (String idLector)
+	public List<RegistranCarnet> darRegistranCarnetPorLector (long idLector)
 	{
 		return sqlRegistranCarnet.darRegistranCarnetPorLector(pmf.getPersistenceManager(), idLector);
 	}
@@ -2973,11 +2982,12 @@ public class PersistenciaAforoAndes
 	 * @param idVisitante - El identificador del visitante
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
 	 * @param fechaFin - La fecha de fin del rango de consulta o null si solo se requiere una fecha
+	 * @param horaEntrada - La hora de entrada registrada
 	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteFecha (String idVisitante, Timestamp fechaInicio, Timestamp fechaFin)
+	public RegistranCarnet darRegistranCarnetPorIdVisitanteFecha (String idVisitante, Timestamp fechaInicio, Timestamp fechaFin, long horaEntrada)
 	{
-		return sqlRegistranCarnet.darResistranCarnetPorIdVisitanteFecha(pmf.getPersistenceManager(), idVisitante, fechaInicio, fechaFin);
+		return sqlRegistranCarnet.darRegistranCarnetPorIdVisitanteFecha(pmf.getPersistenceManager(), idVisitante, fechaInicio, fechaFin, horaEntrada);
 	}
 	
 
@@ -3010,7 +3020,7 @@ public class PersistenciaAforoAndes
 	 * @param horaSalida - La hora de salida de la visita
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
-	public long cambiarHoraSalidaRegistranCarnet (String idLector, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida) 
+	public long cambiarHoraSalidaRegistranCarnet (long idLector, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -3052,7 +3062,7 @@ public class PersistenciaAforoAndes
 	 * @return Las tuplas insertadas 
 	 * @return El objeto RegistranVehiculo adicionado. null si ocurre alguna Excepción
 	 */
-	public RegistranVehiculo adicionarRegistranVehiculo (String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida )
+	public RegistranVehiculo adicionarRegistranVehiculo (long idLector, String vehiculo, Timestamp fecha, Long horaEntrada, Long horaSalida )
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -3091,7 +3101,7 @@ public class PersistenciaAforoAndes
 	 * @param horasalida - Hora de salida del vehículo del centro comercial 
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarRegistranVehiculo (String idlector, String vehiculo, Timestamp fecha, long horaentrada, long horasalida )
+	public long eliminarRegistranVehiculo (long idlector, String vehiculo, Timestamp fecha, long horaentrada, long horasalida )
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -3122,7 +3132,7 @@ public class PersistenciaAforoAndes
 	 * @param idLector - El id del lector por el cual quedó registrada la visita
 	 * @return La lista de objetos RegistranVehiculo, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
 	 */
-	public List<RegistranVehiculo> darRegistranVehiculoPorLector (String idLector)
+	public List<RegistranVehiculo> darRegistranVehiculoPorLector (long idLector)
 	{
 		return sqlRegistranVehiculo.darRegistranVehiculosPorLector(pmf.getPersistenceManager(), idLector);
 	}
@@ -3177,7 +3187,7 @@ public class PersistenciaAforoAndes
 	 * @param horaSalida - La hora de salida de la visita
 	 * @return El número de tuplas modificadas. -1 si ocurre alguna Excepción
 	 */
-	public long cambiarHoraSalidaRegistranVehiculo (String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida) 
+	public long cambiarHoraSalidaRegistranVehiculo (long idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -3885,6 +3895,7 @@ public class PersistenciaAforoAndes
 		}
 	}
 	
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar VEHICULO
 	 *****************************************************************/
@@ -4253,6 +4264,20 @@ public class PersistenciaAforoAndes
 			}
 			pm.close();
 		}
+	}
+	
+
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar el horario de ingreso válido para el visitante
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Un arreglo de objetos, de tamaño 5. Los elementos del arreglo corresponden a los datos del visitante, las horas y minutos de 
+	 * inicio fin del horario de ingreso al centro comercial válido
+	 */
+	
+	public Object[] darHorariosVisitante ( String idVisitante )
+	{
+		return (Object[]) sqlVisitante.darHorariosVisitante(pmf.getPersistenceManager(), idVisitante);		
 	}
 
 	/* ****************************************************************

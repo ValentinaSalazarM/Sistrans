@@ -66,11 +66,11 @@ public class Lector implements VOLector
 	{
 		this.id = 0;
 		this.tipoLector = 0;
-		this.idCentroComercial = "";
-		this.idLocalComercial = "";
-		this.idBano = "";
-		this.idAscensor = "";
-		this.idParqueadero = "";
+		this.idCentroComercial = null;
+		this.idLocalComercial = null;
+		this.idBano = null;
+		this.idAscensor = null;
+		this.idParqueadero = null;
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class Lector implements VOLector
 	/**
 	 * @return El id del baño del centro comercial
 	 */
-	public String getIdBaño() 
+	public String getIdBano() 
 	{
 		return idBano;
 	}
@@ -168,7 +168,7 @@ public class Lector implements VOLector
 	/**
 	 * @param idBano - El nuevo id del baño donde se localiza el lector
 	 */
-	public void setIdBaño(String idBaño) 
+	public void setIdBano(String idBaño) 
 	{	
 		this.idBano = idBaño;
 	}
@@ -205,14 +205,40 @@ public class Lector implements VOLector
 		this.idParqueadero = idParqueadero;
 	}
 
+	/**
+	 * 
+	 */
+	public String[] getEspacioOcupado ()
+	{
+		String[] resp = new String[2];
+		resp[1] = "";
+		
+		if (idCentroComercial != null)
+			resp [0] = idCentroComercial;
+		else if (idLocalComercial != null)
+		{
+			resp[0] = idLocalComercial;
+			resp[1] = "LC";
+		}
+		else if (idParqueadero != null )
+			resp [0] = idCentroComercial;
+		else if(idBano != null)
+			resp [0] = idBano;
+		else
+			resp [0] = idAscensor;
+		
+		return resp;
+	}
+	
+	
 	/** 
 	 * @return Una cadena con la información básica del lector
 	 */
 	@Override
 	public String toString() 
 	{
-		return "Lector [id" + id + ", tipoLector=" + tipoLector + ", idCentroComercial=" + idCentroComercial + ", idLocalComercial=" + idLocalComercial + 
-				", idBano="+ idBano + ", idAscensor=" + idAscensor +", idParqueadero=" + idParqueadero + "]";
+		return "Lector [id" + id + ", tipoLector = " + tipoLector + ", idCentroComercial = " + idCentroComercial + ", idLocalComercial = " + idLocalComercial + 
+				", idBano = "+ idBano + ", idAscensor = " + idAscensor +", idParqueadero = " + idParqueadero + "]";
 	}
 	
 }

@@ -20,6 +20,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.JDODataStoreException;
@@ -46,6 +48,7 @@ import uniandes.isis2304.aforoandes.negocio.Carnet;
 import uniandes.isis2304.aforoandes.negocio.CentroComercial;
 import uniandes.isis2304.aforoandes.negocio.Lector;
 import uniandes.isis2304.aforoandes.negocio.LocalComercial;
+import uniandes.isis2304.aforoandes.negocio.RegistranCarnet;
 import uniandes.isis2304.aforoandes.negocio.VOArea;
 import uniandes.isis2304.aforoandes.negocio.VOAscensor;
 import uniandes.isis2304.aforoandes.negocio.VOBano;
@@ -57,6 +60,7 @@ import uniandes.isis2304.aforoandes.negocio.VOEmpleado;
 import uniandes.isis2304.aforoandes.negocio.VOLector;
 import uniandes.isis2304.aforoandes.negocio.VOLocalComercial;
 import uniandes.isis2304.aforoandes.negocio.VOParqueadero;
+import uniandes.isis2304.aforoandes.negocio.VORegistranCarnet;
 import uniandes.isis2304.aforoandes.negocio.VOTipoCarnet;
 import uniandes.isis2304.aforoandes.negocio.VOTipoLector;
 import uniandes.isis2304.aforoandes.negocio.VOTipoLocal;
@@ -67,7 +71,6 @@ import uniandes.isis2304.aforoandes.negocio.VOZonaCirculacion;
 
 /**
  * Clase principal de la interfaz
- * @author Germán Bravo
  */
 @SuppressWarnings("serial")
 
@@ -492,6 +495,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
+			pDialogo.dispose();
 			long idArea = buscarAreaPorValor(area).getId();
 			long idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
 			VOAscensor ascensor = aforoAndes.adicionarAscensor(idAscensor, idCapacidadNormal, idArea, pesoMaximo, idCentroComercial);
@@ -662,6 +666,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
+			pDialogo.dispose();
 			long idArea = buscarAreaPorValor(area).getId();
 			long idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
 			VOBano baño = aforoAndes.adicionarBaño(idBano, idCapacidadNormal, idArea, numSanitarios, idCentroComercial);
@@ -1683,7 +1688,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
-		
+
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1691,7 +1696,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	/**
 	 * Cambiar el horario de turno del domiciliario con el identificador indicado por el usuario y lo muestra en el panel de datos
 	 */
@@ -1901,7 +1906,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 			}
 		} 
-		
+
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
@@ -1909,7 +1914,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	/**
 	 * Cambiar el horario de turno del empleado con el identificador indicado por el usuario y lo muestra en el panel de datos
 	 */
@@ -1937,7 +1942,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					JOptionPane.showMessageDialog( this, "La hora de final de turno debe ser posterior a la hora de inicio de turno", "Actualizar horario de turno del empleado", JOptionPane.ERROR_MESSAGE );
 				}
-				
+
 				long modificados = aforoAndes.cambiarHorarioTurnoEmpleado(idEmpleado, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno);
 				String resultado = "En actualizar Empleado por horario de turno: \n\n";
 				resultado += modificados + " registros actualizados";
@@ -1985,7 +1990,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		{
 			long idArea = buscarAreaPorValor(area).getId();
 			long idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
-			VOLocalComercial localComercial = aforoAndes.adicionarLocalComercial(idLocalComercial, idCapacidadNormal, idArea, tipoLocal, activoBooleano, idCentroComercial);
+			int activo = 0;
+			if (activoBooleano)
+				activo = 1;
+			VOLocalComercial localComercial = aforoAndes.adicionarLocalComercial(idLocalComercial, idCapacidadNormal, idArea, tipoLocal, activo, idCentroComercial);
 
 			if (localComercial == null)
 			{
@@ -2790,7 +2798,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	/* ****************************************************************
 	 * 			CRUD de TiposVisitante
 	 *****************************************************************/
@@ -3171,7 +3179,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	/* ****************************************************************
 	 * 			CRUD de ZonaCirculación
 	 *****************************************************************/
@@ -3302,7 +3310,255 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
+
+	/* ****************************************************************
+	 * 			Métodos administrativos
+	 *****************************************************************/
+	/**
+	 * Crea una ventana de diálogo para registrar una visita
+	 */
+	public void adicionarRegistranCarnet( )
+	{
+		DialogoRegistrarCarnet dialogo = new DialogoRegistrarCarnet( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de adición");
+	}
+
+	/**
+	 * Registra una visita con la información dada por el usuario
+	 * @param idLector - El id del lector 
+	 * @param tipoCarnet - El tipo del carnet del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @param fecha - La fecha de ingreso
+	 * @param horaEntrada - La hora de ingreso
+	 * @param minutoEntrada - El minuto de ingreso 
+	 * Se crea una nueva tupla de RegistranCarnet en la base de datos, si un registro con esa información no existía
+	 */
+	public void adicionarRegistranCarnet(long idLector, long tipoCarnet, String idVisitante, Timestamp fecha, int horaEntrada, int minutoEntrada, DialogoRegistrarCarnet pDialogo)
+	{
+		try
+		{
+			String[] idEspacioVisitado = aforoAndes.darLectorPorId(idLector).getEspacioOcupado();
+
+			if ( idEspacioVisitado[1].equals("LC"))
+			{
+				Object[] horariosLocal = aforoAndes.darHorariosLocal(idEspacioVisitado[0]);
+				Integer horaApertura = ((BigDecimal)(horariosLocal[1])).intValue();
+				Integer minutoApertura = ((BigDecimal)(horariosLocal[2])).intValue();
+				Integer horaCierre = ((BigDecimal)(horariosLocal[3])).intValue();
+				Integer minutoCierre = ((BigDecimal)(horariosLocal[4])).intValue();
+
+				if ( horaEntrada < horaApertura || (horaApertura == horaEntrada && minutoEntrada < minutoApertura ||
+						horaEntrada > horaCierre || (horaCierre == horaEntrada && minutoEntrada > minutoCierre)))
+					throw new Exception ("No es posible registrar una visita al local " + idEspacioVisitado[0] + " fuera de los horarios de funcionamiento.");
+
+			}
+
+			Object[] horariosCirculacionVisitante = aforoAndes.darHorariosVisitante(idVisitante);
+			Integer horaInicio = ((BigDecimal)(horariosCirculacionVisitante[1])).intValue();
+			Integer minutoInicio = ((BigDecimal)(horariosCirculacionVisitante[2])).intValue();
+			Integer horaLimite = ((BigDecimal)(horariosCirculacionVisitante[3])).intValue();
+			Integer minutoLimite = ((BigDecimal)(horariosCirculacionVisitante[4])).intValue();
+
+			if ( horaEntrada < horaInicio || (horaInicio == horaEntrada && minutoEntrada < minutoInicio ||
+					horaEntrada > horaLimite || (horaLimite == horaEntrada && minutoEntrada > minutoLimite)))
+				throw new Exception ("No es posible registrar una visita del visitante " + idVisitante + " fuera de los horarios válidos de circulación.");
+
+			VORegistranCarnet registro = aforoAndes.adicionarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaEntrada, minutoEntrada);
+			if (registro == null)
+			{
+				throw new Exception ("No se pudo crear un registro de visita para el visitante: " + idVisitante);
+			}
+			String resultado = "En adicionar RegistranCarnet \n\n";
+			resultado += "Registro de visita adicionado exitosamente: " + registro;
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+			pDialogo.dispose();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Consulta en la base de datos los registros existentes y los muestra en el panel de datos de la aplicación
+	 */
+	public void listarRegistranCarnet( )
+	{
+		try 
+		{
+			List <VORegistranCarnet> lista = aforoAndes.darVORegistranCarnet();
+			String resultado = "En listar RegistranCarnet";
+			resultado +=  "\n" + listarObjetos (lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Busca el registro de visita con el identificador de lector indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void buscarRegistranCarnetPorLector( )
+	{
+		try 
+		{
+			String idLectorStr = JOptionPane.showInputDialog (this, "Identificador del lector: ", "Buscar registro por identificador del lector", JOptionPane.QUESTION_MESSAGE);
+			if (idLectorStr != null)
+			{
+				long idLector = Long.valueOf(idLectorStr);
+				List<RegistranCarnet> lista = aforoAndes.darRegistranCarnetPorLector(idLector);
+				String resultado = "En listar RegistranCarnet por lector";
+				resultado +=  "\n" + listarObjetos (lista);
+				panelDatos.actualizarInterfaz(resultado);
+				resultado += "\n Operación terminada";
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog( this, "El identificador del lector debe ser un número.", "Buscar registro por identificador del lector", JOptionPane.ERROR_MESSAGE );
+		}
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Busca el registro de visita con el identificador de visitante indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void buscarRegistranCarnetPorIdVisitante( )
+	{
+		try 
+		{
+			String idVisitante = JOptionPane.showInputDialog (this, "Identificación del visitante: ", "Buscar registro por identificación del visitante", JOptionPane.QUESTION_MESSAGE);
+			if (idVisitante != null)
+			{
+				List<RegistranCarnet> lista = aforoAndes.darRegistranCarnetPorIdVisitante(idVisitante);
+				String resultado = "En listar RegistranCarnet por lector";
+				resultado +=  "\n" + listarObjetos (lista);
+				panelDatos.actualizarInterfaz(resultado);
+				resultado += "\n Operación terminada";
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Cambiar la hora de salida de un registro de visita indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void cambiarHoraSalidaRegistranCarnet( )
+	{
+		DialogoCambiarRegistro dialogo = new DialogoCambiarRegistro( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de modificación");
+	}
+
+	/**
+	 * @param idLector - El id del lector 
+	 * @param tipoCarnet - El tipo del carnet del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @param fecha - La fecha de ingreso
+	 * @param horaEntrada - La hora de ingreso
+	 * @param minutoEntrada - El minuto de ingreso 
+	 * Cambiar la hora de salida de un registro de visita indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void cambiarHoraSalidaRegistranCarnet(long idLector, long tipoCarnet, String idVisitante, Timestamp fecha, int horaEntrada, int minutoEntrada, int horaSalida, int minutoSalida, DialogoCambiarRegistro pDialogo)
+	{
+		try 
+		{
+			if (aforoAndes.darRegistranCarnetPorIdVisitanteFecha(idVisitante, fecha, null, horaEntrada, minutoEntrada) == null)
+			{
+				JOptionPane.showMessageDialog( this, "No se ha registrado la entrada del visitante al espacio.", "Actualizar hora salida de un registro", JOptionPane.ERROR_MESSAGE );
+			}
+			else
+			{
+				if (horaSalida < horaEntrada || (horaSalida == horaEntrada && minutoSalida < minutoEntrada))
+				{
+					JOptionPane.showMessageDialog( this, "La hora de salida debe ser posterior a la hora de entrada.", "Actualizar hora salida de un registro", JOptionPane.ERROR_MESSAGE );
+				}
+				else
+				{
+					long modificados = aforoAndes.cambiarHoraSalidaRegistranCarnet(idLector, idVisitante, fecha, horaEntrada, minutoEntrada, horaSalida, minutoSalida);
+					String resultado = "En actualizar RegistranCarnet: \n\n";
+					resultado += modificados + " registros actualizados";
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				};
+			}
+			pDialogo.dispose();
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Elimina un registro de visita indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void eliminarRegistranCarnet( )
+	{
+		DialogoCambiarRegistro dialogo = new DialogoCambiarRegistro( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de modificación");
+	}
+
+	/**
+	 * Borra de la base de datos el registro con la información dada por el usuario
+	 * Cuando dicho registro no existe, se indica que se borraron 0 registros de la base de datos
+	 * @param idLector - El id del lector 
+	 * @param tipoCarnet - El tipo del carnet del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @param fecha - La fecha de ingreso
+	 * @param horaEntrada - La hora de ingreso
+	 * @param minutoEntrada - El minuto de ingreso 
+	 */
+	public void eliminarRegistranCarnet(long idLector, long tipoCarnet, String idVisitante, Timestamp fecha, int horaEntrada, int minutoEntrada, int horaSalida, int minutoSalida)
+	{
+		try 
+		{
+			long registrosEliminados = aforoAndes.eliminarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaEntrada, minutoEntrada, horaSalida, minutoSalida);
+
+			String resultado = "En eliminar RegistranCarnet\n\n";
+			resultado += registrosEliminados + " registros eliminados\n";
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
 	/* ****************************************************************
 	 * 			Métodos administrativos
 	 *****************************************************************/
@@ -3503,7 +3759,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos los tipos de carnet existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public List <VOTipoCarnet> listarTiposCarnet( )
+	public List <VOTipoCarnet> listarVOTiposCarnet( )
 	{
 		return aforoAndes.darVOTiposCarnet();
 	}
@@ -3654,7 +3910,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			// Unifica la interfaz para Mac y para Windows.
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
 			InterfazAforoAndesApp interfaz = new InterfazAforoAndesApp( );
-			BasicConfigurator.configure();
+			//BasicConfigurator.configure();
 			interfaz.setVisible( true );
 		}
 		catch( Exception e )

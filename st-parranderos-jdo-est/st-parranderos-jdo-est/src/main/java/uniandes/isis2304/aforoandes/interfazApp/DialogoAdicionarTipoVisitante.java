@@ -64,12 +64,12 @@ public class DialogoAdicionarTipoVisitante extends JDialog implements ActionList
 	private JTextField txtHorarioInicio;
 
 	/**
-	 * Etiqueta de la hora límite de circulación.
+	 * Etiqueta de la hora límite de ingreso al centro comercial.
 	 */
 	private JLabel lblHorarioLimite;
 
 	/**
-	 * Campo de la hora límite de circulación.
+	 * Campo de la hora límite de ingreso al centro comercial.
 	 */
 	private JTextField txtHorarioLimite;
 
@@ -109,12 +109,12 @@ public class DialogoAdicionarTipoVisitante extends JDialog implements ActionList
 		txtTipo = new JTextField( );
 		campos.add( txtTipo );
 
-		lblHorarioInicio = new JLabel( "Hora de inicio de circulación en formato 24h (hh:mm): " );
+		lblHorarioInicio = new JLabel( "Hora de inicio válida para ingreso al C.C en formato 24h (hh:mm): " );
 		campos.add( lblHorarioInicio );
 		txtHorarioInicio = new JTextField( );
 		campos.add( txtHorarioInicio );
 
-		lblHorarioLimite = new JLabel( "Hora límite de circulación en formato 24h (hh:mm): " );
+		lblHorarioLimite = new JLabel( "Hora límite de ingreso al C.C en formato 24h (hh:mm): " );
 		campos.add( lblHorarioLimite );
 		txtHorarioLimite = new JTextField( );
 		campos.add( txtHorarioLimite );

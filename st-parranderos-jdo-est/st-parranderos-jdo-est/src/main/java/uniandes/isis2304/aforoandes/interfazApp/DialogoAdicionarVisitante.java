@@ -149,10 +149,10 @@ public class DialogoAdicionarVisitante extends JDialog implements ActionListener
 		principal = pPrincipal;
 		setTitle( "Agregar visitante" );
 		setLayout( new java.awt.BorderLayout( ) );
-		panelInfo.setBorder( new EmptyBorder( 20, 20, 20, 20 ) );
 
 		panelInfo = new JPanel( );
 		panelInfo.setPreferredSize( new Dimension( 650, 300 ) );
+		panelInfo.setBorder( new EmptyBorder( 20, 20, 20, 20 ) );
 
 		panelInfo.setBorder( new TitledBorder( "Información" ) );
 		GridLayout layout = new GridLayout( 7, 2, -175, 30 );

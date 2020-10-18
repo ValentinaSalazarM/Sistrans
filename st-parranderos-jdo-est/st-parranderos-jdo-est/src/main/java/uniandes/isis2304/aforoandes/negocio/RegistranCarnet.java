@@ -28,7 +28,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * El identificador del lector que registra el carnet
 	 */
-	private String idLector;
+	private long idLector;
 	
 	/**
 	 * El tipo del carnet registrado
@@ -48,12 +48,12 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * Identificador del horario en que se efectuó la lectura de entrada. Debe existir en la tabla HORARIO
 	 */
-	private long horaEntrada;
+	private Long horaEntrada;
 	
 	/**
 	 * Identificador del horario en que se efectuó la lectura de salida. Debe existir en la tabla HORARIO
 	 */
-	private long horaSalida;
+	private Long horaSalida;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -63,12 +63,12 @@ public class RegistranCarnet implements VORegistranCarnet
 	 */
 	public RegistranCarnet() 
 	{
-		this.idLector = "";
+		this.idLector = 0;
 		this.tipoCarnet = 0;
 		this.idVisitante = "";
 		this.fecha = new Timestamp(0);
-		this.horaEntrada = 0;
-		this.horaSalida = 0;
+		this.horaEntrada = null;
+		this.horaSalida = null;
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	 * @param horaEntrada - El identificador del horario en el cual se realiza la lectura de entrada. Debe existir un horario con dicho identificador
 	 * @param horaSalida -  El identificador del horario en el cual se realiza la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public RegistranCarnet(String lector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida) 
+	public RegistranCarnet(long lector, long tipoCarnet, String idVisitante, Timestamp fecha, Long horaEntrada, Long horaSalida) 
 	{
 		this.idLector = lector;
 		this.tipoCarnet = tipoCarnet;
@@ -94,7 +94,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @return El lector que realiza el registro
 	 */
-	public String getIdLector() 
+	public long getIdLector() 
 	{
 		return idLector;
 	}
@@ -102,7 +102,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @param lector - El nuevo lector. Debe existir un lector con dicho identificador
 	 */
-	public void setIdLector(String lector) 
+	public void setIdLector(long lector) 
 	{
 		this.idLector = lector;
 	}
@@ -158,7 +158,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @return El identificador del horario en el cual se realiza la lectura de entrada
 	 */
-	public long getHoraEntrada() 
+	public Long getHoraEntrada() 
 	{
 		return horaEntrada;
 	}
@@ -166,7 +166,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @param horaEntrada - El nuevo identificador del horario en el que se realizó la lectura de entrada. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraEntrada(long horaEntrada) 
+	public void setHoraEntrada(Long horaEntrada) 
 	{
 		this.horaEntrada = horaEntrada;
 	}
@@ -174,7 +174,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @return El identificador del horario en el cual se realiza la lectura de salida
 	 */
-	public long getHoraSalida() 
+	public Long getHoraSalida() 
 	{
 		return horaSalida;
 	}
@@ -182,7 +182,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	/**
 	 * @param horaSalida - El nuevo identificador del horario en el que se realizó la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public void setHoraSalida(long horaSalida) 
+	public void setHoraSalida(Long horaSalida) 
 	{
 		this.horaSalida = horaSalida;
 	}
@@ -193,7 +193,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	@Override
 	public String toString() 
 	{
-		return "RegistranCarnet [idLector=" + idLector + ", tipoCarnet=" + tipoCarnet + ", idVisitante=" + idVisitante + ", fecha=" + fecha + ", horaEntrada="
-				+ horaEntrada + ", horaSalida=" + horaSalida + "]";
+		return "RegistranCarnet [idLector = " + idLector + ", tipoCarnet = " + tipoCarnet + ", idVisitante = " + idVisitante + ", fecha = " + fecha + ", idHoraEntrada = "
+				+ horaEntrada + ", idHoraSalida = " + horaSalida + "]";
 	}
 }

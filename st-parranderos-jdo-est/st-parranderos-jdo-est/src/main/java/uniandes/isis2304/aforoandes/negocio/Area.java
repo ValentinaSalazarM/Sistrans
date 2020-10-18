@@ -112,6 +112,6 @@ public class Area implements VOArea
 	@Override
 	public String toString() 
 	{
-		return "Area [id=" + id + ", valor=" + valor + ", aforo=" + aforo + "]";
+		return "Area [id = " + id + ", valor = " + valor + ", aforo = " + aforo + "]";
 	}
 }

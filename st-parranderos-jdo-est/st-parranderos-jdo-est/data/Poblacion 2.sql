@@ -55,6 +55,8 @@ insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 08
 insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 18);
 insert into HORARIO (id, hora , minuto) values (horario_sequence.nextval, 21, 28);
 
+select * from horario;
+
 insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Domiciliario', 5, 48);
 insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Aseo', 2, 55);
 insert into TIPOVISITANTE (id, tipo, horainicio, horalimite) values (tipoVisitante_sequence.nextval, 'Cliente', 8, 47);
@@ -474,6 +476,9 @@ insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentra
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (13, 1, '5053459221', TO_DATE('2020/11/09', 'yyyy/mm/dd'), 31, 39);
 insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '5053459221', TO_DATE('2020/11/09', 'yyyy/mm/dd'), 32, 38);
 
+insert into REGISTRANCARNET (idlector, tipocarnet, idvisitante, fecha, horaentrada, horasalida) values (14, 1, '3757003542', TO_DATE('2020/01/09', 'yyyy/mm/dd'), 11, NULL);
+
+select * from registrancarnet;
 
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (4,'ABC244', TO_DATE('2019/01/11', 'yyyy/mm/dd'), 34, 43);
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (9,'YUA782',TO_DATE('2020/02/09', 'yyyy/mm/dd'), 8, 30);
@@ -482,5 +487,7 @@ insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalid
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (4,'CNI543',TO_DATE('2020/05/23', 'yyyy/mm/dd'), 17, 24);
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (9,'DNE134', TO_DATE('2020/06/30', 'yyyy/mm/dd'), 8, 23);
 insert into REGISTRANVEHICULO (idlector, vehiculo, fecha, horaentrada, horasalida) values (4,'2NK445', TO_DATE('2019/07/26', 'yyyy/mm/dd'), 12, 20);
+
+SELECT * FROM REGISTRANCARNET WHERE idvisitante = '9858905085' and fecha = '17/10/20' AND horaEntrada = 61;
 
 COMMIT;

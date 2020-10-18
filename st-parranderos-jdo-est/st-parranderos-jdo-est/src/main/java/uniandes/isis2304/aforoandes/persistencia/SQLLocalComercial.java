@@ -171,6 +171,38 @@ class SQLLocalComercial
 		return (long) q.executeUnique();            
 	}
 
-
-
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar el horario de funcionamiento de un local
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @return Un arreglo de objetos cuyos elementos corresponden a los datos del local, las horas y minutos de apertura y cierre.
+	 */
+	
+	public Object[] darHorariosLocal ( PersistenceManager pm, String idLocal )
+	{
+		Query q = pm.newQuery(SQL, "SELECT AUX1.*, AUX2.HORACIERRE, AUX2.MINUTOCIERRE " + 
+				"	FROM" + 
+				"(" + 
+				"    SELECT LOCALCOMERCIAL.IDENTIFICADOR, HORARIO.HORA AS HORAAPERTURA, HORARIO.MINUTO AS MINUTOAPERTURA " + 
+				"    FROM LOCALCOMERCIAL " + 
+				"    JOIN TIPOLOCAL " + 
+				"    ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID " + 
+				"    JOIN HORARIO " + 
+				"    ON TIPOLOCAL.HORAAPERTURA = HORARIO.ID " + 
+				"    WHERE LOCALCOMERCIAL.IDENTIFICADOR = ? " + 
+				") AUX1" + 
+				"	JOIN " + 
+				"(" + 
+				"    SELECT LOCALCOMERCIAL.IDENTIFICADOR, HORARIO.HORA AS HORACIERRE, HORARIO.MINUTO AS MINUTOCIERRE " + 
+				"    FROM LOCALCOMERCIAL " + 
+				"    JOIN TIPOLOCAL" + 
+				"    ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID " + 
+				"    JOIN HORARIO " + 
+				"    ON TIPOLOCAL.HORACIERRE = HORARIO.ID " + 
+				") AUX2 " + 
+				"ON AUX1.IDENTIFICADOR = AUX2.IDENTIFICADOR" + 
+				"");
+		q.setParameters(idLocal);
+		return (Object[]) q.executeUnique();            
+	}
 }

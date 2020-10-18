@@ -41,7 +41,7 @@ public class LocalComercial implements VOLocalComercial
 	/**
 	 * Indica si el establecimiento se encuentra en funcionamiento
 	 */
-	private boolean activo;
+	private int activo;
 	
 	/**
 	 * El identificador del centro comercial donde se localiza el local comercial. Debe existir en la tabla de CENTROCOMERCIAL
@@ -63,7 +63,7 @@ public class LocalComercial implements VOLocalComercial
 		this.area = null;
 		this.tipoLocal = 0;
 		this.idCentroComercial = "";
-		activo = true;
+		activo = 1;
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class LocalComercial implements VOLocalComercial
 	 * @param activo - Estado de funcionamiento del local comercial
 	 * @param idCentroComercial - El identificador del centro comercial. Debe existir un centro comercial con dicho identificador
 	 */
-	public LocalComercial (String identificador, Long area, Long capacidadNormal, long tipoLocal, boolean activo, String idCentroComercial) 
+	public LocalComercial (String identificador, Long area, Long capacidadNormal, long tipoLocal, int activo, String idCentroComercial) 
 	{
 		this.identificador = identificador;
 		this.area = area;
@@ -153,7 +153,7 @@ public class LocalComercial implements VOLocalComercial
 	/**
 	 * @return El estado de funcionamiento del local comercial
 	 */
-	public boolean getActivo() 
+	public int getActivo() 
 	{
 		return activo;
 	}
@@ -161,7 +161,7 @@ public class LocalComercial implements VOLocalComercial
 	/**
 	 * @param activo - El nuevo estado de funcionamiento del local comercial
 	 */
-	public void setActivo(boolean activo) 
+	public void setActivo(int activo) 
 	{
 		this.activo = activo;
 	}

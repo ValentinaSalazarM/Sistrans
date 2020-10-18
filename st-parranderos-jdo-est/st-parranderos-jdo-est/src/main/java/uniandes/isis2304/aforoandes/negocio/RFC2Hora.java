@@ -36,7 +36,7 @@ public class RFC2Hora implements VOLocalComercial
 	/**
 	 * Indica si el establecimiento se encuentra en funcionamiento
 	 */
-	private boolean activo;
+	private int activo;
 	
 	/**
 	 * El identificador del centro comercial donde se localiza el local comercial. Debe existir en la tabla de CENTROCOMERCIAL
@@ -67,7 +67,7 @@ public class RFC2Hora implements VOLocalComercial
 		this.area = null;
 		this.tipoLocal = 0;
 		this.idCentroComercial = "";
-		activo = true;
+		activo = 1;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class RFC2Hora implements VOLocalComercial
 	/**
 	 * @return El estado de funcionamiento del local comercial
 	 */
-	public boolean getActivo() 
+	public int getActivo() 
 	{
 		return activo;
 	}
@@ -145,7 +145,7 @@ public class RFC2Hora implements VOLocalComercial
 	/**
 	 * @param activo - El nuevo estado de funcionamiento del local comercial
 	 */
-	public void setActivo(boolean activo) 
+	public void setActivo(int activo) 
 	{
 		this.activo = activo;
 	}

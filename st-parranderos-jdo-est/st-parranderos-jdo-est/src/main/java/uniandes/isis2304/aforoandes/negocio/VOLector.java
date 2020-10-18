@@ -42,7 +42,7 @@ public interface VOLector
 	/**
 	 * @return El id del baño del centro comercial
 	 */
-	public String getIdBaño();
+	public String getIdBano();
 	
 	/**
 	 * @return El id del ascensor donde se localiza el lector

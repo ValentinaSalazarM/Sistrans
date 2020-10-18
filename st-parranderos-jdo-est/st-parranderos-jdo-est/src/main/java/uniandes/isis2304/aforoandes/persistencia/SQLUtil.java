@@ -226,33 +226,33 @@ class SQLUtil
 		if ( fechaFin == null )
 		{
 			q = pm.newQuery (SQL, "SELECT DISTINCT VISITANTE.*" + 
-					"FROM LECTOR" + 
-					"JOIN" + 
+					"	FROM LECTOR" + 
+					"	JOIN" + 
 					"    (" + 
 					"        SELECT IDLECTOR, IDVISITANTE" + 
 					"        FROM REGISTRANCARNET" + 
 					"        WHERE FECHA = ?" + 
 					"    ) INF_VISITAS" + 
-					"ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
-					"JOIN VISITANTE" + 
-					"ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
-					"WHERE LECTOR.IDLOCALCOMERCIAL = ?");
+					"	ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
+					"	JOIN VISITANTE" + 
+					"	ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+					"	WHERE LECTOR.IDLOCALCOMERCIAL = ?");
 			q.setParameters(fechaInicio, idLocalComercial);		
 		}
 		else
 		{
 			q = pm.newQuery (SQL, "SELECT DISTINCT VISITANTE.*" + 
-					"FROM LECTOR" + 
-					"JOIN" + 
+					"	FROM LECTOR" + 
+					"	JOIN" + 
 					"    (" + 
 					"        SELECT IDLECTOR, IDVISITANTE" + 
 					"        FROM REGISTRANCARNET" + 
 					"        WHERE FECHA BETWEEN ? AND ?" + 
 					"    ) INF_VISITAS" + 
-					"ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
-					"JOIN VISITANTE" + 
-					"ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
-					"WHERE LECTOR.IDLOCALCOMERCIAL = ?");
+					"	ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
+					"	JOIN VISITANTE" + 
+					"	ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+					"	WHERE LECTOR.IDLOCALCOMERCIAL = ?");
 			q.setParameters(fechaInicio, fechaFin, idLocalComercial);		
 		}
 		q.setResultClass(Visitante.class);
@@ -273,8 +273,8 @@ class SQLUtil
 		Query q;
 
 		q = pm.newQuery (SQL,"SELECT VISITANTE.*, HORA, MINUTO" + 
-				"FROM LECTOR" + 
-				"JOIN" + 
+				"	FROM LECTOR" + 
+				"	JOIN" + 
 				"    (" + 
 				"        SELECT IDLECTOR, IDVISITANTE, HORA, MINUTO" + 
 				"        FROM HORARIO" + 
@@ -283,10 +283,10 @@ class SQLUtil
 				"        WHERE FECHA =  ?" + 
 				"        AND HORA BETWEEN ? AND ?" + 
 				"    ) INF_VISITAS" + 
-				"ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
-				"JOIN VISITANTE" + 
-				"ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
-				"WHERE LECTOR.IDLOCALCOMERCIAL = ?");
+				"	ON INF_VISITAS.IDLECTOR = LECTOR.ID" + 
+				"	JOIN VISITANTE" + 
+				"	ON INF_VISITAS.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"	WHERE LECTOR.IDLOCALCOMERCIAL = ?");
 		q.setParameters(fecha, horaInicio, horaFin, idLocalComercial);		
 		q.setResultClass(RFC1Hora.class);
 		List<RFC1Hora> list = q.executeList();
@@ -314,8 +314,8 @@ class SQLUtil
 		if ( fechaFin == null )
 		{
 			q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.*" + 
-					"FROM LECTOR" + 
-					"JOIN " + 
+					"	FROM LECTOR" + 
+					"	JOIN " + 
 					"    (SELECT IDLECTOR, NUM_VISITAS, RANK() OVER ( PARTITION BY IDLECTOR ORDER BY NUM_VISITAS DESC) RANK" + 
 					"    FROM" + 
 					"        (SELECT IDLECTOR, COUNT(*) AS NUM_VISITAS" + 
@@ -323,17 +323,17 @@ class SQLUtil
 					"        WHERE FECHA = ?" + 
 					"        GROUP BY IDLECTOR)" + 
 					"    ) AUX" + 
-					"ON AUX.IDLECTOR = LECTOR.ID" + 
-					"JOIN LOCALCOMERCIAL" + 
-					"ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
-					"WHERE RANK <= 20");
+					"	ON AUX.IDLECTOR = LECTOR.ID" + 
+					"	JOIN LOCALCOMERCIAL" + 
+					"	ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+					"	WHERE RANK <= 20");
 			q.setParameters(fechaInicio);		
 		}
 		else
 		{
 			q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.*" + 
-					"FROM LECTOR" + 
-					"JOIN " + 
+					"	FROM LECTOR" + 
+					"	JOIN " + 
 					"    (SELECT IDLECTOR, NUM_VISITAS, RANK() OVER ( PARTITION BY IDLECTOR ORDER BY NUM_VISITAS DESC) RANK" + 
 					"    FROM" + 
 					"        (SELECT IDLECTOR, COUNT(*) AS NUM_VISITAS" + 
@@ -341,10 +341,10 @@ class SQLUtil
 					"        WHERE FECHA BETWEEN ? AND ?" + 
 					"        GROUP BY IDLECTOR)" + 
 					"    ) AUX" + 
-					"ON AUX.IDLECTOR = LECTOR.ID" + 
-					"JOIN LOCALCOMERCIAL" + 
-					"ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
-					"WHERE RANK <= 20");
+					"	ON AUX.IDLECTOR = LECTOR.ID" + 
+					"	JOIN LOCALCOMERCIAL" + 
+					"	ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+					"	WHERE RANK <= 20");
 			q.setParameters(fechaInicio, fechaFin);				
 		}
 		q.setResultClass(LocalComercial.class);
@@ -363,8 +363,8 @@ class SQLUtil
 	{
 		Query q;
 		q = pm.newQuery (SQL,"SELECT LOCALCOMERCIAL.*, HORA, MINUTO" + 
-				"FROM LECTOR" + 
-				"JOIN " + 
+				"	FROM LECTOR" + 
+				"	JOIN " + 
 				"    (SELECT REGISTRANCARNET.IDLECTOR, HORARIO.HORA, HORARIO.MINUTO, RANK() OVER (PARTITION BY REGISTRANCARNET.IDLECTOR ORDER BY INF_VISITAS.NUM_VISITAS DESC) AS RANK" + 
 				"    FROM" + 
 				"        (" + 
@@ -379,10 +379,10 @@ class SQLUtil
 				"    ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
 				"    WHERE HORA BETWEEN ? AND ?" + 
 				"    ) AUX" + 
-				"ON AUX.IDLECTOR = LECTOR.ID" + 
-				"JOIN LOCALCOMERCIAL" + 
-				"ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
-				"WHERE RANK <= 20");
+				"	ON AUX.IDLECTOR = LECTOR.ID" + 
+				"	JOIN LOCALCOMERCIAL" + 
+				"	ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+				"	WHERE RANK <= 20");
 		q.setParameters(fecha, horaInicio, horaFin);		
 		q.setResultClass(RFC2Hora.class);
 		List<RFC2Hora> list = q.executeList();
@@ -429,7 +429,7 @@ class SQLUtil
 					"        WHERE ASCENSOR.IDCENTROCOMERCIAL = ?)" + 
 					"        UNION" + 
 					"        (SELECT AFORO" + 
-					"        FROM\r\n" + 
+					"        FROM" + 
 					"        BANO JOIN CAPACIDADNORMAL" + 
 					"        ON BANO.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
 					"        WHERE BANO.IDCENTROCOMERCIAL = ?)" + 
@@ -471,7 +471,7 @@ class SQLUtil
 					"        WHERE ASCENSOR.IDCENTROCOMERCIAL = ?)" + 
 					"        UNION" + 
 					"        (SELECT AFORO" + 
-					"        FROM\r\n" + 
+					"        FROM" + 
 					"        BANO JOIN CAPACIDADNORMAL" + 
 					"        ON BANO.CAPACIDADNORMAL = CAPACIDADNORMAL.ID" + 
 					"        WHERE BANO.IDCENTROCOMERCIAL = ?)" + 
@@ -573,18 +573,18 @@ class SQLUtil
 		if ( fechaFin == null )
 		{
 			q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.IDENTIFICADOR, NUM_VISITAS/AREA.AFORO AS INDICE" + 
-					"FROM LOCALCOMERCIAL" + 
-					"JOIN" + 
+					"	FROM LOCALCOMERCIAL" + 
+					"	JOIN" + 
 					"    (" + 
 					"        SELECT IDLOCALCOMERCIAL, COUNT(*) AS NUM_VISITAS" + 
 					"        FROM REGISTRANCARNET JOIN LECTOR" + 
 					"        ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
 					"        WHERE FECHA = ? AND LECTOR.IDLOCALCOMERCIAL = ?" + 
-					"        GROUP BY IDLOCALCOMERCIAL\r\n" + 
+					"        GROUP BY IDLOCALCOMERCIAL" + 
 					"    ) AUX" + 
-					"ON LOCALCOMERCIAL.IDENTIFICADOR = AUX.IDLOCALCOMERCIAL" + 
-					"JOIN AREA" + 
-					"ON LOCALCOMERCIAL.AREA = AREA.ID" + 
+					"	ON LOCALCOMERCIAL.IDENTIFICADOR = AUX.IDLOCALCOMERCIAL" + 
+					"	JOIN AREA" + 
+					"	ON LOCALCOMERCIAL.AREA = AREA.ID" + 
 					"");
 			q.setParameters(fechaInicio, id);		
 		}
@@ -592,18 +592,18 @@ class SQLUtil
 		{
 
 			q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.IDENTIFICADOR, NUM_VISITAS/AREA.AFORO AS INDICE" + 
-					"FROM LOCALCOMERCIAL" + 
+					"	FROM LOCALCOMERCIAL" + 
 					"JOIN" + 
 					"    (" + 
 					"        SELECT IDLOCALCOMERCIAL, COUNT(*) AS NUM_VISITAS" + 
 					"        FROM REGISTRANCARNET JOIN LECTOR" + 
 					"        ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
 					"        WHERE FECHA BETWEEN ? AND ? AND LECTOR.IDLOCALCOMERCIAL = ?" + 
-					"        GROUP BY IDLOCALCOMERCIAL\r\n" + 
+					"        GROUP BY IDLOCALCOMERCIAL" + 
 					"    ) AUX" + 
-					"ON LOCALCOMERCIAL.IDENTIFICADOR = AUX.IDLOCALCOMERCIAL" + 
-					"JOIN AREA" + 
-					"ON LOCALCOMERCIAL.AREA = AREA.ID" + 
+					"	ON LOCALCOMERCIAL.IDENTIFICADOR = AUX.IDLOCALCOMERCIAL" + 
+					"	JOIN AREA" + 
+					"	ON LOCALCOMERCIAL.AREA = AREA.ID" + 
 					"");
 			q.setParameters(fechaInicio, fechaFin, id);				
 		}
@@ -640,7 +640,7 @@ class SQLUtil
 				"ON LOCALCOMERCIAL.AREA = AREA.ID" + 
 				"WHERE LOCALCOMERCIAL.IDENTIFICADOR = ?" + 
 				"");
-		q.setParameters(fecha, id, horaInicio, horaFinal, id);		
+		q.setParameters(fecha, horaInicio, horaFinal, id);		
 		q.setResultClass(RFC3Hora.class);
 		List<RFC3Hora> list = q.executeList();
 		Iterator<RFC3Hora> it = list.iterator();

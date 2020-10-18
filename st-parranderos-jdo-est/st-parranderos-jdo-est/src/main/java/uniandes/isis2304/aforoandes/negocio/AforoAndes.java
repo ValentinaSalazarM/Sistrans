@@ -1378,7 +1378,7 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial al que pertenece el local comercial
 	 * @return El objeto LocalComercial adicionado. null si ocurre alguna Excepción
 	 */
-	public LocalComercial adicionarLocalComercial (String idLocalComercial, long capacidadNormal, long area, long tipoLocal, boolean activoBooleano, String idCentroComercial) 
+	public LocalComercial adicionarLocalComercial (String idLocalComercial, long capacidadNormal, long area, long tipoLocal, int activoBooleano, String idCentroComercial) 
 	{
 		log.info ("Adicionando LocalComercial con identificador: " + idLocalComercial );
 		LocalComercial localComercial = pp.adicionarLocalComercial(idLocalComercial, capacidadNormal, area, tipoLocal, activoBooleano, idCentroComercial);
@@ -1497,6 +1497,20 @@ public class AforoAndes
 
 	}
 
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar el horario de funcionamiento de un local
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idLocal - Id del local de interés
+	 * @return Un arreglo de objetos, de tamaño 5. Los elementos del arreglo corresponden a los datos del local, las horas y minutos de apertura y cierre.
+	 */
+	public Object[] darHorariosLocal ( String idLocal )
+	{
+        log.info ("Recuperando horarios de apertura y cierre del local");
+		Object[] tupla = pp.darHorariosLocal( idLocal);		
+        log.info ("Recuperando horarios de apertura y cierre del local: Listo!");
+		return tupla;
+	}
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los PARQUEADEROS
@@ -1600,14 +1614,17 @@ public class AforoAndes
 	 * @param idVisitante - El identificador del visitante
 	 * @param fecha - La fecha de ingreso
 	 * @param horaEntrada - La hora de ingreso
-	 * @param horaSalida - La hora de salida 
+	 * @param minutoEntrada - El minuto de ingreso
 	 * @return Las tuplas insertadas 
-	 * @return El objeto TipoCarnet adicionado. null si ocurre alguna Excepción
+	 * @return El objeto RegistranCarnet adicionado. null si ocurre alguna Excepción
 	 */
-	public RegistranCarnet adicionarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida )
+	public RegistranCarnet adicionarRegistranCarnet(long idLector, long tipoCarnet, String idVisitante, Timestamp fecha, int horaEntrada, int minutoEntrada)
 	{
+		Horario horarioEntrada = pp.darHorarioPorHorayMinuto(horaEntrada, minutoEntrada);
+		if ( horarioEntrada == null )
+			horarioEntrada = pp.adicionarHorario(horaEntrada, minutoEntrada);
 		log.info ("Adicionando RegistranCarnet con lector: " + idLector + " y visitante: " + idVisitante);
-		RegistranCarnet registranCarnet = pp.adicionarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaEntrada, horaSalida);
+		RegistranCarnet registranCarnet = pp.adicionarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horarioEntrada.getId(), null);
 		log.info ("Adicionando RegistranCarnet: " + registranCarnet);
 		return registranCarnet;
 	}
@@ -1619,14 +1636,18 @@ public class AforoAndes
 	 * @param tipoCarnet - El tipo del carnet del visitante
 	 * @param idVisitante - El identificador del visitante
 	 * @param fecha - La fecha de ingreso
-	 * @param horaentrada - Hora de entrada 
-	 * @param horasalida - Hora de salida 
+	 * @param horaEntrada - La hora de entrada de la visita
+	 * @param minutoEntrada - El minuto de entrada de la visita
+	 * @param horaSalida - La hora de salida de la visita
+	 * @param minutoSalida - El minuto de salida de la visita
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarRegistranCarnet(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaentrada, long horasalida)
+	public long eliminarRegistranCarnet(long idLector, long tipoCarnet, String idVisitante, Timestamp fecha, int horaEntrada, int minutoEntrada, int horaSalida, int minutoSalida)
 	{
+		Horario horarioEntrada = pp.darHorarioPorHorayMinuto(horaEntrada, minutoEntrada);
+		Horario horarioSalida = pp.darHorarioPorHorayMinuto(horaEntrada, minutoEntrada);
 		log.info ("Eliminando RegistranCarnet del lector: " + idLector + " y visitante: " + idVisitante);
-		long resp = pp.eliminarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaentrada, horasalida);
+		long resp = pp.eliminarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horarioEntrada.getId(), horarioSalida.getId());
 		log.info ("Eliminando RegistranCarnet: " + resp + " tuplas eliminadas");
 		return resp;
 	}
@@ -1636,7 +1657,7 @@ public class AforoAndes
 	 * @param idLector - El id del lector por el cual quedó registrada la visita
 	 * @return La lista de objetos RegistranCarnet, construidos con base en las tuplas de la tabla REGISTRANCARNET
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorLector (String idLector) 
+	public List<RegistranCarnet> darRegistranCarnetPorLector (long idLector) 
 	{
 		log.info ("Dar información de RegistranCarnet por idLector: " + idLector);
 		List<RegistranCarnet> registros = pp.darRegistranCarnetPorLector(idLector);
@@ -1662,14 +1683,16 @@ public class AforoAndes
 	 * @param idVisitante - El identificador del visitante
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
 	 * @param fechaFin - La fecha de fin del rango de consulta o null si solo se requiere una fecha
+	 * @param horaEntrada - La hora de entrada registrada
 	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
 	 */
-	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteFecha (String idVisitante, Timestamp fechaInicio, Timestamp fechaFin)
+	public RegistranCarnet darRegistranCarnetPorIdVisitanteFecha (String idVisitante, Timestamp fechaInicio, Timestamp fechaFin, int horaEntrada, int minutoEntrada)
 	{
+		Horario horarioEntrada = pp.darHorarioPorHorayMinuto(horaEntrada, minutoEntrada);
 		log.info ("Dar información de RegistranCarnet por idVisitante: " + idVisitante);
-		List<RegistranCarnet> registros = pp.darRegistranCarnetPorIdVisitanteFecha(idVisitante, fechaInicio, fechaFin);
-		log.info ("Dar información de RegistranCarnet por idVisitante: " + registros.size() + " registros con ese idVisitante y fecha(s) existentes");
-		return registros;
+		RegistranCarnet registro = pp.darRegistranCarnetPorIdVisitanteFecha(idVisitante, fechaInicio, fechaFin, horarioEntrada.getId());
+		log.info ("Buscando registro: " + registro != null ? registro : "NO EXISTE");
+		return registro;
 	}
 
 	/**
@@ -1707,13 +1730,20 @@ public class AforoAndes
 	 * @param idVisitante - Identificador del visitante 
 	 * @param fecha - La fecha en la que se realizó el registro
 	 * @param horaEntrada - La hora de entrada de la visita
+	 * @param minutoEntrada - El minuto de entrada de la visita
 	 * @param horaSalida - La hora de salida de la visita
+	 * @param minutoSalida - El minuto de salida de la visita
 	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un registro con ese identificador no existe
 	 */
-	public long cambiarHoraSalidaRegistranCarnet (String idLector, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida) 
+	public long cambiarHoraSalidaRegistranCarnet (long idLector, String idVisitante, Timestamp fecha, int horaEntrada, int minutoEntrada, int horaSalida, int minutoSalida) 
 	{
+		Horario horarioEntrada = pp.darHorarioPorHorayMinuto(horaEntrada, minutoEntrada);
+		Horario horarioSalida = pp.darHorarioPorHorayMinuto(horaSalida, minutoSalida);
+		if ( horarioSalida == null )
+			horarioSalida = pp.adicionarHorario(horaSalida, minutoSalida);
+		System.out.println(horarioSalida.getId());
 		log.info ("Cambiando hora de salida del registro del visitante: " + idVisitante);
-		long cambios = pp.cambiarHoraSalidaRegistranCarnet(idLector, idVisitante, fecha, horaEntrada, horaSalida);
+		long cambios = pp.cambiarHoraSalidaRegistranCarnet(idLector, idVisitante, fecha, horarioEntrada.getId(), horarioSalida.getId());
 		return cambios;
 	}
 
@@ -1722,21 +1752,24 @@ public class AforoAndes
 	 *****************************************************************/
 
 	/**
-	 * Adiciona de manera persitente un registro de carnet
+	 * Adiciona de manera persitente un registro de vehículo
 	 * Adiciona entradas al log de la aplicación
 	 * @param idLector - El id del lector 
-	 * @param vehiculo - La placa del vehículo ingresado
+	 * @param placa - La placa del vehículo
 	 * @param fecha - La fecha de ingreso
 	 * @param horaEntrada - La hora de ingreso
-	 * @param horaSalida - La hora de salida 
+	 * @param minutoEntrada - El minuto de ingreso
 	 * @return Las tuplas insertadas 
-	 * @return El objeto RegistranVehiculo adicionado. null si ocurre alguna Excepción
+	 * @return El objeto RegistranCarnet adicionado. null si ocurre alguna Excepción
 	 */
-	public RegistranVehiculo adicionarRegistranVehiculo (String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida )
+	public RegistranVehiculo adicionarRegistranVehiculo(long idLector, String placa, Timestamp fecha, int horaEntrada, int minutoEntrada)
 	{
-		log.info ("Adicionando RegistranVehiculo con lector: " + idLector + " y vehículo: " + vehiculo);
-		RegistranVehiculo registranVehiculo = pp.adicionarRegistranVehiculo(idLector, vehiculo, fecha, horaEntrada, horaSalida);
-		log.info ("Adicionando RegistranVehiculo: " + registranVehiculo);
+		Horario horarioEntrada = pp.darHorarioPorHorayMinuto(horaEntrada, minutoEntrada);
+		if ( horarioEntrada == null )
+			horarioEntrada = pp.adicionarHorario(horaEntrada, minutoEntrada);
+		log.info ("Adicionando RegistranCarnet con lector: " + idLector + " y vehículo: " + placa);
+		RegistranVehiculo registranVehiculo = pp.adicionarRegistranVehiculo(idLector, placa, fecha, horarioEntrada.getId(), null);
+		log.info ("Adicionando RegistranCarnet: " + registranVehiculo);
 		return registranVehiculo;
 	}
 
@@ -1751,7 +1784,7 @@ public class AforoAndes
 	 * @param horasalida - Hora de salida 
 	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
 	 */
-	public long eliminarRegistranVehiculo(String idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaentrada, long horasalida)
+	public long eliminarRegistranVehiculo(long idLector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaentrada, long horasalida)
 	{
 		log.info ("Eliminando RegistranVehiculo del lector: " + idLector + " y vehículo: " + idVisitante);
 		long resp = pp.eliminarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaentrada, horasalida);
@@ -1764,7 +1797,7 @@ public class AforoAndes
 	 * @param idLector - El id del lector por el cual quedó registrada la visita
 	 * @return La lista de objetos RegistranVehiculo, construidos con base en las tuplas de la tabla REGISTRANVEHICULO
 	 */
-	public List<RegistranVehiculo> darRegistranVehiculoPorLector (String idLector) 
+	public List<RegistranVehiculo> darRegistranVehiculoPorLector (long idLector) 
 	{
 		log.info ("Dar información de RegistranVehiculo por idLector: " + idLector);
 		List<RegistranVehiculo> registros = pp.darRegistranVehiculoPorLector(idLector);
@@ -1835,16 +1868,21 @@ public class AforoAndes
 	 * @param vehiculo - Placa del vehículo 
 	 * @param fecha - La fecha en la que se realizó el registro
 	 * @param horaEntrada - La hora de entrada de la visita
+	 * @param minutoEntrada - El minuto de entrada de la visita
 	 * @param horaSalida - La hora de salida de la visita
+	 * @param minutoSalida - El minuto de salida de la visita
 	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que un registro con ese identificador no existe
 	 */
-	public long cambiarHoraSalidaRegistranVehiculo (String idLector, String vehiculo, Timestamp fecha, long horaEntrada, long horaSalida) 
+	public long cambiarHoraSalidaRegistranVehiculo (long idLector, String vehiculo, Timestamp fecha, int horaEntrada, int minutoEntrada, int horaSalida, int minutoSalida) 
 	{
+		Horario horarioEntrada = pp.darHorarioPorHorayMinuto(horaEntrada, minutoEntrada);
+		Horario horarioSalida = pp.darHorarioPorHorayMinuto(horaEntrada, minutoEntrada);
+		if ( horarioSalida == null )
+			horarioSalida = pp.adicionarHorario(horaSalida, minutoSalida);
 		log.info ("Cambiando hora de salida del registro del vehículo: " + vehiculo);
-		long cambios = pp.cambiarHoraSalidaRegistranVehiculo(idLector, vehiculo, fecha, horaEntrada, horaSalida);
+		long cambios = pp.cambiarHoraSalidaRegistranVehiculo(idLector, vehiculo, fecha, horarioEntrada.getId(), horarioSalida.getId());
 		return cambios;
 	}
-
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los TIPOS DE CARNET
@@ -2597,6 +2635,20 @@ public class AforoAndes
 		return cambios;
 	}
 
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar el horario de funcionamiento de un local
+	 * base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param idVisitante - Id del visitante de interés
+	 * @return Un arreglo de objetos cuyos elementos corresponden a los datos del visitante, las horas y minutos de habilitados para circulación.
+	 */
+	public Object[] darHorariosVisitante ( String idVisitante )
+	{
+        log.info ("Recuperando horarios habilitados para circulación");
+		Object[] tupla = pp.darHorariosVisitante( idVisitante);		
+        log.info ("Recuperando horarios habilitados para circulación: Listo!");
+		return tupla;
+	}
 	/* ****************************************************************
 	 * 			Métodos para manejar las ZONAS DE CIRCULACIÓN
 	 *****************************************************************/

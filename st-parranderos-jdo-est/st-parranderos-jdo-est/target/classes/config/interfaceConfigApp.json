@@ -92,6 +92,35 @@
 				}	
 			]
 		},
+		{ "menuTitle": "Lector",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarLector"
+				},
+				{
+					"label": "Listar",
+					"event": "listarLectores"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarLectorPorIdentificador"
+				},
+				{
+					"label": "Buscar por tipo",
+					"event": "buscarLectorPorTipo"
+				},
+				{
+					"label": "Cambiar tipo lector",
+					"event": "cambiarTipoLector"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarLectorPorIdentificador"
+				}
+			]
+		},
 		{ "menuTitle": "Local comercial",
 		  "options":
 			[
@@ -222,6 +251,35 @@
 				{
 					"label": "Eliminar por tipo",
 					"event": "eliminarTipoLocalPorTipo"
+				}
+			]
+		},
+		{ "menuTitle": "Registro visita",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarRegistranCarnet"
+				},
+				{
+					"label": "Listar",
+					"event": "listarRegistranCarnet"
+				},
+				{
+					"label": "Buscar por lector",
+					"event": "buscarRegistranCarnetPorLector"
+				},
+				{
+					"label": "Buscar por visitante",
+					"event": "buscarRegistranCarnetPorIdVisitante"
+				},
+				{
+					"label": "Actualizar hora salida",
+					"event": "cambiarHoraSalidaRegistranCarnet"
+				},
+				{
+					"label": "Eliminar",
+					"event": "eliminarRegistranCarnet"
 				}
 			]
 		},

@@ -28,7 +28,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	/**
 	 * El identificador del lector que registra el carnet
 	 */
-	private String idLector;
+	private long idLector;
 	
 	/**
 	 * La placa del vehículo registrado
@@ -59,7 +59,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	 */
 	public RegistranVehiculo() 
 	{
-		this.idLector = "";
+		this.idLector = 0;
 		this.placa = "";
 		this.fecha = new Timestamp(0);
 		this.horaEntrada = 0;
@@ -75,7 +75,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	 * @param horaEntrada - El identificador del horario en el cual se realiza la lectura de entrada. Debe existir un horario con dicho identificador
 	 * @param horaSalida -  El identificador del horario en el cual se realiza la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public RegistranVehiculo(String idLector, String placa, Timestamp fecha, long horaEntrada, long horaSalida) 
+	public RegistranVehiculo(long idLector, String placa, Timestamp fecha, long horaEntrada, long horaSalida) 
 	{
 		this.idLector = idLector;
 		this.placa = placa;
@@ -88,7 +88,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	/**
 	 * @return El lector que realiza el registro
 	 */
-	public String getIdLector() 
+	public long getIdLector() 
 	{
 		return idLector;
 	}
@@ -96,7 +96,7 @@ public class RegistranVehiculo implements VORegistranVehiculo
 	/**
 	 * @param lector - El nuevo lector. Debe existir un lector con dicho identificador
 	 */
-	public void setIdLector(String lector) 
+	public void setIdLector(long lector) 
 	{
 		this.idLector = lector;
 	}

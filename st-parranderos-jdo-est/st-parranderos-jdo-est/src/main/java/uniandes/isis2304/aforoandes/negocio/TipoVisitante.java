@@ -29,12 +29,12 @@ public class TipoVisitante implements VOTipoVisitante
 	private String tipo;
 
 	/**
-	 * Identificador del horario de inicio válido del tipo de visitante. Debe existir en la tabla HORARIO
+	 * Identificador del horario de inicio válido para ingreso al centro comercial del tipo de visitante. Debe existir en la tabla HORARIO
 	 */
 	private long horaInicio;
 	
 	/**
-	 * Identificador del horario límite de circulación del tipo de visitante. Debe existir en la tabla HORARIO
+	 * Identificador del horario límite de ingreso al centro comercial  del tipo de visitante. Debe existir en la tabla HORARIO
 	 */
 	private long horaLimite;
 	

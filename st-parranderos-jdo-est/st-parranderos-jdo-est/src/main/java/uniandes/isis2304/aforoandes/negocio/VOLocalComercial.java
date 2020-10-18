@@ -40,7 +40,7 @@ public interface VOLocalComercial
 	/**
 	 * @return El estado de funcionamiento del local comercial
 	 */
-	public boolean getActivo();
+	public int getActivo();
 
 	/**
 	 * @return El id del centro comercial del local comercial

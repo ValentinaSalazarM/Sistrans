@@ -24,7 +24,7 @@ public interface VORegistranVehiculo
 	/**
 	 * @return El lector que realiza el registro
 	 */
-	public String getIdLector(); 
+	public long getIdLector(); 
 
 	/**
 	 * @return La placa del vehículo registrado

@@ -24,7 +24,7 @@ public interface VORegistranCarnet
 	/**
 	 * @return El lector que realiza el registro
 	 */
-	public String getIdLector(); 
+	public long getIdLector(); 
 
 	/**
 	 * @return El tipo del carnet registrado
@@ -44,12 +44,12 @@ public interface VORegistranCarnet
 	/**
 	 * @return El identificador del horario en el cual se realiza la lectura de entrada
 	 */
-	public long getHoraEntrada();
+	public Long getHoraEntrada();
 	
 	/**
 	 * @return El identificador del horario en el cual se realiza la lectura de salida
 	 */
-	public long getHoraSalida();
+	public Long getHoraSalida();
 	
 	/** 
 	 * @return Una cadena con la información básica
