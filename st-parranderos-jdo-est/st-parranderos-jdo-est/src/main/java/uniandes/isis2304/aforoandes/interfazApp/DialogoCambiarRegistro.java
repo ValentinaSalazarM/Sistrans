@@ -165,12 +165,12 @@ public class DialogoCambiarRegistro extends JDialog implements ActionListener
 		dcFecha = new JDateChooser();
 		campos.add(dcFecha);
 		
-		lblHoraEntrada = new JLabel( "Hora de entrada en formato 24h (hh:mm): " );
+		lblHoraEntrada = new JLabel( "<html> Hora de entrada en formato 24h (hh:mm): " );
 		campos.add( lblHoraEntrada );
 		txtHoraEntrada = new JTextField( );
 		campos.add( txtHoraEntrada );
 		
-		lblHoraSalida = new JLabel( "Hora de salida en formato 24h (hh:mm): " );
+		lblHoraSalida = new JLabel( "<html> Hora de salida en formato 24h (hh:mm): " );
 		campos.add( lblHoraSalida );
 		txtHoraSalida = new JTextField( );
 		campos.add( txtHoraSalida );

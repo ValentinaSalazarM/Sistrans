@@ -31,6 +31,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.aforoandes.negocio.Administrador;
+import uniandes.isis2304.aforoandes.negocio.AdministradorLocal;
 import uniandes.isis2304.aforoandes.negocio.Area;
 import uniandes.isis2304.aforoandes.negocio.Ascensor;
 import uniandes.isis2304.aforoandes.negocio.Bano;
@@ -43,6 +45,8 @@ import uniandes.isis2304.aforoandes.negocio.Horario;
 import uniandes.isis2304.aforoandes.negocio.Lector;
 import uniandes.isis2304.aforoandes.negocio.LocalComercial;
 import uniandes.isis2304.aforoandes.negocio.Parqueadero;
+import uniandes.isis2304.aforoandes.negocio.RFC3;
+import uniandes.isis2304.aforoandes.negocio.RFC4;
 import uniandes.isis2304.aforoandes.negocio.RegistranCarnet;
 import uniandes.isis2304.aforoandes.negocio.RegistranVehiculo;
 import uniandes.isis2304.aforoandes.negocio.TipoCarnet;
@@ -208,6 +212,16 @@ public class PersistenciaAforoAndes
 	 */
 	private SQLHorario sqlHorario;
 
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLAdministrador sqlAdministrador;
+	
+	/**
+	 * Atributo para el acceso a la tabla  de la base de datos
+	 */
+	private SQLAdministradorLocal sqlAdministradorLocal;
+	
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
 	 *****************************************************************/
@@ -250,7 +264,8 @@ public class PersistenciaAforoAndes
 		tablas.add ("tipoCarnet_sequence");
 		tablas.add ("tipoLector_sequence");
 		tablas.add ("tipoVisitante_sequence");
-
+		tablas.add("ADMINISTRADOR");
+		tablas.add("ADMINISTRADORLOCAL");
 	}
 
 	/**
@@ -568,6 +583,22 @@ public class PersistenciaAforoAndes
 	}
 
 	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de Administrador de AforoAndes
+	 */
+	public String darTablaAdministrador ()
+	{
+		return tablas.get (28);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de AdministradorLocal de AforoAndes
+	 */
+	public String darTablaAdministradorLocal ()
+	{
+		return tablas.get (29);
+	}
+	
+	/**
 	 * Transacción para el generador de secuencia de Horario
 	 * Adiciona entradas al log de la aplicación
 	 * @return El siguiente número del secuenciador de Horario
@@ -652,6 +683,7 @@ public class PersistenciaAforoAndes
 		return resp;
 	}
 
+	
 	/**
 	 * Extrae el mensaje de la exception JDODataStoreException embebido en la Exception e, que da el detalle específico del problema encontrado
 	 * @param e - La excepción que ocurrio
@@ -4425,6 +4457,113 @@ public class PersistenciaAforoAndes
 	{
 		return sqlUtil.RFC2Horas(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin);
 	}
+
+	/**
+	 * Método que realiza la consulta del índice de aforo de un centro comercial en el rango de fechas dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param idCentroComercial - El centro comercial de interés
+	 * @return El objeto RFC3, construido con base en la consulta realizada
+	 */
+	public RFC3 RFC3FechaCentroComercial (Timestamp fechaInicio, Timestamp fechaFin, String idCentroComercial)
+	{
+		return sqlUtil.RFC3FechaCentroComercial (pmf.getPersistenceManager(), fechaInicio, fechaFin, idCentroComercial);
+	}
+	
+	/**
+	 * Método que realiza la consulta del índice de aforo de un centro comercial en el rango de horas dado
+	 * @param fecha - La fecha del rango de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param idCentroComercial - El centro comercial de interés
+	 * @return El objeto RFC3, construido con base en la consulta realizada
+	 */
+	public RFC3 RFC3HoraCentroComercial(Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idCentroComercial)
+	{
+		return sqlUtil.RFC3HoraCentroComercial(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin, idCentroComercial);
+	}
+	
+	/**
+	 * Método que realiza la consulta del índice de aforo de un local comercial en el rango de fechas dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param idEstablecimiento - El local comercial de interés
+	 * @return El objeto RFC3, construido con base en la consulta realizada
+	 */
+	public RFC3 RFC3FechaEstablecimiento (Timestamp fechaInicio, Timestamp fechaFin, String idEstablecimiento)
+	{
+		return sqlUtil.RFC3FechaEstablecimiento (pmf.getPersistenceManager(), fechaInicio, fechaFin, idEstablecimiento);
+	}
+	
+	/**
+	 * Método que realiza la consulta del índice de aforo de un local comercial en el rango de horas dado
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param idEstablecimiento - El local comercial de interés
+	 * @return El objeto RFC3, construido con base en la consulta realizada
+	 */
+	public RFC3 RFC3HoraEstablecimiento(Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idEstablecimiento)
+	{
+		return sqlUtil.RFC3HoraEstablecimiento(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin, idEstablecimiento);
+	}
+	
+	/**
+	 * Método que realiza la consulta del índice de aforo de un tipo de local en el rango de fechas dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param tipoLocal - El tipo local de interés
+	 * @return El objeto RFC3, construido con base en la consulta realizada
+	 */
+	public RFC3 RFC3FechaTipoLocal (Timestamp fechaInicio, Timestamp fechaFin, String tipoLocal)
+	{
+		return sqlUtil.RFC3FechaTipoLocal (pmf.getPersistenceManager(), fechaInicio, fechaFin, tipoLocal);
+	}
+	
+	/**
+	 * Método que realiza la consulta del índice de aforo de un tipo de local en el rango de horas dado
+	 * @param fecha - La fecha del rango de consulta	 
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoLocal - El tipo local de interés
+	 * @return El objeto RFC3, construido con base en la consulta realizada
+	 */
+	public RFC3 RFC3HoraTipoLocal (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String tipoLocal)
+	{
+		return sqlUtil.RFC3HoraTipoLocal(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin, tipoLocal);
+	}
+	
+	/**
+	 * Método que realiza la consulta de los establecimientos con aforo disponibles en una fecha o rango de fechas y una hora
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @return La lista de objetos RFC4, construida con base en la consulta realizada
+	 */
+	public List<RFC4> RFC4FechaHora (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio)
+	{
+		return sqlUtil.RFC4FechaHora(pmf.getPersistenceManager(), fechaInicio, fechaFin, horaInicio, minutoInicio);
+	}
+	
+	/**
+	 * Método que realiza la consulta de los establecimientos con aforo disponibles en una fecha o rango de fechas y una hora
+	 * @param fecha - La fecha del rango de consulta	 
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @return La lista de objetos RFC4, construida con base en la consulta realizada
+	 */
+	public List<RFC4> RFC4FechaRangoHoras (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin)
+	{
+		return sqlUtil.RFC4FechaRangoHoras(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin);
+	}
 	
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de AforoAndes
@@ -4461,4 +4600,102 @@ public class PersistenciaAforoAndes
         }
 		
 	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para adicionar un Administrador a la base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param identificacion - El identificador del administrador
+	 * @param nombre - El nombre del administrador
+	 * @param contrasenia - La contraseña del administrador
+	 * @return El número de tuplas insertadas
+	 */
+	public Administrador adicionarAdministrador (String identificacion, String nombre, String contrasenia) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlAdministrador.adicionarAdministrador(pmf.getPersistenceManager(), identificacion, nombre, contrasenia);
+			tx.commit();
+
+			log.trace ("Inserción de un administrador:  " + nombre + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Administrador(identificacion, nombre, contrasenia);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+    
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de ADMINISTRADOR de la 
+	 * base de datos de AforoAndes, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param identificacion - El identificador del administrador
+	 * @return El objeto Administrador que tiene el identificador dado
+	 */
+	public Administrador darAdministradorPorId (String identificacion) 
+	{
+		return sqlAdministrador.darAdministradorPorId(pmf.getPersistenceManager(), identificacion);
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para adicionar un Administrador a la base de datos de AforoAndes
+	 * @param pm - El manejador de persistencia
+	 * @param identificacion - El identificador del administrador
+	 * @param nombre - El nombre del administrador
+	 * @param contrasenia - La contraseña del administrador
+	 * @return El número de tuplas insertadas
+	 */
+	public AdministradorLocal adicionarAdministradorLocal (String identificacion, String nombre, String contrasenia, String idLocal) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlAdministradorLocal.adicionarAdministrador(pmf.getPersistenceManager(), identificacion, nombre, contrasenia, idLocal);
+			tx.commit();
+
+			log.trace ("Inserción de un administrador:  " + nombre + "| " + tuplasInsertadas + " tuplas insertadas");
+
+			return new AdministradorLocal (identificacion, nombre, contrasenia, idLocal);
+		}
+		catch (Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}	}
+    
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de ADMINISTRADOR de la 
+	 * base de datos de AforoAndes, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param identificacion - El identificador del administrador
+	 * @return El objeto Administrador que tiene el identificador dado
+	 */
+	public AdministradorLocal darAdministradorLocalPorId (String identificacion) 
+	{
+		return sqlAdministradorLocal.darAdministradorPorId(pmf.getPersistenceManager(), identificacion);
+	}
+	
 }

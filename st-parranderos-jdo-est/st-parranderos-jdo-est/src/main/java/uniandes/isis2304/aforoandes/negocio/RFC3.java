@@ -8,7 +8,9 @@
  */
 package uniandes.isis2304.aforoandes.negocio;
 
-public class RFC3Fecha 
+import java.math.BigDecimal;
+
+public class RFC3 
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -21,7 +23,7 @@ public class RFC3Fecha
 	/**
 	 * Índice de aforo del espacio
 	 */
-	private double indice;
+	private BigDecimal indice;
 
 	/* ****************************************************************
 	 * 			Métodos
@@ -30,10 +32,10 @@ public class RFC3Fecha
 	/**
 	 * Constructor por defecto
 	 */
-	public RFC3Fecha() 
+	public RFC3() 
 	{
 		this.identificador = "";
-		this.indice = 0;
+		this.indice = null;
 	}
 	
 	/**
@@ -55,7 +57,7 @@ public class RFC3Fecha
 	/**
 	 * @return El índice del espacio
 	 */
-	public double getIndice() 
+	public BigDecimal getIndice() 
 	{
 		return indice;
 	}
@@ -63,9 +65,17 @@ public class RFC3Fecha
 	/**
 	 * @param indice - El nuevo índice de aforo del espacio
 	 */
-	public void setIdentificador(double indice) 
+	public void setIndice(BigDecimal indice) 
 	{
 		this.indice = indice;
 	}
-
+	
+	/**
+	 * @return Una cadena de caracteres con la información
+	 */
+	@Override
+	public String toString() 
+	{
+		return "RFC3 [Identificador espacio = " + identificador + ", índice aforo = " + ((BigDecimal)indice).doubleValue() + "]";
+	}
 }

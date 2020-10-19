@@ -155,7 +155,7 @@ public class DialogoRegistrarCarnet extends JDialog implements ActionListener
 		dcFecha = new JDateChooser();
 		campos.add(dcFecha);
 		
-		lblHoraEntrada = new JLabel( "Hora de entrada en formato 24h (hh:mm): " );
+		lblHoraEntrada = new JLabel( "<html> Hora de entrada en formato 24h (hh:mm): " );
 		campos.add( lblHoraEntrada );
 		txtHoraEntrada = new JTextField( );
 		campos.add( txtHoraEntrada );

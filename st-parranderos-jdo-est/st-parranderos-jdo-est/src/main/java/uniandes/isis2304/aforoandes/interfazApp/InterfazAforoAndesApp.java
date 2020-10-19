@@ -34,7 +34,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
@@ -42,12 +41,17 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+
+import uniandes.isis2304.aforoandes.negocio.Administrador;
+import uniandes.isis2304.aforoandes.negocio.AdministradorLocal;
 import uniandes.isis2304.aforoandes.negocio.AforoAndes;
 import uniandes.isis2304.aforoandes.negocio.Bano;
 import uniandes.isis2304.aforoandes.negocio.Carnet;
 import uniandes.isis2304.aforoandes.negocio.CentroComercial;
 import uniandes.isis2304.aforoandes.negocio.Lector;
 import uniandes.isis2304.aforoandes.negocio.LocalComercial;
+import uniandes.isis2304.aforoandes.negocio.RFC3;
+import uniandes.isis2304.aforoandes.negocio.RFC4;
 import uniandes.isis2304.aforoandes.negocio.RegistranCarnet;
 import uniandes.isis2304.aforoandes.negocio.VOArea;
 import uniandes.isis2304.aforoandes.negocio.VOAscensor;
@@ -126,6 +130,16 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	private JMenuBar menuBar;
 
+	/**
+	 * Indica si el usuario es un administrador 
+	 */
+	private boolean administrador;
+
+	/**
+	 * Identificador del local administrado 
+	 */
+	private String idLocalAdministrado;
+
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
@@ -153,7 +167,9 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 		setLayout (new BorderLayout());
 		add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
-		add( panelDatos, BorderLayout.CENTER );        
+		add( panelDatos, BorderLayout.CENTER );      
+		administrador = false;
+		idLocalAdministrado = null;
 	}
 
 	/* ****************************************************************
@@ -483,9 +499,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void adicionarAscensor( )
 	{
-		DialogoAdicionarAscensor dialogo = new DialogoAdicionarAscensor( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
+		if ( administrador )
+		{
+			DialogoAdicionarAscensor dialogo = new DialogoAdicionarAscensor( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}
 	}
 
 	/**
@@ -496,7 +520,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			pDialogo.dispose();
 			long idArea = buscarAreaPorValor(area).getId();
 			long idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
 			VOAscensor ascensor = aforoAndes.adicionarAscensor(idAscensor, idCapacidadNormal, idArea, pesoMaximo, idCentroComercial);
@@ -508,6 +531,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En adicionar Ascensor\n\n";
 			resultado += "Ascensor adicionado exitosamente: " + ascensor;
 			resultado += "\n Operación terminada";
+			pDialogo.dispose();
 			panelDatos.actualizarInterfaz(resultado);
 
 		} 
@@ -654,9 +678,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void adicionarBano( )
 	{
-		DialogoAdicionarBano dialogo = new DialogoAdicionarBano( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
+		if ( administrador )
+		{
+			DialogoAdicionarBano dialogo = new DialogoAdicionarBano( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}
 	}
 
 	/**
@@ -667,7 +699,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			pDialogo.dispose();
+
 			long idArea = buscarAreaPorValor(area).getId();
 			long idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
 			VOBano baño = aforoAndes.adicionarBaño(idBano, idCapacidadNormal, idArea, numSanitarios, idCentroComercial);
@@ -679,6 +711,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En adicionar Baño\n\n";
 			resultado += "Baño adicionado exitosamente: " + baño;
 			resultado += "\n Operación terminada";
+			pDialogo.dispose();
 			panelDatos.actualizarInterfaz(resultado);
 
 		} 
@@ -1194,24 +1227,31 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try
 		{
-			String identificador = JOptionPane.showInputDialog (this, "Identificador del centro comercial: ", "Adicionar centro comercial", JOptionPane.QUESTION_MESSAGE);
-			String nombre = JOptionPane.showInputDialog (this, "Nombre del centro comercial: ", "Adicionar centro comercial", JOptionPane.QUESTION_MESSAGE);
-			if (identificador != null)
+			if( administrador )
 			{
-
-				VOCentroComercial centroComercial = aforoAndes.adicionarCentroComercial(identificador, nombre);
-				if (centroComercial == null)
+				String identificador = JOptionPane.showInputDialog (this, "Identificador del centro comercial: ", "Adicionar centro comercial", JOptionPane.QUESTION_MESSAGE);
+				String nombre = JOptionPane.showInputDialog (this, "Nombre del centro comercial: ", "Adicionar centro comercial", JOptionPane.QUESTION_MESSAGE);
+				if (identificador != null)
 				{
-					throw new Exception ("No se pudo crear un centro comercial con identificador: " + identificador);
+
+					VOCentroComercial centroComercial = aforoAndes.adicionarCentroComercial(identificador, nombre);
+					if (centroComercial == null)
+					{
+						throw new Exception ("No se pudo crear un centro comercial con identificador: " + identificador);
+					}
+					String resultado = "En adicionar CentroComercial\n\n";
+					resultado += "CentroComercial adicionado exitosamente: " + centroComercial;
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
 				}
-				String resultado = "En adicionar CentroComercial\n\n";
-				resultado += "CentroComercial adicionado exitosamente: " + centroComercial;
-				resultado += "\n Operación terminada";
-				panelDatos.actualizarInterfaz(resultado);
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				}
 			}
 			else
 			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				throw new Exception ("\n No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores");
 			}
 		} 
 		catch (Exception e) 
@@ -1978,9 +2018,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void adicionarLocalComercial( )
 	{
-		DialogoAdicionarLocalComercial dialogo = new DialogoAdicionarLocalComercial( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
+		if ( administrador )
+		{
+			DialogoAdicionarLocalComercial dialogo = new DialogoAdicionarLocalComercial( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}	
 	}
 
 	/**
@@ -2146,20 +2194,28 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String idLocal = JOptionPane.showInputDialog (this, "Identificador del local comercial: ", "Actualizar actividad de un local", JOptionPane.QUESTION_MESSAGE);
-			String actividadStr = JOptionPane.showInputDialog (this, "Nuevo estado de actividad (1 - activo, 0 - inactivo): ", "Actualizar actividad de un local", JOptionPane.QUESTION_MESSAGE);
-			if (idLocal != null && actividadStr != null)
-			{	
-				int activo = Integer.parseInt(actividadStr);
-				long modificados = aforoAndes.cambiarActividadLocalComercial(idLocal, activo);
-				String resultado = "En actualizar LocalComercial: \n\n";
-				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
-				panelDatos.actualizarInterfaz(resultado);
+			if ( administrador )
+			{
+				String idLocal = JOptionPane.showInputDialog (this, "Identificador del local comercial: ", "Actualizar actividad de un local", JOptionPane.QUESTION_MESSAGE);
+				String actividadStr = JOptionPane.showInputDialog (this, "Nuevo estado de actividad (1 - activo, 0 - inactivo): ", "Actualizar actividad de un local", JOptionPane.QUESTION_MESSAGE);
+				if (idLocal != null && actividadStr != null)
+				{	
+					int activo = Integer.parseInt(actividadStr);
+					long modificados = aforoAndes.cambiarActividadLocalComercial(idLocal, activo);
+					String resultado = "En actualizar LocalComercial: \n\n";
+					resultado += modificados + " registros actualizados";
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				}
 			}
 			else
 			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				String resultado = "\n No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+				throw new Exception (resultado);
 			}
 		} 
 		catch( NumberFormatException e )
@@ -2251,9 +2307,19 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void adicionarLector( )
 	{
-		DialogoAdicionarLector dialogo = new DialogoAdicionarLector( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
+
+		if ( administrador )
+		{
+			DialogoAdicionarLector dialogo = new DialogoAdicionarLector( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}			
+
 	}
 
 	/**
@@ -2463,9 +2529,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void adicionarParqueadero( )
 	{
-		DialogoAdicionarParqueadero dialogo = new DialogoAdicionarParqueadero( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
+		if ( administrador )
+		{
+			DialogoAdicionarParqueadero dialogo = new DialogoAdicionarParqueadero( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}		
 	}
 	/**
 	 * Adiciona un parqueadero con la información dada por el usuario
@@ -2632,8 +2706,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void adicionarTipoLocal( )
 	{
-		DialogoAdicionarTipoLocal dialogo = new DialogoAdicionarTipoLocal( this );
-		dialogo.setVisible( true );
+		if ( administrador )
+		{
+			DialogoAdicionarTipoLocal dialogo = new DialogoAdicionarTipoLocal( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}			
 	}
 
 	/**
@@ -2815,9 +2898,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void adicionarTipoVisitante( )
 	{
-		DialogoAdicionarTipoVisitante dialogo = new DialogoAdicionarTipoVisitante( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
+		if ( administrador )
+		{
+			DialogoAdicionarTipoVisitante dialogo = new DialogoAdicionarTipoVisitante( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}		
 	}
 
 	/**
@@ -3018,18 +3109,22 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		try
 		{
 			String[] idEspacioVisitado = aforoAndes.darLectorPorId(idLector).getEspacioOcupado();
+			long tipoVisitante = aforoAndes.darVisitantePorId(idVisitante).getTipo();
 
 			if ( idEspacioVisitado[1].equals("LC"))
-			{
+			{					
 				Object[] horariosLocal = aforoAndes.darHorariosLocal(idEspacioVisitado[0]);
+				Integer activo = ((BigDecimal)(horariosLocal[0])).intValue();
 				Integer horaApertura = ((BigDecimal)(horariosLocal[1])).intValue();
 				Integer minutoApertura = ((BigDecimal)(horariosLocal[2])).intValue();
 				Integer horaCierre = ((BigDecimal)(horariosLocal[3])).intValue();
 				Integer minutoCierre = ((BigDecimal)(horariosLocal[4])).intValue();
 
-				if ( horaEntrada < horaApertura || (horaApertura == horaEntrada && minutoEntrada < minutoApertura ||
+				if ( (tipoVisitante == 3 && activo == 0) || horaEntrada < horaApertura || (horaApertura == horaEntrada && minutoEntrada < minutoApertura ||
 						horaEntrada > horaCierre || (horaCierre == horaEntrada && minutoEntrada > minutoCierre)))
+				{	
 					throw new Exception ("No es posible registrar una visita al local " + idEspacioVisitado[0] + " fuera de los horarios de funcionamiento.");
+				}
 
 			}
 
@@ -3041,9 +3136,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 			if ( horaEntrada < horaInicio || (horaInicio == horaEntrada && minutoEntrada < minutoInicio ||
 					horaEntrada > horaLimite || (horaLimite == horaEntrada && minutoEntrada > minutoLimite)))
+			{
 				throw new Exception ("No es posible registrar una visita del visitante " + idVisitante + " fuera de los horarios válidos de circulación.");
-
+			}
 			VORegistranCarnet registro = aforoAndes.adicionarRegistranCarnet(idLector, tipoCarnet, idVisitante, fecha, horaEntrada, minutoEntrada);
+
 			if (registro == null)
 			{
 				throw new Exception ("No se pudo crear un registro de visita para el visitante: " + idVisitante);
@@ -3236,7 +3333,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	/* ****************************************************************
 	 * 			CRUD de Visitante
 	 *****************************************************************/
@@ -3567,6 +3664,8 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}
 	}
 
+
+
 	/* ****************************************************************
 	 * 			Requerimientos de consulta
 	 *****************************************************************/
@@ -3581,7 +3680,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		panelDatos.actualizarInterfaz("En proceso de consulta");
 
 	}
-	
+
 	/** Consulta los visitantes atendidos por el establecimiento indicado por parámetro
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
 	 * @param fechaFin - La fecha de fin del rango de consulta
@@ -3595,7 +3694,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String resultado = "En listar Visitantes del establecimiento " + idLocalComercial;
+			String resultado = "En listar Visitantes del establecimiento " + idLocalComercial + "\n";
 			List<Visitante> visitantes;
 			if ( horaInicial == -1)
 			{
@@ -3624,7 +3723,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}		
 	}
-	
+
 	/**
 	 * Crea una ventana de diálogo para consultar establecimientos populares 
 	 */
@@ -3635,7 +3734,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		panelDatos.actualizarInterfaz("En proceso de consulta");
 
 	}
-	
+
 	/** Consulta el top de establecimientos populares (los que tienen el mismo número de visitas se incluyen)
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
 	 * @param fechaFin - La fecha de fin del rango de consulta
@@ -3649,7 +3748,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String resultado = "En listar Top 20 establecimientos populares: ";
+			String resultado = "En listar Top 20 establecimientos populares:\n ";
 			List<LocalComercial> establecimientos;
 			if ( horaInicial == -1)
 			{
@@ -3679,12 +3778,322 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}		
 	}
 
-	
+	/**
+	 * Crea una ventana de diálogo para consultar índices de aforo 
+	 */
+	public void consultarIndicesAforoEstablecimiento()
+	{
+		DialogoConsultarIndiceAforoLocal dialogo = new DialogoConsultarIndiceAforoLocal( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de consulta");
+
+	}
+
+	/** Consulta el índice de aforo de un establecimiento
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta o -1 si no aplica
+	 * @param minutoFin - El minuto de inicio del rango de consulta  o -1 si no aplica
+	 * @param horaFin - La hora de fin del rango de consulta o -1 si no aplica
+	 * @param minutoFin - El minuto de fin del rango de consulta  o -1 si no aplica
+	 * @param idLocalComercial - El id del local comercial a consultar
+	 */
+	public void consultarIndicesAforoEstablecimiento(String idLocalComercial, Timestamp fechaInicio, Timestamp fechaFin, int horaInicial, int minutoInicial, int horaFinal, int minutoFinal, DialogoConsultarIndiceAforoLocal pDialogo)
+	{
+		try 
+		{
+			String resultado = "En consultar índice de aforo del local " + idLocalComercial + "\n ";
+			RFC3 indice;
+			if ( horaInicial == -1)
+			{
+				indice = aforoAndes.RFC3FechaEstablecimiento(fechaInicio, fechaFin, idLocalComercial);
+			}
+			else
+			{
+				indice = aforoAndes.RFC3HoraEstablecimiento(fechaInicio, horaInicial, minutoInicial, horaFinal, minutoFinal, idLocalComercial);
+			}
+			pDialogo.dispose();
+
+			if ( indice != null )
+			{
+				resultado += "El resultado es: " + indice; 
+			}
+			else
+			{
+				resultado += "No existe un local comercial con identificador " + idLocalComercial;
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Crea una ventana de diálogo para consultar índices de aforo 
+	 */
+	public void consultarIndicesAforoCentroComercial()
+	{
+		DialogoConsultarIndiceAforoCC dialogo = new DialogoConsultarIndiceAforoCC( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de consulta");
+
+	}
+
+	/** Consulta el índice de aforo de un centro comercial
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta o -1 si no aplica
+	 * @param minutoFin - El minuto de inicio del rango de consulta  o -1 si no aplica
+	 * @param horaFin - La hora de fin del rango de consulta o -1 si no aplica
+	 * @param minutoFin - El minuto de fin del rango de consulta  o -1 si no aplica
+	 * @param idCentroComercial - El id del centro comercial a consultar
+	 */
+	public void consultarIndicesAforoCentroComercial (String idCentroComercial, Timestamp fechaInicio, Timestamp fechaFin, int horaInicial, int minutoInicial, int horaFinal, int minutoFinal, DialogoConsultarIndiceAforoCC pDialogo)
+	{
+		try 
+		{
+			String resultado = "En consultar índice de aforo del centro comercial " + idCentroComercial + "\n ";
+			RFC3 indice;
+			if ( horaInicial == -1)
+			{
+				indice = aforoAndes.RFC3FechaCentroComercial(fechaInicio, fechaFin, idCentroComercial);
+			}
+			else
+			{
+				indice = aforoAndes.RFC3HoraCentroComercial(fechaInicio, horaInicial, minutoInicial, horaFinal, minutoFinal, idCentroComercial);
+			}
+			pDialogo.dispose();
+
+			if ( indice != null )
+			{
+				resultado += "El resultado es: " + indice; 
+			}
+			else
+			{
+				resultado += "No existe un centro comercial con identificador " + idCentroComercial;
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Crea una ventana de diálogo para consultar índices de aforo 
+	 */
+	public void consultarIndicesAforoTipoLocal()
+	{
+		DialogoConsultarIndiceAforoTipo dialogo = new DialogoConsultarIndiceAforoTipo( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de consulta");
+
+	}
+
+	/** Consulta el índice de aforo de un tipo de local
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta o -1 si no aplica
+	 * @param minutoFin - El minuto de inicio del rango de consulta  o -1 si no aplica
+	 * @param horaFin - La hora de fin del rango de consulta o -1 si no aplica
+	 * @param minutoFin - El minuto de fin del rango de consulta  o -1 si no aplica
+	 * @param tipoLocal - El tipo del local a consultar
+	 */
+	public void consultarIndicesAforoTipoLocal (String tipoLocal, Timestamp fechaInicio, Timestamp fechaFin, int horaInicial, int minutoInicial, int horaFinal, int minutoFinal, DialogoConsultarIndiceAforoTipo pDialogo)
+	{
+		try 
+		{
+			String resultado = "En consultar índice de aforo del tipo de local " + tipoLocal + "\n ";
+			RFC3 indice;
+			if ( horaInicial == -1)
+			{
+				indice = aforoAndes.RFC3FechaTipoLocal(fechaInicio, fechaFin, tipoLocal);
+			}
+			else
+			{
+				indice = aforoAndes.RFC3HoraTipoLocal(fechaInicio, horaInicial, minutoInicial, horaFinal, minutoFinal, tipoLocal);
+			}
+			pDialogo.dispose();
+
+			if ( indice != null )
+			{
+				resultado += "El resultado es: " + indice; 
+			}
+			else
+			{
+				resultado += "No existe un tipo de local con nombre " + tipoLocal;
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+
+
+	}
+
+	/* ****************************************************************
+	 * 			BONO: Requerimientos de consulta
+	 *****************************************************************/
+	/**
+	 * Crea una ventana de diálogo para consultar establecimientos con aforo disponible
+	 */
+	public void consultarEstablecimientosAforoDisponible ()
+	{
+		DialogoConsultarAforoDisponible dialogo = new DialogoConsultarAforoDisponible( this );
+		dialogo.setVisible( true );
+		panelDatos.actualizarInterfaz("En proceso de consulta");
+
+	}
+
+	/** Consultar los establecimientos con aforo disponible
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta  o -1 si no aplica
+	 * @param horaFin - La hora de fin del rango de consulta o -1 si no aplica
+	 * @param minutoFin - El minuto de fin del rango de consulta  o -1 si no aplica
+	 * @param idCentroComercial - El id del centro comercial a consultar
+	 */
+	public void consultarEstablecimientosAforoDisponible (Timestamp fechaInicio, Timestamp fechaFin, int horaInicial, int minutoInicial, int horaFinal, int minutoFinal, DialogoConsultarAforoDisponible pDialogo)
+	{
+		try 
+		{
+			String resultado = "En consultar establecimientos con aforo disponible ";
+			List<RFC4> resultados;
+			if ( horaFinal == -1)
+			{
+				resultados = aforoAndes.RFC4FechaHora(fechaInicio, fechaFin, horaInicial, minutoInicial);
+			}
+			else
+			{
+				resultados = aforoAndes.RFC4FechaRangoHoras(fechaInicio, horaInicial, minutoInicial, horaFinal, minutoFinal);
+			}
+			pDialogo.dispose();
+			if ( resultados != null )
+			{
+				resultado +=  "\n" + listarObjetos (resultados);
+			}
+			else
+			{
+				resultado += "No existen establecimientos con aforo disponible. ";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}		
+
+	}
+
+
 
 	/* ****************************************************************
 	 * 			Métodos administrativos
 	 *****************************************************************/
-	
+
+	/**
+	 * Registra al jugador con los datos dados.
+	 * @param identificacion - Identificacion del administrador a registrar. identificacion != null && identificacion != "".
+	 * @param nombre - Nombre del administrador a registrar. nombre != null && nombre != "".
+	 * @param contrasenia - Contraseña del administrador a registrar. contrasenia != null && contrasenia != "".
+	 * @param rol - Rol del usuario
+	 * @param idLocal - Identificador del local que administra el administrador
+	 */
+	public void registrar( String identificacion, String nombre, String contrasenia, String rol, String idLocal )
+	{
+		try
+		{
+			String resultado = "Registro de administrador ";
+			if ( rol.equals("Administrador"))
+			{
+				aforoAndes.adicionarAdministrador(identificacion, nombre, contrasenia);
+			}
+			else
+			{
+				aforoAndes.adicionarAdministradorLocal(identificacion, nombre, contrasenia, idLocal);
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Muestra el diálogo para el inicio de sesión.
+	 * @param pTipo Tipo del diálogo a crear. pTipo pertenece {DialogoInicioSecion.REGISTRO, DialogoInicioSecion.InicioSesion}
+	 */
+	public void mostrarDialogoInicioSesion( String pTipo )
+	{
+		DialogoInicioSesion dialogo = new DialogoInicioSesion( this, pTipo );
+		dialogo.setVisible( true );
+	}
+	/**
+	 * Inicia sesión del administrador dado por parámetro.
+	 * @param rol - Rol del usuario     
+	 * @param identificacion - Login del administrador a iniciar sesión. identificacion != null && identificacion != "".
+	 */
+	public void iniciarSesion( String identificacion, String rol )
+	{
+		try
+		{
+			String resultado = "Registro de administrador ";
+			Object administrador = null;
+			if ( rol.equals("Administrador"))
+			{
+				administrador = (Administrador) aforoAndes.darAdministradorPorId(identificacion);
+			}
+			else
+			{
+				administrador = (AdministradorLocal) aforoAndes.darAdministradorLocalPorId(identificacion);
+			}
+
+			if (administrador != null)
+			{
+				administrador = true;
+				if ( rol.equals("Administrador local"))
+				{
+					idLocalAdministrado = ((AdministradorLocal) administrador).getIdLocal();
+				}
+				resultado += "El inicio de sesión fue exitoso: " + administrador;
+			}
+			else
+			{
+				resultado += "El usuario no existe en la base de datos: ";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
 	/**
 	 * Muestra el log de AforoAndes
 	 */
@@ -3910,6 +4319,14 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	public List <VOTipoVisitante> listarVOTiposVisitante( )
 	{
 		return aforoAndes.darVOTiposVisitante();
+	}
+
+	/**
+	 * Consulta en la base de datos los locales existentes y los muestra en el panel de datos de la aplicación
+	 */
+	public List <VOLocalComercial> listarVOLocalComercial( )
+	{
+		return aforoAndes.darVOLocalesComerciales();
 	}
 
 

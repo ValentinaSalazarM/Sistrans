@@ -2756,7 +2756,7 @@ public class AforoAndes
 	{
 		log.info ("Consultando visitantes atendidos por el establecimiento: " + idLocalComercial);
 		List<Visitante> visitantes = pp.RFC1Horas(fecha, horaInicio, minutoInicio, horaFin, minutoFin, idLocalComercial);
-		log.info ("Consultando visitantes: " + visitantes.size() + " visitantes atendidos en el rango de horas");
+		log.info ("Consultando visitantes: " + visitantes.size() + " visitantes en el rango de horas");
 		return visitantes;
 	}
 	
@@ -2764,32 +2764,216 @@ public class AforoAndes
 	 * Método que realiza la consulta de los establecimientos más visitados en una fecha o rango de fechas
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
 	 * @param fechaFin - La fecha de fin del rango de consulta
-	 * @return La lista de objetos Visitante construidos de acuerdo a la consulta realizada
+	 * @return La lista de objetos LocalComercial construidos de acuerdo a la consulta realizada
 	 */
 	public List<LocalComercial> RFC2Fecha(Timestamp fechaInicio, Timestamp fechaFin)
 	{
 		log.info ("Consultando Top 20 establecimientos populares: ");
 		List<LocalComercial> establecimientos = pp.RFC2Fecha(fechaInicio, fechaFin);
-		log.info ("Consultando Top 20 establecimientos populares: " + establecimientos.size() + " establecimientos atendidos encontrados");
+		log.info ("Consultando Top 20 establecimientos populares: " + establecimientos.size() + " establecimientos visitados encontrados");
 		return establecimientos;
 	}
 
 	/**
 	 * Método que realiza la consulta de los visitantes atendidos por un establecimiento en un rango de horas
-	 * @return La lista de objetos Visitante construidos de acuerdo a la consulta realizada
+	 * @return La lista de objetos LocalComercial construidos de acuerdo a la consulta realizada
 	 */
 	public List<LocalComercial> RFC2Hora(Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin)
 	{
 		log.info ("Consultando Top 20 establecimientos populares: ");
 		List<LocalComercial> establecimientos = pp.RFC2Horas(fecha, horaInicio, minutoInicio, horaFin, minutoFin);
-		log.info ("Consultando Top 20 establecimientos populares: " + establecimientos.size() + " establecimientos atendidos encontrados");
+		log.info ("Consultando Top 20 establecimientos populares: " + establecimientos.size() + " establecimientos visitados encontrados");
 		return establecimientos;
 	}
+	
+	/**
+	 * Método que realiza la consulta del índice de aforo de un centro comercial en el rango de fechas dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param idCentroComercial - El centro comercial de interés
+	 * @return El objeto RFC3 con el índice y el identificador del espacio construido de acuerdo a la consulta
+	 */
+	public RFC3 RFC3FechaCentroComercial(Timestamp fechaInicio, Timestamp fechaFin, String idCentroComercial)
+	{
+		log.info ("Consultando índice de aforo del centro comercial: " + idCentroComercial);
+		RFC3 indice = pp.RFC3FechaCentroComercial(fechaInicio, fechaFin, idCentroComercial);
+		log.info ("Consultando índice de aforo del centro comercial: " + indice != null ? indice : "NO EXISTE");
+		return indice;
+	}
+
+	/**
+	 * Método que realiza la consulta del índice de aforo de un centro comercial en el rango de horas dado
+	 * @param fecha - La fecha del rango de consulta	 
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param idCentroComercial - El centro comercial de interés
+	 * @return El objeto RFC3 con el índice y el identificador del espacio construido de acuerdo a la consulta
+	 */
+	public RFC3 RFC3HoraCentroComercial(Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idCentroComercial)
+	{
+		log.info ("Consultando índice de aforo del centro comercial: " + idCentroComercial);
+		RFC3 indice = pp.RFC3HoraCentroComercial(fecha, horaInicio, minutoInicio, horaFin, minutoFin, idCentroComercial);
+		log.info ("Consultando índice de aforo del centro comercial: " + indice != null ? indice : "NO EXISTE");
+		return indice;
+	}
+
+	/**
+	 * Método que realiza la consulta del índice de aforo de un local comercial en el rango de fechas dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param idLocalComercial - El local comercial de interés
+	 * @return El objeto RFC3 con el índice y el identificador del espacio construido de acuerdo a la consulta
+	 */
+	public RFC3 RFC3FechaEstablecimiento (Timestamp fechaInicio, Timestamp fechaFin, String idLocalComercial)
+	{
+		log.info ("Consultando índice de aforo del local comercial: " + idLocalComercial);
+		RFC3 indice = pp.RFC3FechaEstablecimiento(fechaInicio, fechaFin, idLocalComercial);
+		log.info ("Consultando índice de aforo del local comercial: " + indice != null ? indice : "NO EXISTE");
+		return indice;
+	}
+
+	/**
+	 * Método que realiza la consulta del índice de aforo de un local comercial en el rango de horas dado
+	 * @param fecha - La fecha del rango de consulta	 
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param idEstablecimiento - El local comercial de interés
+	 * @return El objeto RFC3 con el índice y el identificador del espacio construido de acuerdo a la consulta
+	 */
+	public RFC3 RFC3HoraEstablecimiento(Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String idLocalComercial)
+	{
+		log.info ("Consultando índice de aforo del local comercial: " + idLocalComercial);
+		RFC3 indice = pp.RFC3HoraEstablecimiento(fecha, horaInicio, minutoInicio, horaFin, minutoFin, idLocalComercial);
+		log.info ("Consultando índice de aforo del local comercial: " + indice != null ? indice : "NO EXISTE");
+		return indice;
+	}
+
+	/**
+	 * Método que realiza la consulta del índice de aforo de un tipo de local en el rango de fechas dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param tipoLocal - El tipo de local de interés
+	 * @return El objeto RFC3 con el índice y el identificador del espacio construido de acuerdo a la consulta
+	 */
+	public RFC3 RFC3FechaTipoLocal (Timestamp fechaInicio, Timestamp fechaFin, String tipoLocal)
+	{
+		log.info ("Consultando índice de aforo del tipo de local: " + tipoLocal);
+		RFC3 indice = pp.RFC3FechaTipoLocal(fechaInicio, fechaFin, tipoLocal);
+		log.info ("Consultando índice de aforo del tipo de local: " + indice != null ? indice : "NO EXISTE");
+		return indice;
+	}
+
+	/**
+	 * Método que realiza la consulta del índice de aforo de un tipo de local en el rango de horas dado
+	 * @param fecha - La fecha del rango de consulta	 
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoLocal - El tipo de local de interés
+	 * @return El objeto RFC3 con el índice y el identificador del espacio construido de acuerdo a la consulta
+	 */
+	public RFC3 RFC3HoraTipoLocal (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin, String tipoLocal)
+	{
+		log.info ("Consultando índice de aforo del tipo de local: " + tipoLocal);
+		RFC3 indice = pp.RFC3HoraTipoLocal(fecha, horaInicio, minutoInicio, horaFin, minutoFin, tipoLocal);
+		log.info ("Consultando índice de aforo del tipo de local: " + indice != null ? indice : "NO EXISTE");
+		return indice;
+	}
+
+	/**
+	 * Método que realiza la consulta de los establecimientos con aforo disponibles en una fecha o rango de fechas y una hora
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @return La lista de objetos RFC4, construida con base en la consulta realizada
+	 */
+	public List<RFC4> RFC4FechaHora (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio)
+	{
+		log.info ("Consultando establecimientos con aforo disponible: ");
+		List<RFC4> resultados = pp.RFC4FechaHora(fechaInicio, fechaFin, horaInicio, minutoInicio);
+		log.info ("Consultando establecimientos con aforo disponible: " + resultados.size() + " locales con cupos disponibles encontrados.");
+		return resultados;
+	}
+	
+	/**
+	 * Método que realiza la consulta de los establecimientos con aforo disponibles en una fecha o rango de fechas y una hora
+	 * @param fecha - La fecha del rango de consulta	 
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta
+	 * @param horaFin - La hora de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @return La lista de objetos RFC4, construida con base en la consulta realizada
+	 */
+	public List<RFC4> RFC4FechaRangoHoras (Timestamp fecha, int horaInicio, int minutoInicio, int horaFin, int minutoFin)
+	{
+		log.info ("Consultando establecimientos con aforo disponible: ");
+		List<RFC4> resultados = pp.RFC4FechaRangoHoras(fecha, horaInicio, minutoInicio, horaFin, minutoFin);
+		log.info ("Consultando establecimientos con aforo disponible: " + resultados.size() + " locales con cupos disponibles encontrados.");
+		return resultados;
+	}
+	
 
 	/* ****************************************************************
 	 * 			Métodos para administración
 	 *****************************************************************/
 
+	/**
+	 * Adicionar de manera persistente un administrador
+	 * @return Las tuplas insertadas
+	 * @return El objeto ADMINISTRADOR adicionado. null si ocurre alguna Excepción
+	 */
+	public Administrador adicionarAdministrador( String identificacion, String nombre, String contrasenia)
+	{
+		log.info ("Adicionando administrador: " + identificacion);
+		Administrador administrador = pp.adicionarAdministrador(identificacion, nombre, contrasenia);
+		log.info ("Adicionando administrador: " + administrador);
+		return administrador;
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla ADMINISTRADOR que tienen el identificador dado
+	 * @param identificacion - El identificador del administrador
+	 * @return El objeto ADMINISTRADOR, construido con base en la tuplas de la tabla ADMINISTRADOR, que tiene el identificador dado
+	 */
+	public Administrador darAdministradorPorId (String identificacion)
+	{
+		log.info ("Dar información de un administrador por id: " + identificacion);
+		Administrador administrador = pp.darAdministradorPorId (identificacion);
+		log.info ("Buscando administrador por Id: " + administrador != null ? administrador : "NO EXISTE");
+		return administrador;
+	}
+	
+	/**
+	 * Adicionar de manera persistente un administrador de local
+	 * @return Las tuplas insertadas
+	 * @return El objeto ADMINISTRADORLOCAL adicionado. null si ocurre alguna Excepción
+	 */
+	public AdministradorLocal adicionarAdministradorLocal( String identificacion, String nombre, String contrasenia, String idLocal )
+	{
+		log.info ("Adicionando administrador: " + identificacion);
+		AdministradorLocal administrador = pp.adicionarAdministradorLocal(identificacion, nombre, contrasenia, idLocal);
+		log.info ("Adicionando administrador: " + administrador);
+		return administrador;
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla ADMINISTRADORLOCAL que tienen el identificador dado
+	 * @param identificacion - El identificador del administrador
+	 * @return El objeto ADMINISTRADORLOCAL, construido con base en la tuplas de la tabla ADMINISTRADOR, que tiene el identificador dado
+	 */
+	public AdministradorLocal darAdministradorLocalPorId (String identificacion)
+	{
+		log.info ("Dar información de un administrador por id: " + identificacion);
+		AdministradorLocal administrador = pp.darAdministradorLocalPorId (identificacion);
+		log.info ("Buscando administrador por Id: " + administrador != null ? administrador : "NO EXISTE");
+		return administrador;
+	}
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de AforoAndes
 	 * @return Un arreglo con números que indican el número de tuplas borradas en las tablas 

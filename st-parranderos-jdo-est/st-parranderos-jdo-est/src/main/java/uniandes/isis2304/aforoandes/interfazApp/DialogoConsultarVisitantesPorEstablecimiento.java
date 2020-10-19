@@ -1,3 +1,11 @@
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Universidad	de	los	Andes	(Bogotá	- Colombia)
+ * Departamento	de	Ingeniería	de	Sistemas	y	Computación
+ * 		
+ * Curso: isis2304 - Sistemas Transaccionales
+ * Proyecto: Aforo-CCAndes
+ *  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 package uniandes.isis2304.aforoandes.interfazApp;
 
 import java.awt.BorderLayout;
@@ -27,7 +35,7 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 	/**
 	 * Comando para agregar la banda.
 	 */
-	public final static String AGREGAR = "Consultar visitantes de un establecimiento";
+	public final static String ACEPTAR = "Consultar visitantes de un establecimiento";
 
 	/**
 	 * Comando para cancelar el proceso.
@@ -48,12 +56,12 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 	// -----------------------------------------------------------------
 
 	/**
-	 * Etiqueta del identificador del lector
+	 * Etiqueta del identificador del local
 	 */
 	private JLabel lblLocalComercial;
 
 	/**
-	 * Campo de texto para el identificador del lector
+	 * Campo de texto para el identificador del local
 	 */
 	private JTextField txtLocalComercial;
 
@@ -143,12 +151,12 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 		dcFechaFinal = new JDateChooser();
 		campos.add(dcFechaFinal);
 				
-		lblHoraInicial = new JLabel( "Hora inicial del rango en formato 24h (hh:mm) - Vacío si no aplica: " );
+		lblHoraInicial = new JLabel( "<html> Hora inicial del rango en formato 24h (hh:mm) - Vacío si no aplica: " );
 		campos.add( lblHoraInicial );
 		txtHoraInicial = new JTextField( );
 		campos.add( txtHoraInicial );
 
-		lblHoraFinal = new JLabel( "Hora final del rango en formato 24h (hh:mm) - Vacío si no aplica: " );
+		lblHoraFinal = new JLabel( "<html> Hora final del rango en formato 24h (hh:mm) - Vacío si no aplica: " );
 		campos.add( lblHoraFinal );
 		txtHoraFinal = new JTextField( );
 		campos.add( txtHoraFinal );
@@ -162,7 +170,7 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 		add( botones, BorderLayout.SOUTH );
 
 		btnAgregar = new JButton( "Agregar" );
-		btnAgregar.setActionCommand( AGREGAR );
+		btnAgregar.setActionCommand( ACEPTAR );
 		btnAgregar.addActionListener( this );
 		botones.add( btnAgregar );
 
@@ -185,7 +193,7 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 	{
 		String comando = pEvento.getActionCommand( );
 
-		if( comando.equals( AGREGAR ) )
+		if( comando.equals( ACEPTAR ) )
 		{
 			String idLocal = txtLocalComercial.getText();
 			String horarioInicial = txtHoraInicial.getText();
@@ -208,7 +216,11 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 					int minutoInicial = -1;
 					int horaFinal = -1;
 					int minutoFinal = -1;
-					
+
+					if ( fechaFinal.after(fechaInicial))
+					{
+						JOptionPane.showMessageDialog( this, "La fecha final debe ser posterior o igual a la fecha inicial del rango.", "Consultar visitantes de un local", JOptionPane.ERROR_MESSAGE );
+					}
 					if (horarioInicial != null && !horarioInicial.equals(""))
 					{
 						horaInicial = Integer.parseInt(horarioInicial.split(":")[0]);
@@ -227,7 +239,7 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 				}
 				catch( NumberFormatException e2 )
 				{
-					JOptionPane.showMessageDialog( this, "La hora deben ser números separados por ':' y el identificador del local un número.", "Consultar visitantes de un local", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( this, "La hora deben ser números separados por ':'.", "Consultar visitantes de un local", JOptionPane.ERROR_MESSAGE );
 				}
 			}
 		}

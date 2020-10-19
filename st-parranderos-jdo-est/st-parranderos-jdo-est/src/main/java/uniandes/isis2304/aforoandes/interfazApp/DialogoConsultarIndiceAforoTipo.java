@@ -25,7 +25,7 @@ import com.toedter.calendar.JDateChooser;
  */
 @SuppressWarnings("serial")
 
-public class DialogoConsultarTop20Establecimientos extends JDialog implements ActionListener
+public class DialogoConsultarIndiceAforoTipo extends JDialog implements ActionListener
 {
 
 	// -----------------------------------------------------------------
@@ -33,9 +33,9 @@ public class DialogoConsultarTop20Establecimientos extends JDialog implements Ac
 	// -----------------------------------------------------------------
 
 	/**
-	 * Comando para agregar la banda.
+	 * Comando para realizar consulta.
 	 */
-	public final static String AGREGAR = "Consultar establecimientos más populares";
+	public final static String ACEPTAR = "Consultar índice de aforo de un tipo de local";
 
 	/**
 	 * Comando para cancelar el proceso.
@@ -54,6 +54,16 @@ public class DialogoConsultarTop20Establecimientos extends JDialog implements Ac
 	// -----------------------------------------------------------------
 	// Atributos de la interfaz
 	// -----------------------------------------------------------------
+
+	/**
+	 * Etiqueta del identificador del tipo de local
+	 */
+	private JLabel lblTipoLocal;
+
+	/**
+	 * Campo de texto para el identificador del tipo de local
+	 */
+	private JTextField txtTipoLocal;
 
 	/**
 	 * Etiqueta de la fecha inicial del rango de consulta
@@ -113,18 +123,23 @@ public class DialogoConsultarTop20Establecimientos extends JDialog implements Ac
 	 * Crea la ventana de diálogo del espacio.
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
-	public DialogoConsultarTop20Establecimientos( InterfazAforoAndesApp pPrincipal )
+	public DialogoConsultarIndiceAforoTipo( InterfazAforoAndesApp pPrincipal )
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
-		setTitle( "Registrar visita" );
+		setTitle( "Consultar índice de aforo de un tipo de local" );
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 7, 2 ) );
+		campos.setLayout( new GridLayout( 6, 2, 5, 1 ) );
 		campos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
 		add( campos, BorderLayout.CENTER );
+
+		lblTipoLocal = new JLabel( "* Tipo de local: " );
+		campos.add( lblTipoLocal );
+		txtTipoLocal = new JTextField( );
+		campos.add( txtTipoLocal );
 
 		lblFechaInicial = new JLabel( "* Fecha inicial del rango: " );
 		campos.add(lblFechaInicial);
@@ -155,7 +170,7 @@ public class DialogoConsultarTop20Establecimientos extends JDialog implements Ac
 		add( botones, BorderLayout.SOUTH );
 
 		btnAgregar = new JButton( "Agregar" );
-		btnAgregar.setActionCommand( AGREGAR );
+		btnAgregar.setActionCommand( ACEPTAR );
 		btnAgregar.addActionListener( this );
 		botones.add( btnAgregar );
 
@@ -178,8 +193,9 @@ public class DialogoConsultarTop20Establecimientos extends JDialog implements Ac
 	{
 		String comando = pEvento.getActionCommand( );
 
-		if( comando.equals( AGREGAR ) )
+		if( comando.equals( ACEPTAR ) )
 		{
+			String tipoLocal = txtTipoLocal.getText();
 			String horarioInicial = txtHoraInicial.getText();
 			String horarioFinal = txtHoraFinal.getText();
 			Date fechaInicial = dcFechaInicial.getDate();
@@ -188,48 +204,52 @@ public class DialogoConsultarTop20Establecimientos extends JDialog implements Ac
 			Timestamp fechaInicialTS = new Timestamp(fechaInicial.getTime());
 			Timestamp fechaFinalTS = new Timestamp(fechaFinal.getTime());
 
-			try
+			if( tipoLocal.equals( "" ) )
 			{
-				int horaInicial = -1;
-				int minutoInicial = -1;
-				int horaFinal = -1;
-				int minutoFinal = -1;
+				JOptionPane.showMessageDialog( this, "Datos incompletos", "Consultar índice de aforo", JOptionPane.ERROR_MESSAGE );
+			}
+			else
+			{
+				try
+				{
+					int horaInicial = -1;
+					int minutoInicial = -1;
+					int horaFinal = -1;
+					int minutoFinal = -1;
 
-				if ( fechaFinal.after(fechaInicial))
-				{
-					JOptionPane.showMessageDialog( this, "La fecha final debe ser posterior o igual a la fecha inicial del rango.", "Consultar establecimientos con aforo disponible", JOptionPane.ERROR_MESSAGE );
-				}
-				else
-				{
-					if (horarioInicial != null && !horarioInicial.equals(""))
+					if ( fechaFinal.after(fechaInicial))
 					{
-						horaInicial = Integer.parseInt(horarioInicial.split(":")[0]);
-						minutoInicial = Integer.parseInt(horarioInicial.split(":")[1]);
-						if ( horarioFinal != null && !horarioFinal.equals(""))
+						JOptionPane.showMessageDialog( this, "La fecha final debe ser posterior o igual a la fecha inicial del rango.", "Consultar índice de aforo", JOptionPane.ERROR_MESSAGE );
+					}
+					else
+					{
+						if (horarioInicial != null && !horarioInicial.equals(""))
 						{
-							horaFinal = Integer.parseInt(horarioFinal.split(":")[0]);
-							minutoFinal = Integer.parseInt(horarioFinal.split(":")[1]);
-							if (horaFinal < horaInicial || (horaInicial == horaFinal && minutoFinal < minutoInicial))
+							horaInicial = Integer.parseInt(horarioInicial.split(":")[0]);
+							minutoInicial = Integer.parseInt(horarioInicial.split(":")[1]);
+							if ( horarioFinal != null && !horarioFinal.equals(""))
 							{
-								JOptionPane.showMessageDialog( this, "La hora final debe ser posterior a la hora inicial del rango.", "Consultar establecimientos más populares", JOptionPane.ERROR_MESSAGE );
-								throw new Exception();
+								horaFinal = Integer.parseInt(horarioFinal.split(":")[0]);
+								minutoFinal = Integer.parseInt(horarioFinal.split(":")[1]);
+								if (horaFinal < horaInicial || (horaInicial == horaFinal && minutoFinal < minutoInicial))
+								{
+									JOptionPane.showMessageDialog( this, "La hora final debe ser posterior a la hora inicial del rango.", "Consultar índice de aforo", JOptionPane.ERROR_MESSAGE );
+									throw new Exception();
+								}
 							}
 						}
+						interfaz.consultarIndicesAforoTipoLocal(tipoLocal, fechaInicialTS, fechaFinalTS, horaInicial, minutoInicial, horaFinal, minutoFinal, this);
 					}
 				}
-				interfaz.consultarEstablecimientosPopulares(fechaInicialTS, fechaFinalTS, horaInicial, minutoInicial, horaFinal, minutoFinal, this);
-
+				catch( NumberFormatException e2 )
+				{
+					JOptionPane.showMessageDialog( this, "La hora deben ser números separados por ':'.", "Consultar índice de aforo", JOptionPane.ERROR_MESSAGE );
+				} 
+				catch (Exception e) 
+				{
+					e.printStackTrace();
+				}
 			}
-			catch( NumberFormatException e2 )
-			{
-				JOptionPane.showMessageDialog( this, "La hora deben ser números separados por ':'.", "Consultar establecimientos más populares", JOptionPane.ERROR_MESSAGE );
-			} 
-			catch (Exception e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
 		}
 		else if( comando.equals( CANCELAR ) )
 		{

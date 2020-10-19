@@ -15,6 +15,22 @@
 				{
 					"label": "RFC2 - Establecimientos más visitados",
 					"event": "consultarEstablecimientosPopulares"
+				},
+				{
+					"label": "RFC3 - Índice aforo centro comercial",
+					"event": "consultarIndicesAforoCentroComercial"
+				},
+				{
+					"label": "RFC3 - Índice aforo establecimiento",
+					"event": "consultarIndicesAforoEstablecimiento"
+				},
+				{
+					"label": "RFC3 - Índice aforo tipo local",
+					"event": "consultarIndicesAforoTipoLocal"
+				},
+				{
+					"label": "RFC4 - Establecimientos con aforo disponible",
+					"event": "consultarEstablecimientosAforoDisponible"
 				}
 			]
 		},
