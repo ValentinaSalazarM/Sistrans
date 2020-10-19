@@ -129,7 +129,7 @@ ORA-02290: restricción de control (ISIS2304A222020.CK_VISITANTE_TELEFONOEMERGEN
 
 23:17:59,244 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando índice de aforo del centro comercial: 6
 23:18:00,155 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - RFC3 [Identificador espacio = 6, índice aforo = 0.0085]
-23:18:11,221 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
+23:18:11,221 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible:
 23:18:12,123 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
 23:18:31,543 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
 23:18:31,544 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
@@ -204,11 +204,11 @@ ORA-02291: restricción de integridad (ISIS2304A222020.FK_L_LOCALCOMERCIAL) viol
 23:30:20,142 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
 23:30:20,143 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
 23:30:20,165 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-23:33:23,560 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
+23:33:23,560 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible:
 23:33:24,277 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
 23:33:37,052 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
 23:33:38,645 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-23:35:01,585 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
+23:35:01,585 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible:
 23:35:02,489 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
 23:36:57,197 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
 23:36:59,407 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 77 registros existentes
@@ -336,7 +336,7 @@ ORA-02291: restricción de integridad (ISIS2304A222020.FK_L_LOCALCOMERCIAL) viol
 00:08:51,001 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de área por valor: 324.0
 00:08:51,636 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Area [id = 5, valor = 324.0, aforo = 21]
 00:08:51,636 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: -1
-00:08:52,242 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - 
+00:08:52,242 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] -
 00:11:18,295 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
 00:11:18,295 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
 00:11:18,316 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
