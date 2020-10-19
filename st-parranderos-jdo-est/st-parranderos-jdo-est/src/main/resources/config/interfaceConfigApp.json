@@ -459,6 +459,10 @@
 				{
 					"label": "RFC4 - Establecimientos con aforo disponible",
 					"event": "consultarEstablecimientosAforoDisponible"
+				},
+				{
+					"label": "RFC5 - Duración visitas de un tipo de visitante",
+					"event": "consultarVisitasTipoVisitante"
 				}
 			]
 		}		

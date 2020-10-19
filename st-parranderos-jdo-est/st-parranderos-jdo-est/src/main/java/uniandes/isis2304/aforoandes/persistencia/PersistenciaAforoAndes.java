@@ -4577,6 +4577,39 @@ public class PersistenciaAforoAndes
 	}
 	
 	/**
+	 * Método que realiza la consulta del promedio, el máximo y el mínimo de duración de una visita de un tipo de visitante dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return El arreglo de double construido con base en la consulta realizada
+	 */
+	public double[] RFC5TiemposVisitaTipoVisitanteMetricas (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		return sqlUtil.RFC5TiemposVisitaTipoVisitanteMetricas(pmf.getPersistenceManager(), fechaInicio, fechaFin, horaInicio, minutoInicio, horaFinal, minutoFinal, tipoVisitante);
+	}
+	
+	/**
+	 * Método que realiza la consulta de la duración de cada visita de un tipo de visitante dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return La lista de objectos construida con base en la consulta realizada
+	 */
+	public List<Object> RFC5TiemposVisitaTipoVisitante (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		return sqlUtil.RFC5TiemposVisitaTipoVisitante(pmf.getPersistenceManager(), fechaInicio, fechaFin, horaInicio, minutoInicio, horaFinal, minutoFinal, tipoVisitante);
+	}
+	
+	
+	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de AforoAndes
 	 * Crea y ejecuta las sentencias SQL para cada tabla de la base de datos - EL ORDEN ES IMPORTANTE 
 	 * @return Un arreglo con números que indican el número de tuplas borradas en las tablas 

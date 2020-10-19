@@ -4071,7 +4071,78 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		}		
 
 	}
+	/**
+	 * Crea una ventana de diálogo para consultar visitas de un tipo de visitante
+	 */
+	public void consultarVisitasTipoVisitante ()
+	{
+		if ( administrador )
+		{
+			DialogoConsultarVisitasTipoVisitante dialogo = new DialogoConsultarVisitasTipoVisitante( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}		
+	}
 
+	/** Consultar los establecimientos con aforo disponible
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta  o -1 si no aplica
+	 * @param horaFin - La hora de fin del rango de consulta o -1 si no aplica
+	 * @param minutoFin - El minuto de fin del rango de consulta  o -1 si no aplica
+	 * @param idCentroComercial - El id del centro comercial a consultar
+	 */
+	public void consultarVisitasTipoVisitante (Timestamp fechaInicio, Timestamp fechaFin, int horaInicial, int minutoInicial, int horaFinal, int minutoFinal, String tipoVisitante, DialogoConsultarVisitasTipoVisitante pDialogo)
+	{
+		try 
+		{
+			if ( horaFinal == -1)
+			{
+				horaFinal = horaInicial;
+				minutoFinal = minutoInicial;
+			}
+			int totalDuracion = 0;
+			String resultado = "En consultar visitas del tipo de visitante " + tipoVisitante;
+			double[] metricas = aforoAndes.RFC5TiemposVisitaTipoVisitanteMetricas(fechaInicio, fechaFin, horaInicial, minutoInicial, horaFinal, minutoFinal, tipoVisitante);
+			List<Object> resultados = aforoAndes.RFC5TiemposVisitaTipoVisitante(fechaInicio, fechaFin, horaInicial, minutoInicial, horaFinal, minutoFinal, tipoVisitante);
+			if ( resultados != null )
+			{
+				resultado += "\n\n Los objetos existentes son:\n";
+				int i = 1;
+				for (Object tupla: resultados)	
+				{
+					Object [] datos = (Object []) tupla;
+					String idVisitante = (String) datos[0];
+					int duracionVisita = ((BigDecimal) datos[1]).intValue();
+					
+					resultado += i++ + ". Visitante: " + idVisitante + " - Duración visita: " + duracionVisita + "\n";
+					totalDuracion += duracionVisita;
+				}
+			}
+			else
+			{
+				resultado += "No existen visitas del tipo de visitante indicado. ";
+			}
+			
+			resultado += "\n\n Promedio: " + metricas[0] + " - Máxima: " +  metricas[2] + " - Mínima: " + metricas[1] + " - Total: " + totalDuracion;
+			pDialogo.dispose();
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}		
+
+	}
 
 
 	/* ****************************************************************
@@ -4079,7 +4150,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 *****************************************************************/
 
 	/**
-	 * Registra al jugador con los datos dados.
+	 * Registra al usuario con los datos dados.
 	 * @param identificacion - Identificacion del administrador a registrar. identificacion != null && identificacion != "".
 	 * @param nombre - Nombre del administrador a registrar. nombre != null && nombre != "".
 	 * @param contrasenia - Contraseña del administrador a registrar. contrasenia != null && contrasenia != "".
@@ -4355,7 +4426,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		int i = 1;
 		for (E objeto : lista)
 		{
-			System.out.println(objeto);
 			resp += i++ + ". " + objeto.toString() + "\n";
 		}
 		return resp;

@@ -2930,7 +2930,45 @@ public class AforoAndes
 		return resultados;
 	}
 	
+	/**
+	 * Método que realiza la consulta del promedio, el máximo y el mínimo de duración de una visita de un tipo de visitante dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return El arreglo de double construido con base en la consulta realizada
+	 */
+	public double[] RFC5TiemposVisitaTipoVisitanteMetricas (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		log.info ("Consultando duración visitas del tipo de visitante: " + tipoVisitante);
+		double[] metricas = pp.RFC5TiemposVisitaTipoVisitanteMetricas(fechaInicio, fechaFin, horaInicio, minutoInicio, horaFinal, minutoFinal, tipoVisitante);
+		log.info ("Consultando duración visitas del tipo de visitante: " + metricas != null ? metricas : "NO EXISTE");
+		return metricas;
 
+	}
+
+	/**
+	 * Método que realiza la consulta de la duración de cada visita de un tipo de visitante dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return El arreglo de double construido con base en la consulta realizada
+	 */
+	public List<Object> RFC5TiemposVisitaTipoVisitante (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		log.info ("Consultando duración visitas del tipo de visitante: " + tipoVisitante);
+		List<Object> resultados = pp.RFC5TiemposVisitaTipoVisitante(fechaInicio, fechaFin, horaInicio, minutoInicio, horaFinal, minutoFinal, tipoVisitante);
+		log.info ("Consultando duración visitas del tipo de visitante: " + resultados.size() + "visitas encontradas");
+		return resultados;
+
+	}
 	/* ****************************************************************
 	 * 			Métodos para administración
 	 *****************************************************************/
