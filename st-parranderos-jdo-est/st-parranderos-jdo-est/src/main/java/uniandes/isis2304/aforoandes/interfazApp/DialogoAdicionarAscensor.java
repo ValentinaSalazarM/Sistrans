@@ -56,16 +56,6 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 	private JTextField txtIdentificador;
 
 	/**
-	 * Etiqueta de la capacidad normal del espacio
-	 */
-	private JLabel lblCapacidadNormal;
-
-	/**
-	 * Campo de texto para la capacidad normal del espacio
-	 */
-	private JTextField txtCapacidadNormal;
-
-	/**
 	 * Etiqueta del área del espacio
 	 */
 	private JLabel lblArea;
@@ -131,11 +121,6 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 		txtIdentificador = new JTextField( );
 		campos.add( txtIdentificador );
 
-		lblCapacidadNormal = new JLabel( "Capacidad Normal: " );
-		campos.add( lblCapacidadNormal );
-		txtCapacidadNormal = new JTextField( );
-		campos.add( txtCapacidadNormal );
-
 		lblArea = new JLabel( "Área: " );
 		campos.add( lblArea );
 		txtArea = new JTextField( );
@@ -189,35 +174,39 @@ public class DialogoAdicionarAscensor extends JDialog implements ActionListener
 		if( comando.equals( AGREGAR ) )
 		{
 			String identificador = txtIdentificador.getText();
-			String capacidadNormalStr = txtCapacidadNormal.getText();
 			String areaStr = txtArea.getText();
 			String pesoMaximoStr = txtPesoMaximo.getText();
 			String comboBox = (String) (cbCentrosComerciales.getSelectedItem());
 			String idCentroComercial = comboBox.split(" - ")[0];
-			if( identificador.equals( "" ) || capacidadNormalStr.equals( "" ) || pesoMaximoStr.equals( "" ) || idCentroComercial.equals( "" ) )
+			if( identificador.equals( "" ) || pesoMaximoStr.equals( "" ) || idCentroComercial.equals( "" ) )
 			{
 				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar Ascensor", JOptionPane.ERROR_MESSAGE );
 			}
 			else
 			{
 				try
-				{
-					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
+				{	
 					double pesoMaximo = Double.parseDouble(pesoMaximoStr);
-					double area = Long.parseLong(areaStr);
-					if ( interfaz.buscarAreaPorValor(area) == null)
+					if ( !areaStr.isEmpty())
 					{
-						interfaz.adicionarArea();
+						double area = Long.parseLong(areaStr);
+						if ( interfaz.buscarAreaPorValor(area) == null)
+						{
+							interfaz.adicionarArea();
+						}
+						interfaz.adicionarAscensor(identificador, area, pesoMaximo, idCentroComercial, this);;
 					}
-					if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
+					else
 					{
-						interfaz.adicionarCapacidadNormal();
+						interfaz.adicionarAscensor(identificador, -1, pesoMaximo, idCentroComercial, this);;
 					}
-					interfaz.adicionarAscensor(identificador, capacidadNormal, area, pesoMaximo, idCentroComercial, this);;
-				}
+				}	
 				catch( NumberFormatException e2 )
 				{
 					JOptionPane.showMessageDialog( this, "La capacidad normal (int), el área (double) y el peso máximo (double) deben ser números.", "Agregar Ascensor", JOptionPane.ERROR_MESSAGE );
+				} 
+				catch (Exception e) 
+				{
 				}
 			}
 		}

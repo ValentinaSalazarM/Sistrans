@@ -1,36 +1,20 @@
 {
 	"title": "Aplicación transaccional de AforoAndes",
 	"frameH": 600,
-	"frameW": 800,
+	"frameW": 1030,
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
-		{ "menuTitle": "Requerimientos de consulta",
+		{ "menuTitle": "Sesión",
 		  "options":
 			[
 				{
-					"label": "RFC1 - Visitantes atendidos por un local",
-					"event": "consultarVisitantesPorEstablecimiento"
+					"label": "Registrarse",
+					"event": "mostrarDialogoRegistro"
 				},
 				{
-					"label": "RFC2 - Establecimientos más visitados",
-					"event": "consultarEstablecimientosPopulares"
-				},
-				{
-					"label": "RFC3 - Índice aforo centro comercial",
-					"event": "consultarIndicesAforoCentroComercial"
-				},
-				{
-					"label": "RFC3 - Índice aforo establecimiento",
-					"event": "consultarIndicesAforoEstablecimiento"
-				},
-				{
-					"label": "RFC3 - Índice aforo tipo local",
-					"event": "consultarIndicesAforoTipoLocal"
-				},
-				{
-					"label": "RFC4 - Establecimientos con aforo disponible",
-					"event": "consultarEstablecimientosAforoDisponible"
+					"label": "Iniciar sesión",
+					"event": "mostrarDialogoInicioSesion"
 				}
 			]
 		},
@@ -84,11 +68,11 @@
 				},
 				{
 					"label": "Eliminar por identificador",
-					"event": "eliminarBañoPorIdentificador"
+					"event": "eliminarBanoPorIdentificador"
 				},
 				{
 					"label": "Eliminar por número de sanitarios",
-					"event": "eliminarBañoPorSanitarios"
+					"event": "eliminarBanoPorSanitarios"
 				}	
 			]
 		},
@@ -119,35 +103,6 @@
 					"label": "Eliminar por identificador",
 					"event": "eliminarCentroComercialPorIdentificador"
 				}	
-			]
-		},
-		{ "menuTitle": "Lector",
-		  "options":
-			[
-				{
-					"label": "Adicionar",
-					"event": "adicionarLector"
-				},
-				{
-					"label": "Listar",
-					"event": "listarLectores"
-				},
-				{
-					"label": "Buscar por identificador",
-					"event": "buscarLectorPorIdentificador"
-				},
-				{
-					"label": "Buscar por tipo",
-					"event": "buscarLectorPorTipo"
-				},
-				{
-					"label": "Cambiar tipo lector",
-					"event": "cambiarTipoLector"
-				},
-				{
-					"label": "Eliminar por identificador",
-					"event": "eliminarLectorPorIdentificador"
-				}
 			]
 		},
 		{ "menuTitle": "Local comercial",
@@ -233,6 +188,35 @@
 				}
 			]
 		},
+		{ "menuTitle": "Lector",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarLector"
+				},
+				{
+					"label": "Listar",
+					"event": "listarLectores"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarLectorPorIdentificador"
+				},
+				{
+					"label": "Buscar por tipo",
+					"event": "buscarLectorPorTipo"
+				},
+				{
+					"label": "Cambiar tipo lector",
+					"event": "cambiarTipoLector"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarLectorPorIdentificador"
+				}
+			]
+		},
 		{ "menuTitle": "Visitante",
 		  "options":
 			[
@@ -262,6 +246,64 @@
 				}
 			]
 		},
+		{ "menuTitle": "Domiciliario",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarDomiciliario"
+				},
+				{
+					"label": "Listar",
+					"event": "listarDomiciliarios"
+				},
+				{
+					"label": "Buscar por identificación",
+					"event": "buscarDomiciliarioPorIdentificacion"
+				},
+				{
+					"label": "Cambiar turno de trabajo",
+					"event": "cambiarHorarioTurnoDomiciliario"
+				},
+				{
+					"label": "Cambiar empresa",
+					"event": "cambiarEmpresaDomiciliosDomiciliario"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarDomiciliarioPorIdentificacion"
+				}
+			]
+		},
+		{ "menuTitle": "Empleado",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarEmpleado"
+				},
+				{
+					"label": "Listar",
+					"event": "listarEmpleados"
+				},
+				{
+					"label": "Buscar por identificación",
+					"event": "buscarEmpleadoPorIdentificacion"
+				},
+				{
+					"label": "Cambiar turno de trabajo",
+					"event": "cambiarHorarioTurnoEmpleado"
+				},
+				{
+					"label": "Cambiar empresa",
+					"event": "cambiarLugarTrabajoEmpleado"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarEmpleadoPorIdentificacion"
+				}
+			]
+		},
 		{ "menuTitle": "Tipo local",
 		  "options":
 			[
@@ -280,6 +322,31 @@
 				{
 					"label": "Eliminar por tipo",
 					"event": "eliminarTipoLocalPorTipo"
+				}
+			]
+		},
+		{ "menuTitle": "Tipo visitante",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarTipoVisitante"
+				},
+				{
+					"label": "Listar",
+					"event": "listarTiposVisitante"
+				},
+				{
+					"label": "Buscar por tipo",
+					"event": "buscarTipoVisitantePorTipo"
+				},
+				{
+					"label": "Cambiar horario",
+					"event": "cambiarHorarioTipoVisitante"
+				},
+				{
+					"label": "Eliminar por tipo",
+					"event": "eliminarTipoVisitantePorTipo"
 				}
 			]
 		},
@@ -316,16 +383,16 @@
 		  "options":
 			[
 				{
-					"label": "Mostrar log Parranderos",
-					"event": "mostrarLogParranderos"
+					"label": "Mostrar log AforoAndes",
+					"event": "mostrarLogAforoAndes"
 				},
 				{
 					"label": "Mostrar log datanucleus",
 					"event": "mostrarLogDatanuecleus"
 				},
 				{
-					"label": "Limpiar log de parranderos",
-					"event": "limpiarLogParranderos"
+					"label": "Limpiar log de AforoAndes",
+					"event": "limpiarLogAforoAndes"
 				},
 				{
 					"label": "Limpiar log de datanucleus",
@@ -366,12 +433,32 @@
 				}
 			]
 		},		
-		{ "menuTitle": "Acerca de ...",
+		{ "menuTitle": "Requerimientos de consulta",
 		  "options":
 			[
 				{
-					"label": "Acerca de ...",
-					"event": "acercaDe"
+					"label": "RFC1 - Visitantes atendidos por un local",
+					"event": "consultarVisitantesPorEstablecimiento"
+				},
+				{
+					"label": "RFC2 - Establecimientos más visitados",
+					"event": "consultarEstablecimientosPopulares"
+				},
+				{
+					"label": "RFC3 - Índice aforo centro comercial",
+					"event": "consultarIndicesAforoCentroComercial"
+				},
+				{
+					"label": "RFC3 - Índice aforo establecimiento",
+					"event": "consultarIndicesAforoEstablecimiento"
+				},
+				{
+					"label": "RFC3 - Índice aforo tipo local",
+					"event": "consultarIndicesAforoTipoLocal"
+				},
+				{
+					"label": "RFC4 - Establecimientos con aforo disponible",
+					"event": "consultarEstablecimientosAforoDisponible"
 				}
 			]
 		}		

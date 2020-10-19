@@ -8,10 +8,11 @@
  */
 package uniandes.isis2304.aforoandes.persistencia;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.aforoandes.negocio.Administrador;
 import uniandes.isis2304.aforoandes.negocio.AdministradorLocal;
 
 
@@ -76,9 +77,10 @@ public class SQLAdministradorLocal
 	public AdministradorLocal darAdministradorPorId (PersistenceManager pm, String identificacion) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaAdministradorLocal() + " WHERE identificacion = ?");
-		q.setResultClass(Administrador.class);
+		q.setResultClass(AdministradorLocal.class);
 		q.setParameters(identificacion);
-		return (AdministradorLocal) q.executeUnique();
+		List<AdministradorLocal> list = q.executeList();
+		return list.get(0);
 	}
 
 }

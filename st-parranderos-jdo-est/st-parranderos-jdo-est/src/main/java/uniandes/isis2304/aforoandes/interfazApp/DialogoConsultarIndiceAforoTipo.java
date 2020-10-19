@@ -217,7 +217,7 @@ public class DialogoConsultarIndiceAforoTipo extends JDialog implements ActionLi
 					int horaFinal = -1;
 					int minutoFinal = -1;
 
-					if ( fechaFinal.after(fechaInicial))
+					if ( fechaFinal != null && fechaFinal.before(fechaInicial))
 					{
 						JOptionPane.showMessageDialog( this, "La fecha final debe ser posterior o igual a la fecha inicial del rango.", "Consultar índice de aforo", JOptionPane.ERROR_MESSAGE );
 					}
@@ -247,7 +247,6 @@ public class DialogoConsultarIndiceAforoTipo extends JDialog implements ActionLi
 				} 
 				catch (Exception e) 
 				{
-					e.printStackTrace();
 				}
 			}
 		}

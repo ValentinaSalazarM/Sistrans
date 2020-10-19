@@ -15,7 +15,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -128,17 +127,18 @@ public class DialogoInicioSesion extends JDialog implements ActionListener
         tipo = pTipo;
 
         setTitle( pTipo );
-        setSize( 500, tipo.equals( REGISTRO ) ? 310 : 370 );
+        setSize( 580, tipo.equals( REGISTRO ) ? 210 : 180 );
         setLayout( new BorderLayout( ) );
         setLocationRelativeTo( principal );
 
         JPanel panelInformacion = new JPanel( );
-        panelInformacion.setLayout( new BorderLayout( ) );
+        panelInformacion.setLayout( new BorderLayout() );
         add( panelInformacion );
 
         JPanel panelDatos = new JPanel( );
         panelDatos.setBorder( new TitledBorder( "Datos administrador" ) );
-        panelDatos.setLayout( new GridLayout( tipo.equals( REGISTRO ) ? 3 : 2, 2, 5, 5 ) );
+        panelDatos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
+        panelDatos.setLayout( new GridLayout( tipo.equals( REGISTRO ) ? 3 : 2, 2, 15, 15 ) );
         panelInformacion.add( panelDatos, BorderLayout.CENTER );
 
         JLabel lblIdentificacion = new JLabel( "Identificación:" );
@@ -172,6 +172,8 @@ public class DialogoInicioSesion extends JDialog implements ActionListener
         JLabel lblLocal = new JLabel( "Local administrado (si aplica)" );
         panelDatos.add( lblLocal );
 
+        cbLocales = new JComboBox();
+        cbLocales.addItem("");
         for ( VOLocalComercial local: pPrincipal.listarVOLocalComercial())
 		{
 			cbLocales.addItem(local.getIdentificador());
@@ -194,9 +196,6 @@ public class DialogoInicioSesion extends JDialog implements ActionListener
         btnCancelar.addActionListener( this );
         panelBotones.add( btnCancelar );
 
-        JLabel lblImagen = new JLabel( );
-        lblImagen.setIcon( new ImageIcon( "./data/imagenes/login.png" ) );
-        add( lblImagen, BorderLayout.WEST );
     }
     // -----------------------------------------------------------------
     // Métodos

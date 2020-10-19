@@ -205,6 +205,10 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 				{
 					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
 					int sanitarios = Integer.parseInt(sanitariosStr);
+					if (capacidadNormal != sanitarios)
+					{
+						JOptionPane.showMessageDialog( this, "La capacidad normal debe depender del número de sanitarios.", "Agregar Baño", JOptionPane.ERROR_MESSAGE );
+					}
 					double area = Long.parseLong(areaStr);
 					if ( interfaz.buscarAreaPorValor(area) == null)
 					{

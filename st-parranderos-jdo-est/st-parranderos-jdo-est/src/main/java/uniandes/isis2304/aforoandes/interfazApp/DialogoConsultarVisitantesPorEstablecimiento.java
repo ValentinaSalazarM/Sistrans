@@ -84,7 +84,7 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 	 * Date chooser de la fecha final del rango de consulta
 	 */
 	private JDateChooser dcFechaFinal;
-	
+
 	/**
 	 * Etiqueta de la hora inicial de consulta
 	 */
@@ -99,7 +99,7 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 	 * Etiqueta de la hora final de consulta
 	 */
 	private JLabel lblHoraFinal;
-	
+
 	/**
 	 * Campo de texto para la hora final de consulta
 	 */
@@ -145,12 +145,12 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 		campos.add(lblFechaInicial);
 		dcFechaInicial = new JDateChooser();
 		campos.add(dcFechaInicial);
-		
+
 		lblFechaFinal = new JLabel( "* Fecha final del rango: " );
 		campos.add(lblFechaFinal);
 		dcFechaFinal = new JDateChooser();
 		campos.add(dcFechaFinal);
-				
+
 		lblHoraInicial = new JLabel( "<html> Hora inicial del rango en formato 24h (hh:mm) - Vacío si no aplica: " );
 		campos.add( lblHoraInicial );
 		txtHoraInicial = new JTextField( );
@@ -160,8 +160,8 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 		campos.add( lblHoraFinal );
 		txtHoraFinal = new JTextField( );
 		campos.add( txtHoraFinal );
-		
-		
+
+
 		campos.add( new JLabel() );        
 
 		JPanel botones = new JPanel( );
@@ -203,7 +203,7 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 
 			Timestamp fechaInicialTS = new Timestamp(fechaInicial.getTime());
 			Timestamp fechaFinalTS = new Timestamp(fechaFinal.getTime());
-			
+
 			if( idLocal.equals( "" ) )
 			{
 				JOptionPane.showMessageDialog( this, "Datos incompletos", "Consultar visitantes de un local", JOptionPane.ERROR_MESSAGE );
@@ -217,29 +217,36 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 					int horaFinal = -1;
 					int minutoFinal = -1;
 
-					if ( fechaFinal.after(fechaInicial))
+					if ( fechaFinal != null && fechaFinal.before(fechaInicial))
 					{
 						JOptionPane.showMessageDialog( this, "La fecha final debe ser posterior o igual a la fecha inicial del rango.", "Consultar visitantes de un local", JOptionPane.ERROR_MESSAGE );
 					}
-					if (horarioInicial != null && !horarioInicial.equals(""))
+					else
 					{
-						horaInicial = Integer.parseInt(horarioInicial.split(":")[0]);
-						minutoInicial = Integer.parseInt(horarioInicial.split(":")[1]);
-						if ( horarioFinal != null && !horarioFinal.equals(""))
+						if (horarioInicial != null && !horarioInicial.equals(""))
 						{
-							horaFinal = Integer.parseInt(horarioFinal.split(":")[0]);
-							minutoFinal = Integer.parseInt(horarioFinal.split(":")[1]);
-							if (horaFinal < horaInicial || (horaInicial == horaFinal && minutoFinal < minutoInicial))
+							horaInicial = Integer.parseInt(horarioInicial.split(":")[0]);
+							minutoInicial = Integer.parseInt(horarioInicial.split(":")[1]);
+							if ( horarioFinal != null && !horarioFinal.equals(""))
 							{
-								JOptionPane.showMessageDialog( this, "La hora final debe ser posterior a la hora inicial del rango.", "Consultar visitantes de un local", JOptionPane.ERROR_MESSAGE );
+								horaFinal = Integer.parseInt(horarioFinal.split(":")[0]);
+								minutoFinal = Integer.parseInt(horarioFinal.split(":")[1]);
+								if (horaFinal < horaInicial || (horaInicial == horaFinal && minutoFinal < minutoInicial))
+								{
+									JOptionPane.showMessageDialog( this, "La hora final debe ser posterior a la hora inicial del rango.", "Consultar visitantes de un local", JOptionPane.ERROR_MESSAGE );
+									throw new Exception();
+								}
 							}
 						}
+						interfaz.consultarVisitantesPorEstablecimiento(idLocal, fechaInicialTS, fechaFinalTS, horaInicial, minutoInicial, horaFinal, minutoFinal, this);
 					}
-					interfaz.consultarVisitantesPorEstablecimiento(idLocal, fechaInicialTS, fechaFinalTS, horaInicial, minutoInicial, horaFinal, minutoFinal, this);
 				}
 				catch( NumberFormatException e2 )
 				{
 					JOptionPane.showMessageDialog( this, "La hora deben ser números separados por ':'.", "Consultar visitantes de un local", JOptionPane.ERROR_MESSAGE );
+				} catch (Exception e) 
+				{
+					
 				}
 			}
 		}

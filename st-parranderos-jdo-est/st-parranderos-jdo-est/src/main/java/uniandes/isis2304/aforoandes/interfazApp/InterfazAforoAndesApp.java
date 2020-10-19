@@ -12,6 +12,7 @@ package uniandes.isis2304.aforoandes.interfazApp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -243,7 +244,9 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	private void crearMenu(  JsonArray jsonMenu )
 	{    	
 		// Creación de la barra de menús
+
 		menuBar = new JMenuBar();       
+		menuBar.setLayout(new GridLayout(3,6));
 		for (JsonElement men : jsonMenu)
 		{
 			// Creación de cada uno de los menús
@@ -516,13 +519,16 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 * Adiciona un ascensor con la información dada por el usuario
 	 * Se crea una nueva tupla de Ascensor en la base de datos, si un ascensor con ese identificador no existía
 	 */
-	public void adicionarAscensor( String idAscensor, int capacidadNormal, double area, double pesoMaximo, String idCentroComercial, DialogoAdicionarAscensor pDialogo)
+	public void adicionarAscensor( String idAscensor, double area, double pesoMaximo, String idCentroComercial, DialogoAdicionarAscensor pDialogo)
 	{
 		try 
 		{
-			long idArea = buscarAreaPorValor(area).getId();
-			long idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
-			VOAscensor ascensor = aforoAndes.adicionarAscensor(idAscensor, idCapacidadNormal, idArea, pesoMaximo, idCentroComercial);
+			Long idArea = null;
+			if ( area != -1)
+			{
+				idArea = buscarAreaPorValor(area).getId();
+			}
+			VOAscensor ascensor = aforoAndes.adicionarAscensor(idAscensor, idArea, pesoMaximo, idCentroComercial);
 
 			if (ascensor == null)
 			{
@@ -537,7 +543,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		} 
 		catch (Exception e) 
 		{
-			//			e.printStackTrace();
+			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
@@ -784,7 +790,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	/**
 	 * Busca los baños por sanitarios.
 	 */
-	public void buscarBanosPorSanitarios( )
+	public void buscarBanoPorSanitarios( )
 	{
 		try 
 		{
@@ -1331,7 +1337,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			if (nombre != null)
 			{
 				List<CentroComercial> lista = aforoAndes.darCentroComercialPorNombre(nombre);
-				String resultado = "En buscar CentroComercial por nombre: \n\n";
+				String resultado = "En buscar CentroComercial por nombre: \n";
 				resultado +=  "\n" + listarObjetos (lista);
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -1361,7 +1367,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			if (nombre != null)
 			{
 				long modificados = aforoAndes.cambiarNombreCentroComercial(idCentroComercial, nombre);
-				String resultado = "En actualizar CentroComercial por nombre: \n\n";
+				String resultado = "En actualizar CentroComercial por nombre: \n";
 				resultado += modificados + " registros actualizados";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -2050,11 +2056,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			{
 				throw new Exception ("No se pudo crear un local comercial con identificador: " + idLocalComercial);
 			}
+			pDialogo.dispose();
 			String resultado = "En adicionar LocalComercial\n\n";
 			resultado += "Local comercial adicionado exitosamente: " + localComercial;
 			resultado += "\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
-			pDialogo.dispose();
 
 		} 
 		catch (Exception e) 
@@ -2557,11 +2563,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			{
 				throw new Exception ("No se pudo crear un parqueadero con identificador: " + idParqueadero);
 			}
+			pDialogo.dispose();
 			String resultado = "En adicionar Parqueadero\n\n";
 			resultado += "Parqueadero adicionado exitosamente: " + ascensor;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
-			pDialogo.dispose();
 
 		} 
 		catch (Exception e) 
@@ -2637,7 +2643,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String idParqueadero = JOptionPane.showInputDialog (this, "Identificador del ascensor: ", "Actualizar área del parqueadero", JOptionPane.QUESTION_MESSAGE);
+			String idParqueadero = JOptionPane.showInputDialog (this, "Identificador del parqueadero: ", "Actualizar área del parqueadero", JOptionPane.QUESTION_MESSAGE);
 			String areaStr = JOptionPane.showInputDialog (this, "Nuevo identificador del área: ", "Actualizar área del parqueadero", JOptionPane.QUESTION_MESSAGE);
 			if (idParqueadero != null && areaStr != null)
 			{	
@@ -2739,7 +2745,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			}
 			String resultado = "En adicionar TipoLocal\n\n";
 			resultado += "Tipo de local adicionado exitosamente: " + tl;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 			pDialogo.dispose();
 
@@ -2929,15 +2935,16 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			{
 				throw new Exception ("No se pudo crear un tipo de visitante con tipo: " + tipo);
 			}
+			pDialogo.dispose();
 			String resultado = "En adicionar TipoVisitante\n\n";
 			resultado += "Tipo de visitante adicionado exitosamente: " + tv;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
-			pDialogo.dispose();
 
 		} 
 		catch (Exception e) 
 		{
+			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
@@ -2958,7 +2965,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		} 
 		catch (Exception e) 
 		{
-			//			e.printStackTrace();
+			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
@@ -3376,6 +3383,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		} 
 		catch (Exception e) 
 		{
+			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
@@ -3541,9 +3549,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void adicionarZonaCirculacion( )
 	{
-		DialogoAdicionarZonaCirculacion dialogo = new DialogoAdicionarZonaCirculacion( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
+		if ( administrador )
+		{
+			DialogoAdicionarZonaCirculacion dialogo = new DialogoAdicionarZonaCirculacion( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}		
 	}
 	/**
 	 * Adiciona una zona de circulación con la información dada por el usuario
@@ -3644,7 +3660,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			if (idParqueadero != null)
 			{
 				String idTipo = idParqueadero;
-				long parqueaderosEliminados = aforoAndes.eliminarParqueaderoPorId (idTipo);
+				long parqueaderosEliminados = aforoAndes.eliminarZonaCirculacionPorId (idTipo);
 
 				String resultado = "En eliminar ZonaCirculacion\n\n";
 				resultado += parqueaderosEliminados + " zonas de circulación eliminadas\n";
@@ -3675,9 +3691,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void consultarVisitantesPorEstablecimiento()
 	{
-		DialogoConsultarVisitantesPorEstablecimiento dialogo = new DialogoConsultarVisitantesPorEstablecimiento( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de consulta");
+		if ( administrador )
+		{
+			DialogoConsultarVisitantesPorEstablecimiento dialogo = new DialogoConsultarVisitantesPorEstablecimiento( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}		
 
 	}
 
@@ -3694,6 +3718,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
+			if (idLocalAdministrado != null && !idLocalAdministrado.equalsIgnoreCase(idLocalComercial))
+			{
+				throw new Exception ("No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores del centro comercial o del local.");
+			}
+				
 			String resultado = "En listar Visitantes del establecimiento " + idLocalComercial + "\n";
 			List<Visitante> visitantes;
 			if ( horaInicial == -1)
@@ -3783,9 +3812,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void consultarIndicesAforoEstablecimiento()
 	{
-		DialogoConsultarIndiceAforoLocal dialogo = new DialogoConsultarIndiceAforoLocal( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de consulta");
+		if ( administrador )
+		{
+			DialogoConsultarIndiceAforoLocal dialogo = new DialogoConsultarIndiceAforoLocal( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}		
 
 	}
 
@@ -3802,6 +3839,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
+			if (idLocalAdministrado != null && !idLocalAdministrado.equalsIgnoreCase(idLocalComercial))
+			{
+				throw new Exception ("No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores del centro comercial o del local.");
+			}
 			String resultado = "En consultar índice de aforo del local " + idLocalComercial + "\n ";
 			RFC3 indice;
 			if ( horaInicial == -1)
@@ -3838,10 +3879,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void consultarIndicesAforoCentroComercial()
 	{
-		DialogoConsultarIndiceAforoCC dialogo = new DialogoConsultarIndiceAforoCC( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de consulta");
-
+		if ( administrador )
+		{
+			DialogoConsultarIndiceAforoCC dialogo = new DialogoConsultarIndiceAforoCC( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}		
 	}
 
 	/** Consulta el índice de aforo de un centro comercial
@@ -3893,10 +3941,17 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void consultarIndicesAforoTipoLocal()
 	{
-		DialogoConsultarIndiceAforoTipo dialogo = new DialogoConsultarIndiceAforoTipo( this );
-		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de consulta");
-
+		if ( administrador )
+		{
+			DialogoConsultarIndiceAforoTipo dialogo = new DialogoConsultarIndiceAforoTipo( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}		
 	}
 
 	/** Consulta el índice de aforo de un tipo de local
@@ -4045,9 +4100,18 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 * Muestra el diálogo para el inicio de sesión.
 	 * @param pTipo Tipo del diálogo a crear. pTipo pertenece {DialogoInicioSecion.REGISTRO, DialogoInicioSecion.InicioSesion}
 	 */
-	public void mostrarDialogoInicioSesion( String pTipo )
+	public void mostrarDialogoRegistro( )
 	{
-		DialogoInicioSesion dialogo = new DialogoInicioSesion( this, pTipo );
+		DialogoInicioSesion dialogo = new DialogoInicioSesion( this, "Registrar" );
+		dialogo.setVisible( true );
+	}
+	/**
+	 * Muestra el diálogo para el inicio de sesión.
+	 * @param pTipo Tipo del diálogo a crear. pTipo pertenece {DialogoInicioSecion.REGISTRO, DialogoInicioSecion.InicioSesion}
+	 */
+	public void mostrarDialogoInicioSesion(  )
+	{
+		DialogoInicioSesion dialogo = new DialogoInicioSesion( this, "Iniciar sesión" );
 		dialogo.setVisible( true );
 	}
 	/**
@@ -4059,25 +4123,29 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try
 		{
-			String resultado = "Registro de administrador ";
-			Object administrador = null;
+			String resultado = "Registro de administrador \n";
+			Object admin = null;
 			if ( rol.equals("Administrador"))
 			{
-				administrador = (Administrador) aforoAndes.darAdministradorPorId(identificacion);
+				admin = (Administrador) (aforoAndes.darAdministradorPorId(identificacion));
 			}
 			else
 			{
-				administrador = (AdministradorLocal) aforoAndes.darAdministradorLocalPorId(identificacion);
+				admin = (AdministradorLocal) (aforoAndes.darAdministradorLocalPorId(identificacion));
+				idLocalAdministrado = ((AdministradorLocal) admin).getIdLocal();
 			}
 
-			if (administrador != null)
+			if (admin != null)
 			{
 				administrador = true;
 				if ( rol.equals("Administrador local"))
 				{
-					idLocalAdministrado = ((AdministradorLocal) administrador).getIdLocal();
+					resultado += "El inicio de sesión fue exitoso: " + (AdministradorLocal) admin;
 				}
-				resultado += "El inicio de sesión fue exitoso: " + administrador;
+				else
+				{
+					resultado += "El inicio de sesión fue exitoso: " + (Administrador) admin;
+				}
 			}
 			else
 			{

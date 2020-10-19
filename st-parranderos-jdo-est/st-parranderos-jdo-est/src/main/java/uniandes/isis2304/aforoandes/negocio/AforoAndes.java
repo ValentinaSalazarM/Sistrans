@@ -211,9 +211,9 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del ascensor
 	 * @return El objeto Ascensor adicionado. null si ocurre alguna Excepción
 	 */
-	public Ascensor adicionarAscensor(String idAscensor, long capacidadNormal, long area, double pesoMaximo, String idCentroComercial)	
+	public Ascensor adicionarAscensor(String idAscensor, Long area, double pesoMaximo, String idCentroComercial)	
 	{
-
+		long capacidadNormal = pp.darCapacidadNormalPorValor(2).getId();
 		log.info ("Adicionando Ascensor con identificador: " + idAscensor );
 		Ascensor ascensor = pp.adicionarAscensor(idAscensor, capacidadNormal, area, pesoMaximo, idCentroComercial);
 		log.info ("Adicionando Ascensor: " + ascensor);
@@ -965,7 +965,7 @@ public class AforoAndes
 	public long cambiarHorarioTurnoDomiciliario(String idDomiciliario, int horaInicioTurno, int minutoInicioTurno, int horaFinalTurno, int minutoFinalTurno)
 	{        
 		Horario horarioInicioTurno = pp.darHorarioPorHorayMinuto(horaInicioTurno, minutoInicioTurno);
-		Horario horarioFinalTurno = pp.darHorarioPorHorayMinuto(minutoFinalTurno, horaFinalTurno);
+		Horario horarioFinalTurno = pp.darHorarioPorHorayMinuto(horaFinalTurno, minutoFinalTurno);
 
 		if (horarioInicioTurno == null)
 		{	
@@ -1125,7 +1125,7 @@ public class AforoAndes
 	public long cambiarHorarioTurnoEmpleado(String idEmpleado, int horaInicioTurno, int minutoInicioTurno, int horaFinalTurno, int minutoFinalTurno)
 	{        
 		Horario horarioInicioTurno = pp.darHorarioPorHorayMinuto(horaInicioTurno, minutoInicioTurno);
-		Horario horarioFinalTurno = pp.darHorarioPorHorayMinuto(minutoFinalTurno, horaFinalTurno);
+		Horario horarioFinalTurno = pp.darHorarioPorHorayMinuto(horaFinalTurno, minutoFinalTurno);
 
 		if (horarioInicioTurno == null)
 		{	

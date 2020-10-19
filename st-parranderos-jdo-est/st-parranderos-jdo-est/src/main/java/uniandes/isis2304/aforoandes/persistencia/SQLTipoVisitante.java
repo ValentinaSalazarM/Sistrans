@@ -118,7 +118,7 @@ public class SQLTipoVisitante
 	 */
 	public TipoVisitante darTipoVisitantePorTipo (PersistenceManager pm, String nombreTipoVisitante) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoVisitante  () + " WHERE tipo = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoVisitante  () + " WHERE UPPER(tipo) = UPPER(?)");
 		q.setResultClass(TipoVisitante.class);
 		q.setParameters(nombreTipoVisitante);
 		return (TipoVisitante) q.executeUnique();

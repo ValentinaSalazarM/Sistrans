@@ -237,7 +237,7 @@ public class Lector implements VOLector
 	@Override
 	public String toString() 
 	{
-		return "Lector [id" + id + ", tipoLector = " + tipoLector + ", idCentroComercial = " + idCentroComercial + ", idLocalComercial = " + idLocalComercial + 
+		return "Lector [id = " + id + ", tipoLector = " + tipoLector + ", idCentroComercial = " + idCentroComercial + ", idLocalComercial = " + idLocalComercial + 
 				", idBano = "+ idBano + ", idAscensor = " + idAscensor +", idParqueadero = " + idParqueadero + "]";
 	}
 	

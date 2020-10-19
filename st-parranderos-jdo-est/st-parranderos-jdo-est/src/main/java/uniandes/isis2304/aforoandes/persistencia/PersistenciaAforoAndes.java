@@ -361,6 +361,8 @@ public class PersistenciaAforoAndes
 		sqlVehiculo = new SQLVehiculo(this);
 		sqlRegistranCarnet = new SQLRegistranCarnet(this);
 		sqlRegistranVehiculo = new SQLRegistranVehiculo(this);
+		sqlAdministrador = new SQLAdministrador(this);
+		sqlAdministradorLocal = new SQLAdministradorLocal(this);
 		sqlUtil = new SQLUtil(this);
 	}
 

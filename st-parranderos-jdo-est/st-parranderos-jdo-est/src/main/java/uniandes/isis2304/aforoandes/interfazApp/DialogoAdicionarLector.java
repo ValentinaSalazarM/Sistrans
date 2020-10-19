@@ -133,7 +133,7 @@ public class DialogoAdicionarLector extends JDialog implements ActionListener
 		lblIdentificadorEspacio = new JLabel( "Identificador del espacio donde se localiza: " );
 		add( lblIdentificadorEspacio, gbcE );
 		
-		gbcE.gridy = 4;
+		gbcE.gridy = 3;
 		lblEspacio = new JLabel( "Espacio donde se localiza: " );
 		add( lblEspacio, gbcE );
 

@@ -122,8 +122,8 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 6, 2, 5, 1 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
+		campos.setLayout( new GridLayout( 6, 1, 8, 2 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 15, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblFechaInicial = new JLabel( "* Fecha inicial del rango: " );
@@ -218,8 +218,8 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 								throw new Exception();
 							}
 						}
+						interfaz.consultarEstablecimientosAforoDisponible(fechaInicialTS, fechaFinalTS, horaInicial, minutoInicial, horaFinal, minutoFinal, this);
 					}
-					interfaz.consultarEstablecimientosAforoDisponible(fechaInicialTS, fechaFinalTS, horaInicial, minutoInicial, horaFinal, minutoFinal, this);
 
 				}
 				catch( NumberFormatException e2 )

@@ -30,7 +30,8 @@
 		"tipoLocal_sequence",
 		"tipoCarnet_sequence",
 		"tipoLector_sequence",
-		"tipoVisitante_sequence"
-		
+		"tipoVisitante_sequence",
+		"ADMINISTRADOR",
+		"ADMINISTRADORLOCAL"
 	]
 }
