@@ -91,6 +91,7 @@ public class ZonaCirculacionTest
 		// Ahora si se pueden probar las operaciones
 		try
 		{
+			aforoAndes.limpiarAforoAndes ();
 			// Lectura de los tipos de bebida con la tabla vacía
 			List <VOZonaCirculacion> lista = aforoAndes.darVOZonasCirculacion();
 			assertEquals ("No deben haber zonas de circulación creadas!!", 0, lista.size ());
@@ -154,6 +155,7 @@ public class ZonaCirculacionTest
 		try
 		{
 
+			aforoAndes.limpiarAforoAndes ();
 			// Lectura de los tipos de bebida con la tabla vacía
 			List <VOZonaCirculacion> lista = aforoAndes.darVOZonasCirculacion();
 			assertEquals ("No deben haber zonas de circulación creadas!!", 0, lista.size ());

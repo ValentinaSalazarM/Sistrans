@@ -94,7 +94,7 @@ public class AscensorTest
 			double valor = 200;
 			int aforo = 13;
 			VOArea area1 = aforoAndes.adicionarArea(valor, aforo);
-
+			
 			//Capacidad normal 
 			int value = 100; 
 			int af = 50;
@@ -141,6 +141,7 @@ public class AscensorTest
 	@Test
 	public void unicidadIDCCTest() 
 	{
+		
 		// Probar primero la conexión a la base de datos
 		try
 		{
