@@ -3109,7 +3109,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		DialogoRegistrarCarnet dialogo = new DialogoRegistrarCarnet( this );
 		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
 	}
 
 	/**
@@ -3126,6 +3125,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try
 		{
+			List<RegistranCarnet> visitasPendientes = aforoAndes.darRegistranCarnetPorIdVisitanteHoraNULL(idVisitante);
+			if (visitasPendientes != null && visitasPendientes.get(0) != null)
+			{
+				throw new Exception ("No es posible registrar una nueva visita porque existe una pendiente de actualizar hora salida");
+			}
 			String[] idEspacioVisitado = aforoAndes.darLectorPorId(idLector).getEspacioOcupado();
 			long tipoVisitante = aforoAndes.darVisitantePorId(idVisitante).getTipo();
 
@@ -3138,10 +3142,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				Integer horaCierre = ((BigDecimal)(horariosLocal[3])).intValue();
 				Integer minutoCierre = ((BigDecimal)(horariosLocal[4])).intValue();
 
-				if ( (tipoVisitante == 3 && activo == 0) || horaEntrada < horaApertura || (horaApertura == horaEntrada && minutoEntrada < minutoApertura ||
-						horaEntrada > horaCierre || (horaCierre == horaEntrada && minutoEntrada > minutoCierre)))
+				if ( tipoVisitante != 3 && tipoVisitante != 4 && (activo == 0 || horaEntrada < horaApertura || (horaApertura == horaEntrada && minutoEntrada < minutoApertura ||
+						horaEntrada > horaCierre || (horaCierre == horaEntrada && minutoEntrada > minutoCierre))))
 				{	
-					throw new Exception ("No es posible registrar una visita al local " + idEspacioVisitado[0] + " fuera de los horarios de funcionamiento.");
+					throw new Exception ("No es posible registrar una visita al local " + idEspacioVisitado[0] + " fuera de los horarios de funcionamiento si no es personal de aseo o mantenimiento.");
 				}
 
 			}

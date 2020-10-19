@@ -1679,6 +1679,19 @@ public class AforoAndes
 	}
 
 	/**
+	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
+	 */
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteHoraNULL (String idVisitante)
+	{
+		log.info ("Dar información de RegistranCarnet por idVisitante: " + idVisitante);
+		List<RegistranCarnet> registros = pp.darRegistranCarnetPorIdVisitanteHoraNULL(idVisitante);
+		log.info ("Dar información de RegistranCarnet por idVisitante: " + registros.size() + " registros con ese idVisitante existentes");
+		return registros;
+	}
+	
+	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador de visitante y una fecha o rango de fechas
 	 * @param idVisitante - El identificador del visitante
 	 * @param fechaInicio - La fecha de inicio del rango de consulta

@@ -3006,9 +3006,18 @@ public class PersistenciaAforoAndes
 	 */
 	public List<RegistranCarnet> darRegistranCarnetPorIdVisitante (String idVisitante)
 	{
-		return sqlRegistranCarnet.darResistranCarnetPorIdVisitante(pmf.getPersistenceManager(), idVisitante);
+		return sqlRegistranCarnet.darRegistranCarnetPorIdVisitante(pmf.getPersistenceManager(), idVisitante);
 	}
 	
+	/**
+	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
+	 */
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteHoraNULL (String idVisitante)
+	{
+		return sqlRegistranCarnet.darRegistranCarnetPorIdVisitanteHoraNULL(pmf.getPersistenceManager(), idVisitante);
+	}
 	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador de visitante y una fecha o rango de fechas
 	 * @param idVisitante - El identificador del visitante

@@ -116,7 +116,7 @@ public class SQLRegistranCarnet
 	 * @param idvisitante - El id del visitante al que pertenece el carnet
 	 * @return Una lista de objetos REGISTRANCARNET con el id del visitante dado
 	 */
-	public List<RegistranCarnet> darResistranCarnetPorIdVisitante (PersistenceManager pm, String idvisitante) 
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitante (PersistenceManager pm, String idvisitante) 
 	{
 		Query q;
 		q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ?");
@@ -125,6 +125,21 @@ public class SQLRegistranCarnet
 		return (List<RegistranCarnet>) q.executeList();
 	}
 
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN REGISTRANCARNET de la 
+	 * base de datos de AforoAndes, por su idvisitante
+	 * @param pm - El manejador de persistencia
+	 * @param idvisitante - El id del visitante al que pertenece el carnet
+	 * @return Una lista de objetos REGISTRANCARNET con el id del visitante dado
+	 */
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteHoraNULL (PersistenceManager pm, String idvisitante) 
+	{
+		Query q;
+		q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaRegistranCarnet () + " WHERE idvisitante = ? and horaSalida is NULL");
+		q.setParameters(idvisitante );
+		q.setResultClass(RegistranCarnet.class);
+		return (List<RegistranCarnet>) q.executeList();
+	}
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN REGISTRANCARNET de la 
 	 * base de datos de AforoAndes, por su idvisitante en una fecha o rango de fechas
