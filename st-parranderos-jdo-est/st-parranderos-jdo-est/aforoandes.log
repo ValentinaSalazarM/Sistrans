@@ -49,3 +49,92 @@
 22:50:36,117 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - empleado
 22:53:47,298 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Tipo de local: Prueba
 22:53:49,105 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Tipo de local: TipoLocal [id=21, nombre=Prueba, horaApertura= 29 horaCierre=43]
+23:33:34,382 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:33:34,601 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 9 ascensores existentes
+23:33:34,601 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:33:35,021 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:33:35,089 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:33:35,653 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:33:35,719 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 9 ascensores existentes
+23:33:35,719 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:33:36,123 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:33:36,157 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:34:40,578 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+23:34:40,822 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
+23:34:40,823 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:34:41,276 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:34:41,314 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:34:41,823 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+23:34:41,888 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
+23:34:41,888 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:34:42,299 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:34:42,326 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:34:42,764 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+23:34:42,822 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
+23:34:42,822 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:34:43,216 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:34:43,249 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:35:48,133 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+23:35:48,341 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
+23:35:48,341 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:35:48,748 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:35:48,791 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:35:49,266 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+23:35:49,332 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
+23:35:49,332 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:35:49,731 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:35:49,763 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:35:50,215 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:35:50,644 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:35:50,704 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:35:50,704 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+23:35:50,765 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
+23:35:50,766 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:35:50,994 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:35:51,023 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:47:26,297 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:47:26,534 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 9 ascensores existentes
+23:47:26,534 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:47:26,950 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:47:26,990 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:47:27,455 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:47:27,530 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 9 ascensores existentes
+23:47:27,530 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:47:27,929 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:47:27,963 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:48:34,828 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación
+23:48:35,042 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación: 16 zonas de circulación existentes
+23:48:35,043 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:48:35,531 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:48:35,567 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:48:36,070 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación
+23:48:36,147 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación: 16 zonas de circulación existentes
+23:48:36,148 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:48:36,601 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+23:48:36,633 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
