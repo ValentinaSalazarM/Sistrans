@@ -61,7 +61,7 @@ class SQLParqueadero
 	 * @param idCentroComercial - El identificador del centro comercial del parqueadero
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarParqueadero (PersistenceManager pm, String idParqueadero, long capacidadNormal, long area, String idCentroComercial) 
+	public long adicionarParqueadero (PersistenceManager pm, String idParqueadero, Long capacidadNormal, Long area, String idCentroComercial) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaParqueadero () + "(identificador, capacidadNormal, area, idcentrocomercial) values (?, ?, ?, ?)");
         q.setParameters(idParqueadero, capacidadNormal, area, idCentroComercial);

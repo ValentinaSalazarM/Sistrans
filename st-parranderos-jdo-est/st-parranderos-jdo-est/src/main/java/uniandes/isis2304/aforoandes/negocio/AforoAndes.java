@@ -346,7 +346,7 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del baño
 	 * @return El objeto Bano adicionado. null si ocurre alguna Excepción
 	 */
-	public Bano adicionarBaño (String idBaño, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
+	public Bano adicionarBaño (String idBaño, long capacidadNormal, Long area, int numeroSanitarios, String idCentroComercial) 
 	{
 		log.info ("Adicionando Bano con identificador: " + idBaño );
 		Bano bano = pp.adicionarBaño(idBaño, capacidadNormal, area, numeroSanitarios, idCentroComercial);
@@ -1378,7 +1378,7 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial al que pertenece el local comercial
 	 * @return El objeto LocalComercial adicionado. null si ocurre alguna Excepción
 	 */
-	public LocalComercial adicionarLocalComercial (String idLocalComercial, long capacidadNormal, long area, long tipoLocal, int activoBooleano, String idCentroComercial) 
+	public LocalComercial adicionarLocalComercial (String idLocalComercial, Long capacidadNormal, Long area, long tipoLocal, int activoBooleano, String idCentroComercial) 
 	{
 		log.info ("Adicionando LocalComercial con identificador: " + idLocalComercial );
 		LocalComercial localComercial = pp.adicionarLocalComercial(idLocalComercial, capacidadNormal, area, tipoLocal, activoBooleano, idCentroComercial);
@@ -1524,7 +1524,7 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del parqueadero
 	 * @return El objeto Parqueadero adicionado. null si ocurre alguna Excepción
 	 */
-	public Parqueadero adicionarParqueadero (String idParqueadero, long capacidadNormal, long area, String idCentroComercial) 
+	public Parqueadero adicionarParqueadero (String idParqueadero, Long capacidadNormal, Long area, String idCentroComercial) 
 	{
 		log.info ("Adicionando Parqueadero con identificador: " + idParqueadero );
 		Parqueadero parqueadero = pp.adicionarParqueadero(idParqueadero, capacidadNormal, area, idCentroComercial);
@@ -1741,7 +1741,6 @@ public class AforoAndes
 		Horario horarioSalida = pp.darHorarioPorHorayMinuto(horaSalida, minutoSalida);
 		if ( horarioSalida == null )
 			horarioSalida = pp.adicionarHorario(horaSalida, minutoSalida);
-		System.out.println(horarioSalida.getId());
 		log.info ("Cambiando hora de salida del registro del visitante: " + idVisitante);
 		long cambios = pp.cambiarHoraSalidaRegistranCarnet(idLector, idVisitante, fecha, horarioEntrada.getId(), horarioSalida.getId());
 		return cambios;

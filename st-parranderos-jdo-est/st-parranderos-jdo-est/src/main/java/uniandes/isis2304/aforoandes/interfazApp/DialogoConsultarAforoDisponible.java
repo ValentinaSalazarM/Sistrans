@@ -118,11 +118,11 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
-		setTitle( "Consultar índice de aforo de un tipo de local" );
+		setTitle( "Consultar establecimientos con aforo disponible" );
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 6, 1, 8, 2 ) );
+		campos.setLayout( new GridLayout( 6, 1, 8, 10 ) );
 		campos.setBorder( new EmptyBorder( 30, 30, 15, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
@@ -214,7 +214,7 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 							minutoFinal = Integer.parseInt(horarioFinal.split(":")[1]);
 							if (horaFinal < horaInicial || (horaInicial == horaFinal && minutoFinal < minutoInicial))
 							{
-								JOptionPane.showMessageDialog( this, "La hora final debe ser posterior a la hora inicial del rango.", "Consultar establecimientos con aforo dipsonible", JOptionPane.ERROR_MESSAGE );
+								JOptionPane.showMessageDialog( this, "La hora final debe ser posterior a la hora inicial del rango.", "Consultar establecimientos con aforo disponible", JOptionPane.ERROR_MESSAGE );
 								throw new Exception();
 							}
 						}

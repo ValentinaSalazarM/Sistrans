@@ -107,7 +107,7 @@ public class DialogoAdicionarEmpleado extends JDialog implements ActionListener
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
 		setTitle( "Agregar Empleado" );
-		setLocationRelativeTo( null );
+		setLocationRelativeTo( interfaz );
 
 		JPanel campos = new JPanel( );
 		campos.setLayout( new GridLayout( 7, 2 ) );

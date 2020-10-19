@@ -915,7 +915,7 @@ public class PersistenciaAforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del ascensor
 	 * @return El objeto Ascensor adicionado. null si ocurre alguna Excepción
 	 */
-	public Ascensor adicionarAscensor(String idAscensor, long capacidadNormal, long area, double pesoMaximo, String idCentroComercial) 
+	public Ascensor adicionarAscensor(String idAscensor, Long capacidadNormal, Long area, double pesoMaximo, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1124,7 +1124,7 @@ public class PersistenciaAforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del baño
 	 * @return El objeto Bano adicionado. null si ocurre alguna Excepción
 	 */
-	public Bano adicionarBaño (String idBaño, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
+	public Bano adicionarBaño (String idBaño, long capacidadNormal, Long area, int numeroSanitarios, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -2578,7 +2578,7 @@ public class PersistenciaAforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial al que pertenece el local comercial
 	 * @return El objeto LocalComercial adicionado. null si ocurre alguna Excepción
 	 */
-	public LocalComercial adicionarLocalComercial (String idLocalComercial, long capacidadNormal, long area, long tipoLocal, int activo, String idCentroComercial) 
+	public LocalComercial adicionarLocalComercial (String idLocalComercial, Long capacidadNormal, Long area, long tipoLocal, int activo, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -2792,7 +2792,7 @@ public class PersistenciaAforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del parqueadero
 	 * @return El objeto Parqueadero adicionado. null si ocurre alguna Excepción
 	 */
-	public Parqueadero adicionarParqueadero (String idParqueadero, long capacidadNormal, long area, String idCentroComercial) 
+	public Parqueadero adicionarParqueadero (String idParqueadero, Long capacidadNormal, Long area, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();

@@ -151,16 +151,17 @@ public class DialogoAdicionarLector extends JDialog implements ActionListener
 		}
 		add( cbTiposLector, gbcC );
 
+
 		gbcC.gridy = 2;
+		txtIdentificadorEspacio = new JTextField( );
+		add( txtIdentificadorEspacio, gbcC );
+
+		gbcC.gridy = 3;
 		JPanel botones1=new JPanel();
 		botones1.setLayout(new BorderLayout());
 
 		JPanel botones2=new JPanel();
 		botones2.setLayout(new BorderLayout());
-
-		gbcC.gridy = 3;
-		txtIdentificadorEspacio = new JTextField( );
-		add( txtIdentificadorEspacio, gbcC );
 
 		rdAscensor= new JRadioButton("Ascensor");
 		rdBaño= new JRadioButton("Baño");
@@ -186,7 +187,7 @@ public class DialogoAdicionarLector extends JDialog implements ActionListener
 
 		add(botones1,gbcC);
 		
-		gbcC.gridy = 3;
+		gbcC.gridy = 4;
 		
 		add(botones2,gbcC);
 		

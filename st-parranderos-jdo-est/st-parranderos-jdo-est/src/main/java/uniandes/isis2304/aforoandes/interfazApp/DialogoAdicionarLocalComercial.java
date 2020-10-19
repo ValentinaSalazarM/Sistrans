@@ -137,7 +137,7 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 		campos.setBorder( new EmptyBorder( 30, 30, 30, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
-		lblIdentificador = new JLabel( "Identificador: " );
+		lblIdentificador = new JLabel( "* Identificador: " );
 		campos.add( lblIdentificador );
 		txtIdentificador = new JTextField( );
 		campos.add( txtIdentificador );
@@ -147,12 +147,12 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 		txtCapacidadNormal = new JTextField( );
 		campos.add( txtCapacidadNormal );
 
-		lblArea = new JLabel( "Área: " );
+		lblArea = new JLabel( "* Área: " );
 		campos.add( lblArea );
 		txtArea = new JTextField( );
 		campos.add( txtArea );
 
-		lblTipo = new JLabel( "Tipo de local: " );
+		lblTipo = new JLabel( "* Tipo de local: " );
 		campos.add( lblTipo );
 
 		cbTipoLocal = new JComboBox<>();
@@ -162,7 +162,7 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 		}
 		campos.add( cbTipoLocal );
 
-		lblCentroComercial = new JLabel( "Id Centro Comercial: " );
+		lblCentroComercial = new JLabel( "* Id Centro Comercial: " );
 		campos.add( lblCentroComercial );
 		cbCentrosComerciales = new JComboBox<>();
 		for ( VOCentroComercial tv: pPrincipal.listarVOCentrosComerciales())
@@ -171,7 +171,7 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 		}
 		campos.add( cbCentrosComerciales );
 
-		lblActivo = new JLabel( "Activo: " );
+		lblActivo = new JLabel( "* Activo: " );
 		campos.add(lblActivo);
 		cbActivo = new JCheckBox();
 		campos.add( cbActivo );
@@ -218,7 +218,7 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 			String idCentroComercial = comboBoxCC.split(" - ")[0];
 			Boolean activo = cbActivo.isSelected();
 			
-			if( idLocalComercial.equals( "" ) || capacidadNormalStr.equals( "" ) || idCentroComercial.equals( "" ) )
+			if( idLocalComercial.equals( "" ) || areaStr.equals( "" ) || idCentroComercial.equals( "" ) )
 			{
 				JOptionPane.showMessageDialog( this, "Datos incompletos", "Agregar Local Comercial", JOptionPane.ERROR_MESSAGE );
 			}
@@ -226,17 +226,25 @@ public class DialogoAdicionarLocalComercial extends JDialog implements ActionLis
 			{
 				try
 				{
-					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
 					double area = Long.parseLong(areaStr);
-					if ( interfaz.buscarAreaPorValor(area) == null)
+					
+					if ( !capacidadNormalStr.isEmpty())
 					{
-						interfaz.adicionarArea();
+						int capacidadNormal = Integer.parseInt(capacidadNormalStr);
+						if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
+						{
+							interfaz.adicionarCapacidadNormal();
+						}
+						interfaz.adicionarLocalComercial(idLocalComercial, capacidadNormal, area, tipoLocal, activo, idCentroComercial, this);
 					}
-					if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
+					else
 					{
-						interfaz.adicionarCapacidadNormal();
+						if ( interfaz.buscarAreaPorValor(area) == null)
+						{
+							interfaz.adicionarArea();
+						}
+						interfaz.adicionarLocalComercial(idLocalComercial, -1, area, tipoLocal, activo, idCentroComercial, this);
 					}
-					interfaz.adicionarLocalComercial(idLocalComercial, capacidadNormal, area, tipoLocal, activo, idCentroComercial, this);
 				}
 				catch( NumberFormatException e2 )
 				{

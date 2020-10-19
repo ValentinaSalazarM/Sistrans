@@ -49,3 +49,308 @@
 22:50:36,117 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - empleado
 22:53:47,298 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Tipo de local: Prueba
 22:53:49,105 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Tipo de local: TipoLocal [id=21, nombre=Prueba, horaApertura= 29 horaCierre=43]
+22:55:15,623 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:55:15,624 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:55:15,650 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:55:30,300 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+22:55:31,581 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+22:55:36,757 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+22:55:37,464 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+22:55:41,924 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
+22:55:43,045 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
+22:56:02,542 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Tipo de visitante: Prueba
+22:56:04,605 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO TIPOVISITANTE (id, tipo, horainicio, horalimite) values (?, ?, ?, ?)".
+ORA-02290: restricción de control (ISIS2304A222020.CK_TV_TIPO) violada
+
+22:56:04,846 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Tipo de visitante: null
+22:56:10,432 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector
+22:56:10,588 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector: 3 existentes
+23:03:16,166 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes
+23:05:22,661 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:05:22,661 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:05:22,683 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:05:36,439 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:05:38,055 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:05:41,472 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+23:05:41,836 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+23:05:44,427 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector
+23:05:44,532 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector: 3 existentes
+23:07:12,383 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando índice de aforo del local comercial: LC101
+23:07:13,065 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - RFC3 [Identificador espacio = LC101, índice aforo = 0.0438]
+23:07:35,838 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:07:35,838 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:07:35,859 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:07:49,243 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:07:50,751 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:07:55,855 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+23:07:56,171 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+23:08:02,251 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes
+23:08:03,973 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes: 51 visitantes existentes
+23:10:20,127 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:10:20,128 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:10:20,149 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:10:27,752 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:10:29,573 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:10:32,373 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:10:34,679 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:10:40,939 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+23:10:42,135 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+23:10:46,109 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector
+23:10:46,697 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector: 3 existentes
+23:10:54,372 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+23:10:55,615 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 39 lectores existentes
+23:11:09,302 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector
+23:11:10,526 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector: 3 existentes
+23:11:24,678 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: 41
+23:11:27,775 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO LECTOR(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño) values (?, ?, ?, ?, ?, ?, ?)".
+ORA-00904: "IDBAÑO": identificador no válido
+
+23:11:28,070 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: null
+23:11:37,560 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: 41
+23:11:37,613 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO LECTOR(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño) values (?, ?, ?, ?, ?, ?, ?)".
+ORA-00904: "IDBAÑO": identificador no válido
+
+23:11:37,730 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: null
+23:11:43,799 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: 41
+23:11:44,059 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO LECTOR(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño) values (?, ?, ?, ?, ?, ?, ?)".
+ORA-00904: "IDBAÑO": identificador no válido
+
+23:11:44,140 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: null
+23:12:14,547 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+23:12:15,876 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 39 lectores existentes
+23:14:53,673 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Cambiando teléfono de emergencia del visitante: 194317
+23:14:55,713 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
+23:14:56,055 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
+23:14:58,954 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes
+23:15:01,730 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes: 51 visitantes existentes
+23:15:16,457 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Cambiando teléfono de emergencia del visitante: 194317
+23:15:16,763 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "UPDATE VISITANTE SET telefonoemergencia = ? WHERE identificacion = ?".
+ORA-02290: restricción de control (ISIS2304A222020.CK_VISITANTE_TELEFONOEMERGENCIA) violada
+
+23:17:59,244 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando índice de aforo del centro comercial: 6
+23:18:00,155 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - RFC3 [Identificador espacio = 6, índice aforo = 0.0085]
+23:18:11,221 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
+23:18:12,123 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
+23:18:31,543 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:18:31,544 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:18:31,565 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:18:39,832 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:18:41,267 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:18:45,722 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+23:18:47,067 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+23:18:51,101 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector
+23:18:52,313 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector: 3 existentes
+23:19:01,919 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: 41
+23:19:04,471 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO LECTOR(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño) values (?, ?, ?, ?, ?, ?, ?)".
+ORA-00904: "IDBAÑO": identificador no válido
+
+23:19:05,110 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: null
+23:22:12,304 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:22:12,305 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:22:12,327 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:22:25,052 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:22:26,081 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:22:30,243 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+23:22:30,688 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+23:22:33,190 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector
+23:22:33,835 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector: 3 existentes
+23:22:38,825 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: 41
+23:22:44,521 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO LECTOR(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño) values (?, ?, ?, ?, ?, ?, ?)".
+ORA-00904: "IDBAÑO": identificador no válido
+
+23:22:44,957 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: null
+23:24:47,716 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:24:47,716 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:24:47,738 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:25:18,703 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:25:20,480 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:25:24,253 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+23:25:24,874 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+23:25:30,853 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector
+23:25:31,465 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector: 3 existentes
+23:25:36,873 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: 42
+23:25:42,356 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: Lector [id = 42, tipoLector = 1, idCentroComercial = 6, idLocalComercial = null, idBano = null, idAscensor = null, idParqueadero = null]
+23:25:50,819 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+23:25:52,079 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 40 lectores existentes
+23:27:12,616 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando lector por id: 42
+23:27:13,485 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando lector por id: 1 tuplas eliminadas
+23:27:16,265 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+23:27:17,114 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 39 lectores existentes
+23:27:20,915 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector
+23:27:21,657 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector: 3 existentes
+23:27:35,093 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: 45
+23:27:35,897 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: Lector [id = 45, tipoLector = 3, idCentroComercial = null, idLocalComercial = LC101, idBano = null, idAscensor = null, idParqueadero = null]
+23:27:40,721 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+23:27:41,949 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 40 lectores existentes
+23:27:54,950 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Cambiando tipo del lector: 45
+23:27:59,062 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+23:28:00,837 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 40 lectores existentes
+23:28:06,586 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector
+23:28:07,338 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de lector: 3 existentes
+23:28:16,930 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: 47
+23:28:17,579 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO LECTOR(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (?, ?, ?, ?, ?, ?, ?)".
+ORA-02291: restricción de integridad (ISIS2304A222020.FK_L_LOCALCOMERCIAL) violada - clave principal no encontrada
+
+23:28:17,760 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: null
+23:28:51,083 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:28:51,084 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:28:51,105 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:29:10,041 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+23:29:11,512 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 40 lectores existentes
+23:29:17,704 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando lector por id: 45
+23:29:19,182 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando lector por id: 1 tuplas eliminadas
+23:29:22,611 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+23:29:24,107 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 39 lectores existentes
+23:30:20,142 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:30:20,143 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:30:20,165 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:33:23,560 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
+23:33:24,277 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
+23:33:37,052 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:33:38,645 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:35:01,585 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
+23:35:02,489 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
+23:36:57,197 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
+23:36:59,407 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 77 registros existentes
+23:37:11,463 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
+23:37:12,300 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
+23:37:19,071 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
+23:37:20,096 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
+23:37:36,151 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes
+23:37:38,920 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes: 51 visitantes existentes
+23:37:47,588 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
+23:37:48,261 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
+23:38:04,785 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un lector por id: 1
+23:38:05,454 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Lector [id = 1, tipoLector = 2, idCentroComercial = 6, idLocalComercial = null, idBano = null, idAscensor = null, idParqueadero = null]
+23:38:05,455 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un visitante por identificación: 194317
+23:38:06,108 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Visitante [identificador = 194317, tipo = 3, nombre = Valentina Salazar, correo = kv.salazar@uniandes.edu.co, telefonoPropio = 8002673, nombreEmergencia = Yorky, telefonoEmergencia = 80095461]
+23:38:06,109 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Recuperando horarios habilitados para circulación
+23:38:06,741 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Recuperando horarios habilitados para circulación: Listo!
+23:38:07,244 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando RegistranCarnet con lector: 1 y visitante: 194317
+23:38:08,443 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando RegistranCarnet: RegistranCarnet [idLector = 1, tipoCarnet = 1, idVisitante = 194317, fecha = 2020-10-18 23:37:48.271, idHoraEntrada = 43, idHoraSalida = null]
+23:38:19,168 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
+23:38:19,810 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
+23:38:39,275 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
+23:38:40,067 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 78 registros existentes
+23:40:00,904 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
+23:40:01,490 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
+23:40:21,044 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 194317
+23:40:21,888 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - RegistranCarnet [idLector = 1, tipoCarnet = 1, idVisitante = 194317, fecha = 2020-10-18 00:00:00.0, idHoraEntrada = 43, idHoraSalida = 0]
+23:40:22,775 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Cambiando hora de salida del registro del visitante: 194317
+23:40:28,864 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
+23:40:30,349 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 78 registros existentes
+23:44:07,890 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:44:09,119 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:44:12,921 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+23:44:13,346 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+23:44:19,646 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
+23:44:20,229 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 0 visitantes atendidos en la(s) fecha(s)
+23:44:35,943 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
+23:44:38,469 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 78 registros existentes
+23:45:41,716 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
+23:45:42,541 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 4 visitantes atendidos en la(s) fecha(s)
+23:46:01,036 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
+23:46:01,382 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 4 visitantes atendidos en la(s) fecha(s)
+23:46:18,519 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
+23:46:21,087 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 78 registros existentes
+23:47:38,139 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
+23:47:38,798 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 2 visitantes en el rango de horas
+23:47:58,672 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
+23:47:58,750 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 6 visitantes atendidos en la(s) fecha(s)
+23:48:16,178 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
+23:48:16,337 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 0 visitantes en el rango de horas
+23:48:35,239 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:48:35,240 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:48:35,260 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:48:50,038 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:48:51,593 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:48:53,671 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:48:55,508 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:49:01,588 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+23:49:02,616 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+23:49:10,143 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+23:49:10,545 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
+23:49:46,639 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Ascensor con identificador: ASCPRUEBA
+23:51:04,433 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:51:04,434 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:51:04,457 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:51:24,799 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:51:26,872 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:51:32,140 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+23:51:32,310 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+23:51:38,576 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+23:51:39,600 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
+23:51:51,327 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Ascensor con identificador: ascpruebaestasies
+23:51:54,096 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Ascensor: Ascensor [identificador=ascpruebaestasies, capacidadNormal=21, area=null, pesoMaximo=2100.0, idCentroComercial=13]
+00:04:28,111 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:04:28,112 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:04:28,133 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+00:04:37,210 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+00:04:38,430 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+00:04:42,329 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+00:04:42,912 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+00:04:47,269 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+00:04:47,855 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
+00:04:52,517 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano
+00:04:53,136 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano: 20 baños existentes
+00:04:56,097 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+00:04:56,906 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
+00:05:31,030 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 18
+00:05:31,571 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=4, valor=18.0, aforo=9]
+00:05:31,571 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 18
+00:05:32,297 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=4, valor=18.0, aforo=9]
+00:05:32,297 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Bano con identificador: BAPRUEBA
+00:05:34,987 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Bano: Bano [identificador=BAPRUEBA, capacidadNormal=4, area=null, sanitarios=19, idCentroComercial=14]
+00:05:38,860 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+00:05:39,760 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
+00:05:42,174 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+00:05:43,015 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
+00:05:52,111 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 18
+00:05:52,615 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=4, valor=18.0, aforo=9]
+00:05:52,615 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 18
+00:05:53,572 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=4, valor=18.0, aforo=9]
+00:05:53,572 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Bano con identificador: BAPRUEB
+00:05:53,948 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Bano: Bano [identificador=BAPRUEB, capacidadNormal=4, area=null, sanitarios=18, idCentroComercial=12]
+00:06:41,336 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano
+00:06:42,628 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano: 22 baños existentes
+00:06:56,457 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Bano por id: BAPRUEBA
+00:06:57,319 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Bano por id: 1 tuplas eliminadas
+00:07:19,443 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+00:07:20,709 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
+00:07:36,972 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 420
+00:07:37,069 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=9, valor=420.0, aforo=100]
+00:07:37,069 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 420
+00:07:37,878 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=9, valor=420.0, aforo=100]
+00:07:37,878 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Parqueadero con identificador: PAPRUEBA
+00:07:38,992 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Parqueadero: Parqueadero [identificador=PAPRUEBA, capacidadNormal=9, area=null, idCentroComercial=14]
+00:07:44,241 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero
+00:07:45,058 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero: 16 parqueaderos existentes
+00:07:52,480 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Parqueadero por id: PAPRUEBA
+00:07:52,566 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Parqueadero por id: 1 tuplas eliminadas
+00:08:00,356 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de local
+00:08:01,637 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de local: 16 existentes
+00:08:01,642 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+00:08:02,611 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
+00:08:50,066 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de área por valor: 324.0
+00:08:51,000 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Area [id = 5, valor = 324.0, aforo = 21]
+00:08:51,001 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de área por valor: 324.0
+00:08:51,636 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Area [id = 5, valor = 324.0, aforo = 21]
+00:08:51,636 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: -1
+00:08:52,242 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - 
+00:11:18,295 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:11:18,295 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:11:18,316 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+00:11:34,172 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+00:11:34,403 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+00:11:40,213 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
+00:11:40,798 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
+00:11:48,899 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de local
+00:11:49,691 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de local: 16 existentes
+00:11:49,695 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+00:11:50,329 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
+00:12:09,822 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de área por valor: 324.0
+00:12:10,275 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Area [id = 5, valor = 324.0, aforo = 21]
+00:12:10,276 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de área por valor: 324.0
+00:12:11,227 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Area [id = 5, valor = 324.0, aforo = 21]
+00:12:11,227 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando LocalComercial con identificador: LCPRUEBAA
+00:12:15,904 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando LocalComercial: LocalComercial [identificador = LCPRUEBAA, capacidadNormal = null, area = 5, tipoLocal = 5, activo = 1, idCentroComercial = 5]

@@ -107,11 +107,11 @@ public class DialogoAdicionarDomiciliario extends JDialog implements ActionListe
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 300 );
 		setTitle( "Agregar Domiciliario" );
-		setLocationRelativeTo( null );
+		setLocationRelativeTo( interfaz );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 7, 2 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 30, 30 ) );
+		campos.setLayout( new GridLayout( 6, 2, 5, 10 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 5, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblIdVisitante = new JLabel( "Identificación como visitante: " );
@@ -124,12 +124,12 @@ public class DialogoAdicionarDomiciliario extends JDialog implements ActionListe
 		txtEmpresaDomicilios = new JTextField( );
 		campos.add( txtEmpresaDomicilios );
 
-		lblHoraInicioTurno = new JLabel( "Hora de inicio del turno en formato 24h (hh:mm): " );
+		lblHoraInicioTurno = new JLabel( "<html> Hora de inicio del turno en formato 24h (hh:mm): " );
 		campos.add( lblHoraInicioTurno );
 		txtHoraInicioTurno = new JTextField( );
 		campos.add( txtHoraInicioTurno );
 
-		lblHoraFinalTurno = new JLabel( "Hora final del turno en formato 24h (formato hh:mm): " );
+		lblHoraFinalTurno = new JLabel( "<html> Hora final del turno en formato 24h (formato hh:mm): " );
 		campos.add( lblHoraFinalTurno );
 		txtHoraFinalTurno = new JTextField( );
 		campos.add( txtHoraFinalTurno );
