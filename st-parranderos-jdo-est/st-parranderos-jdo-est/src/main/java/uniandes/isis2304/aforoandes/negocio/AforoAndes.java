@@ -346,7 +346,7 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del baño
 	 * @return El objeto Bano adicionado. null si ocurre alguna Excepción
 	 */
-	public Bano adicionarBaño (String idBaño, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
+	public Bano adicionarBaño (String idBaño, long capacidadNormal, Long area, int numeroSanitarios, String idCentroComercial) 
 	{
 		log.info ("Adicionando Bano con identificador: " + idBaño );
 		Bano bano = pp.adicionarBaño(idBaño, capacidadNormal, area, numeroSanitarios, idCentroComercial);
@@ -1378,7 +1378,7 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial al que pertenece el local comercial
 	 * @return El objeto LocalComercial adicionado. null si ocurre alguna Excepción
 	 */
-	public LocalComercial adicionarLocalComercial (String idLocalComercial, long capacidadNormal, long area, long tipoLocal, int activoBooleano, String idCentroComercial) 
+	public LocalComercial adicionarLocalComercial (String idLocalComercial, Long capacidadNormal, Long area, long tipoLocal, int activoBooleano, String idCentroComercial) 
 	{
 		log.info ("Adicionando LocalComercial con identificador: " + idLocalComercial );
 		LocalComercial localComercial = pp.adicionarLocalComercial(idLocalComercial, capacidadNormal, area, tipoLocal, activoBooleano, idCentroComercial);
@@ -1524,7 +1524,7 @@ public class AforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del parqueadero
 	 * @return El objeto Parqueadero adicionado. null si ocurre alguna Excepción
 	 */
-	public Parqueadero adicionarParqueadero (String idParqueadero, long capacidadNormal, long area, String idCentroComercial) 
+	public Parqueadero adicionarParqueadero (String idParqueadero, Long capacidadNormal, Long area, String idCentroComercial) 
 	{
 		log.info ("Adicionando Parqueadero con identificador: " + idParqueadero );
 		Parqueadero parqueadero = pp.adicionarParqueadero(idParqueadero, capacidadNormal, area, idCentroComercial);
@@ -1679,6 +1679,19 @@ public class AforoAndes
 	}
 
 	/**
+	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
+	 */
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteHoraNULL (String idVisitante)
+	{
+		log.info ("Dar información de RegistranCarnet por idVisitante: " + idVisitante);
+		List<RegistranCarnet> registros = pp.darRegistranCarnetPorIdVisitanteHoraNULL(idVisitante);
+		log.info ("Dar información de RegistranCarnet por idVisitante: " + registros.size() + " registros con ese idVisitante existentes");
+		return registros;
+	}
+	
+	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador de visitante y una fecha o rango de fechas
 	 * @param idVisitante - El identificador del visitante
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
@@ -1741,7 +1754,6 @@ public class AforoAndes
 		Horario horarioSalida = pp.darHorarioPorHorayMinuto(horaSalida, minutoSalida);
 		if ( horarioSalida == null )
 			horarioSalida = pp.adicionarHorario(horaSalida, minutoSalida);
-		System.out.println(horarioSalida.getId());
 		log.info ("Cambiando hora de salida del registro del visitante: " + idVisitante);
 		long cambios = pp.cambiarHoraSalidaRegistranCarnet(idLector, idVisitante, fecha, horarioEntrada.getId(), horarioSalida.getId());
 		return cambios;
@@ -2918,7 +2930,45 @@ public class AforoAndes
 		return resultados;
 	}
 	
+	/**
+	 * Método que realiza la consulta del promedio, el máximo y el mínimo de duración de una visita de un tipo de visitante dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return El arreglo de double construido con base en la consulta realizada
+	 */
+	public double[] RFC5TiemposVisitaTipoVisitanteMetricas (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		log.info ("Consultando duración visitas del tipo de visitante: " + tipoVisitante);
+		double[] metricas = pp.RFC5TiemposVisitaTipoVisitanteMetricas(fechaInicio, fechaFin, horaInicio, minutoInicio, horaFinal, minutoFinal, tipoVisitante);
+		log.info ("Consultando duración visitas del tipo de visitante: " + metricas != null ? metricas : "NO EXISTE");
+		return metricas;
 
+	}
+
+	/**
+	 * Método que realiza la consulta de la duración de cada visita de un tipo de visitante dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return El arreglo de double construido con base en la consulta realizada
+	 */
+	public List<Object> RFC5TiemposVisitaTipoVisitante (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		log.info ("Consultando duración visitas del tipo de visitante: " + tipoVisitante);
+		List<Object> resultados = pp.RFC5TiemposVisitaTipoVisitante(fechaInicio, fechaFin, horaInicio, minutoInicio, horaFinal, minutoFinal, tipoVisitante);
+		log.info ("Consultando duración visitas del tipo de visitante: " + resultados.size() + "visitas encontradas");
+		return resultados;
+
+	}
 	/* ****************************************************************
 	 * 			Métodos para administración
 	 *****************************************************************/

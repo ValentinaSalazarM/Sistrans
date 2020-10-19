@@ -915,7 +915,7 @@ public class PersistenciaAforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del ascensor
 	 * @return El objeto Ascensor adicionado. null si ocurre alguna Excepción
 	 */
-	public Ascensor adicionarAscensor(String idAscensor, long capacidadNormal, long area, double pesoMaximo, String idCentroComercial) 
+	public Ascensor adicionarAscensor(String idAscensor, Long capacidadNormal, Long area, double pesoMaximo, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1124,7 +1124,7 @@ public class PersistenciaAforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del baño
 	 * @return El objeto Bano adicionado. null si ocurre alguna Excepción
 	 */
-	public Bano adicionarBaño (String idBaño, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
+	public Bano adicionarBaño (String idBaño, long capacidadNormal, Long area, int numeroSanitarios, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -2578,7 +2578,7 @@ public class PersistenciaAforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial al que pertenece el local comercial
 	 * @return El objeto LocalComercial adicionado. null si ocurre alguna Excepción
 	 */
-	public LocalComercial adicionarLocalComercial (String idLocalComercial, long capacidadNormal, long area, long tipoLocal, int activo, String idCentroComercial) 
+	public LocalComercial adicionarLocalComercial (String idLocalComercial, Long capacidadNormal, Long area, long tipoLocal, int activo, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -2792,7 +2792,7 @@ public class PersistenciaAforoAndes
 	 * @param idCentroComercial - El identificador del centro comercial del parqueadero
 	 * @return El objeto Parqueadero adicionado. null si ocurre alguna Excepción
 	 */
-	public Parqueadero adicionarParqueadero (String idParqueadero, long capacidadNormal, long area, String idCentroComercial) 
+	public Parqueadero adicionarParqueadero (String idParqueadero, Long capacidadNormal, Long area, String idCentroComercial) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -3006,9 +3006,18 @@ public class PersistenciaAforoAndes
 	 */
 	public List<RegistranCarnet> darRegistranCarnetPorIdVisitante (String idVisitante)
 	{
-		return sqlRegistranCarnet.darResistranCarnetPorIdVisitante(pmf.getPersistenceManager(), idVisitante);
+		return sqlRegistranCarnet.darRegistranCarnetPorIdVisitante(pmf.getPersistenceManager(), idVisitante);
 	}
 	
+	/**
+	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador del visitante
+	 * @param idVisitante - El identificador del visitante
+	 * @return El objeto RegistranCarnet, construido con base en las tuplas de la tabla REGISTRANCARNET con el identificador dado
+	 */
+	public List<RegistranCarnet> darRegistranCarnetPorIdVisitanteHoraNULL (String idVisitante)
+	{
+		return sqlRegistranCarnet.darRegistranCarnetPorIdVisitanteHoraNULL(pmf.getPersistenceManager(), idVisitante);
+	}
 	/**
 	 * Método que consulta todas las tuplas en la tabla RegistranCarnet con un identificador de visitante y una fecha o rango de fechas
 	 * @param idVisitante - El identificador del visitante
@@ -4566,6 +4575,39 @@ public class PersistenciaAforoAndes
 	{
 		return sqlUtil.RFC4FechaRangoHoras(pmf.getPersistenceManager(), fecha, horaInicio, minutoInicio, horaFin, minutoFin);
 	}
+	
+	/**
+	 * Método que realiza la consulta del promedio, el máximo y el mínimo de duración de una visita de un tipo de visitante dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return El arreglo de double construido con base en la consulta realizada
+	 */
+	public double[] RFC5TiemposVisitaTipoVisitanteMetricas (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		return sqlUtil.RFC5TiemposVisitaTipoVisitanteMetricas(pmf.getPersistenceManager(), fechaInicio, fechaFin, horaInicio, minutoInicio, horaFinal, minutoFinal, tipoVisitante);
+	}
+	
+	/**
+	 * Método que realiza la consulta de la duración de cada visita de un tipo de visitante dado
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return La lista de objectos construida con base en la consulta realizada
+	 */
+	public List<Object> RFC5TiemposVisitaTipoVisitante (Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		return sqlUtil.RFC5TiemposVisitaTipoVisitante(pmf.getPersistenceManager(), fechaInicio, fechaFin, horaInicio, minutoInicio, horaFinal, minutoFinal, tipoVisitante);
+	}
+	
 	
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de AforoAndes

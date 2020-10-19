@@ -127,13 +127,13 @@ public class DialogoConsultarVisitantesPorEstablecimiento extends JDialog implem
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
-		setSize( 500, 300 );
+		setSize( 500, 340 );
 		setTitle( "Consultar visitantes de un establecimiento" );
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 7, 2 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
+		campos.setLayout( new GridLayout( 6, 2, 10, 10 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 10, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblLocalComercial = new JLabel( "* Identificador del establecimiento: " );

@@ -62,7 +62,7 @@ class SQLBano
 	 * @param idCentroComercial - El identificador del centro comercial del baño
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarBaño (PersistenceManager pm, String idBaño, long capacidadNormal, long area, int numeroSanitarios, String idCentroComercial) 
+	public long adicionarBaño (PersistenceManager pm, String idBaño, Long capacidadNormal, Long area, int numeroSanitarios, String idCentroComercial) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBaño () + "(identificador, capacidadNormal, area, sanitarios, idcentrocomercial) values (?, ?, ?, ?, ?)");
         q.setParameters(idBaño, capacidadNormal, area, numeroSanitarios, idCentroComercial);

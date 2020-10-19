@@ -302,7 +302,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				}
 				String resultado = "En adicionar Área\n\n";
 				resultado += "Área adicionado exitosamente: " + area;
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -334,7 +334,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Area";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -365,7 +365,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un area con valor: " + valorStr + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -398,7 +398,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarValorArea(id, valorS);
 				String resultado = "En actualizar Área: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -435,7 +435,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarAforoArea(id, aforoS);
 				String resultado = "En actualizar Área: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 
@@ -473,7 +473,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar Área\n\n";
 				resultado += areasEliminadas + " Áreas eliminadas\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -536,7 +536,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			}
 			String resultado = "En adicionar Ascensor\n\n";
 			resultado += "Ascensor adicionado exitosamente: " + ascensor;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			pDialogo.dispose();
 			panelDatos.actualizarInterfaz(resultado);
 
@@ -561,7 +561,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Ascensor";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -591,7 +591,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un ascensor con identificador: " + idAscensor + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -622,7 +622,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarPesoMaximoAscensor(idAscensor, pesoMaximo);
 				String resultado = "En actualizar Ascensor: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -658,7 +658,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar Ascensor\n\n";
 				resultado += ascensoresEliminados + " Ascensores eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -688,7 +688,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		{
 			DialogoAdicionarBano dialogo = new DialogoAdicionarBano( this );
 			dialogo.setVisible( true );
-			panelDatos.actualizarInterfaz("En proceso de adición");
+
 		}
 		else
 		{
@@ -706,7 +706,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		try 
 		{
 
-			long idArea = buscarAreaPorValor(area).getId();
+			Long idArea = null;
+			if ( area != -1)
+			{
+				idArea = buscarAreaPorValor(area).getId();
+			}
 			long idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
 			VOBano baño = aforoAndes.adicionarBaño(idBano, idCapacidadNormal, idArea, numSanitarios, idCentroComercial);
 
@@ -716,7 +720,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			}
 			String resultado = "En adicionar Baño\n\n";
 			resultado += "Baño adicionado exitosamente: " + baño;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			pDialogo.dispose();
 			panelDatos.actualizarInterfaz(resultado);
 
@@ -741,7 +745,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Baños";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -771,7 +775,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "El baño con identificación: " + identificador + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -802,7 +806,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				String resultado = "En listar Baños";
 				resultado +=  "\n" + listarObjetos (lista);
 				panelDatos.actualizarInterfaz(resultado);
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 			}
 			else
 			{
@@ -836,7 +840,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarNumeroSanitariosBaño(idBano, numeroSanitarios);
 				String resultado = "En actualizar Baño: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -872,7 +876,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long banosEliminados = aforoAndes.eliminarBañoPorId(bano);
 				String resultado = "En eliminar Baño\n\n";
 				resultado += banosEliminados + " Baños eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -903,7 +907,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long banosEliminados = aforoAndes.eliminarBañoPorSanitarios(sanitarios);
 				String resultado = "En eliminar Baño\n\n";
 				resultado += banosEliminados + " Baños eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -951,7 +955,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				}
 				String resultado = "En adicionar Capacidad normal\n\n";
 				resultado += "Capacidad adicionada exitosamente: " + capacidad;
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -983,7 +987,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Capacidad Normal";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -1014,7 +1018,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "La capacidad con identificación: " + identificador + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1055,7 +1059,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "La capacidad con valor: " + valorStr + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1091,7 +1095,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarValorCapacidad(id, valor);
 				String resultado = "En actualizar Capacidad Normal: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1128,7 +1132,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarAforoCapacidad(id, aforo);
 				String resultado = "En actualizar Capacidad Normal: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1164,7 +1168,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar Capacidad\n\n";
 				resultado += capacidadesEliminadas  + "Capacidades eliminadas\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1200,7 +1204,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar Capacidad\n\n";
 				resultado += eliminadas  + "Capacidades eliminadas\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1247,7 +1251,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 					}
 					String resultado = "En adicionar CentroComercial\n\n";
 					resultado += "CentroComercial adicionado exitosamente: " + centroComercial;
-					resultado += "\n Operación terminada";
+					resultado += "\n\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
 				}
 				else
@@ -1279,7 +1283,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar CentroComercial";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -1310,7 +1314,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un centro comercial con identificacion: " + idCentroComercial + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1339,7 +1343,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				List<CentroComercial> lista = aforoAndes.darCentroComercialPorNombre(nombre);
 				String resultado = "En buscar CentroComercial por nombre: \n";
 				resultado +=  "\n" + listarObjetos (lista);
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1369,7 +1373,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarNombreCentroComercial(idCentroComercial, nombre);
 				String resultado = "En actualizar CentroComercial por nombre: \n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1399,7 +1403,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long ccEliminados = aforoAndes.eliminarCentroComercialPorId(idCentroComercial);		
 				String resultado = "En eliminar CentroComercial\n\n";
 				resultado += ccEliminados + " Centros comerciales eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1443,7 +1447,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En adicionar Carnet\n\n";
 				resultado += "Carnet adicionado exitosamente: " + carnet;
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1470,7 +1474,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Carnet";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -1496,7 +1500,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar Carnet\n\n";
 				resultado += carnetsEliminados + " Carnets eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1532,7 +1536,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un carnet perteneciente al visitante: " + idVisitante + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1561,7 +1565,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				List<Carnet> lista = aforoAndes.darCarnetsPorTipo(tipoCarnet);
 				String resultado = "En buscar Carnet por nombre: \n\n";
 				resultado +=  "\n" + listarObjetos (lista);
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1612,7 +1616,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			}
 			String resultado = "En adicionar Domiciliario\n\n";
 			resultado += "Domiciliario adicionado exitosamente: " + domiciliario;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 			pDialogo.dispose();
 
@@ -1635,7 +1639,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Domiciliario";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -1661,7 +1665,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar Domiciliario\n\n";
 				resultado += domiciliariosEliminados + " Domiciliarios eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1697,7 +1701,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un domiciliario con identificacion: " + idEmpleado + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1728,7 +1732,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarEmpresaDomiciliario(idDomiciliario, empresaDomicilios);
 				String resultado = "En actualizar Domiciliario por empresa: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1775,7 +1779,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarHorarioTurnoDomiciliario(idEmpleado, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno);
 				String resultado = "En actualizar Domiciliario por horario de turno: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1830,7 +1834,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			}
 			String resultado = "En adicionar Empleado\n\n";
 			resultado += "Empleado adicionado exitosamente: " + empleado;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 			pDialogo.dispose();
 
@@ -1854,7 +1858,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Empleado";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -1880,7 +1884,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar Empleado\n\n";
 				resultado += empleadosEliminados + " Empleados eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1916,7 +1920,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un empleado con identificacion: " + idEmpleado + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1947,7 +1951,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarLugarTrabajoEmpleado(idEmpleado, lugarTrabajo);
 				String resultado = "En actualizar Empleado por lugar de trabajo: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -1995,7 +1999,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarHorarioTurnoEmpleado(idEmpleado, horaInicioTurno, minutoInicioTurno, horaFinalTurno, minutoFinalTurno);
 				String resultado = "En actualizar Empleado por horario de turno: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2046,7 +2050,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		try 
 		{
 			long idArea = buscarAreaPorValor(area).getId();
-			long idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
+			Long idCapacidadNormal = null;
+			if ( capacidadNormal != -1)
+			{
+				idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
+			}
 			int activo = 0;
 			if (activoBooleano)
 				activo = 1;
@@ -2059,9 +2067,8 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			pDialogo.dispose();
 			String resultado = "En adicionar LocalComercial\n\n";
 			resultado += "Local comercial adicionado exitosamente: " + localComercial;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
-
 		} 
 		catch (Exception e) 
 		{
@@ -2083,7 +2090,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar LocalComercial";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -2113,7 +2120,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "El local comercial con identificador: " + identificador + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2143,7 +2150,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				String resultado = "En listar LocalComercial";
 				resultado +=  "\n" + listarObjetos (lista);
 				panelDatos.actualizarInterfaz(resultado);
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 			}
 			else
 			{
@@ -2173,7 +2180,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarAreaLocalComercial(idLocal, area);
 				String resultado = "En actualizar LocalComercial: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2210,7 +2217,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 					long modificados = aforoAndes.cambiarActividadLocalComercial(idLocal, activo);
 					String resultado = "En actualizar LocalComercial: \n\n";
 					resultado += modificados + " registros actualizados";
-					resultado += "\n Operación terminada";
+					resultado += "\n\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
 				}
 				else
@@ -2250,7 +2257,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long localesEliminados = aforoAndes.eliminarLocalComercialPorId(idLocalComercial);
 				String resultado = "En eliminar LocalComercial\n\n";
 				resultado += localesEliminados + " Locales comerciales eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2285,7 +2292,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long localesEliminados = aforoAndes.eliminarLocalComercialPorActividad(actividad);
 				String resultado = "En eliminar LocalComercial\n\n";
 				resultado += localesEliminados + " Locales comerciales eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2318,7 +2325,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		{
 			DialogoAdicionarLector dialogo = new DialogoAdicionarLector( this );
 			dialogo.setVisible( true );
-			panelDatos.actualizarInterfaz("En proceso de adición");
+
 		}
 		else
 		{
@@ -2344,7 +2351,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			}
 			String resultado = "En adicionar Lector\n\n";
 			resultado += "Lector adicionado exitosamente: " + lector;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 			pDialogo.dispose();
 
@@ -2369,7 +2376,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Lector";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -2400,7 +2407,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "El lector con identificación: " + id + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2435,7 +2442,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				String resultado = "En listar Lector";
 				resultado +=  "\n" + listarObjetos (lista);
 				panelDatos.actualizarInterfaz(resultado);
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 			}
 			else
 			{
@@ -2470,7 +2477,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarTipoLector(idLector, idTipo);
 				String resultado = "En actualizar Lector: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2506,7 +2513,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long localesEliminados = aforoAndes.eliminarLectorPorId(idLector);
 				String resultado = "En eliminar Lector\n\n";
 				resultado += localesEliminados + " Lectores eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2555,7 +2562,12 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			long idArea = buscarAreaPorValor(area).getId();
+
+			Long idArea = null;
+			if ( area != -1)
+			{
+				idArea = buscarAreaPorValor(area).getId();
+			}			
 			long idCapacidadNormal = buscarCapacidadNormalPorValor(capacidadNormal).getId();
 			VOParqueadero ascensor = aforoAndes.adicionarParqueadero(idParqueadero, idCapacidadNormal, idArea, idCentroComercial);
 
@@ -2566,7 +2578,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			pDialogo.dispose();
 			String resultado = "En adicionar Parqueadero\n\n";
 			resultado += "Parqueadero adicionado exitosamente: " + ascensor;
-			resultado += "\n\n Operación terminada";
+			resultado += "\n\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 
 		} 
@@ -2590,7 +2602,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Parqueadero";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -2620,7 +2632,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un parqueadero con identificador: " + idParqueadero + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2651,7 +2663,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarAreaParqueadero(idParqueadero, area);
 				String resultado = "En actualizar Parqueadero: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2687,7 +2699,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar Parqueadero\n\n";
 				resultado += parqueaderosEliminados + " parqueaderos eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2716,7 +2728,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		{
 			DialogoAdicionarTipoLocal dialogo = new DialogoAdicionarTipoLocal( this );
 			dialogo.setVisible( true );
-			panelDatos.actualizarInterfaz("En proceso de adición");
+
 		}
 		else
 		{
@@ -2745,7 +2757,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			}
 			String resultado = "En adicionar TipoLocal\n\n";
 			resultado += "Tipo de local adicionado exitosamente: " + tl;
-			resultado += "\n\n Operación terminada";
+			resultado += "\n\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 			pDialogo.dispose();
 
@@ -2769,7 +2781,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar TipoLocal";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -2809,7 +2821,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarHorarioTipoLocal(tipo, horaApertura, minutoApertura, horaCierre, minutoCierre);
 				String resultado = "En actualizar TipoLocal por horario de funcionamientos: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2849,7 +2861,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un tipo de local con tipo: " + tipo + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2879,7 +2891,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long tlEliminados = aforoAndes.eliminarTipoLocalPorTipo(tipo);
 				String resultado = "En eliminar TipoLocal\n\n";
 				resultado += tlEliminados + " Tipos de local eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -2908,7 +2920,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		{
 			DialogoAdicionarTipoVisitante dialogo = new DialogoAdicionarTipoVisitante( this );
 			dialogo.setVisible( true );
-			panelDatos.actualizarInterfaz("En proceso de adición");
 		}
 		else
 		{
@@ -2938,7 +2949,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			pDialogo.dispose();
 			String resultado = "En adicionar TipoVisitante\n\n";
 			resultado += "Tipo de visitante adicionado exitosamente: " + tv;
-			resultado += "\n\n Operación terminada";
+			resultado += "\n\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 
 		} 
@@ -2961,7 +2972,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar TipoVisitante";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -2991,7 +3002,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un tipo de visitante con tipo: " + tipo + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -3037,7 +3048,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarHorarioTipoVisitante(tipo, horaInicio, minutoInicio, horaLimite, minutoLimite);
 				String resultado = "En actualizar TipoVisitante por horario de circulación: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -3072,7 +3083,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar TipoVisitante\n\n";
 				resultado += tbEliminados + " Tipos de visitante eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -3098,7 +3109,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		DialogoRegistrarCarnet dialogo = new DialogoRegistrarCarnet( this );
 		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
 	}
 
 	/**
@@ -3115,6 +3125,11 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		try
 		{
+			List<RegistranCarnet> visitasPendientes = aforoAndes.darRegistranCarnetPorIdVisitanteHoraNULL(idVisitante);
+			if (visitasPendientes != null && visitasPendientes.get(0) != null)
+			{
+				throw new Exception ("No es posible registrar una nueva visita porque existe una pendiente de actualizar hora salida");
+			}
 			String[] idEspacioVisitado = aforoAndes.darLectorPorId(idLector).getEspacioOcupado();
 			long tipoVisitante = aforoAndes.darVisitantePorId(idVisitante).getTipo();
 
@@ -3127,10 +3142,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				Integer horaCierre = ((BigDecimal)(horariosLocal[3])).intValue();
 				Integer minutoCierre = ((BigDecimal)(horariosLocal[4])).intValue();
 
-				if ( (tipoVisitante == 3 && activo == 0) || horaEntrada < horaApertura || (horaApertura == horaEntrada && minutoEntrada < minutoApertura ||
-						horaEntrada > horaCierre || (horaCierre == horaEntrada && minutoEntrada > minutoCierre)))
+				if ( tipoVisitante != 3 && tipoVisitante != 4 && (activo == 0 || horaEntrada < horaApertura || (horaApertura == horaEntrada && minutoEntrada < minutoApertura ||
+						horaEntrada > horaCierre || (horaCierre == horaEntrada && minutoEntrada > minutoCierre))))
 				{	
-					throw new Exception ("No es posible registrar una visita al local " + idEspacioVisitado[0] + " fuera de los horarios de funcionamiento.");
+					throw new Exception ("No es posible registrar una visita al local " + idEspacioVisitado[0] + " fuera de los horarios de funcionamiento si no es personal de aseo o mantenimiento.");
 				}
 
 			}
@@ -3154,7 +3169,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			}
 			String resultado = "En adicionar RegistranCarnet \n\n";
 			resultado += "Registro de visita adicionado exitosamente: " + registro;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 			pDialogo.dispose();
 		} 
@@ -3177,7 +3192,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar RegistranCarnet";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -3202,7 +3217,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				String resultado = "En listar RegistranCarnet por lector";
 				resultado +=  "\n" + listarObjetos (lista);
 				panelDatos.actualizarInterfaz(resultado);
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 			}
 			else
 			{
@@ -3235,7 +3250,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				String resultado = "En listar RegistranCarnet por lector";
 				resultado +=  "\n" + listarObjetos (lista);
 				panelDatos.actualizarInterfaz(resultado);
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 			}
 			else
 			{
@@ -3288,7 +3303,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 					long modificados = aforoAndes.cambiarHoraSalidaRegistranCarnet(idLector, idVisitante, fecha, horaEntrada, minutoEntrada, horaSalida, minutoSalida);
 					String resultado = "En actualizar RegistranCarnet: \n\n";
 					resultado += modificados + " registros actualizados";
-					resultado += "\n Operación terminada";
+					resultado += "\n\n Operación terminada";
 					panelDatos.actualizarInterfaz(resultado);
 				};
 			}
@@ -3330,7 +3345,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 			String resultado = "En eliminar RegistranCarnet\n\n";
 			resultado += registrosEliminados + " registros eliminados\n";
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 		} 
 		catch (Exception e) 
@@ -3352,7 +3367,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		DialogoAdicionarVisitante dialogo = new DialogoAdicionarVisitante( this );
 		dialogo.setVisible( true );
-		panelDatos.actualizarInterfaz("En proceso de adición");
 	}
 
 	/**
@@ -3366,7 +3380,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 * @param telefonoEmergencia - Telefono del contacto de emergencia del visitante
 	 * Se crea una nueva tupla de Visitante en la base de datos, si un visitante con esa identificación no existía
 	 */
-	public void adicionarVisitante( String identificacion, String nombre, long tipo, String correo, String telefonoPropio, String nombreEmergencia, String telefonoEmergencia)
+	public void adicionarVisitante( String identificacion, String nombre, long tipo, String correo, String telefonoPropio, String nombreEmergencia, String telefonoEmergencia, DialogoAdicionarVisitante pDialogo)
 	{
 		try
 		{
@@ -3375,9 +3389,10 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			{
 				throw new Exception ("No se pudo crear un visitante con identificación: " + identificacion);
 			}
+			pDialogo.dispose();
 			String resultado = "En adicionar Visitante\n\n";
 			resultado += "Visitante adicionado exitosamente: " + visitante;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 
 		} 
@@ -3400,7 +3415,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Visitante";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -3430,7 +3445,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Un visitante con identificacion: " + identificacion + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -3464,7 +3479,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long modificados = aforoAndes.cambiarTelefonoEmergencia(identificacion, telefonoEmergencia);
 				String resultado = "En actualizar Visitante por telefono de emergencia: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -3488,13 +3503,13 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		try 
 		{
 			String identificacion = JOptionPane.showInputDialog (this, "Identificador del visitante: ", "Actualizar contacto de emergencia del visitante", JOptionPane.QUESTION_MESSAGE);
-			String nombreEmergencia = JOptionPane.showInputDialog (this, "Nuevo nombre del contacto de emergencia del visitante: ", "Actualizar teléfono de emergencia del visitante", JOptionPane.QUESTION_MESSAGE);
+			String nombreEmergencia = JOptionPane.showInputDialog (this, "Nuevo nombre del contacto de emergencia del visitante: ", "Actualizar contacto de emergencia del visitante", JOptionPane.QUESTION_MESSAGE);
 			if (identificacion != null && nombreEmergencia != null)
 			{	
-				long modificados = aforoAndes.cambiarTelefonoEmergencia(identificacion, nombreEmergencia);
+				long modificados = aforoAndes.cambiarContactoEmergenciaVisitante (identificacion, nombreEmergencia);
 				String resultado = "En actualizar Visitante por contacto de emergencia: \n\n";
 				resultado += modificados + " registros actualizados";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -3524,7 +3539,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				long visitantesEliminados = aforoAndes.eliminarVisitantePorId(identificacion);
 				String resultado = "En eliminar Visitante\n\n";
 				resultado += visitantesEliminados + " Visitantes eliminados\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -3553,7 +3568,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		{
 			DialogoAdicionarZonaCirculacion dialogo = new DialogoAdicionarZonaCirculacion( this );
 			dialogo.setVisible( true );
-			panelDatos.actualizarInterfaz("En proceso de adición");
 		}
 		else
 		{
@@ -3577,7 +3591,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			}
 			String resultado = "En adicionar Zona circulación\n\n";
 			resultado += "Zona circulacion adicionada exitosamente: " + ascensor;
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
 			pDialogo.dispose();
 
@@ -3602,7 +3616,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 			String resultado = "En listar Zona circulación";
 			resultado +=  "\n" + listarObjetos (lista);
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -3632,7 +3646,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				{
 					resultado += "Una  zona de circulación con identificador: " + idZona + " NO EXISTE\n";    				
 				}
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -3664,7 +3678,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 
 				String resultado = "En eliminar ZonaCirculacion\n\n";
 				resultado += parqueaderosEliminados + " zonas de circulación eliminadas\n";
-				resultado += "\n Operación terminada";
+				resultado += "\n\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
 			else
@@ -3743,7 +3757,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				resultado += "No existen visitantes atendidos por el establecimiento " + idLocalComercial;
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -3797,7 +3811,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				resultado += "No existen establecimientos.";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -3864,7 +3878,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				resultado += "No existe un local comercial con identificador " + idLocalComercial;
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -3926,7 +3940,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				resultado += "No existe un centro comercial con identificador " + idCentroComercial;
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -3988,7 +4002,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				resultado += "No existe un tipo de local con nombre " + tipoLocal;
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -4047,7 +4061,79 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				resultado += "No existen establecimientos con aforo disponible. ";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}		
+
+	}
+	/**
+	 * Crea una ventana de diálogo para consultar visitas de un tipo de visitante
+	 */
+	public void consultarVisitasTipoVisitante ()
+	{
+		if ( administrador )
+		{
+			DialogoConsultarVisitasTipoVisitante dialogo = new DialogoConsultarVisitasTipoVisitante( this );
+			dialogo.setVisible( true );
+			panelDatos.actualizarInterfaz("En proceso de adición");
+		}
+		else
+		{
+			String resultado = "No cuenta con los privilegios para realizar esta acción. Solo permitida para administradores";
+			panelDatos.actualizarInterfaz(resultado);
+		}		
+	}
+
+	/** Consultar los establecimientos con aforo disponible
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La hora de inicio del rango de consulta
+	 * @param minutoFin - El minuto de inicio del rango de consulta  o -1 si no aplica
+	 * @param horaFin - La hora de fin del rango de consulta o -1 si no aplica
+	 * @param minutoFin - El minuto de fin del rango de consulta  o -1 si no aplica
+	 * @param idCentroComercial - El id del centro comercial a consultar
+	 */
+	public void consultarVisitasTipoVisitante (Timestamp fechaInicio, Timestamp fechaFin, int horaInicial, int minutoInicial, int horaFinal, int minutoFinal, String tipoVisitante, DialogoConsultarVisitasTipoVisitante pDialogo)
+	{
+		try 
+		{
+			if ( horaFinal == -1)
+			{
+				horaFinal = horaInicial;
+				minutoFinal = minutoInicial;
+			}
+			int totalDuracion = 0;
+			String resultado = "En consultar visitas del tipo de visitante " + tipoVisitante;
+			double[] metricas = aforoAndes.RFC5TiemposVisitaTipoVisitanteMetricas(fechaInicio, fechaFin, horaInicial, minutoInicial, horaFinal, minutoFinal, tipoVisitante);
+			List<Object> resultados = aforoAndes.RFC5TiemposVisitaTipoVisitante(fechaInicio, fechaFin, horaInicial, minutoInicial, horaFinal, minutoFinal, tipoVisitante);
+			if ( resultados != null )
+			{
+				resultado += "\n\n Los objetos existentes son:\n";
+				int i = 1;
+				for (Object tupla: resultados)	
+				{
+					Object [] datos = (Object []) tupla;
+					String idVisitante = (String) datos[0];
+					int duracionVisita = ((BigDecimal) datos[1]).intValue();
+					
+					resultado += i++ + ". Visitante: " + idVisitante + " - Duración visita: " + duracionVisita + "\n";
+					totalDuracion += duracionVisita;
+				}
+			}
+			else
+			{
+				resultado += "No existen visitas del tipo de visitante indicado. ";
+			}
+			
+			resultado += "\n\n Promedio: " + metricas[0] + " - Máxima: " +  metricas[2] + " - Mínima: " + metricas[1] + " - Total: " + totalDuracion;
+			pDialogo.dispose();
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n\n Operación terminada";
 		} 
 		catch (Exception e) 
 		{
@@ -4059,13 +4145,12 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	}
 
 
-
 	/* ****************************************************************
 	 * 			Métodos administrativos
 	 *****************************************************************/
 
 	/**
-	 * Registra al jugador con los datos dados.
+	 * Registra al usuario con los datos dados.
 	 * @param identificacion - Identificacion del administrador a registrar. identificacion != null && identificacion != "".
 	 * @param nombre - Nombre del administrador a registrar. nombre != null && nombre != "".
 	 * @param contrasenia - Contraseña del administrador a registrar. contrasenia != null && contrasenia != "".
@@ -4086,7 +4171,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				aforoAndes.adicionarAdministradorLocal(identificacion, nombre, contrasenia, idLocal);
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		}
 		catch( Exception e )
 		{
@@ -4152,7 +4237,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 				resultado += "El usuario no existe en la base de datos: ";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n\n Operación terminada";
 		}
 		catch( Exception e )
 		{
@@ -4341,7 +4426,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		int i = 1;
 		for (E objeto : lista)
 		{
-			System.out.println(objeto);
 			resp += i++ + ". " + objeto.toString() + "\n";
 		}
 		return resp;

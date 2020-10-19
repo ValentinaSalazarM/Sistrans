@@ -189,16 +189,24 @@ public class DialogoAdicionarParqueadero extends JDialog implements ActionListen
 				try
 				{
 					int capacidadNormal = Integer.parseInt(capacidadNormalStr);
-					double area = Long.parseLong(areaStr);
-					if ( interfaz.buscarAreaPorValor(area) == null)
-					{
-						interfaz.adicionarArea();
-					}
+					
 					if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
 					{
 						interfaz.adicionarCapacidadNormal();
-					}				
-					interfaz.adicionarParqueadero(identificador, capacidadNormal, area, idCentroComercial, this);
+					}
+					if ( !areaStr.isEmpty())
+					{
+						double area = Long.parseLong(areaStr);
+						if ( interfaz.buscarAreaPorValor(area) == null)
+						{
+							interfaz.adicionarArea();
+						}
+						interfaz.adicionarParqueadero(identificador, capacidadNormal, area, idCentroComercial, this);
+					}
+					else
+					{
+						interfaz.adicionarParqueadero(identificador, capacidadNormal, -1, idCentroComercial, this);
+					}
 				}
 				catch( NumberFormatException e2 )
 				{

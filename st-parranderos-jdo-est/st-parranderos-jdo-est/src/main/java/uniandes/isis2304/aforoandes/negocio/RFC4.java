@@ -51,7 +51,7 @@ public class RFC4 implements VOLocalComercial
 	/**
 	 * Número de cupos disponibles (Aforo - número de visitas)
 	 */
-	private int cupo_disponible;
+	private int CUPOS_DISPONIBLES;
 
 
 	/* ****************************************************************
@@ -69,7 +69,7 @@ public class RFC4 implements VOLocalComercial
 		this.tipoLocal = 0;
 		this.idCentroComercial = "";
 		activo = 1;
-		cupo_disponible = 0;
+		CUPOS_DISPONIBLES = 0;
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class RFC4 implements VOLocalComercial
 		this.tipoLocal = tipoLocal;
 		this.activo = activo;
 		this.idCentroComercial = idCentroComercial;
-		this.cupo_disponible = cupo_disponible;
+		this.CUPOS_DISPONIBLES = cupo_disponible;
 	}
 
 	
@@ -193,17 +193,17 @@ public class RFC4 implements VOLocalComercial
 	/**
 	 * @return El cupo disponible del local
 	 */
-	public int getCupo_disponible() 
+	public int getCUPOS_DISPONIBLES() 
 	{
-		return cupo_disponible;
+		return CUPOS_DISPONIBLES;
 	}
 
 	/**
-	 * @param cupo_disponible - El nuevo cupo disponible del local
+	 * @param CUPOS_DISPONIBLES - El nuevo cupo disponible del local
 	 */
-	public void setCupo_disponible(int cupo_disponible) 
+	public void setCUPOS_DISPONIBLES(int cupo_disponible) 
 	{
-		this.cupo_disponible = cupo_disponible;
+		this.CUPOS_DISPONIBLES = cupo_disponible;
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class RFC4 implements VOLocalComercial
 	@Override
 	public String toString() 
 	{
-		return "LocalComercial [Cupo disponible = " + cupo_disponible + ", identificador = " + identificador + ", tipoLocal = " + tipoLocal + 
+		return "LocalComercial [Cupo disponible = " + CUPOS_DISPONIBLES + ", identificador = " + identificador + ", tipoLocal = " + tipoLocal + 
 				", activo = " + activo + ", idCentroComercial = " + idCentroComercial + "]";
 	}
 

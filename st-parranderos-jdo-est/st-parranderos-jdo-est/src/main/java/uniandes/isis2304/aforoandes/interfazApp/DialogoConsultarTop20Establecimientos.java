@@ -117,13 +117,13 @@ public class DialogoConsultarTop20Establecimientos extends JDialog implements Ac
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
-		setSize( 500, 300 );
-		setTitle( "Registrar visita" );
+		setSize( 500, 340 );
+		setTitle( "Consultar establecimientos más populares" );
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 7, 2 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
+		campos.setLayout( new GridLayout( 6, 2, 10, 10 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 10, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblFechaInicial = new JLabel( "* Fecha inicial del rango: " );

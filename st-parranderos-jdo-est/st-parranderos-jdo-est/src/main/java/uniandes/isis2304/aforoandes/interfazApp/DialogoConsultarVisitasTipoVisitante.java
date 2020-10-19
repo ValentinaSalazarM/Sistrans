@@ -20,12 +20,14 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import uniandes.isis2304.aforoandes.negocio.VOTipoVisitante;
+
 /**
  * Diálogo para introducir la información necesaria para realizar una consulta
  */
 @SuppressWarnings("serial")
 
-public class DialogoConsultarAforoDisponible extends JDialog implements ActionListener
+public class DialogoConsultarVisitasTipoVisitante extends JDialog implements ActionListener
 {
 
 	// -----------------------------------------------------------------
@@ -33,9 +35,9 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 	// -----------------------------------------------------------------
 
 	/**
-	 * Comando para realizar consulta.
+	 * Comando para agregar la banda.
 	 */
-	public final static String ACEPTAR = "Consultar índice de aforo de un tipo de local";
+	public final static String ACEPTAR = "Consultar visitas de un tipo de visitante";
 
 	/**
 	 * Comando para cancelar el proceso.
@@ -54,6 +56,16 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 	// -----------------------------------------------------------------
 	// Atributos de la interfaz
 	// -----------------------------------------------------------------
+
+	/**
+	 * Etiqueta del tipo de visitante
+	 */
+	private JLabel lblTipoVisitante;
+
+	/**
+	 * Campo de texto para el tipo de visitante
+	 */
+	private JComboBox<String> cbTipoVisitante;
 
 	/**
 	 * Etiqueta de la fecha inicial del rango de consulta
@@ -113,12 +125,12 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 	 * Crea la ventana de diálogo del espacio.
 	 * @param pPrincipal Instancia principal de la aplicación.
 	 */
-	public DialogoConsultarAforoDisponible( InterfazAforoAndesApp pPrincipal )
+	public DialogoConsultarVisitasTipoVisitante( InterfazAforoAndesApp pPrincipal )
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
 		setSize( 500, 340 );
-		setTitle( "Consultar establecimientos con aforo disponible" );
+		setTitle( "Consultar visitas de un tipo de visitante" );
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
@@ -126,12 +138,21 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 		campos.setBorder( new EmptyBorder( 30, 30, 10, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
+		lblTipoVisitante = new JLabel( "* Tipo Visitante: " );
+		campos.add( lblTipoVisitante );
+		cbTipoVisitante = new JComboBox<>();
+		for ( VOTipoVisitante tv: pPrincipal.listarVOTiposVisitante())
+		{
+			cbTipoVisitante.addItem(tv.getId() + " - " + tv.getTipo());
+		}
+		campos.add( cbTipoVisitante );
+
 		lblFechaInicial = new JLabel( "* Fecha inicial del rango: " );
 		campos.add(lblFechaInicial);
 		dcFechaInicial = new JDateChooser();
 		campos.add(dcFechaInicial);
 
-		lblFechaFinal = new JLabel( "* Fecha final del rango: " );
+		lblFechaFinal = new JLabel( "* Fecha final del rango (puede ser la misma): " );
 		campos.add(lblFechaFinal);
 		dcFechaFinal = new JDateChooser();
 		campos.add(dcFechaFinal);
@@ -180,6 +201,7 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 
 		if( comando.equals( ACEPTAR ) )
 		{
+			String tipoVisitante = ((String) cbTipoVisitante.getSelectedItem()).split(" - ")[1];
 			String horarioInicial = txtHoraInicial.getText();
 			String horarioFinal = txtHoraFinal.getText();
 			Date fechaInicial = dcFechaInicial.getDate();
@@ -190,7 +212,7 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 
 			if( horarioInicial.equals( "" ) )
 			{
-				JOptionPane.showMessageDialog( this, "Datos incompletos", "Consultar establecimientos con aforo disponible", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( this, "Datos incompletos", "Consultar visitas de un tipo de visitante", JOptionPane.ERROR_MESSAGE );
 			}
 			else
 			{
@@ -203,30 +225,33 @@ public class DialogoConsultarAforoDisponible extends JDialog implements ActionLi
 
 					if ( fechaFinal != null && fechaFinal.before(fechaInicial))
 					{
-						JOptionPane.showMessageDialog( this, "La fecha final debe ser posterior o igual a la fecha inicial del rango.", "Consultar establecimientos con aforo disponible", JOptionPane.ERROR_MESSAGE );
+						JOptionPane.showMessageDialog( this, "La fecha final debe ser posterior o igual a la fecha inicial del rango.", "Consultar visitas de un tipo de visitante", JOptionPane.ERROR_MESSAGE );
 					}
-					else {
-						horaInicial = Integer.parseInt(horarioInicial.split(":")[0]);
-						minutoInicial = Integer.parseInt(horarioInicial.split(":")[1]);
-						if ( horarioFinal != null && !horarioFinal.equals(""))
+					else
+					{
+						if (horarioInicial != null && !horarioInicial.equals(""))
 						{
-							horaFinal = Integer.parseInt(horarioFinal.split(":")[0]);
-							minutoFinal = Integer.parseInt(horarioFinal.split(":")[1]);
-							if (horaFinal < horaInicial || (horaInicial == horaFinal && minutoFinal < minutoInicial))
+							horaInicial = Integer.parseInt(horarioInicial.split(":")[0]);
+							minutoInicial = Integer.parseInt(horarioInicial.split(":")[1]);
+							if ( horarioFinal != null && !horarioFinal.equals(""))
 							{
-								JOptionPane.showMessageDialog( this, "La hora final debe ser posterior a la hora inicial del rango.", "Consultar establecimientos con aforo disponible", JOptionPane.ERROR_MESSAGE );
-								throw new Exception();
+								horaFinal = Integer.parseInt(horarioFinal.split(":")[0]);
+								minutoFinal = Integer.parseInt(horarioFinal.split(":")[1]);
+								if (horaFinal < horaInicial || (horaInicial == horaFinal && minutoFinal < minutoInicial))
+								{
+									JOptionPane.showMessageDialog( this, "La hora final debe ser posterior a la hora inicial del rango.", "Consultar visitantes de un local", JOptionPane.ERROR_MESSAGE );
+									throw new Exception();
+								}
 							}
 						}
-						interfaz.consultarEstablecimientosAforoDisponible(fechaInicialTS, fechaFinalTS, horaInicial, minutoInicial, horaFinal, minutoFinal, this);
+						interfaz.consultarVisitasTipoVisitante(fechaInicialTS, fechaFinalTS, horaInicial, minutoInicial, horaFinal, minutoFinal, tipoVisitante, this);
 					}
-
 				}
 				catch( NumberFormatException e2 )
 				{
-					JOptionPane.showMessageDialog( this, "La hora deben ser números separados por ':'.", "Consultar índice de aforo", JOptionPane.ERROR_MESSAGE );
-				}
-				catch (Exception e )
+					JOptionPane.showMessageDialog( this, "La hora deben ser números separados por ':'.", "Consultar visitas de un tipo de visitante", JOptionPane.ERROR_MESSAGE );
+				} 
+				catch (Exception e) 
 				{
 					
 				}

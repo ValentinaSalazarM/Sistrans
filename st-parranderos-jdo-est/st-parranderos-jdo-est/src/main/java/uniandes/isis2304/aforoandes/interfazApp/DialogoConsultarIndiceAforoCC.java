@@ -127,13 +127,13 @@ public class DialogoConsultarIndiceAforoCC extends JDialog implements ActionList
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
-		setSize( 500, 300 );
+		setSize( 500, 340 );
 		setTitle( "Consultar índice de aforo de un centro comercial" );
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 6, 2, 5, 1 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 30, 30 ) );
+		campos.setLayout( new GridLayout( 6, 2, 10, 10 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 10, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblCentroComercial = new JLabel( "* Identificador del centro comercial: " );

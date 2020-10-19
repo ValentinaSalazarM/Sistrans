@@ -63,7 +63,7 @@ class SQLLocalComercial
 	 * @param idCentroComercial - El identificador del centro comercial al que pertenece el local comercial
 	 * @return El número de tuplas insertadas
 	 */
-	public long adicionarLocalComercial (PersistenceManager pm, String idLocalComercial, long capacidadNormal, long area, long tipoLocal, int activo, String idCentroComercial) 
+	public long adicionarLocalComercial (PersistenceManager pm, String idLocalComercial, Long capacidadNormal, Long area, long tipoLocal, int activo, String idCentroComercial) 
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaLocalComercial () + "(identificador, capacidadNormal, area, tipoLocal, activo, idcentrocomercial) values (?, ?, ?, ?, ?, ?)");
 		q.setParameters(idLocalComercial, capacidadNormal, area, tipoLocal, activo, idCentroComercial);

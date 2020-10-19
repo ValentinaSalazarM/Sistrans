@@ -15,6 +15,7 @@
 
 package uniandes.isis2304.aforoandes.persistencia;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -299,7 +300,7 @@ class SQLUtil
 				"	FROM LECTOR" + 
 				"	JOIN " + 
 				"    (SELECT IDLECTOR, NUM_VISITAS, DENSE_RANK() OVER (ORDER BY NUM_VISITAS DESC) RANK" + 
-				"    FROM\r\n" + 
+				"    FROM" + 
 				"        (SELECT IDLECTOR, COUNT(*) AS NUM_VISITAS" + 
 				"        FROM REGISTRANCARNET" + 
 				"        WHERE FECHA BETWEEN ? AND ?" + 
@@ -511,7 +512,7 @@ class SQLUtil
 				"	ON LOCALCOMERCIAL.AREA = AREA.ID" + 
 				"	WHERE LOCALCOMERCIAL.IDENTIFICADOR = ?" + 
 				"	GROUP BY LOCALCOMERCIAL.IDENTIFICADOR");
-		
+
 		q.setParameters(dt1, dt2, id);				
 		q.setResultClass(RFC3.class);
 		return (RFC3)q.executeUnique();
@@ -529,7 +530,7 @@ class SQLUtil
 	 */
 	public RFC3 RFC3HoraEstablecimiento (PersistenceManager pm, Timestamp fecha, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String id)
 	{
-		
+
 		LocalDateTime dt1 = fecha.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
 		Query q;
 		q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.IDENTIFICADOR AS IDENTIFICADOR, ROUND(AVG(NUM_VISITAS/AREA.AFORO), 4) AS INDICE" + 
@@ -556,7 +557,7 @@ class SQLUtil
 		q.setResultClass(RFC3.class);
 		return (RFC3)q.executeUnique();
 	}
-	
+
 	/**
 	 * Creación y ejecución de la sentencia SQL para calcular el índice de aforo de un local comercial en una fecha o rango de fechas
 	 * @param fechaInicio - La fecha de inicio del rango de consulta
@@ -598,7 +599,7 @@ class SQLUtil
 				"	)INF_VISITAS" + 
 				"	ON INF_AFORO.TIPO = INF_VISITAS.TIPO" + 
 				"	GROUP BY INF_AFORO.TIPO");
-		
+
 		q.setParameters(tipoLocal, dt1, dt2, tipoLocal);				
 		q.setResultClass(RFC3.class);
 		List<RFC3> list = q.executeList();
@@ -696,7 +697,7 @@ class SQLUtil
 		q.setResultClass(RFC4.class);
 		return (List<RFC4>)q.executeList();
 	}
-	
+
 	/**
 	 * Creación y ejecución de la sentencia SQL para consultar los establecimientos con aforo disponible en una fecha y rango de horas
 	 * @param fecha - La fecha del rango de consulta
@@ -710,7 +711,7 @@ class SQLUtil
 	{
 		LocalDateTime dt1 = fecha.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
 		Query q;
-		q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.*, AFORO - NUM_VISITAS AS CUPO_DISPONIBLE" + 
+		q = pm.newQuery (SQL, "SELECT LOCALCOMERCIAL.*, AFORO - NUM_VISITAS AS CUPOS_DISPONIBLES" + 
 				"	FROM" + 
 				"	(" + 
 				"    SELECT LECTOR.IDLOCALCOMERCIAL, COUNT(*) AS NUM_VISITAS" + 
@@ -727,10 +728,419 @@ class SQLUtil
 				"	ON LOCALCOMERCIAL.IDENTIFICADOR = AUX.IDLOCALCOMERCIAL" + 
 				"	JOIN AREA" + 
 				"	ON LOCALCOMERCIAL.AREA = AREA.ID" + 
-				"");
+				"	WHERE AFORO - NUM_VISITAS > 0");
 		q.setParameters(dt1, horaInicio, horaFin, horaInicio, minutoInicio, horaFin, minutoFin);		
 		q.setResultClass(RFC4.class);
 		return (List<RFC4>)q.executeList();
 	}
-	
+
+	/**
+	 * Creación y ejecución de la sentencia SQL para consultar las visitas de un tipo de visitante
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return Arreglo de objetos construido con base en la consulta realizada
+	 */
+	public double[] RFC5TiemposVisitaTipoVisitanteMetricas(PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		LocalDateTime dt1 = fechaInicio.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		LocalDateTime dt2 = fechaFin.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+
+		Query q;
+		q = pm.newQuery (SQL, "SELECT INF_ENTRADA.TIPO, ROUND(AVG((HORASALIDA-HORAENTRADA)*60 + MINUTOSALIDA - MINUTOENTRADA), 3) AS DURACION_VISITA" + 
+				" FROM" + 
+				" (" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, TIPOVISITANTE.TIPO, HORA AS HORAENTRADA, MINUTO AS MINUTOENTRADA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN VISITANTE" + 
+				"    ON REGISTRANCARNET.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"    JOIN TIPOVISITANTE" + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+				"    WHERE (HORAENTRADA BETWEEN ? AND ?) OR (HORAENTRADA = ? AND MINUTO >= ?) OR (HORAENTRADA = ? AND MINUTO <= ?)" + 
+				" ) INF_ENTRADA" + 
+				" JOIN" + 
+				" (" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, TIPOVISITANTE.TIPO, HORA AS HORASALIDA, MINUTO AS MINUTOSALIDA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN VISITANTE" + 
+				"    ON REGISTRANCARNET.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"    JOIN TIPOVISITANTE" + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORASALIDA = HORARIO.ID" + 
+				"    WHERE FECHA BETWEEN ? AND ?" + 
+				"    AND TIPOVISITANTE.TIPO = ?" + 
+				" ) INF_SALIDA" + 
+				" ON INF_ENTRADA.IDVISITANTE = INF_SALIDA.IDVISITANTE" + 
+				" GROUP BY INF_ENTRADA.TIPO" + 
+				"");
+		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, tipoVisitante);	
+		Object[] promedio = (Object[]) q.executeUnique();
+
+		q = pm.newQuery (SQL, "SELECT INF_ENTRADA.TIPO, MIN((HORASALIDA-HORAENTRADA)*60 + MINUTOSALIDA - MINUTOENTRADA) AS DURACION_VISITA" + 
+				" FROM" + 
+				" (" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, TIPOVISITANTE.TIPO, HORA AS HORAENTRADA, MINUTO AS MINUTOENTRADA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN VISITANTE" + 
+				"    ON REGISTRANCARNET.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"    JOIN TIPOVISITANTE" + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+				"    WHERE (HORAENTRADA BETWEEN ? AND ?) OR (HORAENTRADA = ? AND MINUTO >= ?) OR (HORAENTRADA = ? AND MINUTO <= ?)" + 
+				" ) INF_ENTRADA" + 
+				" JOIN" + 
+				" (" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, TIPOVISITANTE.TIPO, HORA AS HORASALIDA, MINUTO AS MINUTOSALIDA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN VISITANTE" + 
+				"    ON REGISTRANCARNET.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"    JOIN TIPOVISITANTE" + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORASALIDA = HORARIO.ID" + 
+				"    WHERE FECHA BETWEEN ? AND ?" + 
+				"    AND TIPOVISITANTE.TIPO = ?" + 
+				" ) INF_SALIDA" + 
+				" ON INF_ENTRADA.IDVISITANTE = INF_SALIDA.IDVISITANTE" + 
+				" GROUP BY INF_ENTRADA.TIPO" + 
+				"");
+		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, tipoVisitante);	
+		Object[] minimo = (Object[]) q.executeUnique();
+
+		q = pm.newQuery (SQL, "SELECT INF_ENTRADA.TIPO, MAX((HORASALIDA-HORAENTRADA)*60 + MINUTOSALIDA - MINUTOENTRADA) AS DURACION_VISITA" + 
+				" FROM" + 
+				" (" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, TIPOVISITANTE.TIPO, HORA AS HORAENTRADA, MINUTO AS MINUTOENTRADA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN VISITANTE" + 
+				"    ON REGISTRANCARNET.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"    JOIN TIPOVISITANTE" + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+				"    WHERE (HORAENTRADA BETWEEN ? AND ?) OR (HORAENTRADA = ? AND MINUTO >= ?) OR (HORAENTRADA = ? AND MINUTO <= ?)" + 
+				" ) INF_ENTRADA" + 
+				" JOIN" + 
+				" (" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, TIPOVISITANTE.TIPO, HORA AS HORASALIDA, MINUTO AS MINUTOSALIDA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN VISITANTE" + 
+				"    ON REGISTRANCARNET.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"    JOIN TIPOVISITANTE" + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORASALIDA = HORARIO.ID" + 
+				"    WHERE FECHA BETWEEN ? AND ?" + 
+				"    AND TIPOVISITANTE.TIPO = ?" + 
+				" ) INF_SALIDA" + 
+				" ON INF_ENTRADA.IDVISITANTE = INF_SALIDA.IDVISITANTE" + 
+				" GROUP BY INF_ENTRADA.TIPO" + 
+				"");
+		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, tipoVisitante);	
+		Object[] maximo = (Object[]) q.executeUnique();
+
+		double[] metricas = new double[3];
+		metricas[0] = ((BigDecimal)promedio[1]).doubleValue();
+		metricas[1] = ((BigDecimal)minimo[1]).doubleValue();
+		metricas[2] = ((BigDecimal)maximo[1]).doubleValue();
+
+		return metricas;
+	}
+
+	/**
+	 * Creación y ejecución de la sentencia SQL para consultar los establecimientos con aforo disponible en una fecha y rango de horas
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoVisitante - Tipo de visitante de interés
+	 * @return Arreglo de objetos construido con base en la consulta realizada
+	 */
+	public List<Object> RFC5TiemposVisitaTipoVisitante(PersistenceManager pm, Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoVisitante)
+	{
+		LocalDateTime dt1 = fechaInicio.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		LocalDateTime dt2 = fechaFin.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		Query q = pm.newQuery (SQL, "SELECT INF_ENTRADA.IDVISITANTE, (HORASALIDA-HORAENTRADA)*60 + MINUTOSALIDA - MINUTOENTRADA AS DURACION_VISITA" + 
+				"	FROM" + 
+				"	(" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, HORA AS HORAENTRADA, MINUTO AS MINUTOENTRADA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN VISITANTE" + 
+				"    ON REGISTRANCARNET.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"    JOIN TIPOVISITANTE" + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+				"    WHERE (HORAENTRADA BETWEEN ? AND ?) OR (HORAENTRADA = ? AND MINUTO >= ?) OR (HORAENTRADA = ? AND MINUTO <= ?)" + 
+				"	) INF_ENTRADA" + 
+				"	JOIN" + 
+				"	(" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, HORA AS HORASALIDA, MINUTO AS MINUTOSALIDA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN VISITANTE" + 
+				"    ON REGISTRANCARNET.IDVISITANTE = VISITANTE.IDENTIFICACION" + 
+				"    JOIN TIPOVISITANTE" + 
+				"    ON VISITANTE.TIPO = TIPOVISITANTE.ID" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORASALIDA = HORARIO.ID" + 
+				"    WHERE FECHA BETWEEN ? AND ?" + 
+				"    AND TIPOVISITANTE.TIPO = 'Domiciliario'" + 
+				"	) INF_SALIDA" + 
+				"	ON INF_ENTRADA.IDVISITANTE = INF_SALIDA.IDVISITANTE");
+		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, tipoVisitante);	
+		return (List<Object>) q.executeList();
+	}
+
+	/**
+	 * Creación y ejecución de la sentencia SQL para consultar las visitas de un tipo de local
+	 * @param distintos - Indica si se cuentan visitas de visitantes distintos
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoLocal - Tipo de local de interés
+	 * @return Arreglo de objetos construido con base en la consulta realizada
+	 */
+	@SuppressWarnings("resource")
+	public double[] RFC5VisitantesTipoLocalMetricas(PersistenceManager pm, boolean distintos, Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoLocal)
+	{
+		LocalDateTime dt1 = fechaInicio.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		LocalDateTime dt2 = fechaFin.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+
+		Query q;
+		if (distintos)
+		{
+			q = pm.newQuery (SQL, "" + 
+					"    SELECT TIPO, ROUND(AVG(CANTIDAD_VISITANTES),4) AS PROMEDIO_CANTIDAD" + 
+					"    FROM" + 
+					"    (" + 
+					"        SELECT TIPOLOCAL.TIPO, IDLOCALCOMERCIAL, COUNT(DISTINCT IDVISITANTE) AS CANTIDAD_VISITANTES" + 
+					"        FROM REGISTRANCARNET" + 
+					"        JOIN LECTOR" + 
+					"        ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+					"        JOIN LOCALCOMERCIAL" + 
+					"        ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+					"        JOIN TIPOLOCAL" + 
+					"        ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID" + 
+					"        JOIN HORARIO" + 
+					"        ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+					"        WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?) " + 
+					"        AND FECHA BETWEEN ? AND ?" + 
+					"        GROUP BY TIPOLOCAL.TIPO, IDLOCALCOMERCIAL" + 
+					"    )" + 
+					"    WHERE UPPER(TIPO) = UPPER(?)" + 
+					"    GROUP BY TIPO" + 
+					"");
+		}
+		else
+		{
+			q = pm.newQuery (SQL, "" + 
+					"    SELECT TIPO, ROUND(AVG(CANTIDAD_VISITANTES),4) AS PROMEDIO_CANTIDAD" + 
+					"    FROM" + 
+					"    (" + 
+					"        SELECT TIPOLOCAL.TIPO, IDLOCALCOMERCIAL, COUNT(IDVISITANTE) AS CANTIDAD_VISITANTES" + 
+					"        FROM REGISTRANCARNET" + 
+					"        JOIN LECTOR" + 
+					"        ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+					"        JOIN LOCALCOMERCIAL" + 
+					"        ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+					"        JOIN TIPOLOCAL" + 
+					"        ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID" + 
+					"        JOIN HORARIO" + 
+					"        ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+					"        WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?) " + 
+					"        AND FECHA BETWEEN ? AND ?" + 
+					"        GROUP BY TIPOLOCAL.TIPO, IDLOCALCOMERCIAL" + 
+					"    )" + 
+					"    WHERE UPPER(TIPO) = UPPER(?)" + 
+					"    GROUP BY TIPO" + 
+					"");
+		}
+		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, tipoLocal);	
+		Object[] promedio = (Object[]) q.executeUnique();
+
+		if ( distintos )
+		{
+			q = pm.newQuery (SQL, "" + 
+					"    SELECT TIPO, ROUND(MIN(CANTIDAD_VISITANTES),4) AS MINIMO_CANTIDAD" + 
+					"    FROM" + 
+					"    (" + 
+					"        SELECT TIPOLOCAL.TIPO, IDLOCALCOMERCIAL, COUNT(DISTINCT IDVISITANTE) AS CANTIDAD_VISITANTES" + 
+					"        FROM REGISTRANCARNET" + 
+					"        JOIN LECTOR" + 
+					"        ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+					"        JOIN LOCALCOMERCIAL" + 
+					"        ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+					"        JOIN TIPOLOCAL" + 
+					"        ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID" + 
+					"        JOIN HORARIO" + 
+					"        ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+					"        WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?) " + 
+					"        AND FECHA BETWEEN ? AND ?" + 
+					"        GROUP BY TIPOLOCAL.TIPO, IDLOCALCOMERCIAL" + 
+					"    )" + 
+					"    WHERE UPPER(TIPO) = UPPER(?)" + 
+					"    GROUP BY TIPO" + 
+					"");
+		}
+		else
+		{
+			q = pm.newQuery (SQL, "" + 
+					"    SELECT TIPO, ROUND(MIN(CANTIDAD_VISITANTES),4) AS MINIMO_CANTIDAD" + 
+					"    FROM" + 
+					"    (" + 
+					"        SELECT TIPOLOCAL.TIPO, IDLOCALCOMERCIAL, COUNT(IDVISITANTE) AS CANTIDAD_VISITANTES" + 
+					"        FROM REGISTRANCARNET" + 
+					"        JOIN LECTOR" + 
+					"        ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+					"        JOIN LOCALCOMERCIAL" + 
+					"        ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+					"        JOIN TIPOLOCAL" + 
+					"        ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID" + 
+					"        JOIN HORARIO" + 
+					"        ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+					"        WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?) " + 
+					"        AND FECHA BETWEEN ? AND ?" + 
+					"        GROUP BY TIPOLOCAL.TIPO, IDLOCALCOMERCIAL" + 
+					"    )" + 
+					"    WHERE UPPER(TIPO) = UPPER(?)" + 
+					"    GROUP BY TIPO" + 
+					"");
+
+		}
+		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, tipoLocal);	
+		Object[] minimo = (Object[]) q.executeUnique();
+
+		if ( distintos )
+		{
+			q = pm.newQuery (SQL, "" + 
+					"    SELECT TIPO, ROUND(MAX(CANTIDAD_VISITANTES),4) AS MAX_CANTIDAD" + 
+					"    FROM" + 
+					"    (" + 
+					"        SELECT TIPOLOCAL.TIPO, IDLOCALCOMERCIAL, COUNT(DISTINCT IDVISITANTE) AS CANTIDAD_VISITANTES" + 
+					"        FROM REGISTRANCARNET" + 
+					"        JOIN LECTOR" + 
+					"        ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+					"        JOIN LOCALCOMERCIAL" + 
+					"        ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+					"        JOIN TIPOLOCAL" + 
+					"        ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID" + 
+					"        JOIN HORARIO" + 
+					"        ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+					"        WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?) " + 
+					"        AND FECHA BETWEEN ? AND ?" + 
+					"        GROUP BY TIPOLOCAL.TIPO, IDLOCALCOMERCIAL" + 
+					"    )" + 
+					"    WHERE UPPER(TIPO) = UPPER(?)" + 
+					"    GROUP BY TIPO" + 
+					"");
+		}
+		else
+		{
+			q = pm.newQuery (SQL, "" + 
+					"    SELECT TIPO, ROUND(MAX(CANTIDAD_VISITANTES),4) AS MAX_CANTIDAD" + 
+					"    FROM" + 
+					"    (" + 
+					"        SELECT TIPOLOCAL.TIPO, IDLOCALCOMERCIAL, COUNT(IDVISITANTE) AS CANTIDAD_VISITANTES" + 
+					"        FROM REGISTRANCARNET" + 
+					"        JOIN LECTOR" + 
+					"        ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+					"        JOIN LOCALCOMERCIAL" + 
+					"        ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+					"        JOIN TIPOLOCAL" + 
+					"        ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID" + 
+					"        JOIN HORARIO" + 
+					"        ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+					"        WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?) " + 
+					"        AND FECHA BETWEEN ? AND ?" + 
+					"        GROUP BY TIPOLOCAL.TIPO, IDLOCALCOMERCIAL" + 
+					"    )" + 
+					"    WHERE UPPER(TIPO) = UPPER(?)" + 
+					"    GROUP BY TIPO" + 
+					"");
+		}
+		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, tipoLocal);	
+		Object[] maximo = (Object[]) q.executeUnique();
+		double[] metricas = new double[3];
+		metricas[0] = ((BigDecimal)promedio[1]).doubleValue();
+		metricas[1] = ((BigDecimal)minimo[1]).doubleValue();
+		metricas[2] = ((BigDecimal)maximo[1]).doubleValue();
+		return metricas;
+	}
+	/**
+	 * Creación y ejecución de la sentencia SQL para las visitas a un tipo de local
+	 * @param distintos - Indica si se cuentan visitas de visitantes distintos
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param tipoLocal - Tipo de local de interés
+	 * @return Arreglo de objetos construido con base en la consulta realizada
+	 */
+	public List<Object> RFC5VisitantesTipoLocal(PersistenceManager pm, boolean distintos, Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String tipoLocal)
+	{
+		LocalDateTime dt1 = fechaInicio.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		LocalDateTime dt2 = fechaFin.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		Query q;
+		if ( distintos )
+		{
+		q = pm.newQuery (SQL, "" + 
+				"SELECT *" + 
+				"FROM" + 
+				"        (" + 
+				"            SELECT TIPOLOCAL.TIPO, IDLOCALCOMERCIAL, COUNT(DISTINCT IDVISITANTE) AS CANTIDAD_VISITANTES" + 
+				"            FROM REGISTRANCARNET" + 
+				"            JOIN LECTOR" + 
+				"            ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+				"            JOIN LOCALCOMERCIAL" + 
+				"            ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+				"            JOIN TIPOLOCAL" + 
+				"            ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID" + 
+				"            JOIN HORARIO" + 
+				"            ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+				"            WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?) " + 
+				"            AND FECHA BETWEEN ? AND ?" + 
+				"            GROUP BY TIPOLOCAL.TIPO, IDLOCALCOMERCIAL" + 
+				"        )" + 
+				"WHERE TIPO = ?");
+		}
+		else
+		{
+			q = pm.newQuery (SQL, "" + 
+					"SELECT *" + 
+					"FROM" + 
+					"        (" + 
+					"            SELECT TIPOLOCAL.TIPO, IDLOCALCOMERCIAL, COUNT(IDVISITANTE) AS CANTIDAD_VISITANTES" + 
+					"            FROM REGISTRANCARNET" + 
+					"            JOIN LECTOR" + 
+					"            ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+					"            JOIN LOCALCOMERCIAL" + 
+					"            ON LECTOR.IDLOCALCOMERCIAL = LOCALCOMERCIAL.IDENTIFICADOR" + 
+					"            JOIN TIPOLOCAL" + 
+					"            ON LOCALCOMERCIAL.TIPOLOCAL = TIPOLOCAL.ID" + 
+					"            JOIN HORARIO" + 
+					"            ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+					"            WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?) " + 
+					"            AND FECHA BETWEEN ? AND ?" + 
+					"            GROUP BY TIPOLOCAL.TIPO, IDLOCALCOMERCIAL" + 
+					"        )" + 
+					"WHERE TIPO = ?");
+		}
+		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, tipoLocal);	
+		return (List<Object>) q.executeList();
+	}
 }

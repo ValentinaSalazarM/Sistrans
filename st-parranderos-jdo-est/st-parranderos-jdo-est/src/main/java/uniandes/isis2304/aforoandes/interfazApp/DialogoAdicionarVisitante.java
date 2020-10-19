@@ -243,7 +243,7 @@ public class DialogoAdicionarVisitante extends JDialog implements ActionListener
 				}
 				else
 				{
-					principal.adicionarVisitante(identificacion, nombre, tipo, correo, telefonoPropio, nombreEmergencia, telefonoEmergencia);
+					principal.adicionarVisitante(identificacion, nombre, tipo, correo, telefonoPropio, nombreEmergencia, telefonoEmergencia, this);
 					dispose( );
 				}
 			}

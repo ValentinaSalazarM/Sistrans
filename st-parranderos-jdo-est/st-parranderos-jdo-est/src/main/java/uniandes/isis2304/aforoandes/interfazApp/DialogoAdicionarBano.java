@@ -209,16 +209,26 @@ public class DialogoAdicionarBano extends JDialog implements ActionListener
 					{
 						JOptionPane.showMessageDialog( this, "La capacidad normal debe depender del número de sanitarios.", "Agregar Baño", JOptionPane.ERROR_MESSAGE );
 					}
-					double area = Long.parseLong(areaStr);
-					if ( interfaz.buscarAreaPorValor(area) == null)
+					else
 					{
-						interfaz.adicionarArea();
+						if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
+						{
+							interfaz.adicionarCapacidadNormal();
+						}
+						if ( !areaStr.isEmpty())
+						{
+							double area = Long.parseLong(areaStr);
+							if ( interfaz.buscarAreaPorValor(area) == null)
+							{
+								interfaz.adicionarArea();
+							}
+							interfaz.adicionarBano(identificador, capacidadNormal, area, sanitarios, idCentroComercial, this);;
+						}
+						else
+						{
+							interfaz.adicionarBano(identificador, capacidadNormal, -1, sanitarios, idCentroComercial, this);
+						}	
 					}
-					if ( interfaz.buscarCapacidadNormalPorValor (capacidadNormal) == null)
-					{
-						interfaz.adicionarCapacidadNormal();
-					}
-					interfaz.adicionarBano(identificador, capacidadNormal, area, sanitarios, idCentroComercial, this);;
 				}
 				catch( NumberFormatException e2 )
 				{

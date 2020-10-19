@@ -62,7 +62,7 @@ class SQLAscensor
 	 * @param idCentroComercial - El identificador del centro comercial del ascensor
 	 * @return EL número de tuplas insertadas
 	 */
-	public long adicionarAscensor (PersistenceManager pm, String idAscensor, long capacidadNormal, long area, double pesoMaximo, String idCentroComercial) 
+	public long adicionarAscensor (PersistenceManager pm, String idAscensor, Long capacidadNormal, Long area, double pesoMaximo, String idCentroComercial) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaAscensor () + "(identificador, capacidadNormal, area, pesoMaximo, idCentroComercial) values (?, ?, ?, ?, ?)");
         q.setParameters(idAscensor, capacidadNormal, area, pesoMaximo, idCentroComercial);

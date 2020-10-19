@@ -127,13 +127,13 @@ public class DialogoConsultarIndiceAforoTipo extends JDialog implements ActionLi
 	{
 		interfaz = pPrincipal;
 		setLayout( new BorderLayout( ) );
-		setSize( 500, 300 );
+		setSize( 500, 340 );
 		setTitle( "Consultar índice de aforo de un tipo de local" );
 		setLocationRelativeTo( pPrincipal );
 
 		JPanel campos = new JPanel( );
-		campos.setLayout( new GridLayout( 6, 2, 5, 1 ) );
-		campos.setBorder( new EmptyBorder( 30, 30, 20, 30 ) );
+		campos.setLayout( new GridLayout( 6, 2, 10, 10 ) );
+		campos.setBorder( new EmptyBorder( 30, 30, 10, 30 ) );
 		add( campos, BorderLayout.CENTER );
 
 		lblTipoLocal = new JLabel( "* Tipo de local: " );

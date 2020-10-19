@@ -51,7 +51,7 @@ public class SQLLector
 	 */
 	public long adicionarLector (PersistenceManager pm, long id, long tipolector, String idcentrocomercial, String idlocalcomercial, String idascensor, String idparqueadero, String idbaño ) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaLector () + "(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbaño) values (?, ?, ?, ?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaLector () + "(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(id, tipolector, idcentrocomercial,idlocalcomercial, idascensor,idparqueadero, idbaño);
         return (long) q.executeUnique();
 	}
