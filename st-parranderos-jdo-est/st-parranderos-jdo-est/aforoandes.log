@@ -991,3 +991,6 @@ ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - re
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
 21:10:26,708 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+21:35:49,556 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:35:49,557 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:35:49,581 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
