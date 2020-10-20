@@ -191,917 +191,299 @@ ORA-00904: "IDBAÑO": identificador no válido
 23:28:17,579 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO LECTOR(id, tipolector, idcentrocomercial, idlocalcomercial, idascensor, idparqueadero, idbano) values (?, ?, ?, ?, ?, ?, ?)".
 ORA-02291: restricción de integridad (ISIS2304A222020.FK_L_LOCALCOMERCIAL) violada - clave principal no encontrada
 
-23:28:17,760 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando lector: null
-23:28:51,083 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-23:28:51,084 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-23:28:51,105 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-23:29:10,041 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
-23:29:11,512 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 40 lectores existentes
-23:29:17,704 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando lector por id: 45
-23:29:19,182 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando lector por id: 1 tuplas eliminadas
-23:29:22,611 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
-23:29:24,107 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 39 lectores existentes
-23:30:20,142 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-23:30:20,143 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-23:30:20,165 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-23:33:23,560 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible:
-23:33:24,277 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-23:33:37,052 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-23:33:38,645 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-23:35:01,585 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible:
-23:35:02,489 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-23:36:57,197 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
-23:36:59,407 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 77 registros existentes
-23:37:11,463 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
-23:37:12,300 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
-23:37:19,071 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
-23:37:20,096 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
-23:37:36,151 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes
-23:37:38,920 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes: 51 visitantes existentes
-23:37:47,588 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
-23:37:48,261 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
-23:38:04,785 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un lector por id: 1
-23:38:05,454 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Lector [id = 1, tipoLector = 2, idCentroComercial = 6, idLocalComercial = null, idBano = null, idAscensor = null, idParqueadero = null]
-23:38:05,455 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un visitante por identificación: 194317
-23:38:06,108 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Visitante [identificador = 194317, tipo = 3, nombre = Valentina Salazar, correo = kv.salazar@uniandes.edu.co, telefonoPropio = 8002673, nombreEmergencia = Yorky, telefonoEmergencia = 80095461]
-23:38:06,109 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Recuperando horarios habilitados para circulación
-23:38:06,741 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Recuperando horarios habilitados para circulación: Listo!
-23:38:07,244 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando RegistranCarnet con lector: 1 y visitante: 194317
-23:38:08,443 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando RegistranCarnet: RegistranCarnet [idLector = 1, tipoCarnet = 1, idVisitante = 194317, fecha = 2020-10-18 23:37:48.271, idHoraEntrada = 43, idHoraSalida = null]
-23:38:19,168 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
-23:38:19,810 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
-23:38:39,275 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
-23:38:40,067 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 78 registros existentes
-23:40:00,904 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
-23:40:01,490 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
-23:40:21,044 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 194317
-23:40:21,888 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - RegistranCarnet [idLector = 1, tipoCarnet = 1, idVisitante = 194317, fecha = 2020-10-18 00:00:00.0, idHoraEntrada = 43, idHoraSalida = 0]
-23:40:22,775 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Cambiando hora de salida del registro del visitante: 194317
-23:40:28,864 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
-23:40:30,349 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 78 registros existentes
-23:44:07,890 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-23:44:09,119 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-23:44:12,921 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-23:44:13,346 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-23:44:19,646 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
-23:44:20,229 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 0 visitantes atendidos en la(s) fecha(s)
-23:44:35,943 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
-23:44:38,469 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 78 registros existentes
-23:45:41,716 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
-23:45:42,541 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 4 visitantes atendidos en la(s) fecha(s)
-23:46:01,036 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
-23:46:01,382 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 4 visitantes atendidos en la(s) fecha(s)
-23:46:18,519 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet
-23:46:21,087 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de RegistranCarnet: 78 registros existentes
-23:47:38,139 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
-23:47:38,798 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 2 visitantes en el rango de horas
-23:47:58,672 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
-23:47:58,750 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 6 visitantes atendidos en la(s) fecha(s)
-23:48:16,178 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes atendidos por el establecimiento: LC101
-23:48:16,337 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando visitantes: 0 visitantes en el rango de horas
-23:48:35,239 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-23:48:35,240 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-23:48:35,260 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-23:48:50,038 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-23:48:51,593 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-23:48:53,671 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-23:48:55,508 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-23:49:01,588 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-23:49:02,616 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-23:49:10,143 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-23:49:10,545 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
-23:49:46,639 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Ascensor con identificador: ASCPRUEBA
-23:51:04,433 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-23:51:04,434 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-23:51:04,457 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-23:51:24,799 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-23:51:26,872 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-23:51:32,140 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-23:51:32,310 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-23:51:38,576 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-23:51:39,600 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
-23:51:51,327 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Ascensor con identificador: ascpruebaestasies
-23:51:54,096 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Ascensor: Ascensor [identificador=ascpruebaestasies, capacidadNormal=21, area=null, pesoMaximo=2100.0, idCentroComercial=13]
-00:04:28,111 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-00:04:28,112 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-00:04:28,133 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-00:04:37,210 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-00:04:38,430 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-00:04:42,329 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-00:04:42,912 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-00:04:47,269 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-00:04:47,855 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
-00:04:52,517 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano
-00:04:53,136 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano: 20 baños existentes
-00:04:56,097 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-00:04:56,906 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
-00:05:31,030 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 18
-00:05:31,571 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=4, valor=18.0, aforo=9]
-00:05:31,571 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 18
-00:05:32,297 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=4, valor=18.0, aforo=9]
-00:05:32,297 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Bano con identificador: BAPRUEBA
-00:05:34,987 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Bano: Bano [identificador=BAPRUEBA, capacidadNormal=4, area=null, sanitarios=19, idCentroComercial=14]
-00:05:38,860 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-00:05:39,760 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
-00:05:42,174 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-00:05:43,015 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
-00:05:52,111 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 18
-00:05:52,615 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=4, valor=18.0, aforo=9]
-00:05:52,615 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 18
-00:05:53,572 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=4, valor=18.0, aforo=9]
-00:05:53,572 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Bano con identificador: BAPRUEB
-00:05:53,948 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Bano: Bano [identificador=BAPRUEB, capacidadNormal=4, area=null, sanitarios=18, idCentroComercial=12]
-00:06:41,336 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano
-00:06:42,628 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano: 22 baños existentes
-00:06:56,457 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Bano por id: BAPRUEBA
-00:06:57,319 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Bano por id: 1 tuplas eliminadas
-00:07:19,443 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-00:07:20,709 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
-00:07:36,972 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 420
-00:07:37,069 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=9, valor=420.0, aforo=100]
-00:07:37,069 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: 420
-00:07:37,878 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - CapacidadNormal [id=9, valor=420.0, aforo=100]
-00:07:37,878 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Parqueadero con identificador: PAPRUEBA
-00:07:38,992 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Parqueadero: Parqueadero [identificador=PAPRUEBA, capacidadNormal=9, area=null, idCentroComercial=14]
-00:07:44,241 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero
-00:07:45,058 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero: 16 parqueaderos existentes
-00:07:52,480 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Parqueadero por id: PAPRUEBA
-00:07:52,566 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Parqueadero por id: 1 tuplas eliminadas
-00:08:00,356 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de local
-00:08:01,637 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de local: 16 existentes
-00:08:01,642 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-00:08:02,611 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
-00:08:50,066 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de área por valor: 324.0
-00:08:51,000 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Area [id = 5, valor = 324.0, aforo = 21]
-00:08:51,001 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de área por valor: 324.0
-00:08:51,636 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Area [id = 5, valor = 324.0, aforo = 21]
-00:08:51,636 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de capacidad normal por valor: -1
-00:08:52,242 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] -
-00:11:18,295 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-00:11:18,295 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-00:11:18,316 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-00:11:34,172 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-00:11:34,403 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-00:11:40,213 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-00:11:40,798 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-00:11:48,899 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de local
-00:11:49,691 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de local: 16 existentes
-00:11:49,695 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-00:11:50,329 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
-00:12:09,822 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de área por valor: 324.0
-00:12:10,275 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Area [id = 5, valor = 324.0, aforo = 21]
-00:12:10,276 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de área por valor: 324.0
-00:12:11,227 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Area [id = 5, valor = 324.0, aforo = 21]
-00:12:11,227 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando LocalComercial con identificador: LCPRUEBAA
-00:12:15,904 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando LocalComercial: LocalComercial [identificador = LCPRUEBAA, capacidadNormal = null, area = 5, tipoLocal = 5, activo = 1, idCentroComercial = 5]
-07:48:47,952 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-07:48:47,956 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-07:48:47,981 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-07:49:07,557 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-07:49:08,591 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 33 locales comerciales existentes
-07:49:14,420 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-07:49:15,368 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-07:50:20,735 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-07:50:20,736 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-07:50:20,756 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-07:50:30,295 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-07:50:31,633 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 33 locales comerciales existentes
-07:50:35,906 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-07:50:36,763 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-07:51:00,480 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando Top 20 establecimientos populares: 
-07:51:02,007 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando Top 20 establecimientos populares: 26 establecimientos visitados encontrados
-07:51:48,504 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-07:51:49,116 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-07:52:09,203 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-07:52:10,046 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-07:54:30,598 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-07:54:30,598 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-07:54:30,619 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-07:55:08,834 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-07:55:10,199 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 33 locales comerciales existentes
-07:55:18,215 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-07:55:18,555 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-07:55:29,983 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando LocalComercial por id: LCPRUEBAA
-07:55:34,894 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando LocalComercial por id: 1 tuplas eliminadas
-07:55:52,406 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-07:55:53,293 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-08:19:43,779 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-08:38:11,939 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
-08:38:15,793 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 16 existentes
-09:20:01,197 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-09:20:01,197 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-09:20:01,219 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-09:20:14,669 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-09:20:14,670 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-09:20:14,690 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-09:20:41,709 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-09:20:43,007 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-09:20:47,006 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-09:20:47,723 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-09:20:49,598 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-09:20:50,271 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-09:21:31,118 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: 1 - Domiciliario
-09:22:23,978 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-09:22:23,978 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-09:22:24,000 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-09:22:32,666 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-09:22:33,690 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-09:22:37,385 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-09:22:38,010 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-09:22:40,565 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-09:22:41,181 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-09:23:02,341 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: 1 - Domiciliario
-09:25:11,458 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:25:12,335 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-09:25:52,265 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:25:53,154 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-09:26:29,782 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:26:30,667 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-09:29:34,572 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-09:29:34,573 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-09:29:34,594 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-09:29:54,804 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-09:29:55,560 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-09:30:22,246 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-09:30:23,889 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-09:30:36,048 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:30:37,701 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-09:30:55,953 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:30:57,112 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-09:31:06,829 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-09:31:07,484 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-09:31:26,664 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: 1 - Domiciliario
-09:36:20,142 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-09:36:20,142 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-09:36:20,166 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-09:36:38,122 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-09:36:38,835 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-09:36:47,952 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-09:36:48,456 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-09:36:53,529 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-09:36:54,306 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-09:37:10,799 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: 1 - Domiciliario
-09:37:51,082 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:37:51,518 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-09:40:52,336 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:40:52,480 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-09:45:05,204 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:50:54,585 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-09:50:56,220 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-09:51:10,891 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: 1 - Domiciliario
-09:51:25,891 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-09:51:25,891 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-09:51:25,912 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-09:51:53,813 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:51:54,551 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-09:52:25,865 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-09:52:27,648 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-09:52:31,105 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-09:52:31,964 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-09:52:35,380 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-09:52:35,520 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-09:52:48,513 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: 1 - Domiciliario
-09:57:18,853 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-09:57:18,853 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-09:57:18,875 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-09:57:47,233 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:57:47,679 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 5 locales con cupos disponibles encontrados.
-09:58:06,741 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:58:07,149 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 0 locales con cupos disponibles encontrados.
-09:58:32,259 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-09:58:33,536 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-09:58:39,423 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-09:58:40,466 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-09:58:56,737 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-09:58:56,840 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-09:59:34,960 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:59:35,595 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 1 locales con cupos disponibles encontrados.
-09:59:56,660 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 
-09:59:57,468 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando establecimientos con aforo disponible: 11 locales con cupos disponibles encontrados.
-10:00:02,911 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-10:00:03,570 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-10:00:33,563 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:06:20,545 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-10:06:20,546 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-10:06:20,568 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-10:06:36,615 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-10:06:38,359 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-10:06:42,022 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-10:06:42,577 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-10:06:45,253 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-10:06:45,731 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-10:06:56,185 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:06:58,994 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - [D@ca921a0
-10:06:58,994 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:08:36,793 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-10:08:36,793 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-10:08:36,821 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-10:09:18,575 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-10:09:20,134 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-10:09:25,213 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-10:09:25,970 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-10:09:43,797 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-10:09:44,415 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-10:09:55,073 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:09:56,469 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - [D@5cdd4c9e
-10:09:56,469 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:10:57,670 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-10:10:57,671 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-10:10:57,694 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-10:11:20,485 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-10:11:21,744 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-10:11:26,875 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-10:11:28,394 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-10:11:32,261 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-10:11:32,436 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-10:11:42,612 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-10:11:42,682 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-10:12:00,781 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:12:02,710 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - [D@160b50e7
-10:12:02,710 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:14:39,763 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-10:14:39,764 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-10:14:39,787 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-10:14:48,018 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-10:14:49,712 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-10:14:54,036 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-10:14:54,360 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-10:14:57,075 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-10:14:57,207 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-10:15:06,219 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:15:08,361 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - [D@5c565ecd
-10:15:08,361 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:15:09,451 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: 3visitas encontradas
-10:27:47,734 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-10:27:47,734 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-10:27:47,766 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-10:27:57,366 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-10:27:59,201 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-10:28:04,619 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-10:28:04,929 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-10:28:17,795 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-10:28:17,966 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-10:28:26,318 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:28:33,171 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:29:38,099 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-10:29:38,100 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-10:29:38,122 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-10:29:54,854 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-10:29:57,438 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-10:30:01,849 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-10:30:02,699 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-10:30:13,038 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
-10:30:13,131 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
-10:30:32,061 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:30:42,343 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:30:45,203 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - [D@5931a9b0
-10:30:45,204 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: Domiciliario
-10:30:45,714 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Consultando duración visitas del tipo de visitante: 4visitas encontradas
-17:15:17,754 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:15:17,755 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:15:17,782 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:15:29,261 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:15:29,457 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:16:17,291 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 194317
-17:16:17,380 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 194317, nombre = Valentina Salazar, contrasena = 123]
-17:16:38,210 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:16:38,377 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:21:26,178 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:21:26,178 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:21:26,202 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:21:33,949 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:21:33,950 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:21:33,974 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:22:21,417 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:22:21,417 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:22:21,429 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:22:21,429 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:22:21,445 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:22:21,455 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:22:29,851 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:22:30,058 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:23:07,788 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:23:07,788 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:23:07,811 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:30:44,683 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:30:44,684 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:30:44,709 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:31:04,549 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:31:04,550 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:31:04,576 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:31:57,298 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:31:57,298 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:31:57,323 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:33:12,791 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:33:12,791 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:33:12,813 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:33:37,236 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:33:38,603 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:34:08,643 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:34:08,643 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:34:08,664 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:34:19,903 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:34:21,588 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:35:19,700 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:35:19,701 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:35:19,729 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:35:29,673 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:35:29,674 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:35:29,694 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:47:49,160 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:47:49,161 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:47:49,181 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:47:54,400 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-17:47:54,401 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-17:47:54,408 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-17:47:59,942 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:47:59,942 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:47:59,961 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:48:00,416 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:35:50,704 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:35:50,704 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales
+23:35:50,765 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de los centros comerciales: 15 existentes
+23:35:50,766 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:35:50,994 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-17:48:00,475 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-17:48:03,566 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-17:48:03,566 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-17:48:03,575 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-17:48:06,963 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:35:51,023 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:47:26,297 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:47:26,534 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 9 ascensores existentes
+23:47:26,534 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:47:26,950 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-17:48:07,586 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-17:49:04,510 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-17:49:04,562 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-17:49:13,947 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:49:13,948 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:49:13,968 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:49:14,059 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:49:15,504 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:49:15,607 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-17:49:18,955 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:47:26,990 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:47:27,455 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:47:27,530 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 9 ascensores existentes
+23:47:27,530 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:47:27,929 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-17:49:19,484 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-17:53:42,110 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-17:53:42,148 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-17:53:52,845 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:53:52,845 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:53:52,878 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:53:52,979 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:53:53,940 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:53:54,012 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-17:53:54,976 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:47:27,963 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:48:34,828 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación
+23:48:35,042 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación: 16 zonas de circulación existentes
+23:48:35,043 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:48:35,531 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-17:53:55,060 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-17:55:00,511 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:55:00,512 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:55:00,532 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:55:06,488 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-17:55:06,488 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-17:55:06,511 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:55:07,983 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:55:08,096 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-17:55:14,584 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:48:35,567 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:48:36,070 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación
+23:48:36,147 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación: 16 zonas de circulación existentes
+23:48:36,148 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:48:36,601 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-17:55:15,216 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-17:55:26,750 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:55:26,750 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:55:26,775 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:55:28,858 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-17:55:28,858 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-17:55:28,891 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:55:30,155 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:55:30,262 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-17:55:31,501 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:48:36,633 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:50:57,347 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:50:57,349 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:50:57,498 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+23:51:22,417 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:51:22,665 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:51:26,157 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:51:26,304 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:51:40,187 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 12345678
+23:51:40,246 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] -
+23:51:57,198 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:51:57,311 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:52:00,653 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:52:00,769 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:52:13,016 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 123456
+23:52:13,086 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: Administrador [identificacion = 123456, nombre = Camila, contrasena = ksnsow]
+23:52:19,934 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:52:20,081 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:52:23,790 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+23:52:23,909 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+23:52:36,109 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 1000506177
+23:52:36,160 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: Administrador [identificacion = 1000506177, nombre = Camila Teran, contrasena = 123]
+23:52:46,124 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 1000507177
+23:52:46,176 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] -
+23:52:53,931 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
+23:52:53,993 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
+23:53:04,589 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+23:53:04,769 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 39 lectores existentes
+23:53:07,677 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes
+23:53:07,970 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes: 51 visitantes existentes
+23:53:12,638 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
+23:53:12,689 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
+23:53:21,080 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Empleado
+23:53:21,146 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Empleado: 10 empleados existentes
+23:53:29,259 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero
+23:53:29,340 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero: 15 parqueaderos existentes
+23:53:51,235 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Parqueadero por id: PA102
+23:53:56,592 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminando Parqueadero por id: 0 tuplas eliminadas
+23:53:59,643 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero
+23:53:59,723 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero: 15 parqueaderos existentes
+23:54:05,844 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero
+23:54:06,049 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Parqueadero: 15 parqueaderos existentes
+23:55:09,360 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:55:09,819 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-17:55:31,603 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-17:56:11,399 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:56:11,399 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:56:11,418 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:56:21,824 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-17:56:21,824 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-17:56:21,851 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:56:25,122 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:56:25,216 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-17:56:32,611 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:55:09,852 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:55:09,852 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:55:09,969 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 10 ascensores existentes
+23:55:09,969 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:55:10,204 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-17:56:32,694 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-17:57:24,028 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:57:24,028 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:57:24,049 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:57:29,591 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-17:57:29,592 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-17:57:29,616 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:57:31,598 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:57:36,673 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-17:57:39,784 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:55:10,240 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:55:10,802 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:55:10,888 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 10 ascensores existentes
+23:55:10,889 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:55:11,296 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-17:57:39,839 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-17:57:47,723 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:57:47,723 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:57:47,743 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-17:57:50,622 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-17:57:50,622 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-17:57:50,649 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-17:57:52,300 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-17:58:03,539 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 3543016364021851
-17:58:03,914 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 3543016364021851, nombre = Gilda Del Monte, contrasena = #618]
-17:58:07,415 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-17:58:11,356 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:55:11,339 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:57:20,496 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:57:20,683 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 10 ascensores existentes
+23:57:20,684 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:57:21,186 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-17:58:11,859 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-17:59:51,666 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-17:59:51,666 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-17:59:51,688 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:00:01,816 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:00:01,817 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:00:01,842 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:00:05,443 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:00:20,553 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:00:26,878 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 3543016364021851
-18:00:26,998 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 3543016364021851, nombre = Gilda Del Monte, contrasena = #618]
-18:00:27,428 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:57:21,242 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:57:21,768 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:57:21,850 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 10 ascensores existentes
+23:57:21,850 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:57:22,237 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:00:27,501 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:01:01,276 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:01:01,276 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:01:01,296 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:01:05,949 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:01:05,949 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:01:05,973 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:01:06,890 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:01:21,987 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:01:22,138 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 3550856365084741
-18:01:22,227 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 3550856365084741, nombre = Tedmund Dominighi, contrasena = #b8c]
-18:01:27,524 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:57:22,272 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:57:40,852 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:57:41,027 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 10 ascensores existentes
+23:57:41,027 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:57:41,525 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:01:28,444 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:01:40,683 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:01:40,684 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:01:40,705 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:01:44,727 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:01:44,728 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:01:44,751 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:01:46,260 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:02:01,394 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:02:06,757 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:57:41,560 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:57:42,003 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:57:42,087 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 10 ascensores existentes
+23:57:42,090 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Área con valor: 200.0 y aforo: 13
+23:57:42,414 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Área: Area [id = 22, valor = 200.0, aforo = 13]
+23:57:42,414 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando CapacidadNormal con valor: 100 y aforo: 50
+23:57:42,608 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando CapacidadNormal: CapacidadNormal [id=22, valor=100.0, aforo=50]
+23:57:42,608 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando centro comercial Titan plaza
+23:57:42,662 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando centro comercial: CentroComercial [identificador=22, nombre=Titan plaza]
+23:57:42,710 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Ascensor con identificador: ASC099
+23:57:42,765 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Ascensor: Ascensor [identificador=ASC099, capacidadNormal=21, area=22, pesoMaximo=1300.0, idCentroComercial=22]
+23:57:42,765 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+23:57:42,854 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 11 ascensores existentes
+23:57:42,854 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:57:43,072 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:02:07,134 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:02:17,702 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:02:17,702 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:02:17,726 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:02:17,726 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:02:17,726 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:02:17,747 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:02:20,111 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:02:20,112 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:02:20,136 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:02:20,333 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:02:20,334 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:02:20,360 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:02:20,413 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:02:21,262 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:02:29,295 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 3543016364021851
-18:02:30,185 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 3543016364021851, nombre = Gilda Del Monte, contrasena = #618]
-18:02:35,473 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:02:36,376 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:02:36,615 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:02:40,602 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:57:43,102 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:58:51,492 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación
+23:58:51,684 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación: 16 zonas de circulación existentes
+23:58:51,685 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:58:52,153 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:02:41,042 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:02:51,667 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:02:57,096 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:58:52,192 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+23:58:52,688 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación
+23:58:52,762 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación: 16 zonas de circulación existentes
+23:58:52,762 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+23:58:53,146 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:02:57,388 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:06:39,653 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:06:39,654 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:06:39,674 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:06:47,112 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:06:47,113 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:06:47,144 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:06:48,204 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:06:48,269 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:06:50,963 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+23:58:53,181 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:00:33,049 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación
+00:00:33,247 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación: 16 zonas de circulación existentes
+00:00:33,247 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:00:33,654 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:06:51,711 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:10:09,828 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:10:09,829 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:10:09,851 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:10:15,132 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:10:15,133 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:10:15,140 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:10:19,896 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:00:33,693 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:00:34,161 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando centro comercial Hacienda Santa Bárbara
+00:00:34,374 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CENTROCOMERCIAL(id, nombre) values (?, ?)".
+ORA-00001: restricción única (ISIS2304A222020.PK_CENTROCOMERCIAL) violada
+
+00:00:34,401 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando centro comercial: null
+00:00:34,401 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:00:34,600 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:10:20,491 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:10:33,938 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:10:33,939 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:10:33,963 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:10:37,472 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:10:37,472 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:10:37,502 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:10:39,099 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:10:39,205 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:10:43,047 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:00:34,626 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:02:23,854 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:02:24,393 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:10:43,628 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:13:07,624 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:13:07,625 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:13:07,645 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:13:17,523 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:13:17,524 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:13:17,547 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:13:19,553 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:13:19,672 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:13:23,868 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:02:24,433 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:02:24,434 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación
+00:02:24,547 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación: 16 zonas de circulación existentes
+00:02:24,547 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:02:24,810 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:13:24,543 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:19:41,658 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:19:41,658 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:19:41,681 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:19:47,024 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:19:47,025 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:19:47,049 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:19:48,475 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:19:48,622 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:19:54,200 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:02:24,849 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:02:25,395 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:02:25,771 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:19:55,195 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:22:51,874 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:22:51,875 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:22:51,895 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:23:06,940 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:23:06,941 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:23:06,968 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:23:10,470 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:23:25,473 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:23:28,434 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:02:25,804 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:02:25,804 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación
+00:02:25,874 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de zonas de circulación: 16 zonas de circulación existentes
+00:02:25,875 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:02:26,127 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:23:28,609 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:24:11,497 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:24:11,498 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:24:11,518 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:24:15,572 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:24:15,573 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:24:15,599 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:24:17,315 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:24:32,458 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:24:36,540 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:02:26,156 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:04:52,469 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+00:04:52,630 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 11 ascensores existentes
+00:04:52,633 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Área con valor: 200.0 y aforo: 13
+00:04:53,011 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO AREA(id, valor, aforo) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A222020.ND_AREA_VALOR) violada
+
+00:04:53,048 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Área: null
+00:04:53,048 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando CapacidadNormal con valor: 100 y aforo: 50
+00:04:53,146 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CAPACIDADNORMAL(id, valor, aforo) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A222020.ND_CAPACIDADNORMAL_VALOR) violada
+
+00:04:53,178 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando CapacidadNormal: null
+00:04:53,178 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando centro comercial Titan plaza
+00:04:53,216 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CENTROCOMERCIAL(id, nombre) values (?, ?)".
+ORA-00001: restricción única (ISIS2304A222020.PK_CENTROCOMERCIAL) violada
+
+00:04:53,241 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando centro comercial: null
+00:04:53,242 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:04:53,444 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:24:37,033 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:24:46,230 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:24:46,230 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:24:46,251 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:24:52,710 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:24:52,710 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:24:52,736 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:24:54,110 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:25:00,370 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 3543016364021851
-18:25:01,135 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 3543016364021851, nombre = Gilda Del Monte, contrasena = #618]
-18:25:14,211 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:25:15,559 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:25:27,077 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 3550856365084741
-18:25:27,753 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 3550856365084741, nombre = Tedmund Dominighi, contrasena = #b8c]
-18:25:35,623 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:25:37,413 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:25:37,492 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:25:43,681 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:04:53,480 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:04:53,942 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+00:04:54,033 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 11 ascensores existentes
+00:04:54,034 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Área con valor: 200.0 y aforo: 13
+00:04:54,292 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO AREA(id, valor, aforo) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A222020.ND_AREA_VALOR) violada
+
+00:04:54,318 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando Área: null
+00:04:54,318 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando CapacidadNormal con valor: 100 y aforo: 50
+00:04:54,399 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CAPACIDADNORMAL(id, valor, aforo) values (?, ?, ?)".
+ORA-00001: restricción única (ISIS2304A222020.ND_CAPACIDADNORMAL_VALOR) violada
+
+00:04:54,433 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando CapacidadNormal: null
+00:04:54,433 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando centro comercial Titan plaza
+00:04:54,466 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CENTROCOMERCIAL(id, nombre) values (?, ?)".
+ORA-00001: restricción única (ISIS2304A222020.PK_CENTROCOMERCIAL) violada
+
+00:04:54,495 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando centro comercial: null
+00:04:54,495 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:04:54,700 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:25:44,230 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:37:48,396 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:37:48,409 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:37:48,439 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:37:53,871 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:37:53,871 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:37:53,908 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:37:55,163 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:38:05,755 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 3543016364021851
-18:38:06,545 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 3543016364021851, nombre = Gilda Del Monte, contrasena = #618]
-18:38:15,252 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:38:16,599 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:38:23,820 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 3550856365084741
-18:38:24,633 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 3550856365084741, nombre = Tedmund Dominighi, contrasena = #b8c]
-18:38:36,642 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:38:37,301 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:38:41,799 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 4913646598441655
-18:38:42,732 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 4913646598441655, nombre = Sigismond Jansema, contrasena = #085]
-18:38:57,384 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:38:58,922 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:39:17,351 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 70806
-18:39:17,954 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: Administrador [identificacion = 70806, nombre = Skip Oxford, contrasena = #4f0]
-18:39:18,988 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 70806
-18:39:19,226 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ADMINISTRADOR(identificacion, nombre, contrasena) values (?, ?, ?)".
-ORA-00001: restricción única (ISIS2304A222020.PK_ADMINISTRADOR) violada
-
-18:39:19,227 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: null
-18:39:19,227 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 70806
-18:39:19,338 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 70806, nombre = Skip Oxford, contrasena = #4f0]
-18:39:19,339 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:39:21,909 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:04:54,739 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:06:04,710 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
+00:06:04,842 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
+00:06:04,843 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:06:05,267 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:39:22,121 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:41:07,082 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:41:07,082 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:41:07,104 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:41:12,975 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:41:12,976 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:41:13,002 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:41:14,292 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:41:29,391 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 70806
-18:41:30,487 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ADMINISTRADOR(identificacion, nombre, contrasena) values (?, ?, ?)".
-ORA-00001: restricción única (ISIS2304A222020.PK_ADMINISTRADOR) violada
-
-18:41:30,490 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: null
-18:41:30,490 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 70806
-18:41:30,851 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 70806
-18:41:30,876 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 70806, nombre = Skip Oxford, contrasena = #4f0]
-18:41:30,877 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:41:31,280 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ADMINISTRADOR(identificacion, nombre, contrasena) values (?, ?, ?)".
-ORA-00001: restricción única (ISIS2304A222020.PK_ADMINISTRADOR) violada
-
-18:41:31,280 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: null
-18:41:32,956 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:06:05,302 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:06:05,769 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
+00:06:05,827 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
+00:06:05,827 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:06:06,200 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:41:33,494 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:42:04,053 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:42:04,054 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:42:04,075 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:42:06,882 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:42:06,882 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:42:06,910 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:42:08,451 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:42:23,516 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 70806
-18:42:24,552 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ADMINISTRADOR(identificacion, nombre, contrasena) values (?, ?, ?)".
-ORA-00001: restricción única (ISIS2304A222020.PK_ADMINISTRADOR) violada
-
-18:42:24,555 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: null
-18:42:24,555 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 70806
-18:42:25,577 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 70806, nombre = Skip Oxford, contrasena = #4f0]
-18:42:25,577 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:42:28,697 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:06:06,234 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:15:19,136 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+00:15:19,293 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 11 ascensores existentes
+00:15:19,293 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:15:19,729 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:42:29,104 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:43:21,101 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:43:21,102 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:43:21,127 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:43:25,677 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:43:25,678 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:43:25,709 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:43:28,100 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:43:43,205 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 70806
-18:43:43,728 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ADMINISTRADOR(identificacion, nombre, contrasena) values (?, ?, ?)".
-ORA-00001: restricción única (ISIS2304A222020.PK_ADMINISTRADOR) violada
-
-18:43:43,730 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: null
-18:43:43,730 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 70806
-18:43:44,226 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 70806, nombre = Skip Oxford, contrasena = #4f0]
-18:43:44,226 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:43:48,897 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:15:19,769 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+00:15:20,361 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+00:15:20,473 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 11 ascensores existentes
+00:15:20,473 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+00:15:20,872 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:43:49,541 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:46:35,746 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:46:35,747 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:46:35,772 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:46:45,398 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:46:45,398 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:46:45,428 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:46:47,595 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:47:00,408 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 34540
-18:47:02,042 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: Administrador [identificacion = 34540, nombre = Otha Ebbers, contrasena = #e99]
-18:47:02,701 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 34540
-18:47:05,396 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ADMINISTRADOR(identificacion, nombre, contrasena) values (?, ?, ?)".
-ORA-00001: restricción única (ISIS2304A222020.PK_ADMINISTRADOR) violada
-
-18:47:05,396 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: null
-18:47:05,396 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 34540
-18:47:06,826 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 34540, nombre = Otha Ebbers, contrasena = #e99]
-18:47:06,826 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:47:12,488 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+00:15:20,903 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+11:36:41,747 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano
+11:36:42,055 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano: 21 baños existentes
+11:36:42,055 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+11:36:42,719 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:47:13,009 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:51:35,166 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:51:35,167 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:51:35,187 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:51:39,664 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:51:39,664 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:51:39,664 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 34541
-18:51:40,069 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ADMINISTRADOR(identificacion, nombre, contrasena) values (?, ?, ?)".
-ORA-00001: restricción única (ISIS2304A222020.ND_ADMINISTRADOR_NOMBRE) violada
-
-18:51:40,072 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: null
-18:51:40,072 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:51:46,082 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+11:36:42,769 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+11:36:43,298 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano
+11:36:43,430 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Bano: 21 baños existentes
+11:36:43,430 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+11:36:43,860 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:51:46,940 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-18:54:16,491 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-18:54:16,492 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-18:54:16,514 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-18:54:18,966 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-18:54:18,966 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-18:54:18,966 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 34541
-18:54:19,377 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: Administrador [identificacion = 34541, nombre = Oa Ebbers, contrasena = #e99]
-18:54:19,457 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-18:54:20,090 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-18:54:35,201 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 34540
-18:54:35,838 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 34540, nombre = Otha Ebbers, contrasena = #e99]
-18:54:35,838 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-18:54:39,000 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+11:36:43,898 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+11:37:54,950 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+11:37:54,952 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+11:37:55,112 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+11:55:28,715 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+11:56:26,553 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
+11:56:32,068 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
+16:34:17,163 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+16:34:17,532 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 39 lectores existentes
+16:34:17,533 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+16:34:18,006 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-18:54:39,523 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-19:27:35,572 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-19:27:35,572 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-19:27:35,594 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-19:27:40,741 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-19:27:40,741 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-19:27:40,751 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-19:27:40,753 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-19:27:40,753 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-19:27:40,780 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-19:27:42,334 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-19:27:57,447 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 34540
-19:27:58,075 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: Administrador [identificacion = 34540, nombre = Otha Ebbers, contrasena = #e99]
-19:27:58,075 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 34540
-19:27:58,701 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 34540, nombre = Otha Ebbers, contrasena = #e99]
-19:27:58,702 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminar información de un administrador por id: 34540
-19:27:59,483 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Eliminar administrador por Id: 
-19:27:59,483 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 34540
-19:28:00,185 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - 
-19:28:00,207 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-19:28:00,393 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 34540
-19:28:00,627 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-19:28:01,347 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: Administrador [identificacion = 34540, nombre = Otha Ebbers, contrasena = #e99]
-19:28:20,639 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-19:28:21,805 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 70806
-19:28:21,914 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - 
-19:28:25,291 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+16:34:18,050 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+16:34:18,556 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector
+16:34:18,700 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Lector: 39 lectores existentes
+16:34:18,700 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+16:34:19,109 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
 ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
 
-19:28:25,617 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-19:29:54,950 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-19:29:54,950 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-19:29:54,972 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-19:30:28,271 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-19:30:28,272 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-19:30:28,298 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-19:30:54,030 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-19:30:54,031 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-19:30:54,051 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-19:31:01,842 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-19:31:01,843 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-19:31:01,873 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-19:31:03,930 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-19:31:19,018 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 34540
-19:31:19,647 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ADMINISTRADOR(identificacion, nombre, contrasena) values (?, ?, ?)".
-ORA-00001: restricción única (ISIS2304A222020.PK_ADMINISTRADOR) violada
-
-19:31:19,653 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: null
-19:31:19,653 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 34540
-19:31:19,833 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 34540, nombre = Otha Ebbers, contrasena = #e99]
-19:31:19,834 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-19:31:26,600 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
-ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
-
-19:31:26,915 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-19:31:56,993 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
-19:31:56,994 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
-19:31:57,013 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
-19:32:02,868 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Probando las operaciones sobre Administrador
-19:32:02,868 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración de tablas válido
-19:32:02,895 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial
-19:32:04,776 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de LocalComercial: 32 locales comerciales existentes
-19:32:19,854 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 34540
-19:32:20,230 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ADMINISTRADOR(identificacion, nombre, contrasena) values (?, ?, ?)".
-ORA-00001: restricción única (ISIS2304A222020.PK_ADMINISTRADOR) violada
-
-19:32:20,232 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: null
-19:32:20,232 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de un administrador por id: 34540
-19:32:20,402 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Administrador [identificacion = 34540, nombre = Otha Ebbers, contrasena = #e99]
-19:32:20,402 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
-19:32:22,354 (main) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
-ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
-
-19:32:22,978 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
-19:32:23,106 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando administrador: 34540
+16:34:19,142 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+>>>>>>> 0f3ec0981172350b0fe7c10bc330dacbbc98cd09

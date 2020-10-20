@@ -1,5 +1,4 @@
 package uniandes.isis2304.parranderos.test;
-
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
@@ -8,7 +7,6 @@ package uniandes.isis2304.parranderos.test;
  * Proyecto: Aforo-CCAndes
  *  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-
 import static org.junit.Assert.assertEquals;
 
 import static org.junit.Assert.assertNull;
@@ -23,11 +21,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.aforoandes.negocio.AforoAndes;
 import uniandes.isis2304.aforoandes.negocio.VOArea;
-import uniandes.isis2304.aforoandes.negocio.VOAscensor;
+
 import uniandes.isis2304.aforoandes.negocio.VOCapacidadNormal;
 import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
-import uniandes.isis2304.aforoandes.negocio.VOParqueadero;
-import uniandes.isis2304.aforoandes.negocio.VOZonaCirculacion;
+
+import uniandes.isis2304.aforoandes.negocio.VOLector;
+import uniandes.isis2304.aforoandes.negocio.VOTipoLector;
+
 
 
 
@@ -35,7 +35,7 @@ import uniandes.isis2304.aforoandes.negocio.VOZonaCirculacion;
  * @author 
  *
  */
-public class ZonaCirculacionTest 
+public class Lector 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -43,7 +43,7 @@ public class ZonaCirculacionTest
 	/**
 	 * Logger para escribir la traza de la ejecución
 	 */
-	private static Logger log = Logger.getLogger(ZonaCirculacionTest.class.getName());
+	private static Logger log = Logger.getLogger(Lector.class.getName());
 
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos: La unidad de persistencia existe y el esquema de la BD también
@@ -64,7 +64,7 @@ public class ZonaCirculacionTest
 	private AforoAndes aforoAndes;
 
 	/* ****************************************************************
-	 * 			Métodos de prueba para la tabla Zona Circulación - Creación 
+	 * 			Métodos de prueba para la tabla Lector - Creación 
 	 *****************************************************************/
 
 	@Test
@@ -73,16 +73,16 @@ public class ZonaCirculacionTest
 		// Probar primero la conexión a la base de datos
 		try
 		{
-			log.info ("Probando las operaciones CRD sobre ZonaCirculación");
+			log.info ("Probando las operaciones CRD sobre Lector");
 			aforoAndes = new AforoAndes (openConfig (CONFIG_TABLAS_A));
 		}
 		catch (Exception e)
 		{
 			//   			e.printStackTrace();
-			log.info ("Prueba de CRD de ZonaCirculación incompleta. No se pudo conectar a la base de datos !!. La excepción generada es: " + e.getClass ().getName ());
+			log.info ("Prueba de CRD de Lector incompleta. No se pudo conectar a la base de datos !!. La excepción generada es: " + e.getClass ().getName ());
 			log.info ("La causa es: " + e.getCause ().toString ());
 
-			String msg = "Prueba de CRD de ZonaCirculación incompleta. No se pudo conectar a la base de datos !!.\n";
+			String msg = "Prueba de CRD de Lector incompleta. No se pudo conectar a la base de datos !!.\n";
 			msg += "Revise el log de aforoAndes y el de datanucleus para conocer el detalle de la excepción";
 			System.out.println (msg);
 			fail (msg);
@@ -91,33 +91,52 @@ public class ZonaCirculacionTest
 		// Ahora si se pueden probar las operaciones
 		try
 		{
-			aforoAndes.limpiarAforoAndes ();
 			// Lectura de los tipos de bebida con la tabla vacía
-			List <VOZonaCirculacion> lista = aforoAndes.darVOZonasCirculacion();
-			assertEquals ("No deben haber zonas de circulación creadas!!", 0, lista.size ());
+			List <VOLector> lista = aforoAndes.darVOLectores();
+			assertEquals("No deben haber ascensores creados!!", 0, lista.size ());
 
+			//Area
+			double valor = 200;
+			int aforo = 13;
+			VOArea area1 = aforoAndes.adicionarArea(valor, aforo);
+
+			//Capacidad normal 
+			int value = 100; 
+			int af = 50;
+
+			VOCapacidadNormal cn = aforoAndes.adicionarCapacidadNormal(value, af);
 
 			//Centro comercial 
-			String identificacion = "12";
-			String nombre = "Hacienda Santa Bárbara";
+			String identificacion = "22";
+			String nombre = "Titan plaza";
 
 			VOCentroComercial cc = aforoAndes.adicionarCentroComercial(identificacion, nombre);
 
 
-			String identificador = "ZC099";
-			VOZonaCirculacion zonaCirculacion1 = aforoAndes.adicionarZonaCirculacion(identificador, 3800, cc.getIdentificador());
-			lista = aforoAndes.darVOZonasCirculacion();
-			assertEquals ("Debe haber una zona de circulación creada!!", 1, lista.size ());
+
+			//TipoLocal 
+			String tipo = "Fisico";
+			VOTipoLector tipoLector = aforoAndes.adicionarTipoLector(tipo);
+
+
+			Long identificador = (long) 123;
+			VOLector lector1 = aforoAndes.adicionarLector(identificador, tipoLector.getId(), cc.getIdentificador(), null, null, null, null);
+			lista = aforoAndes.darVOLectores();
+			assertEquals ("Debe haber un lector creado !!", 1, lista.size ());
+
+
+
+
 
 		}
 		catch (Exception e)
 		{
 			//   			e.printStackTrace();
-			String msg = "Error en la ejecución de las pruebas de operaciones sobre la tabla Parqueadero.\n";
+			String msg = "Error en la ejecución de las pruebas de operaciones sobre la tabla Lector.\n";
 			msg += "Revise el log de aforoAndes y el de datanucleus para conocer el detalle de la excepción";
 			System.out.println (msg);
 
-			fail ("Error en las pruebas sobre la tabla Parqueadero");
+			fail ("Error en las pruebas sobre la tabla Lector");
 		}
 		finally
 		{
@@ -127,25 +146,26 @@ public class ZonaCirculacionTest
 	}
 
 	/**
-	 * Método de prueba de la restricción de unicidad sobre el id de la zona de circulación
+	 * Método de prueba de la restricción de unicidad sobre el nombre del Lector
 	 */
 	@Test
-	public void unicidadIDZonaCirculacionTest() 
+	public void unicidadIDLectorTest() 
 	{
+
 		// Probar primero la conexión a la base de datos
 		try
 		{
 
-			log.info ("Probando la restricción de UNICIDAD del id de la zona de circulación");
+			log.info ("Probando la restricción de UNICIDAD del id del lector");
 			aforoAndes = new AforoAndes (openConfig (CONFIG_TABLAS_A));
 		}
 		catch (Exception e)
 		{
 			//			e.printStackTrace();
-			log.info ("Prueba de UNICIDAD de parqueadero incompleta. No se pudo conectar a la base de datos !!. La excepción generada es: " + e.getClass ().getName ());
+			log.info ("Prueba de UNICIDAD de  lector incompleta. No se pudo conectar a la base de datos !!. La excepción generada es: " + e.getClass ().getName ());
 			log.info ("La causa es: " + e.getCause ().toString ());
 
-			String msg = "Prueba de UNICIDAD de zona circulación incompleta. No se pudo conectar a la base de datos !!.\n";
+			String msg = "Prueba de UNICIDAD de lector incompleta. No se pudo conectar a la base de datos !!.\n";
 			msg += "Revise el log de aforoAndes y el de datanucleus para conocer el detalle de la excepción";
 			System.out.println (msg);
 			fail (msg);
@@ -154,36 +174,52 @@ public class ZonaCirculacionTest
 		// Ahora si se pueden probar las operaciones
 		try
 		{
-
-			aforoAndes.limpiarAforoAndes ();
 			// Lectura de los tipos de bebida con la tabla vacía
-			List <VOZonaCirculacion> lista = aforoAndes.darVOZonasCirculacion();
-			assertEquals ("No deben haber zonas de circulación creadas!!", 0, lista.size ());
+			List <VOLector> lista = aforoAndes.darVOLectores();
+			assertEquals("No deben haber ascensores creados!!", 0, lista.size ());
 
+			//Area
+			double valor = 200;
+			int aforo = 13;
+			VOArea area1 = aforoAndes.adicionarArea(valor, aforo);
+
+			//Capacidad normal 
+			int value = 100; 
+			int af = 50;
+
+			VOCapacidadNormal cn = aforoAndes.adicionarCapacidadNormal(value, af);
 
 			//Centro comercial 
-			String identificacion = "12";
-			String nombre = "Hacienda Santa Bárbara";
+			String identificacion = "22";
+			String nombre = "Titan plaza";
 
 			VOCentroComercial cc = aforoAndes.adicionarCentroComercial(identificacion, nombre);
 
 
-			String identificador = "ZC099";
-			VOZonaCirculacion zonaCirculacion1 = aforoAndes.adicionarZonaCirculacion(identificador, 3800, cc.getIdentificador());
-			lista = aforoAndes.darVOZonasCirculacion();
-			assertEquals ("Debe haber una zona de circulación creada!!", 1, lista.size ());
 
-			VOZonaCirculacion zc2 = aforoAndes.adicionarZonaCirculacion(identificador, 4000, cc.getIdentificador());
-			assertNull ("No puede adicionar dos zonas de circulacion con el mismo id !!", zc2);
+			//TipoLocal 
+			String tipo = "Fisico";
+			VOTipoLector tipoLector = aforoAndes.adicionarTipoLector(tipo);
+
+
+			Long identificador = (long) 123;
+			VOLector lector1 = aforoAndes.adicionarLector(identificador, tipoLector.getId(), cc.getIdentificador(), null, null, null, null);
+			lista = aforoAndes.darVOLectores();
+			assertEquals ("Debe haber un lector creado !!", 1, lista.size ());
+
+
+
+			VOLector lector2 = aforoAndes.adicionarLector(identificador, tipoLector.getId(), cc.getIdentificador(),null, null, null, null);
+			assertNull ("No puede adicionar dos lectores con el mismo id !!", lector2);
 		}
 		catch (Exception e)
 		{
 			//			e.printStackTrace();
-			String msg = "Error en la ejecución de las pruebas de UNICIDAD sobre la tabla Parqueadero.\n";
+			String msg = "Error en la ejecución de las pruebas de UNICIDAD sobre la tabla Lector.\n";
 			msg += "Revise el log de aforoAndes y el de datanucleus para conocer el detalle de la excepción";
 			System.out.println (msg);
 
-			fail ("Error en las pruebas de UNICIDAD sobre la tabla Parqueadero");
+			fail ("Error en las pruebas de UNICIDAD sobre la tabla Lector");
 		}    				
 		finally
 		{
