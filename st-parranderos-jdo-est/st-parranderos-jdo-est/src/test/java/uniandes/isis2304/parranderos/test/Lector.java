@@ -91,9 +91,10 @@ public class Lector
 		// Ahora si se pueden probar las operaciones
 		try
 		{
-			// Lectura de los tipos de bebida con la tabla vacía
+			aforoAndes.limpiarAforoAndes();
+			
 			List <VOLector> lista = aforoAndes.darVOLectores();
-			assertEquals("No deben haber ascensores creados!!", 0, lista.size ());
+			assertEquals("No deben haber lectores creados!!", 0, lista.size ());
 
 			//Area
 			double valor = 200;
@@ -173,7 +174,10 @@ public class Lector
 
 		// Ahora si se pueden probar las operaciones
 		try
+		
 		{
+			
+			aforoAndes.limpiarAforoAndes ();
 			// Lectura de los tipos de bebida con la tabla vacía
 			List <VOLector> lista = aforoAndes.darVOLectores();
 			assertEquals("No deben haber ascensores creados!!", 0, lista.size ());

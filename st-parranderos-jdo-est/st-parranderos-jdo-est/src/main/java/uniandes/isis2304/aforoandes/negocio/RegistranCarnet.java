@@ -80,7 +80,7 @@ public class RegistranCarnet implements VORegistranCarnet
 	 * @param horaEntrada - El identificador del horario en el cual se realiza la lectura de entrada. Debe existir un horario con dicho identificador
 	 * @param horaSalida -  El identificador del horario en el cual se realiza la lectura de salida. Debe existir un horario con dicho identificador
 	 */
-	public RegistranCarnet(long lector, long tipoCarnet, String idVisitante, Timestamp fecha, Long horaEntrada, Long horaSalida) 
+	public RegistranCarnet(long lector, long tipoCarnet, String idVisitante, Timestamp fecha, long horaEntrada, long horaSalida) 
 	{
 		this.idLector = lector;
 		this.tipoCarnet = tipoCarnet;
