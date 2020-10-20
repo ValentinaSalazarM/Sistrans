@@ -412,24 +412,12 @@
 					"event": "mostrarPresentacionGeneral"
 				},
 				{
-					"label": "Modelo conceptual",
-					"event": "mostrarModeloConceptual"
-				},
-				{
 					"label": "Esquema de la BD",
 					"event": "mostrarEsquemaBD"
 				},
 				{
 					"label": "Script creación de la BD",
 					"event": "mostrarScriptBD"
-				},
-				{
-					"label": "Arquitectura de referencia",
-					"event": "mostrarArqRef"
-				},
-				{
-					"label": "Javadoc Parranderos",
-					"event": "mostrarJavadoc"
 				}
 			]
 		},		

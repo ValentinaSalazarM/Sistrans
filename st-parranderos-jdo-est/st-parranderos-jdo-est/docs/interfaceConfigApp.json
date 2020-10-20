@@ -1,0 +1,472 @@
+{
+	"title": "Aplicación transaccional de AforoAndes",
+	"frameH": 600,
+	"frameW": 1030,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menuBar":
+	[
+		{ "menuTitle": "Sesión",
+		  "options":
+			[
+				{
+					"label": "Registrarse",
+					"event": "mostrarDialogoRegistro"
+				},
+				{
+					"label": "Iniciar sesión",
+					"event": "mostrarDialogoInicioSesion"
+				}
+			]
+		},
+		{ "menuTitle": "Ascensor",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarAscensor"
+				},
+				{
+					"label": "Listar",
+					"event": "listarAscensores"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarAscensorPorIdentificador"
+				},
+				{
+					"label": "Cambiar peso máximo",
+					"event": "cambiarPesoMaximoAscensor"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarAscensorPorIdentificador"
+				}
+			]
+		},
+		{ "menuTitle": "Baño",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarBano"
+				},
+				{
+					"label": "Listar",
+					"event": "listarBanos"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarBanoPorIdentificador"
+				},
+				{
+					"label": "Buscar por número de sanitarios",
+					"event": "buscarBanoPorSanitarios"
+				},
+				{
+					"label": "Cambiar número de sanitarios",
+					"event": "cambiarNumeroSanitariosBano"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarBanoPorIdentificador"
+				},
+				{
+					"label": "Eliminar por número de sanitarios",
+					"event": "eliminarBanoPorSanitarios"
+				}	
+			]
+		},
+		{ "menuTitle": "Centro comercial",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarCentroComercial"
+				},
+				{
+					"label": "Listar",
+					"event": "listarCentrosComerciales"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarCentroComercialPorIdentificador"
+				},
+				{
+					"label": "Buscar por nombre",
+					"event": "buscarCentroComercialPorNombre"
+				},
+				{
+					"label": "Cambiar nombre",
+					"event": "cambiarNombreCentroComercial"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarCentroComercialPorIdentificador"
+				}	
+			]
+		},
+		{ "menuTitle": "Local comercial",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarLocalComercial"
+				},
+				{
+					"label": "Listar",
+					"event": "listarLocalesComerciales"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarLocalComercialPorIdentificador"
+				},
+				{
+					"label": "Buscar por identificador Centro Comercial",
+					"event": "buscarLocalComercialPorIDCC"
+				},
+				{
+					"label": "Cambiar área",
+					"event": "cambiarAreaLocalComercial"
+				},
+				{
+					"label": "Abrir o cerrar un establecimiento",
+					"event": "cambiarActividadLocalComercial"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarLocalComercialPorIdentificador"
+				},
+				{
+					"label": "Eliminar por actividad",
+					"event": "eliminarLocalComercialPorActividad"
+				}
+			]
+		},
+		{ "menuTitle": "Parqueadero",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarParqueadero"
+				},
+				{
+					"label": "Listar",
+					"event": "listarParqueaderos"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarParqueaderoPorIdentificador"
+				},
+				{
+					"label": "Cambiar área",
+					"event": "cambiarAreaParqueadero"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarParqueaderoPorIdentificador"
+				}
+			]
+		},
+		{ "menuTitle": "Zona circulación",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarZonaCirculacion"
+				},
+				{
+					"label": "Listar",
+					"event": "listarZonasCirculacion"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarZonaCirculacionPorIdentificador"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarZonaCirculacionPorIdentificador"
+				}
+			]
+		},
+		{ "menuTitle": "Lector",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarLector"
+				},
+				{
+					"label": "Listar",
+					"event": "listarLectores"
+				},
+				{
+					"label": "Buscar por identificador",
+					"event": "buscarLectorPorIdentificador"
+				},
+				{
+					"label": "Buscar por tipo",
+					"event": "buscarLectorPorTipo"
+				},
+				{
+					"label": "Cambiar tipo lector",
+					"event": "cambiarTipoLector"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarLectorPorIdentificador"
+				}
+			]
+		},
+		{ "menuTitle": "Visitante",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarVisitante"
+				},
+				{
+					"label": "Listar",
+					"event": "listarVisitantes"
+				},
+				{
+					"label": "Buscar por identificación",
+					"event": "buscarVisitantePorIdentificacion"
+				},
+				{
+					"label": "Cambiar teléfono de emergencia",
+					"event": "cambiarTelefonoEmergenciaVisitante"
+				},
+				{
+					"label": "Cambiar contacto de emergencia",
+					"event": "cambiarNombreEmergenciaVisitante"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarVisitantePorIdentificacion"
+				}
+			]
+		},
+		{ "menuTitle": "Domiciliario",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarDomiciliario"
+				},
+				{
+					"label": "Listar",
+					"event": "listarDomiciliarios"
+				},
+				{
+					"label": "Buscar por identificación",
+					"event": "buscarDomiciliarioPorIdentificacion"
+				},
+				{
+					"label": "Cambiar turno de trabajo",
+					"event": "cambiarHorarioTurnoDomiciliario"
+				},
+				{
+					"label": "Cambiar empresa",
+					"event": "cambiarEmpresaDomiciliosDomiciliario"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarDomiciliarioPorIdentificacion"
+				}
+			]
+		},
+		{ "menuTitle": "Empleado",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarEmpleado"
+				},
+				{
+					"label": "Listar",
+					"event": "listarEmpleados"
+				},
+				{
+					"label": "Buscar por identificación",
+					"event": "buscarEmpleadoPorIdentificacion"
+				},
+				{
+					"label": "Cambiar turno de trabajo",
+					"event": "cambiarHorarioTurnoEmpleado"
+				},
+				{
+					"label": "Cambiar empresa",
+					"event": "cambiarLugarTrabajoEmpleado"
+				},
+				{
+					"label": "Eliminar por identificador",
+					"event": "eliminarEmpleadoPorIdentificacion"
+				}
+			]
+		},
+		{ "menuTitle": "Tipo local",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarTipoLocal"
+				},
+				{
+					"label": "Listar",
+					"event": "listarTiposLocal"
+				},
+				{
+					"label": "Buscar por tipo",
+					"event": "buscarTipoLocalPorTipo"
+				},
+				{
+					"label": "Eliminar por tipo",
+					"event": "eliminarTipoLocalPorTipo"
+				}
+			]
+		},
+		{ "menuTitle": "Tipo visitante",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarTipoVisitante"
+				},
+				{
+					"label": "Listar",
+					"event": "listarTiposVisitante"
+				},
+				{
+					"label": "Buscar por tipo",
+					"event": "buscarTipoVisitantePorTipo"
+				},
+				{
+					"label": "Cambiar horario",
+					"event": "cambiarHorarioTipoVisitante"
+				},
+				{
+					"label": "Eliminar por tipo",
+					"event": "eliminarTipoVisitantePorTipo"
+				}
+			]
+		},
+		{ "menuTitle": "Registro visita",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarRegistranCarnet"
+				},
+				{
+					"label": "Listar",
+					"event": "listarRegistranCarnet"
+				},
+				{
+					"label": "Buscar por lector",
+					"event": "buscarRegistranCarnetPorLector"
+				},
+				{
+					"label": "Buscar por visitante",
+					"event": "buscarRegistranCarnetPorIdVisitante"
+				},
+				{
+					"label": "Actualizar hora salida",
+					"event": "cambiarHoraSalidaRegistranCarnet"
+				},
+				{
+					"label": "Eliminar",
+					"event": "eliminarRegistranCarnet"
+				}
+			]
+		},
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log AforoAndes",
+					"event": "mostrarLogAforoAndes"
+				},
+				{
+					"label": "Mostrar log datanucleus",
+					"event": "mostrarLogDatanuecleus"
+				},
+				{
+					"label": "Limpiar log de AforoAndes",
+					"event": "limpiarLogAforoAndes"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Documentación",
+		  "options":
+			[
+				{
+					"label": "Presentación general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creación de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc Parranderos",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Requerimientos de consulta",
+		  "options":
+			[
+				{
+					"label": "RFC1 - Visitantes atendidos por un local",
+					"event": "consultarVisitantesPorEstablecimiento"
+				},
+				{
+					"label": "RFC2 - Establecimientos más visitados",
+					"event": "consultarEstablecimientosPopulares"
+				},
+				{
+					"label": "RFC3 - Índice aforo centro comercial",
+					"event": "consultarIndicesAforoCentroComercial"
+				},
+				{
+					"label": "RFC3 - Índice aforo establecimiento",
+					"event": "consultarIndicesAforoEstablecimiento"
+				},
+				{
+					"label": "RFC3 - Índice aforo tipo local",
+					"event": "consultarIndicesAforoTipoLocal"
+				},
+				{
+					"label": "RFC4 - Establecimientos con aforo disponible",
+					"event": "consultarEstablecimientosAforoDisponible"
+				},
+				{
+					"label": "RFC5 - Duración visitas de un tipo de visitante",
+					"event": "consultarVisitasTipoVisitante"
+				}
+			]
+		}		
+		
+	]
+}
+	

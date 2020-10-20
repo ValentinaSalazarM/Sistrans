@@ -4369,20 +4369,13 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		mostrarArchivo ("data/00-ST-ParranderosJDO.pdf");
 	}
 
-	/**
-	 * Muestra el modelo conceptual de AforoAndes
-	 */
-	public void mostrarModeloConceptual ()
-	{
-		mostrarArchivo ("data/Modelo Conceptual AforoAndes.pdf");
-	}
 
 	/**
 	 * Muestra el esquema de la base de datos de AforoAndes
 	 */
 	public void mostrarEsquemaBD ()
 	{
-		mostrarArchivo ("data/Esquema BD AforoAndes.pdf");
+		mostrarArchivo ("data/Esquema de la Base de Datos.pdf");
 	}
 
 	/**
@@ -4390,15 +4383,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void mostrarScriptBD ()
 	{
-		mostrarArchivo ("data/EsquemaAforoCCAndes.sql");
-	}
-
-	/**
-	 * Muestra la arquitectura de referencia para AforoAndes
-	 */
-	public void mostrarArqRef ()
-	{
-		mostrarArchivo ("data/ArquitecturaReferencia.pdf");
+		mostrarArchivo ("docs/EsquemaAforoCCAndes.sql");
 	}
 
 	/**

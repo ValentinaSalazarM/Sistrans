@@ -1143,4 +1143,51 @@ class SQLUtil
 		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, tipoLocal);	
 		return (List<Object>) q.executeList();
 	}
+	
+	/**
+	 * Creación y ejecución de la sentencia SQL para las visitas a un tipo de local
+	 * @param distintos - Indica si se cuentan visitas de visitantes distintos
+	 * @param fechaInicio - La fecha de inicio del rango de consulta
+	 * @param fechaFin - La fecha de fin del rango de consulta
+	 * @param horaInicio - La fecha de inicio del rango de consulta
+	 * @param minutoInicio - El minuto de inicio del rango de consulta
+	 * @param horaFin - La fecha de fin del rango de consulta
+	 * @param minutoFin - El minuto de fin del rango de consulta
+	 * @param idVisitante - Visitante de interés
+	 * @return Arreglo de objetos construido con base en la consulta realizada
+	 */
+	public List<Object> RFC5DuracionVisitaLocal(PersistenceManager pm, boolean distintos, Timestamp fechaInicio, Timestamp fechaFin, int horaInicio, int minutoInicio, int horaFinal, int minutoFinal, String idVisitante)
+	{
+		LocalDateTime dt1 = fechaInicio.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		LocalDateTime dt2 = fechaFin.toLocalDateTime().truncatedTo(ChronoUnit.DAYS);
+		Query q;
+		q = pm.newQuery (SQL, "SELECT INF_ENTRADA.IDVISITANTE, INF_ENTRADA.IDLOCALCOMERCIAL,((HORASALIDA-HORAENTRADA)*60 + MINUTOSALIDA - MINUTOENTRADA) AS DURACION_VISITA" + 
+				"FROM" + 
+				"(" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, LECTOR.IDLOCALCOMERCIAL, HORA AS HORAENTRADA, MINUTO AS MINUTOENTRADA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORAENTRADA = HORARIO.ID" + 
+				"    JOIN LECTOR" + 
+				"    ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+				"    WHERE (HORA BETWEEN ? AND ?) OR (HORA = ? AND MINUTO >= ?) OR (HORA = ? AND MINUTO <= ?) AND LECTOR.IDLOCALCOMERCIAL IS NOT NULL" + 
+				") INF_ENTRADA" + 
+				"JOIN" + 
+				"(" + 
+				"    SELECT REGISTRANCARNET.IDVISITANTE, LECTOR.IDLOCALCOMERCIAL, HORA AS HORASALIDA, MINUTO AS MINUTOSALIDA" + 
+				"    FROM REGISTRANCARNET" + 
+				"    JOIN HORARIO" + 
+				"    ON REGISTRANCARNET.HORASALIDA = HORARIO.ID" + 
+				"    JOIN LECTOR" + 
+				"    ON REGISTRANCARNET.IDLECTOR = LECTOR.ID" + 
+				"    WHERE FECHA BETWEEN ? AND ?" + 
+				"    AND REGISTRANCARNET.IDVISITANTE = ?" + 
+				") INF_SALIDA" + 
+				"ON INF_ENTRADA.IDVISITANTE = INF_SALIDA.IDVISITANTE;");
+		q.setParameters(horaInicio, horaFinal, horaInicio, minutoInicio, horaFinal, minutoFinal, dt1, dt2, idVisitante);	
+		return (List<Object>) q.executeList();
+	}
+	
+
+	
 }
