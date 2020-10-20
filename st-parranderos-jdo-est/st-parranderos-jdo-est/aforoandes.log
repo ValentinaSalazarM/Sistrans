@@ -1227,3 +1227,31 @@ ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - re
 
 21:10:26,708 (main) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
 >>>>>>> 1fe390a9466b9d86ac41ddef07068187facd3747
+21:18:28,911 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:18:28,916 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:18:29,142 (main) INFO  [uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:19:11,519 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes
+21:19:17,098 (AWT-EventQueue-0) ERROR [uniandes.isis2304.aforoandes.persistencia.PersistenciaAforoAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM LOCALCOMERCIAL".
+ORA-02292: restricción de integridad (ISIS2304A222020.FK_AL_LOCAL) violada - registro secundario encontrado
+
+21:19:17,139 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Limpiando la BD de AforoAndes: Listo!
+21:19:21,045 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet
+21:19:21,186 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de carnet: 2 existentes
+21:19:43,253 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 567890789
+21:19:43,318 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 0 registros con ese idVisitante existentes
+21:19:45,375 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 567890789
+21:19:45,424 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 0 registros con ese idVisitante existentes
+21:19:45,933 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 567890789
+21:19:45,998 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 0 registros con ese idVisitante existentes
+21:19:46,122 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 567890789
+21:19:46,180 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 0 registros con ese idVisitante existentes
+21:19:48,256 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 567890789
+21:19:48,315 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Dar información de RegistranCarnet por idVisitante: 0 registros con ese idVisitante existentes
+21:19:55,823 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante
+21:19:55,899 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Tipos de visitante: 6 existentes
+21:20:27,822 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando visitante: Camila Teran
+21:20:27,903 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Adicionando visitante: Visitante [identificador = 1000506177, tipo = 3, nombre = Camila Teran, correo = camite@gmail.com, telefonoPropio = 3212786664, nombreEmergencia = Anilsa Teran, telefonoEmergencia = 134567890]
+21:20:39,119 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes
+21:20:39,338 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de visitantes: 52 visitantes existentes
+21:21:08,152 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor
+21:21:12,798 (AWT-EventQueue-0) INFO  [uniandes.isis2304.aforoandes.negocio.AforoAndes] - Generando los VO de Ascensor: 11 ascensores existentes
