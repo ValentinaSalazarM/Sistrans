@@ -2999,6 +2999,19 @@ public class AforoAndes
 		return administrador;
 	}
 	
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla ADMINISTRADOR que tienen el identificador dado
+	 * @param identificacion - El identificador del administrador
+	 * @return El objeto ADMINISTRADOR, construido con base en la tuplas de la tabla ADMINISTRADOR, que tiene el identificador dado
+	 */
+	public long eliminarAdministradorPorId (String identificacion)
+	{
+		log.info ("Eliminar información de un administrador por id: " + identificacion);
+		long administrador = pp.eliminarAdministradorPorId (identificacion);
+		log.info ("Eliminar administrador por Id: ");
+		return administrador;
+	}
 	/**
 	 * Adicionar de manera persistente un administrador de local
 	 * @return Las tuplas insertadas

@@ -4695,6 +4695,18 @@ public class PersistenciaAforoAndes
 	}
 	
 	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de ADMINISTRADOR de la 
+	 * base de datos de AforoAndes, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param identificacion - El identificador del administrador
+	 * @return El objeto Administrador que tiene el identificador dado
+	 */
+	public long eliminarAdministradorPorId (String identificacion) 
+	{
+		return sqlAdministrador.eliminarAdministradorPorId(pmf.getPersistenceManager(), identificacion);
+	}
+	
+	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un Administrador a la base de datos de AforoAndes
 	 * @param pm - El manejador de persistencia
 	 * @param identificacion - El identificador del administrador

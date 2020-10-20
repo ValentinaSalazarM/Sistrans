@@ -509,6 +509,7 @@ insert into ADMINISTRADOR (identificacion, nombre, contrasena) values ('35430163
 insert into ADMINISTRADOR (identificacion, nombre, contrasena) values ('3550856365084741', 'Tedmund Dominighi', '#b8c');
 insert into ADMINISTRADOR (identificacion, nombre, contrasena) values ('4913646598441655', 'Sigismond Jansema', '#085');
 
+
 insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) values ('35724518', 'Bastien Dobbie', '#027','LC101');
 insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) values ('50202740', 'Theodor Cruttenden', '#760','LC102');
 insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) values ('35314924', 'Lavinia Bolte', '#9a9','LC103');
