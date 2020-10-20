@@ -4387,14 +4387,6 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Muestra la arquitectura de referencia para AforoAndes
-	 */
-	public void mostrarArqRef ()
-	{
-		mostrarArchivo ("data/ArquitecturaReferencia.pdf");
-	}
-
-	/**
 	 * Muestra la documentación Javadoc del proyectp
 	 */
 	public void mostrarJavadoc ()
