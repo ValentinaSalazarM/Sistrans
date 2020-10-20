@@ -275,6 +275,22 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 		setJMenuBar ( menuBar );	
 	}
 
+	 /**
+     * Indica si el administrador está conectado
+     * @return administrador
+     */
+	public boolean getAdministrador()
+	{
+		return administrador;
+	}
+	
+	 /**
+     * Indica si el administrador está conectado
+     */
+	public void setAdministrador()
+	{
+		administrador = true;
+	}
 	/* ****************************************************************
 	 * 			CRUD de Area
 	 *****************************************************************/
@@ -4187,6 +4203,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void mostrarDialogoRegistro( )
 	{
+		System.out.println("holu");
 		DialogoInicioSesion dialogo = new DialogoInicioSesion( this, "Registrar" );
 		dialogo.setVisible( true );
 	}
@@ -4196,6 +4213,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	 */
 	public void mostrarDialogoInicioSesion(  )
 	{
+		administrador = false;
 		DialogoInicioSesion dialogo = new DialogoInicioSesion( this, "Iniciar sesión" );
 		dialogo.setVisible( true );
 	}
@@ -4577,6 +4595,7 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent pEvento)
 	{
+		System.out.println(pEvento);
 		String evento = pEvento.getActionCommand( );		
 		try 
 		{

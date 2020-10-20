@@ -82,5 +82,19 @@ public class SQLAdministradorLocal
 		List<AdministradorLocal> list = q.executeList();
 		return list.get(0);
 	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar la información de ADMINISTRADOR de la 
+	 * base de datos de AforoAndes, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param identificacion - El identificador del administrador
+	 * @return El objeto Administrador que tiene el identificador dado
+	 */
+	public long eliminarAdministradorPorId (PersistenceManager pm, String identificacion) 
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaAdministradorLocal() + " WHERE identificacion = ?");
+		q.setParameters(identificacion);
+		return (long) q.executeUnique();
+	}
 
 }

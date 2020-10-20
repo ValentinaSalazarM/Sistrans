@@ -3509,11 +3509,11 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoLector que tienen el nombre dado
 	 * @param tipo - El nombre del tipo de carnet
-	 * @return La lista de objetos TipoLector, construidos con base en las tuplas de la tabla TipoLector
+	 * @return El objeto TipoLector, construido con base en las tuplas de la tabla TipoLector con el tipo dado
 	 */
-	public List<TipoLector> darTiposLectorPorTipo (String tipo)
+	public TipoLector darTiposLectorPorTipo (String tipo)
 	{
-		return sqlTipoLector.darTiposLectorPorTipo(pmf.getPersistenceManager(), tipo);
+		return sqlTipoLector.darTipoLectorPorTipo(pmf.getPersistenceManager(), tipo);
 	}
 
 	/**
@@ -4692,6 +4692,18 @@ public class PersistenciaAforoAndes
 	public Administrador darAdministradorPorId (String identificacion) 
 	{
 		return sqlAdministrador.darAdministradorPorId(pmf.getPersistenceManager(), identificacion);
+	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de ADMINISTRADOR de la 
+	 * base de datos de AforoAndes, por su identificador
+	 * @param pm - El manejador de persistencia
+	 * @param identificacion - El identificador del administrador
+	 * @return El objeto Administrador que tiene el identificador dado
+	 */
+	public long eliminarAdministradorPorId (String identificacion) 
+	{
+		return sqlAdministrador.eliminarAdministradorPorId(pmf.getPersistenceManager(), identificacion);
 	}
 	
 	/**

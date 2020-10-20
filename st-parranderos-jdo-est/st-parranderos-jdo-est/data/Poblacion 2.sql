@@ -171,6 +171,8 @@ insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentro
 insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC110', 1, NULL, 1415, 2);
 insert into ASCENSOR (identificador, capacidadnormal, area, pesomaximo, idcentrocomercial) values ('ASC223', 1, 6, 1435, 14);
 
+delete from ascensor where identificador = 'ASCTest';
+
 insert into BANO (identificador, capacidadnormal, area, sanitarios, idcentrocomercial) values ('BA123', 3, NULL, 28, 10);
 insert into BANO (identificador, capacidadnormal, area, sanitarios, idcentrocomercial) values ('BA124', 3, NULL, 24, 8);
 insert into BANO (identificador, capacidadnormal, area, sanitarios, idcentrocomercial) values ('BA125', 4, NULL, 25, 4);
@@ -509,6 +511,7 @@ insert into ADMINISTRADOR (identificacion, nombre, contrasena) values ('35430163
 insert into ADMINISTRADOR (identificacion, nombre, contrasena) values ('3550856365084741', 'Tedmund Dominighi', '#b8c');
 insert into ADMINISTRADOR (identificacion, nombre, contrasena) values ('4913646598441655', 'Sigismond Jansema', '#085');
 
+
 insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) values ('35724518', 'Bastien Dobbie', '#027','LC101');
 insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) values ('50202740', 'Theodor Cruttenden', '#760','LC102');
 insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) values ('35314924', 'Lavinia Bolte', '#9a9','LC103');
@@ -521,5 +524,8 @@ insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) value
 insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) values ('63311028', 'Wheeler O''Dooghaine', '#88a','LC704');
 insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) values ('49133536', 'Hetti Iskowicz', '#0ad','LC804');
 insert into ADMINISTRADORLOCAL (identificacion, nombre, contrasena, local) values ('35283352', 'Billy Jurick', '#7c2', 'LC904');
+
+select * from lector;
+delete from lector where id = 500;
 
 COMMIT;

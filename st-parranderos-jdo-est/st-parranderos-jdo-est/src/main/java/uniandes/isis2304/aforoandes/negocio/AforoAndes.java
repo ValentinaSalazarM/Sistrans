@@ -2077,12 +2077,12 @@ public class AforoAndes
 	 * @param tipo - El nombre del tipo de lector
 	 * @return La lista de objetos TipoLector, construidos con base en las tuplas de la tabla TipoLector
 	 */
-	public List<TipoLector> darTiposLectorPorTipo (String tipo)
+	public TipoLector darTipoLectorPorTipo (String tipo)
 	{
 		log.info ("Dar información de tipos de lector por tipo: " + tipo);
-		List<TipoLector> tiposLector = pp.darTiposLectorPorTipo(tipo);
-		log.info ("Dar información de tipos de lector por tipo: " + tiposLector.size() + " tipos de lector con ese tipo existentes");
-		return tiposLector;
+		TipoLector tipoLector = pp.darTiposLectorPorTipo(tipo);
+		log.info ("Buscando tipo de lector por tipo: " + tipoLector != null ? tipoLector : "NO EXISTE");
+		return tipoLector;
 	}
 
 	/**
@@ -2999,6 +2999,19 @@ public class AforoAndes
 		return administrador;
 	}
 	
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla ADMINISTRADOR que tienen el identificador dado
+	 * @param identificacion - El identificador del administrador
+	 * @return El objeto ADMINISTRADOR, construido con base en la tuplas de la tabla ADMINISTRADOR, que tiene el identificador dado
+	 */
+	public long eliminarAdministradorPorId (String identificacion)
+	{
+		log.info ("Eliminar información de un administrador por id: " + identificacion);
+		long administrador = pp.eliminarAdministradorPorId (identificacion);
+		log.info ("Eliminar administrador por Id: ");
+		return administrador;
+	}
 	/**
 	 * Adicionar de manera persistente un administrador de local
 	 * @return Las tuplas insertadas
