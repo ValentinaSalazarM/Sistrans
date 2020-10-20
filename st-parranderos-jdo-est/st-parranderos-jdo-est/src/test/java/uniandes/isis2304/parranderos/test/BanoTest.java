@@ -85,6 +85,8 @@ public class BanoTest
 		// Ahora si se pueden probar las operaciones
 		try
 		{
+			
+			aforoAndes.limpiarAforoAndes();
 			List <VOBano> lista = aforoAndes.darVOBaños();
 			assertEquals ("No deben haber baños creados!!", 0, lista.size ());
 
@@ -162,6 +164,7 @@ public class BanoTest
 		try
 		{
 
+			aforoAndes.limpiarAforoAndes ();
 			List <VOBano> lista = aforoAndes.darVOBaños();
 			assertEquals ("No deben haber baños creados!!", 0, lista.size ());
 
