@@ -114,12 +114,12 @@ public class SQLTipoLector
 	 * @param nombreTipoLector - El nombre del tipo de lector
 	 * @return El objeto TipoLector que tiene el tipo dado
 	 */
-	public List<TipoLector> darTiposLectorPorTipo (PersistenceManager pm, String nombreTipoLector) 
+	public TipoLector darTipoLectorPorTipo (PersistenceManager pm, String nombreTipoLector) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoLector  () + " WHERE tipo = ?");
 		q.setResultClass(TipoLector.class);
 		q.setParameters(nombreTipoLector);
-		return (List<TipoLector>) q.executeList();
+		return (TipoLector) q.executeUnique();
 	}
 
 	/**

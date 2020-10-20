@@ -3509,11 +3509,11 @@ public class PersistenciaAforoAndes
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoLector que tienen el nombre dado
 	 * @param tipo - El nombre del tipo de carnet
-	 * @return La lista de objetos TipoLector, construidos con base en las tuplas de la tabla TipoLector
+	 * @return El objeto TipoLector, construido con base en las tuplas de la tabla TipoLector con el tipo dado
 	 */
-	public List<TipoLector> darTiposLectorPorTipo (String tipo)
+	public TipoLector darTiposLectorPorTipo (String tipo)
 	{
-		return sqlTipoLector.darTiposLectorPorTipo(pmf.getPersistenceManager(), tipo);
+		return sqlTipoLector.darTipoLectorPorTipo(pmf.getPersistenceManager(), tipo);
 	}
 
 	/**

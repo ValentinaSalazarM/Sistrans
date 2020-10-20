@@ -283,6 +283,14 @@ public class InterfazAforoAndesApp extends JFrame implements ActionListener
 	{
 		return administrador;
 	}
+	
+	 /**
+     * Indica si el administrador está conectado
+     */
+	public void setAdministrador()
+	{
+		administrador = true;
+	}
 	/* ****************************************************************
 	 * 			CRUD de Area
 	 *****************************************************************/

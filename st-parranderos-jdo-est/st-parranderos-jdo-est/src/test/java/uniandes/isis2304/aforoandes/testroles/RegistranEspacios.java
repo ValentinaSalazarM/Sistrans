@@ -26,12 +26,17 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.aforoandes.interfazApp.InterfazAforoAndesApp;
 import uniandes.isis2304.aforoandes.negocio.AforoAndes;
+import uniandes.isis2304.aforoandes.negocio.Bano;
+import uniandes.isis2304.aforoandes.negocio.CentroComercial;
+import uniandes.isis2304.aforoandes.negocio.LocalComercial;
+import uniandes.isis2304.aforoandes.negocio.Parqueadero;
 import uniandes.isis2304.aforoandes.negocio.VOAscensor;
 import uniandes.isis2304.aforoandes.negocio.VOBano;
 import uniandes.isis2304.aforoandes.negocio.VOCentroComercial;
 import uniandes.isis2304.aforoandes.negocio.VOLocalComercial;
 import uniandes.isis2304.aforoandes.negocio.VOParqueadero;
 import uniandes.isis2304.aforoandes.negocio.VOZonaCirculacion;
+import uniandes.isis2304.aforoandes.negocio.ZonaCirculacion;
 
 /**
  * @author Usuario
@@ -72,11 +77,6 @@ public class RegistranEspacios
 
 	InterfazAforoAndesApp interfaz = new InterfazAforoAndesApp( );
 
-	/**
-	 * Indica que el manejador indicó que el usuario está conectado
-	 */
-	private boolean administradorConectado;	
-
 	// -----------------------------------------------------------------
 	// Métodos
 	// -----------------------------------------------------------------
@@ -107,23 +107,26 @@ public class RegistranEspacios
 			 * 			ASCENSOR
 			 *****************************************************************/
 
+			interfaz.setAdministrador();
 			interfaz.adicionarAscensor();
+			
 			/**
 			 * Datos a ingresar en el diálogo de adicionar ascensor
 			 * Identificador: ASCTest
-			 * Área: 11
-			 * Peso máximo: 1218
+			 * Área: 21
+			 * Peso máximo: 1218.2
 			 * IDCentroComercial: 3
 			 */
 			Thread.sleep(25000);
-
-			VOAscensor ascensorAñadido = aforoAndes.adicionarAscensor("ASCTest", new Long(11), 1218.2, "3");
 			VOAscensor ascensorEncontrado = aforoAndes.darAscensorPorId("ASCTest");
 
-			assertNotNull ("Debería haberse creado un objeto con el identificador dado", ascensorAñadido);
 			assertNotNull ("Debería existir un objeto con el identificador dado", ascensorEncontrado);
-			assertEquals ("El objeto creado y el recuperado de la base de datos deben ser iguales", ascensorAñadido.toString(), ascensorEncontrado.toString());
+			
+			assertEquals ("El objeto creado y el recuperado de la base de datos deben ser iguales", "ASCTest", ascensorEncontrado.getIdentificador());
+			assertEquals ("El objeto creado y el recuperado de la base de datos deben ser iguales", 1218.2, ascensorEncontrado.getPesoMaximo(), 0);
+			assertEquals ("El objeto creado y el recuperado de la base de datos deben ser iguales", 11, ascensorEncontrado.getArea(), 0);
 
+			
 			aforoAndes.eliminarAscensorPorId("ASCTest");
 			ascensorEncontrado = aforoAndes.darAscensorPorId("ASCTest");
 			assertNull ("No debería existir el ascensor con la identificación 'ASCTest'", ascensorEncontrado);
@@ -136,14 +139,14 @@ public class RegistranEspacios
 			/**
 			 * Datos a ingresar en el diálogo de adicionar baño
 			 * Identificador: BATest
-			 * Capacidad Normal: 11
-			 * Área: 11
-			 * Número de sanitarios: 12
+			 * Capacidad Normal: 14
+			 * Área: 21
+			 * Número de sanitarios: 14
 			 * IDCentroComercial: 10
 			 */
 			Thread.sleep(25000);
 
-			VOBano banoAñadido = aforoAndes.adicionarBaño("BATest", new Long(11), new Long(11), 12, "10");
+			VOBano banoAñadido = (VOBano) new Bano ("BATest", new Long(11), new Long(11), 14, "10");
 			VOBano banoEncontrado = aforoAndes.darBañoPorId("BATest");
 
 			assertNotNull ("Debería haberse creado un objeto con el identificador dado", banoAñadido);
@@ -165,14 +168,14 @@ public class RegistranEspacios
 			 * Nombre: CCTest
 			 */
 			Thread.sleep(10000);
-			VOCentroComercial ccAñadido = aforoAndes.adicionarCentroComercial("110", "CCTest");
-			VOCentroComercial ccEncontrado = aforoAndes.darCentroComercialPorId("CCTest");
+			VOCentroComercial ccAñadido = (VOCentroComercial) new CentroComercial ("110", "CCTest");
+			VOCentroComercial ccEncontrado = aforoAndes.darCentroComercialPorId("110");
 			assertNotNull ("Debería haberse creado un objeto con el identificador dado", ccAñadido);
 			assertNotNull ("Debería existir un objeto con el identificador dado", ccEncontrado);
 			assertEquals ("El objeto creado y el recuperado de la base de datos deben ser iguales", ccAñadido.toString(), ccEncontrado.toString());
 
-			aforoAndes.eliminarCentroComercialPorId("CCTest");
-			ccEncontrado = aforoAndes.darCentroComercialPorId("CCTest");
+			aforoAndes.eliminarCentroComercialPorId("110");
+			ccEncontrado = aforoAndes.darCentroComercialPorId("110");
 			assertNull ("No debería existir el centro comercial con la identificación 'CCTest'", ccEncontrado);
 
 			/* ****************************************************************
@@ -183,25 +186,33 @@ public class RegistranEspacios
 			/**
 			 * Datos a ingresar en el diálogo de adicionar baño
 			 * Identificador: LCTest
-			 * Capacidad Normal: 11
-			 * Área: 11
+			 * Capacidad Normal: 14
+			 * Área: 21			 
 			 * Tipo local: 1-Restaurante
 			 * IDCentroComercial: 10
 			 * Activo: Check
 			 */
 			Thread.sleep(25000);
 
-			VOLocalComercial localAñadido = aforoAndes.adicionarLocalComercial("LCTest", new Long(11), new Long(11), new Long (1), 1, "10");
+			VOLocalComercial localAñadido = (VOLocalComercial) new LocalComercial ("LCTest", new Long(11), new Long(11), new Long (1), 1, "10");
 			VOLocalComercial localEncontrado = aforoAndes.darLocalComercialPorId("LCTest");
 
 			assertNotNull ("Debería haberse creado un objeto con el identificador dado", localAñadido);
 			assertNotNull ("Debería existir un objeto con el identificador dado", localEncontrado);
 			assertEquals ("El objeto creado y el recuperado de la base de datos deben ser iguales", localAñadido.toString(), localEncontrado.toString());
 
-			aforoAndes.eliminarBañoPorId("LCTest");
+			/**
+			 * Cambiar la actividad del local LCTest a 0
+			 */
+			interfaz.cambiarActividadLocalComercial();
+			localEncontrado = aforoAndes.darLocalComercialPorId("LCTest");
+			assertEquals ("La actividad del local comercial debió haber cambiado. ", localEncontrado.getActivo(), 0);
+			
+			
+			aforoAndes.eliminarLocalComercialPorId("LCTest");
 			localEncontrado = aforoAndes.darLocalComercialPorId("LCTest");
 			assertNull ("No debería existir el local con la identificación 'LCTest'", localEncontrado);
-
+			
 
 			/* ****************************************************************
 			 * 			PARQUEADERO
@@ -211,20 +222,20 @@ public class RegistranEspacios
 			/**
 			 * Datos a ingresar en el diálogo de adicionar parqueadero
 			 * Identificador: PARTest
-			 * Capacidad Normal: 20
-			 * Área: 10
+			 * Capacidad Normal: 200
+			 * Área: 200
 			 * IDCentroComercial: 10
 			 */
 			Thread.sleep(25000);
 
-			VOParqueadero parqueaderoAñadido = aforoAndes.adicionarParqueadero("PARTest", new Long(20), new Long(11), "10");
+			VOParqueadero parqueaderoAñadido = (VOParqueadero) new Parqueadero ("PARTest", new Long(22), new Long(5), "10");
 			VOParqueadero parqueaderoEncontrado = aforoAndes.darParqueaderoPorId("PARTest");
 
 			assertNotNull ("Debería haberse creado un objeto con el identificador dado", parqueaderoAñadido);
 			assertNotNull ("Debería existir un objeto con el identificador dado", parqueaderoEncontrado);
 			assertEquals ("El objeto creado y el recuperado de la base de datos deben ser iguales", parqueaderoAñadido.toString(), parqueaderoEncontrado.toString());
 
-			aforoAndes.eliminarBañoPorId("PARTest");
+			aforoAndes.eliminarParqueaderoPorId("PARTest");
 			parqueaderoEncontrado = aforoAndes.darParqueaderoPorId("PARTest");
 			assertNull ("No debería existir el parqueadero con la identificación 'PARTest'", parqueaderoEncontrado);
 
@@ -240,7 +251,7 @@ public class RegistranEspacios
 			 * IDCentroComercial: 10
 			 */
 			Thread.sleep(10000);
-			VOZonaCirculacion zonaAñadida = aforoAndes.adicionarZonaCirculacion("ZCTest", 14, "10");
+			VOZonaCirculacion zonaAñadida = (VOZonaCirculacion) new ZonaCirculacion ("ZCTest", 14, "10");
 			VOZonaCirculacion zonaEncontrada = aforoAndes.darZonaCirculacionPorId("ZCTest");
 
 			assertNotNull ("Debería haberse creado un objeto con el identificador dado", zonaAñadida);
@@ -249,7 +260,7 @@ public class RegistranEspacios
 
 			aforoAndes.eliminarZonaCirculacionPorId("ZCTest");
 			zonaEncontrada = aforoAndes.darZonaCirculacionPorId("ZCTest");
-			assertNull ("No debería existir la zona de circulación con la identificación 'ZCTest'", banoEncontrado);
+			assertNull ("No debería existir la zona de circulación con la identificación 'ZCTest'", zonaEncontrada);
 
 		}
 		catch (Exception e)

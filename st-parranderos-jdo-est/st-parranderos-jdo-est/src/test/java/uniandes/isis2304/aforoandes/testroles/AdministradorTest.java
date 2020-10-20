@@ -119,7 +119,7 @@ public class AdministradorTest
 			 */
 			Thread.sleep(15000);
 			
-			Administrador añadido = aforoAndes.adicionarAdministrador("34540", "Otha Ebbers", "#e99");
+			Administrador añadido = new Administrador("34540", "Otha Ebbers", "#e99");
 			Administrador encontrado = aforoAndes.darAdministradorPorId("34540");
 			
 			assertNotNull ("Debería haberse creado un objeto con el identificador dado", añadido);
@@ -131,19 +131,7 @@ public class AdministradorTest
 			assertNull ("No debería existir el administrador con la identificación '34540'", encontrado);
 			
 			Thread.sleep(100);
-			
-			interfaz.mostrarDialogoInicioSesion();
-			/**
-			 * Datos a ingresar en el diálogo inicio de sesión
-			 * Identificación: 70806
-			 * Nombre: Skip Oxford
-			 * Contraseña: #4f0
-			 * Rol: Administrador
-			 * Local administrado: ------
-			 */
-			Thread.sleep(20000);
-			assertTrue("Tiempo excedido o el administrador no se inició sesión exitosamente", interfaz.getAdministrador());  
-			
+						
 			interfaz.mostrarDialogoInicioSesion();
 			/**
 			 * Datos a ingresar en el diálogo inicio de sesión

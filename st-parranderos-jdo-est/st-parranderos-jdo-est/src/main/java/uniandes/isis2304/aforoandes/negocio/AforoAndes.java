@@ -2077,12 +2077,12 @@ public class AforoAndes
 	 * @param tipo - El nombre del tipo de lector
 	 * @return La lista de objetos TipoLector, construidos con base en las tuplas de la tabla TipoLector
 	 */
-	public List<TipoLector> darTiposLectorPorTipo (String tipo)
+	public TipoLector darTipoLectorPorTipo (String tipo)
 	{
 		log.info ("Dar información de tipos de lector por tipo: " + tipo);
-		List<TipoLector> tiposLector = pp.darTiposLectorPorTipo(tipo);
-		log.info ("Dar información de tipos de lector por tipo: " + tiposLector.size() + " tipos de lector con ese tipo existentes");
-		return tiposLector;
+		TipoLector tipoLector = pp.darTiposLectorPorTipo(tipo);
+		log.info ("Buscando tipo de lector por tipo: " + tipoLector != null ? tipoLector : "NO EXISTE");
+		return tipoLector;
 	}
 
 	/**
